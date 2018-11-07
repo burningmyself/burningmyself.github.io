@@ -1,0 +1,1 @@
+#.net .net core
