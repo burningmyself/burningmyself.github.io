@@ -1,6 +1,6 @@
 #Git 常用命令速查手册
 
-![git](./../img/git1.png "git")
+![git](./../../img/git1.png "git")
 
 ##初始化仓库
 
