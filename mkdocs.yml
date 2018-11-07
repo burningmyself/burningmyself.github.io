@@ -9,7 +9,7 @@ nav:
     - Python: python/index.md 
     - SQL: sql/index.md
     - Tool: 
-        -Git: tool/git/index.md
+        - Git: tool/git/index.md
 
 markdown_extensions:
   - admonition
