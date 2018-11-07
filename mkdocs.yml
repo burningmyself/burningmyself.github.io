@@ -8,10 +8,7 @@ nav:
     - Java: java/index.md 
     - Python: python/index.md 
     - SQL: sql/index.md
-  - 语法: 
-    - 语法总览: syntax/main.md 
-    - 标题: syntax/headline.md 
-    - 段落: syntax/paragraph.md
+    - Tool: tool/index.md
 
 markdown_extensions:
   - admonition
