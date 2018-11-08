@@ -10,7 +10,7 @@ nav:
     - SQL: sql/index.md
     - Tool: 
         - Git: tool/git/index.md
-
+        - tool/markdown.md
 markdown_extensions:
   - admonition
   - codehilite:
