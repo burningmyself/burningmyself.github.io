@@ -9,7 +9,8 @@ nav:
     - Java: java/index.md 
     - Python: python/index.md 
     - SQL: sql/index.md
-    - Linux: linux/often.md
+    - Linux: 
+        - 常用命令: linux/often.md
     - Tool: 
         - Git: tool/git/index.md
         - Markdown: tool/markdown.md
