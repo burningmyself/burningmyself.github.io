@@ -9,6 +9,7 @@ nav:
     - Java: java/index.md 
     - Python: python/index.md 
     - SQL: sql/index.md
+    - Linux: linux/often.md
     - Tool: 
         - Git: tool/git/index.md
         - Markdown: tool/markdown.md
