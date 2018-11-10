@@ -5,7 +5,7 @@ nav:
   - 介绍: index.md 
   - 技术博文: 
     - .NET: 
-        - C# 6: net/c#6.md
+        - C# 6: net/c_sharp.md
     - Java: java/index.md 
     - Python: python/index.md 
     - SQL: sql/index.md
