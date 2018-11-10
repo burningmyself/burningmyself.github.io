@@ -9,7 +9,7 @@ nav:
     - Java: java/index.md 
     - Python: python/index.md 
     - SQL:
-        - MySQL: sql/mysql_yh.md
+        - MySQL优化: sql/mysql_yh.md
     - Linux: 
         - 常用命令: linux/often.md
     - Tool: 
