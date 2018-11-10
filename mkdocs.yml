@@ -8,7 +8,8 @@ nav:
         - C# 6: net/c_sharp.md
     - Java: java/index.md 
     - Python: python/index.md 
-    - SQL: sql/index.md
+    - SQL:
+        - MySQL: sql/mysql_yh.md
     - Linux: 
         - 常用命令: linux/often.md
     - Tool: 
