@@ -7,7 +7,10 @@
 ```git
 git init
 ```
-
+## 设置远程仓库地址后再做push
+'''
+git remote add origin https://gitee.com/用户个性地址/HelloGitee.git
+'''
 ## 将文件添加到仓库
 
 ```git
@@ -89,6 +92,12 @@ git checkout -- test.txt
 ```git
 git remote add origin git@github.com:帐号名/仓库名.git
 ```
+## 将本地仓库内容推送到远程仓库
+'''git
+git add . #将当前目录所有文件添加到git暂存区
+git commit -m "my first commit" #提交并备注提交信息
+git push origin master #将本地提交推送到远程仓库
+'''
 ## 从远程仓库克隆项目到本地
 ```git
 git clone git@github.com:git帐号名/仓库名.git
@@ -165,4 +174,10 @@ git fetch  origin master
  //从远程获取最新的到本地，首先从远程的origin的master主分支下载最新的版本到origin/master分支上，然后比较本地的master分支和origin/master分支的差别，最后进行合并。
 
 git fetch比git pull更加安全
+git pull origin master
 ```
+## 推送时选择强制推送
+强制推送需要执行下面的命令(默认不推荐该行为)：
+'''
+git push origin master -f
+'''
