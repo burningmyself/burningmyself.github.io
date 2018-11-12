@@ -181,3 +181,11 @@ git pull origin master
 '''
 git push origin master -f
 '''
+## git 提示授权失败解决
+'''
+git config --system --unset credential.helper # 管理员权限执行命令
+'''
+## git 授权永久有效
+'''
+git config --global credential.helper 'store'
+'''
