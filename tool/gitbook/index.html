@@ -36,7 +36,7 @@
     
     
       
-        <title>GitBook 使用教程 - BurningMyself</title>
+        <title>GitBook - BurningMyself</title>
       
     
     
@@ -97,7 +97,7 @@
                 BurningMyself
               </span>
               <span class="md-header-nav__topic">
-                GitBook 使用教程
+                GitBook
               </span>
             
           
@@ -178,10 +178,12 @@
       
       
 
+  
 
-  <li class="md-nav__item md-nav__item--nested">
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2" checked>
     
     <label class="md-nav__link" for="nav-2">
       技术博文
@@ -329,10 +331,12 @@
           
           
 
+  
 
-  <li class="md-nav__item md-nav__item--nested">
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-6" type="checkbox" id="nav-2-6">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-6" type="checkbox" id="nav-2-6" checked>
     
     <label class="md-nav__link" for="nav-2-6">
       Tool
@@ -360,11 +364,131 @@
           
           
 
+  
 
-  <li class="md-nav__item">
-    <a href="../git/gitbook.md" title="GitBook" class="md-nav__link">
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        GitBook
+      </label>
+    
+    <a href="./" title="GitBook" class="md-nav__link md-nav__link--active">
       GitBook
     </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" title="背景" class="md-nav__link">
+    背景
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#gitbook_1" title="GitBook 简介" class="md-nav__link">
+    GitBook 简介
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#gitbook_2" title="GitBook 准备工作" class="md-nav__link">
+    GitBook 准备工作
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#nodejs" title="安装 Node.js" class="md-nav__link">
+    安装 Node.js
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gitbook_3" title="安装 GitBook" class="md-nav__link">
+    安装 GitBook
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gitbook_4" title="安装 GitBook 编辑器" class="md-nav__link">
+    安装 GitBook 编辑器
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" title="先睹为快" class="md-nav__link">
+    先睹为快
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_3" title="目录结构" class="md-nav__link">
+    目录结构
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bookjson" title="book.json" class="md-nav__link">
+    book.json
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" title="插件" class="md-nav__link">
+    插件
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_5" title="结语" class="md-nav__link">
+    结语
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
   </li>
 
         
@@ -796,6 +920,41 @@ info: initialization is finished
       
         
 <footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="../git/" title="Git" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                Git
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="../markdown/" title="Markdown" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                Markdown
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
   
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">
