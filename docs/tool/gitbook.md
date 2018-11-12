@@ -7,6 +7,10 @@
 * [GitBook 文档](https://docs.gitbook.com/ "文档")
 * [GitBook GitHub](https://github.com/GitbookIO/gitbook "GitHub")
 ## GitBook 准备工作
+上面我推荐的是 Node.js + GitBook + Typora + Git，所以你还需要安装 Typora（一个很棒的支持 macOS、Windows、Linux 的 Markdown 编辑工具）和 Git 版本管理工具。戳下面：
+* [Node.js](https://nodejs.org/en/)
+* [Typora](https://typora.io/)
+* [Git](https://git-scm.com/)
 ### 安装 Node.js
 GitBook 是一个基于[Node.js](https://nodejs.org/en/ "Node.js") 的命令行工具，下载安装 Node.js，安装完成之后，你可以使用下面的命令来检验是否安装成功。
 ```node
@@ -25,8 +29,10 @@ CLI version: 2.3.2
 Installing GitBook 3.2.3
 ```
 更多详情请参照[GitBook 安装文档](https://docs.gitbook.com/ "文档") 来安装 GitBook。
+### 安装 Typora
+Typora 的安装很简单，难点在于需要翻墙才能下载（当然你也可以找我要）。Git 的安装也很简单，但要用好它需要不少时间，这里就不展开了（再讲下去你就要跑啦）。
 ### 安装 GitBook 编辑器
-去[GitBook 官网](https://docs.gitbook.com/ "官网") 下载 GitBook 编辑器；如果是 Mac 用户且安装过 brew cask 的话可以使用 brew cask install gitbook-editor 命令行来安装 GitBook 编辑器。
+去[GitBook 官网](https://www.gitbook.com/editor "官网") 下载 GitBook 编辑器；如果是 Mac 用户且安装过 brew cask 的话可以使用 brew cask install gitbook-editor 命令行来安装 GitBook 编辑器。
 ## 先睹为快
 GitBook 准备工作做好之后，我们进入一个你要写书的目录，输入如下命令。
 ```node
@@ -51,23 +57,61 @@ info: initialization is finished
 gitbook build
 ```
 下面我们来详细介绍下 GitBook 目录结构及相关文件。
+### Typora 来编辑这两个文件
+![效果图](./../img/gitbook4.png "效果图")
+编辑 SUMMARY.md 文件，内容修改为：
+```
+# 目录
 
-### 目录结构
+* [前言](README.md)
+* [第一章](Chapter1/README.md)
+  * [第1节：衣](Chapter1/衣.md)
+  * [第2节：食](Chapter1/食.md)
+  * [第3节：住](Chapter1/住.md)
+  * [第4节：行](Chapter1/行.md)
+* [第二章](Chapter2/README.md)
+* [第三章](Chapter3/README.md)
+* [第四章](Chapter4/README.md)
+
 ```
-.
-├── book.json
-├── README.md
-├── SUMMARY.md
-├── chapter-1/
-|   ├── README.md
-|   └── something.md
-└── chapter-2/
-    ├── README.md
-    └── something.md
+然后我们回到命令行，在 mybook 文件夹中再次执行 gitbook init 命令。GitBook 会查找 SUMMARY.md 文件中描述的目录和文件，如果没有则会将其创建。
+
+Typora 是所见即所得（实时渲染）的 Markdown 编辑器，这时候它是这样的：
+
+![效果图](./../img/gitbook5.png "效果图")
+
+接着我们执行 gitbook serve 来预览这本书籍，执行命令后会对 Markdown 格式的文档进行转换，默认转换为 html 格式，最后提示 “Serving book on http://localhost:4000”。嗯，打开浏览器看一下吧：
+
+![效果图](./../img/gitbook6.png "效果图")
+### gitbook 常用命令
+
+当你写得差不多，你可以执行 gitbook build 命令构建书籍，默认将生成的静态网站输出到 _book 目录。实际上，这一步也包含在 gitbook serve 里面，因为它们是 HTML，所以 GitBook 通过 Node.js 给你提供服务了。 
+1. 当然，build 命令可以指定路径：
 ```
+gitbook build [书籍路径] [输出路径]
+```
+2. serve 命令也可以指定端口：
+```
+gitbook serve --port 2333
+```
+3. 你还可以生成 PDF 格式的电子书：
+```
+gitbook pdf ./ ./mybook.pdf
+```
+4. 生成 epub 格式的电子书：
+```
+gitbook epub ./ ./mybook.epub
+```
+5. 生成 mobi 格式的电子书：
+```
+gitbook mobi ./ ./mybook.mobi
+```
+如果生成不了，你可能还需要安装一些工具，比如 ebook-convert。或者在 Typora 中安装 Pandoc 进行导出。
+
+除此之外，别忘了还可以用 Git 做版本管理呀！在 mybook 目录下执行 git init 初始化仓库，执行 git remote add 添加远程仓库（你得先在远端建好）。接着就可以愉快地 commit，push，pull … 啦！
+
 
 下面我们主要来讲讲 book.json 和 SUMMARY.md 文件。
-
 ### book.json
 该文件主要用来存放配置信息，我先放出我的配置文件。
 ```conf
