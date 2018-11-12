@@ -562,6 +562,20 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#git_2" title="git 提示授权失败解决" class="md-nav__link">
+    git 提示授权失败解决
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#git_3" title="git 授权永久有效" class="md-nav__link">
+    git 授权永久有效
+  </a>
+  
+</li>
+      
       
       
       
@@ -857,6 +871,20 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#git_2" title="git 提示授权失败解决" class="md-nav__link">
+    git 提示授权失败解决
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#git_3" title="git 授权永久有效" class="md-nav__link">
+    git 授权永久有效
+  </a>
+  
+</li>
+      
       
       
       
@@ -1045,6 +1073,14 @@ git pull origin master
 <p>强制推送需要执行下面的命令(默认不推荐该行为)：
 '''
 git push origin master -f
+'''</p>
+<h2 id="git_2">git 提示授权失败解决<a class="headerlink" href="#git_2" title="Permanent link">&para;</a></h2>
+<p>'''
+git config --system --unset credential.helper # 管理员权限执行命令
+'''</p>
+<h2 id="git_3">git 授权永久有效<a class="headerlink" href="#git_3" title="Permanent link">&para;</a></h2>
+<p>'''
+git config --global credential.helper 'store'
 '''</p>
                 
                   
