@@ -14,7 +14,7 @@ nav:
         - 常用命令: linux/often.md
     - Tool: 
         - Git: tool/git.md
-        - GitBook: tool/git/gitbook.md
+        - GitBook: tool/gitbook.md
         - Markdown: tool/markdown.md
   - 经验分析:
     - 工作学习:  wordstudy/index.md  
