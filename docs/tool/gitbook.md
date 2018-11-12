@@ -106,6 +106,23 @@ gitbook epub ./ ./mybook.epub
 ```
 gitbook mobi ./ ./mybook.mobi
 ```
+
+基本命令
+```
+gitbook init //初始化目录文件
+gitbook help //列出gitbook所有的命令
+gitbook --help //输出gitbook-cli的帮助信息
+gitbook build //生成静态网页
+gitbook serve //生成静态网页并运行服务器
+gitbook build --gitbook=2.0.1 //生成时指定gitbook的版本, 本地没有会先下载
+gitbook ls //列出本地所有的gitbook版本
+gitbook ls-remote //列出远程可用的gitbook版本
+gitbook fetch 标签/版本号 //安装对应的gitbook版本
+gitbook update //更新到gitbook的最新版本
+gitbook uninstall 2.0.1 //卸载对应的gitbook版本
+gitbook build --log=debug //指定log的级别
+gitbook builid --debug //输出错误信息
+```
 如果生成不了，你可能还需要安装一些工具，比如 ebook-convert。或者在 Typora 中安装 Pandoc 进行导出。
 
 除此之外，别忘了还可以用 Git 做版本管理呀！在 mybook 目录下执行 git init 初始化仓库，执行 git remote add 添加远程仓库（你得先在远端建好）。接着就可以愉快地 commit，push，pull … 啦！
@@ -274,3 +291,5 @@ GitBook 有 [插件官网](https://plugins.gitbook.com/ "插件官网")，默认
 如果要指定插件的版本可以使用 plugin@0.3.1，因为一些插件可能不会随着 GitBook 版本的升级而升级。
 ##结语
 这是我对 GitBook 使用的总结，希望能帮到今后需要的小伙伴
+
+[相关资料](https://blog.csdn.net/axi295309066/article/details/61420694/)
