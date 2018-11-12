@@ -178,14 +178,14 @@ git pull origin master
 ```
 ## 推送时选择强制推送
 强制推送需要执行下面的命令(默认不推荐该行为)：
-'''
+```
 git push origin master -f
-'''
+```
 ## git 提示授权失败解决
-'''
+```
 git config --system --unset credential.helper # 管理员权限执行命令
-'''
+```
 ## git 授权永久有效
-'''
+```
 git config --global credential.helper 'store'
-'''
+```
