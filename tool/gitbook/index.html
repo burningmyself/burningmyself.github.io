@@ -429,6 +429,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#typora" title="安装 Typora" class="md-nav__link">
+    安装 Typora
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#gitbook_4" title="安装 GitBook 编辑器" class="md-nav__link">
     安装 GitBook 编辑器
   </a>
@@ -449,8 +456,15 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#_3" title="目录结构" class="md-nav__link">
-    目录结构
+  <a href="#typora_1" title="Typora 来编辑这两个文件" class="md-nav__link">
+    Typora 来编辑这两个文件
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gitbook_5" title="gitbook 常用命令" class="md-nav__link">
+    gitbook 常用命令
   </a>
   
 </li>
@@ -463,7 +477,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#_4" title="插件" class="md-nav__link">
+  <a href="#_3" title="插件" class="md-nav__link">
     插件
   </a>
   
@@ -475,7 +489,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_5" title="结语" class="md-nav__link">
+  <a href="#_4" title="结语" class="md-nav__link">
     结语
   </a>
   
@@ -619,6 +633,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#typora" title="安装 Typora" class="md-nav__link">
+    安装 Typora
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#gitbook_4" title="安装 GitBook 编辑器" class="md-nav__link">
     安装 GitBook 编辑器
   </a>
@@ -639,8 +660,15 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#_3" title="目录结构" class="md-nav__link">
-    目录结构
+  <a href="#typora_1" title="Typora 来编辑这两个文件" class="md-nav__link">
+    Typora 来编辑这两个文件
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gitbook_5" title="gitbook 常用命令" class="md-nav__link">
+    gitbook 常用命令
   </a>
   
 </li>
@@ -653,7 +681,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#_4" title="插件" class="md-nav__link">
+  <a href="#_3" title="插件" class="md-nav__link">
     插件
   </a>
   
@@ -665,7 +693,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_5" title="结语" class="md-nav__link">
+  <a href="#_4" title="结语" class="md-nav__link">
     结语
   </a>
   
@@ -699,6 +727,10 @@
 <li><a href="https://github.com/GitbookIO/gitbook" title="GitHub">GitBook GitHub</a></li>
 </ul>
 <h2 id="gitbook_2">GitBook 准备工作<a class="headerlink" href="#gitbook_2" title="Permanent link">&para;</a></h2>
+<p>上面我推荐的是 Node.js + GitBook + Typora + Git，所以你还需要安装 Typora（一个很棒的支持 macOS、Windows、Linux 的 Markdown 编辑工具）和 Git 版本管理工具。戳下面：
+* <a href="https://nodejs.org/en/">Node.js</a>
+* <a href="https://typora.io/">Typora</a>
+* <a href="https://git-scm.com/">Git</a></p>
 <h3 id="nodejs">安装 Node.js<a class="headerlink" href="#nodejs" title="Permanent link">&para;</a></h3>
 <p>GitBook 是一个基于<a href="https://nodejs.org/en/" title="Node.js">Node.js</a> 的命令行工具，下载安装 Node.js，安装完成之后，你可以使用下面的命令来检验是否安装成功。
 <div class="codehilite"><pre><span></span>$ node -v
@@ -714,8 +746,10 @@ CLI version: 2.3.2
 Installing GitBook 3.2.3
 </pre></div>
 更多详情请参照<a href="https://docs.gitbook.com/" title="文档">GitBook 安装文档</a> 来安装 GitBook。</p>
+<h3 id="typora">安装 Typora<a class="headerlink" href="#typora" title="Permanent link">&para;</a></h3>
+<p>Typora 的安装很简单，难点在于需要翻墙才能下载（当然你也可以找我要）。Git 的安装也很简单，但要用好它需要不少时间，这里就不展开了（再讲下去你就要跑啦）。</p>
 <h3 id="gitbook_4">安装 GitBook 编辑器<a class="headerlink" href="#gitbook_4" title="Permanent link">&para;</a></h3>
-<p>去<a href="https://docs.gitbook.com/" title="官网">GitBook 官网</a> 下载 GitBook 编辑器；如果是 Mac 用户且安装过 brew cask 的话可以使用 brew cask install gitbook-editor 命令行来安装 GitBook 编辑器。</p>
+<p>去<a href="https://www.gitbook.com/editor" title="官网">GitBook 官网</a> 下载 GitBook 编辑器；如果是 Mac 用户且安装过 brew cask 的话可以使用 brew cask install gitbook-editor 命令行来安装 GitBook 编辑器。</p>
 <h2 id="_2">先睹为快<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
 <p>GitBook 准备工作做好之后，我们进入一个你要写书的目录，输入如下命令。
 <div class="codehilite"><pre><span></span>$ gitbook init
@@ -736,19 +770,45 @@ info: initialization is finished
 <div class="codehilite"><pre><span></span>gitbook build
 </pre></div>
 下面我们来详细介绍下 GitBook 目录结构及相关文件。</p>
-<h3 id="_3">目录结构<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span>.
-├── book.json
-├── README.md
-├── SUMMARY.md
-├── chapter-1/
-|   ├── README.md
-|   └── something.md
-└── chapter-2/
-    ├── README.md
-    └── something.md
-</pre></div>
+<h3 id="typora_1">Typora 来编辑这两个文件<a class="headerlink" href="#typora_1" title="Permanent link">&para;</a></h3>
+<p><img alt="效果图" src="../../img/gitbook4.png" title="效果图" />
+编辑 SUMMARY.md 文件，内容修改为：
+<div class="codehilite"><pre><span></span># 目录
 
+* [前言](README.md)
+* [第一章](Chapter1/README.md)
+  * [第1节：衣](Chapter1/衣.md)
+  * [第2节：食](Chapter1/食.md)
+  * [第3节：住](Chapter1/住.md)
+  * [第4节：行](Chapter1/行.md)
+* [第二章](Chapter2/README.md)
+* [第三章](Chapter3/README.md)
+* [第四章](Chapter4/README.md)
+</pre></div>
+然后我们回到命令行，在 mybook 文件夹中再次执行 gitbook init 命令。GitBook 会查找 SUMMARY.md 文件中描述的目录和文件，如果没有则会将其创建。</p>
+<p>Typora 是所见即所得（实时渲染）的 Markdown 编辑器，这时候它是这样的：</p>
+<p><img alt="效果图" src="../../img/gitbook5.png" title="效果图" /></p>
+<p>接着我们执行 gitbook serve 来预览这本书籍，执行命令后会对 Markdown 格式的文档进行转换，默认转换为 html 格式，最后提示 “Serving book on <a href="http://localhost:4000">http://localhost:4000</a>”。嗯，打开浏览器看一下吧：</p>
+<p><img alt="效果图" src="../../img/gitbook6.png" title="效果图" /></p>
+<h3 id="gitbook_5">gitbook 常用命令<a class="headerlink" href="#gitbook_5" title="Permanent link">&para;</a></h3>
+<p>当你写得差不多，你可以执行 gitbook build 命令构建书籍，默认将生成的静态网站输出到 _book 目录。实际上，这一步也包含在 gitbook serve 里面，因为它们是 HTML，所以 GitBook 通过 Node.js 给你提供服务了。 
+1. 当然，build 命令可以指定路径：
+<div class="codehilite"><pre><span></span>gitbook build [书籍路径] [输出路径]
+</pre></div>
+2. serve 命令也可以指定端口：
+<div class="codehilite"><pre><span></span>gitbook serve --port 2333
+</pre></div>
+3. 你还可以生成 PDF 格式的电子书：
+<div class="codehilite"><pre><span></span>gitbook pdf ./ ./mybook.pdf
+</pre></div>
+4. 生成 epub 格式的电子书：
+<div class="codehilite"><pre><span></span>gitbook epub ./ ./mybook.epub
+</pre></div>
+5. 生成 mobi 格式的电子书：
+<div class="codehilite"><pre><span></span>gitbook mobi ./ ./mybook.mobi
+</pre></div>
+如果生成不了，你可能还需要安装一些工具，比如 ebook-convert。或者在 Typora 中安装 Pandoc 进行导出。</p>
+<p>除此之外，别忘了还可以用 Git 做版本管理呀！在 mybook 目录下执行 git init 初始化仓库，执行 git remote add 添加远程仓库（你得先在远端建好）。接着就可以愉快地 commit，push，pull … 啦！</p>
 <p>下面我们主要来讲讲 book.json 和 SUMMARY.md 文件。</p>
 <h3 id="bookjson">book.json<a class="headerlink" href="#bookjson" title="Permanent link">&para;</a></h3>
 <p>该文件主要用来存放配置信息，我先放出我的配置文件。
@@ -884,7 +944,7 @@ info: initialization is finished
 </pre></div>
 这个配置对应的目录结构如下所示:
 <img alt="如图" src="../../img/gitbook3.png" title="如图" /></p>
-<h3 id="_4">插件<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
+<h3 id="_3">插件<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
 <p>GitBook 有 <a href="https://plugins.gitbook.com/" title="插件官网">插件官网</a>，默认带有 5 个插件，highlight、search、sharing、font-settings、livereload，如果要去除自带的插件， 可以在插件名称前面加 -，比如：
 <div class="codehilite"><pre><span></span>&quot;plugins&quot;: [
     &quot;-search&quot;
@@ -902,7 +962,7 @@ info: initialization is finished
 </pre></div>
 然后在终端输入 gitbook install ./ 即可。</p>
 <p>如果要指定插件的版本可以使用 plugin@0.3.1，因为一些插件可能不会随着 GitBook 版本的升级而升级。</p>
-<h2 id="_5">结语<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
+<h2 id="_4">结语<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
 <p>这是我对 GitBook 使用的总结，希望能帮到今后需要的小伙伴</p>
                 
                   
