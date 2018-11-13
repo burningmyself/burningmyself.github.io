@@ -12,6 +12,8 @@ nav:
         - MySQL优化: sql/mysql_yh.md
     - Linux: 
         - 常用命令: linux/often.md
+    - Docker: 
+        - Docker全科: docker/deocker.md    
     - Tool: 
         - Git: tool/git.md
         - GitBook: tool/gitbook.md
