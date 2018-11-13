@@ -13,7 +13,7 @@ nav:
     - Linux: 
         - 常用命令: linux/often.md
     - Docker: 
-        - Docker全科: docker/deocker.md    
+        - Docker全科: docker/docker.md    
     - Tool: 
         - Git: tool/git.md
         - GitBook: tool/gitbook.md
