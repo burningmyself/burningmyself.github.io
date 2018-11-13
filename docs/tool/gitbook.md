@@ -32,7 +32,7 @@ Installing GitBook 3.2.3
 ### 安装 Typora
 Typora 的安装很简单，难点在于需要翻墙才能下载（当然你也可以找我要）。Git 的安装也很简单，但要用好它需要不少时间，这里就不展开了（再讲下去你就要跑啦）。
 ### 安装 GitBook 编辑器
-去[GitBook 官网](https://www.gitbook.com/editor "官网") 下载 GitBook 编辑器；如果是 Mac 用户且安装过 brew cask 的话可以使用 brew cask install gitbook-editor 命令行来安装 GitBook 编辑器。
+去[GitBook 官网](http://downloads.editor.gitbook.com/download/ "官网") 下载 GitBook 编辑器；如果是 Mac 用户且安装过 brew cask 的话可以使用 brew cask install gitbook-editor 命令行来安装 GitBook 编辑器。
 ## 先睹为快
 GitBook 准备工作做好之后，我们进入一个你要写书的目录，输入如下命令。
 ```node
