@@ -1324,7 +1324,7 @@ public class Tester {
 ```
 abc
 ```
-dropWhile 方法 语法:
+#### dropWhile 方法 语法:
 ```java
 default Stream<T> dropWhile(Predicate<? super T> predicate)
 ```
@@ -1343,7 +1343,7 @@ public class Tester {
 ```
 ef
 ```
-iterate 方法 语法:
+#### iterate 方法 语法:
 ```java
 static <T> Stream<T> iterate(T seed, Predicate<? super T> hasNext, UnaryOperator<T> next)
 ```
@@ -1365,7 +1365,7 @@ public class Tester {
 6
 9
 ```
-ofNullable 方法 语法:
+#### ofNullable 方法 语法:
 ```java
 static <T> Stream<T> ofNullable(T t)
 ```
