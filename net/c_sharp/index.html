@@ -711,15 +711,12 @@
 <div class="codehilite"><pre><span></span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="err">$</span><span class="s">&quot;Jack is saying { new Tools().SayHello() }&quot;</span><span class="p">);</span>
 
 <span class="kt">var</span> <span class="n">info</span> <span class="p">=</span> <span class="err">$</span><span class="s">&quot;Your discount is {await GetDiscount()}&quot;</span><span class="p">;</span>
- <span class="err">```</span>
-<span class="err">那么如何处理多语言呢？</span>
-<span class="err">我们可以使用</span> <span class="n">IFormattable</span>
-<span class="err">下面的代码如何实现多语言？</span>
-<span class="err">```</span><span class="n">C</span><span class="err">#</span>
- <span class="n">Double</span> <span class="n">remain</span> <span class="p">=</span> <span class="m">2000.5</span><span class="p">;</span> 
+</pre></div>
+那么如何处理多语言呢？我们可以使用 IFormattable下面的代码如何实现多语言？
+<div class="codehilite"><pre><span></span> <span class="n">Double</span> <span class="n">remain</span> <span class="p">=</span> <span class="m">2000.5</span><span class="p">;</span> 
  <span class="kt">var</span> <span class="n">results</span><span class="p">=</span> <span class="err">$</span><span class="s">&quot;your money is {remain:C}&quot;</span><span class="p">;</span>  
 </pre></div>
-    输出 your money is $2,000.50</p>
+输出 your money is $2,000.50</p>
 <p>使用IFormattable 多语言
 <div class="codehilite"><pre><span></span><span class="k">class</span> <span class="nc">Program</span>
 <span class="p">{</span>
