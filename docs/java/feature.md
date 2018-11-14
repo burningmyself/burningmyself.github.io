@@ -49,7 +49,7 @@ public class HelloWorld{
     }
 }
 ```
-### 新的格式化方法（java.util.Formatter）
+### 新的格式化方法java.util.Formatter）
 ```java
 formatter.format("Remaining account balance: $%.2f", balance);
 ```
