@@ -7,7 +7,7 @@ nav:
     - .NET: 
         - C# 6: net/c_sharp.md
     - Java: 
-        -Java特性: java/feature.md 
+        - Java特性: java/feature.md 
     - Python: python/index.md 
     - SQL:
         - MySQL优化: sql/mysql_yh.md
