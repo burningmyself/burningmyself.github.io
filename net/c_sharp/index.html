@@ -691,10 +691,9 @@
 <p>C# 6之前我们拼接字符串时需要这样
 <div class="codehilite"><pre><span></span> <span class="kt">var</span> <span class="n">Name</span> <span class="p">=</span> <span class="s">&quot;Jack&quot;</span><span class="p">;</span>
  <span class="kt">var</span> <span class="n">results</span> <span class="p">=</span> <span class="s">&quot;Hello&quot;</span> <span class="p">+</span> <span class="n">Name</span><span class="p">;</span>
- <span class="err">```</span>
-<span class="err">或者</span>
-<span class="err">```</span><span class="n">C</span><span class="err">#</span>
- <span class="kt">var</span> <span class="n">Name</span> <span class="p">=</span> <span class="s">&quot;Jack&quot;</span><span class="p">;</span>
+</pre></div>
+或者
+<div class="codehilite"><pre><span></span> <span class="kt">var</span> <span class="n">Name</span> <span class="p">=</span> <span class="s">&quot;Jack&quot;</span><span class="p">;</span>
  <span class="kt">var</span> <span class="n">results</span> <span class="p">=</span> <span class="kt">string</span><span class="p">.</span><span class="n">Format</span><span class="p">(</span><span class="s">&quot;Hello {0}&quot;</span><span class="p">,</span> <span class="n">Name</span><span class="p">);</span>
 </pre></div>
 但是C#6里我们就可以使用新的字符串插值特性
@@ -741,17 +740,16 @@
     <span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
-    输出  your money is ￥2,000.50</p>
+输出  your money is ￥2,000.50</p>
 <h2 id="_1">二、空操作符 ( ?. )<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
 <p>C# 6添加了一个 ?. 操作符，当一个对象或者属性职为空时直接返回null, 就不再继续执行后面的代码，在之前我们的代码里经常出现 NullException, 所以我们就需要加很多Null的判断，比如
 <div class="codehilite"><pre><span></span> <span class="k">if</span> <span class="p">(</span><span class="n">user</span> <span class="p">!=</span> <span class="k">null</span> <span class="p">&amp;&amp;</span> <span class="n">user</span><span class="p">.</span><span class="n">Project</span> <span class="p">!=</span> <span class="k">null</span> <span class="p">&amp;&amp;</span> <span class="n">user</span><span class="p">.</span><span class="n">Project</span><span class="p">.</span><span class="n">Tasks</span> <span class="p">!=</span> <span class="k">null</span> <span class="p">&amp;&amp;</span> <span class="n">user</span><span class="p">.</span><span class="n">Project</span><span class="p">.</span><span class="n">Tasks</span><span class="p">.</span><span class="n">Count</span> <span class="p">&gt;</span> <span class="m">0</span><span class="p">)</span>
  <span class="p">{</span>
    <span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">user</span><span class="p">.</span><span class="n">Project</span><span class="p">.</span><span class="n">Tasks</span><span class="p">.</span><span class="n">First</span><span class="p">().</span><span class="n">Name</span><span class="p">);</span>
  <span class="p">}</span>
- <span class="err">```</span>
-<span class="err">现在我们可以不用写</span> <span class="n">IF</span> <span class="err">直接写成如下这样</span>
-<span class="err">```</span><span class="n">C</span><span class="err">#</span>
-<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">user</span><span class="p">?.</span><span class="n">Project</span><span class="p">?.</span><span class="n">Tasks</span><span class="p">?.</span><span class="n">First</span><span class="p">()?.</span><span class="n">Name</span><span class="p">);</span>
+</pre></div>
+现在我们可以不用写 IF 直接写成如下这样
+<div class="codehilite"><pre><span></span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">user</span><span class="p">?.</span><span class="n">Project</span><span class="p">?.</span><span class="n">Tasks</span><span class="p">?.</span><span class="n">First</span><span class="p">()?.</span><span class="n">Name</span><span class="p">);</span>
 </pre></div>
 这个?. 特性不光是可以用于取值，也可以用于方法调用，如果对象为空将不进行任何操作，下面的代码不会报错，也不会有任何输出。
 <div class="codehilite"><pre><span></span><span class="k">class</span> <span class="nc">Program</span>
