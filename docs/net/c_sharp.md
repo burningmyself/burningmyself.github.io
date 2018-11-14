@@ -5,7 +5,7 @@ C# 6之前我们拼接字符串时需要这样
 ```C#
  var Name = "Jack";
  var results = "Hello" + Name;
- ```
+```
 或者
 ```C#
  var Name = "Jack";
@@ -61,7 +61,7 @@ class Program
     }
 }
 ```
-    输出  your money is ￥2,000.50
+输出  your money is ￥2,000.50
 ## 二、空操作符 ( ?. )
 C# 6添加了一个 ?. 操作符，当一个对象或者属性职为空时直接返回null, 就不再继续执行后面的代码，在之前我们的代码里经常出现 NullException, 所以我们就需要加很多Null的判断，比如
 ```C#
@@ -69,7 +69,7 @@ C# 6添加了一个 ?. 操作符，当一个对象或者属性职为空时直接
  {
    Console.WriteLine(user.Project.Tasks.First().Name);
  }
- ```
+```
 现在我们可以不用写 IF 直接写成如下这样
 ```C#
 Console.WriteLine(user?.Project?.Tasks?.First()?.Name);
