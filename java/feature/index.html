@@ -750,6 +750,27 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#dropwhile" title="dropWhile 方法 语法:" class="md-nav__link">
+    dropWhile 方法 语法:
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#iterate" title="iterate 方法 语法:" class="md-nav__link">
+    iterate 方法 语法:
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ofnullable" title="ofNullable 方法 语法:" class="md-nav__link">
+    ofNullable 方法 语法:
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -1587,6 +1608,27 @@
           <li class="md-nav__item">
   <a href="#takewhile" title="takeWhile 方法 语法:" class="md-nav__link">
     takeWhile 方法 语法:
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dropwhile" title="dropWhile 方法 语法:" class="md-nav__link">
+    dropWhile 方法 语法:
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#iterate" title="iterate 方法 语法:" class="md-nav__link">
+    iterate 方法 语法:
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ofnullable" title="ofNullable 方法 语法:" class="md-nav__link">
+    ofNullable 方法 语法:
   </a>
   
 </li>
@@ -2889,9 +2931,9 @@ takeWhile() 方法使用一个断言作为参数，返回给定 Stream 的子集
 </pre></div>
 以上实例 takeWhile 方法在碰到空字符串时停止循环输出，执行输出结果为：
 <div class="codehilite"><pre><span></span>abc
-</pre></div>
-dropWhile 方法 语法:
-<div class="codehilite"><pre><span></span><span class="k">default</span> <span class="n">Stream</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="nf">dropWhile</span><span class="o">(</span><span class="n">Predicate</span><span class="o">&lt;?</span> <span class="kd">super</span> <span class="n">T</span><span class="o">&gt;</span> <span class="n">predicate</span><span class="o">)</span>
+</pre></div></p>
+<h4 id="dropwhile">dropWhile 方法 语法:<a class="headerlink" href="#dropwhile" title="Permanent link">&para;</a></h4>
+<p><div class="codehilite"><pre><span></span><span class="k">default</span> <span class="n">Stream</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="nf">dropWhile</span><span class="o">(</span><span class="n">Predicate</span><span class="o">&lt;?</span> <span class="kd">super</span> <span class="n">T</span><span class="o">&gt;</span> <span class="n">predicate</span><span class="o">)</span>
 </pre></div>
 dropWhile 方法和 takeWhile 作用相反的，使用一个断言作为参数，直到断言语句第一次返回 true 才返回给定 Stream 的子集。
 <div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="nn">java.util.stream.Stream</span><span class="o">;</span>
@@ -2905,10 +2947,11 @@ dropWhile 方法和 takeWhile 作用相反的，使用一个断言作为参数�
 </pre></div>
 以上实例 dropWhile 方法在碰到空字符串时开始循环输出，执行输出结果为：
 <div class="codehilite"><pre><span></span>ef
-</pre></div>
-iterate 方法 语法:
-<div class="codehilite"><pre><span></span><span class="kd">static</span> <span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="n">Stream</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="nf">iterate</span><span class="o">(</span><span class="n">T</span> <span class="n">seed</span><span class="o">,</span> <span class="n">Predicate</span><span class="o">&lt;?</span> <span class="kd">super</span> <span class="n">T</span><span class="o">&gt;</span> <span class="n">hasNext</span><span class="o">,</span> <span class="n">UnaryOperator</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="n">next</span><span class="o">)</span>
 </pre></div></p>
+<h4 id="iterate">iterate 方法 语法:<a class="headerlink" href="#iterate" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><span class="kd">static</span> <span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="n">Stream</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="nf">iterate</span><span class="o">(</span><span class="n">T</span> <span class="n">seed</span><span class="o">,</span> <span class="n">Predicate</span><span class="o">&lt;?</span> <span class="kd">super</span> <span class="n">T</span><span class="o">&gt;</span> <span class="n">hasNext</span><span class="o">,</span> <span class="n">UnaryOperator</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="n">next</span><span class="o">)</span>
+</pre></div>
+
 <p>方法允许使用初始种子值创建顺序（可能是无限）流，并迭代应用指定的下一个方法。 当指定的 hasNext 的 predicate 返回 false 时，迭代停止。</p>
 <p><div class="codehilite"><pre><span></span><span class="n">java</span><span class="o">.</span><span class="na">util</span><span class="o">.</span><span class="na">stream</span><span class="o">.</span><span class="na">IntStream</span><span class="o">;</span>
 
@@ -2922,9 +2965,9 @@ iterate 方法 语法:
 <div class="codehilite"><pre><span></span>3
 6
 9
-</pre></div>
-ofNullable 方法 语法:
-<div class="codehilite"><pre><span></span><span class="kd">static</span> <span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="n">Stream</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="nf">ofNullable</span><span class="o">(</span><span class="n">T</span> <span class="n">t</span><span class="o">)</span>
+</pre></div></p>
+<h4 id="ofnullable">ofNullable 方法 语法:<a class="headerlink" href="#ofnullable" title="Permanent link">&para;</a></h4>
+<p><div class="codehilite"><pre><span></span><span class="kd">static</span> <span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="n">Stream</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="nf">ofNullable</span><span class="o">(</span><span class="n">T</span> <span class="n">t</span><span class="o">)</span>
 </pre></div>
 ofNullable 方法可以预防 NullPointerExceptions 异常， 可以通过检查流来避免 null 值。</p>
 <p>如果指定元素为非 null，则获取一个元素并生成单个元素流，元素为 null 则返回一个空流。</p>
