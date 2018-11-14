@@ -30,15 +30,13 @@ C# 6之前我们拼接字符串时需要这样
 Console.WriteLine($"Jack is saying { new Tools().SayHello() }");
 
 var info = $"Your discount is {await GetDiscount()}";
- ```
-那么如何处理多语言呢？
-我们可以使用 IFormattable
-下面的代码如何实现多语言？
+```
+那么如何处理多语言呢？我们可以使用 IFormattable下面的代码如何实现多语言？
 ```C#
  Double remain = 2000.5; 
  var results= $"your money is {remain:C}";  
 ```
-    输出 your money is $2,000.50
+输出 your money is $2,000.50
 
 使用IFormattable 多语言
 ```C#
