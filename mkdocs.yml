@@ -22,7 +22,6 @@ nav:
         - GitBook: tool/gitbook.md
         - Markdown: tool/markdown.md
   - 经验分析:
-    - 工作学习:  wordstudy/index.md  
     - DevOps: exp/devops.md   
 markdown_extensions:
   - admonition
