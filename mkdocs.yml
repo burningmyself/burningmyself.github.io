@@ -12,7 +12,7 @@ nav:
         - Python特性: python/feature.md 
     - PHP: php/index.md    
     - Node.js:
-        - es6语法: web/es6/md
+        - es6语法: web/es6.md
         - 阿里js样式规范: web/ali_js_style.md
         - node.js文档: web/node.js.md
     - SQL:
