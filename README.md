@@ -3,7 +3,7 @@
 # .NET: 
 ## C# 6: net/c_sharp.md
 # Java: 
-    # Java特性: java/feature.md 
+## Java特性: java/feature.md 
 # Python: 
 ## Python特性: python/feature.md 
 # PHP: php/index.md    
