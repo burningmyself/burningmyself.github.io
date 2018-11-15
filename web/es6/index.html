@@ -1,0 +1,1149 @@
+
+
+
+
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+      
+      
+      
+        <meta name="lang:clipboard.copy" content="Copy to clipboard">
+      
+        <meta name="lang:clipboard.copied" content="Copied to clipboard">
+      
+        <meta name="lang:search.language" content="en">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="No matching documents">
+      
+        <meta name="lang:search.result.one" content="1 matching document">
+      
+        <meta name="lang:search.result.other" content="# matching documents">
+      
+        <meta name="lang:search.tokenizer" content="[\s\-]+">
+      
+      <link rel="shortcut icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-3.0.6">
+    
+    
+      
+        <title>JavaScript ES6 规范 - BurningMyself</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/application.451f80e5.css">
+      
+      
+    
+    
+      <script src="../../assets/javascripts/modernizr.1aa3b519.js"></script>
+    
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700|Roboto+Mono">
+        <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
+      
+    
+    <link rel="stylesheet" href="../../assets/fonts/material-icons.css">
+    
+    
+  </head>
+  
+    <body dir="ltr">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+    
+      <a href="#javascript-es6" tabindex="1" class="md-skip">
+        Skip to content
+      </a>
+    
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="../.." title="BurningMyself" class="md-header-nav__button md-logo">
+          
+            <i class="md-icon"></i>
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          
+            
+              <span class="md-header-nav__topic">
+                BurningMyself
+              </span>
+              <span class="md-header-nav__topic">
+                JavaScript ES6 规范
+              </span>
+            
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          
+            <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
+            
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="__search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            Type to start searching
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+          
+        
+      </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+      <main class="md-main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="__drawer">
+    <a href="../.." title="BurningMyself" class="md-nav__button md-logo">
+      
+        <i class="md-icon"></i>
+      
+    </a>
+    BurningMyself
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../.." title="介绍" class="md-nav__link">
+      介绍
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2">
+    
+    <label class="md-nav__link" for="nav-2">
+      技术博文
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-2">
+        技术博文
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-1" type="checkbox" id="nav-2-1">
+    
+    <label class="md-nav__link" for="nav-2-1">
+      .NET
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-2-1">
+        .NET
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../net/c_sharp/" title="C# 6" class="md-nav__link">
+      C# 6
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-2" type="checkbox" id="nav-2-2">
+    
+    <label class="md-nav__link" for="nav-2-2">
+      Java
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-2-2">
+        Java
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../java/feature/" title="Java特性" class="md-nav__link">
+      Java特性
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-3" type="checkbox" id="nav-2-3">
+    
+    <label class="md-nav__link" for="nav-2-3">
+      Python
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-2-3">
+        Python
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../python/feature/" title="Python特性" class="md-nav__link">
+      Python特性
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../php/" title="PHP" class="md-nav__link">
+      PHP
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-5" type="checkbox" id="nav-2-5">
+    
+    <label class="md-nav__link" for="nav-2-5">
+      Node.js
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-2-5">
+        Node.js
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="md" title="es6语法" class="md-nav__link">
+      es6语法
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../ali_js_style/" title="阿里js样式规范" class="md-nav__link">
+      阿里js样式规范
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../node.js/" title="node.js文档" class="md-nav__link">
+      node.js文档
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-6" type="checkbox" id="nav-2-6">
+    
+    <label class="md-nav__link" for="nav-2-6">
+      SQL
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-2-6">
+        SQL
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../sql/mysql_yh/" title="MySQL优化" class="md-nav__link">
+      MySQL优化
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-7" type="checkbox" id="nav-2-7">
+    
+    <label class="md-nav__link" for="nav-2-7">
+      Linux
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-2-7">
+        Linux
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../linux/often/" title="常用命令" class="md-nav__link">
+      常用命令
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-8" type="checkbox" id="nav-2-8">
+    
+    <label class="md-nav__link" for="nav-2-8">
+      Docker
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-2-8">
+        Docker
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../docker/docker/" title="Docker全科" class="md-nav__link">
+      Docker全科
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-9" type="checkbox" id="nav-2-9">
+    
+    <label class="md-nav__link" for="nav-2-9">
+      Tool
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-2-9">
+        Tool
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tool/git/" title="Git" class="md-nav__link">
+      Git
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tool/gitbook/" title="GitBook" class="md-nav__link">
+      GitBook
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tool/markdown/" title="Markdown" class="md-nav__link">
+      Markdown
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3">
+    
+    <label class="md-nav__link" for="nav-3">
+      经验分析
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-3">
+        经验分析
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../exp/devops/" title="DevOps" class="md-nav__link">
+      DevOps
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#es6" title="ES6 简介" class="md-nav__link">
+    ES6 简介
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_1" title="新特性" class="md-nav__link">
+    新特性
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#letconst" title="let、const" class="md-nav__link">
+    let、const
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#importexport" title="import、export" class="md-nav__link">
+    import、export
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#classextendssuper" title="class、extends、super" class="md-nav__link">
+    class、extends、super
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#arrow-functions" title="arrow functions （箭头函数）" class="md-nav__link">
+    arrow functions （箭头函数）
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#template-string" title="template string （模板字符串）" class="md-nav__link">
+    template string （模板字符串）
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#destructuring" title="destructuring （解构）" class="md-nav__link">
+    destructuring （解构）
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#default" title="default 函数默认参数" class="md-nav__link">
+    default 函数默认参数
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rest-arguments-rest" title="rest arguments （rest参数）" class="md-nav__link">
+    rest arguments （rest参数）
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#spread-operator" title="Spread Operator （展开运算符）" class="md-nav__link">
+    Spread Operator （展开运算符）
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_2" title="对象" class="md-nav__link">
+    对象
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#promise" title="Promise" class="md-nav__link">
+    Promise
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#generators" title="Generators" class="md-nav__link">
+    Generators
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" title="总结" class="md-nav__link">
+    总结
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                <h1 id="javascript-es6">JavaScript ES6 规范<a class="headerlink" href="#javascript-es6" title="Permanent link">&para;</a></h1>
+<h2 id="es6">ES6 简介<a class="headerlink" href="#es6" title="Permanent link">&para;</a></h2>
+<p>ECMAScript 6 简称 ES6，是 JavaScript 语言的下一代标准，已经在2015年6月正式发布了。它的目标是使得 JavaScript 语言可以用来编写复杂的大型应用程序，成为企业级开发语言。</p>
+<p>ECMAScript 和 JavaScript 的关系：前者是后者的语法规格，后者是前者的一种实现</p>
+<p><a href="http://babeljs.io/">Babel</a>：将ES6代码转为ES5代码 </p>
+<h2 id="_1">新特性<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<h3 id="letconst">let、const<a class="headerlink" href="#letconst" title="Permanent link">&para;</a></h3>
+<p>let 定义的变量不会被变量提升，const 定义的常量不能被修改，let 和 const 都是块级作用域</p>
+<p>ES6前，js 是没有块级作用域 {} 的概念的。（有函数作用域、全局作用域、eval作用域）</p>
+<p>ES6后，let 和 const 的出现，js 也有了块级作用域的概念，前端的知识是日新月异的~</p>
+<p>变量提升：在ES6以前，var关键字声明变量。无论声明在何处，都会被视为声明在函数的最顶部；不在函数内即在全局作用域的最顶部。这样就会引起一些误解。例如：
+<div class="codehilite"><pre><span></span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">a</span><span class="p">);</span> <span class="c1">// undefined</span>
+<span class="kd">var</span> <span class="nx">a</span> <span class="o">=</span> <span class="s1">&#39;hello&#39;</span><span class="p">;</span>
+
+<span class="err">#</span> <span class="nx">上面的代码相当于</span>
+<span class="kd">var</span> <span class="nx">a</span><span class="p">;</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">a</span><span class="p">);</span>
+<span class="nx">a</span> <span class="o">=</span> <span class="s1">&#39;hello&#39;</span><span class="p">;</span>
+
+<span class="err">#</span> <span class="nx">而</span> <span class="kd">let</span> <span class="nx">就不会被变量提升</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">a</span><span class="p">);</span> <span class="c1">// a is not defined</span>
+<span class="kd">let</span> <span class="nx">a</span> <span class="o">=</span> <span class="s1">&#39;hello&#39;</span><span class="p">;</span>
+</pre></div>
+const 定义的常量不能被修改
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">name</span> <span class="o">=</span> <span class="s2">&quot;bai&quot;</span><span class="p">;</span>
+<span class="nx">name</span> <span class="o">=</span> <span class="s2">&quot;ming&quot;</span><span class="p">;</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">name</span><span class="p">);</span> <span class="c1">// ming</span>
+<span class="kr">const</span> <span class="nx">name</span> <span class="o">=</span> <span class="s2">&quot;bai&quot;</span><span class="p">;</span>
+<span class="nx">name</span> <span class="o">=</span> <span class="s2">&quot;ming&quot;</span><span class="p">;</span> <span class="c1">// Assignment to constant variable.</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">name</span><span class="p">);</span>
+</pre></div></p>
+<h3 id="importexport">import、export<a class="headerlink" href="#importexport" title="Permanent link">&para;</a></h3>
+<p>import导入模块、export导出模块
+<div class="codehilite"><pre><span></span><span class="c1">// 全部导入</span>
+<span class="kr">import</span> <span class="nx">people</span> <span class="nx">from</span> <span class="s1">&#39;./example&#39;</span>
+
+<span class="c1">// 将整个模块当作单一对象进行导入，该模块的所有导出都会作为对象的属性存在</span>
+<span class="kr">import</span> <span class="o">*</span> <span class="nx">as</span> <span class="nx">example</span> <span class="nx">from</span> <span class="s2">&quot;./example.js&quot;</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">example</span><span class="p">.</span><span class="nx">name</span><span class="p">)</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">example</span><span class="p">.</span><span class="nx">getName</span><span class="p">())</span>
+
+<span class="c1">// 导入部分，引入非 default 时，使用花括号</span>
+<span class="kr">import</span> <span class="p">{</span><span class="nx">name</span><span class="p">,</span> <span class="nx">age</span><span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;./example&#39;</span>
+
+
+<span class="c1">// 导出默认, 有且只有一个默认</span>
+<span class="kr">export</span> <span class="k">default</span> <span class="nx">App</span>
+
+<span class="c1">// 部分导出</span>
+<span class="kr">export</span> <span class="kr">class</span> <span class="nx">App</span> <span class="nx">extend</span> <span class="nx">Component</span> <span class="p">{};</span>
+</pre></div></p>
+<h3 id="classextendssuper">class、extends、super<a class="headerlink" href="#classextendssuper" title="Permanent link">&para;</a></h3>
+<p>ES5中最令人头疼的的几个部分：原型、构造函数，继承，有了ES6我们不再烦恼！</p>
+<p>ES6引入了Class（类）这个概念。
+<div class="codehilite"><pre><span></span><span class="kr">class</span> <span class="nx">Animal</span> <span class="p">{</span>
+<span class="nx">constructor</span><span class="p">()</span> <span class="p">{</span>
+<span class="k">this</span><span class="p">.</span><span class="nx">type</span> <span class="o">=</span> <span class="s1">&#39;animal&#39;</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="nx">says</span><span class="p">(</span><span class="nx">say</span><span class="p">)</span> <span class="p">{</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">type</span> <span class="o">+</span> <span class="s1">&#39; says &#39;</span> <span class="o">+</span> <span class="nx">say</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">let</span> <span class="nx">animal</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Animal</span><span class="p">();</span>
+<span class="nx">animal</span><span class="p">.</span><span class="nx">says</span><span class="p">(</span><span class="s1">&#39;hello&#39;</span><span class="p">);</span> <span class="c1">//animal says hello</span>
+
+<span class="kr">class</span> <span class="nx">Cat</span> <span class="kr">extends</span> <span class="nx">Animal</span> <span class="p">{</span>
+<span class="nx">constructor</span><span class="p">()</span> <span class="p">{</span>
+<span class="kr">super</span><span class="p">();</span>
+<span class="k">this</span><span class="p">.</span><span class="nx">type</span> <span class="o">=</span> <span class="s1">&#39;cat&#39;</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">let</span> <span class="nx">cat</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Cat</span><span class="p">();</span>
+<span class="nx">cat</span><span class="p">.</span><span class="nx">says</span><span class="p">(</span><span class="s1">&#39;hello&#39;</span><span class="p">);</span> <span class="c1">//cat says hello</span>
+</pre></div>
+上面代码首先用class定义了一个“类”，可以看到里面有一个constructor方法，这就是构造方法，而this关键字则代表实例对象。简单地说，constructor内定义的方法和属性是实例对象自己的，而constructor外定义的方法和属性则是所有实力对象可以共享的。</p>
+<p>Class之间可以通过extends关键字实现继承，这比ES5的通过修改原型链实现继承，要清晰和方便很多。上面定义了一个Cat类，该类通过extends关键字，继承了Animal类的所有属性和方法。</p>
+<p>super关键字，它指代父类的实例（即父类的this对象）。子类必须在constructor方法中调用super方法，否则新建实例时会报错。这是因为子类没有自己的this对象，而是继承父类的this对象，然后对其进行加工。如果不调用super方法，子类就得不到this对象。</p>
+<p>ES6的继承机制，实质是先创造父类的实例对象this（所以必须先调用super方法），然后再用子类的构造函数修改this。
+<div class="codehilite"><pre><span></span><span class="c1">// ES5</span>
+<span class="kd">var</span> <span class="nx">Shape</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">id</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">)</span> <span class="p">{</span>
+<span class="k">this</span><span class="p">.</span><span class="nx">id</span> <span class="o">=</span> <span class="nx">id</span><span class="p">,</span>
+<span class="k">this</span><span class="p">.</span><span class="nx">move</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">);</span>
+<span class="p">};</span>
+<span class="nx">Shape</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">move</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">)</span> <span class="p">{</span>
+<span class="k">this</span><span class="p">.</span><span class="nx">x</span> <span class="o">=</span> <span class="nx">x</span><span class="p">;</span>
+<span class="k">this</span><span class="p">.</span><span class="nx">y</span> <span class="o">=</span> <span class="nx">y</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="kd">var</span> <span class="nx">Rectangle</span> <span class="o">=</span> <span class="kd">function</span> <span class="nx">id</span><span class="p">(</span><span class="nx">ix</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">)</span> <span class="p">{</span>
+<span class="nx">Shape</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="nx">id</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">);</span>
+<span class="k">this</span><span class="p">.</span><span class="nx">width</span> <span class="o">=</span> <span class="nx">width</span><span class="p">;</span>
+<span class="k">this</span><span class="p">.</span><span class="nx">height</span> <span class="o">=</span> <span class="nx">height</span><span class="p">;</span>
+<span class="p">};</span>
+<span class="nx">Rectangle</span><span class="p">.</span><span class="nx">prototype</span> <span class="o">=</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="nx">Shape</span><span class="p">.</span><span class="nx">prototype</span><span class="p">);</span>
+<span class="nx">Rectangle</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">constructor</span> <span class="o">=</span> <span class="nx">Rectangle</span><span class="p">;</span>
+
+<span class="kd">var</span> <span class="nx">Circle</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">id</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">radius</span><span class="p">)</span> <span class="p">{</span>
+<span class="nx">Shape</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="nx">id</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">);</span>
+<span class="k">this</span><span class="p">.</span><span class="nx">radius</span> <span class="o">=</span> <span class="nx">radius</span><span class="p">;</span>
+<span class="p">};</span>
+<span class="nx">Circle</span><span class="p">.</span><span class="nx">prototype</span> <span class="o">=</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="nx">Shape</span><span class="p">.</span><span class="nx">prototype</span><span class="p">);</span>
+<span class="nx">Circle</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">constructor</span> <span class="o">=</span> <span class="nx">Circle</span><span class="p">;</span>
+
+<span class="c1">// ES6</span>
+<span class="kr">class</span> <span class="nx">Shape</span> <span class="p">{</span>
+<span class="nx">constructor</span><span class="p">(</span><span class="nx">id</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">)</span> <span class="p">{</span>
+<span class="k">this</span><span class="p">.</span><span class="nx">id</span> <span class="o">=</span> <span class="nx">id</span> <span class="k">this</span><span class="p">.</span><span class="nx">move</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="nx">move</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">)</span> <span class="p">{</span>
+<span class="k">this</span><span class="p">.</span><span class="nx">x</span> <span class="o">=</span> <span class="nx">x</span> <span class="k">this</span><span class="p">.</span><span class="nx">y</span> <span class="o">=</span> <span class="nx">y</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kr">class</span> <span class="nx">Rectangle</span> <span class="kr">extends</span> <span class="nx">Shape</span> <span class="p">{</span>
+<span class="nx">constructor</span><span class="p">(</span><span class="nx">id</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">)</span> <span class="p">{</span>
+<span class="kr">super</span><span class="p">(</span><span class="nx">id</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">)</span> <span class="k">this</span><span class="p">.</span><span class="nx">width</span> <span class="o">=</span> <span class="nx">width</span> <span class="k">this</span><span class="p">.</span><span class="nx">height</span> <span class="o">=</span> <span class="nx">height</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kr">class</span> <span class="nx">Circle</span> <span class="kr">extends</span> <span class="nx">Shape</span> <span class="p">{</span>
+<span class="nx">constructor</span><span class="p">(</span><span class="nx">id</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">radius</span><span class="p">)</span> <span class="p">{</span>
+<span class="kr">super</span><span class="p">(</span><span class="nx">id</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">)</span> <span class="k">this</span><span class="p">.</span><span class="nx">radius</span> <span class="o">=</span> <span class="nx">radius</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="p">}</span>
+</pre></div></p>
+<h3 id="arrow-functions">arrow functions （箭头函数）<a class="headerlink" href="#arrow-functions" title="Permanent link">&para;</a></h3>
+<p>函数的快捷写法。不需要 function 关键字来创建函数，省略 return 关键字，继承当前上下文的 this 关键字
+<div class="codehilite"><pre><span></span><span class="c1">// ES5</span>
+<span class="kd">var</span> <span class="nx">arr1</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">];</span>
+<span class="kd">var</span> <span class="nx">newArr1</span> <span class="o">=</span> <span class="nx">arr1</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">x</span><span class="p">)</span> <span class="p">{</span>
+<span class="k">return</span> <span class="nx">x</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+<span class="p">});</span>
+
+<span class="c1">// ES6</span>
+<span class="kd">let</span> <span class="nx">arr2</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">];</span>
+<span class="kd">let</span> <span class="nx">newArr2</span> <span class="o">=</span> <span class="nx">arr2</span><span class="p">.</span><span class="nx">map</span><span class="p">((</span><span class="nx">x</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+<span class="nx">x</span> <span class="o">+</span> <span class="mi">1</span>
+<span class="p">});</span>
+</pre></div>
+箭头函数小细节：当你的函数有且仅有一个参数的时候，是可以省略掉括号的；当你函数中有且仅有一个表达式的时候可以省略{}
+<div class="codehilite"><pre><span></span><span class="kd">let</span> <span class="nx">arr2</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">];</span>
+<span class="kd">let</span> <span class="nx">newArr2</span> <span class="o">=</span> <span class="nx">arr2</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="nx">x</span> <span class="p">=&gt;</span> <span class="nx">x</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>
+</pre></div>
+JavaScript语言的this对象一直是一个令人头痛的问题，运行上面的代码会报错，这是因为setTimeout中的this指向的是全局对象。</p>
+<p><div class="codehilite"><pre><span></span><span class="kr">class</span> <span class="nx">Animal</span> <span class="p">{</span>
+<span class="nx">constructor</span><span class="p">()</span> <span class="p">{</span>
+<span class="k">this</span><span class="p">.</span><span class="nx">type</span> <span class="o">=</span> <span class="s1">&#39;animal&#39;</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="nx">says</span><span class="p">(</span><span class="nx">say</span><span class="p">)</span> <span class="p">{</span>
+<span class="nx">setTimeout</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">type</span> <span class="o">+</span> <span class="s1">&#39; says &#39;</span> <span class="o">+</span> <span class="nx">say</span><span class="p">);</span>
+<span class="p">},</span> <span class="mi">1000</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="p">}</span>
+<span class="kd">var</span> <span class="nx">animal</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Animal</span><span class="p">();</span>
+<span class="nx">animal</span><span class="p">.</span><span class="nx">says</span><span class="p">(</span><span class="s1">&#39;hi&#39;</span><span class="p">);</span> <span class="c1">//undefined says hi</span>
+</pre></div>
+解决办法：
+<div class="codehilite"><pre><span></span><span class="c1">// 传统方法1: 将this传给self,再用self来指代this</span>
+<span class="nx">says</span><span class="p">(</span><span class="nx">say</span><span class="p">)</span> <span class="p">{</span>
+<span class="kd">var</span> <span class="nx">self</span> <span class="o">=</span> <span class="k">this</span><span class="p">;</span>
+<span class="nx">setTimeout</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">self</span><span class="p">.</span><span class="nx">type</span> <span class="o">+</span> <span class="s1">&#39; says &#39;</span> <span class="o">+</span> <span class="nx">say</span><span class="p">);</span>
+<span class="p">},</span> <span class="mi">1000</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="c1">// 传统方法2: 用bind(this),即</span>
+<span class="nx">says</span><span class="p">(</span><span class="nx">say</span><span class="p">)</span> <span class="p">{</span>
+<span class="nx">setTimeout</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">type</span> <span class="o">+</span> <span class="s1">&#39; says &#39;</span> <span class="o">+</span> <span class="nx">say</span><span class="p">);</span>
+<span class="p">}.</span><span class="nx">bind</span><span class="p">(</span><span class="k">this</span><span class="p">),</span> <span class="mi">1000</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="c1">// ES6: 箭头函数</span>
+<span class="c1">// 当我们使用箭头函数时，函数体内的this对象，就是定义时所在的对象</span>
+<span class="nx">says</span><span class="p">(</span><span class="nx">say</span><span class="p">)</span> <span class="p">{</span>
+<span class="nx">setTimeout</span><span class="p">(()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">type</span> <span class="o">+</span> <span class="s1">&#39; says &#39;</span> <span class="o">+</span> <span class="nx">say</span><span class="p">);</span>
+<span class="p">},</span> <span class="mi">1000</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div></p>
+<h3 id="template-string">template string （模板字符串）<a class="headerlink" href="#template-string" title="Permanent link">&para;</a></h3>
+<p>解决了 ES5 在字符串功能上的痛点。</p>
+<p>第一个用途：字符串拼接。将表达式嵌入字符串中进行拼接，用 <code>和${}</code>来界定。
+<div class="codehilite"><pre><span></span><span class="c1">// es5</span>
+<span class="kd">var</span> <span class="nx">name1</span> <span class="o">=</span> <span class="s2">&quot;bai&quot;</span><span class="p">;</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;hello&#39;</span> <span class="o">+</span> <span class="nx">name1</span><span class="p">);</span>
+
+<span class="c1">// es6</span>
+<span class="kr">const</span> <span class="nx">name2</span> <span class="o">=</span> <span class="s2">&quot;ming&quot;</span><span class="p">;</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`hello</span><span class="si">${</span><span class="nx">name2</span><span class="si">}</span><span class="sb">`</span><span class="p">);</span>
+</pre></div>
+第二个用途：在ES5时我们通过反斜杠来做多行字符串拼接。ES6反引号 `` 直接搞定。
+<div class="codehilite"><pre><span></span><span class="c1">// es5</span>
+<span class="kd">var</span> <span class="nx">msg</span> <span class="o">=</span> <span class="s2">&quot;Hi \</span>
+<span class="s2">man!&quot;</span><span class="p">;</span>
+
+<span class="c1">// es6</span>
+<span class="kr">const</span> <span class="nx">template</span> <span class="o">=</span> <span class="sb">`&lt;div&gt;</span>
+<span class="sb">&lt;span&gt;hello world&lt;/span&gt;</span>
+<span class="sb">&lt;/div&gt;`</span><span class="p">;</span>
+</pre></div>
+另外：includes repeat
+<div class="codehilite"><pre><span></span><span class="c1">// includes：判断是否包含然后直接返回布尔值</span>
+<span class="kd">let</span> <span class="nx">str</span> <span class="o">=</span> <span class="s1">&#39;hahah&#39;</span><span class="p">;</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">str</span><span class="p">.</span><span class="nx">includes</span><span class="p">(</span><span class="s1">&#39;y&#39;</span><span class="p">));</span> <span class="c1">// false</span>
+
+<span class="c1">// repeat: 获取字符串重复n次</span>
+<span class="kd">let</span> <span class="nx">s</span> <span class="o">=</span> <span class="s1">&#39;he&#39;</span><span class="p">;</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">s</span><span class="p">.</span><span class="nx">repeat</span><span class="p">(</span><span class="mi">3</span><span class="p">));</span> <span class="c1">// &#39;hehehe&#39;</span>
+</pre></div></p>
+<h3 id="destructuring">destructuring （解构）<a class="headerlink" href="#destructuring" title="Permanent link">&para;</a></h3>
+<p>简化数组和对象中信息的提取。</p>
+<p>ES6前，我们一个一个获取对象信息；</p>
+<p>ES6后，解构能让我们从对象或者数组里取出数据存为变量
+<div class="codehilite"><pre><span></span><span class="c1">// ES5</span>
+<span class="kd">var</span> <span class="nx">people1</span> <span class="o">=</span> <span class="p">{</span>
+<span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;bai&#39;</span><span class="p">,</span>
+<span class="nx">age</span><span class="o">:</span> <span class="mi">20</span><span class="p">,</span>
+<span class="nx">color</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="s1">&#39;blue&#39;</span><span class="p">]</span>
+<span class="p">};</span>
+
+<span class="kd">var</span> <span class="nx">myName</span> <span class="o">=</span> <span class="nx">people1</span><span class="p">.</span><span class="nx">name</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">myAge</span> <span class="o">=</span> <span class="nx">people1</span><span class="p">.</span><span class="nx">age</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">myColor</span> <span class="o">=</span> <span class="nx">people1</span><span class="p">.</span><span class="nx">color</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">myName</span> <span class="o">+</span> <span class="s1">&#39;----&#39;</span> <span class="o">+</span> <span class="nx">myAge</span> <span class="o">+</span> <span class="s1">&#39;----&#39;</span> <span class="o">+</span> <span class="nx">myColor</span><span class="p">);</span>
+
+<span class="c1">// ES6</span>
+<span class="kd">let</span> <span class="nx">people2</span> <span class="o">=</span> <span class="p">{</span>
+<span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;ming&#39;</span><span class="p">,</span>
+<span class="nx">age</span><span class="o">:</span> <span class="mi">20</span><span class="p">,</span>
+<span class="nx">color</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="s1">&#39;blue&#39;</span><span class="p">]</span>
+<span class="p">}</span>
+
+<span class="kd">let</span> <span class="p">{</span> <span class="nx">name</span><span class="p">,</span> <span class="nx">age</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">people2</span><span class="p">;</span>
+<span class="kd">let</span> <span class="p">[</span><span class="nx">first</span><span class="p">,</span> <span class="nx">second</span><span class="p">]</span> <span class="o">=</span> <span class="nx">people2</span><span class="p">.</span><span class="nx">color</span><span class="p">;</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`</span><span class="si">${</span><span class="nx">name</span><span class="si">}</span><span class="sb">----</span><span class="si">${</span><span class="nx">age</span><span class="si">}</span><span class="sb">----</span><span class="si">${</span><span class="nx">first</span><span class="si">}</span><span class="sb">`</span><span class="p">);</span>
+</pre></div></p>
+<h3 id="default">default 函数默认参数<a class="headerlink" href="#default" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="c1">// ES5 给函数定义参数默认值</span>
+<span class="kd">function</span> <span class="nx">foo</span><span class="p">(</span><span class="nx">num</span><span class="p">)</span> <span class="p">{</span>
+<span class="nx">num</span> <span class="o">=</span> <span class="nx">num</span> <span class="o">||</span> <span class="mi">200</span><span class="p">;</span>
+<span class="k">return</span> <span class="nx">num</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// ES6</span>
+<span class="kd">function</span> <span class="nx">foo</span><span class="p">(</span><span class="nx">num</span> <span class="o">=</span> <span class="mi">200</span><span class="p">)</span> <span class="p">{</span>
+<span class="k">return</span> <span class="nx">num</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+
+<h3 id="rest-arguments-rest">rest arguments （rest参数）<a class="headerlink" href="#rest-arguments-rest" title="Permanent link">&para;</a></h3>
+<p>解决了 es5 复杂的 arguments 问题
+<div class="codehilite"><pre><span></span><span class="kd">function</span> <span class="nx">foo</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="p">...</span><span class="nx">rest</span><span class="p">)</span> <span class="p">{</span>
+<span class="k">return</span> <span class="p">((</span><span class="nx">x</span> <span class="o">+</span> <span class="nx">y</span><span class="p">)</span> <span class="o">*</span> <span class="nx">rest</span><span class="p">.</span><span class="nx">length</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="nx">foo</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;hello&#39;</span><span class="p">,</span> <span class="kc">true</span><span class="p">,</span> <span class="mi">7</span><span class="p">);</span> <span class="c1">// 9</span>
+</pre></div></p>
+<h3 id="spread-operator">Spread Operator （展开运算符）<a class="headerlink" href="#spread-operator" title="Permanent link">&para;</a></h3>
+<p>第一个用途：组装数组
+<div class="codehilite"><pre><span></span><span class="kd">let</span> <span class="nx">color</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="s1">&#39;yellow&#39;</span><span class="p">];</span>
+<span class="kd">let</span> <span class="nx">colorful</span> <span class="o">=</span> <span class="p">[...</span><span class="nx">color</span><span class="p">,</span> <span class="s1">&#39;green&#39;</span><span class="p">,</span> <span class="s1">&#39;blue&#39;</span><span class="p">];</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">colorful</span><span class="p">);</span> <span class="c1">// [&quot;red&quot;, &quot;yellow&quot;, &quot;green&quot;, &quot;blue&quot;]</span>
+</pre></div>
+第二个用途：获取数组除了某几项的其他项
+<div class="codehilite"><pre><span></span><span class="kd">let</span> <span class="nx">num</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">9</span><span class="p">];</span>
+<span class="kd">let</span> <span class="p">[</span><span class="nx">first</span><span class="p">,</span> <span class="nx">second</span><span class="p">,</span> <span class="p">...</span><span class="nx">rest</span><span class="p">]</span> <span class="o">=</span> <span class="nx">num</span><span class="p">;</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">rest</span><span class="p">);</span> <span class="c1">// [5, 7, 9]</span>
+</pre></div></p>
+<h3 id="_2">对象<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
+<p>对象初始化简写
+<div class="codehilite"><pre><span></span><span class="c1">// ES5</span>
+<span class="kd">function</span> <span class="nx">people</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">age</span><span class="p">)</span> <span class="p">{</span>
+<span class="k">return</span> <span class="p">{</span>
+<span class="nx">name</span><span class="o">:</span> <span class="nx">name</span><span class="p">,</span>
+<span class="nx">age</span><span class="o">:</span> <span class="nx">age</span>
+<span class="p">};</span>
+<span class="p">}</span>
+
+<span class="c1">// ES6</span>
+<span class="kd">function</span> <span class="nx">people</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">age</span><span class="p">)</span> <span class="p">{</span>
+<span class="k">return</span> <span class="p">{</span>
+<span class="nx">name</span><span class="p">,</span>
+<span class="nx">age</span>
+<span class="p">};</span>
+<span class="p">}</span>
+</pre></div>
+对象字面量简写（省略冒号与 function 关键字）
+<div class="codehilite"><pre><span></span><span class="c1">// ES5</span>
+<span class="kd">var</span> <span class="nx">people1</span> <span class="o">=</span> <span class="p">{</span>
+<span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;bai&#39;</span><span class="p">,</span>
+<span class="nx">getName</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">name</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="p">};</span>
+
+<span class="c1">// ES6</span>
+<span class="kd">let</span> <span class="nx">people2</span> <span class="o">=</span> <span class="p">{</span>
+<span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;bai&#39;</span><span class="p">,</span>
+<span class="nx">getName</span> <span class="p">()</span> <span class="p">{</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">name</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="p">};</span>
+</pre></div>
+另外：Object.assign()</p>
+<p>ES6 对象提供了Object.assign()这个方法来实现浅复制。Object.assign()可以把任意多个源对象自身可枚举的属性拷贝给目标对象，然后返回目标对象。第一参数即为目标对象。在实际项目中，我们为了不改变源对象。一般会把目标对象传为{}
+<div class="codehilite"><pre><span></span><span class="kr">const</span> <span class="nx">obj</span> <span class="o">=</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">assign</span><span class="p">({},</span> <span class="nx">objA</span><span class="p">,</span> <span class="nx">objB</span><span class="p">)</span>
+
+<span class="c1">// 给对象添加属性</span>
+<span class="k">this</span><span class="p">.</span><span class="nx">seller</span> <span class="o">=</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">assign</span><span class="p">({},</span> <span class="k">this</span><span class="p">.</span><span class="nx">seller</span><span class="p">,</span> <span class="nx">response</span><span class="p">.</span><span class="nx">data</span><span class="p">)</span>
+</pre></div></p>
+<h3 id="promise">Promise<a class="headerlink" href="#promise" title="Permanent link">&para;</a></h3>
+<p>用同步的方式去写异步代码
+<div class="codehilite"><pre><span></span><span class="c1">// 发起异步请求</span>
+<span class="nx">fetch</span><span class="p">(</span><span class="s1">&#39;/api/todos&#39;</span><span class="p">)</span>
+<span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">res</span> <span class="p">=&gt;</span> <span class="nx">res</span><span class="p">.</span><span class="nx">json</span><span class="p">())</span>
+<span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">data</span> <span class="p">=&gt;</span> <span class="p">({</span>
+<span class="nx">data</span>
+<span class="p">}))</span>
+<span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="nx">err</span> <span class="p">=&gt;</span> <span class="p">({</span>
+<span class="nx">err</span>
+<span class="p">}));</span>
+</pre></div></p>
+<h3 id="generators">Generators<a class="headerlink" href="#generators" title="Permanent link">&para;</a></h3>
+<p>生成器（ generator）是能返回一个迭代器的函数。</p>
+<p>生成器函数也是一种函数，最直观的表现就是比普通的function多了个星号*，在其函数体内可以使用yield关键字,有意思的是函数会在每个yield后暂停。</p>
+<p>这里生活中有一个比较形象的例子。咱们到银行办理业务时候都得向大厅的机器取一张排队号。你拿到你的排队号，机器并不会自动为你再出下一张票。也就是说取票机“暂停”住了，直到下一个人再次唤起才会继续吐票。</p>
+<p>迭代器：当你调用一个generator时，它将返回一个迭代器对象。这个迭代器对象拥有一个叫做next的方法来帮助你重启generator函数并得到下一个值。next方法不仅返回值，它返回的对象具有两个属性：done和value。value是你获得的值，done用来表明你的generator是否已经停止提供值。继续用刚刚取票的例子，每张排队号就是这里的value，打印票的纸是否用完就这是这里的done。
+<div class="codehilite"><pre><span></span><span class="c1">// 生成器</span>
+<span class="kd">function</span> <span class="o">*</span><span class="nx">createIterator</span><span class="p">()</span> <span class="p">{</span>
+<span class="k">yield</span> <span class="mi">1</span><span class="p">;</span>
+<span class="k">yield</span> <span class="mi">2</span><span class="p">;</span>
+<span class="k">yield</span> <span class="mi">3</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// 生成器能像正规函数那样被调用，但会返回一个迭代器</span>
+<span class="kd">let</span> <span class="nx">iterator</span> <span class="o">=</span> <span class="nx">createIterator</span><span class="p">();</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">iterator</span><span class="p">.</span><span class="nx">next</span><span class="p">().</span><span class="nx">value</span><span class="p">);</span> <span class="c1">// 1</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">iterator</span><span class="p">.</span><span class="nx">next</span><span class="p">().</span><span class="nx">value</span><span class="p">);</span> <span class="c1">// 2</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">iterator</span><span class="p">.</span><span class="nx">next</span><span class="p">().</span><span class="nx">value</span><span class="p">);</span> <span class="c1">// 3</span>
+</pre></div>
+迭代器对异步编程作用很大，异步调用对于我们来说是很困难的事，我们的函数并不会等待异步调用完再执行，你可能会想到用回调函数，（当然还有其他方案比如Promise比如Async/await）。</p>
+<p>生成器可以让我们的代码进行等待。就不用嵌套的回调函数。使用generator可以确保当异步调用在我们的generator函数运行一下行代码之前完成时暂停函数的执行。</p>
+<p>那么问题来了，咱们也不能手动一直调用next()方法，你需要一个能够调用生成器并启动迭代器的方法。就像这样子的：
+<div class="codehilite"><pre><span></span><span class="kd">function</span> <span class="nx">run</span><span class="p">(</span><span class="nx">taskDef</span><span class="p">)</span> <span class="p">{</span>
+<span class="c1">// taskDef 即一个生成器函数</span>
+<span class="c1">// 创建迭代器，让它在别处可用</span>
+<span class="kd">let</span> <span class="nx">task</span> <span class="o">=</span> <span class="nx">taskDef</span><span class="p">();</span>
+
+<span class="c1">// 启动任务</span>
+<span class="kd">let</span> <span class="nx">result</span> <span class="o">=</span> <span class="nx">task</span><span class="p">.</span><span class="nx">next</span><span class="p">();</span>
+
+<span class="c1">// 递归使用函数来保持对 next() 的调用</span>
+<span class="kd">function</span> <span class="nx">step</span><span class="p">()</span> <span class="p">{</span>
+<span class="c1">// 如果还有更多要做的</span>
+<span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">result</span><span class="p">.</span><span class="nx">done</span><span class="p">)</span> <span class="p">{</span>
+<span class="nx">result</span> <span class="o">=</span> <span class="nx">task</span><span class="p">.</span><span class="nx">next</span><span class="p">();</span>
+<span class="nx">step</span><span class="p">();</span>
+<span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// 开始处理过程</span>
+<span class="nx">step</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div></p>
+<h2 id="_3">总结<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
+<p>以上就是 ES6 最常用的一些语法，可以说这20%的语法，在ES6的日常使用中占了80%</p>
+<p><a href="http://es6.ruanyifeng.com/">更多ES6语法点击这里</a></p>
+                
+                  
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        powered by
+        <a href="https://www.mkdocs.org">MkDocs</a>
+        and
+        <a href="https://squidfunk.github.io/mkdocs-material/">
+          Material for MkDocs</a>
+      </div>
+      
+        
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../assets/javascripts/application.5e60981f.js"></script>
+      
+      <script>app.initialize({version:"1.0.4",url:{base:"../.."}})</script>
+      
+    
+    
+      
+    
+  </body>
+</html>
