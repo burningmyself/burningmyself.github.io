@@ -1470,7 +1470,7 @@ ES5 的编码规范请查看[版本一](https://github.com/sivan/javascript-styl
 
   - [19.2](#19.2) <a name='19.2'></a> 增加结尾的逗号: **需要**。
 
-    > 为什么? 这会让 git diffs 更干净。另外，像 babel 这样的转译器会移除结尾多余的逗号，也就是说你不必担心老旧浏览器的[尾逗号问题](es5/README.md#commas)。
+    > 为什么? 这会让 git diffs 更干净。另外，像 babel 这样的转译器会移除结尾多余的逗号，也就是说你不必担心老旧浏览器的[尾逗号问题](https://github.com/sivan/javascript-style-guide/blob/master/es5/README.md)。
 
     ```javascript
     // bad - git diff without trailing comma
