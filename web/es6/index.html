@@ -36,7 +36,7 @@
     
     
       
-        <title>JavaScript ES6 规范 - BurningMyself</title>
+        <title>es6语法 - BurningMyself</title>
       
     
     
@@ -97,7 +97,7 @@
                 BurningMyself
               </span>
               <span class="md-header-nav__topic">
-                JavaScript ES6 规范
+                es6语法
               </span>
             
           
@@ -178,10 +178,12 @@
       
       
 
+  
 
-  <li class="md-nav__item md-nav__item--nested">
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2" checked>
     
     <label class="md-nav__link" for="nav-2">
       技术博文
@@ -317,10 +319,12 @@
           
           
 
+  
 
-  <li class="md-nav__item md-nav__item--nested">
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-5" type="checkbox" id="nav-2-5">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-5" type="checkbox" id="nav-2-5" checked>
     
     <label class="md-nav__link" for="nav-2-5">
       Node.js
@@ -336,11 +340,153 @@
           
           
 
+  
 
-  <li class="md-nav__item">
-    <a href="md" title="es6语法" class="md-nav__link">
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        es6语法
+      </label>
+    
+    <a href="./" title="es6语法" class="md-nav__link md-nav__link--active">
       es6语法
     </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#es6" title="ES6 简介" class="md-nav__link">
+    ES6 简介
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_1" title="新特性" class="md-nav__link">
+    新特性
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#letconst" title="let、const" class="md-nav__link">
+    let、const
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#importexport" title="import、export" class="md-nav__link">
+    import、export
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#classextendssuper" title="class、extends、super" class="md-nav__link">
+    class、extends、super
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#arrow-functions" title="arrow functions （箭头函数）" class="md-nav__link">
+    arrow functions （箭头函数）
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#template-string" title="template string （模板字符串）" class="md-nav__link">
+    template string （模板字符串）
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#destructuring" title="destructuring （解构）" class="md-nav__link">
+    destructuring （解构）
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#default" title="default 函数默认参数" class="md-nav__link">
+    default 函数默认参数
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rest-arguments-rest" title="rest arguments （rest参数）" class="md-nav__link">
+    rest arguments （rest参数）
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#spread-operator" title="Spread Operator （展开运算符）" class="md-nav__link">
+    Spread Operator （展开运算符）
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_2" title="对象" class="md-nav__link">
+    对象
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#promise" title="Promise" class="md-nav__link">
+    Promise
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#generators" title="Generators" class="md-nav__link">
+    Generators
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" title="总结" class="md-nav__link">
+    总结
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
   </li>
 
         
@@ -1117,6 +1263,41 @@ JavaScript语言的this对象一直是一个令人头痛的问题，运行上面
       
         
 <footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="../../php/" title="PHP" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                PHP
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="../ali_js_style/" title="阿里js样式规范" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                阿里js样式规范
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
   
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">
