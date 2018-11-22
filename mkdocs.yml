@@ -17,6 +17,7 @@ nav:
         - Java特性: java/feature.md 
     - Python: 
         - Python特性: python/feature.md 
+        - Python字符拼接: python/str_joint.md
     - PHP: php/index.md    
     - Web:
         - es6语法: web/es6.md
@@ -35,6 +36,7 @@ nav:
         - Markdown: tool/markdown.md
   - 经验分析:
     - DevOps: exp/devops.md   
+    - Micro-Service: exp/micro-service.md
 markdown_extensions:
   - admonition
   - codehilite:
