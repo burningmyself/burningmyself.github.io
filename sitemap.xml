@@ -2,82 +2,92 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
      <loc>https://burningmyself.github.io/blog/</loc>
-     <lastmod>2018-11-21</lastmod>
+     <lastmod>2018-11-22</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://burningmyself.github.io/blog/net/c_sharp/</loc>
-     <lastmod>2018-11-21</lastmod>
+     <lastmod>2018-11-22</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://burningmyself.github.io/blog/java/feature/</loc>
-     <lastmod>2018-11-21</lastmod>
+     <lastmod>2018-11-22</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://burningmyself.github.io/blog/python/feature/</loc>
-     <lastmod>2018-11-21</lastmod>
+     <lastmod>2018-11-22</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
+     <loc>https://burningmyself.github.io/blog/python/str_joint/</loc>
+     <lastmod>2018-11-22</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://burningmyself.github.io/blog/php/</loc>
-     <lastmod>2018-11-21</lastmod>
+     <lastmod>2018-11-22</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://burningmyself.github.io/blog/web/es6/</loc>
-     <lastmod>2018-11-21</lastmod>
+     <lastmod>2018-11-22</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://burningmyself.github.io/blog/web/ali_js_style/</loc>
-     <lastmod>2018-11-21</lastmod>
+     <lastmod>2018-11-22</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://burningmyself.github.io/blog/web/node.js/</loc>
-     <lastmod>2018-11-21</lastmod>
+     <lastmod>2018-11-22</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://burningmyself.github.io/blog/sql/mysql_yh/</loc>
-     <lastmod>2018-11-21</lastmod>
+     <lastmod>2018-11-22</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://burningmyself.github.io/blog/linux/often/</loc>
-     <lastmod>2018-11-21</lastmod>
+     <lastmod>2018-11-22</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://burningmyself.github.io/blog/docker/docker/</loc>
-     <lastmod>2018-11-21</lastmod>
+     <lastmod>2018-11-22</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://burningmyself.github.io/blog/tool/git/</loc>
-     <lastmod>2018-11-21</lastmod>
+     <lastmod>2018-11-22</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://burningmyself.github.io/blog/tool/gitquestion/</loc>
-     <lastmod>2018-11-21</lastmod>
+     <lastmod>2018-11-22</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://burningmyself.github.io/blog/tool/gitbook/</loc>
-     <lastmod>2018-11-21</lastmod>
+     <lastmod>2018-11-22</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://burningmyself.github.io/blog/tool/markdown/</loc>
-     <lastmod>2018-11-21</lastmod>
+     <lastmod>2018-11-22</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://burningmyself.github.io/blog/exp/devops/</loc>
-     <lastmod>2018-11-21</lastmod>
+     <lastmod>2018-11-22</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
+     <loc>https://burningmyself.github.io/blog/exp/micro-service/</loc>
+     <lastmod>2018-11-22</lastmod>
      <changefreq>daily</changefreq>
     </url>
 </urlset>

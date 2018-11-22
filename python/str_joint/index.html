@@ -13,7 +13,7 @@
         <meta name="description" content=".net,java,php,python,docker,web">
       
       
-        <link rel="canonical" href="https://burningmyself.github.io/blog/tool/gitquestion/">
+        <link rel="canonical" href="https://burningmyself.github.io/blog/python/str_joint/">
       
       
         <meta name="author" content="朽木自雕">
@@ -42,7 +42,7 @@
     
     
       
-        <title>Git问题处理 - BurningMyself</title>
+        <title>Python字符拼接 - BurningMyself</title>
       
     
     
@@ -96,7 +96,7 @@
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
     <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
     
-      <a href="#git" tabindex="1" class="md-skip">
+      <a href="#python-7" tabindex="1" class="md-skip">
         Skip to content
       </a>
     
@@ -122,7 +122,7 @@
                 BurningMyself
               </span>
               <span class="md-header-nav__topic">
-                Git问题处理
+                Python字符拼接
               </span>
             
           
@@ -342,10 +342,12 @@
           
           
 
+  
 
-  <li class="md-nav__item md-nav__item--nested">
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-3" type="checkbox" id="nav-2-3">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-3" type="checkbox" id="nav-2-3" checked>
     
     <label class="md-nav__link" for="nav-2-3">
       Python
@@ -363,7 +365,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../python/feature/" title="Python特性" class="md-nav__link">
+    <a href="../feature/" title="Python特性" class="md-nav__link">
       Python特性
     </a>
   </li>
@@ -373,11 +375,77 @@
           
           
 
+  
 
-  <li class="md-nav__item">
-    <a href="../../python/str_joint/" title="Python字符拼接" class="md-nav__link">
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Python字符拼接
+      </label>
+    
+    <a href="./" title="Python字符拼接" class="md-nav__link md-nav__link--active">
       Python字符拼接
     </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1c" title="1、来自C语言的%方式" class="md-nav__link">
+    1、来自C语言的%方式
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2format" title="2、format()拼接方式" class="md-nav__link">
+    2、format()拼接方式
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3" title="3、() 类似元组方式" class="md-nav__link">
+    3、() 类似元组方式
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6join" title="6、join()拼接方式" class="md-nav__link">
+    6、join()拼接方式
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7f-string" title="7、f-string方式" class="md-nav__link">
+    7、f-string方式
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
   </li>
 
         
@@ -570,12 +638,10 @@
           
           
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+  <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-9" type="checkbox" id="nav-2-9" checked>
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-9" type="checkbox" id="nav-2-9">
     
     <label class="md-nav__link" for="nav-2-9">
       Tool
@@ -593,7 +659,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../git/" title="Git" class="md-nav__link">
+    <a href="../../tool/git/" title="Git" class="md-nav__link">
       Git
     </a>
   </li>
@@ -603,63 +669,11 @@
           
           
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active">
-    
-    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-    
-      
-    
-    
-      <label class="md-nav__link md-nav__link--active" for="__toc">
-        Git问题处理
-      </label>
-    
-    <a href="./" title="Git问题处理" class="md-nav__link md-nav__link--active">
+  <li class="md-nav__item">
+    <a href="../../tool/gitquestion/" title="Git问题处理" class="md-nav__link">
       Git问题处理
     </a>
-    
-      
-<nav class="md-nav md-nav--secondary">
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">Table of contents</label>
-    <ul class="md-nav__list" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#git-fetch" title="git fetch 失效的问题" class="md-nav__link">
-    git fetch 失效的问题
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#git_1" title="git 错误提交或者错误的合并了解决方案" class="md-nav__link">
-    git 错误提交或者错误的合并了解决方案
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#git-rebase" title="git rebase 中的冲突处理" class="md-nav__link">
-    git rebase 中的冲突处理
-  </a>
-  
-</li>
-      
-      
-      
-      
-      
-    </ul>
-  
-</nav>
-    
   </li>
 
         
@@ -669,7 +683,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../gitbook/" title="GitBook" class="md-nav__link">
+    <a href="../../tool/gitbook/" title="GitBook" class="md-nav__link">
       GitBook
     </a>
   </li>
@@ -681,7 +695,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../markdown/" title="Markdown" class="md-nav__link">
+    <a href="../../tool/markdown/" title="Markdown" class="md-nav__link">
       Markdown
     </a>
   </li>
@@ -766,22 +780,36 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#git-fetch" title="git fetch 失效的问题" class="md-nav__link">
-    git fetch 失效的问题
+  <a href="#1c" title="1、来自C语言的%方式" class="md-nav__link">
+    1、来自C语言的%方式
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#git_1" title="git 错误提交或者错误的合并了解决方案" class="md-nav__link">
-    git 错误提交或者错误的合并了解决方案
+  <a href="#2format" title="2、format()拼接方式" class="md-nav__link">
+    2、format()拼接方式
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#git-rebase" title="git rebase 中的冲突处理" class="md-nav__link">
-    git rebase 中的冲突处理
+  <a href="#3" title="3、() 类似元组方式" class="md-nav__link">
+    3、() 类似元组方式
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6join" title="6、join()拼接方式" class="md-nav__link">
+    6、join()拼接方式
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7f-string" title="7、f-string方式" class="md-nav__link">
+    7、f-string方式
   </a>
   
 </li>
@@ -802,81 +830,99 @@
             <article class="md-content__inner md-typeset">
               
                 
-                  <a href="https://github.com/burningmyself/blog/edit/master/docs/tool/gitquestion.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
+                  <a href="https://github.com/burningmyself/blog/edit/master/docs/python/str_joint.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
                 
                 
-                <h1 id="git">Git 使用过程中遇到的问题以及解决办法<a class="headerlink" href="#git" title="Permanent link">&para;</a></h1>
-<p>git 是项目当中最常用的代码管理库，熟练的使用git不是万能的，但不能熟练的使用git是万万不能的，归纳了一下真正开始在多人协作的代码库中提交自己的代码时遇到的问题。</p>
-<h2 id="git-fetch">git fetch 失效的问题<a class="headerlink" href="#git-fetch" title="Permanent link">&para;</a></h2>
-<p>在项目工程中，主要使用的是两个分支，一个是主分支master，一个是开发分支develop，我们一般在develop中进行开发，master分支中用来存重大版本的代码。当需要获取最新的代码时，使用git fetch 或者 $ git fetch origin develop:develop 命令从远程develop分支上拉取最新的代码。</p>
-<p>但有时候这个命令会失效，拉取不到最新的代码，出现这样的错误提示
-<div class="codehilite"><pre><span></span>fatal: Refusing to fetch into current branch refs/heads/develop of non-bare repository
-fatal: The remote end hung up unexpectedly
+                <h1 id="python-7">Python 拼接字符串的 7 种方式<a class="headerlink" href="#python-7" title="Permanent link">&para;</a></h1>
+<h2 id="1c">1、来自C语言的%方式<a class="headerlink" href="#1c" title="Permanent link">&para;</a></h2>
+<p><div class="codehilite"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1"> </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="s1">&#39;Hello&#39;</span><span class="p">,</span> <span class="s1">&#39;world&#39;</span><span class="p">))</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">Hello</span> <span class="n">world</span>
 </pre></div>
-这种时候，先切换到master分支，然后再从master分支fetch分支develop上的代码，就能够成功了。</p>
-<p><div class="codehilite"><pre><span></span>$ git fetch origin develop:develop
-fatal: Refusing to fetch into current branch refs/heads/develop of non-bare repository
-fatal: The remote end hung up unexpectedly
-$ git checkout master
-Switched to branch &#39;master&#39;
-Your branch is up-to-date with &#39;origin/master&#39;.
-$ git fetch origin develop:develop
-From 172.20.10.91:developers/android_do_as
-   5ee9941..ff421cf  develop    -&gt; develop
+%号格式化字符串的方式继承自古老的C语言，这在很多编程语言都有类似的实现。上例的%s是一个占位符，它仅代表一段字符串，并不是拼接的实际内容。实际的拼接内容在一个单独的%号后面，放在一个元组里。</p>
+<p>类似的占位符还有：%d（代表一个整数）、%f（代表一个浮点数）、%x（代表一个16进制数），等等。%占位符既是这种拼接方式的特点，同时也是其限制，因为每种占位符都有特定意义，实际使用起来太麻烦了。</p>
+<h2 id="2format">2、format()拼接方式<a class="headerlink" href="#2format" title="Permanent link">&para;</a></h2>
+<p><div class="codehilite"><pre><span></span><span class="c1"># 简洁版</span>
+<span class="n">s1</span> <span class="o">=</span> <span class="s1">&#39;Hello {}! My name is {}.&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s1">&#39;World&#39;</span><span class="p">,</span> <span class="s1">&#39;Python猫&#39;</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">s1</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span><span class="n">Hello</span> <span class="n">World</span><span class="err">!</span> <span class="n">My</span> <span class="n">name</span> <span class="ow">is</span> <span class="n">Python猫</span><span class="o">.</span>
+
+<span class="c1"># 对号入座版</span>
+<span class="n">s2</span> <span class="o">=</span> <span class="s1">&#39;Hello {0}! My name is {1}.&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s1">&#39;World&#39;</span><span class="p">,</span> <span class="s1">&#39;Python猫&#39;</span><span class="p">)</span>
+<span class="n">s3</span> <span class="o">=</span> <span class="s1">&#39;Hello {name1}! My name is {name2}.&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">name1</span><span class="o">=</span><span class="s1">&#39;World&#39;</span><span class="p">,</span> <span class="n">name2</span><span class="o">=</span><span class="s1">&#39;Python猫&#39;</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">s2</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span><span class="n">Hello</span> <span class="n">World</span><span class="err">!</span> <span class="n">My</span> <span class="n">name</span> <span class="ow">is</span> <span class="n">Python猫</span><span class="o">.</span>
+<span class="k">print</span><span class="p">(</span><span class="n">s3</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span><span class="n">Hello</span> <span class="n">World</span><span class="err">!</span> <span class="n">My</span> <span class="n">name</span> <span class="ow">is</span> <span class="n">Python猫</span><span class="o">.</span>
 </pre></div>
-究其原因，就和fatal的提示一样，在非bare的git仓库中，如果你要同步的本地跟踪分支是当前分支，就会出现拒绝fetch的情况。也就是说不可以在非bare的git仓库中通过fetch快进你的当前分支与远程同步。</p>
-<h2 id="git_1">git 错误提交或者错误的合并了解决方案<a class="headerlink" href="#git_1" title="Permanent link">&para;</a></h2>
-<p>第一次在代码库中提交代码，心情比较激动，直接本地多次提交之后，就和远程分支给merge了。命令看起来是这么用的，但这样就会在代码线上弄出一条新线，而不是一条线，多么丑啊。还好没有push到远程去，所以就要看看如何解决，把它弄成一条线了。</p>
-<p>当已经错误的提交，或者是错误的合并已经产生了，首先，要想办法回到过去，我多想回到过去，再回到你的身边。</p>
-<p><div class="codehilite"><pre><span></span>$ git reflog
-ff421cf HEAD@{0}: checkout: moving from master to develop
-efaaa61 HEAD@{1}: checkout: moving from develop to master
+这种方式使用花括号{}做占位符，在format方法中再转入实际的拼接值。容易看出，它实际上是对%号拼接方式的改进。这种方式在Python2.6中开始引入。</p>
+<p>上例中，简洁版的花括号中无内容，缺点是容易弄错次序。对号入座版主要有两种，一种传入序列号，一种则使用key-value的方式。实战中，我们更推荐后一种，既不会数错次序，又更直观可读。</p>
+<h2 id="3">3、() 类似元组方式<a class="headerlink" href="#3" title="Permanent link">&para;</a></h2>
+<p><div class="codehilite"><pre><span></span><span class="n">s_tuple</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;Hello&#39;</span><span class="p">,</span> <span class="s1">&#39; &#39;</span><span class="p">,</span> <span class="s1">&#39;world&#39;</span><span class="p">)</span>
+<span class="n">s_like_tuple</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;Hello&#39;</span> <span class="s1">&#39; &#39;</span> <span class="s1">&#39;world&#39;</span><span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">s_tuple</span><span class="p">)</span> 
+<span class="o">&gt;&gt;&gt;</span><span class="p">(</span><span class="s1">&#39;Hello&#39;</span><span class="p">,</span> <span class="s1">&#39; &#39;</span><span class="p">,</span> <span class="s1">&#39;world&#39;</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">s_like_tuple</span><span class="p">)</span> 
+<span class="o">&gt;&gt;&gt;</span><span class="n">Hello</span> <span class="n">world</span>
+
+<span class="nb">type</span><span class="p">(</span><span class="n">s_like_tuple</span><span class="p">)</span> <span class="o">&gt;&gt;&gt;</span><span class="nb">str</span>
 </pre></div>
-首先用git reflog 命令，看看最近自己做过什么，哪里是自己想回去的地方。
-<div class="codehilite"><pre><span></span>$ git reset --hard 72b075e
-$ git clean --f
+注意，上例中s_like_tuple并不是一个元组，因为元素间没有逗号分隔符，这些元素间可以用空格间隔，也可以不要空格。使用type()查看，发现它就是一个str类型。我没查到这是啥原因，猜测或许()括号中的内容是被Python优化处理了。</p>
+<p>这种方式看起来很快捷，但是，括号()内要求元素是真实字符串，不能混用变量，所以不够灵活。
+<div class="codehilite"><pre><span></span><span class="c1"># 多元素时，不支持有变量</span>
+<span class="n">str_1</span> <span class="o">=</span> <span class="s1">&#39;Hello&#39;</span>
+<span class="n">str_2</span> <span class="o">=</span> <span class="p">(</span><span class="n">str_1</span> <span class="s1">&#39;world&#39;</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="ne">SyntaxError</span><span class="p">:</span> <span class="n">invalid</span> <span class="n">syntax</span>
+<span class="n">str_3</span> <span class="o">=</span> <span class="p">(</span><span class="n">str_1</span> <span class="n">str_1</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="ne">SyntaxError</span><span class="p">:</span> <span class="n">invalid</span> <span class="n">syntax</span>
+<span class="c1"># 但是下面写法不会报错</span>
+<span class="n">str_4</span> <span class="o">=</span> <span class="p">(</span><span class="n">str_1</span><span class="p">)</span>
 </pre></div>
-然后再使用 reset命令，复制自己想要去的地方的哈希码，穿越时光回到过去。顺便 clean 一下，保持清洁。</p>
-<p>这样你就能去到任何你想去的地方，so happy。</p>
-<p>但如何把多个提交合并成一个提交呢？为了保持代码树的干净漂亮，在本地的多次提交保存，弄成一次提交再推到远程去可能会更加好一点，所以可以是用 rebase 命令进行衍合。</p>
-<p>在自己多次提交的本地分支上进行衍合一般不会出现冲突，找准本地分支的第一次提交的哈希码值，或者数清楚自己提交了几次用rebase命令就可以将多次提交合并成一次提交
-<div class="codehilite"><pre><span></span>$ git rebase -i head~11
+说实话，我不喜欢这种实现方式。浓浓的一股被面向对象思想毒害的臭味。</p>
+<p>就不多说了。
+5、常用的+号方式
+<div class="codehilite"><pre><span></span><span class="n">str_1</span> <span class="o">=</span> <span class="s1">&#39;Hello world！ &#39;</span> 
+<span class="n">str_2</span> <span class="o">=</span> <span class="s1">&#39;My name is Python猫.&#39;</span>
+<span class="k">print</span><span class="p">(</span><span class="n">str_1</span> <span class="o">+</span> <span class="n">str_2</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span><span class="n">Hello</span> <span class="n">world</span><span class="err">！</span> <span class="n">My</span> <span class="n">name</span> <span class="ow">is</span> <span class="n">Python猫</span><span class="o">.</span>
+<span class="k">print</span><span class="p">(</span><span class="n">str_1</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span><span class="n">Hello</span> <span class="n">world</span><span class="err">！</span> 
 </pre></div>
-使用这个命令之后，会进入到vim模式，将自己需要的提交信息设置为p，其他的设置为s，最后使用：wq退出保存即可。
-<div class="codehilite"><pre><span></span># Rebase 6a2eb6d..f7d0bd7 onto 6a2eb6d
-#
-# Commands:
-#  p, pick = use commit
-#  r, reword = use commit, but edit the commit message
-#  e, edit = use commit, but stop for amending
-#  s, squash = use commit, but meld into previous commit
-#  f, fixup = like &quot;squash&quot;, but discard this commit&#39;s log message
-#  x, exec = run command (the rest of the line) using shell
-#
-# These lines can be re-ordered; they are executed from top to bottom.
-#
-# If you remove a line here THAT COMMIT WILL BE LOST.
-#
-# However, if you remove everything, the rebase will be aborted.
-#
-# Note that empty commits are commented out
+这种方式最常用、直观、易懂，是入门级的实现方式。但是，它也存在两处让人容易犯错的地方。</p>
+<p>首先，新入门编程的同学容易犯错，他们不知道字符串是不可变类型，新的字符串会独占一块新的内存，而原来的字符串保持不变。上例中，拼接前有两段字符串，拼接后实际有三段字符串。</p>
+<p>其次，一些有经验的老程序员也容易犯错，他们以为当拼接次数不超过3时，使用+号连接符就会比其它方式快（ps：不少Python教程都是如此建议），但这没有任何合理根据。</p>
+<p>事实上，在拼接短的字面值时，由于CPython中的 常数折叠 （constant folding）功能，这些字面值会被转换成更短的形式，例如'a'+'b'+'c' 被转换成'abc'，'hello'+'world'也会被转换成'hello world'。这种转换是在编译期完成的，而到了运行期时就不会再发生任何拼接操作，因此会加快整体计算的速度。</p>
+<p>常数折叠优化有一个限度，它要求拼接结果的长度不超过20。所以，当拼接的最终字符串长度不超过20时，+号操作符的方式，会比后面提到的join等方式快得多，这与+号的使用次数无关。</p>
+<h2 id="6join">6、join()拼接方式<a class="headerlink" href="#6join" title="Permanent link">&para;</a></h2>
+<p><div class="codehilite"><pre><span></span><span class="n">str_list</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Hello&#39;</span><span class="p">,</span> <span class="s1">&#39;world&#39;</span><span class="p">]</span>
+<span class="n">str_join1</span> <span class="o">=</span> <span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">str_list</span><span class="p">)</span>
+<span class="n">str_join2</span> <span class="o">=</span> <span class="s1">&#39;-&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">str_list</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">str_join1</span><span class="p">)</span> <span class="o">&gt;&gt;&gt;</span><span class="n">Hello</span> <span class="n">world</span>
+<span class="k">print</span><span class="p">(</span><span class="n">str_join2</span><span class="p">)</span> <span class="o">&gt;&gt;&gt;</span><span class="n">Hello</span><span class="o">-</span><span class="n">world</span>
 </pre></div>
-这是对命令的提示。</p>
-<p>但最好还是不要面对需要这样使用rebase的情景，应该好好使用commit 命令的参数。比如：
-<div class="codehilite"><pre><span></span>git commit --amend
+str对象自带的join()方法，接受一个序列参数，可以实现拼接。拼接时，元素若不是字符串，需要先转换一下。可以看出，这种方法比较适用于连接序列对象中（例如列表）的元素，并设置统一的间隔符。</p>
+<p>当拼接长度超过20时，这种方式基本上是首选。不过，它的缺点就是，不适合进行零散片段的、不处于序列集合的元素拼接。</p>
+<h2 id="7f-string">7、f-string方式<a class="headerlink" href="#7f-string" title="Permanent link">&para;</a></h2>
+<p><div class="codehilite"><pre><span></span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;world&#39;</span>
+<span class="n">myname</span> <span class="o">=</span> <span class="s1">&#39;python_cat&#39;</span>
+<span class="n">words</span> <span class="o">=</span> <span class="n">f</span><span class="s1">&#39;Hello {name}. My name is {myname}.&#39;</span>
+<span class="k">print</span><span class="p">(</span><span class="n">words</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">Hello</span> <span class="n">world</span><span class="o">.</span> <span class="n">My</span> <span class="n">name</span> <span class="ow">is</span> <span class="n">python_cat</span><span class="o">.</span>
 </pre></div>
-使用这个命令，会将本次提交写到上次的提交中去，就不会产生多条的提交信息。</p>
-<h2 id="git-rebase">git rebase 中的冲突处理<a class="headerlink" href="#git-rebase" title="Permanent link">&para;</a></h2>
-<p>在合并代码的过程中，可以使用merge，也可以使用rebase，如果使用merge，合并之后推上远程就会有两条线，但使用rebase就只会产生一条线，变得简洁而优雅，所以在合并代码的过程中建议尽量使用rebase命令。</p>
-<p>在合并代码中可能会遇到冲突，当提示有冲突时，我们可以使用外部的图形化冲突处理工具来处理冲突。这里使用的是KDiff3来处理冲突。</p>
-<ol>
-<li>安装Kdiff3 软件。（最好使用默认路径）</li>
-<li>添加kdiff3到git mergetool里。 git config --global merge.tool kdiff3</li>
-<li>添加kdiff3路径到 git global config里。git config --global mergetool.kdiff3.path "C:\Program Files\KDiff3\kdiff3.exe"</li>
-<li>以后merge发生冲突时：git mergetool 来做图形化merge。进入编辑冲突。</li>
-</ol>
-<p>带问号的才是冲突。当两者都需要保存时，右击标记处，选完B后，再次右击，选择C。A是最原始的代码，B是自己的，C是别人的。</p>
-<p>在这里需要注意的是，首先要设置好kDiff3的默认编码，和自己的工程编码一样，要不解决完冲突之后还要解决乱码问题。。。。</p>
+f-string方式出自PEP 498（Literal String Interpolation，字面字符串插值），从Python3.6版本引入。其特点是在字符串前加 f 标识，字符串中间则用花括号{}包裹其它字符串变量。</p>
+<p>这种方式在可读性上秒杀format()方式，处理长字符串的拼接时，速度与join()方法相当。</p>
+<p>尽管如此，这种方式与其它某些编程语言相比，还是欠优雅，因为它引入了一个 f 标识。而其它某些程序语言可以更简练，比如shell：
+<div class="codehilite"><pre><span></span><span class="nv">name</span><span class="o">=</span><span class="s2">&quot;world&quot;</span>
+<span class="nv">myname</span><span class="o">=</span><span class="s2">&quot;python_cat&quot;</span>
+<span class="nv">words</span><span class="o">=</span><span class="s2">&quot;Hello </span><span class="si">${</span><span class="nv">name</span><span class="si">}</span><span class="s2">. My name is </span><span class="si">${</span><span class="nv">myname</span><span class="si">}</span><span class="s2">.&quot;</span>
+<span class="nb">echo</span> <span class="nv">$words</span>
+&gt;&gt;&gt;Hello world. My name is python_cat.
+</pre></div>
+总结一下，我们前面说的“字符串拼接”，其实是从结果上理解。若从实现原理上划分的话，我们可以将这些方法划分出三种类型：
+格式化类：%、format()、template
+拼接类：+、()、join()
+插值类：f-string
+当要处理字符串列表等序列结构时，采用join()方式；拼接长度不超过20时，选用+号操作符方式；长度超过20的情况，高版本选用f-string，低版本时看情况使用format()或join()方式。</p>
                 
                   
                 
@@ -897,7 +943,7 @@ $ git clean --f
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
         
-          <a href="../git/" title="Git" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../feature/" title="Python特性" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-flex__cell md-flex__cell--shrink">
               <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
             </div>
@@ -906,19 +952,19 @@ $ git clean --f
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                Git
+                Python特性
               </span>
             </div>
           </a>
         
         
-          <a href="../gitbook/" title="GitBook" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../../php/" title="PHP" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                GitBook
+                PHP
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">
