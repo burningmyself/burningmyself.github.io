@@ -42,7 +42,7 @@
     
     
       
-        <title>谈谈 Java 类加载机制 - BurningMyself</title>
+        <title>Java类加载 - BurningMyself</title>
       
     
     
@@ -122,7 +122,7 @@
                 BurningMyself
               </span>
               <span class="md-header-nav__topic">
-                谈谈 Java 类加载机制
+                Java类加载
               </span>
             
           
@@ -249,10 +249,12 @@
       
       
 
+  
 
-  <li class="md-nav__item md-nav__item--nested">
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2" checked>
     
     <label class="md-nav__link" for="nav-2">
       技术博文
@@ -304,10 +306,12 @@
           
           
 
+  
 
-  <li class="md-nav__item md-nav__item--nested">
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-2" type="checkbox" id="nav-2-2">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-2" type="checkbox" id="nav-2-2" checked>
     
     <label class="md-nav__link" for="nav-2-2">
       Java
@@ -328,6 +332,104 @@
     <a href="../feature/" title="Java特性" class="md-nav__link">
       Java特性
     </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Java类加载
+      </label>
+    
+    <a href="./" title="Java类加载" class="md-nav__link md-nav__link--active">
+      Java类加载
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#overview" title="Overview" class="md-nav__link">
+    Overview
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#api-for-class-loading" title="API for class loading" class="md-nav__link">
+    API for class loading
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#javalangclassloader" title="java.lang.ClassLoader" class="md-nav__link">
+    java.lang.ClassLoader
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#javasecuritysecureclassloader" title="java.security.SecureClassLoader" class="md-nav__link">
+    java.security.SecureClassLoader
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#javaneturlclassloader" title="java.net.URLClassLoader" class="md-nav__link">
+    java.net.URLClassLoader
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tomcat-8515-class-loading-mechanism" title="Tomcat 8.5.15 class loading Mechanism" class="md-nav__link">
+    Tomcat 8.5.15 class loading Mechanism
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#reference" title="Reference" class="md-nav__link">
+    Reference
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
   </li>
 
         
@@ -1014,6 +1116,41 @@ JDK 默认提供三种类加载器</p>
       
         
 <footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="../feature/" title="Java特性" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                Java特性
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="../../python/feature/" title="Python特性" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                Python特性
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
   
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">
