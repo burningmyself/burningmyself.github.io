@@ -15,6 +15,7 @@ nav:
         - C# 6: net/c_sharp.md
     - Java: 
         - Java特性: java/feature.md 
+        - Java类加载: java/load-class.md
     - Python: 
         - Python特性: python/feature.md 
         - Python字符拼接: python/str_joint.md
