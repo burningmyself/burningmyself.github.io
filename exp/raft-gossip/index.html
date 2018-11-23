@@ -13,7 +13,7 @@
         <meta name="description" content=".net,java,php,python,docker,web">
       
       
-        <link rel="canonical" href="https://burningmyself.github.io/blog/">
+        <link rel="canonical" href="https://burningmyself.github.io/blog/exp/raft-gossip/">
       
       
         <meta name="author" content="朽木自雕">
@@ -37,21 +37,21 @@
       
         <meta name="lang:search.tokenizer" content="[\s\-]+">
       
-      <link rel="shortcut icon" href="assets/images/favicon.png">
+      <link rel="shortcut icon" href="../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-3.0.6">
     
     
       
-        <title>BurningMyself</title>
+        <title>Raft算法和Gossip协议 - BurningMyself</title>
       
     
     
-      <link rel="stylesheet" href="assets/stylesheets/application.451f80e5.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/application.451f80e5.css">
       
       
     
     
-      <script src="assets/javascripts/modernizr.1aa3b519.js"></script>
+      <script src="../../assets/javascripts/modernizr.1aa3b519.js"></script>
     
     
       
@@ -60,7 +60,7 @@
         <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
       
     
-    <link rel="stylesheet" href="assets/fonts/material-icons.css">
+    <link rel="stylesheet" href="../../assets/fonts/material-icons.css">
     
     
   </head>
@@ -96,7 +96,7 @@
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
     <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
     
-      <a href="#_1" tabindex="1" class="md-skip">
+      <a href="#raftgossip" tabindex="1" class="md-skip">
         Skip to content
       </a>
     
@@ -122,7 +122,7 @@
                 BurningMyself
               </span>
               <span class="md-header-nav__topic">
-                介绍
+                Raft算法和Gossip协议
               </span>
             
           
@@ -237,56 +237,11 @@
       
       
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active">
-    
-    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-    
-      
-    
-    
-      <label class="md-nav__link md-nav__link--active" for="__toc">
-        介绍
-      </label>
-    
-    <a href="." title="介绍" class="md-nav__link md-nav__link--active">
+  <li class="md-nav__item">
+    <a href="../.." title="介绍" class="md-nav__link">
       介绍
     </a>
-    
-      
-<nav class="md-nav md-nav--secondary">
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">Table of contents</label>
-    <ul class="md-nav__list" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#_2" title="个人爱好，纯属扯蛋" class="md-nav__link">
-    个人爱好，纯属扯蛋
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_3" title="捐赠" class="md-nav__link">
-    捐赠
-  </a>
-  
-</li>
-      
-      
-      
-      
-      
-    </ul>
-  
-</nav>
-    
   </li>
 
     
@@ -334,7 +289,7 @@
 
 
   <li class="md-nav__item">
-    <a href="net/c_sharp/" title="C# 6" class="md-nav__link">
+    <a href="../../net/c_sharp/" title="C# 6" class="md-nav__link">
       C# 6
     </a>
   </li>
@@ -370,7 +325,7 @@
 
 
   <li class="md-nav__item">
-    <a href="java/feature/" title="Java特性" class="md-nav__link">
+    <a href="../../java/feature/" title="Java特性" class="md-nav__link">
       Java特性
     </a>
   </li>
@@ -406,7 +361,7 @@
 
 
   <li class="md-nav__item">
-    <a href="python/feature/" title="Python特性" class="md-nav__link">
+    <a href="../../python/feature/" title="Python特性" class="md-nav__link">
       Python特性
     </a>
   </li>
@@ -418,7 +373,7 @@
 
 
   <li class="md-nav__item">
-    <a href="python/str_joint/" title="Python字符拼接" class="md-nav__link">
+    <a href="../../python/str_joint/" title="Python字符拼接" class="md-nav__link">
       Python字符拼接
     </a>
   </li>
@@ -435,7 +390,7 @@
 
 
   <li class="md-nav__item">
-    <a href="php/" title="PHP" class="md-nav__link">
+    <a href="../../php/" title="PHP" class="md-nav__link">
       PHP
     </a>
   </li>
@@ -466,7 +421,7 @@
 
 
   <li class="md-nav__item">
-    <a href="web/es6/" title="es6语法" class="md-nav__link">
+    <a href="../../web/es6/" title="es6语法" class="md-nav__link">
       es6语法
     </a>
   </li>
@@ -478,7 +433,7 @@
 
 
   <li class="md-nav__item">
-    <a href="web/ali_js_style/" title="阿里js样式规范" class="md-nav__link">
+    <a href="../../web/ali_js_style/" title="阿里js样式规范" class="md-nav__link">
       阿里js样式规范
     </a>
   </li>
@@ -490,7 +445,7 @@
 
 
   <li class="md-nav__item">
-    <a href="web/node.js/" title="node.js文档" class="md-nav__link">
+    <a href="../../web/node.js/" title="node.js文档" class="md-nav__link">
       node.js文档
     </a>
   </li>
@@ -526,7 +481,7 @@
 
 
   <li class="md-nav__item">
-    <a href="sql/mysql_yh/" title="MySQL优化" class="md-nav__link">
+    <a href="../../sql/mysql_yh/" title="MySQL优化" class="md-nav__link">
       MySQL优化
     </a>
   </li>
@@ -562,7 +517,7 @@
 
 
   <li class="md-nav__item">
-    <a href="linux/often/" title="常用命令" class="md-nav__link">
+    <a href="../../linux/often/" title="常用命令" class="md-nav__link">
       常用命令
     </a>
   </li>
@@ -598,7 +553,7 @@
 
 
   <li class="md-nav__item">
-    <a href="docker/docker/" title="Docker全科" class="md-nav__link">
+    <a href="../../docker/docker/" title="Docker全科" class="md-nav__link">
       Docker全科
     </a>
   </li>
@@ -634,7 +589,7 @@
 
 
   <li class="md-nav__item">
-    <a href="tool/git/" title="Git" class="md-nav__link">
+    <a href="../../tool/git/" title="Git" class="md-nav__link">
       Git
     </a>
   </li>
@@ -646,7 +601,7 @@
 
 
   <li class="md-nav__item">
-    <a href="tool/gitquestion/" title="Git问题处理" class="md-nav__link">
+    <a href="../../tool/gitquestion/" title="Git问题处理" class="md-nav__link">
       Git问题处理
     </a>
   </li>
@@ -658,7 +613,7 @@
 
 
   <li class="md-nav__item">
-    <a href="tool/gitbook/" title="GitBook" class="md-nav__link">
+    <a href="../../tool/gitbook/" title="GitBook" class="md-nav__link">
       GitBook
     </a>
   </li>
@@ -670,7 +625,7 @@
 
 
   <li class="md-nav__item">
-    <a href="tool/markdown/" title="Markdown" class="md-nav__link">
+    <a href="../../tool/markdown/" title="Markdown" class="md-nav__link">
       Markdown
     </a>
   </li>
@@ -711,7 +666,7 @@
 
 
   <li class="md-nav__item">
-    <a href="micro/spring-cloud/" title="基于SpringCloud的微服务架构演变史" class="md-nav__link">
+    <a href="../../micro/spring-cloud/" title="基于SpringCloud的微服务架构演变史" class="md-nav__link">
       基于SpringCloud的微服务架构演变史
     </a>
   </li>
@@ -726,10 +681,12 @@
       
       
 
+  
 
-  <li class="md-nav__item md-nav__item--nested">
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4" checked>
     
     <label class="md-nav__link" for="nav-4">
       经验分析
@@ -747,7 +704,7 @@
 
 
   <li class="md-nav__item">
-    <a href="exp/devops/" title="DevOps" class="md-nav__link">
+    <a href="../devops/" title="DevOps" class="md-nav__link">
       DevOps
     </a>
   </li>
@@ -759,7 +716,7 @@
 
 
   <li class="md-nav__item">
-    <a href="exp/micro-service/" title="Micro-Service" class="md-nav__link">
+    <a href="../micro-service/" title="Micro-Service" class="md-nav__link">
       Micro-Service
     </a>
   </li>
@@ -769,11 +726,70 @@
           
           
 
+  
 
-  <li class="md-nav__item">
-    <a href="exp/raft-gossip/" title="Raft算法和Gossip协议" class="md-nav__link">
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Raft算法和Gossip协议
+      </label>
+    
+    <a href="./" title="Raft算法和Gossip协议" class="md-nav__link md-nav__link--active">
       Raft算法和Gossip协议
     </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#raft" title="Raft算法" class="md-nav__link">
+    Raft算法
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#follower" title="follower 节点不可用" class="md-nav__link">
+    follower 节点不可用
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#leader" title="leader 不可用" class="md-nav__link">
+    leader 不可用
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#gossip" title="Gossip协议" class="md-nav__link">
+    Gossip协议
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
   </li>
 
         
@@ -783,7 +799,7 @@
 
 
   <li class="md-nav__item">
-    <a href="exp/cl/" title="集群和负载均衡" class="md-nav__link">
+    <a href="../cl/" title="集群和负载均衡" class="md-nav__link">
       集群和负载均衡
     </a>
   </li>
@@ -815,15 +831,29 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#_2" title="个人爱好，纯属扯蛋" class="md-nav__link">
-    个人爱好，纯属扯蛋
+  <a href="#raft" title="Raft算法" class="md-nav__link">
+    Raft算法
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#_3" title="捐赠" class="md-nav__link">
-    捐赠
+  <a href="#follower" title="follower 节点不可用" class="md-nav__link">
+    follower 节点不可用
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#leader" title="leader 不可用" class="md-nav__link">
+    leader 不可用
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#gossip" title="Gossip协议" class="md-nav__link">
+    Gossip协议
   </a>
   
 </li>
@@ -844,19 +874,39 @@
             <article class="md-content__inner md-typeset">
               
                 
-                  <a href="https://github.com/burningmyself/blog/edit/master/docs/index.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
+                  <a href="https://github.com/burningmyself/blog/edit/master/docs/exp/raft-gossip.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
                 
                 
-                <h1 id="_1">朽木自雕<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
-<div class="codehilite"><pre><span></span>活在当下，活在就要发挥，就要创造
-</pre></div>
-
-
-<h2 id="_2">个人爱好，纯属扯蛋<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
-<h2 id="_3">捐赠<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
-<p>如果你觉得这写文章能帮助到了你，你可以帮作者买一杯果汁表示鼓励
-<img alt="pay" src="img/pay.png" /></p>
-<p><a href="https://paypal.me/yangfubing">Paypal Me</a></p>
+                <h1 id="raftgossip">Raft算法和Gossip协议<a class="headerlink" href="#raftgossip" title="Permanent link">&para;</a></h1>
+<p>简单介绍下集群数据同步，集群监控用到的两种常见算法。</p>
+<h2 id="raft">Raft算法<a class="headerlink" href="#raft" title="Permanent link">&para;</a></h2>
+<p>raft 集群中的每个节点都可以根据集群运行的情况在三种状态间切换：follower, candidate 与 leader。leader 向 follower 同步日志，follower 只从 leader 处获取日志。在节点初始启动时，节点的 raft 状态机将处于 follower 状态并被设定一个 election timeout，如果在这一时间周期内没有收到来自 leader 的 heartbeat，节点将发起选举：节点在将自己的状态切换为 candidate 之后，向集群中其它 follower 节点发送请求，询问其是否选举自己成为 leader。当收到来自集群中过半数节点的接受投票后，节点即成为 leader，开始接收保存 client 的数据并向其它的 follower 节点同步日志。leader 节点依靠定时向 follower 发送 heartbeat 来保持其地位。任何时候如果其它 follower 在 election timeout 期间都没有收到来自 leader 的 heartbeat，同样会将自己的状态切换为 candidate 并发起选举。每成功选举一次，新 leader 的步进数都会比之前 leader 的步进数大1。</p>
+<p>Raft一致性算法处理日志复制以保证强一致性。</p>
+<h2 id="follower">follower 节点不可用<a class="headerlink" href="#follower" title="Permanent link">&para;</a></h2>
+<p>follower 节点不可用的情况相对容易解决。因为集群中的日志内容始终是从 leader 节点同步的，只要这一节点再次加入集群时重新从 leader 节点处复制日志即可。</p>
+<h2 id="leader">leader 不可用<a class="headerlink" href="#leader" title="Permanent link">&para;</a></h2>
+<p>一般情况下，leader 节点定时发送 heartbeat 到 follower 节点。
+<img alt="rg" src="../../img/rg1.png" /></p>
+<p>由于某些异常导致 leader 不再发送 heartbeat ，或 follower 无法收到 heartbeat 。</p>
+<p><img alt="rg" src="../../img/rg2.png" /></p>
+<p>当某一 follower 发生 election timeout 时，其状态变更为 candidate，并向其他 follower 发起投票。</p>
+<p><img alt="rg" src="../../img/rg3.png" /></p>
+<p>当超过半数的 follower 接受投票后，这一节点将成为新的 leader，leader 的步进数加1并开始向 follower 同步日志。</p>
+<p><img alt="rg" src="../../img/rg4.png" /></p>
+<p>当一段时间之后，如果之前的 leader 再次加入集群，则两个 leader 比较彼此的步进数，步进数低的 leader 将切换自己的状态为 follower。</p>
+<p><img alt="rg" src="../../img/rg5.png" /></p>
+<p>较早前 leader 中不一致的日志将被清除，并与现有 leader 中的日志保持一致。</p>
+<p><img alt="rg" src="../../img/rg6.png" /></p>
+<h2 id="gossip">Gossip协议<a class="headerlink" href="#gossip" title="Permanent link">&para;</a></h2>
+<p>传统的监控，如ceilometer，由于每个节点都会向server报告状态，随着节点数量的增加server的压力随之增大。分布式健康检查可以解决这类性能瓶颈，降节点数量从数百台扩至数千台，甚至更多。</p>
+<p>Agent在每台节点上运行，可以在每个Agent上添加一些健康检查的动作，Agent会周期性的运行这些动作。用户可以添加脚本或者请求一个URL链接。一旦有健康检查报告失败，Agent就把这个事件上报给服务器节点。用户可以在服务器节点上订阅健康检查事件，并处理这些报错消息。</p>
+<p>在所有的Agent之间（包括服务器模式和普通模式）运行着Gossip协议。服务器节点和普通Agent都会加入这个Gossip集群，收发Gossip消息。每隔一段时间，每个节点都会随机选择几个节点发送Gossip消息，其他节点会再次随机选择其他几个节点接力发送消息。这样一段时间过后，整个集群都能收到这条消息。示意图如下。</p>
+<p><img alt="rg" src="../../img/rg7.png" /></p>
+<p>Gossip协议已经是P2P网络中比较成熟的协议了。Gossip协议的最大的好处是，即使集群节点的数量增加，每个节点的负载也不会增加很多，几乎是恒定的。这就允许Consul管理的集群规模能横向扩展到数千个节点。</p>
+<p>Consul的每个Agent会利用Gossip协议互相检查在线状态，本质上是节点之间互Ping，分担了服务器节点的心跳压力。如果有节点掉线，不用服务器节点检查，其他普通节点会发现，然后用Gossip广播给整个集群。</p>
+<p>Gossip算法又被称为反熵（Anti-Entropy），熵是物理学上的一个概念，代表杂乱无章，而反熵就是在杂乱无章中寻求一致，这充分说明了Gossip的特点：在一个有界网络中，每个节点都随机地与其他节点通信，经过一番杂乱无章的通信，最终所有节点的状态都会达成一致。每个节点可能知道所有其他节点，也可能仅知道几个邻居节点，只要这些节可以通过网络连通，最终他们的状态都是一致的，当然这也是疫情传播的特点。</p>
+<p>要注意到的一点是，即使有的节点因宕机而重启，有新节点加入，但经过一段时间后，这些节点的状态也会与其他节点达成一致，也就是说，Gossip天然具有分布式容错的优点。</p>
+<p>Gossip协议实现 <a href="https://github.com/hashicorp/serf">serf</a></p>
                 
                   
                 
@@ -877,14 +927,28 @@
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
         
+          <a href="../micro-service/" title="Micro-Service" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                Micro-Service
+              </span>
+            </div>
+          </a>
         
-          <a href="net/c_sharp/" title="C# 6" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+        
+          <a href="../cl/" title="集群和负载均衡" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                C# 6
+                集群和负载均衡
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">
@@ -914,9 +978,9 @@
       
     </div>
     
-      <script src="assets/javascripts/application.5e60981f.js"></script>
+      <script src="../../assets/javascripts/application.5e60981f.js"></script>
       
-      <script>app.initialize({version:"1.0.4",url:{base:"."}})</script>
+      <script>app.initialize({version:"1.0.4",url:{base:"../.."}})</script>
       
     
     
