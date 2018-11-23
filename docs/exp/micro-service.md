@@ -234,3 +234,4 @@ IAM：是 identity & access management 的简称，对发布平台各个组件�
 44. Netflix Spinnaker  https://github.com/spinnaker/spinnaker
 
 45. Microservices in Practice – Key Architecture Concepts of an MSA  https://wso2.com/whitepapers/microservices-in-practice-key-architectural-concepts-of-an-msa/
+46. Serf https://github.com/hashicorp/serf

@@ -34,9 +34,13 @@ nav:
         - Git问题处理: tool/gitquestion.md
         - GitBook: tool/gitbook.md
         - Markdown: tool/markdown.md
+  - 微服务:  
+        - 基于SpringCloud的微服务架构演变史: micro/spring-cloud.md
   - 经验分析:
     - DevOps: exp/devops.md   
     - Micro-Service: exp/micro-service.md
+    - Raft算法和Gossip协议: exp/raft-gossip.md
+    - 集群和负载均衡: exp/cl.md
 markdown_extensions:
   - admonition
   - codehilite:
