@@ -4,7 +4,7 @@
 
 如果大家觉得那里写的不合适的可以给我提 Issue
 
-```markdown
+
 .
 |-- README.md
 |-- Docker
@@ -23,7 +23,6 @@
 |-- web
 |-- index.md
 
-```
 
 ## C# 6: net/c_sharp.md
 # Java: 
