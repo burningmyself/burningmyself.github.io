@@ -16,6 +16,7 @@ nav:
     - Java: 
         - Java特性: java/feature.md 
         - Java类加载: java/load-class.md
+        - Orm的优缺点: java/orm.md
     - Python: 
         - Python特性: python/feature.md 
         - Python字符拼接: python/str_joint.md
@@ -27,6 +28,7 @@ nav:
         - node.js文档: web/node.js.md
     - SQL:
         - MySQL优化: sql/mysql_yh.md
+        - MySQL日志: sql/mysql_log.md
     - Linux: 
         - 常用命令: linux/often.md
     - Docker: 
