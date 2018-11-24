@@ -9,13 +9,13 @@
 
 ## 捐赠
 如果你觉得这写文章能帮助到了你，你可以帮作者买一杯果汁表示鼓励
-![pay](./img/pay.png)
+![pay](docs/img/pay.png)
 
 [Paypal Me](https://paypal.me/yangfubing)
 
 ## 目录
 
-* [README.md](docs/README.md)
+* [README.md](README.md)
 * [Docker]()
 * * [Docker介绍使用](docs/docker/docker.md)
 * [经验]()
