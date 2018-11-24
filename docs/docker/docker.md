@@ -1,5 +1,5 @@
 # Docker
-### Docker简介
+## Docker简介
 * Docker是开源应用容器引擎，轻量级容器技术。
 * 基于Go语言，并遵循Apache2.0协议开源
 * Docker可以让开发者打包他们的应用以及依赖包到一个轻量级、可移植的容器中，然后发布到任何流行的Linux系统上，也可以实现虚拟化
@@ -11,7 +11,7 @@
 Docker支持将软件编译成一个镜像，然后在镜像中各种软件做好配置，将镜像发布出去，其他使用者可以直接使用这个镜像。 
 运行中的这个镜像称为容器，容器启动是非常快速的。类似windows里面的ghost操 作系统，安装好后什么都有了。
 ```
-### 什么是Docker
+## 什么是Docker
 Docker 是一个开源的应用容器引擎，基于Go语言，诞生于2013年初，最初发起者是dotCloud公司，开发者可以打包应用到一个轻量级、可移植的容器中，然后发布到主流Linux系统上运行。
 为什么用Docker
 
@@ -21,21 +21,23 @@ Docker 是一个开源的应用容器引擎，基于Go语言，诞生于2013年�
 * 更快速的启动时间：传统的虚拟机技术启动应用服务往往需要数分钟，而Docker容器应用，由于直接运行于宿主内核，无需启动完整的操作系统，因此可以做到妙级，甚至毫秒级的启动时间，大大的节约了开发，测试，部署的时间。
 Docker与传统虚拟机差异
 
-### 传统虚拟化方式
+传统虚拟化方式
+
 ![传统虚拟化方式](./../img/docker1.png "传统虚拟化方式")
-### Docker虚拟化方式
+Docker虚拟化方式
+
 ![Docker虚拟化方式](./../img/docker2.png "Docker虚拟化方式")
 
 传统虚拟化是在硬件层面实现虚拟化，需要有额外的虚拟机管理应用和虚拟机操作系统层，而Docker容器是在操作系统层面实现虚拟化，直接复用本地主机操作系统，更加轻量级。
 
-### 核心概念
+## 核心概念
 
 * Docker镜像：类似于虚拟机里的镜像，是一个只读的模板，一个独立的文件系统，使用镜像可以创建容器，可以理解为镜像是容器的基石。
 * Docker容器：是由Docker镜像创建的运行实例，类似于轻量级的沙箱，每个容器之间都是相互隔离的。支持的操作有启动，停止，删除等。
 * docker客户端(Client)：客户端通过命令行或其他工具使用Docker API(https://docs.docker.com/reference/api/docker_remote_api)与Docker的守护进程进行通信
 * docker主机(Host)：一个物理或虚拟的机器用来执行Docker守护进程和容器
 * docker仓库(Registry)：Docker仓库用来存储镜像，可以理解为代码控制中的代码仓库，Docker Hub(https://hub.docker.com) 提供了庞大的镜像集合供使用     
-### Docker安装及启停
+## Docker安装及启停
 1. 查看centos版本
 ```
 Docker 要求 CentOS 系统的内核版本高于 3.10
@@ -62,7 +64,7 @@ systemtctl enable docker
 ```
 systemtctl stop docker
 ```
-### Docker常用命令及操作
+## Docker常用命令及操作
 docker镜像命令
 ```
 docker search mysql  ## 搜索镜像
@@ -92,7 +94,7 @@ docker exec -it container-id/container-name bash  ##容器登录命令为
 exit ##容器退出命令
 ```
 [更多命令可以参考](https://docs.docker.com/engine/reference/commandline/docker/ "更多命令可以参考")
-### 镜像操作指令
+## 镜像操作指令
 
 * 获取镜像：
 docker pull centos    (默认获取centos最新的镜像)
@@ -110,7 +112,7 @@ B:使用ID删除：docker rimi
 A:使用docker commit命令
 B:使用Dockerfile构建
 
-### 使用docker commit
+## 使用docker commit
 
 例：构建一个带有jdk的镜像
 
@@ -137,7 +139,7 @@ Unpacking JAR files...
 [root@localhost ~]# docker commit 060793baf536 centos/jdk:2.0
 ```
 通过docker images命令可以看到新增了centos/jdk 标签为2.0的镜像
-### 使用Dockerfile构建
+## 使用Dockerfile构建
 
 实际使用中不推荐使用docker commit构建，应使用更灵活和强大的Dockerfile构建docker镜像，直接举例来认识Dockerfile。
 
@@ -159,7 +161,7 @@ RUN rpm -ivh /usr/local/jdk/jdk-8u171-linux-x64.rpm
 ![运行结果如下：](./../img/docker3.png "运行结果如下：")
 docker images可以看到新生成的centos/jdk镜像
 
-### 容器操作指令
+## 容器操作指令
 * 创建启动容器：
 ```
 [root@localhost ~]# docker run centos:7 /bin/echo'hello world'
@@ -214,14 +216,14 @@ docker images可以看到新生成的centos/jdk镜像
 [root@localhost ~]# docker import centos_test.tar test/centos
 通过docker images命令可以看到增加了个test/centos镜像
 ```
-### 实例：制作自己的 Docker 容器
+## 实例：制作自己的 Docker 容器
 下面我以 [koa-demos](http://www.ruanyifeng.com/blog/2017/08/koa.html)项目为例，介绍怎么写 Dockerfile 文件，实现让用户在 Docker 容器里面运行 Koa 框架。
 作为准备工作，请先下载源码。
 ```
 $ git clone https://github.com/ruanyf/koa-demos.git
 $ cd koa-demos
 ```
-### Dockerfile 文件
+## Dockerfile 文件
 
 首先，在项目的根目录下，新建一个文本文件.dockerignore，写入下面的内容。
 ```
@@ -246,7 +248,7 @@ EXPOSE 3000
 * RUN npm install：在/app目录下，运行npm install命令安装依赖。注意，安装后所有的依赖，都将打包进入 image 文件。
 * EXPOSE 3000：将容器 3000 端口暴露出来， 允许外部连接这个端口。
 
-### 创建 image 文件
+## 创建 image 文件
 有了 Dockerfile 文件以后，就可以使用docker image build命令创建 image 文件了。
 ```
 $ docker image build -t koa-demo .
@@ -259,7 +261,7 @@ $ docker image build -t koa-demo:0.0.1 .
 ```
 $ docker image ls
 ```
-### 生成容器
+## 生成容器
 docker container run命令会从 image 文件生成容器。
 ```
 $ docker container run -p 8000:3000 -it koa-demo /bin/bash
@@ -305,7 +307,7 @@ $ docker container rm [containerID]
 ```
 $ docker container run --rm -p 8000:3000 -it koa-demo /bin/bash
 ```
-### CMD 命令
+## CMD 命令
 上一节的例子里面，容器启动以后，需要手动输入命令node demos/01.js。我们可以把这个命令写在 Dockerfile 里面，这样容器启动以后，这个命令就已经执行了，不用再手动输入了。
 ```
 FROM node:8.4
@@ -323,7 +325,7 @@ CMD node demos/01.js
 ```
 $ docker container run --rm -p 8000:3000 -it koa-demo:0.0.1
 ```
-### 发布 image 文件
+## 发布 image 文件
 
 容器运行成功后，就确认了 image 文件的有效性。这时，我们就可以考虑把 image 文件分享到网上，让其他人使用。
 首先，去 hub.docker.com 或 cloud.docker.com 注册一个账户。然后，用下面的命令登录。
@@ -346,7 +348,7 @@ $ docker image push [username]/[repository]:[tag]
 ```
 发布成功以后，登录 hub.docker.com，就可以看到已经发布的 image 文件。
 
-### 其他有用的命令
+## 其他有用的命令
 
 docker 的主要用法就是上面这些，此外还有几个命令，也非常有用。
 1. docker container start
