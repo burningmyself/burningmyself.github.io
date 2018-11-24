@@ -23,6 +23,7 @@
 * * [DevOps是什么](docs/exp/devops.md)  
 * * [微服务架构技术栈选型手册](docs/exp/micro-service.md)  
 * * [Raft算法和Gossip协议](docs/exp/raft-gossip.md) 
+* * [人工智能](docs/exp/ai.md) 
 * [Img]()
 * [Java]()
 * * [Java 新特性](docs/java/feature.md) 

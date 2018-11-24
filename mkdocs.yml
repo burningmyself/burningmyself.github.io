@@ -45,6 +45,7 @@ nav:
     - Micro-Service: exp/micro-service.md
     - Raft算法和Gossip协议: exp/raft-gossip.md
     - 集群和负载均衡: exp/cl.md
+    - 人工智能: exp//ai.md
 markdown_extensions:
   - admonition
   - codehilite:
