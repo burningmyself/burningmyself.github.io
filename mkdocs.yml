@@ -20,6 +20,7 @@ nav:
     - Python: 
         - Python特性: python/feature.md 
         - Python字符拼接: python/str_joint.md
+        - Python语法技巧: python/syntax_rule.md
     - PHP: 
         - 框架: php/kj.md    
     - Web:
