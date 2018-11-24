@@ -1,4 +1,4 @@
-#Python新特性
+# Python新特性
 ## Python2.x与3​​.x版本区别
 Python的3​​.0版本，常被称为Python 3000，或简称Py3k。相对于Python的早期版本，这是一个较大的升级。 
 为了不带入过多的累赘，Python 3.0在设计的时候没有考虑向下相容。
