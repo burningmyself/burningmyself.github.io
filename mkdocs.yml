@@ -41,6 +41,7 @@ nav:
         - Markdown: tool/markdown.md
   - 微服务:  
         - 基于SpringCloud的微服务架构演变史: micro/spring-cloud.md
+        - 分布式锁: micro/fbs-lock.md
   - 经验分析:
     - DevOps: exp/devops.md   
     - Micro-Service: exp/micro-service.md
