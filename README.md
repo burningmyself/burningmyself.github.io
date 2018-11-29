@@ -47,6 +47,7 @@
 * [SQL](#)
 * * [MySQL 优化指南](docs/sql/mysql_yh.md)
 * * [MySQL 日志](docs/sql/mysql_log.md)
+* * [MySQL 索引](docs/sql/mysql_index.md)
 * [TOOL](#)
 * * [Git命令](docs/tool/git.md)
 * * [GitBook](docs/tool/gitbook.md)
