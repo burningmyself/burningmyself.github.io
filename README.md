@@ -51,7 +51,7 @@
 * [TOOL](#)
 * * [Git命令](docs/tool/git.md)
 * * [GitBook](docs/tool/gitbook.md)
-* * [Git问题处理](docs/web/gitquestion.md)
+* * [Git问题处理](docs/tool/gitquestion.md)
 * * [MarkDown](docs/tool/markdown.md)
 * [前端](#)
 * * [阿里js样式](docs/web/ali_js_style.md)
