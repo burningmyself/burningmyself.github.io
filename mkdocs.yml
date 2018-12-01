@@ -31,6 +31,7 @@ nav:
         - MySQL优化: sql/mysql_yh.md
         - MySQL日志: sql/mysql_log.md
         - MySQL索引: sql/mysql_index.md
+        - MySQL PXC集群: sql/mysql_pxc.md
     - Linux: 
         - 常用命令: linux/often.md
     - Docker: 
