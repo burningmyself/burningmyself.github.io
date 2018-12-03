@@ -39,7 +39,7 @@ nav:
     - Tool: 
         - Git: tool/git.md
         - Git问题处理: tool/gitquestion.md
-        - GitFlow: tool/gitbook.md
+        - GitFlow: tool/gitflow.md
         - GitBook: tool/gitbook.md
         - Markdown: tool/markdown.md
   - 微服务:  
