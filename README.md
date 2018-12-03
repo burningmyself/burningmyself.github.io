@@ -52,6 +52,7 @@
 * [TOOL](#)
 * * [Git命令](docs/tool/git.md)
 * * [GitBook](docs/tool/gitbook.md)
+* * [GitFlow](docs/tool/gitflow.md)
 * * [Git问题处理](docs/tool/gitquestion.md)
 * * [MarkDown](docs/tool/markdown.md)
 * [前端](#)
