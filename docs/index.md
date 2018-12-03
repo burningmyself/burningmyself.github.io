@@ -8,3 +8,13 @@
 
 [Paypal Me](https://paypal.me/yangfubing)
 
+## 关联
+
+本仓库下存放个人博客的源文件。持续更新，欢迎 star。
+
+如果大家觉得那里写的不合适的可以给我提 Issue
+
+[Github](https://github.com/burningmyself)
+[Gitee](https://gitee.com/yangfubing)
+
+
