@@ -444,3 +444,6 @@ importlib模块现在可用来读取“资源”，即随Python应用程序一�
 由于新的操作码，方法调用起来最多快20%。（除非你在编写直接处理Python操作码的代码，否则不需要担心由此带来的影响。）
 正则表达式中不区分大小写的匹配速度更快了，有时要快20倍。
 源代码中的一些常量现在可以更高效地优化。
+
+### 更多特性
+[Python Feature](https://github.com/leisurelicht/wtfpython-cn)
