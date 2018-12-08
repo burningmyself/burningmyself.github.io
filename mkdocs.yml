@@ -52,6 +52,7 @@ nav:
     - Raft算法和Gossip协议: exp/raft-gossip.md
     - 集群和负载均衡: exp/cl.md
     - 人工智能: exp/ai.md
+    - 代码原则: exp/code-principle.md
     - 情商: exp/eq.md
 markdown_extensions:
   - admonition
