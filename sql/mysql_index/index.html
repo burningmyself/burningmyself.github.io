@@ -1,0 +1,1502 @@
+
+
+
+
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+        <meta name="description" content=".net,java,php,python,docker,web">
+      
+      
+        <link rel="canonical" href="https://burningmyself.github.io/blog/sql/mysql_index/">
+      
+      
+        <meta name="author" content="朽木自雕">
+      
+      
+        <meta name="lang:clipboard.copy" content="Copy to clipboard">
+      
+        <meta name="lang:clipboard.copied" content="Copied to clipboard">
+      
+        <meta name="lang:search.language" content="en">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="No matching documents">
+      
+        <meta name="lang:search.result.one" content="1 matching document">
+      
+        <meta name="lang:search.result.other" content="# matching documents">
+      
+        <meta name="lang:search.tokenizer" content="[\s\-]+">
+      
+      <link rel="shortcut icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-3.0.6">
+    
+    
+      
+        <title>MySQL索引 - BurningMyself</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/application.451f80e5.css">
+      
+      
+    
+    
+      <script src="../../assets/javascripts/modernizr.1aa3b519.js"></script>
+    
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700|Roboto+Mono">
+        <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
+      
+    
+    <link rel="stylesheet" href="../../assets/fonts/material-icons.css">
+    
+    
+  </head>
+  
+    <body dir="ltr">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+          <svg xmlns="http://www.w3.org/2000/svg" width="416" height="448"
+    viewBox="0 0 416 448" id="__github">
+  <path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19-18.125
+        8.5-18.125-8.5-10.75-19-3.125-20.5 3.125-20.5 10.75-19 18.125-8.5
+        18.125 8.5 10.75 19 3.125 20.5zM320 304q0 10-3.125 20.5t-10.75
+        19-18.125 8.5-18.125-8.5-10.75-19-3.125-20.5 3.125-20.5 10.75-19
+        18.125-8.5 18.125 8.5 10.75 19 3.125 20.5zM360
+        304q0-30-17.25-51t-46.75-21q-10.25 0-48.75 5.25-17.75 2.75-39.25
+        2.75t-39.25-2.75q-38-5.25-48.75-5.25-29.5 0-46.75 21t-17.25 51q0 22 8
+        38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0
+        37.25-1.75t35-7.375 30.5-15 20.25-25.75 8-38.375zM416 260q0 51.75-15.25
+        82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5-41.75
+        1.125q-19.5 0-35.5-0.75t-36.875-3.125-38.125-7.5-34.25-12.875-30.25-20.25-21.5-28.75q-15.5-30.75-15.5-82.75
+        0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25
+        30.875q36.75-8.75 77.25-8.75 37 0 70 8 26.25-20.5
+        46.75-30.25t47.25-9.75q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34
+        99.5z" />
+</svg>
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+    
+      <a href="#mysql" tabindex="1" class="md-skip">
+        Skip to content
+      </a>
+    
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="https://burningmyself.github.io/blog/" title="BurningMyself" class="md-header-nav__button md-logo">
+          
+            <i class="md-icon"></i>
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          
+            
+              <span class="md-header-nav__topic">
+                BurningMyself
+              </span>
+              <span class="md-header-nav__topic">
+                MySQL索引
+              </span>
+            
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          
+            <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
+            
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="__search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            Type to start searching
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+          
+        
+      </div>
+      
+        <div class="md-flex__cell md-flex__cell--shrink">
+          <div class="md-header-nav__source">
+            
+
+
+  
+
+
+  <a href="https://github.com/burningmyself/blog/" title="Go to repository" class="md-source" data-md-source="github">
+    
+      <div class="md-source__icon">
+        <svg viewBox="0 0 24 24" width="24" height="24">
+          <use xlink:href="#__github" width="24" height="24"></use>
+        </svg>
+      </div>
+    
+    <div class="md-source__repository">
+      burningmyself/blog
+    </div>
+  </a>
+
+          </div>
+        </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+      <main class="md-main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="__drawer">
+    <a href="https://burningmyself.github.io/blog/" title="BurningMyself" class="md-nav__button md-logo">
+      
+        <i class="md-icon"></i>
+      
+    </a>
+    BurningMyself
+  </label>
+  
+    <div class="md-nav__source">
+      
+
+
+  
+
+
+  <a href="https://github.com/burningmyself/blog/" title="Go to repository" class="md-source" data-md-source="github">
+    
+      <div class="md-source__icon">
+        <svg viewBox="0 0 24 24" width="24" height="24">
+          <use xlink:href="#__github" width="24" height="24"></use>
+        </svg>
+      </div>
+    
+    <div class="md-source__repository">
+      burningmyself/blog
+    </div>
+  </a>
+
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../.." title="介绍" class="md-nav__link">
+      介绍
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2" checked>
+    
+    <label class="md-nav__link" for="nav-2">
+      技术博文
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-2">
+        技术博文
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-1" type="checkbox" id="nav-2-1">
+    
+    <label class="md-nav__link" for="nav-2-1">
+      .NET
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-2-1">
+        .NET
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../net/c_sharp/" title="C# 6" class="md-nav__link">
+      C# 6
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-2" type="checkbox" id="nav-2-2">
+    
+    <label class="md-nav__link" for="nav-2-2">
+      Java
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-2-2">
+        Java
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../java/feature/" title="Java特性" class="md-nav__link">
+      Java特性
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../java/load-class/" title="Java类加载" class="md-nav__link">
+      Java类加载
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../java/orm/" title="Orm的优缺点" class="md-nav__link">
+      Orm的优缺点
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-3" type="checkbox" id="nav-2-3">
+    
+    <label class="md-nav__link" for="nav-2-3">
+      Python
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-2-3">
+        Python
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../python/feature/" title="Python特性" class="md-nav__link">
+      Python特性
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../python/str_joint/" title="Python字符拼接" class="md-nav__link">
+      Python字符拼接
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../python/syntax_rule/" title="Python语法技巧" class="md-nav__link">
+      Python语法技巧
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-4" type="checkbox" id="nav-2-4">
+    
+    <label class="md-nav__link" for="nav-2-4">
+      PHP
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-2-4">
+        PHP
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../php/kj/" title="框架" class="md-nav__link">
+      框架
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-5" type="checkbox" id="nav-2-5">
+    
+    <label class="md-nav__link" for="nav-2-5">
+      Web
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-2-5">
+        Web
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../web/es6/" title="es6语法" class="md-nav__link">
+      es6语法
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../web/ali_js_style/" title="阿里js样式规范" class="md-nav__link">
+      阿里js样式规范
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../web/node.js/" title="node.js文档" class="md-nav__link">
+      node.js文档
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-6" type="checkbox" id="nav-2-6" checked>
+    
+    <label class="md-nav__link" for="nav-2-6">
+      SQL
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-2-6">
+        SQL
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../mysql_yh/" title="MySQL优化" class="md-nav__link">
+      MySQL优化
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../mysql_log/" title="MySQL日志" class="md-nav__link">
+      MySQL日志
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        MySQL索引
+      </label>
+    
+    <a href="./" title="MySQL索引" class="md-nav__link md-nav__link--active">
+      MySQL索引
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#mysql_1" title="一、MySQL——索引基础" class="md-nav__link">
+    一、MySQL——索引基础
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1" title="1、什么是索引" class="md-nav__link">
+    1、什么是索引
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2" title="2、索引类型" class="md-nav__link">
+    2、索引类型
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3" title="3、索引设计的原则" class="md-nav__link">
+    3、索引设计的原则
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mysql_2" title="二、MySQL——索引优化实战" class="md-nav__link">
+    二、MySQL——索引优化实战
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1_1" title="1、索引相关的重要概念" class="md-nav__link">
+    1、索引相关的重要概念
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2_1" title="2、索引优化实战" class="md-nav__link">
+    2、索引优化实战
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_1" title="索引优化规则：" class="md-nav__link">
+    索引优化规则：
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3_1" title="3、总结" class="md-nav__link">
+    3、总结
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" title="三、数据库索引背后的数据结构" class="md-nav__link">
+    三、数据库索引背后的数据结构
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1b-tree" title="1、B-Tree" class="md-nav__link">
+    1、B-Tree
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#b-tree" title="B-Tree的特性" class="md-nav__link">
+    B-Tree的特性
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#b-tree_1" title="B-Tree查找数据" class="md-nav__link">
+    B-Tree查找数据
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2btree" title="2、B+Tree" class="md-nav__link">
+    2、B+Tree
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../mysql_pxc/" title="MySQL PXC集群" class="md-nav__link">
+      MySQL PXC集群
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-7" type="checkbox" id="nav-2-7">
+    
+    <label class="md-nav__link" for="nav-2-7">
+      Linux
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-2-7">
+        Linux
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../linux/often/" title="常用命令" class="md-nav__link">
+      常用命令
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-8" type="checkbox" id="nav-2-8">
+    
+    <label class="md-nav__link" for="nav-2-8">
+      Docker
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-2-8">
+        Docker
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../docker/docker/" title="Docker全科" class="md-nav__link">
+      Docker全科
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-9" type="checkbox" id="nav-2-9">
+    
+    <label class="md-nav__link" for="nav-2-9">
+      Tool
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-2-9">
+        Tool
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tool/git/" title="Git" class="md-nav__link">
+      Git
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tool/gitquestion/" title="Git问题处理" class="md-nav__link">
+      Git问题处理
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tool/gitflow/" title="GitFlow" class="md-nav__link">
+      GitFlow
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tool/gitbook/" title="GitBook" class="md-nav__link">
+      GitBook
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tool/markdown/" title="Markdown" class="md-nav__link">
+      Markdown
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3">
+    
+    <label class="md-nav__link" for="nav-3">
+      微服务
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-3">
+        微服务
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../micro/spring-cloud/" title="基于SpringCloud的微服务架构演变史" class="md-nav__link">
+      基于SpringCloud的微服务架构演变史
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../micro/fbs-lock/" title="分布式锁" class="md-nav__link">
+      分布式锁
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../micro/design/" title="微服务设计" class="md-nav__link">
+      微服务设计
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4">
+    
+    <label class="md-nav__link" for="nav-4">
+      经验分析
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-4">
+        经验分析
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../exp/devops/" title="DevOps" class="md-nav__link">
+      DevOps
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../exp/micro-service/" title="Micro-Service" class="md-nav__link">
+      Micro-Service
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../exp/raft-gossip/" title="Raft算法和Gossip协议" class="md-nav__link">
+      Raft算法和Gossip协议
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../exp/cl/" title="集群和负载均衡" class="md-nav__link">
+      集群和负载均衡
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../exp/ai/" title="人工智能" class="md-nav__link">
+      人工智能
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../exp/code-principle/" title="代码原则" class="md-nav__link">
+      代码原则
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../exp/eq/" title="情商" class="md-nav__link">
+      情商
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#mysql_1" title="一、MySQL——索引基础" class="md-nav__link">
+    一、MySQL——索引基础
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1" title="1、什么是索引" class="md-nav__link">
+    1、什么是索引
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2" title="2、索引类型" class="md-nav__link">
+    2、索引类型
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3" title="3、索引设计的原则" class="md-nav__link">
+    3、索引设计的原则
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mysql_2" title="二、MySQL——索引优化实战" class="md-nav__link">
+    二、MySQL——索引优化实战
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1_1" title="1、索引相关的重要概念" class="md-nav__link">
+    1、索引相关的重要概念
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2_1" title="2、索引优化实战" class="md-nav__link">
+    2、索引优化实战
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_1" title="索引优化规则：" class="md-nav__link">
+    索引优化规则：
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3_1" title="3、总结" class="md-nav__link">
+    3、总结
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" title="三、数据库索引背后的数据结构" class="md-nav__link">
+    三、数据库索引背后的数据结构
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1b-tree" title="1、B-Tree" class="md-nav__link">
+    1、B-Tree
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#b-tree" title="B-Tree的特性" class="md-nav__link">
+    B-Tree的特性
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#b-tree_1" title="B-Tree查找数据" class="md-nav__link">
+    B-Tree查找数据
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2btree" title="2、B+Tree" class="md-nav__link">
+    2、B+Tree
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/burningmyself/blog/edit/master/docs/sql/mysql_index.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
+                
+                
+                <h1 id="mysql">MySQL索引优化<a class="headerlink" href="#mysql" title="Permanent link">&para;</a></h1>
+<hr />
+<p>本文主要讨论MySQL索引的部分知识。将会从MySQL索引基础、索引优化实战和数据库索引背后的数据结构三部分相关内容，下面一一展开。</p>
+<h2 id="mysql_1">一、MySQL——索引基础<a class="headerlink" href="#mysql_1" title="Permanent link">&para;</a></h2>
+<p>首先，我们将从索引基础开始介绍一下什么是索引，分析索引的几种类型，并探讨一下如何创建索引以及索引设计的基本原则。</p>
+<p>此部分用于测试索引创建的pay_user表的结构如下：</p>
+<p><img alt="index" src="../../img/mysql-index-1.png" /></p>
+<h3 id="1">1、什么是索引<a class="headerlink" href="#1" title="Permanent link">&para;</a></h3>
+<p>“索引（在MySQL中也叫“键key”）是存储引擎快速找到记录的一种数据结构。”
+——《高性能MySQL》</p>
+<p>我们需要知道索引其实是一种数据结构，其功能是帮助我们快速匹配查找到需要的数据行，是数据库性能优化最常用的工具之一。其作用相当于超市里的导购员、书本里的目录。</p>
+<h3 id="2">2、索引类型<a class="headerlink" href="#2" title="Permanent link">&para;</a></h3>
+<p>可以使用SHOW INDEX FROM table_name;查看索引详情：</p>
+<p><img alt="index" src="../../img/mysql-index-2.png" /></p>
+<ul>
+<li>主键索引 PRIMARY KEY</li>
+</ul>
+<p>它是一种特殊的唯一索引，不允许有空值。一般是在建表的时候同时创建主键索引。注意：一个表只能有一个主键。</p>
+<ul>
+<li>唯一索引 UNIQUE</li>
+</ul>
+<p>唯一索引列的值必须唯一，但允许有空值。如果是组合索引，则列值的组合必须唯一。</p>
+<p>可以通过ALTER TABLE table_name ADD UNIQUE [alias] (column);创建唯一索引：</p>
+<p><img alt="index" src="../../img/mysql-index-3.png" /></p>
+<p>可以通过ALTER TABLE table_name ADD UNIQUE [alias] (column1,column2);创建唯一组合索引：</p>
+<p><img alt="index" src="../../img/mysql-index-4.png" /></p>
+<ul>
+<li>普通索引 INDEX</li>
+</ul>
+<p>这是最基本的索引，它没有任何限制。</p>
+<p>可以通过ALTER TABLE table_name ADD INDEX index_name (column);创建普通索引：</p>
+<p><img alt="index" src="../../img/mysql-index-5.png" /></p>
+<ul>
+<li>组合索引 INDEX
+即一个索引包含多个列，多用于避免回表查询。</li>
+</ul>
+<p>可以通过ALTER TABLE table_name ADD INDEX index_name(column1,column2, column3);创建组合索引：</p>
+<p><img alt="index" src="../../img/mysql-index-6.png" /></p>
+<p>全文索引 FULLTEXT</p>
+<p>也称全文检索，是目前搜索引擎使用的一种关键技术。</p>
+<p>可以通过ALTER TABLE table_name ADD FULLTEXT (column);创建全文索引：</p>
+<p><img alt="index" src="../../img/mysql-index-7.png" /></p>
+<p>索引一经创建不能修改，如果要修改索引，只能删除重建。可以使用DROP INDEX index_name ON table_name;删除索引。</p>
+<h3 id="3">3、索引设计的原则<a class="headerlink" href="#3" title="Permanent link">&para;</a></h3>
+<ol>
+<li>适合索引的列是出现在where子句中的列，或者连接子句中指定的列；</li>
+<li>基数较小的类，索引效果较差，没有必要在此列建立索引；</li>
+<li>使用短索引，如果对长字符串列进行索引，应该指定一个前缀长度，这样能够节省大量索引空间；</li>
+<li>不要过度索引。索引需要额外的磁盘空间，并降低写操作的性能。在修改表内容的时候，索引会进行更新甚至重构，索引列越多，这个时间就会越长。所以只保持需要的索引有利于查询即可。</li>
+</ol>
+<h2 id="mysql_2">二、MySQL——索引优化实战<a class="headerlink" href="#mysql_2" title="Permanent link">&para;</a></h2>
+<p>上面我们介绍了索引的基本内容，这部分我们介绍索引优化实战。在介绍索引优化实战之前，首先要介绍两个与索引相关的重要概念，这两个概念对于索引优化至关重要。</p>
+<p>此部分用于测试的user表结构：</p>
+<p><img alt="index" src="../../img/mysql-index-8.png" /></p>
+<h3 id="1_1">1、索引相关的重要概念<a class="headerlink" href="#1_1" title="Permanent link">&para;</a></h3>
+<ul>
+<li>基数
+单个列唯一键（distict_keys）的数量叫做基数。</li>
+</ul>
+<p>SELECT COUNT(DISTINCT UserName),COUNT(DISTINCT LoginPassWord) FROM pay_user;</p>
+<p><img alt="index" src="../../img/mysql-index-9.png" /></p>
+<p>pay_user表的总行数是5，UserName列的基数是10，说明LoginPassWord列里面有大量重复值，UserName列的基数等于总行数，说明UserName列没有重复值，相当于主键。</p>
+<p>返回数据的比例：
+pay_user表中共有5条数据：
+<img alt="index" src="../../img/mysql-index-11.png" /></p>
+<p>基数越大命中索引命中越高，一半取表数据30%一下走索引</p>
+<ul>
+<li>回表</li>
+</ul>
+<p>当对一个列创建索引之后，索引会包含该列的键值及键值对应行所在的rowid。通过索引中记录的rowid访问表中的数据就叫回表。回表次数太多会严重影响SQL性能，如果回表次数太多，就不应该走索引扫描，应该直接走全表扫描。</p>
+<p>EXPLAIN命令结果中的Using Index意味着不会回表，通过索引就可以获得主要的数据。Using Where则意味着需要回表取数据。</p>
+<h3 id="2_1">2、索引优化实战<a class="headerlink" href="#2_1" title="Permanent link">&para;</a></h3>
+<p>有些时候虽然数据库有索引，但是并不被优化器选择使用。</p>
+<p>我们可以通过SHOW STATUS LIKE 'Handler_read%';查看索引的使用情况：</p>
+<p><img alt="index" src="../../img/mysql-index-12.png" /></p>
+<ul>
+<li>Handler_read_key：如果索引正在工作，Handler_read_key的值将很高。</li>
+<li>Handler_read_rnd_next：数据文件中读取下一行的请求数，如果正在进行大量的表扫描，值将较高，则说明索引利用不理想。</li>
+</ul>
+<h4 id="_1">索引优化规则：<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h4>
+<ul>
+<li>如果MySQL估计使用索引比全表扫描还慢，则不会使用索引。</li>
+</ul>
+<p>返回数据的比例是重要的指标，比例越低越容易命中索引。记住这个范围值——30%，后面所讲的内容都是建立在返回数据的比例在30%以内的基础上。</p>
+<ul>
+<li>前导模糊查询不能命中索引。</li>
+</ul>
+<p>UserName列创建普通索引：</p>
+<p>前导模糊查询不能命中索引：</p>
+<p>EXPLAIN SELECT * FROM pay_user WHERE UserName LIKE '%s%';</p>
+<p>非前导模糊查询则可以使用索引，可优化为使用非前导模糊查询：</p>
+<p>EXPLAIN SELECT * FROM pay_user WHERE UserName LIKE 's%';</p>
+<ul>
+<li>数据类型出现隐式转换的时候不会命中索引，特别是当列类型是字符串，一定要将字符常量值用引号引起来。
+EXPLAIN SELECT * FROM pay_user WHERE UserName=1;--未使用索引</li>
+</ul>
+<p>EXPLAIN SELECT * FROM user WHERE name='1';--使用索引</p>
+<ul>
+<li>复合索引的情况下，查询条件不包含索引列最左边部分（不满足最左原则），不会命中符合索引。</li>
+</ul>
+<p>注意，最左原则并不是说是查询条件的顺序</p>
+<ul>
+<li>union、in、or都能够命中索引，建议使用in。</li>
+</ul>
+<p>查询的CPU消耗：or&gt;in&gt;union</p>
+<ul>
+<li>用or分割开的条件，如果or前的条件中列有索引，而后面的列中没有索引，那么涉及到的索引都不会被用到。</li>
+</ul>
+<p>因为or后面的条件列中没有索引，那么后面的查询肯定要走全表扫描，在存在全表扫描的情况下，就没有必要多一次索引扫描增加IO访问。</p>
+<ul>
+<li>
+<p>负向条件查询不能使用索引，可以优化为in查询。
+负向条件有：!=、&lt;&gt;、not in、not exists、not like等。</p>
+</li>
+<li>
+<p>范围条件查询可以命中索引。范围条件有：&lt;、&lt;=、&gt;、&gt;=、between等。</p>
+</li>
+</ul>
+<p>范围列可以用到索引（联合索引必须是最左前缀），但是范围列后面的列无法用到索引，索引最多用于一个范围列，如果查询条件中有两个范围列则无法全用到索引：</p>
+<p>如果是范围查询和等值查询同时存在，优先匹配等值查询列的索引：</p>
+<ul>
+<li>数据库执行计算不会命中索引</li>
+</ul>
+<p>计算逻辑应该尽量放到业务层处理，节省数据库的CPU的同时最大限度的命中索引。</p>
+<ul>
+<li>利用覆盖索引进行查询，避免回表。</li>
+</ul>
+<p>被查询的列，数据能从索引中取得，而不用通过行定位符row-locator再到row上获取，即“被查询列要被所建的索引覆盖”，这能够加速查询速度。</p>
+<p>当查询其他列时，就需要回表查询，这也是为什么要避免SELECT*的原因之一：</p>
+<ul>
+<li>建立索引的列，不允许为null。</li>
+</ul>
+<p>单列索引不存null值，复合索引不存全为null的值，如果列允许为null，可能会得到“不符合预期”的结果集，所以，请使用not null约束以及默认值。</p>
+<p>虽然IS NULL可以命中索引，但是NULL本身就不是一种好的数据库设计，应该使用NOT NULL约束以及默认值。</p>
+<ul>
+<li>更新十分频繁的字段上不宜建立索引：因为更新操作会变更B+树，重建索引。这个过程是十分消耗数据库性能的。</li>
+<li>区分度不大的字段上不宜建立索引：类似于性别这种区分度不大的字段，建立索引的意义不大。因为不能有效过滤数据，性能和全表扫描相当。另外返回数据的比例在30%以外的情况下，优化器不会选择使用索引。</li>
+<li>业务上具有唯一特性的字段，即使是多个字段的组合，也必须建成唯一索引。虽然唯一索引会影响insert速度，但是对于查询的速度提升是非常明显的。另外，即使在应用层做了非常完善的校验控制，只要没有唯一索引，在并发的情况下，依然有脏数据产生。</li>
+<li>多表关联时，要保证关联字段上一定有索引。</li>
+<li>创建索引时避免以下错误观念：索引越多越好，认为一个查询就需要建一个索引；宁缺勿滥，认为索引会消耗空间、严重拖慢更新和新增速度；抵制唯一索引，认为业务的唯一性一律需要在应用层通过“先查后插”方式解决；过早优化，在不了解系统的情况下就开始优化。</li>
+</ul>
+<h3 id="3_1">3、总结<a class="headerlink" href="#3_1" title="Permanent link">&para;</a></h3>
+<p>对于自己编写的SQL查询语句，要尽量使用EXPLAIN命令分析一下，做一个对SQL性能有追求的程序员。衡量一个程序员是否靠谱，SQL能力是一个重要的指标。作为后端程序员，深以为然。</p>
+<h2 id="_2">三、数据库索引背后的数据结构<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<p>第一部分开头我们简单提到，索引是存储引擎快速找到记录的一种数据结构。进一步说，在数据库系统里，这种数据结构要满足特定查找算法，即这些数据结构以某种方式引用（指向）数据，这样就可以在这些数据结构上实现高级查找算法。</p>
+<p><img alt="index" src="../../img/mysql-index-13.png" /></p>
+<h3 id="1b-tree">1、B-Tree<a class="headerlink" href="#1b-tree" title="Permanent link">&para;</a></h3>
+<p>B-Tree是一种平衡的多路查找(又称排序)树，在文件系统中和数据库系统中有所应用，主要用作文件的索引。其中的B就表示平衡(Balance) 。</p>
+<p><img alt="index" src="../../img/mysql-index-14.png" /></p>
+<h3 id="b-tree">B-Tree的特性<a class="headerlink" href="#b-tree" title="Permanent link">&para;</a></h3>
+<p>为了描述B-Tree，首先定义一条数据记录为一个二元组[key, data]，key为记录的键值，对于不同数据记录，key是互不相同的；data为数据记录除key外的数据。那么B-Tree是满足下列条件的数据结构：</p>
+<p>d为大于1的一个正整数，称为B-Tree的度：</p>
+<p><img alt="index" src="../../img/mysql-index-15.png" /></p>
+<p>h为一个正整数，称为B-Tree的高度：</p>
+<p><img alt="index" src="../../img/mysql-index-16.png" /></p>
+<p>key和指针互相间隔，节点两端是指针：</p>
+<p><img alt="index" src="../../img/mysql-index-17.png" /></p>
+<p>一个节点中的key从左到右非递减排列：</p>
+<p><img alt="index" src="../../img/mysql-index-18.png" /></p>
+<p>所有节点组成树结构。</p>
+<p>每个指针要么为null，要么指向另外一个节点；每个非叶子节点由n-1个key和n个指针组成，其中d&lt;=n&lt;=2d：</p>
+<p>每个叶子节点最少包含一个key和两个指针，最多包含2d-1个key和2d个指针，叶节点的指针均为null：</p>
+<p>所有叶节点具有相同的深度，等于树高h。</p>
+<p>如果某个指针在节点node最左边且不为null，则其指向节点的所有key小于key1，其中key1为node的第一个key的值：</p>
+<p>如果某个指针在节点node最右边且不为null，则其指向节点的所有key大于keym，其中keym为node的最后一个key的值：</p>
+<p>如果某个指针在节点node的左右相邻key分别是keyi和keyi+1且不为null，则其指向节点的所有key小于keyi+1且大于keyi：</p>
+<h3 id="b-tree_1">B-Tree查找数据<a class="headerlink" href="#b-tree_1" title="Permanent link">&para;</a></h3>
+<p>B-Tree是一个非常有效率的索引数据结构。这主要得益于B-Tree的度可以非常大，高度会变的非常小，只需要二分几次就可以找到数据。例如一个度为d的B-Tree，设其索引N个key，则其树高h的上限为logd((N+1)/2))，检索一个key，其查找节点个数的渐进复杂度为O(logdN)。</p>
+<p>在B-Tree中按key检索数据的算法非常直观：</p>
+<ul>
+<li>首先从根节点进行二分查找，如果找到则返回对应节点的data；</li>
+<li>否则对相应区间的指针指向的节点递归进行查找，如果找到则返回对应节点的data；</li>
+<li>如果找不到，则重复上述“对相应区间的指针指向的节点递归进行查找”，直到找到节点或找到null指针，前者查找成功，后者查找失败。</li>
+</ul>
+<h3 id="2btree">2、B+Tree<a class="headerlink" href="#2btree" title="Permanent link">&para;</a></h3>
+<p>B+Tree是B-Tree的一种变种。一般来说，B+Tree比B-Tree更适合实现外存储索引结构，具体原因与外存储器原理及计算机存取原理有关，将在以后讨论。</p>
+<p>B+Tree的特性:</p>
+<p>区别于B-Tree:</p>
+<p>每个节点的指针上限为2d而不是2d+1；
+内节点不存储data，只存储key；叶子节点不存储指针。</p>
+<p>3、带有顺序访问指针的B+Tree</p>
+<p>一般在数据库系统或者文件系统中，并不是直接使用B+Tree作为索引数据结构的，而是在B+Tree的基础上做了优化，增加了顺序访问指针，提升了区间查询的性能。</p>
+<p>如上图所示，在B+Tree的每个叶子节点增加一个指向相邻叶子节点的指针，就形成了带有顺序访问指针的B+Tree。</p>
+<p>例如要查询18到30之间的数据记录，只要先找到18，然后顺着顺序访问指针就可以访问到所有的数据节点。这样就提升了区间查询的性能。数据库的索引全扫描index和索引范围扫描range就是基于此实现的。</p>
+                
+                  
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="../mysql_log/" title="MySQL日志" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                MySQL日志
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="../mysql_pxc/" title="MySQL PXC集群" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                MySQL PXC集群
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        powered by
+        <a href="https://www.mkdocs.org">MkDocs</a>
+        and
+        <a href="https://squidfunk.github.io/mkdocs-material/">
+          Material for MkDocs</a>
+      </div>
+      
+        
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../assets/javascripts/application.5e60981f.js"></script>
+      
+      <script>app.initialize({version:"1.0.4",url:{base:"../.."}})</script>
+      
+    
+    
+      
+    
+  </body>
+</html>
