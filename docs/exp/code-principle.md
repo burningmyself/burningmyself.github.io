@@ -24,9 +24,11 @@ YAGNI代表“你不会需要它”：在必要之前不要实施某些东西。
 * 它导致代码膨胀; 软件变得更大，更复杂。
 
 怎么样：
+
 * 当你真正需要它们时，总是要实现它们，而不是在你预见到需要它们的时候。
 
 资源：
+
 *[你不会需要它](http://c2.com/xp/YouArentGonnaNeedIt.html)
 *[你不需要它！](http://www.xprogramming.com/Practices/PracNotNeed.html)
 *[你不需要它](https://en.wikipedia.org/wiki/You_aren%27t_gonna_need_it)
@@ -40,6 +42,7 @@ YAGNI代表“你不会需要它”：在必要之前不要实施某些东西。
 怎么样:
 
 * 问问自己：“最简单的事情是什么？”
+
 资源:
 
 * [做最简单的事可能有效](http://c2.com/xp/DoTheSimplestThingThatCouldPossiblyWork.html)
@@ -354,12 +357,12 @@ Curly定律是为任何特定的代码选择一个明确定义的目标：做一
 
 * 在发生更改时最小化所需的修改
 
-怎么样
+怎么样:
 
 * 封装API背后不同的概念
 * 可能将不同的概念分成它自己的模块
 
-资源
+资源:
 
 * [封装变化的概念](http://principles-wiki.net/principles:encapsulate_the_concept_that_varies)
 * [封装什么变化](https://blogs.msdn.microsoft.com/steverowe/2007/12/26/encapsulate-what-varies/)
