@@ -422,3 +422,82 @@ chkconfig   查看所有服务器自启配置
 chkconfig iptables off   关掉指定服务的自动启动
 chkconfig iptables on   开启指定服务的自动启动
 ```
+
+### 防火墙
+
+#### iptables防火墙
+
+1. 基本操作
+
+* 查看防火墙状态
+``` 
+service iptables status  
+```
+* 停止防火墙
+```
+service iptables stop  
+```
+* 启动防火墙
+```
+service iptables start  
+```
+* 重启防火墙
+```
+service iptables restart  
+```
+* 永久关闭防火墙
+```
+chkconfig iptables off  
+```
+* 永久关闭后重启
+```
+chkconfig iptables on　　
+```
+
+2. 开启80端口
+
+```
+ vim /etc/sysconfig/iptables
+# 加入如下代码
+-A INPUT -m state --state NEW -m tcp -p tcp --dport 80 -j ACCEPT
+```
+
+#### firewall防火墙
+
+1. 查看firewall服务状态
+```
+systemctl status firewalld
+```
+2. 查看firewall的状态
+```
+firewall-cmd --state
+```
+3. 开启、重启、关闭、firewalld.service服务
+```
+# 开启
+service firewalld start
+# 重启
+service firewalld restart
+# 关闭
+service firewalld stop
+```
+4. 查看防火墙规则
+```
+firewall-cmd --list-all 
+```
+5. 查询、开放、关闭端口
+```
+# 查询端口是否开放
+firewall-cmd --query-port=8080/tcp
+# 开放80端口
+firewall-cmd --permanent --add-port=80/tcp
+# 移除端口
+firewall-cmd --permanent --remove-port=8080/tcp
+#重启防火墙(修改配置后要重启防火墙)
+firewall-cmd --reload
+```
+参数解释:
+
+* firwall-cmd：是Linux提供的操作firewall的一个工具；
+* --permanent：表示设置为持久；
+* --add-port：标识添加的端口；
