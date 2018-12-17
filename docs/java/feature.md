@@ -453,10 +453,6 @@ cars.forEach( Car::collide );
 ```java
 cars.forEach( Car::repair );
 ```
-第三种方法引用的类型是某个类的成员方法的引用，语法是Class::method，注意，这个方法没有定义入参：
-```java
-cars.forEach( Car::repair );
-```
 第四种方法引用的类型是某个实例对象的成员方法的引用，语法是instance::method。注意：这个方法接受一个Car类型的参数：
 ```java
 final Car police = Car.create( Car::new );
