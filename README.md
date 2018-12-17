@@ -26,6 +26,7 @@
 * * [人工智能](docs/exp/ai.md) 
 * * [代码原则](docs/exp/code-principle.md)
 * * [如何成为技术大牛](docs/exp/techbig.md) 
+* * [程序员如何技术成长](docs/exp/learnweetout.md)
 * * [情商](docs/exp/eq.md) 
 * [Img](#)
 * [Java](#)

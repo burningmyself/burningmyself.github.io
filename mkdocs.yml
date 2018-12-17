@@ -54,7 +54,9 @@ nav:
     - 人工智能: exp/ai.md
     - 代码原则: exp/code-principle.md
     - 如何成为技术大牛: exp/techbig.md
+    - 程序员如何技术成长: exp/learnweetout.md
     - 情商: exp/eq.md
+ 
 markdown_extensions:
   - admonition
   - codehilite:
