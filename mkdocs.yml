@@ -17,6 +17,7 @@ nav:
         - Java特性: java/feature.md 
         - Java类加载: java/load-class.md
         - Orm的优缺点: java/orm.md
+        - BIO与NIO: java/bio-nio.md
     - Python: 
         - Python特性: python/feature.md 
         - Python字符拼接: python/str_joint.md
