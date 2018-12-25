@@ -287,8 +287,33 @@ GitBook 有 [插件官网](https://plugins.gitbook.com/ "插件官网")，默认
 }
 ```
 然后在终端输入 gitbook install ./ 即可。
+### 总结
+
+1. 主要流程
+安装node.js > 安装Gitbook > 安装Gitbook编辑器 > 安装calibre > 导出PDF
+
+2. 安装 GitBook
+```
+npm install -g gitbook
+npm install -g gitbook-cli
+gitbook -V # 查看版本
+```
+3. 终端生成HTML
+
+[客户端编辑器下载：](https://www.gitbook.com/editor)
+```
+cd /Users/sunshine/GitBook/Library/Import/test/
+gitbook build
+gitbook serve # 本地预览 _book
+```
+4. 使用calibre插件生成PDF
+[插件下载：](https://calibre-ebook.com/download)
+```
+ln -s /Applications/calibre.app/Contents/MacOS/ebook-convert /usr/local/bin
+gitbook pdf . mypdf.pdf```
 
 如果要指定插件的版本可以使用 plugin@0.3.1，因为一些插件可能不会随着 GitBook 版本的升级而升级。
+
 ##结语
 这是我对 GitBook 使用的总结，希望能帮到今后需要的小伙伴
 
