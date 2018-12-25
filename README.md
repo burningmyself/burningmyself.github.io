@@ -48,6 +48,7 @@
 * * [Python新特性](docs/python/feature.md)
 * * [Python的字符操作](docs/python/str_joint.md) 
 * * [Python语法技巧](docs/python/syntax_rule.md) 
+* * [远程部署神器 Fabric](docs/python/fabric.md) 
 * [SQL](#)
 * * [MySQL 优化指南](docs/sql/mysql_yh.md)
 * * [MySQL 日志](docs/sql/mysql_log.md)
