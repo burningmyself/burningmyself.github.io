@@ -307,14 +307,17 @@ gitbook build
 gitbook serve # 本地预览 _book
 ```
 4. 使用calibre插件生成PDF
+
 [插件下载：](https://calibre-ebook.com/download)
 ```
 ln -s /Applications/calibre.app/Contents/MacOS/ebook-convert /usr/local/bin
 gitbook pdf . mypdf.pdf```
+```
 
 如果要指定插件的版本可以使用 plugin@0.3.1，因为一些插件可能不会随着 GitBook 版本的升级而升级。
 
-##结语
+### 结语
+
 这是我对 GitBook 使用的总结，希望能帮到今后需要的小伙伴
 
 [相关资料](https://blog.csdn.net/axi295309066/article/details/61420694/)
