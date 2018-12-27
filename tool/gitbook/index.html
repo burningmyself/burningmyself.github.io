@@ -429,6 +429,18 @@
   </li>
 
         
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../python/fabric/" title="远程部署神器 Fabric" class="md-nav__link">
+      远程部署神器 Fabric
+    </a>
+  </li>
+
+        
       </ul>
     </nav>
   </li>
@@ -854,15 +866,22 @@
   
 </li>
         
-      </ul>
-    </nav>
+          <li class="md-nav__item">
+  <a href="#_4" title="总结" class="md-nav__link">
+    总结
+  </a>
   
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#_4" title="结语" class="md-nav__link">
+        
+          <li class="md-nav__item">
+  <a href="#_5" title="结语" class="md-nav__link">
     结语
   </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -1086,6 +1105,18 @@
   </li>
 
         
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../exp/workheard/" title="工作心得" class="md-nav__link">
+      工作心得
+    </a>
+  </li>
+
+        
       </ul>
     </nav>
   </li>
@@ -1202,15 +1233,22 @@
   
 </li>
         
-      </ul>
-    </nav>
+          <li class="md-nav__item">
+  <a href="#_4" title="总结" class="md-nav__link">
+    总结
+  </a>
   
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#_4" title="结语" class="md-nav__link">
+        
+          <li class="md-nav__item">
+  <a href="#_5" title="结语" class="md-nav__link">
     结语
   </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -1493,8 +1531,33 @@ gitbook builid --debug //输出错误信息
 }
 </pre></div>
 然后在终端输入 gitbook install ./ 即可。</p>
+<h3 id="_4">总结<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p>主要流程
+安装node.js &gt; 安装Gitbook &gt; 安装Gitbook编辑器 &gt; 安装calibre &gt; 导出PDF</p>
+</li>
+<li>
+<p>安装 GitBook
+<div class="codehilite"><pre><span></span>npm install -g gitbook
+npm install -g gitbook-cli
+gitbook -V # 查看版本
+</pre></div></p>
+</li>
+<li>终端生成HTML</li>
+</ol>
+<p><a href="https://www.gitbook.com/editor">客户端编辑器下载：</a>
+<div class="codehilite"><pre><span></span>cd /Users/sunshine/GitBook/Library/Import/test/
+gitbook build
+gitbook serve # 本地预览 _book
+</pre></div>
+4. 使用calibre插件生成PDF</p>
+<p><a href="https://calibre-ebook.com/download">插件下载：</a>
+<div class="codehilite"><pre><span></span>ln -s /Applications/calibre.app/Contents/MacOS/ebook-convert /usr/local/bin
+gitbook pdf . mypdf.pdf```
+</pre></div></p>
 <p>如果要指定插件的版本可以使用 plugin@0.3.1，因为一些插件可能不会随着 GitBook 版本的升级而升级。</p>
-<h2 id="_4">结语<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
+<h3 id="_5">结语<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
 <p>这是我对 GitBook 使用的总结，希望能帮到今后需要的小伙伴</p>
 <p><a href="https://blog.csdn.net/axi295309066/article/details/61420694/">相关资料</a></p>
                 
