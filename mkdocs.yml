@@ -58,7 +58,7 @@ nav:
     - 如何成为技术大牛: exp/techbig.md
     - 程序员如何技术成长: exp/learnweetout.md
     - 情商: exp/eq.md
- 
+    - 工作心得: exp/workheard.md
 markdown_extensions:
   - admonition
   - codehilite:

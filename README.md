@@ -28,6 +28,7 @@
 * * [如何成为技术大牛](docs/exp/techbig.md) 
 * * [程序员如何技术成长](docs/exp/learnweetout.md)
 * * [情商](docs/exp/eq.md) 
+* * [工作心得](docs/exp/workheard.md)
 * [Img](#)
 * [Java](#)
 * * [Java 新特性](docs/java/feature.md) 
