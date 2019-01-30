@@ -55,6 +55,7 @@
 * * [MySQL 日志](docs/sql/mysql_log.md)
 * * [MySQL 索引](docs/sql/mysql_index.md)
 * * [MySQL PXC集群](docs/sql/mysql_pxc.md)
+* * [MySQL MySQL数据库应用](docs/sql/mysql_use.md)
 * [TOOL](#)
 * * [Git命令](docs/tool/git.md)
 * * [GitBook](docs/tool/gitbook.md)
@@ -65,6 +66,8 @@
 * * [阿里js样式](docs/web/ali_js_style.md)
 * * [ES6语法](docs/web/es6.md)
 * * [Node.js](docs/web/node.js.md)
+* [医学](#)
+* * [脑炎](docs/doctor/ae.md)
 
 
 
