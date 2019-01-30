@@ -13,7 +13,7 @@
         <meta name="description" content=".net,java,php,python,docker,web">
       
       
-        <link rel="canonical" href="https://burningmyself.github.io/blog/java/bio-nio/">
+        <link rel="canonical" href="https://burningmyself.github.io/blog/sql/mysql_use/">
       
       
         <meta name="author" content="朽木自雕">
@@ -42,7 +42,7 @@
     
     
       
-        <title>BIO与NIO - BurningMyself</title>
+        <title>MySQL PXC集群 - BurningMyself</title>
       
     
     
@@ -96,7 +96,7 @@
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
     <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
     
-      <a href="#bionio" tabindex="1" class="md-skip">
+      <a href="#mysql17" tabindex="1" class="md-skip">
         Skip to content
       </a>
     
@@ -122,7 +122,7 @@
                 BurningMyself
               </span>
               <span class="md-header-nav__topic">
-                BIO与NIO
+                MySQL PXC集群
               </span>
             
           
@@ -306,12 +306,10 @@
           
           
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+  <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-2" type="checkbox" id="nav-2-2" checked>
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-2" type="checkbox" id="nav-2-2">
     
     <label class="md-nav__link" for="nav-2-2">
       Java
@@ -329,7 +327,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../feature/" title="Java特性" class="md-nav__link">
+    <a href="../../java/feature/" title="Java特性" class="md-nav__link">
       Java特性
     </a>
   </li>
@@ -341,7 +339,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../load-class/" title="Java类加载" class="md-nav__link">
+    <a href="../../java/load-class/" title="Java类加载" class="md-nav__link">
       Java类加载
     </a>
   </li>
@@ -353,7 +351,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../orm/" title="Orm的优缺点" class="md-nav__link">
+    <a href="../../java/orm/" title="Orm的优缺点" class="md-nav__link">
       Orm的优缺点
     </a>
   </li>
@@ -363,124 +361,11 @@
           
           
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active">
-    
-    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-    
-      
-    
-    
-      <label class="md-nav__link md-nav__link--active" for="__toc">
-        BIO与NIO
-      </label>
-    
-    <a href="./" title="BIO与NIO" class="md-nav__link md-nav__link--active">
+  <li class="md-nav__item">
+    <a href="../../java/bio-nio/" title="BIO与NIO" class="md-nav__link">
       BIO与NIO
     </a>
-    
-      
-<nav class="md-nav md-nav--secondary">
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">Table of contents</label>
-    <ul class="md-nav__list" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#_1" title="简介：" class="md-nav__link">
-    简介：
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#bio" title="BIO" class="md-nav__link">
-    BIO
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#nio" title="NIO" class="md-nav__link">
-    NIO
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#_2" title="轮询方式" class="md-nav__link">
-    轮询方式
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#io" title="I/O多路复用" class="md-nav__link">
-    I/O多路复用
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#nio_1" title="NIO三种模型" class="md-nav__link">
-    NIO三种模型
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#reactor" title="Reactor单线程模型：" class="md-nav__link">
-    Reactor单线程模型：
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#reactor_1" title="Reactor多线程模型：" class="md-nav__link">
-    Reactor多线程模型：
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#reactor_2" title="主从Reactor多线程模型" class="md-nav__link">
-    主从Reactor多线程模型
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_3" title="各自应用场景" class="md-nav__link">
-    各自应用场景
-  </a>
-  
-</li>
-      
-      
-      
-      
-      
-    </ul>
-  
-</nav>
-    
   </li>
 
         
@@ -661,10 +546,12 @@
           
           
 
+  
 
-  <li class="md-nav__item md-nav__item--nested">
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-6" type="checkbox" id="nav-2-6">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-6" type="checkbox" id="nav-2-6" checked>
     
     <label class="md-nav__link" for="nav-2-6">
       SQL
@@ -682,7 +569,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../sql/mysql_yh/" title="MySQL优化" class="md-nav__link">
+    <a href="../mysql_yh/" title="MySQL优化" class="md-nav__link">
       MySQL优化
     </a>
   </li>
@@ -694,7 +581,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../sql/mysql_log/" title="MySQL日志" class="md-nav__link">
+    <a href="../mysql_log/" title="MySQL日志" class="md-nav__link">
       MySQL日志
     </a>
   </li>
@@ -706,7 +593,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../sql/mysql_index/" title="MySQL索引" class="md-nav__link">
+    <a href="../mysql_index/" title="MySQL索引" class="md-nav__link">
       MySQL索引
     </a>
   </li>
@@ -718,7 +605,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../sql/mysql_pxc/" title="MySQL PXC集群" class="md-nav__link">
+    <a href="../mysql_pxc/" title="MySQL PXC集群" class="md-nav__link">
       MySQL PXC集群
     </a>
   </li>
@@ -728,11 +615,111 @@
           
           
 
+  
 
-  <li class="md-nav__item">
-    <a href="../../sql/mysql_use/" title="MySQL PXC集群" class="md-nav__link">
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        MySQL PXC集群
+      </label>
+    
+    <a href="./" title="MySQL PXC集群" class="md-nav__link md-nav__link--active">
       MySQL PXC集群
     </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#master" title="一、单Master" class="md-nav__link">
+    一、单Master
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1" title="1）冷备：" class="md-nav__link">
+    1）冷备：
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2" title="2）热备：" class="md-nav__link">
+    2）热备：
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3" title="3）温备：" class="md-nav__link">
+    3）温备：
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_1" title="二、一主一从" class="md-nav__link">
+    二、一主一从
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#n" title="三、一主 n 从" class="md-nav__link">
+    三、一主 n 从
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" title="四、横向集群" class="md-nav__link">
+    四、横向集群
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" title="五、纵向集群" class="md-nav__link">
+    五、纵向集群
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" title="六、混合模式" class="md-nav__link">
+    六、混合模式
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
   </li>
 
         
@@ -1163,72 +1150,31 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#_1" title="简介：" class="md-nav__link">
-    简介：
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#bio" title="BIO" class="md-nav__link">
-    BIO
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#nio" title="NIO" class="md-nav__link">
-    NIO
+  <a href="#master" title="一、单Master" class="md-nav__link">
+    一、单Master
   </a>
   
     <nav class="md-nav">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#_2" title="轮询方式" class="md-nav__link">
-    轮询方式
+  <a href="#1" title="1）冷备：" class="md-nav__link">
+    1）冷备：
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#io" title="I/O多路复用" class="md-nav__link">
-    I/O多路复用
+  <a href="#2" title="2）热备：" class="md-nav__link">
+    2）热备：
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#nio_1" title="NIO三种模型" class="md-nav__link">
-    NIO三种模型
+  <a href="#3" title="3）温备：" class="md-nav__link">
+    3）温备：
   </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#reactor" title="Reactor单线程模型：" class="md-nav__link">
-    Reactor单线程模型：
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#reactor_1" title="Reactor多线程模型：" class="md-nav__link">
-    Reactor多线程模型：
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#reactor_2" title="主从Reactor多线程模型" class="md-nav__link">
-    主从Reactor多线程模型
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
         
@@ -1238,8 +1184,36 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_3" title="各自应用场景" class="md-nav__link">
-    各自应用场景
+  <a href="#_1" title="二、一主一从" class="md-nav__link">
+    二、一主一从
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#n" title="三、一主 n 从" class="md-nav__link">
+    三、一主 n 从
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" title="四、横向集群" class="md-nav__link">
+    四、横向集群
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" title="五、纵向集群" class="md-nav__link">
+    五、纵向集群
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" title="六、混合模式" class="md-nav__link">
+    六、混合模式
   </a>
   
 </li>
@@ -1260,87 +1234,45 @@
             <article class="md-content__inner md-typeset">
               
                 
-                  <a href="https://github.com/burningmyself/blog/edit/master/docs/java/bio-nio.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
+                  <a href="https://github.com/burningmyself/blog/edit/master/docs/sql/mysql_use.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
                 
                 
-                <h1 id="bionio">关于BIO和NIO的理解<a class="headerlink" href="#bionio" title="Permanent link">&para;</a></h1>
-<p>摘要: 关于BIO和NIO的理解</p>
-<p>最近大概看了ZooKeeper和Mina的源码发现都是用Java NIO实现的，所以有必要搞清楚什么是NIO。下面是我结合网络资料自己总结的，为了节约时间图示随便画的，能达意就行。</p>
-<h3 id="_1">简介：<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h3>
-<p>BIO：同步阻塞式IO，服务器实现模式为一个连接一个线程，即客户端有连接请求时服务器端就需要启动一个线程进行处理，如果这个连接不做任何事情会造成不必要的线程开销，当然可以通过线程池机制改善。 
-NIO：同步非阻塞式IO，服务器实现模式为一个请求一个线程，即客户端发送的连接请求都会注册到多路复用器上，多路复用器轮询到连接有I/O请求时才启动一个线程进行处理。 
-AIO(NIO.2)：异步非阻塞式IO，服务器实现模式为一个有效请求一个线程，客户端的I/O请求都是由OS先完成了再通知服务器应用去启动线程进行处理。 </p>
-<h3 id="bio">BIO<a class="headerlink" href="#bio" title="Permanent link">&para;</a></h3>
-<p>同步阻塞式IO，相信每一个学习过操作系统网络编程或者任何语言的网络编程的人都很熟悉，在while循环中服务端会调用accept方法等待接收客户端的连接请求，一旦接收到一个连接请求，就可以建立通信套接字在这个通信套接字上进行读写操作，此时不能再接收其他客户端连接请求，只能等待同当前连接的客户端的操作执行完成。 </p>
-<p>如果BIO要能够同时处理多个客户端请求，就必须使用多线程，即每次accept阻塞等待来自客户端请求，一旦受到连接请求就建立通信套接字同时开启一个新的线程来处理这个套接字的数据读写请求，然后立刻又继续accept等待其他客户端连接请求，即为每一个客户端连接请求都创建一个线程来单独处理，大概原理图就像这样： </p>
-<p><img alt="bio-nio" src="../../img/bio-nio-1.png" /></p>
-<p>虽然此时服务器具备了高并发能力，即能够同时处理多个客户端请求了，但是却带来了一个问题，随着开启的线程数目增多，将会消耗过多的内存资源，导致服务器变慢甚至崩溃，NIO可以一定程度解决这个问题。</p>
-<h3 id="nio">NIO<a class="headerlink" href="#nio" title="Permanent link">&para;</a></h3>
-<p>同步非阻塞式IO，关键是采用了事件驱动的思想来实现了一个多路转换器。 
-NIO与BIO最大的区别就是只需要开启一个线程就可以处理来自多个客户端的IO事件，这是怎么做到的呢？ 
-就是多路复用器，可以监听来自多个客户端的IO事件： 
-A. 若服务端监听到客户端连接请求，便为其建立通信套接字(java中就是通道)，然后返回继续监听，若同时有多个客户端连接请求到来也可以全部收到，依次为它们都建立通信套接字。 
-B. 若服务端监听到来自已经创建了通信套接字的客户端发送来的数据，就会调用对应接口处理接收到的数据，若同时有多个客户端发来数据也可以依次进行处理。 
-C. 监听多个客户端的连接请求和接收数据请求同时还能监听自己时候有数据要发送。 </p>
-<p><img alt="bio-nio" src="../../img/bio-nio-2.png" /></p>
-<p>总之就是在一个线程中就可以调用多路复用接口（java中是select）阻塞同时监听来自多个客户端的IO请求，一旦有收到IO请求就调用对应函数处理。 </p>
-<h4 id="_2">轮询方式<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h4>
-<p>如果将套接字读操作换成非阻塞的，那么只需要一个线程就可以同时处理套接字，每次检查一个套接字，有数据则读取，没有则检查下一个，因为是非阻塞的，所以执行read操作时若没有数据准备好则立即返回，不会发生阻塞。</p>
-<h4 id="io">I/O多路复用<a class="headerlink" href="#io" title="Permanent link">&para;</a></h4>
-<p>这种轮询的方式缺点是浪费CPU资源，大部分时间可能都是无数据可读的，不必仍不间断的反复执行read操作，I/O多路复用（IOmultiplexing）是一种更好的方法，调用select函数时，其内部会维护一张监听的套接字的列表，其会一直阻塞直到其中某一个套接字有数据准备好才返回，并告诉是哪个套接字可读，这时再调用该套接字的read函数效率更高。</p>
-<p>所以基本可以认为 “NIO = I/O多路复用 + 非阻塞式I/O”，大部分情况下是单线程，但也有超过一个线程实现NIO的情况</p>
-<h4 id="nio_1">NIO三种模型<a class="headerlink" href="#nio_1" title="Permanent link">&para;</a></h4>
-<p>上面所讲到的只需要一个线程就可以同时处理多个套接字，这只是其中的一种单线程模型，是一种较为极端的情况，NIO主要包含三种线程模型：</p>
-<ol>
-<li>
-<p>Reactor单线程模型</p>
-</li>
-<li>
-<p>Reactor多线程模型</p>
-</li>
-<li>
-<p>主从Reactor多线程模型</p>
-</li>
-</ol>
-<h5 id="reactor">Reactor单线程模型：<a class="headerlink" href="#reactor" title="Permanent link">&para;</a></h5>
-<p>单个线程完成所有事情包括接收客户端的TCP连接请求，读取和写入套接字数据等。</p>
-<p>对于一些小容量应用场景，可以使用单线程模型。但是对于高负载、大并发的应用却不合适，主要原因如下：</p>
-<ol>
-<li>
-<p>一个NIO线程同时处理成百上千的链路，性能上无法支撑，即便NIO线程的CPU负荷达到100%，也无法满足海量消息的编码、解码、读取和发送；</p>
-</li>
-<li>
-<p>当NIO线程负载过重之后，处理速度将变慢，这会导致大量客户端连接超时，超时之后往往会进行重发，这更加重了NIO线程的负载，最终会导致大量消息积压和处理超时，NIO线程会成为系统的性能瓶颈；</p>
-</li>
-<li>
-<p>可靠性问题：一旦NIO线程意外跑飞，或者进入死循环，会导致整个系统通信模块不可用，不能接收和处理外部消息，造成节点故障。</p>
-</li>
-</ol>
-<p>为了解决这些问题，演进出了Reactor多线程模型。</p>
-<h5 id="reactor_1">Reactor多线程模型：<a class="headerlink" href="#reactor_1" title="Permanent link">&para;</a></h5>
-<p>Reactor多线程模型与单线程模型最大的区别就是有一组NIO线程处理真实的IO操作。</p>
-<p>Reactor多线程模型的特点：</p>
-<ol>
-<li>
-<p>有专门一个NIO线程-Acceptor线程用于监听服务端，接收客户端的TCP连接请求；</p>
-</li>
-<li>
-<p>网络IO操作-读、写等由一个NIO线程池负责，线程池可以采用标准的JDK线程池实现，它包含一个任务队列和N个可用的线程，由这些NIO线程负责消息的读取、解码、编码和发送；</p>
-</li>
-<li>
-<p>1个NIO线程可以同时处理N条链路，但是1个链路只对应1个NIO线程，防止发生并发操作问题。</p>
-</li>
-</ol>
-<p>在绝大多数场景下，Reactor多线程模型都可以满足性能需求；但是，在极特殊应用场景中，一个NIO线程负责监听和处理所有的客户端连接可能会存在性能问题。例如百万客户端并发连接，或者服务端需要对客户端的握手消息进行安全认证，认证本身非常损耗性能。在这类场景下，单独一个Acceptor线程可能会存在性能不足问题，为了解决性能问题，产生了第三种Reactor线程模型-主从Reactor多线程模型。</p>
-<p>即从单线程中由一个线程即监听连接事件、读写事件、由完成数据读写，拆分为由一个线程专门监听各种事件，再由专门的线程池负责处理真正的IO数据读写。</p>
-<h5 id="reactor_2">主从Reactor多线程模型<a class="headerlink" href="#reactor_2" title="Permanent link">&para;</a></h5>
-<p>主从Reactor线程模型与Reactor多线程模型的最大区别就是有一组NIO线程处理连接、读写事件。</p>
-<p>主从Reactor线程模型的特点是：服务端用于接收客户端连接的不再是个1个单独的NIO线程，而是一个独立的NIO线程池。Acceptor接收到客户端TCP连接请求处理完成后（可能包含接入认证等），将新创建的SocketChannel注册到IO线程池（sub reactor线程池）的某个IO线程上，由它负责SocketChannel的读写和编解码工作。Acceptor线程池仅仅只用于客户端的登陆、握手和安全认证，一旦链路建立成功，就将链路注册到后端subReactor线程池的IO线程上，由IO线程负责后续的IO操作。</p>
-<p>即从多线程模型中由一个线程来监听连接事件和数据读写事件，拆分为一个线程监听连接事件，线程池的多个线程监听已经建立连接的套接字的数据读写事件，另外和多线程模型一样有专门的线程池处理真正的IO操作。</p>
-<h3 id="_3">各自应用场景<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
-<p>到这里你也许已经发现，一旦有请求到来(不管是几个同时到还是只有一个到)，都会调用对应IO处理函数处理，所以：</p>
-<p>（1）NIO适合处理连接数目特别多，但是连接比较短（轻操作）的场景，Jetty，Mina，ZooKeeper等都是基于java nio实现。</p>
-<p>（2）BIO方式适用于连接数目比较小且固定的场景，这种方式对服务器资源要求比较高，并发局限于应用中。</p>
+                <h1 id="mysql17">埋在MySQL数据库应用中的17个关键问题！<a class="headerlink" href="#mysql17" title="Permanent link">&para;</a></h1>
+<p>MySQL的使用非常普遍，跟MySQL有关的话题也非常多，如性能优化、高可用性、强一致性、安全、备份、集群、横向扩展、纵向扩展、负载均衡、读写分离等。要想掌握其中的精髓，可得花费不少功力，虽然目前流行的MySQL替代方案有很多，可是从最小成本最容易维护的角度而言，MySQL还是首选。下面从应用场景的角度切入，对MySQL的技术点进行组织，写一份知识图谱，方便进行更深入的学习和总结。</p>
+<p>如下图整理，我试着把MySQL的应用场景分为6种，每种场景下需要考虑的重点问题不一样，从而引出不同问题点下需要补齐的知识点，后续继续基于这些知识点进行学习和整理。</p>
+<p><img alt="question" src="../../img/mysql_q_1.png" /></p>
+<h2 id="master">一、单Master<a class="headerlink" href="#master" title="Permanent link">&para;</a></h2>
+<p><img alt="question" src="../../img/mysql_q_2.png" />
+单Master的情况是普遍存在的，对于很多个人站点、初创公司、小型内部系统，考虑到成本、更新频率、系统重要性等问题，系统只依赖一个单例数据库提供服务，基本上已经满足需求。这种场景下我觉得重点应该关注的话题有上图所示的四点。</p>
+<p>其中最重要的环节是数据备份，如果是交易量非常低，并且具有非常明确的服务时间段特性的话，简单的mysqldump是可以胜任的。但是这是有缺陷的，数据还原之后注定从备份点到还原点之间的数据会丢失。然而在极多数的情况下，备份的工作是没法马虎的，如下列举的几点小细节。</p>
+<h3 id="1">1）冷备：<a class="headerlink" href="#1" title="Permanent link">&para;</a></h3>
+<p>停机，直接copy物理文件，InnoDB引擎（frm文件、共享表空间文件、独立表空间文件、重做日志文件、my.cnf）。</p>
+<p>恢复：把文件copy到对应目录。</p>
+<h3 id="2">2）热备：<a class="headerlink" href="#2" title="Permanent link">&para;</a></h3>
+<p>Ibbackup或者XtraBackup工具，记录重做日志文件检查点的LSN，copy共享表空间文件以及独立表空间文件（不产生任何阻塞），记录copy后重做日志文件检查点的LSN，copy备份是产生的重做日志。</p>
+<p>恢复：恢复表空间文件，应用重做日志文件。</p>
+<h3 id="3">3）温备：<a class="headerlink" href="#3" title="Permanent link">&para;</a></h3>
+<p>mysqldump，--single-transaction参数进行事务管理保证数据一致性。备份时不能用DDL语句。 恢复：直接执行文件，mysql –uroot –p &lt;文件名.sql&gt;</p>
+<p>二进制半同步复制，主从服务器增量复制</p>
+<p>恢复：mysqlbinlog</p>
+<h2 id="_1">二、一主一从<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<p><img alt="question" src="../../img/mysql_q_3.png" /></p>
+<p>考虑一主一从的多数初衷是系统性能和系统高可用性问题，除了单Master场景中的备份工作需要做好以外，还有性能优化、读写分离、负载均衡三项重点工作需要考虑。其中性能优化的内容比较多，也是一块大主题，要从系统的服务指标作为依据采取相应的动作，多数系统要求的是3秒内完成请求，总体换算下来，数据库大概可以有1.5秒的总执行时间，能满足这个性能要求就是合理的优化方案。下学期以这样的优先级来分别整理内容：索引优化 -》 表设计优化 -》数据库配置优化 -》硬件优化。</p>
+<p>读写分离和负载均衡的实现相对简单些，我目前维护的系统比较落后，没有做读写分离，因为是一套以报表类功能为主的系统，而负载均衡是依赖php代码来做的，从实际运维效果来看，不大理想，而且负载均衡的代码过分嵌入到业务逻辑代码中，给代码维护带来一定噪音。下学期计划对各种中间件进行实践和性能测试，到时候把一些测试数据分享出来。</p>
+<h2 id="n">三、一主 n 从<a class="headerlink" href="#n" title="Permanent link">&para;</a></h2>
+<p><img alt="quesiton" src="../../img/mysql_q_4.png" /></p>
+<p>一旦开始考虑一主多从的服务器架构，则证明你的系统对可用性、一致性、性能中一种或者多种的要求比较高。好多系统在开始搭建的时候都会往这个方向看齐，毕竟这样“看起来”系统会健壮很多。不过其实并不能单单依靠MySQL的配置和MySQL自带的中间件来解决可用性、一致性方面的问题。</p>
+<h2 id="_2">四、横向集群<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<p><img alt="quesion" src="../../img/mysql_q_5.png" /></p>
+<p>系统庞大到需要分库分表，其实是一件可喜可贺的事情，但是切记的是要前面提到性能优化工作做到极致之后才好考虑这些会增加系统复杂度的解决方案。横向集群主要是从业务特性的角度对系统进行切分，最彻底就是切分成了各个子系统，子系统之间通过一些数据同步的方案来把一些核心数据进行共享，以避免跨库调用跨库join。</p>
+<p>然后是各种系统接口调用，把大事务拆成小事务，事务之间做好隔离和同步。上图中的三个问题在横向集群的架构体系中应属于很有特色的问题，在实际项目中其实是尽量去避免这些需求的存在的，不过如果确实需要了，也得有解决方案。下学期也将针对这些问题进行逐一整理，并测试一下一些号称支持这些功能的中间件。</p>
+<h2 id="_3">五、纵向集群<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
+<p><img alt="question" src="../../img/mysql_q_6.png" /></p>
+<p>横向集群的切分思路最终是切分子系统，而纵向集群最后遇到的最棘手的问题是扩缩容，我运维的一个系统是提前对数据做了256个切片，256切片中0<sub>127切片和128</sub>255切片分别存在两个一主两从的数据库集群中，系统运维了3年多，目前还没有扩容需求。设计初衷应该是考虑得到，假设有一天数据量非常大，可以把256个切片分4大片，分别存储到4个一主两从的集群中，从而实现扩容。</p>
+<p>这个思路的确是可取的，只是我们的分库逻辑当前是php代码实现，也有一定程度上影响了业务代码的逻辑，运维起来有点心惊胆战，还是保持业务代码清爽比较好。</p>
+<p>下学期将介绍一些实现了库路由功能的中间件的使用，也根据实际情况把想到的一些扩缩容方案实践一遍，敬请期待实操效果的分享。</p>
+<h2 id="_4">六、混合模式<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
+<p>与其说这部分内容讨论上面5种场景的混合，不如说这部分内容是做总结。上面的5种场景中，一共列举了17个问题点，这17个问题点基本上都是叠加式的，越往深入的框架去做就越需要考虑齐这17个问题点。17个问题点考虑全了，混合模式下的问题就不成问题了。</p>
                 
                   
                 
@@ -1361,7 +1293,7 @@ C. 监听多个客户端的连接请求和接收数据请求同时还能监听�
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
         
-          <a href="../orm/" title="Orm的优缺点" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../mysql_pxc/" title="MySQL PXC集群" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-flex__cell md-flex__cell--shrink">
               <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
             </div>
@@ -1370,19 +1302,19 @@ C. 监听多个客户端的连接请求和接收数据请求同时还能监听�
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                Orm的优缺点
+                MySQL PXC集群
               </span>
             </div>
           </a>
         
         
-          <a href="../../python/feature/" title="Python特性" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../../linux/often/" title="常用命令" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                Python特性
+                常用命令
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">
