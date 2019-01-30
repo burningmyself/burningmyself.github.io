@@ -34,7 +34,7 @@ nav:
         - MySQL日志: sql/mysql_log.md
         - MySQL索引: sql/mysql_index.md
         - MySQL PXC集群: sql/mysql_pxc.md
-        - MySQL PXC集群: sql/mysql_use.md
+        - MySQL 数据库应用: sql/mysql_use.md
     - Linux: 
         - 常用命令: linux/often.md
     - Docker: 
@@ -60,7 +60,7 @@ nav:
     - 程序员如何技术成长: exp/learnweetout.md
     - 情商: exp/eq.md
     - 工作心得: exp/workheard.md
-  - 医学：
+  - 医学:
     - 脑炎: doctor/ae.md
 markdown_extensions:
   - admonition
