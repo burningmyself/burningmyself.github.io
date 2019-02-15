@@ -2,202 +2,207 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
      <loc>https://burningmyself.github.io/blog/</loc>
-     <lastmod>2019-01-30</lastmod>
+     <lastmod>2019-02-15</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://burningmyself.github.io/blog/net/c_sharp/</loc>
-     <lastmod>2019-01-30</lastmod>
+     <lastmod>2019-02-15</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://burningmyself.github.io/blog/java/feature/</loc>
-     <lastmod>2019-01-30</lastmod>
+     <lastmod>2019-02-15</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://burningmyself.github.io/blog/java/load-class/</loc>
-     <lastmod>2019-01-30</lastmod>
+     <lastmod>2019-02-15</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://burningmyself.github.io/blog/java/orm/</loc>
-     <lastmod>2019-01-30</lastmod>
+     <lastmod>2019-02-15</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://burningmyself.github.io/blog/java/bio-nio/</loc>
-     <lastmod>2019-01-30</lastmod>
+     <lastmod>2019-02-15</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://burningmyself.github.io/blog/python/feature/</loc>
-     <lastmod>2019-01-30</lastmod>
+     <lastmod>2019-02-15</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://burningmyself.github.io/blog/python/str_joint/</loc>
-     <lastmod>2019-01-30</lastmod>
+     <lastmod>2019-02-15</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://burningmyself.github.io/blog/python/syntax_rule/</loc>
-     <lastmod>2019-01-30</lastmod>
+     <lastmod>2019-02-15</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://burningmyself.github.io/blog/python/fabric/</loc>
-     <lastmod>2019-01-30</lastmod>
+     <lastmod>2019-02-15</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://burningmyself.github.io/blog/php/kj/</loc>
-     <lastmod>2019-01-30</lastmod>
+     <lastmod>2019-02-15</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://burningmyself.github.io/blog/web/es6/</loc>
-     <lastmod>2019-01-30</lastmod>
+     <lastmod>2019-02-15</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://burningmyself.github.io/blog/web/ali_js_style/</loc>
-     <lastmod>2019-01-30</lastmod>
+     <lastmod>2019-02-15</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://burningmyself.github.io/blog/web/node.js/</loc>
-     <lastmod>2019-01-30</lastmod>
+     <lastmod>2019-02-15</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://burningmyself.github.io/blog/sql/mysql_yh/</loc>
-     <lastmod>2019-01-30</lastmod>
+     <lastmod>2019-02-15</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://burningmyself.github.io/blog/sql/mysql_log/</loc>
-     <lastmod>2019-01-30</lastmod>
+     <lastmod>2019-02-15</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://burningmyself.github.io/blog/sql/mysql_index/</loc>
-     <lastmod>2019-01-30</lastmod>
+     <lastmod>2019-02-15</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://burningmyself.github.io/blog/sql/mysql_pxc/</loc>
-     <lastmod>2019-01-30</lastmod>
+     <lastmod>2019-02-15</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://burningmyself.github.io/blog/sql/mysql_use/</loc>
-     <lastmod>2019-01-30</lastmod>
+     <lastmod>2019-02-15</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://burningmyself.github.io/blog/linux/often/</loc>
-     <lastmod>2019-01-30</lastmod>
+     <lastmod>2019-02-15</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://burningmyself.github.io/blog/docker/docker/</loc>
-     <lastmod>2019-01-30</lastmod>
+     <lastmod>2019-02-15</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://burningmyself.github.io/blog/tool/git/</loc>
-     <lastmod>2019-01-30</lastmod>
+     <lastmod>2019-02-15</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://burningmyself.github.io/blog/tool/gitquestion/</loc>
-     <lastmod>2019-01-30</lastmod>
+     <lastmod>2019-02-15</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://burningmyself.github.io/blog/tool/gitflow/</loc>
-     <lastmod>2019-01-30</lastmod>
+     <lastmod>2019-02-15</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://burningmyself.github.io/blog/tool/gitbook/</loc>
-     <lastmod>2019-01-30</lastmod>
+     <lastmod>2019-02-15</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://burningmyself.github.io/blog/tool/markdown/</loc>
-     <lastmod>2019-01-30</lastmod>
+     <lastmod>2019-02-15</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://burningmyself.github.io/blog/micro/spring-cloud/</loc>
-     <lastmod>2019-01-30</lastmod>
+     <lastmod>2019-02-15</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://burningmyself.github.io/blog/micro/fbs-lock/</loc>
-     <lastmod>2019-01-30</lastmod>
+     <lastmod>2019-02-15</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://burningmyself.github.io/blog/micro/design/</loc>
-     <lastmod>2019-01-30</lastmod>
+     <lastmod>2019-02-15</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://burningmyself.github.io/blog/exp/devops/</loc>
-     <lastmod>2019-01-30</lastmod>
+     <lastmod>2019-02-15</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://burningmyself.github.io/blog/exp/micro-service/</loc>
-     <lastmod>2019-01-30</lastmod>
+     <lastmod>2019-02-15</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://burningmyself.github.io/blog/exp/raft-gossip/</loc>
-     <lastmod>2019-01-30</lastmod>
+     <lastmod>2019-02-15</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://burningmyself.github.io/blog/exp/cl/</loc>
-     <lastmod>2019-01-30</lastmod>
+     <lastmod>2019-02-15</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://burningmyself.github.io/blog/exp/ai/</loc>
-     <lastmod>2019-01-30</lastmod>
+     <lastmod>2019-02-15</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://burningmyself.github.io/blog/exp/code-principle/</loc>
-     <lastmod>2019-01-30</lastmod>
+     <lastmod>2019-02-15</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://burningmyself.github.io/blog/exp/techbig/</loc>
-     <lastmod>2019-01-30</lastmod>
+     <lastmod>2019-02-15</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://burningmyself.github.io/blog/exp/learnweetout/</loc>
-     <lastmod>2019-01-30</lastmod>
+     <lastmod>2019-02-15</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://burningmyself.github.io/blog/exp/eq/</loc>
-     <lastmod>2019-01-30</lastmod>
+     <lastmod>2019-02-15</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://burningmyself.github.io/blog/exp/workheard/</loc>
-     <lastmod>2019-01-30</lastmod>
+     <lastmod>2019-02-15</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
+     <loc>https://burningmyself.github.io/blog/exp/lookbook/</loc>
+     <lastmod>2019-02-15</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://burningmyself.github.io/blog/doctor/ae/</loc>
-     <lastmod>2019-01-30</lastmod>
+     <lastmod>2019-02-15</lastmod>
      <changefreq>daily</changefreq>
     </url>
 </urlset>
