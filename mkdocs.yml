@@ -60,6 +60,7 @@ nav:
     - 程序员如何技术成长: exp/learnweetout.md
     - 情商: exp/eq.md
     - 工作心得: exp/workheard.md
+    - 看书: exp/lookbook.md
   - 医学:
     - 脑炎: doctor/ae.md
 markdown_extensions:

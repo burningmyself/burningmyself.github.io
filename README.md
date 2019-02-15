@@ -29,6 +29,7 @@
 * * [程序员如何技术成长](docs/exp/learnweetout.md)
 * * [情商](docs/exp/eq.md) 
 * * [工作心得](docs/exp/workheard.md)
+* * [看书](docs/exp/lookbook.md)
 * [Img](#)
 * [Java](#)
 * * [Java 新特性](docs/java/feature.md) 
