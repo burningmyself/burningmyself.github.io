@@ -27,9 +27,6 @@
 * * [代码原则](docs/exp/code-principle.md)
 * * [如何成为技术大牛](docs/exp/techbig.md) 
 * * [程序员如何技术成长](docs/exp/learnweetout.md)
-* * [情商](docs/exp/eq.md) 
-* * [工作心得](docs/exp/workheard.md)
-* * [看书](docs/exp/lookbook.md)
 * [Img](#)
 * [Java](#)
 * * [Java 新特性](docs/java/feature.md) 
@@ -69,6 +66,12 @@
 * * [Node.js](docs/web/node.js.md)
 * [医学](#)
 * * [脑炎](docs/doctor/ae.md)
+* [情感](#)
+* * [情商](docs/emotion/eq.md) 
+* * [工作心得](docs/emotion/workheard.md)
+* * [看书](docs/emotion/lookbook.md)
+* * [4种男朋友](docs/emotion/fmf.md)
+* * [不上心](docs/emotion/notheart.md)
 
 
 

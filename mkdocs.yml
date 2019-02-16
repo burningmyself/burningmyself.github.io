@@ -57,12 +57,15 @@ nav:
     - 人工智能: exp/ai.md
     - 代码原则: exp/code-principle.md
     - 如何成为技术大牛: exp/techbig.md
-    - 程序员如何技术成长: exp/learnweetout.md
-    - 情商: exp/eq.md
-    - 工作心得: exp/workheard.md
-    - 看书: exp/lookbook.md
+    - 程序员如何技术成长: exp/learnweetout.md    
   - 医学:
     - 脑炎: doctor/ae.md
+  - 情感:
+    - 情商: emotion/eq.md
+    - 工作心得: emotion/workheard.md
+    - 看书: emotion/lookbook.md  
+    - 4种男朋友: emotion/fmf.md
+    - 不上心: emotion/notheart.md
 markdown_extensions:
   - admonition
   - codehilite:
