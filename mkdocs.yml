@@ -66,6 +66,7 @@ nav:
     - 看书: emotion/lookbook.md  
     - 4种男朋友: emotion/fmf.md
     - 不上心: emotion/notheart.md
+    - 自律: emotion/selfdiscipline.md
 markdown_extensions:
   - admonition
   - codehilite:
