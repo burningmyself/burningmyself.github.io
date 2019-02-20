@@ -72,7 +72,7 @@
 * * [看书](docs/emotion/lookbook.md)
 * * [4种男朋友](docs/emotion/fmf.md)
 * * [不上心](docs/emotion/notheart.md)
-* * [自律](docs/emotion/self-discipline.md)
+* * [自律](docs/emotion/selfdiscipline.md)
 
 
 
