@@ -39,6 +39,7 @@
 * * [SpringCloud的微服务架构](docs/micro/spring-cloud.md) 
 * * [分布式锁](docs/micro/fbs-lock.md) 
 * * [微服务设计](docs/micro/design.md)
+* * [分布式系统与消息的投递](docs/micro/distrimsg.md)
 * [.NET](#)
 * * [C#语法新特性](docs/net/c_sharp.md) 
 * [PHP](#)
