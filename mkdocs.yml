@@ -67,6 +67,8 @@ nav:
     - 4种男朋友: emotion/fmf.md
     - 不上心: emotion/notheart.md
     - 自律: emotion/selfdiscipline.md
+    - 喜欢与不喜欢: emotion/notlike.md
+    - 晚婚: emotion/latemarry.md
 markdown_extensions:
   - admonition
   - codehilite:
