@@ -79,6 +79,7 @@
 * * [追女生要明白这些事](docs/emotion/understand.md)
 * * [备胎](docs/emotion/backup.md)
 * * [为什么追不到她](docs/emotion/chase.md)
+* * [为什么活着失败](docs/emotion/livefail.md)
 
 
 
