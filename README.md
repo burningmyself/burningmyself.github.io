@@ -61,6 +61,7 @@
 * * [GitFlow](docs/tool/gitflow.md)
 * * [Git问题处理](docs/tool/gitquestion.md)
 * * [MarkDown](docs/tool/markdown.md)
+* * [CI/CD](docs/tool/cicd.md)
 * [前端](#)
 * * [阿里js样式](docs/web/ali_js_style.md)
 * * [ES6语法](docs/web/es6.md)
