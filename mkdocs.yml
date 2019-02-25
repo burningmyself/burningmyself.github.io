@@ -62,6 +62,8 @@ nav:
     - 程序员如何技术成长: exp/learnweetout.md    
   - 医学:
     - 脑炎: doctor/ae.md
+  - 构架:
+    - 构架拆分: framework/split.md  
   - 情感:
     - 情商: emotion/eq.md
     - 工作心得: emotion/workheard.md
