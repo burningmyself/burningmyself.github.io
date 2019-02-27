@@ -77,6 +77,7 @@ nav:
     - 备胎: emotion/backup.md
     - 为什么追不到她: emotion/chase.md
     - 为什么活着失败: emotion/livefail.md
+    - 情绪管理: emotion/emotuon.md
 markdown_extensions:
   - admonition
   - codehilite:

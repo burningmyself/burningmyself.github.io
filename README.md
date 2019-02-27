@@ -83,8 +83,10 @@
 * * [备胎](docs/emotion/backup.md)
 * * [为什么追不到她](docs/emotion/chase.md)
 * * [为什么活着失败](docs/emotion/livefail.md)
+* * [情绪管理](docs/emotion/emoution.md)
 * [总结](#)
 * * [20190223](docs/summary/20190223.md)
+* * [20190302](docs/summary/20190302.md)
 
 
 
