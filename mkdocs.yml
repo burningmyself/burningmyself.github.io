@@ -78,6 +78,7 @@ nav:
     - 为什么追不到她: emotion/chase.md
     - 为什么活着失败: emotion/livefail.md
     - 情绪管理: emotion/emotion.md
+    - 废掉的三个迹象: emotion/abolish.md
 markdown_extensions:
   - admonition
   - codehilite:
