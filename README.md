@@ -85,7 +85,7 @@
 * * [为什么活着失败](docs/emotion/livefail.md)
 * * [情绪管理](docs/emotion/emotion.md)
 * * [废掉的三个迹象](docs/emotion/abolish.md)
-* * [余生，好好珍惜](docs/emotion/abolish.md)
+* * [余生，好好珍惜](docs/emotion/uptime.md)
 * [总结](#)
 * * [20190223](docs/summary/20190223.md)
 * * [20190302](docs/summary/20190302.md)
