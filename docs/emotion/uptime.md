@@ -1,6 +1,6 @@
 # 余生，好好珍惜
 
-[[你在陌生的城市等我]](https://i.y.qq.com/v8/playsong.html?songid=109333107&source=yqq#wechat_redirect)
+![split](./../img/music.png)[[你在陌生的城市等我]](https://i.y.qq.com/v8/playsong.html?songid=109333107&source=yqq#wechat_redirect)
 
 看过一段话说：
 人有时候也是可怜，喜欢的人得不到，得到的不珍惜，在一起的怀疑，失去的怀念，怀念的想相见，相见的恨晚，终其一生，都满是遗憾。
