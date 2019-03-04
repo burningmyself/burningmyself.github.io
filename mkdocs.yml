@@ -18,6 +18,7 @@ nav:
         - Java类加载: java/load-class.md
         - Orm的优缺点: java/orm.md
         - BIO与NIO: java/bio-nio.md
+        - RocketMq下载与安装: java/rocketmq/rmq-1.md
     - Python: 
         - Python特性: python/feature.md 
         - Python字符拼接: python/str_joint.md
@@ -80,6 +81,7 @@ nav:
     - 情绪管理: emotion/emotion.md
     - 废掉的三个迹象: emotion/abolish.md
     - 余生，好好珍惜: emotion/uptime.md
+    - 所有的失去，都会以另一种方式归来: emotion/uptime.md
 markdown_extensions:
   - admonition
   - codehilite:
