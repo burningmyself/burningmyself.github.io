@@ -96,7 +96,7 @@
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
     <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
     
-      <a href="#nodejs" tabindex="1" class="md-skip">
+      <a href="#node" tabindex="1" class="md-skip">
         Skip to content
       </a>
     
@@ -369,6 +369,18 @@
   </li>
 
         
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../java/rocketmq/rmq-1/" title="RocketMq下载与安装" class="md-nav__link">
+      RocketMq下载与安装
+    </a>
+  </li>
+
+        
       </ul>
     </nav>
   </li>
@@ -538,12 +550,44 @@
     
     <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
     
-      
     
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        node.js文档
+      </label>
     
     <a href="./" title="node.js文档" class="md-nav__link md-nav__link--active">
       node.js文档
     </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#node" title="Node 介绍" class="md-nav__link">
+    Node 介绍
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_1" title="文档" class="md-nav__link">
+    文档
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
     
   </li>
 
@@ -1273,6 +1317,18 @@
   </li>
 
         
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/uptime/" title="所有的失去，都会以另一种方式归来" class="md-nav__link">
+      所有的失去，都会以另一种方式归来
+    </a>
+  </li>
+
+        
       </ul>
     </nav>
   </li>
@@ -1292,8 +1348,29 @@
 <nav class="md-nav md-nav--secondary">
   
   
-    
   
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#node" title="Node 介绍" class="md-nav__link">
+    Node 介绍
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_1" title="文档" class="md-nav__link">
+    文档
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
   
 </nav>
                   </div>
@@ -1308,7 +1385,79 @@
                   <a href="https://github.com/burningmyself/blog/edit/master/docs/web/node.js.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
                 
                 
-                <h1 id="nodejs">node.js 基础<a class="headerlink" href="#nodejs" title="Permanent link">&para;</a></h1>
+                  <h1>node.js文档</h1>
+                
+                <h2 id="node">Node 介绍<a class="headerlink" href="#node" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Node 中的 JavaScript</li>
+<li>EcmaScript<ul>
+<li>变量</li>
+<li>方法</li>
+<li>数据类型</li>
+<li>内置对象</li>
+<li>Array</li>
+<li>Object</li>
+<li>Date</li>
+<li>Math</li>
+</ul>
+</li>
+<li>模块系统<ul>
+<li>在 Node 中没有全局作用域的概念</li>
+<li>在 Node 中，只能通过 require 方法来加载执行多个 JavaScript 脚本文件</li>
+<li>require 加载只能是执行其中的代码，文件与文件之间由于是模块作用域，所以不会有污染的问题</li>
+<li>模块完全是封闭的</li>
+<li>外部无法访问内部</li>
+<li>内部也无法访问外部</li>
+<li>模块作用域固然带来了一些好处，可以加载执行多个文件，可以完全避免变量命名冲突污染的问题</li>
+<li>但是某些情况下，模块与模块是需要进行通信的</li>
+<li>在每个模块中，都提供了一个对象：<code>exports</code></li>
+<li>该对象默认是一个空对象</li>
+<li>你要做的就是把需要被外部访问使用的成员手动的挂载到 <code>exports</code> 接口对象中</li>
+<li>然后谁来 <code>require</code> 这个模块，谁就可以得到模块内部的 <code>exports</code> 接口对象</li>
+<li>还有其它的一些规则，具体后面讲，以及如何在项目中去使用这种编程方式，会通过后面的案例来处理</li>
+</ul>
+</li>
+<li>核心模块<ul>
+<li>核心模块是由 Node 提供的一个个的具名的模块，它们都有自己特殊的名称标识，例如</li>
+<li>fs 文件操作模块</li>
+<li>http 网络服务构建模块</li>
+<li>os 操作系统信息模块</li>
+<li>path 路径处理模块</li>
+<li>。。。。</li>
+<li>所有核心模块在使用的时候都必须手动的先使用 <code>require</code> 方法来加载，然后才可以使用，例如：</li>
+<li><code>var fs = require('fs')</code></li>
+</ul>
+</li>
+<li>http</li>
+<li>require</li>
+<li>端口号<ul>
+<li>ip 地址定位计算机</li>
+<li>端口号定位具体的应用程序</li>
+</ul>
+</li>
+<li>Content-Type<ul>
+<li>服务器最好把每次响应的数据是什么内容类型都告诉客户端，而且要正确的告诉</li>
+<li>不同的资源对应的 Content-Type 是不一样，具体参照：<a href="http://tool.oschina.net/commons">http://tool.oschina.net/commons</a></li>
+<li>对于文本类型的数据，最好都加上编码，目的是为了防止中文解析乱码问题</li>
+</ul>
+</li>
+<li>
+<p>通过网络发送文件</p>
+<ul>
+<li>发送的并不是文件，本质上来讲发送是文件的内容</li>
+<li>当浏览器收到服务器响应内容之后，就会根据你的 Content-Type 进行对应的解析处理</li>
+</ul>
+</li>
+<li>
+<p>模块系统</p>
+</li>
+<li>Node 中的其它的核心模块</li>
+<li>做一个小管理系统：</li>
+<li>CRUD</li>
+<li>Express Web 开发框架</li>
+<li><code>npm install express</code></li>
+</ul>
+<h2 id="_1">文档<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
 <ul>
 <li><a href="https://nodejs.org/en/docs/">官方文档</a></li>
 <li><a href="http://www.runoob.com/nodejs/nodejs-tutorial.html">菜鸟文档</a></li>
