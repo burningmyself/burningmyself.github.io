@@ -81,7 +81,7 @@ nav:
     - 情绪管理: emotion/emotion.md
     - 废掉的三个迹象: emotion/abolish.md
     - 余生，好好珍惜: emotion/uptime.md
-    - 所有的失去，都会以另一种方式归来: emotion/lostcome.md
+    - 所有的失去，都会以另一种方式归来: emotion/losecome.md
 markdown_extensions:
   - admonition
   - codehilite:
