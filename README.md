@@ -88,6 +88,7 @@
 * * [废掉的三个迹象](docs/emotion/abolish.md)
 * * [余生，好好珍惜](docs/emotion/uptime.md)
 * * [所有的失去，都会以另一种方式归来](docs/emotion/losecome.md)
+* * [人生有这三种好心态](docs/emotion/threeheart.md)
 * [总结](#)
 * * [20190223](docs/summary/20190223.md)
 * * [20190302](docs/summary/20190302.md)

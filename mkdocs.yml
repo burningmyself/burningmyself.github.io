@@ -82,6 +82,7 @@ nav:
     - 废掉的三个迹象: emotion/abolish.md
     - 余生，好好珍惜: emotion/uptime.md
     - 所有的失去，都会以另一种方式归来: emotion/losecome.md
+    - 人生有这三种好心态: emotion/threeheart.md
 markdown_extensions:
   - admonition
   - codehilite:
