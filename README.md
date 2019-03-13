@@ -90,6 +90,7 @@
 * * [所有的失去，都会以另一种方式归来](docs/emotion/losecome.md)
 * * [人生有这三种好心态](docs/emotion/threeheart.md)
 * * [一个感情真相](docs/emotion/onelike.md)
+* * [情商与道理](docs/emotion/notruch.md)
 * [总结](#)
 * * [20190223](docs/summary/20190223.md)
 * * [20190302](docs/summary/20190302.md)
