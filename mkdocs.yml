@@ -83,6 +83,7 @@ nav:
     - 余生，好好珍惜: emotion/uptime.md
     - 所有的失去，都会以另一种方式归来: emotion/losecome.md
     - 人生有这三种好心态: emotion/threeheart.md
+    - 一个感情真相: emotion/onelike.md
 markdown_extensions:
   - admonition
   - codehilite:
