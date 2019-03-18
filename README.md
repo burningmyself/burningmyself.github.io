@@ -91,6 +91,7 @@
 * * [人生有这三种好心态](docs/emotion/threeheart.md)
 * * [一个感情真相](docs/emotion/onelike.md)
 * * [情商与道理](docs/emotion/notruch.md)
+* * [六种男人远离](docs/emotion/smf.md)
 * [总结](#)
 * * [20190223](docs/summary/20190223.md)
 * * [20190302](docs/summary/20190302.md)

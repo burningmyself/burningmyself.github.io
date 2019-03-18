@@ -85,6 +85,7 @@ nav:
     - 人生有这三种好心态: emotion/threeheart.md
     - 一个感情真相: emotion/onelike.md
     - 情商与道理: emotion/notruth.md
+    - 六种男人远离: emotion/smf.md
 markdown_extensions:
   - admonition
   - codehilite:
