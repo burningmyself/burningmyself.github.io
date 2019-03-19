@@ -45,6 +45,7 @@ nav:
         - Git问题处理: tool/gitquestion.md
         - GitFlow: tool/gitflow.md
         - GitBook: tool/gitbook.md
+        - Git提交日志规范: tool/gitcmr.md
         - Markdown: tool/markdown.md
         - CI/CD: tool/cicd.md
   - 微服务:  

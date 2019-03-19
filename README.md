@@ -61,6 +61,7 @@
 * * [GitBook](docs/tool/gitbook.md)
 * * [GitFlow](docs/tool/gitflow.md)
 * * [Git问题处理](docs/tool/gitquestion.md)
+* * [Git提交日志规范](docs/tool/gitcmr.md)
 * * [MarkDown](docs/tool/markdown.md)
 * * [CI/CD](docs/tool/cicd.md)
 * [前端](#)
