@@ -64,7 +64,8 @@ nav:
   - 医学:
     - 脑炎: doctor/ae.md
   - 构架:
-    - 构架拆分: framework/split.md  
+    - 构架拆分: framework/split.md 
+    - 分布式、高并发、多线程: framework/fgb.md 
   - 情感:
     - 情商: emotion/eq.md
     - 工作心得: emotion/workheard.md
