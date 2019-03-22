@@ -43,6 +43,7 @@
 * * [分布式系统与消息的投递](docs/micro/distrimsg.md)
 * [.NET](#)
 * * [C#语法新特性](docs/net/c_sharp.md) 
+* * [.Ner Core Docker 部署](docs/net/c_docker.md)
 * [PHP](#)
 * * [框架](docs/php/kj.md)
 * [Python](#)

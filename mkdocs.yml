@@ -13,6 +13,7 @@ nav:
   - 技术博文: 
     - .NET: 
         - C# 6: net/c_sharp.md
+        - .Ner Core Docker 部署: net/c_docker.md
     - Java: 
         - Java特性: java/feature.md 
         - Java类加载: java/load-class.md
