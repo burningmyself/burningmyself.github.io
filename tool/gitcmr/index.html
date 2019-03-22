@@ -1,0 +1,1861 @@
+
+
+
+
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+        <meta name="description" content=".net,java,php,python,docker,web">
+      
+      
+        <link rel="canonical" href="https://burningmyself.github.io/blog/tool/gitcmr/">
+      
+      
+        <meta name="author" content="朽木自雕">
+      
+      
+        <meta name="lang:clipboard.copy" content="Copy to clipboard">
+      
+        <meta name="lang:clipboard.copied" content="Copied to clipboard">
+      
+        <meta name="lang:search.language" content="en">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="No matching documents">
+      
+        <meta name="lang:search.result.one" content="1 matching document">
+      
+        <meta name="lang:search.result.other" content="# matching documents">
+      
+        <meta name="lang:search.tokenizer" content="[\s\-]+">
+      
+      <link rel="shortcut icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-3.0.6">
+    
+    
+      
+        <title>Git提交日志规范 - BurningMyself</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/application.451f80e5.css">
+      
+      
+    
+    
+      <script src="../../assets/javascripts/modernizr.1aa3b519.js"></script>
+    
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700|Roboto+Mono">
+        <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
+      
+    
+    <link rel="stylesheet" href="../../assets/fonts/material-icons.css">
+    
+    
+  </head>
+  
+    <body dir="ltr">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+          <svg xmlns="http://www.w3.org/2000/svg" width="416" height="448"
+    viewBox="0 0 416 448" id="__github">
+  <path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19-18.125
+        8.5-18.125-8.5-10.75-19-3.125-20.5 3.125-20.5 10.75-19 18.125-8.5
+        18.125 8.5 10.75 19 3.125 20.5zM320 304q0 10-3.125 20.5t-10.75
+        19-18.125 8.5-18.125-8.5-10.75-19-3.125-20.5 3.125-20.5 10.75-19
+        18.125-8.5 18.125 8.5 10.75 19 3.125 20.5zM360
+        304q0-30-17.25-51t-46.75-21q-10.25 0-48.75 5.25-17.75 2.75-39.25
+        2.75t-39.25-2.75q-38-5.25-48.75-5.25-29.5 0-46.75 21t-17.25 51q0 22 8
+        38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0
+        37.25-1.75t35-7.375 30.5-15 20.25-25.75 8-38.375zM416 260q0 51.75-15.25
+        82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5-41.75
+        1.125q-19.5 0-35.5-0.75t-36.875-3.125-38.125-7.5-34.25-12.875-30.25-20.25-21.5-28.75q-15.5-30.75-15.5-82.75
+        0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25
+        30.875q36.75-8.75 77.25-8.75 37 0 70 8 26.25-20.5
+        46.75-30.25t47.25-9.75q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34
+        99.5z" />
+</svg>
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+    
+      <a href="#git" tabindex="1" class="md-skip">
+        Skip to content
+      </a>
+    
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="https://burningmyself.github.io/blog/" title="BurningMyself" class="md-header-nav__button md-logo">
+          
+            <i class="md-icon"></i>
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          
+            
+              <span class="md-header-nav__topic">
+                BurningMyself
+              </span>
+              <span class="md-header-nav__topic">
+                Git提交日志规范
+              </span>
+            
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          
+            <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
+            
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="__search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            Type to start searching
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+          
+        
+      </div>
+      
+        <div class="md-flex__cell md-flex__cell--shrink">
+          <div class="md-header-nav__source">
+            
+
+
+  
+
+
+  <a href="https://github.com/burningmyself/blog/" title="Go to repository" class="md-source" data-md-source="github">
+    
+      <div class="md-source__icon">
+        <svg viewBox="0 0 24 24" width="24" height="24">
+          <use xlink:href="#__github" width="24" height="24"></use>
+        </svg>
+      </div>
+    
+    <div class="md-source__repository">
+      burningmyself/blog
+    </div>
+  </a>
+
+          </div>
+        </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+      <main class="md-main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="__drawer">
+    <a href="https://burningmyself.github.io/blog/" title="BurningMyself" class="md-nav__button md-logo">
+      
+        <i class="md-icon"></i>
+      
+    </a>
+    BurningMyself
+  </label>
+  
+    <div class="md-nav__source">
+      
+
+
+  
+
+
+  <a href="https://github.com/burningmyself/blog/" title="Go to repository" class="md-source" data-md-source="github">
+    
+      <div class="md-source__icon">
+        <svg viewBox="0 0 24 24" width="24" height="24">
+          <use xlink:href="#__github" width="24" height="24"></use>
+        </svg>
+      </div>
+    
+    <div class="md-source__repository">
+      burningmyself/blog
+    </div>
+  </a>
+
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../.." title="介绍" class="md-nav__link">
+      介绍
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2" checked>
+    
+    <label class="md-nav__link" for="nav-2">
+      技术博文
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-2">
+        技术博文
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-1" type="checkbox" id="nav-2-1">
+    
+    <label class="md-nav__link" for="nav-2-1">
+      .NET
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-2-1">
+        .NET
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../net/c_sharp/" title="C# 6" class="md-nav__link">
+      C# 6
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../net/c_docker/" title=".Ner Core Docker 部署" class="md-nav__link">
+      .Ner Core Docker 部署
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-2" type="checkbox" id="nav-2-2">
+    
+    <label class="md-nav__link" for="nav-2-2">
+      Java
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-2-2">
+        Java
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../java/feature/" title="Java特性" class="md-nav__link">
+      Java特性
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../java/load-class/" title="Java类加载" class="md-nav__link">
+      Java类加载
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../java/orm/" title="Orm的优缺点" class="md-nav__link">
+      Orm的优缺点
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../java/bio-nio/" title="BIO与NIO" class="md-nav__link">
+      BIO与NIO
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../java/rocketmq/rmq-1/" title="RocketMq下载与安装" class="md-nav__link">
+      RocketMq下载与安装
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-3" type="checkbox" id="nav-2-3">
+    
+    <label class="md-nav__link" for="nav-2-3">
+      Python
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-2-3">
+        Python
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../python/feature/" title="Python特性" class="md-nav__link">
+      Python特性
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../python/str_joint/" title="Python字符拼接" class="md-nav__link">
+      Python字符拼接
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../python/syntax_rule/" title="Python语法技巧" class="md-nav__link">
+      Python语法技巧
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../python/fabric/" title="远程部署神器 Fabric" class="md-nav__link">
+      远程部署神器 Fabric
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-4" type="checkbox" id="nav-2-4">
+    
+    <label class="md-nav__link" for="nav-2-4">
+      PHP
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-2-4">
+        PHP
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../php/kj/" title="框架" class="md-nav__link">
+      框架
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-5" type="checkbox" id="nav-2-5">
+    
+    <label class="md-nav__link" for="nav-2-5">
+      Web
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-2-5">
+        Web
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../web/es6/" title="es6语法" class="md-nav__link">
+      es6语法
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../web/ali_js_style/" title="阿里js样式规范" class="md-nav__link">
+      阿里js样式规范
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../web/node.js/" title="node.js文档" class="md-nav__link">
+      node.js文档
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-6" type="checkbox" id="nav-2-6">
+    
+    <label class="md-nav__link" for="nav-2-6">
+      SQL
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-2-6">
+        SQL
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../sql/mysql_yh/" title="MySQL优化" class="md-nav__link">
+      MySQL优化
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../sql/mysql_log/" title="MySQL日志" class="md-nav__link">
+      MySQL日志
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../sql/mysql_index/" title="MySQL索引" class="md-nav__link">
+      MySQL索引
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../sql/mysql_pxc/" title="MySQL PXC集群" class="md-nav__link">
+      MySQL PXC集群
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../sql/mysql_use/" title="MySQL 数据库应用" class="md-nav__link">
+      MySQL 数据库应用
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-7" type="checkbox" id="nav-2-7">
+    
+    <label class="md-nav__link" for="nav-2-7">
+      Linux
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-2-7">
+        Linux
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../linux/often/" title="常用命令" class="md-nav__link">
+      常用命令
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-8" type="checkbox" id="nav-2-8">
+    
+    <label class="md-nav__link" for="nav-2-8">
+      Docker
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-2-8">
+        Docker
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../docker/docker/" title="Docker全科" class="md-nav__link">
+      Docker全科
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-9" type="checkbox" id="nav-2-9" checked>
+    
+    <label class="md-nav__link" for="nav-2-9">
+      Tool
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-2-9">
+        Tool
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../git/" title="Git" class="md-nav__link">
+      Git
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../gitquestion/" title="Git问题处理" class="md-nav__link">
+      Git问题处理
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../gitflow/" title="GitFlow" class="md-nav__link">
+      GitFlow
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../gitbook/" title="GitBook" class="md-nav__link">
+      GitBook
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Git提交日志规范
+      </label>
+    
+    <a href="./" title="Git提交日志规范" class="md-nav__link md-nav__link--active">
+      Git提交日志规范
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1" title="1 介绍" class="md-nav__link">
+    1 介绍
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-commit-message" title="2 Commit message的格式" class="md-nav__link">
+    2 Commit message的格式
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-header" title="2.1 Header" class="md-nav__link">
+    2.1 Header
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-body" title="2.2 Body" class="md-nav__link">
+    2.2 Body
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-footer" title="2.3 Footer" class="md-nav__link">
+    2.3 Footer
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#24-revert" title="2.4 Revert" class="md-nav__link">
+    2.4 Revert
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#commitizen" title="Commitizen" class="md-nav__link">
+    Commitizen
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#validate-commit-msg" title="validate-commit-msg" class="md-nav__link">
+    validate-commit-msg
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_1" title="简单的示例" class="md-nav__link">
+    简单的示例
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../markdown/" title="Markdown" class="md-nav__link">
+      Markdown
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../cicd/" title="CI/CD" class="md-nav__link">
+      CI/CD
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3">
+    
+    <label class="md-nav__link" for="nav-3">
+      微服务
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-3">
+        微服务
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../micro/spring-cloud/" title="基于SpringCloud的微服务架构演变史" class="md-nav__link">
+      基于SpringCloud的微服务架构演变史
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../micro/fbs-lock/" title="分布式锁" class="md-nav__link">
+      分布式锁
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../micro/design/" title="微服务设计" class="md-nav__link">
+      微服务设计
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../micro/distrimsg/" title="分布式系统与消息的投递" class="md-nav__link">
+      分布式系统与消息的投递
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4">
+    
+    <label class="md-nav__link" for="nav-4">
+      经验分析
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-4">
+        经验分析
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../exp/devops/" title="DevOps" class="md-nav__link">
+      DevOps
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../exp/micro-service/" title="Micro-Service" class="md-nav__link">
+      Micro-Service
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../exp/raft-gossip/" title="Raft算法和Gossip协议" class="md-nav__link">
+      Raft算法和Gossip协议
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../exp/cl/" title="集群和负载均衡" class="md-nav__link">
+      集群和负载均衡
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../exp/ai/" title="人工智能" class="md-nav__link">
+      人工智能
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../exp/code-principle/" title="代码原则" class="md-nav__link">
+      代码原则
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../exp/techbig/" title="如何成为技术大牛" class="md-nav__link">
+      如何成为技术大牛
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../exp/learnweetout/" title="程序员如何技术成长" class="md-nav__link">
+      程序员如何技术成长
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5">
+    
+    <label class="md-nav__link" for="nav-5">
+      医学
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-5">
+        医学
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../doctor/ae/" title="脑炎" class="md-nav__link">
+      脑炎
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6" type="checkbox" id="nav-6">
+    
+    <label class="md-nav__link" for="nav-6">
+      构架
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-6">
+        构架
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../framework/split/" title="构架拆分" class="md-nav__link">
+      构架拆分
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../framework/fgb/" title="分布式、高并发、多线程" class="md-nav__link">
+      分布式、高并发、多线程
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7" type="checkbox" id="nav-7">
+    
+    <label class="md-nav__link" for="nav-7">
+      情感
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-7">
+        情感
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/eq/" title="情商" class="md-nav__link">
+      情商
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/workheard/" title="工作心得" class="md-nav__link">
+      工作心得
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/lookbook/" title="看书" class="md-nav__link">
+      看书
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/fmf/" title="4种男朋友" class="md-nav__link">
+      4种男朋友
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/notheart/" title="不上心" class="md-nav__link">
+      不上心
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/selfdiscipline/" title="自律" class="md-nav__link">
+      自律
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/notlike/" title="喜欢与不喜欢" class="md-nav__link">
+      喜欢与不喜欢
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/latemarry/" title="晚婚" class="md-nav__link">
+      晚婚
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/understand/" title="追女生要明白这些事" class="md-nav__link">
+      追女生要明白这些事
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/backup/" title="备胎" class="md-nav__link">
+      备胎
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/chase/" title="为什么追不到她" class="md-nav__link">
+      为什么追不到她
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/livefail/" title="为什么活着失败" class="md-nav__link">
+      为什么活着失败
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/emotion/" title="情绪管理" class="md-nav__link">
+      情绪管理
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/abolish/" title="废掉的三个迹象" class="md-nav__link">
+      废掉的三个迹象
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/uptime/" title="余生，好好珍惜" class="md-nav__link">
+      余生，好好珍惜
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/losecome/" title="所有的失去，都会以另一种方式归来" class="md-nav__link">
+      所有的失去，都会以另一种方式归来
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/threeheart/" title="人生有这三种好心态" class="md-nav__link">
+      人生有这三种好心态
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/onelike/" title="一个感情真相" class="md-nav__link">
+      一个感情真相
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/notruth/" title="情商与道理" class="md-nav__link">
+      情商与道理
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/smf/" title="六种男人远离" class="md-nav__link">
+      六种男人远离
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1" title="1 介绍" class="md-nav__link">
+    1 介绍
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-commit-message" title="2 Commit message的格式" class="md-nav__link">
+    2 Commit message的格式
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-header" title="2.1 Header" class="md-nav__link">
+    2.1 Header
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-body" title="2.2 Body" class="md-nav__link">
+    2.2 Body
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-footer" title="2.3 Footer" class="md-nav__link">
+    2.3 Footer
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#24-revert" title="2.4 Revert" class="md-nav__link">
+    2.4 Revert
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#commitizen" title="Commitizen" class="md-nav__link">
+    Commitizen
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#validate-commit-msg" title="validate-commit-msg" class="md-nav__link">
+    validate-commit-msg
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_1" title="简单的示例" class="md-nav__link">
+    简单的示例
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/burningmyself/blog/edit/master/docs/tool/gitcmr.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
+                
+                
+                <h1 id="git">Git提交日志规范<a class="headerlink" href="#git" title="Permanent link">&para;</a></h1>
+<h3 id="1">1 介绍<a class="headerlink" href="#1" title="Permanent link">&para;</a></h3>
+<p>Git进行commit时都需要提交说明（commit message）：
+<div class="codehilite"><pre><span></span>Git commit -m <span class="s1">&#39;hello world&#39;</span>
+</pre></div>
+-m参数就是用来指定commit message的</p>
+<p>commit message应该清晰明了，说明本次提交的目的。</p>
+<h3 id="2-commit-message">2 Commit message的格式<a class="headerlink" href="#2-commit-message" title="Permanent link">&para;</a></h3>
+<p>Commit message应该包括三个部分：Header/Body/Footer。其中，Header是必需的，Body和Footer可以省略。
+<div class="codehilite"><pre><span></span><span class="o">&lt;</span><span class="nx">type</span><span class="o">&gt;</span><span class="p">(</span><span class="o">&lt;</span><span class="nx">scope</span><span class="o">&gt;</span><span class="p">)</span><span class="o">:</span> <span class="o">&lt;</span><span class="nx">subject</span><span class="o">&gt;</span>
+<span class="c1">// 空一行</span>
+<span class="o">&lt;</span><span class="nx">body</span><span class="o">&gt;</span>
+<span class="c1">// 空一行</span>
+<span class="o">&lt;</span><span class="nx">footer</span><span class="o">&gt;</span>
+</pre></div>
+不管是哪一个部分，任何一行都不得超过72个字符（或100个字符）。这是为了避免自动换行影响美观。</p>
+<h4 id="21-header">2.1 Header<a class="headerlink" href="#21-header" title="Permanent link">&para;</a></h4>
+<p>只有一行，包含三个字段，type（必须）、scope（可选）和subject（必须）</p>
+<ul>
+<li>type用于说明commit的类别，只允许使用一下7个标识：</li>
+<li>feat：新功能（feature）</li>
+<li>fix：修补bug</li>
+<li>docs：文档（documentation）</li>
+<li>style：格式（不影响代码运行的改动）</li>
+<li>refactor：重构（即不是新增功能，也不是修改bug的代码变动）</li>
+<li>test：增加测试</li>
+<li>chore：构建过程或辅助工具的变动</li>
+<li>
+<p>scope用于说明commit影响的范围，比如数据层、控制层、视图层等，是项目不同而不同</p>
+</li>
+<li>
+<p>subject是commit的简短描述，不超过50字符</p>
+</li>
+</ul>
+<p>例如fix: array parsing issue when multiple spaces were contained in string.
+* 义动词开头，使用第一人称现在时（change，而不是changed）
+* 第一个字母小写
+* 结尾不加句号(.)</p>
+<h4 id="22-body">2.2 Body<a class="headerlink" href="#22-body" title="Permanent link">&para;</a></h4>
+<p>是对本次commit的详细描述，可以分成多行：</p>
+<p><div class="codehilite"><pre><span></span>More detailed explanatory text, if necessary.  Wrap it to 
+about 72 characters or so. 
+
+Further paragraphs come after blank lines.
+
+- Bullet points are okay, too
+- Use a hanging indent
+</pre></div>
+有两个注意点： 
+1. 使用第一人称现在时 
+2. 说明代码变动的动机，以及与以前行为的对比</p>
+<h4 id="23-footer">2.3 Footer<a class="headerlink" href="#23-footer" title="Permanent link">&para;</a></h4>
+<p>只是用与两种情况</p>
+<ul>
+<li>
+<p>不兼容变动
+如果当前代码与上一个版本不兼容，则Footer部分以BREAKING CHANGE开头，后面是变动的描述以及变动理由和迁移方法
+<div class="codehilite"><pre><span></span><span class="nt">BREAKING</span> <span class="nt">CHANGE</span><span class="o">:</span> <span class="nt">isolate</span> <span class="nt">scope</span> <span class="nt">bindings</span> <span class="nt">definition</span> <span class="nt">has</span> <span class="nt">changed</span><span class="o">.</span>
+
+    <span class="nt">To</span> <span class="nt">migrate</span> <span class="nt">the</span> <span class="nt">code</span> <span class="nt">follow</span> <span class="nt">the</span> <span class="nt">example</span> <span class="nt">below</span><span class="o">:</span>
+
+    <span class="nt">Before</span><span class="o">:</span>
+
+    <span class="nt">scope</span><span class="o">:</span> <span class="p">{</span>
+      <span class="n">myAttr</span><span class="p">:</span> <span class="s1">&#39;attribute&#39;</span><span class="p">,</span>
+    <span class="p">}</span>
+
+    <span class="nt">After</span><span class="o">:</span>
+
+    <span class="nt">scope</span><span class="o">:</span> <span class="p">{</span>
+      <span class="n">myAttr</span><span class="p">:</span> <span class="s1">&#39;@&#39;</span><span class="p">,</span>
+    <span class="p">}</span>
+    <span class="nt">The</span> <span class="nt">removed</span> <span class="err">`</span><span class="nt">inject</span><span class="err">`</span> <span class="nt">wasn</span><span class="err">&#39;</span><span class="nt">t</span> <span class="nt">generaly</span> <span class="nt">useful</span> <span class="nt">for</span> <span class="nt">directives</span> <span class="nt">so</span> <span class="nt">there</span> <span class="nt">should</span> <span class="nt">be</span> <span class="nt">no</span> <span class="nt">code</span> <span class="nt">using</span> <span class="nt">it</span><span class="o">.</span>
+</pre></div></p>
+</li>
+<li>
+<p>关闭Issue
+如果当前commit针对某个issue，那么可以在Footer部分关闭这个issue
+<div class="codehilite"><pre><span></span>Closes #123, #245, #992
+</pre></div></p>
+</li>
+</ul>
+<h4 id="24-revert">2.4 Revert<a class="headerlink" href="#24-revert" title="Permanent link">&para;</a></h4>
+<p>有一种特殊情况，如果当前commit用于撤销以前的commit，则必须以revert:开头，后面跟着被撤销的Commit的Header
+<div class="codehilite"><pre><span></span>revert: feat<span class="o">(</span>pencil<span class="o">)</span>: add <span class="s1">&#39;graphiteWidth&#39;</span> option
+
+This reverts commit 667ecc1654a317a13331b17617d973392f415f02.
+</pre></div>
+Body部分的格式是固定的，必须写成·This reverts commit ·</p>
+<h3 id="commitizen">Commitizen<a class="headerlink" href="#commitizen" title="Permanent link">&para;</a></h3>
+<p>一个撰写合格的Commit message的工具</p>
+<p>安装：
+<div class="codehilite"><pre><span></span>npm install <span class="o">-</span>g commitizen
+</pre></div></p>
+<p>然后，在项目目录里，运行下面的命令，使其支持 Angular 的 Commit message 格式。
+<div class="codehilite"><pre><span></span>commitizen init cz-conventional-changelog --save --save-exact
+</pre></div>
+以后凡是用到git commit的命令，一律改为git cz，这时，就会出现选项，用来生成符合格式的Commit message。</p>
+<h3 id="validate-commit-msg">validate-commit-msg<a class="headerlink" href="#validate-commit-msg" title="Permanent link">&para;</a></h3>
+<p>用于检查Node项目的Commit message是否符合格式，需要手动安装</p>
+<p>首先拷贝这个JS文件到代码库，命名为validate-commit-msg.js</p>
+<p>然后把这个脚本加入Git的Hook，在package.json中使用ghooks，把这个脚本加为commit-msg时运行
+<div class="codehilite"><pre><span></span>&quot;config&quot;: {
+  &quot;ghooks&quot;: {
+    &quot;commit-msg&quot;: &quot;./validate-commit-msg.js&quot;
+  }
+}
+</pre></div></p>
+<p>然后每次Git commit时脚本就会自动检查Commit message是否合格，不合格就会报错</p>
+<h3 id="_1">简单的示例<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span>feat: 新增分析师清理功能
+
+分析师清理功能，包括
+1. 查询分析师
+2. 分时段清理
+</pre></div>
+
+<p>不包含正文的提交说明
+<div class="codehilite"><pre><span></span>docs: correct spelling of CHANGELOG
+</pre></div></p>
+<p>包含作用域的提交说明
+<div class="codehilite"><pre><span></span>feat(lang): added polish language
+</pre></div>
+为fix编写的提交说明，包含可选的issue编号
+<div class="codehilite"><pre><span></span>fix: minor typos in code
+
+see the issue for details on the typos fixed
+
+fixes issue #12
+</pre></div></p>
+<h1 id="git-commit-message-rules">Git Commit Message Rules<a class="headerlink" href="#git-commit-message-rules" title="Permanent link">&para;</a></h1>
+<h2 id="gcm001"><code>GCM001</code> 首行作为「总结行」，简明扼要的总结提交内容<a class="headerlink" href="#gcm001" title="Permanent link">&para;</a></h2>
+<p>无论是 Kernel 领袖 Torvalds，还是 Vim 骨灰级玩家 <a href="https://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html">Tim Pope</a>，都提出了这一点要求。其中，Tim Pope 建议，该行信息长度应该控制在50个字符以内。</p>
+<p>即使 Torvalds 并没有限制该行信息的长度，但是我们还是要对该长度进行控制。在<code>GCM005</code>中列举了若干需要用到总结行的命令和工具。在这些命令或工具中，如果「总结行」长度过长，那么显示效果和阅读体验将会大打折扣。</p>
+<h2 id="gcm002"><code>GCM002</code> 「总结行」行文使用「祈使句」<a class="headerlink" href="#gcm002" title="Permanent link">&para;</a></h2>
+<p>如果某次提交，主要是用于修复某个 Bug，那么使用英文写日志， 就应该表述为 「Fix Bug」，而不是 「Fixing Bug」或「Fixed Bug」。如果使用中文，则应写作「修复 Bug」，避免写作「修复了 Bug」或者 「已修复 Bug」等形式。</p>
+<p>统一使用祈使句，一方面，可以统一形式；另外祈使句的 Git 日志，也能够与 <code>git merge</code> 和 <code>get revert</code> 自动生成的 Git 日志的形式相吻合。</p>
+<p>在 GitLab 中，「总结行」中使用<code>#XXX</code>来引用 Issue。其中<code>XXX</code>就是 Issue ID。如果这个提交和这个 Issue 是位于同一个项目中的，那么 GitLab 就会自动为你创建一个指向 Issue 的链接。</p>
+<p>在GitHub中，你甚至可以在「总结行」中，<a href="https://help.github.com/articles/closing-issues-using-keywords/">使用关键词关闭一个Issue</a>。例如「总结行」中包含「Fix #123」，那么这个提交一旦被合并至主分支，Issue123 将会被 Close。</p>
+<h2 id="gcm003"><code>GCM003</code> 不在「总结行」结尾使用标点符号<a class="headerlink" href="#gcm003" title="Permanent link">&para;</a></h2>
+<p>「总结行」的作用，类似于标题。因此，不需要在总结行末尾添加标点符号。                                                                                          </p>
+<h2 id="gcm004"><code>GCM004</code> 使用「正文」来描述提交细节信息<a class="headerlink" href="#gcm004" title="Permanent link">&para;</a></h2>
+<p>提交的「正文」，应当回答以下几个问题：</p>
+<ol>
+<li>
+<p><code>WHY</code> 这次提交是为了解决什么样的问题？</p>
+</li>
+<li>
+<p>项目管理者，可能需要通过这个问题的回答，来判断究竟是否要将本次提交合并至 master 分支；</p>
+</li>
+<li>执行 Code Review 时，Reviewers 可以通过这个问题的回答，更加迅速地了解本次提交的内容，以及剔除不相关的提交内容；</li>
+<li>
+<p>当我们为了快速排查一次引入问题的提交时，这个信息也能够为我们提供很多有价值的参考。</p>
+</li>
+<li>
+<p><code>HOW</code> 这次提交如何解决刚才所提到的问题？</p>
+</li>
+</ol>
+<p>在更高的层面上，描述一下我们为了解决所提到的问题，采取了哪些策略和算法。例如，「通过在XXX过程中引入一个XXX对应于XXX关系的哈希表，提高对XXX的索引性能，进一步解决XXX方面执行效率的瓶颈。」就是一个很不错的描述。</p>
+<p>当然，如果你所采取的做法非常明显，比如这次提交仅仅是为了修正不规范的代码风格，或者修正一个拼写错误，你大可省略这一段的描述。</p>
+<p>当然，如果目前的做法有哪些地方不太妥当，或者只是临时的解决办法（Walk Across Solution），需要后续更正，这些内容也可以在本段中进行描述说明。</p>
+<ol>
+<li><code>OTHERS</code> 这次提交还包含其他哪些修改？</li>
+</ol>
+<p>提交日志是否需要包含这段内容，取决于你的团队对单次提交所包含的修改内容多少的容忍程度。一般来讲，Git 鼓励我们只做「原子提交」，即每次提交仅仅只涉及一个内容，只解决一个问题。如果单次提交确实涉及到其他的修改项，可以在本段中列出。但是本着 「原子提交」的原则，其他的修改项不宜过多，尽量控制在 2 个以内。</p>
+<p>此外，「正文」在行文中，可以使用列表的形式对所阐述的信息分条阐述。列表标记可以使用 <code>*</code> 或 <code>-</code> 符号。这一点和 <code>Markdown</code> 格式非常类似。</p>
+<h2 id="gcm005"><code>GCM005</code> 「总结行」与「正文」之间使用「空行分隔」<a class="headerlink" href="#gcm005" title="Permanent link">&para;</a></h2>
+<p>「空行分隔」用于区别「总结行」与「正文」部分，某些命令或工具，都会根据「空行分隔」对提交日志进行解析：</p>
+<ul>
+<li><code>git format-patch</code>和<code>git send-email</code>命令中，「总结行」将作为邮件标题使用，「正文」将作为邮件正文使用；</li>
+<li><code>git log --oneline</code>，<code>git shortlog</code>命令将使用「总结行」作为提交简要描述，如果没有「空行分隔」，提交简要描述中，将会包含「正文」部分；</li>
+<li>使用<code>git rebase -i</code>后，自动启动的编辑器中，会使用「总结行」作为每个提交的简要描述；</li>
+<li>如果 Git 设置了<code>merge.summary</code>选项，那么当执行<code>merge</code>操作时，Git 将会汇总来自所有被 merge 的提交的「总结行」，作为本次 merge 提交的「总结行」；</li>
+<li><code>gitk</code>工具有专门的一栏用于显示「总结行」；</li>
+<li><code>GitLab</code>和<code>GitHub</code>在他们的用户界面总，都专门为「总结行」做了显示设计；</li>
+</ul>
+<h2 id="gcm006"><code>GCM006</code> 「正文」中的不同段落使用空行分隔<a class="headerlink" href="#gcm006" title="Permanent link">&para;</a></h2>
+<p>该原则与 <code>Markdown</code> 的段落分隔方法相似。</p>
+<h2 id="gcm007-72"><code>GCM007</code> 「正文」每一行的长度控制在 72 个字符以内<a class="headerlink" href="#gcm007-72" title="Permanent link">&para;</a></h2>
+<p>在 Git 的设计思路中，提交日志的排版，换行等工作，需要日志的编写者来负责处理的。因为只有日志提交者，才知道究竟哪些地方需要换行，哪些地方不能换行。<a href="https://github.com/torvalds/linux/pull/17#issuecomment-5660604">Torvalds对此也有解释</a>：
+* <code>git log</code>命令在显示提交日志时，并不负责对日志进行分页换行处理，所以如何断行机比较美观，需要日志编写者来考虑处理；
+* 某些信息，例如编译器的编译输出等，是不能包含换行的。</p>
+<p><strong>为何日志的长度需要限制在 72 个字符呢？</strong></p>
+<ol>
+<li>默认情况下，<code>git log</code>命令会调用<code>less -S</code>对提交日志进行分页显示。因此，对于常用的宽度为80字符的终端来讲，如果你的日志中一行的长度超过80，那么长度超过80的的部分将会显示在终端之外，阅读起来将会很不方便。在宽度为80字符的终端中，为了更好的显示日志内容，80个字符减去左边可能会存在的4字符缩进，以及右边为了保证左右对称的4字符宽度，就得到了 72 字符的日志长度限制。</li>
+<li>使用<code>git format-patch --stdout</code>命令时，Git 会将提交转换成多个邮件序列。对于纯文本格式的邮件，为了保证邮件阅读体验，一般要保证在考虑了历史邮件嵌套的情况下，在80个字符的终端中，邮件仍然可以较美观的显示，因此，对于这个需求，72 字符的宽度限制，仍然是一个不错的选择。</li>
+</ol>
+<h2 id="gcm008"><code>GCM008</code> 确保你的提交是「原子提交」<a class="headerlink" href="#gcm008" title="Permanent link">&para;</a></h2>
+<p>「原子提交」指的是 每个提交**仅包含一个修改**，且**必须包含该修改所有的相关内容**。因此，你不可以：
+* 提交中混合与提交目的不相关的提交内容；
+* 提交不完整的内容，甚至导致代码不能正常编译的内容；
+* 在一个较大的修改提交中「隐藏」一些很小的代码改动。</p>
+<p>使用<code>git add -p</code>命令，可以帮助你较方便的将你的提交整理成一个个小的的「原子提交」。</p>
+                
+                  
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="../gitbook/" title="GitBook" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                GitBook
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="../markdown/" title="Markdown" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                Markdown
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        powered by
+        <a href="https://www.mkdocs.org">MkDocs</a>
+        and
+        <a href="https://squidfunk.github.io/mkdocs-material/">
+          Material for MkDocs</a>
+      </div>
+      
+        
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../assets/javascripts/application.5e60981f.js"></script>
+      
+      <script>app.initialize({version:"1.0.4",url:{base:"../.."}})</script>
+      
+    
+    
+      
+    
+  </body>
+</html>
