@@ -14,6 +14,7 @@ nav:
     - .NET: 
         - C# 6: net/c_sharp.md
         - .Ner Core Docker 部署: net/c_docker.md
+        - 使用 Docker 容器化部署 ASP.NET Core + MySQL + Nginx: net/c_mysql_nginx.md
     - Java: 
         - Java特性: java/feature.md 
         - Java类加载: java/load-class.md

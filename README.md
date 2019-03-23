@@ -44,6 +44,7 @@
 * [.NET](#)
 * * [C#语法新特性](docs/net/c_sharp.md) 
 * * [.Ner Core Docker 部署](docs/net/c_docker.md)
+* * [使用 Docker 容器化部署 ASP.NET Core + MySQL + Nginx](docs/net/c_mysql_nginx.md)
 * [PHP](#)
 * * [框架](docs/php/kj.md)
 * [Python](#)
