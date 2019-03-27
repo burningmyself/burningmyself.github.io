@@ -36,6 +36,7 @@
 * * [RocketMq下载与安装](docs/java/rocketmq/rmq-1.md)
 * [Linux](#)
 * * [Linux常用命令](docs/linux/often.md) 
+* * [实用的Linux 命令](docs/linux/ope.md) 
 * [微服务](#)
 * * [SpringCloud的微服务架构](docs/micro/spring-cloud.md) 
 * * [分布式锁](docs/micro/fbs-lock.md) 

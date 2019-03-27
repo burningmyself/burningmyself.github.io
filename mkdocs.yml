@@ -40,6 +40,7 @@ nav:
         - MySQL 数据库应用: sql/mysql_use.md
     - Linux: 
         - 常用命令: linux/often.md
+        - 实用的Linux 命令: linux/ope.md
     - Docker: 
         - Docker全科: docker/docker.md    
     - Tool: 
