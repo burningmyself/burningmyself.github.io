@@ -105,6 +105,7 @@
 * * [20190316](docs/summary/20190316.md)
 * * [20190323](docs/summary/20190323.md)
 * * [20190330](docs/summary/20190330.md)
+* * [20190404](docs/summary/20190404.md)
 
 
 
