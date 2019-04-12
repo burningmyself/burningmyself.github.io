@@ -710,19 +710,6 @@
     搭建主从
   </a>
   
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#_4" title="创建管理员【可选】" class="md-nav__link">
-    创建管理员【可选】
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
 </li>
       
       
@@ -1125,6 +1112,18 @@
   </li>
 
         
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../exp/pt/" title="产品与技术" class="md-nav__link">
+      产品与技术
+    </a>
+  </li>
+
+        
       </ul>
     </nav>
   </li>
@@ -1473,6 +1472,18 @@
   </li>
 
         
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/select/" title="决定接下来人生归属的，不是努力，而是选择" class="md-nav__link">
+      决定接下来人生归属的，不是努力，而是选择
+    </a>
+  </li>
+
+        
       </ul>
     </nav>
   </li>
@@ -1517,19 +1528,6 @@
     搭建主从
   </a>
   
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#_4" title="创建管理员【可选】" class="md-nav__link">
-    创建管理员【可选】
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
 </li>
       
       
@@ -1551,7 +1549,7 @@
                   <a href="https://github.com/burningmyself/blog/edit/master/docs/sql/sql_server_master.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
                 
                 
-                <h1 id="sql-server-2017">SQL Server 2017搭建主从<a class="headerlink" href="#sql-server-2017" title="Permanent link">&para;</a></h1>
+                <h1 id="sql-server-2017">SQL Server 2017搭建主从备份<a class="headerlink" href="#sql-server-2017" title="Permanent link">&para;</a></h1>
 <h3 id="_1">关于日志传输<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h3>
 <p>和Oracle DG，Mysql主从一样，SQL Server也支持主从的高可用。进一步提高数据的安全性和业务的高可用。通过将主库上的日志传输到备用实例上，从而达到主备库数据的一致性。</p>
 <p>优点
@@ -1571,7 +1569,6 @@
 <p>主数据库必须处于Full恢复模式或大容量日志恢复模式。
 在配置日志传送之前，必须创建共享备份目录，以便备库可以访问事务日志备份。 这是对生成事务日志备份的目录的共享。 例如，如果将事务日志备份到目录 E:\log_backup，则可以对该目录创建共享。</p>
 <h3 id="_3">搭建主从<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
-<h4 id="_4">创建管理员【可选】<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h4>
 <p>下面步骤是可选的，使用administrator管理员账户也是可以的。如果是使用administrator用户，则下文中关于sqladmin用户权限相关的，替换为administrator。</p>
 <ol>
 <li>主从两台分别创建sqladmin用户加入administrators组删除默认的users组，并且设置"密码永不过期"和"用户不能更改密码" 为sqladmin创建一个密码
