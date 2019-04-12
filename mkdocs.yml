@@ -66,6 +66,7 @@ nav:
     - 代码原则: exp/code-principle.md
     - 如何成为技术大牛: exp/techbig.md
     - 程序员如何技术成长: exp/learnweetout.md    
+    - 产品与技术: exp/pt.md
   - 医学:
     - 脑炎: doctor/ae.md
   - 构架:
@@ -92,6 +93,7 @@ nav:
     - 一个感情真相: emotion/onelike.md
     - 情商与道理: emotion/notruth.md
     - 六种男人远离: emotion/smf.md
+    - 决定接下来人生归属的，不是努力，而是选择: emotion/select.md
 markdown_extensions:
   - admonition
   - codehilite:
