@@ -95,6 +95,7 @@ nav:
     - 六种男人远离: emotion/smf.md
     - 决定接下来人生归属的，不是努力，而是选择: emotion/select.md
     - 被你拉黑的那个人，你一定很喜欢吧: emotion/nolike.md
+    -  余生，学会一个人走，不管有没有人陪: emotion/onepath.md
 markdown_extensions:
   - admonition
   - codehilite:
