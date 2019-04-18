@@ -96,7 +96,8 @@ nav:
     - 决定接下来人生归属的，不是努力，而是选择: emotion/select.md
     - 被你拉黑的那个人，你一定很喜欢吧: emotion/nolike.md
     - 余生，学会一个人走，不管有没有人陪: emotion/onepath.md
-    - 往后余生还很精彩，别被熬夜拖垮了~: emotion/twopath.md
+    - 往后余生还很精彩，别被熬夜拖垮了: emotion/twopath.md
+    - 心态好的人，一辈子都好: emotion/lifetime.md
 markdown_extensions:
   - admonition
   - codehilite:
