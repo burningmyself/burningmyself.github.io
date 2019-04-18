@@ -101,4 +101,5 @@
 * * [六种男人远离](docs/emotion/smf.md)
 * * [决定接下来人生归属的，不是努力，而是选择](docs/emotion/select.md)
 * * [被你拉黑的那个人，你一定很喜欢吧](docs/emotion/nolike.md)
-* * [余生，学会一个人走，不管有没有人陪](docs/emotion/nolike.md)
+* * [余生，学会一个人走，不管有没有人陪](docs/emotion/onepath.md)
+* * [往后余生还很精彩，别被熬夜拖垮了](docs/emotion/twopath.md)
