@@ -101,6 +101,7 @@ nav:
     - 余生，学会一个人走，不管有没有人陪: emotion/onepath.md
     - 往后余生还很精彩，别被熬夜拖垮了: emotion/twopath.md
     - 心态好的人，一辈子都好: emotion/lifetime.md
+    - 将心比心，方得人心: emotion/hearttoheart.md
 markdown_extensions:
   - admonition
   - codehilite:
