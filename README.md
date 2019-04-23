@@ -1,4 +1,5 @@
 # 个人博客
+
 ---
 本仓库下存放个人博客的源文件。持续更新，欢迎 star。
 
@@ -8,62 +9,64 @@
 [Gitee](https://gitee.com/yangfubing)
 
 ## 捐赠
+
 如果你觉得这写文章能帮助到了你，你可以帮作者买一杯果汁表示鼓励
 ![pay](docs/img/pay.png)
 
 [Paypal Me](https://paypal.me/yangfubing)
 
 ## 目录
+
 * [介绍](docs/index.md)
 * [README.md](README.md)
-* [Docker](#)
+* [Docker]
 * * [Docker介绍使用](docs/docker/docker.md)
-* [经验](#)
+* [经验]
 * * [集群和负载均衡](docs/exp/cl.md)
 * * [DevOps是什么](docs/exp/devops.md)  
 * * [微服务架构技术栈选型手册](docs/exp/micro-service.md)  
-* * [Raft算法和Gossip协议](docs/exp/raft-gossip.md) 
-* * [人工智能](docs/exp/ai.md) 
+* * [Raft算法和Gossip协议](docs/exp/raft-gossip.md)
+* * [人工智能](docs/exp/ai.md)
 * * [代码原则](docs/exp/code-principle.md)
-* * [如何成为技术大牛](docs/exp/techbig.md) 
+* * [如何成为技术大牛](docs/exp/techbig.md)
 * * [程序员如何技术成长](docs/exp/learnweetout.md)
 * * [产品与技术](docs/exp/pt.md)
-* [Img](#)
-* [Java](#)
-* * [Java 新特性](docs/java/feature.md) 
-* * [Java 类加载机制](docs/java/load-class.md) 
-* * [Orm的优缺点](docs/java/orm.md) 
+* [Img]
+* [Java]
+* * [Java 新特性](docs/java/feature.md)
+* * [Java 类加载机制](docs/java/load-class.md)
+* * [Orm的优缺点](docs/java/orm.md)
 * * [BIO与NIO](docs/java/bio-nio.md)
 * * [RocketMq下载与安装](docs/java/rocketmq/rmq-1.md)
-* [Linux](#)
-* * [Linux常用命令](docs/linux/often.md) 
-* * [实用的Linux 命令](docs/linux/ope.md) 
-* [微服务](#)
-* * [SpringCloud的微服务架构](docs/micro/spring-cloud.md) 
-* * [分布式锁](docs/micro/fbs-lock.md) 
+* [Linux]
+* * [Linux常用命令](docs/linux/often.md)
+* * [实用的Linux 命令](docs/linux/ope.md)
+* [微服务]
+* * [SpringCloud的微服务架构](docs/micro/spring-cloud.md)
+* * [分布式锁](docs/micro/fbs-lock.md)
 * * [微服务设计](docs/micro/design.md)
 * * [分布式系统与消息的投递](docs/micro/distrimsg.md)
-* [.NET](#)
-* * [C#语法新特性](docs/net/c_sharp.md) 
+* [.NET]
+* * [C#语法新特性](docs/net/c_sharp.md)
 * * [.Ner Core Docker 部署](docs/net/c_docker.md)
 * * [使用 Docker 容器化部署 ASP.NET Core + MySQL + Nginx](docs/net/c_mysql_nginx.md)
 * * [让你的ASP.NET Core应用程序更安全](docs/net/c_core_safety.md)
 * * [ASP.NET Core开发者指南](docs/net/c_core_study_route.md)
-* [PHP](#)
+* [PHP]
 * * [框架](docs/php/kj.md)
-* [Python](#)
+* [Python]
 * * [Python新特性](docs/python/feature.md)
-* * [Python的字符操作](docs/python/str_joint.md) 
-* * [Python语法技巧](docs/python/syntax_rule.md) 
-* * [远程部署神器 Fabric](docs/python/fabric.md) 
-* [SQL](#)
+* * [Python的字符操作](docs/python/str_joint.md)
+* * [Python语法技巧](docs/python/syntax_rule.md)
+* * [远程部署神器 Fabric](docs/python/fabric.md)
+* [SQL]
 * * [MySQL 优化指南](docs/sql/mysql_yh.md)
 * * [MySQL 日志](docs/sql/mysql_log.md)
 * * [MySQL 索引](docs/sql/mysql_index.md)
 * * [MySQL PXC集群](docs/sql/mysql_pxc.md)
 * * [MySQL MySQL数据库应用](docs/sql/mysql_use.md)
 * * [Sql Server 主从备份](docs/sql/sql_server_master.md)
-* [TOOL](#)
+* [TOOL]
 * * [Git命令](docs/tool/git.md)
 * * [GitBook](docs/tool/gitbook.md)
 * * [GitFlow](docs/tool/gitflow.md)
@@ -71,17 +74,18 @@
 * * [Git提交日志规范](docs/tool/gitcmr.md)
 * * [MarkDown](docs/tool/markdown.md)
 * * [CI/CD](docs/tool/cicd.md)
-* [前端](#)
+* [前端]
 * * [阿里js样式](docs/web/ali_js_style.md)
 * * [ES6语法](docs/web/es6.md)
 * * [Node.js](docs/web/node.js.md)
-* [构架](#)
+* * [React 开发者指南](docs/web/react.md)
+* [构架]
 * * [构架拆分](docs/framework/split.md)
 * * [分布式、高并发、多线程](docs/framework/fgb.md)
-* [医学](#)
+* [医学]
 * * [脑炎](docs/doctor/ae.md)
-* [情感](#)
-* * [情商](docs/emotion/eq.md) 
+* [情感]
+* * [情商](docs/emotion/eq.md)
 * * [工作心得](docs/emotion/workheard.md)
 * * [看书](docs/emotion/lookbook.md)
 * * [4种男朋友](docs/emotion/fmf.md)
