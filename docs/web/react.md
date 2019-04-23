@@ -11,7 +11,7 @@
 
 ## Roadmap
 
-![Roadmap](./roadmap-cn.png)
+![Roadmap](./../img/roadmap-cn.png)
 
 ## 资源
 

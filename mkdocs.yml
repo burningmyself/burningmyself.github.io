@@ -34,7 +34,7 @@ nav:
         - es6语法: web/es6.md
         - 阿里js样式规范: web/ali_js_style.md
         - node.js文档: web/node.js.md
-        - node.js文档: web/react.md
+        - React 开发者指南: web/react.md
     - SQL:
         - MySQL优化: sql/mysql_yh.md
         - MySQL日志: sql/mysql_log.md
