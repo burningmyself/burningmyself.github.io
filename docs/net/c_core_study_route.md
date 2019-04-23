@@ -178,7 +178,7 @@
 16. 设计模式
 
     - [CQRS](https://docs.microsoft.com/zh-cn/azure/architecture/patterns/cqrs)
-	- [装饰模式](https://www.dofactory.com/net/decorator-design-pattern)
+    - [装饰模式](https://www.dofactory.com/net/decorator-design-pattern)
     - [策略模式](https://www.dofactory.com/net/strategy-design-pattern)
     - [观察者模式](https://www.dofactory.com/net/observer-design-pattern)
     - [建造者模式](https://www.dofactory.com/net/builder-design-pattern)
