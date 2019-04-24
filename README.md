@@ -31,6 +31,7 @@
 * * [如何成为技术大牛](docs/exp/techbig.md)
 * * [程序员如何技术成长](docs/exp/learnweetout.md)
 * * [产品与技术](docs/exp/pt.md)
+* * [深度学习框架](docs/exp/four_deep_learning.md)
 * [Img]
 * [Java]
 * * [Java 新特性](docs/java/feature.md)
