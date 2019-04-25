@@ -1,9 +1,11 @@
 # 朽木自雕
+
     活在当下，活着就要发挥，就要创造
 
 ## 个人爱好，纯属扯蛋
 
 ## 捐赠
+
 如果你觉得这写文章能帮助到了你，你可以帮作者买一杯果汁表示鼓励
 
 ![pay](./img/pay.png)
@@ -18,5 +20,3 @@
 
 [Github](https://github.com/burningmyself)
 [Gitee](https://gitee.com/yangfubing)
-
-
