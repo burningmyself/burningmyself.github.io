@@ -55,6 +55,7 @@ nav:
         - Git提交日志规范: tool/gitcmr.md
         - Markdown: tool/markdown.md
         - CI/CD: tool/cicd.md
+        - mkdocs简单使用: tool/mkdocs.md
   - 微服务:  
         - 基于SpringCloud的微服务架构演变史: micro/spring-cloud.md
         - 分布式锁: micro/fbs-lock.md

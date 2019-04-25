@@ -75,6 +75,7 @@
 * * [Git提交日志规范](docs/tool/gitcmr.md)
 * * [MarkDown](docs/tool/markdown.md)
 * * [CI/CD](docs/tool/cicd.md)
+* * [mkdocs简单使用](docs/tool/mkdocs.md)
 * [前端]
 * * [阿里js样式](docs/web/ali_js_style.md)
 * * [ES6语法](docs/web/es6.md)
