@@ -1798,6 +1798,18 @@
   </li>
 
         
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/ttt/" title="别睡太晚，别爱太满，别要太多" class="md-nav__link">
+      别睡太晚，别爱太满，别要太多
+    </a>
+  </li>
+
+        
       </ul>
     </nav>
   </li>
@@ -2052,20 +2064,20 @@
 </pre></div>
 
 <h2 id="push">设置远程仓库地址后再做push<a class="headerlink" href="#push" title="Permanent link">&para;</a></h2>
-<p>'''
-git remote add origin <a href="https://gitee.com/用户个性地址/HelloGitee.git">https://gitee.com/用户个性地址/HelloGitee.git</a>
+<p>''' s
+git remote add origin <a href="https://gitee.com/useraddress/HelloGitee.git">https://gitee.com/useraddress/HelloGitee.git</a>
 '''</p>
 <h2 id="_2">将文件添加到仓库<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
-<div class="codehilite"><pre><span></span>git add 文件名 # 将工作区的某个文件添加到暂存区   
-git add -u # 添加所有被tracked文件中被修改或删除的文件信息到暂存区，不处理untracked的文件
-git add -A # 添加所有被tracked文件中被修改或删除的文件信息到暂存区，包括untracked的文件
-git add . # 将当前工作区的所有文件都加入暂存区
-git add -i # 进入交互界面模式，按需添加文件到缓存区
+<div class="codehilite"><pre><span></span>git add 文件名 <span class="c1"># 将工作区的某个文件添加到暂存区   </span>
+git add <span class="o">-</span>u <span class="c1"># 添加所有被tracked文件中被修改或删除的文件信息到暂存区，不处理untracked的文件</span>
+git add <span class="o">-</span>A <span class="c1"># 添加所有被tracked文件中被修改或删除的文件信息到暂存区，包括untracked的文件</span>
+git add <span class="m">.</span> <span class="c1"># 将当前工作区的所有文件都加入暂存区</span>
+git add <span class="o">-</span>i <span class="c1"># 进入交互界面模式，按需添加文件到缓存区</span>
 </pre></div>
 
 <h2 id="_3">将暂存区文件提交到本地仓库<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
-<div class="codehilite"><pre><span></span>git commit -m &quot;提交说明&quot; # 将暂存区内容提交到本地仓库
-git commit -a -m &quot;提交说明&quot; # 跳过缓存区操作，直接把工作区内容提交到本地仓库
+<div class="codehilite"><pre><span></span>git commit <span class="o">-</span>m <span class="s">&quot;提交说明&quot;</span> <span class="c1"># 将暂存区内容提交到本地仓库</span>
+git commit <span class="o">-</span>a <span class="o">-</span>m <span class="s">&quot;提交说明&quot;</span> <span class="c1"># 跳过缓存区操作，直接把工作区内容提交到本地仓库</span>
 </pre></div>
 
 <h2 id="_4">查看仓库当前状态<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
@@ -2073,47 +2085,47 @@ git commit -a -m &quot;提交说明&quot; # 跳过缓存区操作，直接把工
 </pre></div>
 
 <h2 id="_5">比较文件异同<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
-<div class="codehilite"><pre><span></span>git diff # 工作区与暂存区的差异
-git diff 分支名 #工作区与某分支的差异，远程分支这样写：remotes/origin/分支名
-git diff HEAD  # 工作区与HEAD指针指向的内容差异
-git diff 提交id 文件路径 # 工作区某文件当前版本与历史版本的差异
-git diff --stage # 工作区文件与上次提交的差异(1.6 版本前用 --cached)
-git diff 版本TAG # 查看从某个版本后都改动内容
-git diff 分支A 分支B # 比较从分支A和分支B的差异(也支持比较两个TAG)
-git diff 分支A...分支B # 比较两分支在分开后各自的改动
+<div class="codehilite"><pre><span></span>git diff <span class="c1"># 工作区与暂存区的差异</span>
+git diff 分支名 <span class="c1">#工作区与某分支的差异，远程分支这样写：remotes/origin/分支名</span>
+git diff HEAD  <span class="c1"># 工作区与HEAD指针指向的内容差异</span>
+git diff 提交id 文件路径 <span class="c1"># 工作区某文件当前版本与历史版本的差异</span>
+git diff <span class="o">--</span>stage <span class="c1"># 工作区文件与上次提交的差异(1.6 版本前用 --cached)</span>
+git diff 版本TAG <span class="c1"># 查看从某个版本后都改动内容</span>
+git diff 分支A 分支B <span class="c1"># 比较从分支A和分支B的差异(也支持比较两个TAG)</span>
+git diff 分支A...分支B <span class="c1"># 比较两分支在分开后各自的改动</span>
 
-# 另外：如果只想统计哪些文件被改动，多少行被改动，可以添加 --stat 参数
+<span class="c1"># 另外：如果只想统计哪些文件被改动，多少行被改动，可以添加 --stat 参数</span>
 </pre></div>
 
 <h2 id="_6">查看历史记录<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
-<div class="codehilite"><pre><span></span>git log # 查看所有commit记录(SHA-A校验和，作者名称，邮箱，提交时间，提交说明)
-git log -p -次数 # 查看最近多少次的提交记录
-git log --stat # 简略显示每次提交的内容更改
-git log --name-only # 仅显示已修改的文件清单
-git log --name-status # 显示新增，修改，删除的文件清单
-git log --oneline # 让提交记录以精简的一行输出
-git log –graph –all --online # 图形展示分支的合并历史
-git log --author=作者  # 查询作者的提交记录(和grep同时使用要加一个--all--match参数)
-git log --grep=过滤信息 # 列出提交信息中包含过滤信息的提交记录
-git log -S查询内容 # 和--grep类似，S和查询内容间没有空格
-git log fileName # 查看某文件的修改记录，找背锅专用
+<div class="codehilite"><pre><span></span>git log <span class="c1"># 查看所有commit记录(SHA-A校验和，作者名称，邮箱，提交时间，提交说明)</span>
+git log <span class="o">-</span>p <span class="o">-</span>次数 <span class="c1"># 查看最近多少次的提交记录</span>
+git log <span class="o">--</span>stat <span class="c1"># 简略显示每次提交的内容更改</span>
+git log <span class="o">--</span>name<span class="o">-</span>only <span class="c1"># 仅显示已修改的文件清单</span>
+git log <span class="o">--</span>name<span class="o">-</span>status <span class="c1"># 显示新增，修改，删除的文件清单</span>
+git log <span class="o">--</span>oneline <span class="c1"># 让提交记录以精简的一行输出</span>
+git log –graph –all <span class="o">--</span>online <span class="c1"># 图形展示分支的合并历史</span>
+git log <span class="o">--</span>author<span class="o">=</span>作者  <span class="c1"># 查询作者的提交记录(和grep同时使用要加一个--all--match参数)</span>
+git log <span class="o">--</span>grep<span class="o">=</span>过滤信息 <span class="c1"># 列出提交信息中包含过滤信息的提交记录</span>
+git log <span class="o">-</span>S查询内容 <span class="c1"># 和--grep类似，S和查询内容间没有空格</span>
+git log fileName <span class="c1"># 查看某文件的修改记录，找背锅专用</span>
 </pre></div>
 
 <h2 id="_7">代码回滚<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h2>
-<div class="codehilite"><pre><span></span>git reset HEAD^ # 恢复成上次提交的版本
-git reset HEAD^^ # 恢复成上上次提交的版本，就是多个^，以此类推或用~次数
+<div class="codehilite"><pre><span></span>git reset HEAD<span class="o">^</span> <span class="c1"># 恢复成上次提交的版本</span>
+git reset HEAD<span class="o">^^</span> <span class="c1"># 恢复成上上次提交的版本，就是多个^，以此类推或用~次数</span>
 
 git reflog
 
-git reset --hard 版本号
+git reset <span class="o">--</span>hard 版本号
 
---soft：只是改变HEAD指针指向，缓存区和工作区不变；
---mixed：修改HEAD指针指向，暂存区内容丢失，工作区不变；
---hard：修改HEAD指针指向，暂存区内容丢失，工作区恢复以前状态；
+<span class="o">--</span>soft：只是改变HEAD指针指向，缓存区和工作区不变；
+<span class="o">--</span>mixed：修改HEAD指针指向，暂存区内容丢失，工作区不变；
+<span class="o">--</span>hard：修改HEAD指针指向，暂存区内容丢失，工作区恢复以前状态；
 </pre></div>
 
 <h2 id="_8">同步远程仓库<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h2>
-<div class="codehilite"><pre><span></span>git push -u origin master
+<div class="codehilite"><pre><span></span>git push <span class="o">-</span>u origin master
 </pre></div>
 
 <h2 id="_9">删除版本库文件<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h2>
@@ -2121,29 +2133,29 @@ git reset --hard 版本号
 </pre></div>
 
 <h2 id="_10">版本库里的版本替换工作区的版本<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h2>
-<div class="codehilite"><pre><span></span>git checkout -- test.txt
+<div class="codehilite"><pre><span></span>git checkout <span class="o">--</span> test.txt
 </pre></div>
 
 <h2 id="_11">本地仓库内容推送到远程仓库<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h2>
-<div class="codehilite"><pre><span></span>git remote add origin git@github.com:帐号名/仓库名.git
+<div class="codehilite"><pre><span></span>git remote add origin git<span class="o">@</span>github.com<span class="o">:</span>帐号名<span class="o">/</span>仓库名<span class="m">.</span>git
 </pre></div>
 
 <h2 id="_12">将本地仓库内容推送到远程仓库<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h2>
-<p>'''git
+<p>''' s
 git add . #将当前目录所有文件添加到git暂存区
 git commit -m "my first commit" #提交并备注提交信息
 git push origin master #将本地提交推送到远程仓库
 '''</p>
 <h2 id="_13">从远程仓库克隆项目到本地<a class="headerlink" href="#_13" title="Permanent link">&para;</a></h2>
-<div class="codehilite"><pre><span></span>git clone git@github.com:git帐号名/仓库名.git
+<div class="codehilite"><pre><span></span>git clone git<span class="o">@</span>github.com<span class="o">:</span>git帐号名<span class="o">/</span>仓库名<span class="m">.</span>git
 </pre></div>
 
 <h2 id="_14">创建分支<a class="headerlink" href="#_14" title="Permanent link">&para;</a></h2>
-<div class="codehilite"><pre><span></span>git checkout -b dev
--b表示创建并切换分支
+<div class="codehilite"><pre><span></span>git checkout <span class="o">-</span>b dev
+<span class="o">-</span>b表示创建并切换分支
 上面一条命令相当于一面的二条：
-git branch dev //创建分支
-git checkout dev //切换分支
+git branch dev <span class="o">//</span>创建分支
+git checkout dev <span class="o">//</span>切换分支
 </pre></div>
 
 <h2 id="_15">查看分支<a class="headerlink" href="#_15" title="Permanent link">&para;</a></h2>
@@ -2152,76 +2164,77 @@ git checkout dev //切换分支
 
 <h2 id="_16">合并分支<a class="headerlink" href="#_16" title="Permanent link">&para;</a></h2>
 <div class="codehilite"><pre><span></span>git merge dev
-//用于合并指定分支到当前分支
+<span class="o">//</span>用于合并指定分支到当前分支
 
-git merge --no-ff -m &quot;merge with no-ff&quot; dev
-//加上--no-ff参数就可以用普通模式合并，合并后的历史有分支，能看出来曾经做过合并
+git merge <span class="o">--</span>no<span class="o">-</span>ff <span class="o">-</span>m <span class="s">&quot;merge with no-ff&quot;</span> dev
+<span class="o">//</span>加上<span class="o">--</span>no<span class="o">-</span>ff参数就可以用普通模式合并，合并后的历史有分支，能看出来曾经做过合并
 </pre></div>
 
 <h2 id="_17">删除分支<a class="headerlink" href="#_17" title="Permanent link">&para;</a></h2>
-<div class="codehilite"><pre><span></span>git branch -d dev
+<div class="codehilite"><pre><span></span>git branch <span class="o">-</span>d dev
 </pre></div>
 
 <h2 id="_18">查看分支合并图<a class="headerlink" href="#_18" title="Permanent link">&para;</a></h2>
-<div class="codehilite"><pre><span></span>git log --graph --pretty=oneline --abbrev-commit
+<div class="codehilite"><pre><span></span>git log <span class="o">--</span>graph <span class="o">--</span>pretty<span class="o">=</span>oneline <span class="o">--</span>abbrev<span class="o">-</span>commit
 </pre></div>
 
 <h2 id="_19">查看远程库信息<a class="headerlink" href="#_19" title="Permanent link">&para;</a></h2>
 <div class="codehilite"><pre><span></span>git remote
-// -v 显示更详细的信息
+<span class="o">//</span> <span class="o">-</span>v 显示更详细的信息
 </pre></div>
 
 <h2 id="git_1">git相关配置<a class="headerlink" href="#git_1" title="Permanent link">&para;</a></h2>
-<div class="codehilite"><pre><span></span># 安装完Git后第一件要做的事，设置用户信息(global可换成local在单独项目生效)：
-git config --global user.name &quot;用户名&quot; # 设置用户名
-git config --global user.email &quot;用户邮箱&quot;   #设置邮箱
-git config --global user.name   # 查看用户名是否配置成功
-git config --global user.email   # 查看邮箱是否配置
+<div class="codehilite"><pre><span></span><span class="c1"># 安装完Git后第一件要做的事，设置用户信息(global可换成local在单独项目生效)：</span>
+git config <span class="o">--</span>global user.name <span class="s">&quot;用户名&quot;</span> <span class="c1"># 设置用户名</span>
+git config <span class="o">--</span>global user.email <span class="s">&quot;用户邮箱&quot;</span>   <span class="c1">#设置邮箱</span>
+git config <span class="o">--</span>global user.name   <span class="c1"># 查看用户名是否配置成功</span>
+git config <span class="o">--</span>global user.email   <span class="c1"># 查看邮箱是否配置</span>
 
-# 其他查看配置相关
-git config --global --list  # 查看全局设置相关参数列表
-git config --local --list # 查看本地设置相关参数列表
-git config --system --list # 查看系统配置参数列表
-git config --list  # 查看所有Git的配置(全局+本地+系统)
-git config --global color.ui true //显示git相关颜色
+<span class="c1"># 其他查看配置相关</span>
+git config <span class="o">--</span>global <span class="o">--</span><span class="kt">list</span>  <span class="c1"># 查看全局设置相关参数列表</span>
+git config <span class="o">--</span>local <span class="o">--</span><span class="kt">list</span> <span class="c1"># 查看本地设置相关参数列表</span>
+git config <span class="o">--</span>system <span class="o">--</span><span class="kt">list</span> <span class="c1"># 查看系统配置参数列表</span>
+git config <span class="o">--</span><span class="kt">list</span>  <span class="c1"># 查看所有Git的配置(全局+本地+系统)</span>
+git config <span class="o">--</span>global color.ui true <span class="o">//</span>显示git相关颜色
 </pre></div>
 
 <h2 id="_20">撤消某次提交<a class="headerlink" href="#_20" title="Permanent link">&para;</a></h2>
-<div class="codehilite"><pre><span></span>git revert HEAD # 撤销最近的一个提交
-git revert 版本号 # 撤销某次commit
+<div class="codehilite"><pre><span></span>git revert HEAD <span class="c1"># 撤销最近的一个提交</span>
+git revert 版本号 <span class="c1"># 撤销某次commit</span>
 </pre></div>
 
 <h2 id="_21">拉取远程分支到本地仓库<a class="headerlink" href="#_21" title="Permanent link">&para;</a></h2>
-<div class="codehilite"><pre><span></span>git checkout -b 本地分支 远程分支 # 会在本地新建分支，并自动切换到该分支
-git fetch origin 远程分支:本地分支 # 会在本地新建分支，但不会自动切换，还需checkout
-git branch --set-upstream 本地分支 远程分支 # 建立本地分支与远程分支的链接
+<div class="codehilite"><pre><span></span>git checkout <span class="o">-</span>b 本地分支 远程分支 <span class="c1"># 会在本地新建分支，并自动切换到该分支</span>
+git fetch origin 远程分支<span class="o">:</span>本地分支 <span class="c1"># 会在本地新建分支，但不会自动切换，还需checkout</span>
+git branch <span class="o">--</span>set<span class="o">-</span>upstream 本地分支 远程分支 <span class="c1"># 建立本地分支与远程分支的链接</span>
 </pre></div>
 
 <h2 id="_22">标签命令<a class="headerlink" href="#_22" title="Permanent link">&para;</a></h2>
-<div class="codehilite"><pre><span></span>git tag 标签 //打标签命令，默认为HEAD
-git tag //显示所有标签
-git tag 标签 �版本号 //给某个commit版本添加标签
-git show 标签 //显示某个标签的详细信息
+<div class="codehilite"><pre><span></span>git tag 标签 <span class="o">//</span>打标签命令，默认为HEAD
+git tag <span class="o">//</span>显示所有标签
+git tag 标签 �版本号 <span class="o">//</span>给某个commit版本添加标签
+git show 标签 <span class="o">//</span>显示某个标签的详细信息
 </pre></div>
 
 <h2 id="_23">同步远程仓库更新<a class="headerlink" href="#_23" title="Permanent link">&para;</a></h2>
 <div class="codehilite"><pre><span></span>git fetch  origin master
- //从远程获取最新的到本地，首先从远程的origin的master主分支下载最新的版本到origin/master分支上，然后比较本地的master分支和origin/master分支的差别，最后进行合并。
+ <span class="o">//</span>从远程获取最新的到本地，首先从远程的origin的master主分支下载最新的版本到origin<span class="o">/</span>master分支上，然后比较本地的master分支和origin<span class="o">/</span>master分支的差别，最后进行合并。
 
 git fetch比git pull更加安全
 git pull origin master
 </pre></div>
 
 <h2 id="_24">推送时选择强制推送<a class="headerlink" href="#_24" title="Permanent link">&para;</a></h2>
-<p>强制推送需要执行下面的命令(默认不推荐该行为)：
-<div class="codehilite"><pre><span></span>git push origin master -f
-</pre></div></p>
+<p>强制推送需要执行下面的命令(默认不推荐该行为)：</p>
+<div class="codehilite"><pre><span></span>git push origin master <span class="o">-</span>f
+</pre></div>
+
 <h2 id="git_2">git 提示授权失败解决<a class="headerlink" href="#git_2" title="Permanent link">&para;</a></h2>
-<div class="codehilite"><pre><span></span>git config --system --unset credential.helper # 管理员权限执行命令
+<div class="codehilite"><pre><span></span>git config <span class="o">--</span>system <span class="o">--</span>unset credential.helper <span class="c1"># 管理员权限执行命令</span>
 </pre></div>
 
 <h2 id="git_3">git 授权永久有效<a class="headerlink" href="#git_3" title="Permanent link">&para;</a></h2>
-<div class="codehilite"><pre><span></span>git config --global credential.helper &#39;store&#39;
+<div class="codehilite"><pre><span></span>git config <span class="o">--</span>global credential.helper <span class="s">&#39;store&#39;</span>
 </pre></div>
 
 <h2 id="_25">程序员的那些迷之缩写<a class="headerlink" href="#_25" title="Permanent link">&para;</a></h2>

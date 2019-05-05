@@ -863,8 +863,8 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#takewhile" title="takeWhile 方法 语法:" class="md-nav__link">
-    takeWhile 方法 语法:
+  <a href="#takewhile" title="takeWhile 方法 语法" class="md-nav__link">
+    takeWhile 方法 语法
   </a>
   
 </li>
@@ -2188,6 +2188,18 @@
   </li>
 
         
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/ttt/" title="别睡太晚，别爱太满，别要太多" class="md-nav__link">
+      别睡太晚，别爱太满，别要太多
+    </a>
+  </li>
+
+        
       </ul>
     </nav>
   </li>
@@ -2673,8 +2685,8 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#takewhile" title="takeWhile 方法 语法:" class="md-nav__link">
-    takeWhile 方法 语法:
+  <a href="#takewhile" title="takeWhile 方法 语法" class="md-nav__link">
+    takeWhile 方法 语法
   </a>
   
 </li>
@@ -2827,14 +2839,16 @@
                 
                 <h1 id="java">Java 新特性总结<a class="headerlink" href="#java" title="Permanent link">&para;</a></h1>
 <p>总结的这些新特性，都是自己觉得在开发中实际用得上的。
-简单概括下就是：
-* JAVA1.3：普通的原始的JAVA，基本语法相信大家都见过了
-* JAVA1.4：assert关键字
-* JAVA5：枚举类型、泛型、自动拆装箱
-* JAVA6： @Override注解
-* JAVA7： &lt;&gt;符号、ARM支持、支持多catch
-* JAVA8：Lamda表达式，类型注解等
-* JAVA9： 模块化、接口中的私有方法等</p>
+简单概括下就是：</p>
+<ul>
+<li>JAVA1.3：普通的原始的JAVA，基本语法相信大家都见过了</li>
+<li>JAVA1.4：assert关键字</li>
+<li>JAVA5：枚举类型、泛型、自动拆装箱</li>
+<li>JAVA6： @Override注解</li>
+<li>JAVA7： &lt;&gt;符号、ARM支持、支持多catch</li>
+<li>JAVA8：Lamda表达式，类型注解等</li>
+<li>JAVA9： 模块化、接口中的私有方法等</li>
+</ul>
 <h2 id="java5">Java5  新特性总结<a class="headerlink" href="#java5" title="Permanent link">&para;</a></h2>
 <h3 id="generics">泛型 Generics<a class="headerlink" href="#generics" title="Permanent link">&para;</a></h3>
 <p>引用泛型之后，允许指定集合里元素的类型，免去了强制类型转换，并且能在编译时刻进行类型检查的好处。Parameterized Type作为参数和返回值，Generic是vararg、annotation、enumeration、collection的基石。</p>
@@ -2850,13 +2864,14 @@
 <h3 id="autoboxing-unboxing">自动装箱拆箱（自动类型包装和解包）autoboxing &amp; unboxing<a class="headerlink" href="#autoboxing-unboxing" title="Permanent link">&para;</a></h3>
 <p>简单的说是类型自动转换。自动装包：基本类型自动转为包装类（int ——Integer）自动拆包：包装类自动转为基本类型（Integer——int）</p>
 <h3 id="varargsvarargs-number-of-arguments">可变参数varargs(varargs number of arguments)<a class="headerlink" href="#varargsvarargs-number-of-arguments" title="Permanent link">&para;</a></h3>
-<p>参数类型相同时，把重载函数合并到一起了。如：
+<p>参数类型相同时，把重载函数合并到一起了。如：</p>
 <div class="codehilite"><pre><span></span><span class="kd">public</span> <span class="kt">void</span> <span class="nf">test</span><span class="o">(</span><span class="n">object</span><span class="o">...</span> <span class="n">objs</span><span class="o">){</span>
     <span class="k">for</span><span class="o">(</span><span class="n">Object</span> <span class="n">obj</span><span class="o">:</span><span class="n">objs</span><span class="o">){</span>
         <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">obj</span><span class="o">);</span>
     <span class="o">}</span>
 <span class="o">}</span>
-</pre></div></p>
+</pre></div>
+
 <h3 id="annotations-javametadata">Annotations（重要） 它是java中的metadata（注释）<a class="headerlink" href="#annotations-javametadata" title="Permanent link">&para;</a></h3>
 <p>注解在JAVA5中就引入了。这是非常重要的特性。现在注解的应用已经随处可见。不过JAVA5的注解还不成熟，没法自定义注解。</p>
 <h3 id="_2">新的迭代语句<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
@@ -2866,14 +2881,15 @@
 </pre></div>
 
 <h3 id="import-static">静态导入（import static ）<a class="headerlink" href="#import-static" title="Permanent link">&para;</a></h3>
-<p>导入静态对象，可以省略些代码。不过这个也不常用。
+<p>导入静态对象，可以省略些代码。不过这个也不常用。</p>
 <div class="codehilite"><pre><span></span><span class="kn">import static</span> <span class="nn">java.lang.System.out</span><span class="o">;</span><span class="c1">//导入java.lang包下的System类的静态方法out;</span>
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">HelloWorld</span><span class="o">{</span>
     <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">){</span>
         <span class="n">out</span><span class="o">.</span><span class="na">print</span><span class="o">(</span><span class="s">&quot;Hello World!&quot;</span><span class="o">);</span><span class="c1">//既是在这里不用再写成System.out.println(&quot;Hello World!&quot;)了，因为已经导入了这个静态方法out。</span>
     <span class="o">}</span>
 <span class="o">}</span>
-</pre></div></p>
+</pre></div>
+
 <h3 id="javautilformatter">新的格式化方法java.util.Formatter）<a class="headerlink" href="#javautilformatter" title="Permanent link">&para;</a></h3>
 <div class="codehilite"><pre><span></span><span class="n">formatter</span><span class="o">.</span><span class="na">format</span><span class="o">(</span><span class="s">&quot;Remaining account balance: $%.2f&quot;</span><span class="o">,</span> <span class="n">balance</span><span class="o">);</span>
 </pre></div>
@@ -2904,7 +2920,7 @@
 <h2 id="java7">Java7 新特性总结<a class="headerlink" href="#java7" title="Permanent link">&para;</a></h2>
 <h3 id="switchstring">switch中使用String<a class="headerlink" href="#switchstring" title="Permanent link">&para;</a></h3>
 <p>java7以前在switch中只能使用number或enum,现在可以使用string了。</p>
-<p>示例：
+<p>示例：</p>
 <div class="codehilite"><pre><span></span><span class="n">String</span> <span class="n">s</span> <span class="o">=</span> <span class="s">&quot;a&quot;</span><span class="o">;</span>
 <span class="k">switch</span> <span class="o">(</span><span class="n">s</span><span class="o">)</span> <span class="o">{</span>
     <span class="k">case</span> <span class="s">&quot;a&quot;</span><span class="o">:</span>
@@ -2917,12 +2933,14 @@
         <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;is c&quot;</span><span class="o">);</span>
         <span class="k">break</span><span class="o">;</span>
 <span class="o">}</span>
-</pre></div></p>
+</pre></div>
+
 <h3 id="_6">异常处理<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Throwable类增加addSuppressed方法和getSuppressed方法，支持原始异常中加入被抑制的异常。</li>
 <li>异常抑制：在try和finally中同时抛出异常时，finally中抛出的异常会在异常栈中向上传递，而try中产生的原始异常会消失。</li>
-<li>在Java7之前的版本，可以将原始异常保存，在finally中产生异常时抛出原始异常：
+<li>在Java7之前的版本，可以将原始异常保存，在finally中产生异常时抛出原始异常：</li>
+</ul>
 <div class="codehilite"><pre><span></span><span class="c1">//java 7 以前</span>
 <span class="kd">public</span> <span class="kt">void</span> <span class="nf">read</span><span class="o">(</span><span class="n">String</span> <span class="n">filename</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">BaseException</span> <span class="o">{</span>  
     <span class="n">FileInputStream</span> <span class="n">input</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>  
@@ -2945,7 +2963,8 @@
             <span class="k">throw</span> <span class="k">new</span> <span class="n">BaseException</span><span class="o">(</span><span class="n">readException</span><span class="o">);</span>  
         <span class="o">}</span>  
     <span class="o">}</span>  
-<span class="o">}</span> 
+<span class="o">}</span>
+
 <span class="c1">//在Java7中的版本，可以使用addSuppressed方法记录被抑制的异常：</span>
 <span class="kd">public</span> <span class="kt">void</span> <span class="nf">read</span><span class="o">(</span><span class="n">String</span> <span class="n">filename</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">IOException</span> <span class="o">{</span>  
     <span class="n">FileInputStream</span> <span class="n">input</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>  
@@ -2972,20 +2991,23 @@
         <span class="o">}</span>  
     <span class="o">}</span>  
 <span class="o">}</span>  
-</pre></div></li>
-</ul>
+</pre></div>
+
 <h3 id="try-with-resources">try-with-resources<a class="headerlink" href="#try-with-resources" title="Permanent link">&para;</a></h3>
 <p>java7以前对某些资源的操作是需要手动关闭，如InputStream，Writes，Sockets，Sql等，需要在finally中进行关闭资源的操作，现在不需要使用finally来保证打开的流被正确关闭，现在是自动完成的，会自动释放资源,确保每一个资源在处理完成后都会关闭，就不需要我们代码去close();</p>
 <ul>
 <li>在采用try-with-resources方式后，不需要再次声明流的关闭。</li>
-<li>可以使用try-with-resources的资源有：任何实现了java.lang.AutoCloseable接口和java.io.Closeable接口的对象。为了支持这个行为，所有可关闭的类将被修改为可以实现一个Closable（可关闭的）接口。
+<li>可以使用try-with-resources的资源有：任何实现了java.lang.AutoCloseable接口和java.io.Closeable接口的对象。为了支持这个行为，所有可关闭的类将被修改为可以实现一个Closable（可关闭的）接口。</li>
+</ul>
 <div class="codehilite"><pre><span></span><span class="kd">public</span> <span class="kd">interface</span> <span class="nc">Closeable</span> <span class="kd">extends</span> <span class="n">AutoCloseable</span><span class="o">{}</span>
 <span class="kd">public</span> <span class="kd">abstract</span> <span class="kd">class</span> <span class="nc">Reader</span> <span class="kd">implements</span> <span class="n">Readable</span><span class="o">,</span> <span class="n">Closeable</span><span class="o">{}</span>
 </pre></div>
-如果在try语句中写入了没有实现该接口的类，会提示：
-<div class="codehilite"><pre><span></span>The resource type File does not implement java.lang.AutoCloseable
-</pre></div>
-示例：
+
+<p>如果在try语句中写入了没有实现该接口的类，会提示：</p>
+<blockquote>
+<p>The resource type File does not implement java.lang.AutoCloseable</p>
+</blockquote>
+<p>示例：</p>
 <div class="codehilite"><pre><span></span><span class="c1">//java 7 以前</span>
 <span class="n">OutputStream</span> <span class="n">fos</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
 <span class="k">try</span> <span class="o">{</span>
@@ -3006,13 +3028,13 @@
     <span class="k">while</span><span class="o">(</span> <span class="o">(</span><span class="n">len</span><span class="o">=</span><span class="n">input</span><span class="o">.</span><span class="na">read</span><span class="o">(</span><span class="n">buffer</span><span class="o">))!=-</span><span class="mi">1</span> <span class="o">)</span> <span class="o">{</span>  
         <span class="n">output</span><span class="o">.</span><span class="na">write</span><span class="o">(</span><span class="n">buffer</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="n">len</span><span class="o">);</span>  
         <span class="o">}</span>  
-    <span class="o">}</span>   
+    <span class="o">}</span>
 <span class="o">}</span>  
-</pre></div></li>
-</ul>
+</pre></div>
+
 <h3 id="_7">捕获多个异常<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
 <p>java7以前在一个方法抛出多个异常时，只能一个个的catch，这样代码会有多个catch,显得很不友好，现在只需一个catch语句，多个异常类型用"|"隔开。
- 示例：
+ 示例：</p>
 <div class="codehilite"><pre><span></span><span class="c1">//java 7 以前</span>
 <span class="k">try</span> <span class="o">{</span>
     <span class="n">result</span> <span class="o">=</span> <span class="n">field</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">obj</span><span class="o">);</span>
@@ -3027,35 +3049,39 @@
 <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">IllegalArgumentException</span> <span class="o">|</span> <span class="n">IllegalAccessException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
     <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
 <span class="o">}</span>
-</pre></div></p>
+</pre></div>
+
 <h3 id="_8">泛型实例化类型自动推断<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
 <p>运用泛型实例化类型自动推断，对通用实例创建(diamond)的type引用进行了改进
-示例：
+示例：</p>
 <div class="codehilite"><pre><span></span><span class="c1">//java 7 以前</span>
 <span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">list</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;();</span>
 <span class="c1">//java 7 以后</span>
 <span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">list</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;();</span>
-</pre></div></p>
+</pre></div>
+
 <h3 id="_9">增加二进制表示<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h3>
 <p>Java7前支持十进制（123）、八进制（0123）、十六进制（0X12AB）</p>
 <p>Java7增加二进制表示（0B11110001、0b11110001）
-示例：
+示例：</p>
 <div class="codehilite"><pre><span></span><span class="kt">int</span> <span class="n">binary</span> <span class="o">=</span> <span class="mb">0b0001_1001</span><span class="o">;</span>
 <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;binary is :&quot;</span><span class="o">+</span><span class="n">binary</span><span class="o">);</span>
                 <span class="n">binary</span> <span class="n">is</span> <span class="o">:</span><span class="mi">25</span>
-</pre></div></p>
+</pre></div>
+
 <h3 id="_10">数字中可添加分隔符<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h3>
 <p>Java7中支持在数字中间增加'_'作为分隔符，分隔长int以及long（也支持double,float），显示更直观，如（12_123_456）。</p>
 <p>下划线只能在数字中间，编译时编译器自动删除数字中的下划线。</p>
-<p>示例：
+<p>示例：</p>
 <div class="codehilite"><pre><span></span><span class="kt">int</span> <span class="n">intOne</span> <span class="o">=</span> <span class="mi">1_000_000</span><span class="o">;</span>
 <span class="kt">long</span> <span class="n">longOne</span> <span class="o">=</span> <span class="mi">1_000_000</span><span class="o">;</span>
 <span class="kt">double</span> <span class="n">doubleOne</span> <span class="o">=</span> <span class="mi">1_000_000</span><span class="o">;</span>
 <span class="kt">float</span> <span class="n">floatOne</span> <span class="o">=</span> <span class="mi">1_000_000</span><span class="o">;</span>
-</pre></div></p>
+</pre></div>
+
 <h3 id="_11">变长参数方法的优化<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h3>
 <p>参数类型相同时，把重载函数合并到一起了
-使用可变参数时，提升编译器的警告和错误信息
+使用可变参数时，提升编译器的警告和错误信息</p>
 <div class="codehilite"><pre><span></span><span class="kd">public</span> <span class="kt">int</span> <span class="nf">sum</span><span class="o">(</span><span class="kt">int</span><span class="o">...</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>  
     <span class="kt">int</span> <span class="n">result</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>  
     <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">value</span> <span class="o">:</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>  
@@ -3063,7 +3089,8 @@
     <span class="o">}</span>  
     <span class="k">return</span> <span class="n">result</span><span class="o">;</span>  
 <span class="o">}</span>  
-</pre></div></p>
+</pre></div>
+
 <h3 id="_12">集合类的语法支持<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h3>
 <div class="codehilite"><pre><span></span><span class="c1">//java 7 以前</span>
 <span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">list</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;();</span>
@@ -3086,19 +3113,20 @@
 </pre></div>
 
 <h3 id="_13">自动资源管理<a class="headerlink" href="#_13" title="Permanent link">&para;</a></h3>
-<p>Java中某些资源是需要手动关闭的，如InputStream，Writes，Sockets，Sql classes等。这个新的语言特性允许try语句本身申请更多的资源，这些资源作用于try代码块，并自动关闭。
+<p>Java中某些资源是需要手动关闭的，如InputStream，Writes，Sockets，Sql classes等。这个新的语言特性允许try语句本身申请更多的资源，这些资源作用于try代码块，并自动关闭。</p>
 <div class="codehilite"><pre><span></span><span class="c1">//java 7 以前</span>
 <span class="n">BufferedReader</span> <span class="n">br</span> <span class="o">=</span> <span class="k">new</span> <span class="n">BufferedReader</span><span class="o">(</span><span class="k">new</span> <span class="n">FileReader</span><span class="o">(</span><span class="n">path</span><span class="o">));</span>
 <span class="k">try</span> <span class="o">{</span>
 <span class="k">return</span> <span class="n">br</span><span class="o">.</span><span class="na">readLine</span><span class="o">();</span>
     <span class="o">}</span> <span class="k">finally</span> <span class="o">{</span>
         <span class="n">br</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
-<span class="o">}</span> 
+<span class="o">}</span>
 <span class="c1">//java 7 以后</span>
 <span class="k">try</span> <span class="o">(</span><span class="n">BufferedReader</span> <span class="n">br</span> <span class="o">=</span> <span class="k">new</span> <span class="n">BufferedReader</span><span class="o">(</span><span class="k">new</span> <span class="n">FileReader</span><span class="o">(</span><span class="n">path</span><span class="o">))</span> <span class="o">{</span>
     <span class="k">return</span> <span class="n">br</span><span class="o">.</span><span class="na">readLine</span><span class="o">();</span>
-<span class="o">}</span> 
-</pre></div></p>
+<span class="o">}</span>
+</pre></div>
+
 <h3 id="_14">新增一些取环境信息的工具方法<a class="headerlink" href="#_14" title="Permanent link">&para;</a></h3>
 <div class="codehilite"><pre><span></span><span class="n">File</span> <span class="n">System</span><span class="o">.</span><span class="na">getJavaIoTempDir</span><span class="o">()</span> <span class="c1">// IO临时文件夹  </span>
 <span class="n">File</span> <span class="n">System</span><span class="o">.</span><span class="na">getJavaHomeDir</span><span class="o">()</span> <span class="c1">// JRE的安装目录  </span>
@@ -3107,30 +3135,35 @@
 </pre></div>
 
 <h2 id="java8">Java8 新特性总结<a class="headerlink" href="#java8" title="Permanent link">&para;</a></h2>
-<p>Java8 新增了非常多的特性，我们主要讨论以下几个：
-1. Lambda 表达式 − Lambda允许把函数作为一个方法的参数(函数作为参数传递进方法中)。
-2. 方法引用 − 方法引用提供了非常有用的语法，可以直接引用已有Java类或对象（实例）的方法或构造器。与lambda联合使用，方法引用可以使语言的构造更紧凑简洁，减少冗余代码。
-3. 默认方法 − 默认方法就是一个在接口里面有了一个实现的方法。
-4. 新工具 − 新的编译工具，如：Nashorn引擎 jjs、 类依赖分析器jdeps。
-5. Stream API −新添加的Stream API（java.util.stream） 把真正的函数式编程风格引入到Java中。
-6. Date Time API − 加强对日期与时间的处理。
-7. Optional 类 − Optional 类已经成为 Java 8 类库的一部分，用来解决空指针异常。
-8. Nashorn, JavaScript 引擎 − Java 8提供了一个新的Nashorn javascript引擎，它允许我们在JVM上运行特定的javascript应用。</p>
+<p>Java8 新增了非常多的特性，我们主要讨论以下几个：</p>
+<ol>
+<li>Lambda 表达式 − Lambda允许把函数作为一个方法的参数(函数作为参数传递进方法中)。</li>
+<li>方法引用 − 方法引用提供了非常有用的语法，可以直接引用已有Java类或对象（实例）的方法或构造器。与lambda联合使用，方法引用可以使语言的构造更紧凑简洁，减少冗余代码。</li>
+<li>默认方法 − 默认方法就是一个在接口里面有了一个实现的方法。</li>
+<li>新工具 − 新的编译工具，如：Nashorn引擎 jjs、 类依赖分析器jdeps。</li>
+<li>Stream API −新添加的Stream API（java.util.stream） 把真正的函数式编程风格引入到Java中。</li>
+<li>Date Time API − 加强对日期与时间的处理。</li>
+<li>Optional 类 − Optional 类已经成为 Java 8 类库的一部分，用来解决空指针异常。</li>
+<li>Nashorn, JavaScript 引擎 − Java 8提供了一个新的Nashorn javascript引擎，它允许我们在JVM上运行特定的javascript应用。</li>
+</ol>
 <h3 id="lambda">Lambda表达式和函数式接口<a class="headerlink" href="#lambda" title="Permanent link">&para;</a></h3>
 <p>Lambda表达式（也称为闭包）是Java 8中最大和最令人期待的语言改变。它允许我们将函数当成参数传递给某个方法，或者把代码本身当作数据处理：函数式开发者非常熟悉这些概念。很多JVM平台上的语言（Groovy、Scala等）从诞生之日就支持Lambda表达式，但是Java开发者没有选择，只能使用匿名内部类代替Lambda表达式。</p>
-<p>Lambda的设计耗费了很多时间和很大的社区力量，最终找到一种折中的实现方案，可以实现简洁而紧凑的语言结构。最简单的Lambda表达式可由逗号分隔的参数列表、-&gt;符号和语句块组成，例如：
+<p>Lambda的设计耗费了很多时间和很大的社区力量，最终找到一种折中的实现方案，可以实现简洁而紧凑的语言结构。最简单的Lambda表达式可由逗号分隔的参数列表、-&gt;符号和语句块组成，例如：</p>
 <div class="codehilite"><pre><span></span><span class="n">Arrays</span><span class="o">.</span><span class="na">asList</span><span class="o">(</span> <span class="s">&quot;a&quot;</span><span class="o">,</span> <span class="s">&quot;b&quot;</span><span class="o">,</span> <span class="s">&quot;d&quot;</span> <span class="o">).</span><span class="na">forEach</span><span class="o">(</span> <span class="n">e</span> <span class="o">-&gt;</span> <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span> <span class="n">e</span> <span class="o">)</span> <span class="o">);</span>
 </pre></div>
-在上面这个代码中的参数e的类型是由编译器推理得出的，你也可以显式指定该参数的类型，例如：
+
+<p>在上面这个代码中的参数e的类型是由编译器推理得出的，你也可以显式指定该参数的类型，例如：</p>
 <div class="codehilite"><pre><span></span><span class="n">Arrays</span><span class="o">.</span><span class="na">asList</span><span class="o">(</span> <span class="s">&quot;a&quot;</span><span class="o">,</span> <span class="s">&quot;b&quot;</span><span class="o">,</span> <span class="s">&quot;d&quot;</span> <span class="o">).</span><span class="na">forEach</span><span class="o">(</span> <span class="o">(</span> <span class="n">String</span> <span class="n">e</span> <span class="o">)</span> <span class="o">-&gt;</span> <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span> <span class="n">e</span> <span class="o">)</span> <span class="o">);</span>
 </pre></div>
-如果Lambda表达式需要更复杂的语句块，则可以使用花括号将该语句块括起来，类似于Java中的函数体，例如：
+
+<p>如果Lambda表达式需要更复杂的语句块，则可以使用花括号将该语句块括起来，类似于Java中的函数体，例如：</p>
 <div class="codehilite"><pre><span></span><span class="n">Arrays</span><span class="o">.</span><span class="na">asList</span><span class="o">(</span> <span class="s">&quot;a&quot;</span><span class="o">,</span> <span class="s">&quot;b&quot;</span><span class="o">,</span> <span class="s">&quot;d&quot;</span> <span class="o">).</span><span class="na">forEach</span><span class="o">(</span> <span class="n">e</span> <span class="o">-&gt;</span> <span class="o">{</span>
     <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">print</span><span class="o">(</span> <span class="n">e</span> <span class="o">);</span>
     <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">print</span><span class="o">(</span> <span class="n">e</span> <span class="o">);</span>
 <span class="o">}</span> <span class="o">);</span>
 </pre></div>
-Lambda表达式可以引用类成员和局部变量（会将这些变量隐式得转换成final的），例如下列两个代码块的效果完全相同：
+
+<p>Lambda表达式可以引用类成员和局部变量（会将这些变量隐式得转换成final的），例如下列两个代码块的效果完全相同：</p>
 <div class="codehilite"><pre><span></span><span class="n">String</span> <span class="n">separator</span> <span class="o">=</span> <span class="s">&quot;,&quot;</span><span class="o">;</span>
 <span class="n">Arrays</span><span class="o">.</span><span class="na">asList</span><span class="o">(</span> <span class="s">&quot;a&quot;</span><span class="o">,</span> <span class="s">&quot;b&quot;</span><span class="o">,</span> <span class="s">&quot;d&quot;</span> <span class="o">).</span><span class="na">forEach</span><span class="o">(</span> 
     <span class="o">(</span> <span class="n">String</span> <span class="n">e</span> <span class="o">)</span> <span class="o">-&gt;</span> <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">print</span><span class="o">(</span> <span class="n">e</span> <span class="o">+</span> <span class="n">separator</span> <span class="o">)</span> <span class="o">);</span>
@@ -3139,7 +3172,8 @@ Lambda表达式可以引用类成员和局部变量（会将这些变量隐式�
 <span class="n">Arrays</span><span class="o">.</span><span class="na">asList</span><span class="o">(</span> <span class="s">&quot;a&quot;</span><span class="o">,</span> <span class="s">&quot;b&quot;</span><span class="o">,</span> <span class="s">&quot;d&quot;</span> <span class="o">).</span><span class="na">forEach</span><span class="o">(</span> 
     <span class="o">(</span> <span class="n">String</span> <span class="n">e</span> <span class="o">)</span> <span class="o">-&gt;</span> <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">print</span><span class="o">(</span> <span class="n">e</span> <span class="o">+</span> <span class="n">separator</span> <span class="o">)</span> <span class="o">);</span>    
 </pre></div>
-Lambda表达式有返回值，返回值的类型也由编译器推理得出。如果Lambda表达式中的语句块只有一行，则可以不用使用return语句，下列两个代码片段效果相同：
+
+<p>Lambda表达式有返回值，返回值的类型也由编译器推理得出。如果Lambda表达式中的语句块只有一行，则可以不用使用return语句，下列两个代码片段效果相同：</p>
 <div class="codehilite"><pre><span></span><span class="n">Arrays</span><span class="o">.</span><span class="na">asList</span><span class="o">(</span> <span class="s">&quot;a&quot;</span><span class="o">,</span> <span class="s">&quot;b&quot;</span><span class="o">,</span> <span class="s">&quot;d&quot;</span> <span class="o">).</span><span class="na">sort</span><span class="o">(</span> <span class="o">(</span> <span class="n">e1</span><span class="o">,</span> <span class="n">e2</span> <span class="o">)</span> <span class="o">-&gt;</span> <span class="n">e1</span><span class="o">.</span><span class="na">compareTo</span><span class="o">(</span> <span class="n">e2</span> <span class="o">)</span> <span class="o">);</span>
 <span class="c1">//和</span>
 <span class="n">Arrays</span><span class="o">.</span><span class="na">asList</span><span class="o">(</span> <span class="s">&quot;a&quot;</span><span class="o">,</span> <span class="s">&quot;b&quot;</span><span class="o">,</span> <span class="s">&quot;d&quot;</span> <span class="o">).</span><span class="na">sort</span><span class="o">(</span> <span class="o">(</span> <span class="n">e1</span><span class="o">,</span> <span class="n">e2</span> <span class="o">)</span> <span class="o">-&gt;</span> <span class="o">{</span>
@@ -3147,29 +3181,32 @@ Lambda表达式有返回值，返回值的类型也由编译器推理得出。�
     <span class="k">return</span> <span class="n">result</span><span class="o">;</span>
 <span class="o">}</span> <span class="o">);</span>
 </pre></div>
-Lambda的设计者们为了让现有的功能与Lambda表达式良好兼容，考虑了很多方法，于是产生了函数接口这个概念。函数接口指的是只有一个函数的接口，这样的接口可以隐式转换为Lambda表达式。java.lang.Runnable和java.util.concurrent.Callable是函数式接口的最佳例子。在实践中，函数式接口非常脆弱：只要某个开发者在该接口中添加一个函数，则该接口就不再是函数式接口进而导致编译失败。为了克服这种代码层面的脆弱性，并显式说明某个接口是函数式接口，Java 8 提供了一个特殊的注解@FunctionalInterface（Java 库中的所有相关接口都已经带有这个注解了），举个简单的函数式接口的定义：
+
+<p>Lambda的设计者们为了让现有的功能与Lambda表达式良好兼容，考虑了很多方法，于是产生了函数接口这个概念。函数接口指的是只有一个函数的接口，这样的接口可以隐式转换为Lambda表达式。java.lang.Runnable和java.util.concurrent.Callable是函数式接口的最佳例子。在实践中，函数式接口非常脆弱：只要某个开发者在该接口中添加一个函数，则该接口就不再是函数式接口进而导致编译失败。为了克服这种代码层面的脆弱性，并显式说明某个接口是函数式接口，Java 8 提供了一个特殊的注解@FunctionalInterface（Java 库中的所有相关接口都已经带有这个注解了），举个简单的函数式接口的定义：</p>
 <div class="codehilite"><pre><span></span><span class="nd">@FunctionalInterface</span>
 <span class="kd">public</span> <span class="kd">interface</span> <span class="nc">Functional</span> <span class="o">{</span>
     <span class="kt">void</span> <span class="nf">method</span><span class="o">();</span>
 <span class="o">}</span>
 </pre></div>
-不过有一点需要注意，默认方法和静态方法不会破坏函数式接口的定义，因此如下的代码是合法的。
+
+<p>不过有一点需要注意，默认方法和静态方法不会破坏函数式接口的定义，因此如下的代码是合法的。</p>
 <div class="codehilite"><pre><span></span><span class="nd">@FunctionalInterface</span>
 <span class="kd">public</span> <span class="kd">interface</span> <span class="nc">FunctionalDefaultMethods</span> <span class="o">{</span>
     <span class="kt">void</span> <span class="nf">method</span><span class="o">();</span>
 
-    <span class="k">default</span> <span class="kt">void</span> <span class="nf">defaultMethod</span><span class="o">()</span> <span class="o">{</span>   
-        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">print</span><span class="o">(</span><span class="s">&quot;defaultMethod&quot;</span><span class="o">);</span>       
-    <span class="o">}</span>        
+    <span class="k">default</span> <span class="kt">void</span> <span class="nf">defaultMethod</span><span class="o">()</span> <span class="o">{</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">print</span><span class="o">(</span><span class="s">&quot;defaultMethod&quot;</span><span class="o">);</span>
+    <span class="o">}</span>
     <span class="kd">static</span> <span class="kt">void</span> <span class="nf">staticMethod</span><span class="o">(){</span>
         <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">print</span><span class="o">(</span><span class="s">&quot;staticMethod&quot;</span><span class="o">);</span>
     <span class="o">}</span>
 <span class="o">}</span>
 </pre></div>
-Lambda表达式作为Java 8的最大卖点，它有潜力吸引更多的开发者加入到JVM平台，并在纯Java编程中使用函数式编程的概念。如果你需要了解更多Lambda表达式的细节，可以参考<a href="https://docs.oracle.com/javase/tutorial/java/javaOO/lambdaexpressions.html" title="官方文档">官方文档</a>。</p>
+
+<p>Lambda表达式作为Java 8的最大卖点，它有潜力吸引更多的开发者加入到JVM平台，并在纯Java编程中使用函数式编程的概念。如果你需要了解更多Lambda表达式的细节，可以参考<a href="https://docs.oracle.com/javase/tutorial/java/javaOO/lambdaexpressions.html" title="官方文档">官方文档</a>。</p>
 <h3 id="_15">接口的默认方法和静态方法<a class="headerlink" href="#_15" title="Permanent link">&para;</a></h3>
 <p>Java 8使用两个新概念扩展了接口的含义：默认方法和静态方法。默认方法使得接口有点类似traits，不过要实现的目标不一样。默认方法使得开发者可以在 不破坏二进制兼容性的前提下，往现存接口中添加新的方法，即不强制那些实现了该接口的类也同时实现这个新加的方法。</p>
-<p>默认方法和抽象方法之间的区别在于抽象方法需要实现，而默认方法不需要。接口提供的默认方法会被接口的实现类继承或者覆写，例子代码如下：
+<p>默认方法和抽象方法之间的区别在于抽象方法需要实现，而默认方法不需要。接口提供的默认方法会被接口的实现类继承或者覆写，例子代码如下：</p>
 <div class="codehilite"><pre><span></span><span class="kd">private</span> <span class="kd">interface</span> <span class="nc">Defaulable</span> <span class="o">{</span>
     <span class="c1">// Interfaces now allow default methods, the implementer may or </span>
     <span class="c1">// may not implement (override) them.</span>
@@ -3188,8 +3225,9 @@ Lambda表达式作为Java 8的最大卖点，它有潜力吸引更多的开发�
     <span class="o">}</span>
 <span class="o">}</span>
 </pre></div>
-Defaulable接口使用关键字default定义了一个默认方法notRequired()。DefaultableImpl类实现了这个接口，同时默认继承了这个接口中的默认方法；OverridableImpl类也实现了这个接口，但覆写了该接口的默认方法，并提供了一个不同的实现。</p>
-<p>Java 8带来的另一个有趣的特性是在接口中可以定义静态方法，例子代码如下：
+
+<p>Defaulable接口使用关键字default定义了一个默认方法notRequired()。DefaultableImpl类实现了这个接口，同时默认继承了这个接口中的默认方法；OverridableImpl类也实现了这个接口，但覆写了该接口的默认方法，并提供了一个不同的实现。</p>
+<p>Java 8带来的另一个有趣的特性是在接口中可以定义静态方法，例子代码如下：</p>
 <div class="codehilite"><pre><span></span><span class="kd">private</span> <span class="kd">interface</span> <span class="nc">DefaulableFactory</span> <span class="o">{</span>
     <span class="c1">// Interfaces now allow static methods</span>
     <span class="kd">static</span> <span class="n">Defaulable</span> <span class="nf">create</span><span class="o">(</span> <span class="n">Supplier</span><span class="o">&lt;</span> <span class="n">Defaulable</span> <span class="o">&gt;</span> <span class="n">supplier</span> <span class="o">)</span> <span class="o">{</span>
@@ -3197,7 +3235,8 @@ Defaulable接口使用关键字default定义了一个默认方法notRequired()�
     <span class="o">}</span>
 <span class="o">}</span>
 </pre></div>
-下面的代码片段整合了默认方法和静态方法的使用场景：
+
+<p>下面的代码片段整合了默认方法和静态方法的使用场景：</p>
 <div class="codehilite"><pre><span></span><span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span> <span class="n">String</span><span class="o">[]</span> <span class="n">args</span> <span class="o">)</span> <span class="o">{</span>
     <span class="n">Defaulable</span> <span class="n">defaulable</span> <span class="o">=</span> <span class="n">DefaulableFactory</span><span class="o">.</span><span class="na">create</span><span class="o">(</span> <span class="n">DefaultableImpl</span><span class="o">::</span><span class="k">new</span> <span class="o">);</span>
     <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span> <span class="n">defaulable</span><span class="o">.</span><span class="na">notRequired</span><span class="o">()</span> <span class="o">);</span>
@@ -3206,19 +3245,21 @@ Defaulable接口使用关键字default定义了一个默认方法notRequired()�
     <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span> <span class="n">defaulable</span><span class="o">.</span><span class="na">notRequired</span><span class="o">()</span> <span class="o">);</span>
 <span class="o">}</span>
 </pre></div>
-这段代码的输出结果如下：
-<div class="codehilite"><pre><span></span>Default implementation
-Overridden implementation
-</pre></div>
-由于JVM上的默认方法的实现在字节码层面提供了支持，因此效率非常高。默认方法允许在不打破现有继承体系的基础上改进接口。该特性在官方库中的应用是：给java.util.Collection接口添加新方法，如stream()、parallelStream()、forEach()和removeIf()等等。</p>
+
+<p>这段代码的输出结果如下：</p>
+<blockquote>
+<p>Default implementation
+Overridden implementation</p>
+</blockquote>
+<p>由于JVM上的默认方法的实现在字节码层面提供了支持，因此效率非常高。默认方法允许在不打破现有继承体系的基础上改进接口。该特性在官方库中的应用是：给java.util.Collection接口添加新方法，如stream()、parallelStream()、forEach()和removeIf()等等。</p>
 <p>尽管默认方法有这么多好处，但在实际开发中应该谨慎使用：在复杂的继承体系中，默认方法可能引起歧义和编译错误。如果你想了解更多细节，可以参考<a href="https://docs.oracle.com/javase/tutorial/java/IandI/defaultmethods.html" title="官方文档">官方文档</a>。</p>
 <h3 id="_16">方法引用<a class="headerlink" href="#_16" title="Permanent link">&para;</a></h3>
 <p>方法引用使得开发者可以直接引用现存的方法、Java类的构造方法或者实例对象。方法引用和Lambda表达式配合使用，使得java类的构造方法看起来紧凑而简洁，没有很多复杂的模板代码。</p>
-<p>西门的例子中，Car类是不同方法引用的例子，可以帮助读者区分四种类型的方法引用。
+<p>西门的例子中，Car类是不同方法引用的例子，可以帮助读者区分四种类型的方法引用。</p>
 <div class="codehilite"><pre><span></span><span class="kd">public</span> <span class="kd">static</span> <span class="kd">class</span> <span class="nc">Car</span> <span class="o">{</span>
     <span class="kd">public</span> <span class="kd">static</span> <span class="n">Car</span> <span class="nf">create</span><span class="o">(</span> <span class="kd">final</span> <span class="n">Supplier</span><span class="o">&lt;</span> <span class="n">Car</span> <span class="o">&gt;</span> <span class="n">supplier</span> <span class="o">)</span> <span class="o">{</span>
         <span class="k">return</span> <span class="n">supplier</span><span class="o">.</span><span class="na">get</span><span class="o">();</span>
-    <span class="o">}</span>              
+    <span class="o">}</span>
 
     <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">collide</span><span class="o">(</span> <span class="kd">final</span> <span class="n">Car</span> <span class="n">car</span> <span class="o">)</span> <span class="o">{</span>
         <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span> <span class="s">&quot;Collided &quot;</span> <span class="o">+</span> <span class="n">car</span><span class="o">.</span><span class="na">toString</span><span class="o">()</span> <span class="o">);</span>
@@ -3233,29 +3274,34 @@ Overridden implementation
     <span class="o">}</span>
 <span class="o">}</span>
 </pre></div>
-第一种方法引用的类型是构造器引用，语法是Class::new，或者更一般的形式：Class<T>::new。注意：这个构造器没有参数。
+
+<p>第一种方法引用的类型是构造器引用，语法是Class::new，或者更一般的形式：Class<T>::new。注意：这个构造器没有参数。</p>
 <div class="codehilite"><pre><span></span><span class="kd">final</span> <span class="n">Car</span> <span class="n">car</span> <span class="o">=</span> <span class="n">Car</span><span class="o">.</span><span class="na">create</span><span class="o">(</span> <span class="n">Car</span><span class="o">::</span><span class="k">new</span> <span class="o">);</span>
 <span class="kd">final</span> <span class="n">List</span><span class="o">&lt;</span> <span class="n">Car</span> <span class="o">&gt;</span> <span class="n">cars</span> <span class="o">=</span> <span class="n">Arrays</span><span class="o">.</span><span class="na">asList</span><span class="o">(</span> <span class="n">car</span> <span class="o">);</span>
 </pre></div>
-第二种方法引用的类型是静态方法引用，语法是Class::static_method。注意：这个方法接受一个Car类型的参数。
-<div class="codehilite"><pre><span></span><span class="n">cars</span><span class="o">.</span><span class="na">forEach</span><span class="o">(</span> <span class="n">Car</span><span class="o">::</span><span class="n">collide</span> <span class="o">);</span>
+
+<p>第二种方法引用的类型是静态方法引用，语法是Class::static_method。注意：这个方法接受一个Car类型的参数。</p>
+<p><div class="codehilite"><pre><span></span><span class="n">cars</span><span class="o">.</span><span class="na">forEach</span><span class="o">(</span> <span class="n">Car</span><span class="o">::</span><span class="n">collide</span> <span class="o">);</span>
 </pre></div>
 第三种方法引用的类型是某个类的成员方法的引用，语法是Class::method，注意，这个方法没有定义入参：
 <div class="codehilite"><pre><span></span><span class="n">cars</span><span class="o">.</span><span class="na">forEach</span><span class="o">(</span> <span class="n">Car</span><span class="o">::</span><span class="n">repair</span> <span class="o">);</span>
-</pre></div>
-第四种方法引用的类型是某个实例对象的成员方法的引用，语法是instance::method。注意：这个方法接受一个Car类型的参数：
+</pre></div></p>
+<p>第四种方法引用的类型是某个实例对象的成员方法的引用，语法是instance::method。注意：这个方法接受一个Car类型的参数：</p>
 <div class="codehilite"><pre><span></span><span class="kd">final</span> <span class="n">Car</span> <span class="n">police</span> <span class="o">=</span> <span class="n">Car</span><span class="o">.</span><span class="na">create</span><span class="o">(</span> <span class="n">Car</span><span class="o">::</span><span class="k">new</span> <span class="o">);</span>
 <span class="n">cars</span><span class="o">.</span><span class="na">forEach</span><span class="o">(</span> <span class="n">police</span><span class="o">::</span><span class="n">follow</span> <span class="o">);</span>
 </pre></div>
-运行上述例子，可以在控制台看到如下输出（Car实例可能不同）：
-<div class="codehilite"><pre><span></span>Collided com.javacodegeeks.java8.method.references.MethodReferences$Car@7a81197d
-Repaired com.javacodegeeks.java8.method.references.MethodReferences$Car@7a81197d
-Following the com.javacodegeeks.java8.method.references.MethodReferences$Car@7a81197d
-</pre></div>
-如果想了解和学习更详细的内容，可以参考<a href="https://docs.oracle.com/javase/tutorial/java/javaOO/methodreferences.html" title="官方文档">官方文档</a>。</p>
+
+<p>运行上述例子，可以在控制台看到如下输出（Car实例可能不同）：</p>
+<blockquote>
+<p>Collided com.javacodegeeks.java8.method.references.MethodReferences<span><span class="MathJax_Preview">Car@7a81197d
+Repaired com.javacodegeeks.java8.method.references.MethodReferences</span><script type="math/tex">Car@7a81197d
+Repaired com.javacodegeeks.java8.method.references.MethodReferences</script></span>Car@7a81197d
+Following the com.javacodegeeks.java8.method.references.MethodReferences$Car@7a81197d</p>
+</blockquote>
+<p>如果想了解和学习更详细的内容，可以参考<a href="https://docs.oracle.com/javase/tutorial/java/javaOO/methodreferences.html" title="官方文档">官方文档</a>。</p>
 <h3 id="_17">重复注解<a class="headerlink" href="#_17" title="Permanent link">&para;</a></h3>
 <p>自从Java 5中引入注解以来，这个特性开始变得非常流行，并在各个框架和项目中被广泛使用。不过，注解有一个很大的限制是：在同一个地方不能多次使用同一个注解。Java 8打破了这个限制，引入了重复注解的概念，允许在同一个地方多次使用同一个注解。</p>
-<p>在Java 8中使用@Repeatable注解定义重复注解，实际上，这并不是语言层面的改进，而是编译器做的一个trick，底层的技术仍然相同。可以利用下面的代码说明：
+<p>在Java 8中使用@Repeatable注解定义重复注解，实际上，这并不是语言层面的改进，而是编译器做的一个trick，底层的技术仍然相同。可以利用下面的代码说明：</p>
 <div class="codehilite"><pre><span></span><span class="kn">package</span> <span class="nn">com.javacodegeeks.java8.repeatable.annotations</span><span class="o">;</span>
 
 <span class="kn">import</span> <span class="nn">java.lang.annotation.ElementType</span><span class="o">;</span>
@@ -3280,7 +3326,7 @@ Following the com.javacodegeeks.java8.method.references.MethodReferences$Car@7a8
 
     <span class="nd">@Filter</span><span class="o">(</span> <span class="s">&quot;filter1&quot;</span> <span class="o">)</span>
     <span class="nd">@Filter</span><span class="o">(</span> <span class="s">&quot;filter2&quot;</span> <span class="o">)</span>
-    <span class="kd">public</span> <span class="kd">interface</span> <span class="nc">Filterable</span> <span class="o">{</span>        
+    <span class="kd">public</span> <span class="kd">interface</span> <span class="nc">Filterable</span> <span class="o">{</span>
     <span class="o">}</span>
 
     <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
@@ -3290,19 +3336,21 @@ Following the com.javacodegeeks.java8.method.references.MethodReferences$Car@7a8
     <span class="o">}</span>
 <span class="o">}</span>
 </pre></div>
-正如我们所见，这里的Filter类使用@Repeatable(Filters.class)注解修饰，而Filters是存放Filter注解的容器，编译器尽量对开发者屏蔽这些细节。这样，Filterable接口可以用两个Filter注解注释（这里并没有提到任何关于Filters的信息）。</p>
-<p>另外，反射API提供了一个新的方法：getAnnotationsByType()，可以返回某个类型的重复注解，例如Filterable.class.getAnnoation(Filters.class)将返回两个Filter实例，输出到控制台的内容如下所示：
-<div class="codehilite"><pre><span></span>filter1
-filter2
-</pre></div>
-如果想了解和学习更详细的内容，可以参考<a href="https://docs.oracle.com/javase/tutorial/java/annotations/repeating.html" title="官方文档">官方文档</a>。</p>
+
+<p>正如我们所见，这里的Filter类使用@Repeatable(Filters.class)注解修饰，而Filters是存放Filter注解的容器，编译器尽量对开发者屏蔽这些细节。这样，Filterable接口可以用两个Filter注解注释（这里并没有提到任何关于Filters的信息）。</p>
+<p>另外，反射API提供了一个新的方法：getAnnotationsByType()，可以返回某个类型的重复注解，例如Filterable.class.getAnnoation(Filters.class)将返回两个Filter实例，输出到控制台的内容如下所示：</p>
+<blockquote>
+<p>filter1
+filter2</p>
+</blockquote>
+<p>如果想了解和学习更详细的内容，可以参考<a href="https://docs.oracle.com/javase/tutorial/java/annotations/repeating.html" title="官方文档">官方文档</a>。</p>
 <h3 id="_18">更好的类型推断<a class="headerlink" href="#_18" title="Permanent link">&para;</a></h3>
-<p>Java 8编译器在类型推断方面有很大的提升，在很多场景下编译器可以推导出某个参数的数据类型，从而使得代码更为简洁。例子代码如下：
+<p>Java 8编译器在类型推断方面有很大的提升，在很多场景下编译器可以推导出某个参数的数据类型，从而使得代码更为简洁。例子代码如下：</p>
 <div class="codehilite"><pre><span></span><span class="kn">package</span> <span class="nn">com.javacodegeeks.java8.type.inference</span><span class="o">;</span>
 
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">Value</span><span class="o">&lt;</span> <span class="n">T</span> <span class="o">&gt;</span> <span class="o">{</span>
-    <span class="kd">public</span> <span class="kd">static</span><span class="o">&lt;</span> <span class="n">T</span> <span class="o">&gt;</span> <span class="n">T</span> <span class="nf">defaultValue</span><span class="o">()</span> <span class="o">{</span> 
-        <span class="k">return</span> <span class="kc">null</span><span class="o">;</span> 
+    <span class="kd">public</span> <span class="kd">static</span><span class="o">&lt;</span> <span class="n">T</span> <span class="o">&gt;</span> <span class="n">T</span> <span class="nf">defaultValue</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
     <span class="o">}</span>
 
     <span class="kd">public</span> <span class="n">T</span> <span class="nf">getOrDefault</span><span class="o">(</span> <span class="n">T</span> <span class="n">value</span><span class="o">,</span> <span class="n">T</span> <span class="n">defaultValue</span> <span class="o">)</span> <span class="o">{</span>
@@ -3310,7 +3358,8 @@ filter2
     <span class="o">}</span>
 <span class="o">}</span>
 </pre></div>
-下列代码是Value<String>类型的应用：
+
+<p>下列代码是Value<String>类型的应用：</p>
 <div class="codehilite"><pre><span></span><span class="kn">package</span> <span class="nn">com.javacodegeeks.java8.type.inference</span><span class="o">;</span>
 
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">TypeInference</span> <span class="o">{</span>
@@ -3320,9 +3369,10 @@ filter2
     <span class="o">}</span>
 <span class="o">}</span>
 </pre></div>
-参数Value.defaultValue()的类型由编译器推导得出，不需要显式指明。在Java 7中这段代码会有编译错误，除非使用Value.<String>defaultValue()。</p>
+
+<p>参数Value.defaultValue()的类型由编译器推导得出，不需要显式指明。在Java 7中这段代码会有编译错误，除非使用Value.<String>defaultValue()。</p>
 <h3 id="_19">拓宽注解的应用场景<a class="headerlink" href="#_19" title="Permanent link">&para;</a></h3>
-<p>Java 8拓宽了注解的应用场景。现在，注解几乎可以使用在任何元素上：局部变量、接口类型、超类和接口实现类，甚至可以用在函数的异常定义上。下面是一些例子：
+<p>Java 8拓宽了注解的应用场景。现在，注解几乎可以使用在任何元素上：局部变量、接口类型、超类和接口实现类，甚至可以用在函数的异常定义上。下面是一些例子：</p>
 <div class="codehilite"><pre><span></span><span class="kn">package</span> <span class="nn">com.javacodegeeks.java8.annotations</span><span class="o">;</span>
 
 <span class="kn">import</span> <span class="nn">java.lang.annotation.ElementType</span><span class="o">;</span>
@@ -3335,24 +3385,25 @@ filter2
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">Annotations</span> <span class="o">{</span>
     <span class="nd">@Retention</span><span class="o">(</span> <span class="n">RetentionPolicy</span><span class="o">.</span><span class="na">RUNTIME</span> <span class="o">)</span>
     <span class="nd">@Target</span><span class="o">(</span> <span class="o">{</span> <span class="n">ElementType</span><span class="o">.</span><span class="na">TYPE_USE</span><span class="o">,</span> <span class="n">ElementType</span><span class="o">.</span><span class="na">TYPE_PARAMETER</span> <span class="o">}</span> <span class="o">)</span>
-    <span class="kd">public</span> <span class="nd">@interface</span> <span class="n">NonEmpty</span> <span class="o">{</span>        
+    <span class="kd">public</span> <span class="nd">@interface</span> <span class="n">NonEmpty</span> <span class="o">{</span>
     <span class="o">}</span>
 
     <span class="kd">public</span> <span class="kd">static</span> <span class="kd">class</span> <span class="nc">Holder</span><span class="o">&lt;</span> <span class="nd">@NonEmpty</span> <span class="n">T</span> <span class="o">&gt;</span> <span class="kd">extends</span> <span class="nd">@NonEmpty</span> <span class="n">Object</span> <span class="o">{</span>
-        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">method</span><span class="o">()</span> <span class="kd">throws</span> <span class="nd">@NonEmpty</span> <span class="n">Exception</span> <span class="o">{</span>            
+        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">method</span><span class="o">()</span> <span class="kd">throws</span> <span class="nd">@NonEmpty</span> <span class="n">Exception</span> <span class="o">{</span>
         <span class="o">}</span>
     <span class="o">}</span>
 
     <span class="nd">@SuppressWarnings</span><span class="o">(</span> <span class="s">&quot;unused&quot;</span> <span class="o">)</span>
     <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
-        <span class="kd">final</span> <span class="n">Holder</span><span class="o">&lt;</span> <span class="n">String</span> <span class="o">&gt;</span> <span class="n">holder</span> <span class="o">=</span> <span class="k">new</span> <span class="nd">@NonEmpty</span> <span class="n">Holder</span><span class="o">&lt;</span> <span class="n">String</span> <span class="o">&gt;();</span>        
-        <span class="nd">@NonEmpty</span> <span class="n">Collection</span><span class="o">&lt;</span> <span class="nd">@NonEmpty</span> <span class="n">String</span> <span class="o">&gt;</span> <span class="n">strings</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;();</span>        
+        <span class="kd">final</span> <span class="n">Holder</span><span class="o">&lt;</span> <span class="n">String</span> <span class="o">&gt;</span> <span class="n">holder</span> <span class="o">=</span> <span class="k">new</span> <span class="nd">@NonEmpty</span> <span class="n">Holder</span><span class="o">&lt;</span> <span class="n">String</span> <span class="o">&gt;();</span>
+        <span class="nd">@NonEmpty</span> <span class="n">Collection</span><span class="o">&lt;</span> <span class="nd">@NonEmpty</span> <span class="n">String</span> <span class="o">&gt;</span> <span class="n">strings</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;();</span>
     <span class="o">}</span>
 <span class="o">}</span>
 </pre></div>
-ElementType.TYPE_USER和ElementType.TYPE_PARAMETER是Java 8新增的两个注解，用于描述注解的使用场景。Java 语言也做了对应的改变，以识别这些新增的注解。</p>
+
+<p>ElementType.TYPE_USER和ElementType.TYPE_PARAMETER是Java 8新增的两个注解，用于描述注解的使用场景。Java 语言也做了对应的改变，以识别这些新增的注解。</p>
 <h3 id="java_1">Java编译器的新特性<a class="headerlink" href="#java_1" title="Permanent link">&para;</a></h3>
-<p>为了在运行时获得Java程序中方法的参数名称，老一辈的Java程序员必须使用不同方法，例如Paranamer library。Java 8终于将这个特性规范化，在语言层面（使用反射API和Parameter.getName()方法）和字节码层面（使用新的javac编译器以及-parameters参数）提供支持。
+<p>为了在运行时获得Java程序中方法的参数名称，老一辈的Java程序员必须使用不同方法，例如Paranamer library。Java 8终于将这个特性规范化，在语言层面（使用反射API和Parameter.getName()方法）和字节码层面（使用新的javac编译器以及-parameters参数）提供支持。</p>
 <div class="codehilite"><pre><span></span><span class="kn">package</span> <span class="nn">com.javacodegeeks.java8.parameter.names</span><span class="o">;</span>
 
 <span class="kn">import</span> <span class="nn">java.lang.reflect.Method</span><span class="o">;</span>
@@ -3367,13 +3418,14 @@ ElementType.TYPE_USER和ElementType.TYPE_PARAMETER是Java 8新增的两个注解
     <span class="o">}</span>
 <span class="o">}</span>
 </pre></div>
-在Java 8中这个特性是默认关闭的，因此如果不带-parameters参数编译上述代码并运行，则会输出如下结果：
-<div class="codehilite"><pre><span></span>Parameter: arg0
-</pre></div>
+
+<p>在Java 8中这个特性是默认关闭的，因此如果不带-parameters参数编译上述代码并运行，则会输出如下结果：</p>
+<blockquote>
+<p>Parameter: arg0
 如果带-parameters参数，则会输出如下结果（正确的结果）：
-<div class="codehilite"><pre><span></span>Parameter: args
-</pre></div>
-如果你使用Maven进行项目管理，则可以在maven-compiler-plugin编译器的配置项中配置-parameters参数：
+Parameter: args
+如果你使用Maven进行项目管理，则可以在maven-compiler-plugin编译器的配置项中配置-parameters参数：</p>
+</blockquote>
 <div class="codehilite"><pre><span></span>&lt;plugin&gt;
     &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;
     &lt;artifactId&gt;maven-compiler-plugin&lt;/artifactId&gt;
@@ -3384,34 +3436,38 @@ ElementType.TYPE_USER和ElementType.TYPE_PARAMETER是Java 8新增的两个注解
         &lt;target&gt;1.8&lt;/target&gt;
     &lt;/configuration&gt;
 &lt;/plugin&gt;
-</pre></div></p>
+</pre></div>
+
 <h3 id="optional">Optional<a class="headerlink" href="#optional" title="Permanent link">&para;</a></h3>
 <p>Java应用中最常见的bug就是空值异常。在Java 8之前，Google Guava引入了Optionals类来解决NullPointerException，从而避免源码被各种null检查污染，以便开发者写出更加整洁的代码。Java 8也将Optional加入了官方库。</p>
 <p>Optional仅仅是一个容器：存放T类型的值或者null。它提供了一些有用的接口来避免显式的null检查，可以参考Java 8官方文档了解更多细节。</p>
 <p>接下来看一点使用Optional的例子：可能为空的值或者某个类型的值：</p>
-<p><div class="codehilite"><pre><span></span><span class="n">Optional</span><span class="o">&lt;</span> <span class="n">String</span> <span class="o">&gt;</span> <span class="n">fullName</span> <span class="o">=</span> <span class="n">Optional</span><span class="o">.</span><span class="na">ofNullable</span><span class="o">(</span> <span class="kc">null</span> <span class="o">);</span>
-<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span> <span class="s">&quot;Full Name is set? &quot;</span> <span class="o">+</span> <span class="n">fullName</span><span class="o">.</span><span class="na">isPresent</span><span class="o">()</span> <span class="o">);</span>        
-<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span> <span class="s">&quot;Full Name: &quot;</span> <span class="o">+</span> <span class="n">fullName</span><span class="o">.</span><span class="na">orElseGet</span><span class="o">(</span> <span class="o">()</span> <span class="o">-&gt;</span> <span class="s">&quot;[none]&quot;</span> <span class="o">)</span> <span class="o">);</span> 
+<div class="codehilite"><pre><span></span><span class="n">Optional</span><span class="o">&lt;</span> <span class="n">String</span> <span class="o">&gt;</span> <span class="n">fullName</span> <span class="o">=</span> <span class="n">Optional</span><span class="o">.</span><span class="na">ofNullable</span><span class="o">(</span> <span class="kc">null</span> <span class="o">);</span>
+<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span> <span class="s">&quot;Full Name is set? &quot;</span> <span class="o">+</span> <span class="n">fullName</span><span class="o">.</span><span class="na">isPresent</span><span class="o">()</span> <span class="o">);</span>
+<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span> <span class="s">&quot;Full Name: &quot;</span> <span class="o">+</span> <span class="n">fullName</span><span class="o">.</span><span class="na">orElseGet</span><span class="o">(</span> <span class="o">()</span> <span class="o">-&gt;</span> <span class="s">&quot;[none]&quot;</span> <span class="o">)</span> <span class="o">);</span>
 <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span> <span class="n">fullName</span><span class="o">.</span><span class="na">map</span><span class="o">(</span> <span class="n">s</span> <span class="o">-&gt;</span> <span class="s">&quot;Hey &quot;</span> <span class="o">+</span> <span class="n">s</span> <span class="o">+</span> <span class="s">&quot;!&quot;</span> <span class="o">).</span><span class="na">orElse</span><span class="o">(</span> <span class="s">&quot;Hey Stranger!&quot;</span> <span class="o">)</span> <span class="o">);</span>
 </pre></div>
-如果Optional实例持有一个非空值，则isPresent()方法返回true，否则返回false；orElseGet()方法，Optional实例持有null，则可以接受一个lambda表达式生成的默认值；map()方法可以将现有的Opetional实例的值转换成新的值；orElse()方法与orElseGet()方法类似，但是在持有null的时候返回传入的默认值。</p>
-<p>上述代码的输出结果如下：
-<div class="codehilite"><pre><span></span>Full Name is set? false
+
+<p>如果Optional实例持有一个非空值，则isPresent()方法返回true，否则返回false；orElseGet()方法，Optional实例持有null，则可以接受一个lambda表达式生成的默认值；map()方法可以将现有的Opetional实例的值转换成新的值；orElse()方法与orElseGet()方法类似，但是在持有null的时候返回传入的默认值。</p>
+<p>上述代码的输出结果如下：</p>
+<blockquote>
+<p>Full Name is set? false
 Full Name: [none]
-Hey Stranger!
-</pre></div>
-再看下另一个简单的例子：
+Hey Stranger!</p>
+</blockquote>
+<p>再看下另一个简单的例子：</p>
 <div class="codehilite"><pre><span></span><span class="n">Optional</span><span class="o">&lt;</span> <span class="n">String</span> <span class="o">&gt;</span> <span class="n">firstName</span> <span class="o">=</span> <span class="n">Optional</span><span class="o">.</span><span class="na">of</span><span class="o">(</span> <span class="s">&quot;Tom&quot;</span> <span class="o">);</span>
-<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span> <span class="s">&quot;First Name is set? &quot;</span> <span class="o">+</span> <span class="n">firstName</span><span class="o">.</span><span class="na">isPresent</span><span class="o">()</span> <span class="o">);</span>        
-<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span> <span class="s">&quot;First Name: &quot;</span> <span class="o">+</span> <span class="n">firstName</span><span class="o">.</span><span class="na">orElseGet</span><span class="o">(</span> <span class="o">()</span> <span class="o">-&gt;</span> <span class="s">&quot;[none]&quot;</span> <span class="o">)</span> <span class="o">);</span> 
+<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span> <span class="s">&quot;First Name is set? &quot;</span> <span class="o">+</span> <span class="n">firstName</span><span class="o">.</span><span class="na">isPresent</span><span class="o">()</span> <span class="o">);</span>
+<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span> <span class="s">&quot;First Name: &quot;</span> <span class="o">+</span> <span class="n">firstName</span><span class="o">.</span><span class="na">orElseGet</span><span class="o">(</span> <span class="o">()</span> <span class="o">-&gt;</span> <span class="s">&quot;[none]&quot;</span> <span class="o">)</span> <span class="o">);</span>
 <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span> <span class="n">firstName</span><span class="o">.</span><span class="na">map</span><span class="o">(</span> <span class="n">s</span> <span class="o">-&gt;</span> <span class="s">&quot;Hey &quot;</span> <span class="o">+</span> <span class="n">s</span> <span class="o">+</span> <span class="s">&quot;!&quot;</span> <span class="o">).</span><span class="na">orElse</span><span class="o">(</span> <span class="s">&quot;Hey Stranger!&quot;</span> <span class="o">)</span> <span class="o">);</span>
 <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">();</span>
 </pre></div>
-如果想了解和学习更详细的内容，可以参考<a href="https://docs.oracle.com/javase/8/docs/api/java/util/Optional.html" title="官方文档">官方文档</a>。</p>
+
+<p>如果想了解和学习更详细的内容，可以参考<a href="https://docs.oracle.com/javase/8/docs/api/java/util/Optional.html" title="官方文档">官方文档</a>。</p>
 <h3 id="streams">Streams<a class="headerlink" href="#streams" title="Permanent link">&para;</a></h3>
 <p>新增的Stream API（java.util.stream）将生成环境的函数式编程引入了Java库中。这是目前为止最大的一次对Java库的完善，以便开发者能够写出更加有效、更加简洁和紧凑的代码。</p>
 <p>Steam API极大得简化了集合操作（后面我们会看到不止是集合），首先看下这个叫Task的类：</p>
-<p><div class="codehilite"><pre><span></span><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Streams</span>  <span class="o">{</span>
+<div class="codehilite"><pre><span></span><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Streams</span>  <span class="o">{</span>
     <span class="kd">private</span> <span class="kd">enum</span> <span class="n">Status</span> <span class="o">{</span>
         <span class="n">OPEN</span><span class="o">,</span> <span class="n">CLOSED</span>
     <span class="o">};</span>
@@ -3440,14 +3496,16 @@ Hey Stranger!
     <span class="o">}</span>
 <span class="o">}</span>
 </pre></div>
-Task类有一个分数（或伪复杂度）的概念，另外还有两种状态：OPEN或者CLOSED。现在假设有一个task集合：
+
+<p>Task类有一个分数（或伪复杂度）的概念，另外还有两种状态：OPEN或者CLOSED。现在假设有一个task集合：</p>
 <div class="codehilite"><pre><span></span><span class="kd">final</span> <span class="n">Collection</span><span class="o">&lt;</span> <span class="n">Task</span> <span class="o">&gt;</span> <span class="n">tasks</span> <span class="o">=</span> <span class="n">Arrays</span><span class="o">.</span><span class="na">asList</span><span class="o">(</span>
     <span class="k">new</span> <span class="n">Task</span><span class="o">(</span> <span class="n">Status</span><span class="o">.</span><span class="na">OPEN</span><span class="o">,</span> <span class="mi">5</span> <span class="o">),</span>
     <span class="k">new</span> <span class="n">Task</span><span class="o">(</span> <span class="n">Status</span><span class="o">.</span><span class="na">OPEN</span><span class="o">,</span> <span class="mi">13</span> <span class="o">),</span>
     <span class="k">new</span> <span class="n">Task</span><span class="o">(</span> <span class="n">Status</span><span class="o">.</span><span class="na">CLOSED</span><span class="o">,</span> <span class="mi">8</span> <span class="o">)</span> 
 <span class="o">);</span>
 </pre></div>
-首先看一个问题：在这个task集合中一共有多少个OPEN状态的点？在Java 8之前，要解决这个问题，则需要使用foreach循环遍历task集合；但是在Java 8中可以利用steams解决：包括一系列元素的列表，并且支持顺序和并行处理。
+
+<p>首先看一个问题：在这个task集合中一共有多少个OPEN状态的点？在Java 8之前，要解决这个问题，则需要使用foreach循环遍历task集合；但是在Java 8中可以利用steams解决：包括一系列元素的列表，并且支持顺序和并行处理。</p>
 <div class="codehilite"><pre><span></span><span class="c1">// Calculate total points of all active tasks using sum()</span>
 <span class="kd">final</span> <span class="kt">long</span> <span class="n">totalPointsOfOpenTasks</span> <span class="o">=</span> <span class="n">tasks</span>
     <span class="o">.</span><span class="na">stream</span><span class="o">()</span>
@@ -3457,14 +3515,16 @@ Task类有一个分数（或伪复杂度）的概念，另外还有两种状态�
 
 <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span> <span class="s">&quot;Total points: &quot;</span> <span class="o">+</span> <span class="n">totalPointsOfOpenTasks</span> <span class="o">);</span>
 </pre></div>
-运行这个方法的控制台输出是：
-<div class="codehilite"><pre><span></span>Total points: 18
-</pre></div>
+
+<p>运行这个方法的控制台输出是：</p>
+<blockquote>
+<p>Total points: 18
 这里有很多知识点值得说。首先，tasks集合被转换成steam表示；其次，在steam上的filter操作会过滤掉所有CLOSED的task；第三，mapToInt操作基于每个task实例的Task::getPoints方法将task流转换成Integer集合；最后，通过sum方法计算总和，得出最后的结果。</p>
+</blockquote>
 <p>在学习下一个例子之前，还需要记住一些steams（<a href="https://docs.oracle.com/javase/8/docs/api/java/util/Optional.html" title="点此更多细节">点此更多细节</a>）的知识点。Steam之上的操作可分为中间操作和晚期操作。</p>
 <p>中间操作会返回一个新的steam——执行一个中间操作（例如filter）并不会执行实际的过滤操作，而是创建一个新的steam，并将原steam中符合条件的元素放入新创建的steam。</p>
 <p>晚期操作（例如forEach或者sum），会遍历steam并得出结果或者附带结果；在执行晚期操作之后，steam处理线已经处理完毕，就不能使用了。在几乎所有情况下，晚期操作都是立刻对steam进行遍历。</p>
-<p>steam的另一个价值是创造性地支持并行处理（parallel processing）。对于上述的tasks集合，我们可以用下面的代码计算所有任务的点数之和：
+<p>steam的另一个价值是创造性地支持并行处理（parallel processing）。对于上述的tasks集合，我们可以用下面的代码计算所有任务的点数之和：</p>
 <div class="codehilite"><pre><span></span><span class="c1">// Calculate total points of all tasks</span>
 <span class="kd">final</span> <span class="kt">double</span> <span class="n">totalPoints</span> <span class="o">=</span> <span class="n">tasks</span>
    <span class="o">.</span><span class="na">stream</span><span class="o">()</span>
@@ -3474,20 +3534,24 @@ Task类有一个分数（或伪复杂度）的概念，另外还有两种状态�
 
 <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span> <span class="s">&quot;Total points (all tasks): &quot;</span> <span class="o">+</span> <span class="n">totalPoints</span> <span class="o">);</span>
 </pre></div>
-这里我们使用parallel方法并行处理所有的task，并使用reduce方法计算最终的结果。控制台输出如下：
-<div class="codehilite"><pre><span></span>Total points（all tasks）: 26.0
-</pre></div>
-对于一个集合，经常需要根据某些条件对其中的元素分组。利用steam提供的API可以很快完成这类任务，代码如下：
+
+<p>这里我们使用parallel方法并行处理所有的task，并使用reduce方法计算最终的结果。控制台输出如下：</p>
+<blockquote>
+<p>Total points（all tasks）: 26.0</p>
+</blockquote>
+<p>对于一个集合，经常需要根据某些条件对其中的元素分组。利用steam提供的API可以很快完成这类任务，代码如下：</p>
 <div class="codehilite"><pre><span></span><span class="c1">// Group tasks by their status</span>
 <span class="kd">final</span> <span class="n">Map</span><span class="o">&lt;</span> <span class="n">Status</span><span class="o">,</span> <span class="n">List</span><span class="o">&lt;</span> <span class="n">Task</span> <span class="o">&gt;</span> <span class="o">&gt;</span> <span class="n">map</span> <span class="o">=</span> <span class="n">tasks</span>
     <span class="o">.</span><span class="na">stream</span><span class="o">()</span>
     <span class="o">.</span><span class="na">collect</span><span class="o">(</span> <span class="n">Collectors</span><span class="o">.</span><span class="na">groupingBy</span><span class="o">(</span> <span class="n">Task</span><span class="o">::</span><span class="n">getStatus</span> <span class="o">)</span> <span class="o">);</span>
 <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span> <span class="n">map</span> <span class="o">);</span>
 </pre></div>
-控制台的输出如下：
-<div class="codehilite"><pre><span></span>{CLOSED=[[CLOSED, 8]], OPEN=[[OPEN, 5], [OPEN, 13]]}
-</pre></div>
-最后一个关于tasks集合的例子问题是：如何计算集合中每个任务的点数在集合中所占的比重，具体处理的代码如下：
+
+<p>控制台的输出如下：</p>
+<blockquote>
+<p>{CLOSED=[[CLOSED, 8]], OPEN=[[OPEN, 5], [OPEN, 13]]}</p>
+</blockquote>
+<p>最后一个关于tasks集合的例子问题是：如何计算集合中每个任务的点数在集合中所占的比重，具体处理的代码如下：</p>
 <div class="codehilite"><pre><span></span><span class="c1">// Calculate the weight of each tasks (as percent of total points) </span>
 <span class="kd">final</span> <span class="n">Collection</span><span class="o">&lt;</span> <span class="n">String</span> <span class="o">&gt;</span> <span class="n">result</span> <span class="o">=</span> <span class="n">tasks</span>
     <span class="o">.</span><span class="na">stream</span><span class="o">()</span>                                        <span class="c1">// Stream&lt; String &gt;</span>
@@ -3501,31 +3565,36 @@ Task类有一个分数（或伪复杂度）的概念，另外还有两种状态�
 
 <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span> <span class="n">result</span> <span class="o">);</span>
 </pre></div>
-控制台输出结果如下：
-<div class="codehilite"><pre><span></span>[19%, 50%, 30%]
-</pre></div>
-最后，正如之前所说，Steam API不仅可以作用于Java集合，传统的IO操作（从文件或者网络一行一行得读取数据）可以受益于steam处理，这里有一个小例子：
+
+<p>控制台输出结果如下：</p>
+<blockquote>
+<p>[19%, 50%, 30%]</p>
+</blockquote>
+<p>最后，正如之前所说，Steam API不仅可以作用于Java集合，传统的IO操作（从文件或者网络一行一行得读取数据）可以受益于steam处理，这里有一个小例子：</p>
 <div class="codehilite"><pre><span></span><span class="kd">final</span> <span class="n">Path</span> <span class="n">path</span> <span class="o">=</span> <span class="k">new</span> <span class="n">File</span><span class="o">(</span> <span class="n">filename</span> <span class="o">).</span><span class="na">toPath</span><span class="o">();</span>
 <span class="k">try</span><span class="o">(</span> <span class="n">Stream</span><span class="o">&lt;</span> <span class="n">String</span> <span class="o">&gt;</span> <span class="n">lines</span> <span class="o">=</span> <span class="n">Files</span><span class="o">.</span><span class="na">lines</span><span class="o">(</span> <span class="n">path</span><span class="o">,</span> <span class="n">StandardCharsets</span><span class="o">.</span><span class="na">UTF_8</span> <span class="o">)</span> <span class="o">)</span> <span class="o">{</span>
     <span class="n">lines</span><span class="o">.</span><span class="na">onClose</span><span class="o">(</span> <span class="o">()</span> <span class="o">-&gt;</span> <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Done!&quot;</span><span class="o">)</span> <span class="o">).</span><span class="na">forEach</span><span class="o">(</span> <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">::</span><span class="n">println</span> <span class="o">);</span>
 <span class="o">}</span>
 </pre></div>
-Stream的方法onClose 返回一个等价的有额外句柄的Stream，当Stream的close（）方法被调用的时候这个句柄会被执行。Stream API、Lambda表达式还有接口默认方法和静态方法支持的方法引用，是Java 8对软件开发的现代范式的响应。</p>
+
+<p>Stream的方法onClose 返回一个等价的有额外句柄的Stream，当Stream的close（）方法被调用的时候这个句柄会被执行。Stream API、Lambda表达式还有接口默认方法和静态方法支持的方法引用，是Java 8对软件开发的现代范式的响应。</p>
 <p><a href="https://docs.oracle.com/javase/8/docs/api/java/util/stream/package-summary.html" title="点此更多细节">点此更多细节</a></p>
 <h3 id="datetime-apijsr-310">Date/Time API(JSR 310)<a class="headerlink" href="#datetime-apijsr-310" title="Permanent link">&para;</a></h3>
 <p>Java 8引入了新的Date-Time API(JSR 310)来改进时间、日期的处理。时间和日期的管理一直是最令Java开发者痛苦的问题。java.util.Date和后来的java.util.Calendar一直没有解决这个问题（甚至令开发者更加迷茫）。</p>
 <p>因为上面这些原因，诞生了第三方库Joda-Time，可以替代Java的时间管理API。Java 8中新的时间和日期管理API深受Joda-Time影响，并吸收了很多Joda-Time的精华。新的java.time包包含了所有关于日期、时间、时区、Instant（跟日期类似但是精确到纳秒）、duration（持续时间）和时钟操作的类。新设计的API认真考虑了这些类的不变性（从java.util.Calendar吸取的教训），如果某个实例需要修改，则返回一个新的对象。</p>
 <p>我们接下来看看java.time包中的关键类和各自的使用例子。首先，Clock类使用时区来返回当前的纳秒时间和日期。Clock可以替代System.currentTimeMillis()和TimeZone.getDefault()。</p>
-<p><div class="codehilite"><pre><span></span><span class="c1">// Get the system clock as UTC offset </span>
+<div class="codehilite"><pre><span></span><span class="c1">// Get the system clock as UTC offset </span>
 <span class="kd">final</span> <span class="n">Clock</span> <span class="n">clock</span> <span class="o">=</span> <span class="n">Clock</span><span class="o">.</span><span class="na">systemUTC</span><span class="o">();</span>
 <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span> <span class="n">clock</span><span class="o">.</span><span class="na">instant</span><span class="o">()</span> <span class="o">);</span>
 <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span> <span class="n">clock</span><span class="o">.</span><span class="na">millis</span><span class="o">()</span> <span class="o">);</span>
 </pre></div>
-这个例子的输出结果是：
-<div class="codehilite"><pre><span></span>2014-04-12T15:19:29.282Z
-1397315969360
-</pre></div>
-第二，关注下LocalDate和LocalTime类。LocalDate仅仅包含ISO-8601日历系统中的日期部分；LocalTime则仅仅包含该日历系统中的时间部分。这两个类的对象都可以使用Clock对象构建得到。
+
+<p>这个例子的输出结果是：</p>
+<blockquote>
+<p>2014-04-12T15:19:29.282Z
+1397315969360</p>
+</blockquote>
+<p>第二，关注下LocalDate和LocalTime类。LocalDate仅仅包含ISO-8601日历系统中的日期部分；LocalTime则仅仅包含该日历系统中的时间部分。这两个类的对象都可以使用Clock对象构建得到。</p>
 <div class="codehilite"><pre><span></span><span class="c1">// Get the local date and local time</span>
 <span class="kd">final</span> <span class="n">LocalDate</span> <span class="n">date</span> <span class="o">=</span> <span class="n">LocalDate</span><span class="o">.</span><span class="na">now</span><span class="o">();</span>
 <span class="kd">final</span> <span class="n">LocalDate</span> <span class="n">dateFromClock</span> <span class="o">=</span> <span class="n">LocalDate</span><span class="o">.</span><span class="na">now</span><span class="o">(</span> <span class="n">clock</span> <span class="o">);</span>
@@ -3540,13 +3609,15 @@ Stream的方法onClose 返回一个等价的有额外句柄的Stream，当Stream
 <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span> <span class="n">time</span> <span class="o">);</span>
 <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span> <span class="n">timeFromClock</span> <span class="o">);</span>
 </pre></div>
-上述例子的输出结果如下：
-<div class="codehilite"><pre><span></span>2014-04-12
+
+<p>上述例子的输出结果如下：</p>
+<blockquote>
+<p>2014-04-12
 2014-04-12
 11:25:54.568
-15:25:54.568
-</pre></div>
-LocalDateTime类包含了LocalDate和LocalTime的信息，但是不包含ISO-8601日历系统中的时区信息。这里有一些关于LocalDate和LocalTime的例子：
+15:25:54.568</p>
+</blockquote>
+<p>LocalDateTime类包含了LocalDate和LocalTime的信息，但是不包含ISO-8601日历系统中的时区信息。这里有一些关于LocalDate和LocalTime的例子：</p>
 <div class="codehilite"><pre><span></span><span class="c1">// Get the local date/time</span>
 <span class="kd">final</span> <span class="n">LocalDateTime</span> <span class="n">datetime</span> <span class="o">=</span> <span class="n">LocalDateTime</span><span class="o">.</span><span class="na">now</span><span class="o">();</span>
 <span class="kd">final</span> <span class="n">LocalDateTime</span> <span class="n">datetimeFromClock</span> <span class="o">=</span> <span class="n">LocalDateTime</span><span class="o">.</span><span class="na">now</span><span class="o">(</span> <span class="n">clock</span> <span class="o">);</span>
@@ -3554,11 +3625,13 @@ LocalDateTime类包含了LocalDate和LocalTime的信息，但是不包含ISO-860
 <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span> <span class="n">datetime</span> <span class="o">);</span>
 <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span> <span class="n">datetimeFromClock</span> <span class="o">);</span>
 </pre></div>
-上述这个例子的输出结果如下：
-<div class="codehilite"><pre><span></span>2014-04-12T11:37:52.309
-2014-04-12T15:37:52.309
-</pre></div>
-如果你需要特定时区的data/time信息，则可以使用ZoneDateTime，它保存有ISO-8601日期系统的日期和时间，而且有时区信息。下面是一些使用不同时区的例子：
+
+<p>上述这个例子的输出结果如下：</p>
+<blockquote>
+<p>2014-04-12T11:37:52.309
+2014-04-12T15:37:52.309</p>
+</blockquote>
+<p>如果你需要特定时区的data/time信息，则可以使用ZoneDateTime，它保存有ISO-8601日期系统的日期和时间，而且有时区信息。下面是一些使用不同时区的例子：</p>
 <div class="codehilite"><pre><span></span><span class="c1">// Get the zoned date/time</span>
 <span class="kd">final</span> <span class="n">ZonedDateTime</span> <span class="n">zonedDatetime</span> <span class="o">=</span> <span class="n">ZonedDateTime</span><span class="o">.</span><span class="na">now</span><span class="o">();</span>
 <span class="kd">final</span> <span class="n">ZonedDateTime</span> <span class="n">zonedDatetimeFromClock</span> <span class="o">=</span> <span class="n">ZonedDateTime</span><span class="o">.</span><span class="na">now</span><span class="o">(</span> <span class="n">clock</span> <span class="o">);</span>
@@ -3568,12 +3641,14 @@ LocalDateTime类包含了LocalDate和LocalTime的信息，但是不包含ISO-860
 <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span> <span class="n">zonedDatetimeFromClock</span> <span class="o">);</span>
 <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span> <span class="n">zonedDatetimeFromZone</span> <span class="o">);</span>
 </pre></div>
-这个例子的输出结果是：
-<div class="codehilite"><pre><span></span>2014-04-12T11:47:01.017-04:00[America/New_York]
+
+<p>这个例子的输出结果是：</p>
+<blockquote>
+<p>2014-04-12T11:47:01.017-04:00[America/New_York]
 2014-04-12T15:47:01.017Z
-2014-04-12T08:47:01.017-07:00[America/Los_Angeles]
-</pre></div>
-最后看下Duration类，它持有的时间精确到秒和纳秒。这使得我们可以很容易得计算两个日期之间的不同，例子代码如下：
+2014-04-12T08:47:01.017-07:00[America/Los_Angeles]</p>
+</blockquote>
+<p>最后看下Duration类，它持有的时间精确到秒和纳秒。这使得我们可以很容易得计算两个日期之间的不同，例子代码如下：</p>
 <div class="codehilite"><pre><span></span><span class="c1">// Get duration between two dates</span>
 <span class="kd">final</span> <span class="n">LocalDateTime</span> <span class="n">from</span> <span class="o">=</span> <span class="n">LocalDateTime</span><span class="o">.</span><span class="na">of</span><span class="o">(</span> <span class="mi">2014</span><span class="o">,</span> <span class="n">Month</span><span class="o">.</span><span class="na">APRIL</span><span class="o">,</span> <span class="mi">16</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="mi">0</span> <span class="o">);</span>
 <span class="kd">final</span> <span class="n">LocalDateTime</span> <span class="n">to</span> <span class="o">=</span> <span class="n">LocalDateTime</span><span class="o">.</span><span class="na">of</span><span class="o">(</span> <span class="mi">2015</span><span class="o">,</span> <span class="n">Month</span><span class="o">.</span><span class="na">APRIL</span><span class="o">,</span> <span class="mi">16</span><span class="o">,</span> <span class="mi">23</span><span class="o">,</span> <span class="mi">59</span><span class="o">,</span> <span class="mi">59</span> <span class="o">);</span>
@@ -3582,26 +3657,30 @@ LocalDateTime类包含了LocalDate和LocalTime的信息，但是不包含ISO-860
 <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span> <span class="s">&quot;Duration in days: &quot;</span> <span class="o">+</span> <span class="n">duration</span><span class="o">.</span><span class="na">toDays</span><span class="o">()</span> <span class="o">);</span>
 <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span> <span class="s">&quot;Duration in hours: &quot;</span> <span class="o">+</span> <span class="n">duration</span><span class="o">.</span><span class="na">toHours</span><span class="o">()</span> <span class="o">);</span>
 </pre></div>
-这个例子用于计算2014年4月16日和2015年4月16日之间的天数和小时数，输出结果如下：
-<div class="codehilite"><pre><span></span>Duration in days: 365
-Duration in hours: 8783
-</pre></div>
-对于Java 8的新日期时间的总体印象还是比较积极的，一部分是因为Joda-Time的积极影响，另一部分是因为官方终于听取了开发人员的需求。如果想了解和学习更详细的内容，可以参考<a href="https://docs.oracle.com/javase/tutorial/datetime/index.html" title="官方文档">官方文档</a>。</p>
+
+<p>这个例子用于计算2014年4月16日和2015年4月16日之间的天数和小时数，输出结果如下：</p>
+<blockquote>
+<p>Duration in days: 365
+Duration in hours: 8783</p>
+</blockquote>
+<p>对于Java 8的新日期时间的总体印象还是比较积极的，一部分是因为Joda-Time的积极影响，另一部分是因为官方终于听取了开发人员的需求。如果想了解和学习更详细的内容，可以参考<a href="https://docs.oracle.com/javase/tutorial/datetime/index.html" title="官方文档">官方文档</a>。</p>
 <h3 id="nashorn-javascript">Nashorn JavaScript引擎<a class="headerlink" href="#nashorn-javascript" title="Permanent link">&para;</a></h3>
-<p>Java 8提供了新的Nashorn JavaScript引擎，使得我们可以在JVM上开发和运行JS应用。Nashorn JavaScript引擎是javax.script.ScriptEngine的另一个实现版本，这类Script引擎遵循相同的规则，允许Java和JavaScript交互使用，例子代码如下：
+<p>Java 8提供了新的Nashorn JavaScript引擎，使得我们可以在JVM上开发和运行JS应用。Nashorn JavaScript引擎是javax.script.ScriptEngine的另一个实现版本，这类Script引擎遵循相同的规则，允许Java和JavaScript交互使用，例子代码如下：</p>
 <div class="codehilite"><pre><span></span><span class="n">ScriptEngineManager</span> <span class="n">manager</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ScriptEngineManager</span><span class="o">();</span>
 <span class="n">ScriptEngine</span> <span class="n">engine</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="na">getEngineByName</span><span class="o">(</span> <span class="s">&quot;JavaScript&quot;</span> <span class="o">);</span>
 
 <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span> <span class="n">engine</span><span class="o">.</span><span class="na">getClass</span><span class="o">().</span><span class="na">getName</span><span class="o">()</span> <span class="o">);</span>
 <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span> <span class="s">&quot;Result:&quot;</span> <span class="o">+</span> <span class="n">engine</span><span class="o">.</span><span class="na">eval</span><span class="o">(</span> <span class="s">&quot;function f() { return 1; }; f() + 1;&quot;</span> <span class="o">)</span> <span class="o">);</span>
 </pre></div>
-这个代码的输出结果如下：
-<div class="codehilite"><pre><span></span>jdk.nashorn.api.scripting.NashornScriptEngine
-Result: 2
-</pre></div></p>
+
+<p>这个代码的输出结果如下：</p>
+<blockquote>
+<p>jdk.nashorn.api.scripting.NashornScriptEngine
+Result: 2</p>
+</blockquote>
 <h3 id="base64">Base64<a class="headerlink" href="#base64" title="Permanent link">&para;</a></h3>
 <p>对Base64编码的支持已经被加入到Java 8官方库中，这样不需要使用第三方库就可以进行Base64编码，例子代码如下：</p>
-<p><div class="codehilite"><pre><span></span><span class="kn">package</span> <span class="nn">com.javacodegeeks.java8.base64</span><span class="o">;</span>
+<div class="codehilite"><pre><span></span><span class="kn">package</span> <span class="nn">com.javacodegeeks.java8.base64</span><span class="o">;</span>
 
 <span class="kn">import</span> <span class="nn">java.nio.charset.StandardCharsets</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">java.util.Base64</span><span class="o">;</span>
@@ -3622,14 +3701,16 @@ Result: 2
     <span class="o">}</span>
 <span class="o">}</span>
 </pre></div>
-这个例子的输出结果如下：
-<div class="codehilite"><pre><span></span>QmFzZTY0IGZpbmFsbHkgaW4gSmF2YSA4IQ==
-Base64 finally in Java 8!
-</pre></div>
-新的Base64API也支持URL和MINE的编码解码。
+
+<p>这个例子的输出结果如下：</p>
+<blockquote>
+<p>QmFzZTY0IGZpbmFsbHkgaW4gSmF2YSA4IQ==
+Base64 finally in Java 8!</p>
+</blockquote>
+<p>新的Base64API也支持URL和MINE的编码解码。
 (Base64.getUrlEncoder() / Base64.getUrlDecoder(), Base64.getMimeEncoder() / Base64.getMimeDecoder())。</p>
 <h3 id="_20">并行数组<a class="headerlink" href="#_20" title="Permanent link">&para;</a></h3>
-<p>Java8版本新增了很多新的方法，用于支持并行数组处理。最重要的方法是parallelSort()，可以显著加快多核机器上的数组排序。下面的例子论证了parallexXxx系列的方法：
+<p>Java8版本新增了很多新的方法，用于支持并行数组处理。最重要的方法是parallelSort()，可以显著加快多核机器上的数组排序。下面的例子论证了parallexXxx系列的方法：</p>
 <div class="codehilite"><pre><span></span><span class="kn">package</span> <span class="nn">com.javacodegeeks.java8.parallel.arrays</span><span class="o">;</span>
 
 <span class="kn">import</span> <span class="nn">java.util.Arrays</span><span class="o">;</span>
@@ -3637,25 +3718,27 @@ Base64 finally in Java 8!
 
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">ParallelArrays</span> <span class="o">{</span>
     <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span> <span class="n">String</span><span class="o">[]</span> <span class="n">args</span> <span class="o">)</span> <span class="o">{</span>
-        <span class="kt">long</span><span class="o">[]</span> <span class="n">arrayOfLong</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">long</span> <span class="o">[</span> <span class="mi">20000</span> <span class="o">];</span>        
+        <span class="kt">long</span><span class="o">[]</span> <span class="n">arrayOfLong</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">long</span> <span class="o">[</span> <span class="mi">20000</span> <span class="o">];</span>
 
-        <span class="n">Arrays</span><span class="o">.</span><span class="na">parallelSetAll</span><span class="o">(</span> <span class="n">arrayOfLong</span><span class="o">,</span> 
+        <span class="n">Arrays</span><span class="o">.</span><span class="na">parallelSetAll</span><span class="o">(</span> <span class="n">arrayOfLong</span><span class="o">,</span>
             <span class="n">index</span> <span class="o">-&gt;</span> <span class="n">ThreadLocalRandom</span><span class="o">.</span><span class="na">current</span><span class="o">().</span><span class="na">nextInt</span><span class="o">(</span> <span class="mi">1000000</span> <span class="o">)</span> <span class="o">);</span>
-        <span class="n">Arrays</span><span class="o">.</span><span class="na">stream</span><span class="o">(</span> <span class="n">arrayOfLong</span> <span class="o">).</span><span class="na">limit</span><span class="o">(</span> <span class="mi">10</span> <span class="o">).</span><span class="na">forEach</span><span class="o">(</span> 
+        <span class="n">Arrays</span><span class="o">.</span><span class="na">stream</span><span class="o">(</span> <span class="n">arrayOfLong</span> <span class="o">).</span><span class="na">limit</span><span class="o">(</span> <span class="mi">10</span> <span class="o">).</span><span class="na">forEach</span><span class="o">(</span>
             <span class="n">i</span> <span class="o">-&gt;</span> <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">print</span><span class="o">(</span> <span class="n">i</span> <span class="o">+</span> <span class="s">&quot; &quot;</span> <span class="o">)</span> <span class="o">);</span>
         <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">();</span>
 
-        <span class="n">Arrays</span><span class="o">.</span><span class="na">parallelSort</span><span class="o">(</span> <span class="n">arrayOfLong</span> <span class="o">);</span>        
-        <span class="n">Arrays</span><span class="o">.</span><span class="na">stream</span><span class="o">(</span> <span class="n">arrayOfLong</span> <span class="o">).</span><span class="na">limit</span><span class="o">(</span> <span class="mi">10</span> <span class="o">).</span><span class="na">forEach</span><span class="o">(</span> 
+        <span class="n">Arrays</span><span class="o">.</span><span class="na">parallelSort</span><span class="o">(</span> <span class="n">arrayOfLong</span> <span class="o">);</span>
+        <span class="n">Arrays</span><span class="o">.</span><span class="na">stream</span><span class="o">(</span> <span class="n">arrayOfLong</span> <span class="o">).</span><span class="na">limit</span><span class="o">(</span> <span class="mi">10</span> <span class="o">).</span><span class="na">forEach</span><span class="o">(</span>
             <span class="n">i</span> <span class="o">-&gt;</span> <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">print</span><span class="o">(</span> <span class="n">i</span> <span class="o">+</span> <span class="s">&quot; &quot;</span> <span class="o">)</span> <span class="o">);</span>
         <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">();</span>
     <span class="o">}</span>
 <span class="o">}</span>
 </pre></div>
-上述这些代码使用parallelSetAll()方法生成20000个随机数，然后使用parallelSort()方法进行排序。这个程序会输出乱序数组和排序数组的前10个元素。上述例子的代码输出的结果是：
-<div class="codehilite"><pre><span></span>Unsorted: 591217 891976 443951 424479 766825 351964 242997 642839 119108 552378 
-Sorted: 39 220 263 268 325 607 655 678 723 793
-</pre></div></p>
+
+<p>上述这些代码使用parallelSetAll()方法生成20000个随机数，然后使用parallelSort()方法进行排序。这个程序会输出乱序数组和排序数组的前10个元素。上述例子的代码输出的结果是：</p>
+<blockquote>
+<p>Unsorted: 591217 891976 443951 424479 766825 351964 242997 642839 119108 552378
+Sorted: 39 220 263 268 325 607 655 678 723 793</p>
+</blockquote>
 <h3 id="_21">并发性<a class="headerlink" href="#_21" title="Permanent link">&para;</a></h3>
 <p>基于新增的lambda表达式和steam特性，为Java 8中为java.util.concurrent.ConcurrentHashMap类添加了新的方法来支持聚焦操作；另外，也为java.util.concurrentForkJoinPool类添加了新的方法来支持通用线程池操作</p>
 <p>Java 8还添加了新的java.util.concurrent.locks.StampedLock类，用于支持基于容量的锁——该锁有三个模型用于支持读写操作（可以把这个锁当做是java.util.concurrent.locks.ReadWriteLock的替代者）。</p>
@@ -3668,42 +3751,46 @@ Sorted: 39 220 263 268 325 607 655 678 723 793
 </ol>
 <h3 id="java_2">新的Java工具<a class="headerlink" href="#java_2" title="Permanent link">&para;</a></h3>
 <h4 id="nashornjjs">Nashorn引擎：jjs<a class="headerlink" href="#nashornjjs" title="Permanent link">&para;</a></h4>
-<p>jjs是一个基于标准Nashorn引擎的命令行工具，可以接受js源码并执行。例如，我们写一个func.js文件，内容如下：
-<div class="codehilite"><pre><span></span><span class="kd">function</span> <span class="nx">f</span><span class="p">()</span> <span class="p">{</span> 
-     <span class="k">return</span> <span class="mi">1</span><span class="p">;</span> 
-<span class="p">};</span> 
+<p>jjs是一个基于标准Nashorn引擎的命令行工具，可以接受js源码并执行。例如，我们写一个func.js文件，内容如下：</p>
+<div class="codehilite"><pre><span></span><span class="kd">function</span> <span class="nx">f</span><span class="p">()</span> <span class="p">{</span>
+     <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+<span class="p">};</span>
 
 <span class="nx">print</span><span class="p">(</span> <span class="nx">f</span><span class="p">()</span> <span class="o">+</span> <span class="mi">1</span> <span class="p">);</span>
 </pre></div>
-可以在命令行中执行这个命令：jjs func.js，控制台输出结果是：
-<div class="codehilite"><pre><span></span>2
-</pre></div>
-如果需要了解细节，可以参考<a href="https://docs.oracle.com/javase/8/docs/technotes/tools/unix/jjs.html" title="官方文档">官方文档</a>。</p>
+
+<p>可以在命令行中执行这个命令：jjs func.js，控制台输出结果是：</p>
+<blockquote>
+<p>2</p>
+</blockquote>
+<p>如果需要了解细节，可以参考<a href="https://docs.oracle.com/javase/8/docs/technotes/tools/unix/jjs.html" title="官方文档">官方文档</a>。</p>
 <h4 id="jdeps">类依赖分析器：jdeps<a class="headerlink" href="#jdeps" title="Permanent link">&para;</a></h4>
 <p>jdeps是一个相当棒的命令行工具，它可以展示包层级和类层级的Java类依赖关系，它以.class文件、目录或者Jar文件为输入，然后会把依赖关系输出到控制台。</p>
 <p>我们可以利用jedps分析下Spring Framework库，为了让结果少一点，仅仅分析一个JAR文件：org.springframework.core-3.0.5.RELEASE.jar。</p>
-<p><div class="codehilite"><pre><span></span><span class="n">jdeps</span> <span class="n">org</span><span class="o">.</span><span class="na">springframework</span><span class="o">.</span><span class="na">core</span><span class="o">-</span><span class="mf">3.0.5</span><span class="o">.</span><span class="na">RELEASE</span><span class="o">.</span><span class="na">jar</span>
+<div class="codehilite"><pre><span></span><span class="n">jdeps</span> <span class="n">org</span><span class="o">.</span><span class="na">springframework</span><span class="o">.</span><span class="na">core</span><span class="o">-</span><span class="mf">3.0.5</span><span class="o">.</span><span class="na">RELEASE</span><span class="o">.</span><span class="na">jar</span>
 </pre></div>
-这个命令会输出很多结果，我们仅看下其中的一部分：依赖关系按照包分组，如果在classpath上找不到依赖，则显示"not found".
-<div class="codehilite"><pre><span></span>org.springframework.core-3.0.5.RELEASE.jar -&gt; C:\Program Files\Java\jdk1.8.0\jre\lib\rt.jar
-   org.springframework.core (org.springframework.core-3.0.5.RELEASE.jar)
-      -&gt; java.io                                            
-      -&gt; java.lang                                          
-      -&gt; java.lang.annotation                               
-      -&gt; java.lang.ref                                      
-      -&gt; java.lang.reflect                                  
-      -&gt; java.util                                          
-      -&gt; java.util.concurrent                               
-      -&gt; org.apache.commons.logging                         not found
-      -&gt; org.springframework.asm                            not found
-      -&gt; org.springframework.asm.commons                    not found
-   org.springframework.core.annotation (org.springframework.core-3.0.5.RELEASE.jar)
-      -&gt; java.lang                                          
-      -&gt; java.lang.annotation                               
-      -&gt; java.lang.reflect                                  
-      -&gt; java.util
+
+<p>这个命令会输出很多结果，我们仅看下其中的一部分：依赖关系按照包分组，如果在classpath上找不到依赖，则显示"not found".</p>
+<div class="codehilite"><pre><span></span>org.springframework.core<span class="m">-3.0.5.</span>RELEASE.jar <span class="o">-&gt;</span> C<span class="o">:</span>\Program Files\Java\jdk1.8.0\jre\lib\rt.jar
+   org.springframework.core <span class="p">(</span>org.springframework.core<span class="m">-3.0.5.</span>RELEASE.jar<span class="p">)</span>
+      <span class="o">-&gt;</span> java.io
+      <span class="o">-&gt;</span> java.lang
+      <span class="o">-&gt;</span> java.lang.annotation
+      <span class="o">-&gt;</span> java.lang.ref
+      <span class="o">-&gt;</span> java.lang.reflect
+      <span class="o">-&gt;</span> java.util
+      <span class="o">-&gt;</span> java.util.concurrent
+      <span class="o">-&gt;</span> org.apache.commons.logging                         not found
+      <span class="o">-&gt;</span> org.springframework.asm                            not found
+      <span class="o">-&gt;</span> org.springframework.asm.commons                    not found
+   org.springframework.core.annotation <span class="p">(</span>org.springframework.core<span class="m">-3.0.5.</span>RELEASE.jar<span class="p">)</span>
+      <span class="o">-&gt;</span> java.lang
+      <span class="o">-&gt;</span> java.lang.annotation
+      <span class="o">-&gt;</span> java.lang.reflect
+      <span class="o">-&gt;</span> java.util
 </pre></div>
-如果需要了解细节，可以参考<a href="https://docs.oracle.com/javase/8/docs/technotes/tools/unix/jdeps.html" title="官方文档">官方文档</a>。</p>
+
+<p>如果需要了解细节，可以参考<a href="https://docs.oracle.com/javase/8/docs/technotes/tools/unix/jdeps.html" title="官方文档">官方文档</a>。</p>
 <h3 id="jvm">JVM的新特性<a class="headerlink" href="#jvm" title="Permanent link">&para;</a></h3>
 <p>使用Metaspace（JEP 122）代替持久代（PermGen space）。在JVM参数方面，使用-XX:MetaSpaceSize和-XX:MaxMetaspaceSize代替原来的-XX:PermSize和-XX:MaxPermSize。</p>
 <h2 id="java-9">Java 9 新特性总结<a class="headerlink" href="#java-9" title="Permanent link">&para;</a></h2>
@@ -3739,97 +3826,105 @@ jdk9之后，目录结构发生变化如图：
 一个项目中的两个模块，模块之间通过module-info.java来关联，在IDEA编辑器右键创建package-info.java
 <img alt="java" src="../../img/java5.png" title="java" />
 在这个两个模块java9Demo和java9Test中，java9demo编写一个实体类Person,在java9Test调用这样一个过程</p>
-<p>这个是java9Demo 将 java9Test 模块需要的文件导出 exports 把它所在的包导出
+<p>这个是java9Demo 将 java9Test 模块需要的文件导出 exports 把它所在的包导出</p>
 <div class="codehilite"><pre><span></span><span class="n">module</span> <span class="n">java9Demo</span><span class="o">{</span>
     <span class="n">requires</span> <span class="n">com</span><span class="o">.</span><span class="na">mdxl</span><span class="o">.</span><span class="na">layer_cj</span><span class="o">.</span><span class="na">entity</span><span class="o">;</span>
 <span class="o">}</span>
 </pre></div>
-然后在java9Test模块中创建一个package-info.java,引入java9Demo模块导出包名
+
+<p>然后在java9Test模块中创建一个package-info.java,引入java9Demo模块导出包名</p>
 <div class="codehilite"><pre><span></span><span class="n">module</span> <span class="n">java9Test</span><span class="o">{</span>
     <span class="n">requires</span> <span class="n">java9Demo</span><span class="o">;</span>
 <span class="o">}</span>
 </pre></div>
-这样就可以直接在java9Test中引入Person实体类了，这只是一个简单的例子。exports 控制着那些包可以被模块访问，所以不被导出的包不能被其他模块访问</p>
+
+<p>这样就可以直接在java9Test中引入Person实体类了，这只是一个简单的例子。exports 控制着那些包可以被模块访问，所以不被导出的包不能被其他模块访问</p>
 <h3 id="jshell">JShell工具<a class="headerlink" href="#jshell" title="Permanent link">&para;</a></h3>
 <p>怎么理解，怎么用呢？这个只是针对于java9来说，相当于cmd工具，你可以和cmd一样，直接写方法等等，不过我认为只是适用于初学者做一些最简单的运算和写一些方法：
-在cmd中打开这个工具：
-<div class="codehilite"><pre><span></span><span class="n">$</span> <span class="n">jshell</span>
-<span class="o">|</span>  <span class="n">Welcome</span> <span class="n">to</span> <span class="n">JShell</span> <span class="o">--</span> <span class="n">Version</span> <span class="mi">9</span><span class="o">-</span><span class="n">ea</span>
-<span class="o">|</span>  <span class="n">For</span> <span class="n">an</span> <span class="n">introduction</span> <span class="n">type</span><span class="o">:</span> <span class="o">/</span><span class="n">help</span> <span class="n">intro</span>
-<span class="n">jshell</span><span class="o">&gt;</span>
+在cmd中打开这个工具：</p>
+<div class="codehilite"><pre><span></span><span class="o">$</span> jshell
+<span class="o">|</span>  Welcome to JShell <span class="o">--</span> Version <span class="m">9</span><span class="o">-</span>ea
+<span class="o">|</span>  For an introduction type<span class="o">:</span> <span class="o">/</span>help intro
+jshell<span class="o">&gt;</span>
 </pre></div>
-查看 JShell 命令</p>
-<p>输入 /help 可以查看 JShell相关的命令：
-<div class="codehilite"><pre><span></span>jshell&gt; /help
-|  Type a Java language expression, statement, or declaration.
-|  Or type one of the following commands:
-|  /list [&lt;name or id&gt;|-all|-start]
-|  list the source you have typed
-|  /edit &lt;name or id&gt;
-|  edit a source entry referenced by name or id
-|  /drop &lt;name or id&gt;
-|  delete a source entry referenced by name or id
-|  /save [-all|-history|-start] &lt;file&gt;
-|  Save snippet source to a file.
-|  /open &lt;file&gt;
-|  open a file as source input
-|  /vars [&lt;name or id&gt;|-all|-start]
-|  list the declared variables and their values
-|  /methods [&lt;name or id&gt;|-all|-start]
-|  list the declared methods and their signatures
-|  /types [&lt;name or id&gt;|-all|-start]
-|  list the declared types
-|  /imports 
-|  list the imported items
+
+<p>查看 JShell 命令</p>
+<p>输入 /help 可以查看 JShell相关的命令：</p>
+<div class="codehilite"><pre><span></span>jshell<span class="o">&gt;</span> <span class="o">/</span>help
+<span class="o">|</span>  Type a Java language <span class="kp">expression</span><span class="p">,</span> statement<span class="p">,</span> or declaration.
+<span class="o">|</span>  Or type one of the following commands<span class="o">:</span>
+<span class="o">|</span>  <span class="o">/</span><span class="kt">list</span> <span class="p">[</span><span class="o">&lt;</span>name or id<span class="o">&gt;|-</span><span class="kp">all</span><span class="o">|-</span>start<span class="p">]</span>
+<span class="o">|</span>  <span class="kt">list</span> the <span class="kn">source</span> you have typed
+<span class="o">|</span>  <span class="o">/</span>edit <span class="o">&lt;</span>name or id<span class="o">&gt;</span>
+<span class="o">|</span>  edit a <span class="kn">source</span> entry referenced by name or id
+<span class="o">|</span>  <span class="o">/</span>drop <span class="o">&lt;</span>name or id<span class="o">&gt;</span>
+<span class="o">|</span>  delete a <span class="kn">source</span> entry referenced by name or id
+<span class="o">|</span>  <span class="o">/</span>save <span class="p">[</span><span class="o">-</span><span class="kp">all</span><span class="o">|-</span>history<span class="o">|-</span>start<span class="p">]</span> <span class="o">&lt;</span><span class="kp">file</span><span class="o">&gt;</span>
+<span class="o">|</span>  Save snippet <span class="kn">source</span> to a file.
+<span class="o">|</span>  <span class="o">/</span>open <span class="o">&lt;</span><span class="kp">file</span><span class="o">&gt;</span>
+<span class="o">|</span>  open a file as <span class="kn">source</span> input
+<span class="o">|</span>  <span class="o">/</span>vars <span class="p">[</span><span class="o">&lt;</span>name or id<span class="o">&gt;|-</span><span class="kp">all</span><span class="o">|-</span>start<span class="p">]</span>
+<span class="o">|</span>  <span class="kt">list</span> the declared variables and their values
+<span class="o">|</span>  <span class="o">/</span>methods <span class="p">[</span><span class="o">&lt;</span>name or id<span class="o">&gt;|-</span><span class="kp">all</span><span class="o">|-</span>start<span class="p">]</span>
+<span class="o">|</span>  <span class="kt">list</span> the declared methods and their signatures
+<span class="o">|</span>  <span class="o">/</span>types <span class="p">[</span><span class="o">&lt;</span>name or id<span class="o">&gt;|-</span><span class="kp">all</span><span class="o">|-</span>start<span class="p">]</span>
+<span class="o">|</span>  <span class="kt">list</span> the declared types
+<span class="o">|</span>  <span class="o">/</span>imports 
+<span class="o">|</span>  <span class="kt">list</span> the imported items
 </pre></div>
-执行 JShell 命令</p>
-<p>/imports 命令用于查看已导入的包：
-<div class="codehilite"><pre><span></span>jshell&gt; /imports
-|    import java.io.*
-|    import java.math.*
-|    import java.net.*
-|    import java.nio.file.*
-|    import java.util.*
-|    import java.util.concurrent.*
-|    import java.util.function.*
-|    import java.util.prefs.*
-|    import java.util.regex.*
-|    import java.util.stream.*
-jshell&gt;
+
+<p>执行 JShell 命令</p>
+<p>/imports 命令用于查看已导入的包：</p>
+<div class="codehilite"><pre><span></span>jshell<span class="o">&gt;</span> <span class="o">/</span>imports
+<span class="o">|</span>    import java.io.<span class="o">*</span>
+<span class="o">|</span>    import java.math.<span class="o">*</span>
+<span class="o">|</span>    import java.net.<span class="o">*</span>
+<span class="o">|</span>    import java.nio.file.<span class="o">*</span>
+<span class="o">|</span>    import java.util.<span class="o">*</span>
+<span class="o">|</span>    import java.util.concurrent.<span class="o">*</span>
+<span class="o">|</span>    import java.util.function.<span class="o">*</span>
+<span class="o">|</span>    import java.util.prefs.<span class="o">*</span>
+<span class="o">|</span>    import java.util.regex.<span class="o">*</span>
+<span class="o">|</span>    import java.util.stream.<span class="o">*</span>
+jshell<span class="o">&gt;</span>
 </pre></div>
-等等，我认为只适用于初学者学习java不用其他编辑工具就可以学习java</p>
+
+<p>等等，我认为只适用于初学者学习java不用其他编辑工具就可以学习java</p>
 <h3 id="http-2">HTTP 2 客户端<a class="headerlink" href="#http-2" title="Permanent link">&para;</a></h3>
 <p>JDK9之前提供HttpURLConnection API来实现Http访问功能，但是这个类基本很少使用，一般都会选择Apache的Http Client，此次在Java 9的版本中引入了一个新的package:java.net.http，里面提供了对Http访问很好的支持，不仅支持Http1.1而且还支持HTTP2（什么是HTTP2？请参见HTTP2的时代来了...），以及WebSocket，据说性能特别好。</p>
 <p><img alt="java" src="../../img/java6.png" title="java" />
 注意：新的 HttpClient API 在 Java 9 中以所谓的孵化器模块交付。也就是说，这套 API 不能保证 100% 完成。</p>
 <h3 id="javadoc">改进 Javadoc<a class="headerlink" href="#javadoc" title="Permanent link">&para;</a></h3>
-<p>javadoc 工具可以生成 Java 文档， Java 9 的 javadoc 的输出现在符合兼容 HTML5 标准。
-<div class="codehilite"><pre><span></span><span class="c1">//java 9 之前</span>
-<span class="nl">C:</span><span class="err">\</span><span class="n">JAVA</span><span class="o">&gt;</span><span class="n">javadoc</span> <span class="o">-</span><span class="n">d</span> <span class="n">C</span><span class="o">:/</span><span class="n">JAVA</span> <span class="n">Tester</span><span class="o">.</span><span class="na">java</span>
-<span class="c1">//java 9 之后</span>
-<span class="nl">C:</span><span class="err">\</span><span class="n">JAVA</span><span class="o">&gt;</span> <span class="n">javadoc</span> <span class="o">-</span><span class="n">d</span> <span class="n">C</span><span class="o">:/</span><span class="n">JAVA</span> <span class="o">-</span><span class="n">html5</span> <span class="n">Tester</span><span class="o">.</span><span class="na">java</span>
-</pre></div></p>
+<p>javadoc 工具可以生成 Java 文档， Java 9 的 javadoc 的输出现在符合兼容 HTML5 标准。</p>
+<div class="codehilite"><pre><span></span><span class="o">//</span>java <span class="m">9</span> 之前
+C<span class="o">:</span>\JAVA<span class="o">&gt;</span>javadoc <span class="o">-</span>d C<span class="o">:/</span>JAVA Tester.java
+<span class="o">//</span>java <span class="m">9</span> 之后
+C<span class="o">:</span>\JAVA<span class="o">&gt;</span> javadoc <span class="o">-</span>d C<span class="o">:/</span>JAVA <span class="o">-</span>html5 Tester.java
+</pre></div>
+
 <h3 id="jar">多版本兼容 jar 包<a class="headerlink" href="#jar" title="Permanent link">&para;</a></h3>
 <p>多版本兼容 JAR 功能能让你创建仅在特定版本的 Java 环境中运行库程序时选择使用的 class 版本。</p>
 <p>通过 --release 参数指定编译版本。</p>
-<p>具体的变化就是 META-INF 目录下 MANIFEST.MF 文件新增了一个属性：
-<div class="codehilite"><pre><span></span>Multi-Release: true
-</pre></div>
-然后 META-INF 目录下还新增了一个 versions 目录，如果是要支持 java9，则在 versions 目录下有 9 的目录。
+<p>具体的变化就是 META-INF 目录下 MANIFEST.MF 文件新增了一个属性：</p>
+<blockquote>
+<p>Multi-Release: true</p>
+</blockquote>
+<p>然后 META-INF 目录下还新增了一个 versions 目录，如果是要支持 java9，则在 versions 目录下有 9 的目录。</p>
 <div class="codehilite"><pre><span></span>multirelease.jar
-├── META-INF
+├── META<span class="o">-</span>INF
 │   └── versions
-│       └── 9
+│       └── <span class="m">9</span>
 │           └── multirelease
 │               └── Helper.class
 ├── multirelease
     ├── Helper.class
     └── Main.class
-</pre></div></p>
+</pre></div>
+
 <h3 id="_23">集合工厂方法<a class="headerlink" href="#_23" title="Permanent link">&para;</a></h3>
 <p>Java 9 List，Set 和 Map 接口中，新的静态工厂方法可以创建这些集合的不可变实例。</p>
 <p>这些工厂方法可以以更简洁的方式来创建集合。</p>
-<p>旧方法创建集合:
+<p>旧方法创建集合:</p>
 <div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="nn">java.util.ArrayList</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">java.util.Collections</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">java.util.HashMap</span><span class="o">;</span>
@@ -3863,22 +3958,27 @@ jshell&gt;
    <span class="o">}</span>
 <span class="o">}</span>
 </pre></div>
-执行输出结果为：
-<div class="codehilite"><pre><span></span>[A, B, C]
-[A, B, C]
-{A=Apple, B=Boy, C=Cat}
+
+<p>执行输出结果为：</p>
+<div class="codehilite"><pre><span></span><span class="p">[</span>A<span class="p">,</span> B<span class="p">,</span> C<span class="p">]</span>
+<span class="p">[</span>A<span class="p">,</span> B<span class="p">,</span> C<span class="p">]</span>
+<span class="p">{</span>A<span class="o">=</span>Apple<span class="p">,</span> B<span class="o">=</span>Boy<span class="p">,</span> C<span class="o">=</span>Cat<span class="p">}</span>
 </pre></div>
-新方法创建集合：</p>
-<p>Java 9 中，以下方法被添加到 List，Set 和 Map 接口以及它们的重载对象。
+
+<p>新方法创建集合：</p>
+<p>Java 9 中，以下方法被添加到 List，Set 和 Map 接口以及它们的重载对象。</p>
 <div class="codehilite"><pre><span></span><span class="kd">static</span> <span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="nf">of</span><span class="o">(</span><span class="n">E</span> <span class="n">e1</span><span class="o">,</span> <span class="n">E</span> <span class="n">e2</span><span class="o">,</span> <span class="n">E</span> <span class="n">e3</span><span class="o">);</span>
 <span class="kd">static</span> <span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">Set</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span>  <span class="nf">of</span><span class="o">(</span><span class="n">E</span> <span class="n">e1</span><span class="o">,</span> <span class="n">E</span> <span class="n">e2</span><span class="o">,</span> <span class="n">E</span> <span class="n">e3</span><span class="o">);</span>
 <span class="kd">static</span> <span class="o">&lt;</span><span class="n">K</span><span class="o">,</span><span class="n">V</span><span class="o">&gt;</span> <span class="n">Map</span><span class="o">&lt;</span><span class="n">K</span><span class="o">,</span><span class="n">V</span><span class="o">&gt;</span> <span class="nf">of</span><span class="o">(</span><span class="n">K</span> <span class="n">k1</span><span class="o">,</span> <span class="n">V</span> <span class="n">v1</span><span class="o">,</span> <span class="n">K</span> <span class="n">k2</span><span class="o">,</span> <span class="n">V</span> <span class="n">v2</span><span class="o">,</span> <span class="n">K</span> <span class="n">k3</span><span class="o">,</span> <span class="n">V</span> <span class="n">v3</span><span class="o">);</span>
 <span class="kd">static</span> <span class="o">&lt;</span><span class="n">K</span><span class="o">,</span><span class="n">V</span><span class="o">&gt;</span> <span class="n">Map</span><span class="o">&lt;</span><span class="n">K</span><span class="o">,</span><span class="n">V</span><span class="o">&gt;</span> <span class="nf">ofEntries</span><span class="o">(</span><span class="n">Map</span><span class="o">.</span><span class="na">Entry</span><span class="o">&lt;?</span> <span class="kd">extends</span> <span class="n">K</span><span class="o">,?</span> <span class="kd">extends</span> <span class="n">V</span><span class="o">&gt;...</span> <span class="n">entries</span><span class="o">)</span>
 </pre></div>
-* List 和 Set 接口, of(...) 方法重载了 0 ~ 10 个参数的不同方法 。
-* Map 接口, of(...) 方法重载了 0 ~ 10 个参数的不同方法 。
-* Map 接口如果超过 10 个参数, 可以使用 ofEntries(...) 方法。</p>
-<p>新方法创建集合:
+
+<ul>
+<li>List 和 Set 接口, of(...) 方法重载了 0 ~ 10 个参数的不同方法 。</li>
+<li>Map 接口, of(...) 方法重载了 0 ~ 10 个参数的不同方法 。</li>
+<li>Map 接口如果超过 10 个参数, 可以使用 ofEntries(...) 方法。</li>
+</ul>
+<p>新方法创建集合:</p>
 <div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="nn">java.util.ArrayList</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">java.util.Collections</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">java.util.HashMap</span><span class="o">;</span>
@@ -3906,12 +4006,14 @@ jshell&gt;
    <span class="o">}</span>
 <span class="o">}</span>
 </pre></div>
-输出结果为：
-<div class="codehilite"><pre><span></span>[A, B, C]
-[A, B, C]
-{A=Apple, B=Boy, C=Cat}
-{A=Apple, B=Boy, C=Cat}
-</pre></div></p>
+
+<p>输出结果为：</p>
+<div class="codehilite"><pre><span></span><span class="p">[</span>A<span class="p">,</span> B<span class="p">,</span> C<span class="p">]</span>
+<span class="p">[</span>A<span class="p">,</span> B<span class="p">,</span> C<span class="p">]</span>
+<span class="p">{</span>A<span class="o">=</span>Apple<span class="p">,</span> B<span class="o">=</span>Boy<span class="p">,</span> C<span class="o">=</span>Cat<span class="p">}</span>
+<span class="p">{</span>A<span class="o">=</span>Apple<span class="p">,</span> B<span class="o">=</span>Boy<span class="p">,</span> C<span class="o">=</span>Cat<span class="p">}</span>
+</pre></div>
+
 <h3 id="_24">私有接口方法<a class="headerlink" href="#_24" title="Permanent link">&para;</a></h3>
 <p>在 Java 8之前，接口可以有常量变量和抽象方法。</p>
 <p>我们不能在接口中提供方法实现。如果我们要提供抽象方法和非抽象方法（方法与实现）的组合，那么我们就得使用抽象类。</p>
@@ -3943,7 +4045,7 @@ jshell&gt;
 <p>ProcessHandle 嵌套接口 Info 来让开发者逃离时常因为要获取一个本地进程的 PID 而不得不使用本地代码的窘境。</p>
 <p>我们不能在接口中提供方法实现。如果我们要提供抽象方法和非抽象方法（方法与实现）的组合，那么我们就得使用抽象类。</p>
 <p>ProcessHandle 接口中声明的 onExit() 方法可用于在某个进程终止时触发某些操作。</p>
-<p><div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="nn">java.time.ZoneId</span><span class="o">;</span>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="nn">java.time.ZoneId</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">java.util.stream.Stream</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">java.util.stream.Collectors</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">java.io.IOException</span><span class="o">;</span>
@@ -3967,77 +4069,88 @@ jshell&gt;
          <span class="n">Collectors</span><span class="o">.</span><span class="na">joining</span><span class="o">(</span><span class="s">&quot; &quot;</span><span class="o">))).</span><span class="na">orElse</span><span class="o">(</span><span class="n">np</span><span class="o">));</span>
 
       <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">printf</span><span class="o">(</span><span class="s">&quot;User : %s%n&quot;</span><span class="o">,</span> <span class="n">info</span><span class="o">.</span><span class="na">user</span><span class="o">().</span><span class="na">orElse</span><span class="o">(</span><span class="n">np</span><span class="o">));</span>
-   <span class="o">}</span> 
+   <span class="o">}</span>
 <span class="o">}</span>
 </pre></div>
-以上实例执行输出结果为：
-<div class="codehilite"><pre><span></span>Process ID : 5800
-Command name : C:\Windows\System32\notepad.exe
-Command line : Not Present
-Start time: 2017-11-04T21:35:03.626
-Arguments : Not Present
-User: administrator
-</pre></div></p>
+
+<p>以上实例执行输出结果为：</p>
+<div class="codehilite"><pre><span></span>Process ID <span class="o">:</span> <span class="m">5800</span>
+Command name <span class="o">:</span> C<span class="o">:</span>\Windows\System32\notepad.exe
+Command line <span class="o">:</span> Not Present
+Start time<span class="o">:</span> <span class="m">2017-11-04</span>T21<span class="o">:</span><span class="m">35</span><span class="o">:</span><span class="m">03.626</span>
+Arguments <span class="o">:</span> Not Present
+User<span class="o">:</span> administrator
+</pre></div>
+
 <h3 id="stream-api">改进的 Stream API<a class="headerlink" href="#stream-api" title="Permanent link">&para;</a></h3>
 <p>Java 9 改进的 Stream API 添加了一些便利的方法，使流处理更容易，并使用收集器编写复杂的查询。</p>
 <p>Java 9 为 Stream 新增了几个方法：dropWhile、takeWhile、ofNullable，为 iterate 方法新增了一个重载方法。</p>
-<h4 id="takewhile">takeWhile 方法 语法:<a class="headerlink" href="#takewhile" title="Permanent link">&para;</a></h4>
-<p><div class="codehilite"><pre><span></span><span class="k">default</span> <span class="n">Stream</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="nf">takeWhile</span><span class="o">(</span><span class="n">Predicate</span><span class="o">&lt;?</span> <span class="kd">super</span> <span class="n">T</span><span class="o">&gt;</span> <span class="n">predicate</span><span class="o">)</span>
+<h4 id="takewhile">takeWhile 方法 语法<a class="headerlink" href="#takewhile" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><span class="k">default</span> <span class="n">Stream</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="nf">takeWhile</span><span class="o">(</span><span class="n">Predicate</span><span class="o">&lt;?</span> <span class="kd">super</span> <span class="n">T</span><span class="o">&gt;</span> <span class="n">predicate</span><span class="o">)</span>
 </pre></div>
-takeWhile() 方法使用一个断言作为参数，返回给定 Stream 的子集直到断言语句第一次返回 false。如果第一个值不满足断言条件，将返回一个空的 Stream。</p>
-<p>takeWhile() 方法在有序的 Stream 中，takeWhile 返回从开头开始的尽量多的元素；在无序的 Stream 中，takeWhile 返回从开头开始的符合 Predicate 要求的元素的子集。
+
+<p>takeWhile() 方法使用一个断言作为参数，返回给定 Stream 的子集直到断言语句第一次返回 false。如果第一个值不满足断言条件，将返回一个空的 Stream。</p>
+<p>takeWhile() 方法在有序的 Stream 中，takeWhile 返回从开头开始的尽量多的元素；在无序的 Stream 中，takeWhile 返回从开头开始的符合 Predicate 要求的元素的子集。</p>
 <div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="nn">java.util.stream.Stream</span><span class="o">;</span>
 
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">Tester</span> <span class="o">{</span>
    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
       <span class="n">Stream</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="s">&quot;a&quot;</span><span class="o">,</span><span class="s">&quot;b&quot;</span><span class="o">,</span><span class="s">&quot;c&quot;</span><span class="o">,</span><span class="s">&quot;&quot;</span><span class="o">,</span><span class="s">&quot;e&quot;</span><span class="o">,</span><span class="s">&quot;f&quot;</span><span class="o">).</span><span class="na">takeWhile</span><span class="o">(</span><span class="n">s</span><span class="o">-&gt;!</span><span class="n">s</span><span class="o">.</span><span class="na">isEmpty</span><span class="o">())</span>
-         <span class="o">.</span><span class="na">forEach</span><span class="o">(</span><span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">::</span><span class="n">print</span><span class="o">);</span>      
-   <span class="o">}</span> 
+         <span class="o">.</span><span class="na">forEach</span><span class="o">(</span><span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">::</span><span class="n">print</span><span class="o">);</span>
+   <span class="o">}</span>
 <span class="o">}</span>
 </pre></div>
-以上实例 takeWhile 方法在碰到空字符串时停止循环输出，执行输出结果为：
+
+<p>以上实例 takeWhile 方法在碰到空字符串时停止循环输出，执行输出结果为：</p>
 <div class="codehilite"><pre><span></span>abc
-</pre></div></p>
-<h4 id="dropwhile">dropWhile 方法 语法:<a class="headerlink" href="#dropwhile" title="Permanent link">&para;</a></h4>
-<p><div class="codehilite"><pre><span></span><span class="k">default</span> <span class="n">Stream</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="nf">dropWhile</span><span class="o">(</span><span class="n">Predicate</span><span class="o">&lt;?</span> <span class="kd">super</span> <span class="n">T</span><span class="o">&gt;</span> <span class="n">predicate</span><span class="o">)</span>
 </pre></div>
-dropWhile 方法和 takeWhile 作用相反的，使用一个断言作为参数，直到断言语句第一次返回 true 才返回给定 Stream 的子集。
+
+<h4 id="dropwhile">dropWhile 方法 语法:<a class="headerlink" href="#dropwhile" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><span class="k">default</span> <span class="n">Stream</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="nf">dropWhile</span><span class="o">(</span><span class="n">Predicate</span><span class="o">&lt;?</span> <span class="kd">super</span> <span class="n">T</span><span class="o">&gt;</span> <span class="n">predicate</span><span class="o">)</span>
+</pre></div>
+
+<p>dropWhile 方法和 takeWhile 作用相反的，使用一个断言作为参数，直到断言语句第一次返回 true 才返回给定 Stream 的子集。</p>
 <div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="nn">java.util.stream.Stream</span><span class="o">;</span>
 
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">Tester</span> <span class="o">{</span>
    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
       <span class="n">Stream</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="s">&quot;a&quot;</span><span class="o">,</span><span class="s">&quot;b&quot;</span><span class="o">,</span><span class="s">&quot;c&quot;</span><span class="o">,</span><span class="s">&quot;&quot;</span><span class="o">,</span><span class="s">&quot;e&quot;</span><span class="o">,</span><span class="s">&quot;f&quot;</span><span class="o">).</span><span class="na">dropWhile</span><span class="o">(</span><span class="n">s</span><span class="o">-&gt;</span> <span class="o">!</span><span class="n">s</span><span class="o">.</span><span class="na">isEmpty</span><span class="o">())</span>
          <span class="o">.</span><span class="na">forEach</span><span class="o">(</span><span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">::</span><span class="n">print</span><span class="o">);</span>
-   <span class="o">}</span> 
+   <span class="o">}</span>
 <span class="o">}</span>
 </pre></div>
-以上实例 dropWhile 方法在碰到空字符串时开始循环输出，执行输出结果为：
+
+<p>以上实例 dropWhile 方法在碰到空字符串时开始循环输出，执行输出结果为：</p>
 <div class="codehilite"><pre><span></span>ef
-</pre></div></p>
+</pre></div>
+
 <h4 id="iterate">iterate 方法 语法:<a class="headerlink" href="#iterate" title="Permanent link">&para;</a></h4>
 <div class="codehilite"><pre><span></span><span class="kd">static</span> <span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="n">Stream</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="nf">iterate</span><span class="o">(</span><span class="n">T</span> <span class="n">seed</span><span class="o">,</span> <span class="n">Predicate</span><span class="o">&lt;?</span> <span class="kd">super</span> <span class="n">T</span><span class="o">&gt;</span> <span class="n">hasNext</span><span class="o">,</span> <span class="n">UnaryOperator</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="n">next</span><span class="o">)</span>
 </pre></div>
 
 <p>方法允许使用初始种子值创建顺序（可能是无限）流，并迭代应用指定的下一个方法。 当指定的 hasNext 的 predicate 返回 false 时，迭代停止。</p>
-<p><div class="codehilite"><pre><span></span><span class="n">java</span><span class="o">.</span><span class="na">util</span><span class="o">.</span><span class="na">stream</span><span class="o">.</span><span class="na">IntStream</span><span class="o">;</span>
+<div class="codehilite"><pre><span></span><span class="n">java</span><span class="o">.</span><span class="na">util</span><span class="o">.</span><span class="na">stream</span><span class="o">.</span><span class="na">IntStream</span><span class="o">;</span>
 
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">Tester</span> <span class="o">{</span>
    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
       <span class="n">IntStream</span><span class="o">.</span><span class="na">iterate</span><span class="o">(</span><span class="mi">3</span><span class="o">,</span> <span class="n">x</span> <span class="o">-&gt;</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="o">,</span> <span class="n">x</span> <span class="o">-&gt;</span> <span class="n">x</span><span class="o">+</span> <span class="mi">3</span><span class="o">).</span><span class="na">forEach</span><span class="o">(</span><span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">::</span><span class="n">println</span><span class="o">);</span>
-   <span class="o">}</span> 
+   <span class="o">}</span>
 <span class="o">}</span>
 </pre></div>
-执行输出结果为：
-<div class="codehilite"><pre><span></span>3
-6
-9
-</pre></div></p>
-<h4 id="ofnullable">ofNullable 方法 语法:<a class="headerlink" href="#ofnullable" title="Permanent link">&para;</a></h4>
-<p><div class="codehilite"><pre><span></span><span class="kd">static</span> <span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="n">Stream</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="nf">ofNullable</span><span class="o">(</span><span class="n">T</span> <span class="n">t</span><span class="o">)</span>
+
+<p>执行输出结果为：</p>
+<div class="codehilite"><pre><span></span><span class="m">3</span>
+<span class="m">6</span>
+<span class="m">9</span>
 </pre></div>
-ofNullable 方法可以预防 NullPointerExceptions 异常， 可以通过检查流来避免 null 值。</p>
+
+<h4 id="ofnullable">ofNullable 方法 语法:<a class="headerlink" href="#ofnullable" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><span class="kd">static</span> <span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="n">Stream</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="nf">ofNullable</span><span class="o">(</span><span class="n">T</span> <span class="n">t</span><span class="o">)</span>
+</pre></div>
+
+<p>ofNullable 方法可以预防 NullPointerExceptions 异常， 可以通过检查流来避免 null 值。</p>
 <p>如果指定元素为非 null，则获取一个元素并生成单个元素流，元素为 null 则返回一个空流。</p>
-<p><div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="nn">java.util.stream.Stream</span><span class="o">;</span>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="nn">java.util.stream.Stream</span><span class="o">;</span>
 
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">Tester</span> <span class="o">{</span>
    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
@@ -4046,17 +4159,19 @@ ofNullable 方法可以预防 NullPointerExceptions 异常， 可以通过检查
 
       <span class="n">count</span> <span class="o">=</span> <span class="n">Stream</span><span class="o">.</span><span class="na">ofNullable</span><span class="o">(</span><span class="kc">null</span><span class="o">).</span><span class="na">count</span><span class="o">();</span>
       <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">count</span><span class="o">);</span>
-   <span class="o">}</span> 
+   <span class="o">}</span>
 <span class="o">}</span>
 </pre></div>
-执行输出结果为：
-<div class="codehilite"><pre><span></span>1
-0
-</pre></div></p>
+
+<p>执行输出结果为：</p>
+<div class="codehilite"><pre><span></span><span class="m">1</span>
+<span class="m">0</span>
+</pre></div>
+
 <h3 id="try-with-resources_1">改进的 try-with-resources<a class="headerlink" href="#try-with-resources_1" title="Permanent link">&para;</a></h3>
 <p>try-with-resources 是 JDK 7 中一个新的异常处理机制，它能够很容易地关闭在 try-catch 语句块中使用的资源。所谓的资源（resource）是指在程序完成后，必须关闭的对象。try-with-resources 语句确保了每个资源在语句结束时关闭。所有实现了 java.lang.AutoCloseable 接口（其中，它包括实现了 java.io.Closeable 的所有对象），可以使用作为资源。</p>
 <p>try-with-resources 声明在 JDK 9 已得到改进。如果你已经有一个资源是 final 或等效于 final 变量,您可以在 try-with-resources 语句中使用该变量，而无需在 try-with-resources 语句中声明一个新变量。</p>
-<p><div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="nn">java.io.BufferedReader</span><span class="o">;</span>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="nn">java.io.BufferedReader</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">java.io.IOException</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">java.io.Reader</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">java.io.StringReader</span><span class="o">;</span>
@@ -4064,7 +4179,7 @@ ofNullable 方法可以预防 NullPointerExceptions 异常， 可以通过检查
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">Tester</span> <span class="o">{</span>
    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">IOException</span> <span class="o">{</span>
       <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">readData</span><span class="o">(</span><span class="s">&quot;test&quot;</span><span class="o">));</span>
-   <span class="o">}</span> 
+   <span class="o">}</span>
    <span class="kd">static</span> <span class="n">String</span> <span class="nf">readData</span><span class="o">(</span><span class="n">String</span> <span class="n">message</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">IOException</span> <span class="o">{</span>
       <span class="n">Reader</span> <span class="n">inputString</span> <span class="o">=</span> <span class="k">new</span> <span class="n">StringReader</span><span class="o">(</span><span class="n">message</span><span class="o">);</span>
       <span class="n">BufferedReader</span> <span class="n">br</span> <span class="o">=</span> <span class="k">new</span> <span class="n">BufferedReader</span><span class="o">(</span><span class="n">inputString</span><span class="o">);</span>
@@ -4074,11 +4189,13 @@ ofNullable 方法可以预防 NullPointerExceptions 异常， 可以通过检查
    <span class="o">}</span>
 <span class="o">}</span>
 </pre></div>
-输出结果为：
+
+<p>输出结果为：</p>
 <div class="codehilite"><pre><span></span>test
 </pre></div>
-以上实例中我们需要在 try 语句块中声明资源 br1，然后才能使用它。
-在 Java 9 中，我们不需要声明资源 br1 就可以使用它，并得到相同的结果。
+
+<p>以上实例中我们需要在 try 语句块中声明资源 br1，然后才能使用它。
+在 Java 9 中，我们不需要声明资源 br1 就可以使用它，并得到相同的结果。</p>
 <div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="nn">java.io.BufferedReader</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">java.io.IOException</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">java.io.Reader</span><span class="o">;</span>
@@ -4087,7 +4204,7 @@ ofNullable 方法可以预防 NullPointerExceptions 异常， 可以通过检查
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">Tester</span> <span class="o">{</span>
    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">IOException</span> <span class="o">{</span>
       <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">readData</span><span class="o">(</span><span class="s">&quot;test&quot;</span><span class="o">));</span>
-   <span class="o">}</span> 
+   <span class="o">}</span>
    <span class="kd">static</span> <span class="n">String</span> <span class="nf">readData</span><span class="o">(</span><span class="n">String</span> <span class="n">message</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">IOException</span> <span class="o">{</span>
       <span class="n">Reader</span> <span class="n">inputString</span> <span class="o">=</span> <span class="k">new</span> <span class="n">StringReader</span><span class="o">(</span><span class="n">message</span><span class="o">);</span>
       <span class="n">BufferedReader</span> <span class="n">br</span> <span class="o">=</span> <span class="k">new</span> <span class="n">BufferedReader</span><span class="o">(</span><span class="n">inputString</span><span class="o">);</span>
@@ -4097,38 +4214,45 @@ ofNullable 方法可以预防 NullPointerExceptions 异常， 可以通过检查
    <span class="o">}</span>
 <span class="o">}</span>
 </pre></div>
-执行输出结果为：
+
+<p>执行输出结果为：
 <div class="codehilite"><pre><span></span>test
-</pre></div>
-在处理必须关闭的资源时，使用try-with-resources语句替代try-finally语句。 生成的代码更简洁，更清晰，并且生成的异常更有用。 try-with-resources语句在编写必须关闭资源的代码时会更容易，也不会出错，而使用try-finally语句实际上是不可能的。</p>
+</pre></div></p>
+<p>在处理必须关闭的资源时，使用try-with-resources语句替代try-finally语句。 生成的代码更简洁，更清晰，并且生成的异常更有用。 try-with-resources语句在编写必须关闭资源的代码时会更容易，也不会出错，而使用try-finally语句实际上是不可能的。</p>
 <h3 id="deprecated">改进的 @Deprecated 注解<a class="headerlink" href="#deprecated" title="Permanent link">&para;</a></h3>
 <p>注解 @Deprecated 可以标记 Java API 状态，可以是以下几种：</p>
 <p>使用它存在风险，可能导致错误
 可能在未来版本中不兼容
 可能在未来版本中删除
 一个更好和更高效的方案已经取代它。
-Java 9 中注解增加了两个新元素：since 和 forRemoval。
-* since: 元素指定已注解的API元素已被弃用的版本。
-* forRemoval: 元素表示注解的 API 元素在将来的版本中被删除，应该迁移 API。</p>
+Java 9 中注解增加了两个新元素：since 和 forRemoval。</p>
+<ul>
+<li>since: 元素指定已注解的API元素已被弃用的版本。</li>
+<li>forRemoval: 元素表示注解的 API 元素在将来的版本中被删除，应该迁移 API。</li>
+</ul>
 <h3 id="_25">钻石操作符的升级<a class="headerlink" href="#_25" title="Permanent link">&para;</a></h3>
 <p>钻石操作符是在 java 7 中引入的，可以让代码更易读，但它不能用于匿名的内部类。</p>
-<p>在 java 9 中， 它可以与匿名的内部类一起使用，从而提高代码的可读性。
+<p>在 java 9 中， 它可以与匿名的内部类一起使用，从而提高代码的可读性。</p>
 <div class="codehilite"><pre><span></span><span class="c1">//java6 及之前</span>
 <span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">map6</span><span class="o">=</span><span class="k">new</span> <span class="n">HashMap</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span><span class="n">String</span><span class="o">&gt;();</span>
 <span class="c1">//java7和8 &lt;&gt;没有了数据类型</span>
 <span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">map6</span><span class="o">=</span><span class="k">new</span> <span class="n">HashMap</span><span class="o">&lt;&gt;();</span>
 <span class="c1">//java9 添加了匿名内部类的功能 后面添加大括号{} 可以做一些细节操作</span>
 <span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">map6</span><span class="o">=</span><span class="k">new</span> <span class="n">HashMap</span><span class="o">&lt;&gt;(){};</span>
-</pre></div></p>
-<h3 id="optional_1">改进的 Optional 类<a class="headerlink" href="#optional_1" title="Permanent link">&para;</a></h3>
-<p>Optional 类在 Java 8 中引入，Optional 类的引入很好的解决空指针异常。。在 java 9 中, 添加了三个方法来改进它的功能：
-* stream()
-* ifPresentOrElse()
-* or()</p>
-<h4 id="stream">stream() 方法 语法:<a class="headerlink" href="#stream" title="Permanent link">&para;</a></h4>
-<p><div class="codehilite"><pre><span></span><span class="kd">public</span> <span class="n">Stream</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="nf">stream</span><span class="o">()</span>
 </pre></div>
-stream 方法的作用就是将 Optional 转为一个 Stream，如果该 Optional 中包含值，那么就返回包含这个值的 Stream，否则返回一个空的 Stream（Stream.empty()）。
+
+<h3 id="optional_1">改进的 Optional 类<a class="headerlink" href="#optional_1" title="Permanent link">&para;</a></h3>
+<p>Optional 类在 Java 8 中引入，Optional 类的引入很好的解决空指针异常。。在 java 9 中, 添加了三个方法来改进它的功能：</p>
+<ul>
+<li>stream()</li>
+<li>ifPresentOrElse()</li>
+<li>or()</li>
+</ul>
+<h4 id="stream">stream() 方法 语法:<a class="headerlink" href="#stream" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><span class="kd">public</span> <span class="n">Stream</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="nf">stream</span><span class="o">()</span>
+</pre></div>
+
+<p>stream 方法的作用就是将 Optional 转为一个 Stream，如果该 Optional 中包含值，那么就返回包含这个值的 Stream，否则返回一个空的 Stream（Stream.empty()）。</p>
 <div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="nn">java.util.Arrays</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">java.util.List</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">java.util.Optional</span><span class="o">;</span>
@@ -4161,16 +4285,19 @@ stream 方法的作用就是将 Optional 转为一个 Stream，如果该 Optiona
    <span class="o">}</span>  
 <span class="o">}</span>
 </pre></div>
-执行输出结果为：
-<div class="codehilite"><pre><span></span>[A, B]
-[A, B]
-</pre></div></p>
-<h4 id="ifpresentorelse">ifPresentOrElse() 方法 语法:<a class="headerlink" href="#ifpresentorelse" title="Permanent link">&para;</a></h4>
-<p><div class="codehilite"><pre><span></span><span class="kd">public</span> <span class="kt">void</span> <span class="nf">ifPresentOrElse</span><span class="o">(</span><span class="n">Consumer</span><span class="o">&lt;?</span> <span class="kd">super</span> <span class="n">T</span><span class="o">&gt;</span> <span class="n">action</span><span class="o">,</span> <span class="n">Runnable</span> <span class="n">emptyAction</span><span class="o">)</span>
+
+<p>执行输出结果为：</p>
+<div class="codehilite"><pre><span></span><span class="p">[</span>A<span class="p">,</span> B<span class="p">]</span>
+<span class="p">[</span>A<span class="p">,</span> B<span class="p">]</span>
 </pre></div>
-ifPresentOrElse 方法的改进就是有了 else，接受两个参数 Consumer 和 Runnable。</p>
+
+<h4 id="ifpresentorelse">ifPresentOrElse() 方法 语法:<a class="headerlink" href="#ifpresentorelse" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><span class="kd">public</span> <span class="kt">void</span> <span class="nf">ifPresentOrElse</span><span class="o">(</span><span class="n">Consumer</span><span class="o">&lt;?</span> <span class="kd">super</span> <span class="n">T</span><span class="o">&gt;</span> <span class="n">action</span><span class="o">,</span> <span class="n">Runnable</span> <span class="n">emptyAction</span><span class="o">)</span>
+</pre></div>
+
+<p>ifPresentOrElse 方法的改进就是有了 else，接受两个参数 Consumer 和 Runnable。</p>
 <p>ifPresentOrElse 方法的用途是，如果一个 Optional 包含值，则对其包含的值调用函数 action，即 action.accept(value)，这与 ifPresent 一致；与 ifPresent 方法的区别在于，ifPresentOrElse 还有第二个参数 emptyAction —— 如果 Optional 不包含值，那么 ifPresentOrElse 便会调用 emptyAction，即 emptyAction.run()。</p>
-<p><div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="nn">java.util.Optional</span><span class="o">;</span>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="nn">java.util.Optional</span><span class="o">;</span>
 
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">Tester</span> <span class="o">{</span>
    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
@@ -4186,14 +4313,17 @@ ifPresentOrElse 方法的改进就是有了 else，接受两个参数 Consumer �
    <span class="o">}</span>  
 <span class="o">}</span>
 </pre></div>
-执行输出结果为：
-<div class="codehilite"><pre><span></span>Value: 1
+
+<p>执行输出结果为：</p>
+<div class="codehilite"><pre><span></span>Value<span class="o">:</span> <span class="m">1</span>
 Not Present.
-</pre></div></p>
-<h4 id="or">or() 方法 语法:<a class="headerlink" href="#or" title="Permanent link">&para;</a></h4>
-<p><div class="codehilite"><pre><span></span><span class="kd">public</span> <span class="n">Optional</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="nf">or</span><span class="o">(</span><span class="n">Supplier</span><span class="o">&lt;?</span> <span class="kd">extends</span> <span class="n">Optional</span><span class="o">&lt;?</span> <span class="kd">extends</span> <span class="n">T</span><span class="o">&gt;&gt;</span> <span class="n">supplier</span><span class="o">)</span>
 </pre></div>
-如果值存在，返回 Optional 指定的值，否则返回一个预设的值。
+
+<h4 id="or">or() 方法 语法:<a class="headerlink" href="#or" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><span class="kd">public</span> <span class="n">Optional</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="nf">or</span><span class="o">(</span><span class="n">Supplier</span><span class="o">&lt;?</span> <span class="kd">extends</span> <span class="n">Optional</span><span class="o">&lt;?</span> <span class="kd">extends</span> <span class="n">T</span><span class="o">&gt;&gt;</span> <span class="n">supplier</span><span class="o">)</span>
+</pre></div>
+
+<p>如果值存在，返回 Optional 指定的值，否则返回一个预设的值。</p>
 <div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="nn">java.util.Optional</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">java.util.function.Supplier</span><span class="o">;</span>
 
@@ -4209,10 +4339,12 @@ Not Present.
    <span class="o">}</span>  
 <span class="o">}</span>
 </pre></div>
-执行输出结果为：
-<div class="codehilite"><pre><span></span>Value: Mahesh
-Value: Not Present
-</pre></div></p>
+
+<p>执行输出结果为：</p>
+<div class="codehilite"><pre><span></span>Value<span class="o">:</span> Mahesh
+Value<span class="o">:</span> Not Present
+</pre></div>
+
 <h3 id="api_2">多分辨率图像 API<a class="headerlink" href="#api_2" title="Permanent link">&para;</a></h3>
 <p>Java 9 定义多分辨率图像 API，开发者可以很容易的操作和展示不同分辨率的图像了。</p>
 <p>以下是多分辨率图像的主要操作方法：</p>
@@ -4233,24 +4365,27 @@ Value: Not Present
 <li>新的工厂方法</li>
 </ul>
 <h4 id="delays-timeouts">支持 delays 和 timeouts<a class="headerlink" href="#delays-timeouts" title="Permanent link">&para;</a></h4>
-<p><div class="codehilite"><pre><span></span><span class="kd">public</span> <span class="n">CompletableFuture</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="nf">completeOnTimeout</span><span class="o">(</span><span class="n">T</span> <span class="n">value</span><span class="o">,</span> <span class="kt">long</span> <span class="n">timeout</span><span class="o">,</span> <span class="n">TimeUnit</span> <span class="n">unit</span><span class="o">)</span>
+<div class="codehilite"><pre><span></span><span class="kd">public</span> <span class="n">CompletableFuture</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="nf">completeOnTimeout</span><span class="o">(</span><span class="n">T</span> <span class="n">value</span><span class="o">,</span> <span class="kt">long</span> <span class="n">timeout</span><span class="o">,</span> <span class="n">TimeUnit</span> <span class="n">unit</span><span class="o">)</span>
 </pre></div>
-在 timeout（单位在 java.util.concurrent.Timeunits units 中，比如 MILLISECONDS ）前以给定的 value 完成这个 CompletableFutrue。返回这个 CompletableFutrue。
+
+<p>在 timeout（单位在 java.util.concurrent.Timeunits units 中，比如 MILLISECONDS ）前以给定的 value 完成这个 CompletableFutrue。返回这个 CompletableFutrue。</p>
 <div class="codehilite"><pre><span></span><span class="kd">public</span> <span class="n">CompletableFuture</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="nf">orTimeout</span><span class="o">(</span><span class="kt">long</span> <span class="n">timeout</span><span class="o">,</span> <span class="n">TimeUnit</span> <span class="n">unit</span><span class="o">)</span>
 </pre></div>
-如果没有在给定的 timeout 内完成，就以 java.util.concurrent.TimeoutException 完成这个 CompletableFutrue，并返回这个 CompletableFutrue</p>
+
+<p>如果没有在给定的 timeout 内完成，就以 java.util.concurrent.TimeoutException 完成这个 CompletableFutrue，并返回这个 CompletableFutrue</p>
 <h4 id="_26">增强了对子类化的支持<a class="headerlink" href="#_26" title="Permanent link">&para;</a></h4>
 <p>做了许多改进使得 CompletableFuture 可以被更简单的继承。比如，你也许想重写新的 public Executor defaultExecutor() 方法来代替默认的 executor。</p>
-<p>另一个新的使子类化更容易的方法是：
+<p>另一个新的使子类化更容易的方法是：</p>
 <div class="codehilite"><pre><span></span><span class="kd">public</span> <span class="o">&lt;</span><span class="n">U</span><span class="o">&gt;</span> <span class="n">CompletableFuture</span><span class="o">&lt;</span><span class="n">U</span><span class="o">&gt;</span> <span class="nf">newIncompleteFuture</span><span class="o">()</span>
-</pre></div></p>
+</pre></div>
+
 <h3 id="_27">新的工厂方法<a class="headerlink" href="#_27" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span>Java 8引入了 &lt;U&gt; CompletableFuture&lt;U&gt; completedFuture(U value) 工厂方法来返回一个已经以给定 value 完成了的 CompletableFuture。Java 9以 一个新的 &lt;U&gt; CompletableFuture &lt;U&gt; failedFuture(Throwable ex) 来补充了这个方法，可以返回一个以给定异常完成的 CompletableFuture。
+<div class="codehilite"><pre><span></span>Java <span class="m">8</span>引入了 <span class="o">&lt;</span>U<span class="o">&gt;</span> CompletableFuture<span class="o">&lt;</span>U<span class="o">&gt;</span> completedFuture<span class="p">(</span>U value<span class="p">)</span> 工厂方法来返回一个已经以给定 value 完成了的 CompletableFuture。Java <span class="m">9</span>以 一个新的 <span class="o">&lt;</span>U<span class="o">&gt;</span> CompletableFuture <span class="o">&lt;</span>U<span class="o">&gt;</span> failedFuture<span class="p">(</span>Throwable ex<span class="p">)</span> 来补充了这个方法，可以返回一个以给定异常完成的 CompletableFuture。
 
-除此以外，Java 9 引入了下面这对 stage-oriented 工厂方法，返回完成的或异常完成的 completion stages:
+除此以外，Java <span class="m">9</span> 引入了下面这对 stage<span class="o">-</span>oriented 工厂方法，返回完成的或异常完成的 completion stages<span class="o">:</span>
 
-* &lt;U&gt; CompletionStage&lt;U&gt; completedStage(U value): 返回一个新的以指定 value 完成的CompletionStage ，并且只支持 CompletionStage 里的接口。
-* &lt;U&gt; CompletionStage&lt;U&gt; failedStage(Throwable ex): 返回一个新的以指定异常完成的CompletionStage ，并且只支持 CompletionStage 里的接口。
+<span class="o">*</span> <span class="o">&lt;</span>U<span class="o">&gt;</span> CompletionStage<span class="o">&lt;</span>U<span class="o">&gt;</span> completedStage<span class="p">(</span>U value<span class="p">)</span><span class="o">:</span> 返回一个新的以指定 value 完成的CompletionStage ，并且只支持 CompletionStage 里的接口。
+<span class="o">*</span> <span class="o">&lt;</span>U<span class="o">&gt;</span> CompletionStage<span class="o">&lt;</span>U<span class="o">&gt;</span> failedStage<span class="p">(</span>Throwable ex<span class="p">)</span><span class="o">:</span> 返回一个新的以指定异常完成的CompletionStage ，并且只支持 CompletionStage 里的接口。
 </pre></div>
                 
                   
