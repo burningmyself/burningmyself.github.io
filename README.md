@@ -32,6 +32,7 @@
 * * [程序员如何技术成长](docs/exp/learnweetout.md)
 * * [产品与技术](docs/exp/pt.md)
 * * [深度学习框架](docs/exp/four_deep_learning.md)
+* * [在阿里做了5年技术Leader，我总结出这些套路！](docs/exp/tl.md)
 * [Img]
 * [Java]
 * * [Java 新特性](docs/java/feature.md)
