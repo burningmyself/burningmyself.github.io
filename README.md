@@ -114,3 +114,4 @@
 * * [往后余生还很精彩，别被熬夜拖垮了](docs/emotion/twopath.md)
 * * [心态好的人，一辈子都好](docs/emotion/lifetime.md)
 * * [将心比心，方得人心](docs/emotion/hearttoheart.md)
+* * [别睡太晚，别爱太满，别要太多](docs/emotion/ttt.md)
