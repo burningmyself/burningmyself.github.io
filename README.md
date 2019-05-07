@@ -63,6 +63,7 @@
 * * [远程部署神器 Fabric](docs/python/fabric.md)
 * [SQL]
 * * [MySQL 优化指南](docs/sql/mysql_yh.md)
+* * [MySQL优化](docs/sql/mysql_yh17.md)
 * * [MySQL 日志](docs/sql/mysql_log.md)
 * * [MySQL 索引](docs/sql/mysql_index.md)
 * * [MySQL PXC集群](docs/sql/mysql_pxc.md)

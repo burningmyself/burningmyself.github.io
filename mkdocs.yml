@@ -37,6 +37,7 @@ nav:
         - React 开发者指南: web/react.md
     - SQL:
         - MySQL优化: sql/mysql_yh.md
+        - MySQL优化: sql/mysql_yh17.md
         - MySQL日志: sql/mysql_log.md
         - MySQL索引: sql/mysql_index.md
         - MySQL PXC集群: sql/mysql_pxc.md
