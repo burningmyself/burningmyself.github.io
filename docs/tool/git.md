@@ -17,7 +17,7 @@ git remote add origin <https://gitee.com/useraddress/HelloGitee.git>
 ## 将文件添加到仓库
 
 ``` s
-git add 文件名 # 将工作区的某个文件添加到暂存区   
+git add 文件名 # 将工作区的某个文件添加到暂存区
 git add -u # 添加所有被tracked文件中被修改或删除的文件信息到暂存区，不处理untracked的文件
 git add -A # 添加所有被tracked文件中被修改或删除的文件信息到暂存区，包括untracked的文件
 git add . # 将当前工作区的所有文件都加入暂存区
