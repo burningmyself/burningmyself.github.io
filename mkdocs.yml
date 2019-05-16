@@ -108,6 +108,7 @@ nav:
     - 心态好的人，一辈子都好: emotion/lifetime.md
     - 将心比心，方得人心: emotion/hearttoheart.md
     - 别睡太晚，别爱太满，别要太多: emotion/ttt.md
+    - 表白: emotion/index.md
 markdown_extensions:
   - admonition
   - codehilite:

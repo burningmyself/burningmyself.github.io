@@ -117,3 +117,4 @@
 * * [心态好的人，一辈子都好](docs/emotion/lifetime.md)
 * * [将心比心，方得人心](docs/emotion/hearttoheart.md)
 * * [别睡太晚，别爱太满，别要太多](docs/emotion/ttt.md)
+* * [程序员表白必备神器] (docs/emotion/profess.md)
