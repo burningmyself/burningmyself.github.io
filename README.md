@@ -48,6 +48,7 @@
 * * [分布式锁](docs/micro/fbs-lock.md)
 * * [微服务设计](docs/micro/design.md)
 * * [分布式系统与消息的投递](docs/micro/distrimsg.md)
+* * [基于DDD的微服务设计和开发实战](docs/micro/ddd.md)
 * [.NET]
 * * [C#语法新特性](docs/net/c_sharp.md)
 * * [.Ner Core Docker 部署](docs/net/c_docker.md)

@@ -63,6 +63,7 @@ nav:
         - 分布式锁: micro/fbs-lock.md
         - 微服务设计: micro/design.md
         - 分布式系统与消息的投递: micro/distrimsg.md
+        - 基于DDD的微服务设计和开发实战: micro/ddd.md
   - 经验分析:
     - DevOps: exp/devops.md   
     - Micro-Service: exp/micro-service.md
