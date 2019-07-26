@@ -70,6 +70,7 @@
 * * [MySQL PXC集群](docs/sql/mysql_pxc.md)
 * * [MySQL MySQL数据库应用](docs/sql/mysql_use.md)
 * * [Sql Server 主从备份](docs/sql/sql_server_master.md)
+* * [数据库之互联网常用分库分表方案](docs/sql/data_split.md)
 * [TOOL]
 * * [Git命令](docs/tool/git.md)
 * * [GitBook](docs/tool/gitbook.md)
