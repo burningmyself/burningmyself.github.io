@@ -1,0 +1,2855 @@
+
+
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+        <meta name="description" content=".net,java,php,python,docker,web">
+      
+      
+        <link rel="canonical" href="https://burningmyself.github.io/blog/micro/ddd/">
+      
+      
+        <meta name="author" content="朽木自雕">
+      
+      
+        <meta name="lang:clipboard.copy" content="Copy to clipboard">
+      
+        <meta name="lang:clipboard.copied" content="Copied to clipboard">
+      
+        <meta name="lang:search.language" content="en">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="No matching documents">
+      
+        <meta name="lang:search.result.one" content="1 matching document">
+      
+        <meta name="lang:search.result.other" content="# matching documents">
+      
+        <meta name="lang:search.tokenizer" content="[\s\-]+">
+      
+      <link rel="shortcut icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.4.0">
+    
+    
+      
+        <title>基于DDD的微服务设计和开发实战 - BurningMyself</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/application.0284f74d.css">
+      
+      
+    
+    
+      <script src="../../assets/javascripts/modernizr.74668098.js"></script>
+    
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700|Roboto+Mono&display=fallback">
+        <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
+      
+    
+    <link rel="stylesheet" href="../../assets/fonts/material-icons.css">
+    
+    
+    
+      
+    
+    
+  </head>
+  
+    <body dir="ltr">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+          <svg xmlns="http://www.w3.org/2000/svg" width="416" height="448" viewBox="0 0 416 448" id="__github"><path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19T128 352t-18.125-8.5-10.75-19T96 304t3.125-20.5 10.75-19T128 256t18.125 8.5 10.75 19T160 304zm160 0q0 10-3.125 20.5t-10.75 19T288 352t-18.125-8.5-10.75-19T256 304t3.125-20.5 10.75-19T288 256t18.125 8.5 10.75 19T320 304zm40 0q0-30-17.25-51T296 232q-10.25 0-48.75 5.25Q229.5 240 208 240t-39.25-2.75Q130.75 232 120 232q-29.5 0-46.75 21T56 304q0 22 8 38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0 37.25-1.75t35-7.375 30.5-15 20.25-25.75T360 304zm56-44q0 51.75-15.25 82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5T212 416q-19.5 0-35.5-.75t-36.875-3.125-38.125-7.5-34.25-12.875T37 371.5t-21.5-28.75Q0 312 0 260q0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25 30.875Q171.5 96 212 96q37 0 70 8 26.25-20.5 46.75-30.25T376 64q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34 99.5z"/></svg>
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+    
+      <a href="#ddd" tabindex="1" class="md-skip">
+        Skip to content
+      </a>
+    
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="https://burningmyself.github.io/blog/" title="BurningMyself" class="md-header-nav__button md-logo">
+          
+            <i class="md-icon"></i>
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          
+            <span class="md-header-nav__topic">
+              BurningMyself
+            </span>
+            <span class="md-header-nav__topic">
+              
+                基于DDD的微服务设计和开发实战
+              
+            </span>
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
+          
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="__search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            Type to start searching
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+        
+      </div>
+      
+        <div class="md-flex__cell md-flex__cell--shrink">
+          <div class="md-header-nav__source">
+            
+
+
+  
+
+<a href="https://github.com/burningmyself/blog/" title="Go to repository" class="md-source" data-md-source="github">
+  
+    <div class="md-source__icon">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
+    burningmyself/blog
+  </div>
+</a>
+          </div>
+        </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+      <main class="md-main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="__drawer">
+    <a href="https://burningmyself.github.io/blog/" title="BurningMyself" class="md-nav__button md-logo">
+      
+        <i class="md-icon"></i>
+      
+    </a>
+    BurningMyself
+  </label>
+  
+    <div class="md-nav__source">
+      
+
+
+  
+
+<a href="https://github.com/burningmyself/blog/" title="Go to repository" class="md-source" data-md-source="github">
+  
+    <div class="md-source__icon">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
+    burningmyself/blog
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../.." title="介绍" class="md-nav__link">
+      介绍
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2">
+    
+    <label class="md-nav__link" for="nav-2">
+      技术博文
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-2">
+        技术博文
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-1" type="checkbox" id="nav-2-1">
+    
+    <label class="md-nav__link" for="nav-2-1">
+      .NET
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-2-1">
+        .NET
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../net/c_sharp/" title="C# 6" class="md-nav__link">
+      C# 6
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../net/c_docker/" title=".Ner Core Docker 部署" class="md-nav__link">
+      .Ner Core Docker 部署
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../net/c_mysql_nginx/" title="使用 Docker 容器化部署 ASP.NET Core + MySQL + Nginx" class="md-nav__link">
+      使用 Docker 容器化部署 ASP.NET Core + MySQL + Nginx
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../net/c_core_safety/" title="让你的ASP.NET Core应用程序更安全" class="md-nav__link">
+      让你的ASP.NET Core应用程序更安全
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../net/c_core_study_route/" title="ASP.NET Core开发者指南" class="md-nav__link">
+      ASP.NET Core开发者指南
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-2" type="checkbox" id="nav-2-2">
+    
+    <label class="md-nav__link" for="nav-2-2">
+      Java
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-2-2">
+        Java
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../java/feature/" title="Java特性" class="md-nav__link">
+      Java特性
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../java/load-class/" title="Java类加载" class="md-nav__link">
+      Java类加载
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../java/orm/" title="Orm的优缺点" class="md-nav__link">
+      Orm的优缺点
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../java/bio-nio/" title="BIO与NIO" class="md-nav__link">
+      BIO与NIO
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../java/rocketmq/rmq-1/" title="RocketMq下载与安装" class="md-nav__link">
+      RocketMq下载与安装
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-3" type="checkbox" id="nav-2-3">
+    
+    <label class="md-nav__link" for="nav-2-3">
+      Python
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-2-3">
+        Python
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../python/feature/" title="Python特性" class="md-nav__link">
+      Python特性
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../python/str_joint/" title="Python字符拼接" class="md-nav__link">
+      Python字符拼接
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../python/syntax_rule/" title="Python语法技巧" class="md-nav__link">
+      Python语法技巧
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../python/fabric/" title="远程部署神器 Fabric" class="md-nav__link">
+      远程部署神器 Fabric
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-4" type="checkbox" id="nav-2-4">
+    
+    <label class="md-nav__link" for="nav-2-4">
+      PHP
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-2-4">
+        PHP
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../php/kj/" title="框架" class="md-nav__link">
+      框架
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-5" type="checkbox" id="nav-2-5">
+    
+    <label class="md-nav__link" for="nav-2-5">
+      Web
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-2-5">
+        Web
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../web/es6/" title="es6语法" class="md-nav__link">
+      es6语法
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../web/ali_js_style/" title="阿里js样式规范" class="md-nav__link">
+      阿里js样式规范
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../web/node.js/" title="node.js文档" class="md-nav__link">
+      node.js文档
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../web/react/" title="React 开发者指南" class="md-nav__link">
+      React 开发者指南
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-6" type="checkbox" id="nav-2-6">
+    
+    <label class="md-nav__link" for="nav-2-6">
+      SQL
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-2-6">
+        SQL
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../sql/mysql_yh/" title="MySQL优化" class="md-nav__link">
+      MySQL优化
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../sql/mysql_yh17/" title="MySQL优化" class="md-nav__link">
+      MySQL优化
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../sql/mysql_log/" title="MySQL日志" class="md-nav__link">
+      MySQL日志
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../sql/mysql_index/" title="MySQL索引" class="md-nav__link">
+      MySQL索引
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../sql/mysql_pxc/" title="MySQL PXC集群" class="md-nav__link">
+      MySQL PXC集群
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../sql/mysql_use/" title="MySQL 数据库应用" class="md-nav__link">
+      MySQL 数据库应用
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../sql/sql_server_master/" title="Sql Server 主从备份" class="md-nav__link">
+      Sql Server 主从备份
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../sql/data_split/" title="数据库之互联网常用分库分表方案" class="md-nav__link">
+      数据库之互联网常用分库分表方案
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-7" type="checkbox" id="nav-2-7">
+    
+    <label class="md-nav__link" for="nav-2-7">
+      Linux
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-2-7">
+        Linux
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../linux/often/" title="常用命令" class="md-nav__link">
+      常用命令
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../linux/ope/" title="实用的Linux 命令" class="md-nav__link">
+      实用的Linux 命令
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-8" type="checkbox" id="nav-2-8">
+    
+    <label class="md-nav__link" for="nav-2-8">
+      Docker
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-2-8">
+        Docker
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../docker/docker/" title="Docker全科" class="md-nav__link">
+      Docker全科
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-9" type="checkbox" id="nav-2-9">
+    
+    <label class="md-nav__link" for="nav-2-9">
+      Tool
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-2-9">
+        Tool
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tool/git/" title="Git" class="md-nav__link">
+      Git
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tool/gitquestion/" title="Git问题处理" class="md-nav__link">
+      Git问题处理
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tool/gitflow/" title="GitFlow" class="md-nav__link">
+      GitFlow
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tool/gitbook/" title="GitBook" class="md-nav__link">
+      GitBook
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tool/gitcmr/" title="Git提交日志规范" class="md-nav__link">
+      Git提交日志规范
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tool/markdown/" title="Markdown" class="md-nav__link">
+      Markdown
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tool/cicd/" title="CI/CD" class="md-nav__link">
+      CI/CD
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tool/mkdocs/" title="mkdocs简单使用" class="md-nav__link">
+      mkdocs简单使用
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tool/gitstudy/" title="Git的黑魔法" class="md-nav__link">
+      Git的黑魔法
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3" checked>
+    
+    <label class="md-nav__link" for="nav-3">
+      微服务
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-3">
+        微服务
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../spring-cloud/" title="基于SpringCloud的微服务架构演变史" class="md-nav__link">
+      基于SpringCloud的微服务架构演变史
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../fbs-lock/" title="分布式锁" class="md-nav__link">
+      分布式锁
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../design/" title="微服务设计" class="md-nav__link">
+      微服务设计
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../distrimsg/" title="分布式系统与消息的投递" class="md-nav__link">
+      分布式系统与消息的投递
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        基于DDD的微服务设计和开发实战
+      </label>
+    
+    <a href="./" title="基于DDD的微服务设计和开发实战" class="md-nav__link md-nav__link--active">
+      基于DDD的微服务设计和开发实战
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" title="目标" class="md-nav__link">
+    目标
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" title="适用范围" class="md-nav__link">
+    适用范围
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ddd_1" title="DDD 分层架构视图" class="md-nav__link">
+    DDD 分层架构视图
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" title="服务视图" class="md-nav__link">
+    服务视图
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1" title="1、接口服务" class="md-nav__link">
+    1、接口服务
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2" title="2、应用服务" class="md-nav__link">
+    2、应用服务
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3" title="3、领域服务" class="md-nav__link">
+    3、领域服务
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4" title="4、基础服务" class="md-nav__link">
+    4、基础服务
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" title="微服务外的服务视图" class="md-nav__link">
+    微服务外的服务视图
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1_1" title="1. 前端应用与微服务" class="md-nav__link">
+    1. 前端应用与微服务
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2_1" title="2. 微服务与外部应用" class="md-nav__link">
+    2. 微服务与外部应用
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_5" title="数据视图" class="md-nav__link">
+    数据视图
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_6" title="领域事件和事件总线" class="md-nav__link">
+    领域事件和事件总线
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_7" title="微服务内的领域事件" class="md-nav__link">
+    微服务内的领域事件
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" title="微服务之间的领域事件" class="md-nav__link">
+    微服务之间的领域事件
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_9" title="事件总线" class="md-nav__link">
+    事件总线
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_10" title="事件数据持久化" class="md-nav__link">
+    事件数据持久化
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_11" title="微服务设计方法" class="md-nav__link">
+    微服务设计方法
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_12" title="事件风暴" class="md-nav__link">
+    事件风暴
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_13" title="领域对象及服务矩阵和代码模型设计" class="md-nav__link">
+    领域对象及服务矩阵和代码模型设计
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_14" title="领域对象及服务矩阵样例说明" class="md-nav__link">
+    领域对象及服务矩阵样例说明
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_15" title="微服务代码结构模型" class="md-nav__link">
+    微服务代码结构模型
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_16" title="微服务代码总目录" class="md-nav__link">
+    微服务代码总目录
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_17" title="用户接口层代码模型" class="md-nav__link">
+    用户接口层代码模型
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_18" title="应用层代码模型" class="md-nav__link">
+    应用层代码模型
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_19" title="领域层代码模型" class="md-nav__link">
+    领域层代码模型
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_20" title="基础层代码模型" class="md-nav__link">
+    基础层代码模型
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_21" title="微服务总目录结构" class="md-nav__link">
+    微服务总目录结构
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_22" title="微服务设计原则" class="md-nav__link">
+    微服务设计原则
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_23" title="不同场景的微服务设计" class="md-nav__link">
+    不同场景的微服务设计
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_24" title="新建系统的微服务设计" class="md-nav__link">
+    新建系统的微服务设计
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1_2" title="1、简单领域的建模" class="md-nav__link">
+    1、简单领域的建模
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2_2" title="2、复杂领域的建模" class="md-nav__link">
+    2、复杂领域的建模
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_25" title="单体遗留系统的微服务设计" class="md-nav__link">
+    单体遗留系统的微服务设计
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_26" title="特别说明" class="md-nav__link">
+    特别说明
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ddd_2" title="基于 DDD 的微服务设计和开发实例" class="md-nav__link">
+    基于 DDD 的微服务设计和开发实例
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_27" title="项目基本信息" class="md-nav__link">
+    项目基本信息
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_28" title="设计和实施步骤" class="md-nav__link">
+    设计和实施步骤
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_29" title="步骤一：事件风暴" class="md-nav__link">
+    步骤一：事件风暴
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_30" title="步骤二、领域对象及服务矩阵" class="md-nav__link">
+    步骤二、领域对象及服务矩阵
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_31" title="步骤三：领域模型及服务架构" class="md-nav__link">
+    步骤三：领域模型及服务架构
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_32" title="步骤四：代码模型设计" class="md-nav__link">
+    步骤四：代码模型设计
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_33" title="步骤五：详细设计" class="md-nav__link">
+    步骤五：详细设计
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_34" title="步骤六：代码开发" class="md-nav__link">
+    步骤六：代码开发
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_35" title="步骤七：测试和发布" class="md-nav__link">
+    步骤七：测试和发布
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_36" title="技术组件说明" class="md-nav__link">
+    技术组件说明
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ddd_3" title="附录一：DDD 名词和术语" class="md-nav__link">
+    附录一：DDD 名词和术语
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4">
+    
+    <label class="md-nav__link" for="nav-4">
+      经验分析
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-4">
+        经验分析
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../exp/devops/" title="DevOps" class="md-nav__link">
+      DevOps
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../exp/micro-service/" title="Micro-Service" class="md-nav__link">
+      Micro-Service
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../exp/raft-gossip/" title="Raft算法和Gossip协议" class="md-nav__link">
+      Raft算法和Gossip协议
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../exp/cl/" title="集群和负载均衡" class="md-nav__link">
+      集群和负载均衡
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../exp/ai/" title="人工智能" class="md-nav__link">
+      人工智能
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../exp/code-principle/" title="代码原则" class="md-nav__link">
+      代码原则
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../exp/techbig/" title="如何成为技术大牛" class="md-nav__link">
+      如何成为技术大牛
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../exp/learnweetout/" title="程序员如何技术成长" class="md-nav__link">
+      程序员如何技术成长
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../exp/pt/" title="产品与技术" class="md-nav__link">
+      产品与技术
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../exp/four_deep_learning/" title="深度学习框架" class="md-nav__link">
+      深度学习框架
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../exp/tl/" title="在阿里做了5年技术Leader，我总结出这些套路！" class="md-nav__link">
+      在阿里做了5年技术Leader，我总结出这些套路！
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5">
+    
+    <label class="md-nav__link" for="nav-5">
+      医学
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-5">
+        医学
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../doctor/ae/" title="脑炎" class="md-nav__link">
+      脑炎
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6" type="checkbox" id="nav-6">
+    
+    <label class="md-nav__link" for="nav-6">
+      构架
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-6">
+        构架
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../framework/split/" title="构架拆分" class="md-nav__link">
+      构架拆分
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../framework/fgb/" title="分布式、高并发、多线程" class="md-nav__link">
+      分布式、高并发、多线程
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7" type="checkbox" id="nav-7">
+    
+    <label class="md-nav__link" for="nav-7">
+      情感
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-7">
+        情感
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/eq/" title="情商" class="md-nav__link">
+      情商
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/workheard/" title="工作心得" class="md-nav__link">
+      工作心得
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/lookbook/" title="看书" class="md-nav__link">
+      看书
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/fmf/" title="4种男朋友" class="md-nav__link">
+      4种男朋友
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/notheart/" title="不上心" class="md-nav__link">
+      不上心
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/selfdiscipline/" title="自律" class="md-nav__link">
+      自律
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/notlike/" title="喜欢与不喜欢" class="md-nav__link">
+      喜欢与不喜欢
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/latemarry/" title="晚婚" class="md-nav__link">
+      晚婚
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/understand/" title="追女生要明白这些事" class="md-nav__link">
+      追女生要明白这些事
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/backup/" title="备胎" class="md-nav__link">
+      备胎
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/chase/" title="为什么追不到她" class="md-nav__link">
+      为什么追不到她
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/livefail/" title="为什么活着失败" class="md-nav__link">
+      为什么活着失败
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/emotion/" title="情绪管理" class="md-nav__link">
+      情绪管理
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/abolish/" title="废掉的三个迹象" class="md-nav__link">
+      废掉的三个迹象
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/uptime/" title="余生，好好珍惜" class="md-nav__link">
+      余生，好好珍惜
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/losecome/" title="所有的失去，都会以另一种方式归来" class="md-nav__link">
+      所有的失去，都会以另一种方式归来
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/threeheart/" title="人生有这三种好心态" class="md-nav__link">
+      人生有这三种好心态
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/onelike/" title="一个感情真相" class="md-nav__link">
+      一个感情真相
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/notruth/" title="情商与道理" class="md-nav__link">
+      情商与道理
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/smf/" title="六种男人远离" class="md-nav__link">
+      六种男人远离
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/select/" title="决定接下来人生归属的，不是努力，而是选择" class="md-nav__link">
+      决定接下来人生归属的，不是努力，而是选择
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/nolike/" title="被你拉黑的那个人，你一定很喜欢吧" class="md-nav__link">
+      被你拉黑的那个人，你一定很喜欢吧
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/onepath/" title="余生，学会一个人走，不管有没有人陪" class="md-nav__link">
+      余生，学会一个人走，不管有没有人陪
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/twopath/" title="往后余生还很精彩，别被熬夜拖垮了" class="md-nav__link">
+      往后余生还很精彩，别被熬夜拖垮了
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/lifetime/" title="心态好的人，一辈子都好" class="md-nav__link">
+      心态好的人，一辈子都好
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/hearttoheart/" title="将心比心，方得人心" class="md-nav__link">
+      将心比心，方得人心
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/ttt/" title="别睡太晚，别爱太满，别要太多" class="md-nav__link">
+      别睡太晚，别爱太满，别要太多
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/profess/" title="表白" class="md-nav__link">
+      表白
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" title="目标" class="md-nav__link">
+    目标
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" title="适用范围" class="md-nav__link">
+    适用范围
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ddd_1" title="DDD 分层架构视图" class="md-nav__link">
+    DDD 分层架构视图
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" title="服务视图" class="md-nav__link">
+    服务视图
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1" title="1、接口服务" class="md-nav__link">
+    1、接口服务
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2" title="2、应用服务" class="md-nav__link">
+    2、应用服务
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3" title="3、领域服务" class="md-nav__link">
+    3、领域服务
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4" title="4、基础服务" class="md-nav__link">
+    4、基础服务
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" title="微服务外的服务视图" class="md-nav__link">
+    微服务外的服务视图
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1_1" title="1. 前端应用与微服务" class="md-nav__link">
+    1. 前端应用与微服务
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2_1" title="2. 微服务与外部应用" class="md-nav__link">
+    2. 微服务与外部应用
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_5" title="数据视图" class="md-nav__link">
+    数据视图
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_6" title="领域事件和事件总线" class="md-nav__link">
+    领域事件和事件总线
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_7" title="微服务内的领域事件" class="md-nav__link">
+    微服务内的领域事件
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" title="微服务之间的领域事件" class="md-nav__link">
+    微服务之间的领域事件
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_9" title="事件总线" class="md-nav__link">
+    事件总线
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_10" title="事件数据持久化" class="md-nav__link">
+    事件数据持久化
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_11" title="微服务设计方法" class="md-nav__link">
+    微服务设计方法
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_12" title="事件风暴" class="md-nav__link">
+    事件风暴
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_13" title="领域对象及服务矩阵和代码模型设计" class="md-nav__link">
+    领域对象及服务矩阵和代码模型设计
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_14" title="领域对象及服务矩阵样例说明" class="md-nav__link">
+    领域对象及服务矩阵样例说明
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_15" title="微服务代码结构模型" class="md-nav__link">
+    微服务代码结构模型
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_16" title="微服务代码总目录" class="md-nav__link">
+    微服务代码总目录
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_17" title="用户接口层代码模型" class="md-nav__link">
+    用户接口层代码模型
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_18" title="应用层代码模型" class="md-nav__link">
+    应用层代码模型
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_19" title="领域层代码模型" class="md-nav__link">
+    领域层代码模型
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_20" title="基础层代码模型" class="md-nav__link">
+    基础层代码模型
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_21" title="微服务总目录结构" class="md-nav__link">
+    微服务总目录结构
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_22" title="微服务设计原则" class="md-nav__link">
+    微服务设计原则
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_23" title="不同场景的微服务设计" class="md-nav__link">
+    不同场景的微服务设计
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_24" title="新建系统的微服务设计" class="md-nav__link">
+    新建系统的微服务设计
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1_2" title="1、简单领域的建模" class="md-nav__link">
+    1、简单领域的建模
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2_2" title="2、复杂领域的建模" class="md-nav__link">
+    2、复杂领域的建模
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_25" title="单体遗留系统的微服务设计" class="md-nav__link">
+    单体遗留系统的微服务设计
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_26" title="特别说明" class="md-nav__link">
+    特别说明
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ddd_2" title="基于 DDD 的微服务设计和开发实例" class="md-nav__link">
+    基于 DDD 的微服务设计和开发实例
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_27" title="项目基本信息" class="md-nav__link">
+    项目基本信息
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_28" title="设计和实施步骤" class="md-nav__link">
+    设计和实施步骤
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_29" title="步骤一：事件风暴" class="md-nav__link">
+    步骤一：事件风暴
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_30" title="步骤二、领域对象及服务矩阵" class="md-nav__link">
+    步骤二、领域对象及服务矩阵
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_31" title="步骤三：领域模型及服务架构" class="md-nav__link">
+    步骤三：领域模型及服务架构
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_32" title="步骤四：代码模型设计" class="md-nav__link">
+    步骤四：代码模型设计
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_33" title="步骤五：详细设计" class="md-nav__link">
+    步骤五：详细设计
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_34" title="步骤六：代码开发" class="md-nav__link">
+    步骤六：代码开发
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_35" title="步骤七：测试和发布" class="md-nav__link">
+    步骤七：测试和发布
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_36" title="技术组件说明" class="md-nav__link">
+    技术组件说明
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ddd_3" title="附录一：DDD 名词和术语" class="md-nav__link">
+    附录一：DDD 名词和术语
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/burningmyself/blog/edit/master/docs/micro/ddd.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
+                
+                
+                <h1 id="ddd">基于DDD的微服务设计和开发实战<a class="headerlink" href="#ddd" title="Permanent link">&para;</a></h1>
+<p>你是否还在为微服务应该拆多小而争论不休？到底如何才能设计出收放自如的微服务？怎样才能保证业务领域模型与代码模型的一致性？或许本文能帮你找到答案。
+本文是基于 DDD 的微服务设计和开发实战篇，通过借鉴领域驱动设计思想，指导微服务项目团队进行设计和开发（理论篇详见《当中台遇上 DDD，我们该如何设计微服务？》）。本文包括三部分内容：第一部分讲述领域驱动设计基本知识，包括：分层架构、服务视图、数据视图和领域事件发布和订阅等；第二部分讲述微服务设计方法、过程、模板、代码目录、设计原则等内容；最后部分以一个项目为例讲述基于 DDD 的微服务设计过程。</p>
+<h2 id="_1">目标<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<p>本文采用 DDD（领域驱动设计）作为微服务设计指导思想，通过事件风暴建立领域模型，合理划分领域逻辑和物理边界，建立领域对象及服务矩阵和服务架构图，定义符合 DDD 分层架构思想的代码结构模型，保证业务模型与代码模型的一致性。通过上述设计思想、方法和过程，指导团队按照 DDD 设计思想完成微服务设计和开发。
+通过领域模型和 DDD 的分层思想，屏蔽外部变化对领域逻辑的影响，确保交付的软件产品是边界清晰的微服务，而不是内部边界依然混乱的小单体。在需求和设计变化时，可以轻松的完成微服务的开发、拆分和组合，确保微服务不易受外部变化的影响，并稳定运行。</p>
+<h2 id="_2">适用范围<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<p>本文适用于按照 DDD 设计方法进行微服务设计和开发的项目及相关人员。</p>
+<h2 id="ddd_1">DDD 分层架构视图<a class="headerlink" href="#ddd_1" title="Permanent link">&para;</a></h2>
+<p>DDD 分层架构包括：展现层、应用层、领域层和基础层。</p>
+<p><img alt="" src="../../img/ddd1.png" /></p>
+<p>DDD 分层架构各层职能如下：</p>
+<ul>
+<li>展现层<br />
+展现层负责向用户显示信息和解释用户指令。</li>
+<li>应用层<br />
+应用层是很薄的一层，主要面向用户用例操作，协调和指挥领域对象来完成业务逻辑。应用层也是与其他系统的应用层进行交互的必要渠道。应用层服务尽量简单，它不包含业务规则或知识，只为下一层的领域对象协调任务，使它们互相协作。应用层还可进行安全认证、权限校验、分布式和持久化事务控制或向外部应用发送基于事件的消息等。</li>
+<li>领域层<br />
+领域层是软件的核心所在，它实现全部业务逻辑并且通过各种校验手段保证业务正确性。它包含业务所涉及的领域对象（实体、值对象）、领域服务以及它们之间的关系。它负责表达业务概念、业务状态以及业务规则，具体表现形式就是领域模型。</li>
+<li>基础层<br />
+基础层为各层提供通用的技术能力，包括：为应用层传递消息、提供 API 管理，为领域层提供数据库持久化机制等。它还能通过技术框架来支持各层之间的交互。</li>
+</ul>
+<h2 id="_3">服务视图<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
+<p>微服务内的服务视图  </p>
+<p>微服务内有 Facade 接口、应用服务、领域服务和基础服务，各层服务协同配合，为外部提供服务。</p>
+<p><img alt="" src="../../img/ddd2.png" /></p>
+<h3 id="1">1、接口服务<a class="headerlink" href="#1" title="Permanent link">&para;</a></h3>
+<p>接口服务位于用户接口层，用于处理用户发送的 Restful 请求和解析用户输入的配置文件等，并将信息传递给应用层。</p>
+<h3 id="2">2、应用服务<a class="headerlink" href="#2" title="Permanent link">&para;</a></h3>
+<p>应用服务位于应用层。用来表述应用和用户行为，负责服务的组合、编排和转发，负责处理业务用例的执行顺序以及结果的拼装。
+应用层的服务包括应用服务和领域事件相关服务。
+应用服务可对微服务内的领域服务以及微服务外的应用服务进行组合和编排，或者对基础层如文件、缓存等数据直接操作形成应用服务，对外提供粗粒度的服务。
+领域事件服务包括两类：领域事件的发布和订阅。通过事件总线和消息队列实现异步数据传输，实现微服务之间的解耦。</p>
+<h3 id="3">3、领域服务<a class="headerlink" href="#3" title="Permanent link">&para;</a></h3>
+<p>领域服务位于领域层，为完成领域中跨实体或值对象的操作转换而封装的服务，领域服务以与实体和值对象相同的方式参与实施过程。
+领域服务对同一个实体的一个或多个方法进行组合和封装，或对多个不同实体的操作进行组合或编排，对外暴露成领域服务。领域服务封装了核心的业务逻辑。实体自身的行为在实体类内部实现，向上封装成领域服务暴露。
+为隐藏领域层的业务逻辑实现，所有领域方法和服务等均须通过领域服务对外暴露。
+为实现微服务内聚合之间的解耦，原则上禁止跨聚合的领域服务调用和跨聚合的数据相互关联。</p>
+<h3 id="4">4、基础服务<a class="headerlink" href="#4" title="Permanent link">&para;</a></h3>
+<p>基础服务位于基础层。为各层提供资源服务（如数据库、缓存等），实现各层的解耦，降低外部资源变化对业务逻辑的影响。
+基础服务主要为仓储服务，通过依赖反转的方式为各层提供基础资源服务，领域服务和应用服务调用仓储服务接口，利用仓储实现持久化数据对象或直接访问基础资源。</p>
+<h2 id="_4">微服务外的服务视图<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
+<h3 id="1_1">1. 前端应用与微服务<a class="headerlink" href="#1_1" title="Permanent link">&para;</a></h3>
+<p>微服务中的应用服务通过用户接口层组装和数据转换后，发布在 API 网关，为前端应用提供数据展示服务。</p>
+<h3 id="2_1">2. 微服务与外部应用<a class="headerlink" href="#2_1" title="Permanent link">&para;</a></h3>
+<p>跨微服务数据处理时，对实时性要求高的场景，可选择直接调用应用服务的方式（新增和修改类型操作需关注事务一致性）。对实时性要求不高的场景，可选择异步化的领域事件驱动机制（最终数据一致性）。</p>
+<h2 id="_5">数据视图<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
+<p>DDD 分层架构中数据对象转换的过程如下图。</p>
+<p><img alt="" src="../../img/ddd3.png" /></p>
+<p>数据视图应用服务通过数据传输对象（DTO）完成外部数据交换。领域层通过领域对象（DO）作为领域实体和值对象的数据和行为载体。基础层利用持久化对象（PO）完成数据库的交换。
+DTO 与 VO 通过 Restful 协议实现 JSON 格式和对象转换。
+前端应用与应用层之间 DTO 与 DO 的转换发生在用户接口层。如微服务内应用服务需调用外部微服务的应用服务，则 DTO 的组装和 DTO 与 DO 的转换发生在应用层。
+领域层 DO 与 PO 的转换发生在基础层。</p>
+<h2 id="_6">领域事件和事件总线<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
+<p>领域事件是领域模型中非常重要的部分，用来表示领域中发生的事件。一个领域事件将导致进一步的业务操作，有助于形成完整的业务闭环。领域事件主要用于解耦微服务，各个微服务之间不再是强一致性，而是基于事件的最终一致性。</p>
+<p><img alt="" src="../../img/ddd4.png" /></p>
+<h3 id="_7">微服务内的领域事件<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
+<p>微服务内的领域事件可以通过事件总线或利用应用服务实现不同聚合之间的业务协同。当微服务内发生领域事件时，由于大部分事件的集成发生在同一个线程内，不一定需要引入消息中间件。但一个事件如果同时更新多个聚合数据，按照 DDD“一个事务只更新一个聚合根”的原则，可以考虑引入消息中间件，通过异步化的方式，对微服务内不同的聚合根采用不同的事务。</p>
+<h3 id="_8">微服务之间的领域事件<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
+<p>微服务之间的数据交互方式通常有两种：应用服务调用和领域事件驱动机制。
+领域事件驱动机制更多的用于不同微服务之间的集成，实现微服务之间的解耦。事件库（表）可以用于微服务之间的数据对账，在应用、网络等出现问题后，可以实现源和目的端的数据比对，在数据暂时不一致的情况下仍可根据这些数据完成后续业务处理流程，保证微服务之间数据的最终一致性。
+应用服务调用方式通常应用于实时性要求高的业务场景，但一旦涉及到跨微服务的数据修改，将会增加分布式事务控制成本，影响系统性能，微服务之间的耦合度也会变高。</p>
+<h3 id="_9">事件总线<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h3>
+<p>事件总线位于基础层，为应用层和领域层服务提供事件消息接收和分发等服务。其大致流程如下：
+1、服务触发并发布事件。
+2、事件总线事件分发。</p>
+<ul>
+<li>如果是微服务内的订阅者（微服务内的其它聚合），则直接分发到指定订阅者。</li>
+<li>如果是微服务外的订阅者，则事件消息先保存到事件库（表）并异步发送到消息中间件。</li>
+<li>如果同时存在微服务内和外订阅者，则分发到内部订阅者，并将事件消息保存到事件库（表）并异步发送到消息中间件。为了保证事务的一致性，事件表可以共享业务数据库。也可以采用多个微服务共享事件库的方式。当业务操作和事件发布操作跨数据库时，须保证业务操作和事件发布操作数据的强一致性。</li>
+</ul>
+<h3 id="_10">事件数据持久化<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h3>
+<p>事件数据的持久化存储可以有两种方案，在项目实施过程中根据具体场景选择最佳方案。</p>
+<ul>
+<li>事件数据保存到微服务所在业务数据库的事件表中，利用本地事务保证业务操作和事件发布操作的强一致性。</li>
+<li>事件数据保存到多个微服务共享的事件库中。需要注意的一点是：这时业务操作和事件发布操作会跨数据库操作，须保证事务的强一致性（如分布式事务机制）。</li>
+</ul>
+<p>事件数据的持久化可以保证数据的完整性，基于这些数据可以完成跨微服务数据的一致性比对。</p>
+<h2 id="_11">微服务设计方法<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h2>
+<h3 id="_12">事件风暴<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h3>
+<p>本阶段主要完成领域模型设计。
+基于 DDD 的微服务设计通常采用事件风暴方法。通过事件风暴完成领域模型设计，划分出微服务逻辑边界和物理边界，定义领域模型中的领域对象，指导微服务设计和开发。事件风暴通常包括产品愿景、场景分析、领域建模、微服务设计和拆分等过程。本文不对事件风暴详细方法做深入描述，如感兴趣可查阅相关资料。</p>
+<ul>
+<li>1、产品愿景</li>
+</ul>
+<p>产品愿景是对产品的顶层价值设计，对产品目标用户、核心价值、差异化竞争点等信息达成一致，避免产品偏离方向。建议参与角色：业务需求方、产品经理和开发组长。</p>
+<ul>
+<li>2、场景分析</li>
+</ul>
+<p>场景分析是从用户视角出发，探索业务领域中的典型场景，产出领域中需要支撑的场景分类、用例操作以及不同子域之间的依赖关系，用以支撑领域建模。
+建议参与角色：产品经理、需求分析人员、架构师、开发组长和测试组长。</p>
+<ul>
+<li>3、领域建模</li>
+</ul>
+<p>领域建模是通过对业务和问题域进行分析，建立领域模型，向上通过限界上下文指导微服务边界设计，向下通过聚合指导实体的对象设计。
+建议参与角色：领域专家、产品经理、需求分析人员、架构师、开发组长和测试组长。</p>
+<ul>
+<li>4、微服务拆分和设计</li>
+</ul>
+<p>结合业务限界上下文与技术因素，对服务的粒度、分层、边界划分、依赖关系和集成关系进行梳理，完成微服务拆分和设计。
+微服务设计应综合考虑业务职责单一、敏态与稳态业务分离、非功能性需求（如弹性伸缩要求、安全性等要求）、团队组织和沟通效率、软件包大小以及技术异构等因素。
+建议参与角色：产品经理、需求分析人员、架构师、开发组长和测试组长。</p>
+<h3 id="_13">领域对象及服务矩阵和代码模型设计<a class="headerlink" href="#_13" title="Permanent link">&para;</a></h3>
+<p>本阶段完成领域对象及服务矩阵文档以及微服务代码模型设计。</p>
+<ul>
+<li>1、领域对象及服务矩阵</li>
+</ul>
+<p>根据事件风暴过程领域对象和关系，对产出的限界上下文、聚合、实体、值对象、仓储、事件、应用服务、领域服务等领域对象以及各对象之间的依赖关系进行梳理，确定各对象在分层架构中的位置和依赖关系，建立领域对象分层架构视图，为每个领域对象建立与代码模型对象的一一映射。
+建议参与角色：架构师和开发组长。</p>
+<ul>
+<li>2、微服务代码模型</li>
+</ul>
+<p>根据领域对象在 DDD 分层架构中所在的层、领域类型、与代码对象的映射关系，定义领域对象在微服务代码模型中的包、类和方法名称等，设计微服务工程的代码层级和代码结构，明确各层间的调用关系。
+建议参与角色：架构师和开发组长。</p>
+<h3 id="_14">领域对象及服务矩阵样例说明<a class="headerlink" href="#_14" title="Permanent link">&para;</a></h3>
+<p>领域对象及服务矩阵主要用来记录事件风暴和微服务设计过程中产出的领域对象属性，如：各领域对象在 DDD 分层架构中的位置、属性、依赖关系以及与代码对象的映射关系等。通过建立领域对象与代码对象的映射关系，可指导软件开发人员准确无误的按照设计文档完成微服务开发。
+以下为领域对象及服务矩阵样例（部分数据，仅供参考）。</p>
+<p><img alt="" src="../../img/ddd5.png" /></p>
+<p>各栏说明如下：
+* 层：</p>
+<p>定义领域对象位于 DDD 分层架构中的哪一层。如：接口层、应用层、领域层以及基础层等。</p>
+<ul>
+<li>聚合：</li>
+</ul>
+<p>在事件风暴过程中将关联紧密的实体和值对象等组合形成聚合。本栏说明聚合名称。
+* 领域对象名称：</p>
+<p>领域模型中领域对象的具体名称。如：“请假审批已通过”是类型为“事件”的领域对象；“请假单”是领域类型为“实体”的领域对象。</p>
+<ul>
+<li>领域类型：</li>
+</ul>
+<p>在领域模型中根据 DDD 知识域定义的领域对象的类型，如：限界上下文、聚合、聚合根（实体）、实体、值对象、事件、命令、应用服务、领域服务和仓储服务等。
+依赖对象名称：根据业务对象依赖或分层调用依赖关系建立的领域对象的依赖关系（如服务调用依赖、关联对象聚合等）。本栏说明领域对象需依赖的其他领域对象，如上层服务在组合和编排过程中对下层服务的调用依赖、实体之间或者实体与值对象在聚合内的依赖等。</p>
+<ul>
+<li>包名：</li>
+</ul>
+<p>代码模型中的包名，本栏说明领域对象所在的软件包。</p>
+<ul>
+<li>类名：</li>
+</ul>
+<p>代码模型中的类名，本栏说明领域对象的类名。</p>
+<ul>
+<li>方法名：</li>
+</ul>
+<p>代码模型中的方法名，本栏说明领域对象实现或操作的方法名。</p>
+<h2 id="_15">微服务代码结构模型<a class="headerlink" href="#_15" title="Permanent link">&para;</a></h2>
+<p>微服务代码模型最终结果来源于领域对象及服务矩阵。在代码模型设计时须建立领域对象和代码对象的一一映射，保证业务模型与代码模型的一致性，即使不熟悉业务的开发人员或者不熟悉代码的业务人员也可以很快定位到代码位置。</p>
+<h3 id="_16">微服务代码总目录<a class="headerlink" href="#_16" title="Permanent link">&para;</a></h3>
+<p>基于 DDD 的代码模型包括 interfaces、application、domain 和 infrastructure 四个目录。</p>
+<p><img alt="" src="../../img/ddd6.png" /></p>
+<ul>
+<li>Interfaces（用户接口层）：</li>
+</ul>
+<p>本目录主要存放用户接口层代码。前端应用通过本层向应用服务获取展现所需的数据。本层主要用于处理用户发送的 Restful 请求和解析用户输入的配置文件等，并将信息传递给 Application 层。主要代码形态是数据组装以及 Facade 接口等。</p>
+<ul>
+<li>Application（应用层）：</li>
+</ul>
+<p>本目录主要存放应用层代码。应用服务代码基于微服务内的领域服务或微服务外的应用服务完成服务编排和组合。为用户接口层提供各种应用数据展现支持。主要代码形态是应用服务和领域事件等。</p>
+<ul>
+<li>Domain（领域层）：</li>
+</ul>
+<p>本目录主要存放领域层代码。本层代码主要实现核心领域逻辑，其主要代码形态是实体类方法和领域服务等。</p>
+<ul>
+<li>Infrastructure（基础层）：</li>
+</ul>
+<p>本目录存放基础层代码，为其它各层提供通用技术能力、三方软件包、配置和基础资源服务等。</p>
+<h3 id="_17">用户接口层代码模型<a class="headerlink" href="#_17" title="Permanent link">&para;</a></h3>
+<p>用户接口层代码模型目录包括：assembler、dto 和 facade。</p>
+<p><img alt="" src="../../img/ddd7.png" /></p>
+<ul>
+<li>
+<p>Assembler：实现 DTO 与领域对象之间的相互转换和数据交换。理论上 Assembler 总是与 DTO 一同被使用。</p>
+</li>
+<li>
+<p>Dto：数据传输的载体，内部不存在任何业务逻辑，通过 DTO 把内部的领域对象与外界隔离。</p>
+</li>
+<li>
+<p>Facade：提供较粗粒度的调用接口，将用户请求委派给一个或多个应用服务进行处理。</p>
+</li>
+</ul>
+<h3 id="_18">应用层代码模型<a class="headerlink" href="#_18" title="Permanent link">&para;</a></h3>
+<p>应用层代码模型目录包括：event 和 service。</p>
+<p><img alt="" src="../../img/ddd8.png" /></p>
+<ul>
+<li>
+<p>Event（事件）：事件目录包括两个子目录：publish 和 subscribe。publish 目录主要存放微服务内领域事件发布相关代码。subscribe 目录主要存放微服务内聚合之间或外部微服务领域事件订阅处理相关代码。为了实现领域事件的统一管理，微服务内所有领域事件（包括应用层和领域层事件）的发布和订阅处理都统一放在应用层。</p>
+</li>
+<li>
+<p>Service（应用服务）：这里的服务是应用服务。应用服务对多个领域服务或外部应用服务进行封装、编排和组合，对外提供粗粒度的服务。</p>
+</li>
+</ul>
+<h3 id="_19">领域层代码模型<a class="headerlink" href="#_19" title="Permanent link">&para;</a></h3>
+<p>微服务领域层包括一个或多个聚合代码包。标准的聚合代码模型包括：entity、repository 和 service 三个子目录。</p>
+<p><img alt="" src="../../img/ddd9.png" /></p>
+<ul>
+<li>Aggregate（聚合）：聚合代码包的根目录，实际项目中以实际业务属性的名称来命名。聚合定义了领域对象之间的关系和边界，实现领域模型的内聚。</li>
+<li>Entity（实体）：存放实体（含聚合根、实体和值对象）相关代码。同一实体所有相关的代码（含对同一实体类多个对象操作的方法，如对多个对象的 count 等）都放在一个实体类中。</li>
+<li>Service（领域服务）：存放对多个不同实体对象操作的领域服务代码。这部分代码以领域服务的形式存在，在设计时一个领域服务对应一个类。</li>
+<li>Repository（仓储）：存放聚合对应的查询或持久化领域对象的代码，通常包括仓储接口和仓储实现方法。为了方便聚合的拆分和组合，我们设定一个原则：一个聚合对应一个仓储。</li>
+<li>特别说明：按照 DDD 分层原则，仓储实现本应属于基础层代码，但为了微服务代码拆分和重组的便利性，我们把聚合的仓储实现代码放到了领域层对应的聚合代码包内。如果需求或者设计发生变化导致聚合需要拆分或重新组合时，我们可以聚合代码包为单位，轻松实现微服务聚合的拆分和组合。</li>
+</ul>
+<h3 id="_20">基础层代码模型<a class="headerlink" href="#_20" title="Permanent link">&para;</a></h3>
+<p>基础层代码模型包括：config 和 util 两个子目录。</p>
+<p><img alt="" src="../../img/ddd10.png" /></p>
+<ul>
+<li>Config：主要存放配置相关代码。</li>
+<li>Util：主要存放平台、开发框架、消息、数据库、缓存、文件、总线、网关、第三方类库、通用算法等基础代码，可为不同的资源类别建立不同的子目录。</li>
+</ul>
+<h3 id="_21">微服务总目录结构<a class="headerlink" href="#_21" title="Permanent link">&para;</a></h3>
+<p>微服务总目录结构如下：</p>
+<p><img alt="" src="../../img/ddd11.png" /></p>
+<h3 id="_22">微服务设计原则<a class="headerlink" href="#_22" title="Permanent link">&para;</a></h3>
+<p>微服务设计原则中如高内聚低耦合、复用、单一职责等原则在此就不赘述了，这里主要强调以下几条：</p>
+<ul>
+<li>第一条：“要领域驱动设计，而不是数据驱动设计，也不是界面驱动设计”。</li>
+</ul>
+<p>微服务设计首先应建立领域模型，确定逻辑和物理边界后，然后才进行微服务边界拆分，而不是一上来就定义数据库表结构，也不是界面需要什么，就去调整领域逻辑代码。
+领域模型和领域服务应具有高度通用性，通过接口层和应用层屏蔽外部变化对业务逻辑的影响，保证核心业务功能的稳定性。</p>
+<ul>
+<li>第二条：“要边界清晰的微服务，而不是泥球小单体”。</li>
+</ul>
+<p>微服务完成开发后其功能和代码也不是一成不变的。随着需求或设计变化，微服务内的代码也会分分合合。逻辑边界清晰的微服务，可快速实现微服务代码的拆分和组合。DDD 思想中的逻辑边界和分层设计也是为微服务各种可能的分分合合做准备的。
+微服务内聚合与聚合之间的领域服务以及数据原则上禁止相互产生依赖。如有必要可通过上层的应用服务编排或者事件驱动机制实现聚合之间的解耦，以利于聚合之间的组合和拆分。</p>
+<ul>
+<li>第三条：“要职能清晰的分层，而不是什么都放的大箩筐”。</li>
+</ul>
+<p>分层架构中各层职能定位清晰，且都只能与其下方的层发生依赖，也就是说只能从外层调用内层服务，内层服务通过封装、组合或编排对外逐层暴露，服务粒度由细到粗。
+应用层负责服务的编排和组合，领域层负责领域业务逻辑的实现，基础层为各层提供资源服务。</p>
+<ul>
+<li>第四条：“要做自己能 hold 住的微服务，而不是过度拆分的微服务”</li>
+</ul>
+<p>微服务的过度拆分必然会带来软件维护成本的上升，如：集成成本、运维成本以及监控和定位问题的成本。企业转型过程中很难短时间内提升这些能力，如果项目团队不具备这些能力，将很难 hold 住这些过细的微服务。而如果我们在微服务设计之初就已经定义好了微服务内的逻辑边界，项目初期我们可以尽可能少的拆分出过细的微服务，随着技术的积累和时间的推移，当我们具有这些能力后，由于微服务内有清晰的逻辑边界，这时就可以随时根据需要轻松的拆分或组合出新的微服务。</p>
+<h2 id="_23">不同场景的微服务设计<a class="headerlink" href="#_23" title="Permanent link">&para;</a></h2>
+<p>微服务的设计先从领域建模开始，领域模型是微服务设计的核心，微服务是领域建模的结果。在微服务设计之前，请先判断你的业务是否聚焦在领域和领域逻辑。
+实际在做系统设计时我们可能面临各种不同的情形，如从传统单体拆分为多个微服务，也可能是一个全新领域的微服务设计（如创业中的应用），抑或是将一个单体中面临问题或性能瓶颈的模块拆分为微服务而其余功能仍为单体的情况。
+下面分几类不同场景说明如何进行微服务和领域模型设计。</p>
+<h3 id="_24">新建系统的微服务设计<a class="headerlink" href="#_24" title="Permanent link">&para;</a></h3>
+<p>新建系统会遇到复杂和简单领域两种场景，两者的领域建模过程也会有所差别。</p>
+<h4 id="1_2">1、简单领域的建模<a class="headerlink" href="#1_2" title="Permanent link">&para;</a></h4>
+<p>对于简单的业务领域，一个领域可能就是一个小的子域。领域建模过程相对简单，根据事件风暴可以分解出事件、命令、实体、聚合和限界上下文等，根据领域模型和微服务拆分原则设计出微服务即可。</p>
+<h4 id="2_2">2、复杂领域的建模<a class="headerlink" href="#2_2" title="Permanent link">&para;</a></h4>
+<p>对于复杂的业务领域，领域可能还需要拆分为子域，甚至子域还会进一步拆分，如：保险领域可以拆分为承保、理赔、收付费和再保等子域，承保子域还可以再拆分为投保、保单管理等子子域。对于这种复杂的领域模型，是无法通过一个事件风暴完成领域建模的，即使能完成，其工程量也是非常浩大，效果也不一定好。
+对于这种复杂的领域，我们可以分三阶段来完成领域模型和微服务设计。</p>
+<ul>
+<li>
+<p>拆分子域建立领域模型：根据业务特点考虑流程节点或功能模块等边界因素（微服务最终的拆分结果很多时候跟这些边界因素有一定的相关性），按领域逐级分解为大小合适的子域，针对子域进行事件风暴，记录领域对象、聚合和限界上下文，初步确定各级子域的领域模型。</p>
+</li>
+<li>
+<p>领域模型微调：梳理领域内所有子域的领域模型，对各子域模型进行微调，这个过程重点考虑不同限界上下文内聚合的重新组合，同步需要考虑子域、限界上下文以及聚合之间的边界、服务以及事件之间的依赖关系，确定最终的领域模型。</p>
+</li>
+<li>
+<p>微服务设计和拆分：根据领域模型的限界上下文和微服务的拆分原则，完成微服务的拆分和设计。</p>
+</li>
+</ul>
+<h3 id="_25">单体遗留系统的微服务设计<a class="headerlink" href="#_25" title="Permanent link">&para;</a></h3>
+<p>如果一个单体遗留系统，只是将面临问题或性能瓶颈的模块拆分为微服务，而其余功能仍为单体。我们只需要将这些特定功能领域理解为一个简单的子领域，按照简单领域建模方式进行领域模型的设计即可。但在新微服务设计中需要考虑新老系统之间的服务协议，必要时引入防腐层。</p>
+<h3 id="_26">特别说明<a class="headerlink" href="#_26" title="Permanent link">&para;</a></h3>
+<p>虽然有些业务领域在事件风暴后发现无法建立领域模型，如数据处理或分析类场景，但本文所述的分层架构模型、服务之间规约和代码目录结构在微服务设计和开发中仍然是通用的。</p>
+<h2 id="ddd_2">基于 DDD 的微服务设计和开发实例<a class="headerlink" href="#ddd_2" title="Permanent link">&para;</a></h2>
+<p>为了更好的理解 DDD 的设计思想和过程，我们用一个场景简单但基本涵盖 DDD 设计思想的项目来说明微服务设计和开发过程。</p>
+<h3 id="_27">项目基本信息<a class="headerlink" href="#_27" title="Permanent link">&para;</a></h3>
+<p>项目主要目标是实现在线请假和考勤管理。基本功能包括：请假、考勤以及人员管理等。</p>
+<ul>
+<li>请假：请假人填写请假单提交审批，根据请假人身份和请假天数进行校验，根据审批规则逐级递交审批，核批通过则完成审批。</li>
+<li>考勤：根据考勤规则，剔除请假数据后，对员工考勤数据进行校验，输出考勤统计表。</li>
+<li>人员管理：维护人员基本信息和上下级关系。
+......</li>
+</ul>
+<h3 id="_28">设计和实施步骤<a class="headerlink" href="#_28" title="Permanent link">&para;</a></h3>
+<h4 id="_29">步骤一：事件风暴<a class="headerlink" href="#_29" title="Permanent link">&para;</a></h4>
+<p>由于项目目标基本明确，我们在事件风暴过程中裁剪了产品愿景，直接从用户旅程和场景分析开始。</p>
+<ul>
+<li>1、场景分析：场景分析是一个发散的过程。根据不同角色的旅程和场景分析，尽可能全面的梳理从前端操作到后端业务逻辑发生的所有操作、命令、领域事件以及外部依赖关系等信息（如下图），如：请假人员会执行创建请假信息操作命令，审批人员会执行审批操作，请假审批通过后会产生领域事件，通知邮件系统反馈请假人员结果，并将请假数据发送到考勤以便核销等。在记录这些领域对象的同时，我们也会标记各对象在 DDD 中的层和对象类型等属性，如：应用服务、领域服务、事件和命令等类型。</li>
+</ul>
+<p><img alt="" src="../../img/ddd12.png" /></p>
+<ul>
+<li>
+<p>2、领域建模：领域建模是一个收敛的过程。这个收敛过程分三步：第一步根据场景分析中的操作集合定义领域实体；第二步根据领域实体业务关联性，定义聚合；第三步根据业务及语义边界等因素，定义限界上下文。</p>
+<ul>
+<li>定义领域实体：在场景分析过程中梳理完操作、命令、领域事件以及外部依赖关系等领域对象后。分析这些操作应由什么实体发起或产生，从而定义领域实体对象，并将这些操作与实体进行关联。
+在请假场景中，经分析需要有请假单实体对象，请假单实体有创建请假信息以及修改请假信息等操作。</li>
+<li>定义聚合：将业务紧密相关的实体进行组合形成聚合，同时确定聚合中的聚合根、值对象和实体。经分析项目最终形成三个聚合：人员管理、请假和考勤。在请假聚合中有请假单、审批轨迹、审批规则等实体，其中请假单是聚合根，审批轨迹是请假单的值对象，审批规则是辅助实体。</li>
+<li>聚合内须保证业务操作的事务性，高度内聚的实体对象可自包含完成本领域功能。聚合是可拆分为微服务的最小单元。在同一限界上下文内多个聚合可以组合为一个微服务。如有必要，也可以将某一个聚合独立为微服务。</li>
+<li>定义限界上下文：根据领域及语义边界等因素确定限界上下文，将同一个语义环境下的一个或者多个聚合放在一个限界上下文内。由于人员管理与请假聚合两者业务关联紧密，共同完成人员请假功能，两者一起构成请假限界上下文，考勤聚合则单独形成考勤限界上下文。</li>
+</ul>
+</li>
+<li>
+<p>3、微服务设计和拆分：理论上一个限界上下文可以设计为一个微服务，但还需要综合考虑多种外部因素，如：职责单一性、性能差异、版本发布频率、团队沟通效率和技术异构等要素。</p>
+</li>
+</ul>
+<p>由于本项目微服务设计受技术以及团队等因素影响相对较小，主要考虑职责单一性，因此根据限界上下文直接拆分为请假和考勤两个微服务。其中请假微服务包含人员和请假两个聚合，考勤微服务只包含考勤聚合。</p>
+<h4 id="_30">步骤二、领域对象及服务矩阵<a class="headerlink" href="#_30" title="Permanent link">&para;</a></h4>
+<p>将事件风暴中产出的领域对象按照各自所在的微服务进行分类，定义每个领域对象在微服务中的层、领域类型和依赖的领域对象等。</p>
+<p>这个步骤最关键的工作是确定实体、方法、服务等领域对象在微服务分层架构中的位置以及各对象之间的依赖关系，形成服务矩阵（如下表）。这个过程也将在事件风暴数据的基础上，进一步细化领域对象以及它们之间关系，并补充事件风暴中可能遗漏的细节。</p>
+<p>确定完各领域对象的属性后，按照代码模型设计各个领域对象在代码模型中的代码对象（包括代码对象所在的：包名、类名和方法名），建立领域对象与代码对象的一一映射关系。根据这种映射关系，相关人员可快速定位到业务逻辑所在的代码位置。</p>
+<p><img alt="" src="../../img/ddd13.png" /></p>
+<h4 id="_31">步骤三：领域模型及服务架构<a class="headerlink" href="#_31" title="Permanent link">&para;</a></h4>
+<p>根据领域模型中领域对象属性以及服务矩阵，画出领域对象及服务架构视图（如下图）。这个视图可以作为标准的 DDD 分层领域服务架构视图模型，应用在不同的领域模型中。这个模型可以清晰的体现微服务内实体、聚合之间的关系，各层服务之间的依赖关系以及应用层服务组合和编排的关系，微服务之间的服务调用以及事件驱动的前后处理逻辑关系。
+在这个阶段，前端的设计也可以同步进行，在这里我们用到了微前端的设计理念，为请假和考勤微服务分别设计了请假和考勤微前端，基于微前端和微服务，形成从前端到后端的业务逻辑自包含组件。两个微前端之上有一个集成主页面，可根据页面流动态加载请假和考勤的微前端页面。</p>
+<p><img alt="" src="../../img/ddd14.png" /></p>
+<h4 id="_32">步骤四：代码模型设计<a class="headerlink" href="#_32" title="Permanent link">&para;</a></h4>
+<p>根据 DDD 的代码结构模型和各领域对象在所在的包、类和方法，定义出请假微服务的代码结构模型。应用层代码结构包括：应用服务以及事件发布相关代码（如下图）。</p>
+<p><img alt="" src="../../img/ddd15.png" /></p>
+<p>领域层代码结构包括一个或多个聚合的实体类以及领域服务相关代码（如下图）。在本项目中请假微服务领域层包含了请假和人员两个聚合。</p>
+<p><img alt="" src="../../img/ddd16.png" /></p>
+<p>领域模型中的一个聚合对应一个聚合代码包，如：人员和请假领域逻辑代码都放在各自的聚合代码包中，如随着业务发展，人员管理功能需要从请假微服务中拆分出来，我们只需要将人员聚合代码包稍加改造并独立部署即可快速发布为人员管理微服务。</p>
+<h4 id="_33">步骤五：详细设计<a class="headerlink" href="#_33" title="Permanent link">&para;</a></h4>
+<p>在完成领域模型和代码模型设计后，我们就可以开始详细设计了，详细设计主要结合具体的业务功能来开展，主要工作包括：系统界面、数据库表以及字段、服务参数规约及功能等。</p>
+<h4 id="_34">步骤六：代码开发<a class="headerlink" href="#_34" title="Permanent link">&para;</a></h4>
+<p>软件开发人员只需要按照设计文档和功能要求，找到业务功能对应的代码位置，完成代码开发和服务编排即可。</p>
+<h4 id="_35">步骤七：测试和发布<a class="headerlink" href="#_35" title="Permanent link">&para;</a></h4>
+<p>完成代码开发后，由开发人员编写单元测试用例，基于挡板模拟依赖对象完成跨服务的测试。单元测试完成后，在团队内可进一步完成微服务与相应微前端的集成和测试，形成请假和考勤两个业务组件。前端主页面完成请假和考勤微前端页面集成和页面流及组件基础数据配置，主页面可以按照页面流程动态加载请假和考勤微前端页面。最终部署的软件包包括：请假和考勤两个微服务，请假和考勤两个微前端，一个主页面共计五个。这五个部署包独立开发、独立运行和独立部署。</p>
+<h4 id="_36">技术组件说明<a class="headerlink" href="#_36" title="Permanent link">&para;</a></h4>
+<p>主页面和微前端采用：Vue(前端框架)，ElementUI(UI 框架 -PC)，VUX(UI 框架 - 移动端) 和 MPVUE(UI 框架 - 小程序) 等。微服务开发采用：Spring Cloud、Kafka、Redis 等。数据库采用：PostgreSQL。</p>
+<h3 id="ddd_3">附录一：DDD 名词和术语<a class="headerlink" href="#ddd_3" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Event Storming（事件风暴）：事件风暴是一项团队活动，旨在通过领域事件识别出聚合根，进而划分微服务的限界上下文。在活动中，团队先通过头脑风暴的形式罗列出领域中所有的领域事件，整合之后形成最终的领域事件集合，然后对于每一个事件，标注出导致该事件的命令（Command），再然后为每个事件标注出命令发起方的角色，命令可以是用户发起，也可以是第三方系统调用或者是定时器触发等。最后对事件进行分类整理出聚合根以及限界上下文。</li>
+<li>Entity（实体）：每个实体是唯一的，并且可以相当长的一段时间内持续地变化。我们可以对实体做多次修改，故一个实体对象可能和它先前的状态大不相同。但是，由于它们拥有相同的身份标识，他们依然是同一个实体。例如一件商品在电商商品上下文中是一个实体，通过商品中台唯一的商品 id 来标示这个实体。</li>
+<li>ValueObject（值对象）：值对象用于度量和描述事物，当你只关心某个对象的属性时，该对象便可作为一个值对象。实体与值对象的区别在于唯一的身份标识和可变性。当一个对象用于描述一个事物，但是又没有唯一标示，那么它就是一个值对象。例如商品中的商品类别，类别就没有一个唯一标识，通过图书、服装等这些值就能明确表示这个商品类别。</li>
+<li>Aggregate（聚合）：聚合是实体的升级，是由一组与生俱来就密切相关实体和值对象组合而成的，整个组合的最上层实体就是聚合。</li>
+<li>Bounded Context（限界上下文）：用来封装通用语言和领域对象，为领域提供上下文语境，保证在领域之内的一些术语、业务相关对象等（通用语言）有一个确切的含义，没有二义性。使团队所有成员能够明确地知道什么必须保持一致，什么必须独立开发。</li>
+</ul>
+                
+                  
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="../distrimsg/" title="分布式系统与消息的投递" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                分布式系统与消息的投递
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="../../exp/devops/" title="DevOps" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                DevOps
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        powered by
+        <a href="https://www.mkdocs.org">MkDocs</a>
+        and
+        <a href="https://squidfunk.github.io/mkdocs-material/">
+          Material for MkDocs</a>
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../assets/javascripts/application.245445c6.js"></script>
+      
+      <script>app.initialize({version:"1.0.4",url:{base:"../.."}})</script>
+      
+    
+  </body>
+</html>

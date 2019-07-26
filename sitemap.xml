@@ -2,427 +2,437 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
      <loc>https://burningmyself.github.io/blog/</loc>
-     <lastmod>2019-05-16</lastmod>
+     <lastmod>2019-07-26</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://burningmyself.github.io/blog/net/c_sharp/</loc>
-     <lastmod>2019-05-16</lastmod>
+     <lastmod>2019-07-26</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://burningmyself.github.io/blog/net/c_docker/</loc>
-     <lastmod>2019-05-16</lastmod>
+     <lastmod>2019-07-26</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://burningmyself.github.io/blog/net/c_mysql_nginx/</loc>
-     <lastmod>2019-05-16</lastmod>
+     <lastmod>2019-07-26</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://burningmyself.github.io/blog/net/c_core_safety/</loc>
-     <lastmod>2019-05-16</lastmod>
+     <lastmod>2019-07-26</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://burningmyself.github.io/blog/net/c_core_study_route/</loc>
-     <lastmod>2019-05-16</lastmod>
+     <lastmod>2019-07-26</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://burningmyself.github.io/blog/java/feature/</loc>
-     <lastmod>2019-05-16</lastmod>
+     <lastmod>2019-07-26</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://burningmyself.github.io/blog/java/load-class/</loc>
-     <lastmod>2019-05-16</lastmod>
+     <lastmod>2019-07-26</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://burningmyself.github.io/blog/java/orm/</loc>
-     <lastmod>2019-05-16</lastmod>
+     <lastmod>2019-07-26</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://burningmyself.github.io/blog/java/bio-nio/</loc>
-     <lastmod>2019-05-16</lastmod>
+     <lastmod>2019-07-26</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://burningmyself.github.io/blog/java/rocketmq/rmq-1/</loc>
-     <lastmod>2019-05-16</lastmod>
+     <lastmod>2019-07-26</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://burningmyself.github.io/blog/python/feature/</loc>
-     <lastmod>2019-05-16</lastmod>
+     <lastmod>2019-07-26</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://burningmyself.github.io/blog/python/str_joint/</loc>
-     <lastmod>2019-05-16</lastmod>
+     <lastmod>2019-07-26</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://burningmyself.github.io/blog/python/syntax_rule/</loc>
-     <lastmod>2019-05-16</lastmod>
+     <lastmod>2019-07-26</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://burningmyself.github.io/blog/python/fabric/</loc>
-     <lastmod>2019-05-16</lastmod>
+     <lastmod>2019-07-26</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://burningmyself.github.io/blog/php/kj/</loc>
-     <lastmod>2019-05-16</lastmod>
+     <lastmod>2019-07-26</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://burningmyself.github.io/blog/web/es6/</loc>
-     <lastmod>2019-05-16</lastmod>
+     <lastmod>2019-07-26</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://burningmyself.github.io/blog/web/ali_js_style/</loc>
-     <lastmod>2019-05-16</lastmod>
+     <lastmod>2019-07-26</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://burningmyself.github.io/blog/web/node.js/</loc>
-     <lastmod>2019-05-16</lastmod>
+     <lastmod>2019-07-26</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://burningmyself.github.io/blog/web/react/</loc>
-     <lastmod>2019-05-16</lastmod>
+     <lastmod>2019-07-26</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://burningmyself.github.io/blog/sql/mysql_yh/</loc>
-     <lastmod>2019-05-16</lastmod>
+     <lastmod>2019-07-26</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://burningmyself.github.io/blog/sql/mysql_yh17/</loc>
-     <lastmod>2019-05-16</lastmod>
+     <lastmod>2019-07-26</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://burningmyself.github.io/blog/sql/mysql_log/</loc>
-     <lastmod>2019-05-16</lastmod>
+     <lastmod>2019-07-26</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://burningmyself.github.io/blog/sql/mysql_index/</loc>
-     <lastmod>2019-05-16</lastmod>
+     <lastmod>2019-07-26</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://burningmyself.github.io/blog/sql/mysql_pxc/</loc>
-     <lastmod>2019-05-16</lastmod>
+     <lastmod>2019-07-26</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://burningmyself.github.io/blog/sql/mysql_use/</loc>
-     <lastmod>2019-05-16</lastmod>
+     <lastmod>2019-07-26</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://burningmyself.github.io/blog/sql/sql_server_master/</loc>
-     <lastmod>2019-05-16</lastmod>
+     <lastmod>2019-07-26</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
+     <loc>https://burningmyself.github.io/blog/sql/data_split/</loc>
+     <lastmod>2019-07-26</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://burningmyself.github.io/blog/linux/often/</loc>
-     <lastmod>2019-05-16</lastmod>
+     <lastmod>2019-07-26</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://burningmyself.github.io/blog/linux/ope/</loc>
-     <lastmod>2019-05-16</lastmod>
+     <lastmod>2019-07-26</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://burningmyself.github.io/blog/docker/docker/</loc>
-     <lastmod>2019-05-16</lastmod>
+     <lastmod>2019-07-26</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://burningmyself.github.io/blog/tool/git/</loc>
-     <lastmod>2019-05-16</lastmod>
+     <lastmod>2019-07-26</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://burningmyself.github.io/blog/tool/gitquestion/</loc>
-     <lastmod>2019-05-16</lastmod>
+     <lastmod>2019-07-26</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://burningmyself.github.io/blog/tool/gitflow/</loc>
-     <lastmod>2019-05-16</lastmod>
+     <lastmod>2019-07-26</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://burningmyself.github.io/blog/tool/gitbook/</loc>
-     <lastmod>2019-05-16</lastmod>
+     <lastmod>2019-07-26</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://burningmyself.github.io/blog/tool/gitcmr/</loc>
-     <lastmod>2019-05-16</lastmod>
+     <lastmod>2019-07-26</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://burningmyself.github.io/blog/tool/markdown/</loc>
-     <lastmod>2019-05-16</lastmod>
+     <lastmod>2019-07-26</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://burningmyself.github.io/blog/tool/cicd/</loc>
-     <lastmod>2019-05-16</lastmod>
+     <lastmod>2019-07-26</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://burningmyself.github.io/blog/tool/mkdocs/</loc>
-     <lastmod>2019-05-16</lastmod>
+     <lastmod>2019-07-26</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://burningmyself.github.io/blog/tool/gitstudy/</loc>
-     <lastmod>2019-05-16</lastmod>
+     <lastmod>2019-07-26</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://burningmyself.github.io/blog/micro/spring-cloud/</loc>
-     <lastmod>2019-05-16</lastmod>
+     <lastmod>2019-07-26</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://burningmyself.github.io/blog/micro/fbs-lock/</loc>
-     <lastmod>2019-05-16</lastmod>
+     <lastmod>2019-07-26</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://burningmyself.github.io/blog/micro/design/</loc>
-     <lastmod>2019-05-16</lastmod>
+     <lastmod>2019-07-26</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://burningmyself.github.io/blog/micro/distrimsg/</loc>
-     <lastmod>2019-05-16</lastmod>
+     <lastmod>2019-07-26</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
+     <loc>https://burningmyself.github.io/blog/micro/ddd/</loc>
+     <lastmod>2019-07-26</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://burningmyself.github.io/blog/exp/devops/</loc>
-     <lastmod>2019-05-16</lastmod>
+     <lastmod>2019-07-26</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://burningmyself.github.io/blog/exp/micro-service/</loc>
-     <lastmod>2019-05-16</lastmod>
+     <lastmod>2019-07-26</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://burningmyself.github.io/blog/exp/raft-gossip/</loc>
-     <lastmod>2019-05-16</lastmod>
+     <lastmod>2019-07-26</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://burningmyself.github.io/blog/exp/cl/</loc>
-     <lastmod>2019-05-16</lastmod>
+     <lastmod>2019-07-26</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://burningmyself.github.io/blog/exp/ai/</loc>
-     <lastmod>2019-05-16</lastmod>
+     <lastmod>2019-07-26</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://burningmyself.github.io/blog/exp/code-principle/</loc>
-     <lastmod>2019-05-16</lastmod>
+     <lastmod>2019-07-26</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://burningmyself.github.io/blog/exp/techbig/</loc>
-     <lastmod>2019-05-16</lastmod>
+     <lastmod>2019-07-26</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://burningmyself.github.io/blog/exp/learnweetout/</loc>
-     <lastmod>2019-05-16</lastmod>
+     <lastmod>2019-07-26</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://burningmyself.github.io/blog/exp/pt/</loc>
-     <lastmod>2019-05-16</lastmod>
+     <lastmod>2019-07-26</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://burningmyself.github.io/blog/exp/four_deep_learning/</loc>
-     <lastmod>2019-05-16</lastmod>
+     <lastmod>2019-07-26</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://burningmyself.github.io/blog/exp/tl/</loc>
-     <lastmod>2019-05-16</lastmod>
+     <lastmod>2019-07-26</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://burningmyself.github.io/blog/doctor/ae/</loc>
-     <lastmod>2019-05-16</lastmod>
+     <lastmod>2019-07-26</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://burningmyself.github.io/blog/framework/split/</loc>
-     <lastmod>2019-05-16</lastmod>
+     <lastmod>2019-07-26</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://burningmyself.github.io/blog/framework/fgb/</loc>
-     <lastmod>2019-05-16</lastmod>
+     <lastmod>2019-07-26</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://burningmyself.github.io/blog/emotion/eq/</loc>
-     <lastmod>2019-05-16</lastmod>
+     <lastmod>2019-07-26</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://burningmyself.github.io/blog/emotion/workheard/</loc>
-     <lastmod>2019-05-16</lastmod>
+     <lastmod>2019-07-26</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://burningmyself.github.io/blog/emotion/lookbook/</loc>
-     <lastmod>2019-05-16</lastmod>
+     <lastmod>2019-07-26</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://burningmyself.github.io/blog/emotion/fmf/</loc>
-     <lastmod>2019-05-16</lastmod>
+     <lastmod>2019-07-26</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://burningmyself.github.io/blog/emotion/notheart/</loc>
-     <lastmod>2019-05-16</lastmod>
+     <lastmod>2019-07-26</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://burningmyself.github.io/blog/emotion/selfdiscipline/</loc>
-     <lastmod>2019-05-16</lastmod>
+     <lastmod>2019-07-26</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://burningmyself.github.io/blog/emotion/notlike/</loc>
-     <lastmod>2019-05-16</lastmod>
+     <lastmod>2019-07-26</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://burningmyself.github.io/blog/emotion/latemarry/</loc>
-     <lastmod>2019-05-16</lastmod>
+     <lastmod>2019-07-26</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://burningmyself.github.io/blog/emotion/understand/</loc>
-     <lastmod>2019-05-16</lastmod>
+     <lastmod>2019-07-26</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://burningmyself.github.io/blog/emotion/backup/</loc>
-     <lastmod>2019-05-16</lastmod>
+     <lastmod>2019-07-26</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://burningmyself.github.io/blog/emotion/chase/</loc>
-     <lastmod>2019-05-16</lastmod>
+     <lastmod>2019-07-26</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://burningmyself.github.io/blog/emotion/livefail/</loc>
-     <lastmod>2019-05-16</lastmod>
+     <lastmod>2019-07-26</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://burningmyself.github.io/blog/emotion/emotion/</loc>
-     <lastmod>2019-05-16</lastmod>
+     <lastmod>2019-07-26</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://burningmyself.github.io/blog/emotion/abolish/</loc>
-     <lastmod>2019-05-16</lastmod>
+     <lastmod>2019-07-26</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://burningmyself.github.io/blog/emotion/uptime/</loc>
-     <lastmod>2019-05-16</lastmod>
+     <lastmod>2019-07-26</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://burningmyself.github.io/blog/emotion/losecome/</loc>
-     <lastmod>2019-05-16</lastmod>
+     <lastmod>2019-07-26</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://burningmyself.github.io/blog/emotion/threeheart/</loc>
-     <lastmod>2019-05-16</lastmod>
+     <lastmod>2019-07-26</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://burningmyself.github.io/blog/emotion/onelike/</loc>
-     <lastmod>2019-05-16</lastmod>
+     <lastmod>2019-07-26</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://burningmyself.github.io/blog/emotion/notruth/</loc>
-     <lastmod>2019-05-16</lastmod>
+     <lastmod>2019-07-26</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://burningmyself.github.io/blog/emotion/smf/</loc>
-     <lastmod>2019-05-16</lastmod>
+     <lastmod>2019-07-26</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://burningmyself.github.io/blog/emotion/select/</loc>
-     <lastmod>2019-05-16</lastmod>
+     <lastmod>2019-07-26</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://burningmyself.github.io/blog/emotion/nolike/</loc>
-     <lastmod>2019-05-16</lastmod>
+     <lastmod>2019-07-26</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://burningmyself.github.io/blog/emotion/onepath/</loc>
-     <lastmod>2019-05-16</lastmod>
+     <lastmod>2019-07-26</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://burningmyself.github.io/blog/emotion/twopath/</loc>
-     <lastmod>2019-05-16</lastmod>
+     <lastmod>2019-07-26</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://burningmyself.github.io/blog/emotion/lifetime/</loc>
-     <lastmod>2019-05-16</lastmod>
+     <lastmod>2019-07-26</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://burningmyself.github.io/blog/emotion/hearttoheart/</loc>
-     <lastmod>2019-05-16</lastmod>
+     <lastmod>2019-07-26</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://burningmyself.github.io/blog/emotion/ttt/</loc>
-     <lastmod>2019-05-16</lastmod>
+     <lastmod>2019-07-26</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://burningmyself.github.io/blog/emotion/profess/</loc>
-     <lastmod>2019-05-16</lastmod>
+     <lastmod>2019-07-26</lastmod>
      <changefreq>daily</changefreq>
     </url>
 </urlset>
