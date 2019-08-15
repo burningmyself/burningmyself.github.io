@@ -89,6 +89,7 @@
 * [构架]
 * * [构架拆分](docs/framework/split.md)
 * * [分布式、高并发、多线程](docs/framework/fgb.md)
+* * [如何理解敏捷开发](docs/framework/agility.md)
 * [医学]
 * * [脑炎](docs/doctor/ae.md)
 * [情感]
