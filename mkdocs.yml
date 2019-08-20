@@ -83,6 +83,7 @@ nav:
     - 构架拆分: framework/split.md 
     - 分布式、高并发、多线程: framework/fgb.md 
     - 如何理解敏捷开发: framework/agility.md 
+    - 走向架构师必备的技能: framework/fwork.md
   - 情感:
     - 情商: emotion/eq.md
     - 工作心得: emotion/workheard.md
