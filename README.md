@@ -80,7 +80,7 @@
 * * [MarkDown](docs/tool/markdown.md)
 * * [CI/CD](docs/tool/cicd.md)
 * * [mkdocs简单使用](docs/tool/mkdocs.md)
-* * [Git的黑魔法](docs/tool/gitsutdy.md)
+* * [Git的黑魔法](docs/tool/gitstudy.md)
 * [前端]
 * * [阿里js样式](docs/web/ali_js_style.md)
 * * [ES6语法](docs/web/es6.md)
