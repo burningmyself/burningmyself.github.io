@@ -411,3 +411,4 @@ step();
 以上就是 ES6 最常用的一些语法，可以说这20%的语法，在ES6的日常使用中占了80%
 
 [更多ES6语法点击这里](http://es6.ruanyifeng.com/)
+[《JavaScript 语言入门教程》](https://wangdoc.com/)
