@@ -33,6 +33,7 @@
 * * [产品与技术](docs/exp/pt.md)
 * * [深度学习框架](docs/exp/four_deep_learning.md)
 * * [在阿里做了5年技术Leader，我总结出这些套路！](docs/exp/tl.md)
+* * [CTO 技能图谱](docs/exp/cto.md)
 * [Img]
 * [Java]
 * * [Java 新特性](docs/java/feature.md)
@@ -124,5 +125,3 @@
 * * [将心比心，方得人心](docs/emotion/hearttoheart.md)
 * * [别睡太晚，别爱太满，别要太多](docs/emotion/ttt.md)
 * * [程序员表白必备神器](docs/emotion/profess.md)
-
-我的博客即将同步至腾讯云+社区，邀请大家一同入驻：https://cloud.tencent.com/developer/support-plan?invite_code=130s9nboctqwq
