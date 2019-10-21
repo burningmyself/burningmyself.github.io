@@ -37,6 +37,7 @@ nav:
         - node.js文档: web/node.js.md
         - React 开发者指南: web/react.md
         - Dart语法学习: dart/syntax.md
+        - React 面试: web/react_interview.md
     - SQL:
         - MySQL优化: sql/mysql_yh.md
         - MySQL优化: sql/mysql_yh17.md
