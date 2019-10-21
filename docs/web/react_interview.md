@@ -620,4 +620,5 @@ Switch 只会渲染第一个匹配的子级。当我们嵌套了下面这样的�
 参与的页面|每个视图对应一个新页面|只涉及单个 HTML 页面
 URL 更改|向服务器发送一个 HTTP 请求并接收对应的 HTML 页面|只有历史属性被更改
 体验|用户其实是在每个视图的不同页面间切换|用户以为自己正在不同的页面间切换
+
 [原文链接：](https://codersera.com/blog/top-50-react-questions-you-need-to-prepare-for-the-interview-in-2019/ )
