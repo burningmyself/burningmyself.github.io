@@ -91,6 +91,7 @@
 * * [Dart语法学习](docs/dart/syntax.md)
 * * [React 面试](docs/web/react_interview.md)
 * * [Js 工具函数](docs/web/js_tool_method.md)
+* * [vue与react比较](docs/web/vue_cp_react.md)
 * [构架]
 * * [构架拆分](docs/framework/split.md)
 * * [分布式、高并发、多线程](docs/framework/fgb.md)
