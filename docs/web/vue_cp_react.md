@@ -205,7 +205,7 @@ Next是一个React框架，允许使用React构建SSR和静态web应用
 组件销毁后执行destroyed，销毁后组件的双向数据绑定、事件监听watcher相关的都被移除掉了，但是组件的真实dom结构还是存在在页面中的。
 添加keep-alive标签后会增加active和deactive这两个生命周期函数，初始化操作放在actived里面，一旦切换组件，因为组件没有被销毁，所以它不会执行销毁阶段的钩子函数，所以移除操作需要放在deactived里面，在里面进行一些善后操作，这个时候created钩子函数只会执行一次，销毁的钩子函数一直没有执行。
 
-![vue-react-2](./../img/veu-react-2.png)
+![vue-react-2](./../img/vue-react-2.png)
 
 ### react
 【初始化阶段（5个）】：
