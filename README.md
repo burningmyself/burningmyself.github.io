@@ -118,7 +118,7 @@
 * * [所有的失去，都会以另一种方式归来](docs/emotion/losecome.md)
 * * [人生有这三种好心态](docs/emotion/threeheart.md)
 * * [一个感情真相](docs/emotion/onelike.md)
-* * [情商与道理](docs/emotion/notruch.md)
+* * [情商与道理](docs/emotion/notruth.md)
 * * [六种男人远离](docs/emotion/smf.md)
 * * [决定接下来人生归属的，不是努力，而是选择](docs/emotion/select.md)
 * * [被你拉黑的那个人，你一定很喜欢吧](docs/emotion/nolike.md)
