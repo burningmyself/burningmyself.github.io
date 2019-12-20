@@ -410,6 +410,18 @@
   </li>
 
         
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../java/springAnnotation/" title="Spring常用注解" class="md-nav__link">
+      Spring常用注解
+    </a>
+  </li>
+
+        
       </ul>
     </nav>
   </li>
@@ -590,6 +602,54 @@
   </li>
 
         
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../dart/syntax/" title="Dart语法学习" class="md-nav__link">
+      Dart语法学习
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../web/react_interview/" title="React 面试" class="md-nav__link">
+      React 面试
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../web/js_tool_method/" title="js 工具函数" class="md-nav__link">
+      js 工具函数
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../web/vue-cp-react.md" title="vue与react比较" class="md-nav__link">
+      vue与react比较
+    </a>
+  </li>
+
+        
       </ul>
     </nav>
   </li>
@@ -710,6 +770,18 @@
   </li>
 
         
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../sql/mybatis/" title="Mybatis使用心德" class="md-nav__link">
+      Mybatis使用心德
+    </a>
+  </li>
+
+        
       </ul>
     </nav>
   </li>
@@ -754,6 +826,18 @@
   <li class="md-nav__item">
     <a href="../../linux/ope/" title="实用的Linux 命令" class="md-nav__link">
       实用的Linux 命令
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../linux/centos_docker/" title="Centos配置 docker java mysql mongodb redis nginx 环境" class="md-nav__link">
+      Centos配置 docker java mysql mongodb redis nginx 环境
     </a>
   </li>
 
@@ -1051,6 +1135,13 @@
         <li class="md-nav__item">
   <a href="#_25" title="程序员的那些迷之缩写" class="md-nav__link">
     程序员的那些迷之缩写
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#git_4" title="git常用命令归纳" class="md-nav__link">
+    git常用命令归纳
   </a>
   
 </li>
@@ -1403,6 +1494,18 @@
   <li class="md-nav__item">
     <a href="../../exp/tl/" title="在阿里做了5年技术Leader，我总结出这些套路！" class="md-nav__link">
       在阿里做了5年技术Leader，我总结出这些套路！
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../exp/cto/" title="CTO 技能图谱" class="md-nav__link">
+      CTO 技能图谱
     </a>
   </li>
 
@@ -2103,6 +2206,13 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#git_4" title="git常用命令归纳" class="md-nav__link">
+    git常用命令归纳
+  </a>
+  
+</li>
+      
       
       
       
@@ -2333,6 +2443,157 @@ git push origin master #将本地提交推送到远程仓库
 <p>PRD : Product Requirement Document. 产品需求文档</p>
 </li>
 </ol>
+<h2 id="git_4">git常用命令归纳<a class="headerlink" href="#git_4" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th align="left">分支命令</th>
+<th align="left">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">git branch</td>
+<td align="left">列出所有本地分支机构。</td>
+</tr>
+<tr>
+<td align="left">git branch -a</td>
+<td align="left">列出远程和本地分支。</td>
+</tr>
+<tr>
+<td align="left">git checkout -b branch_name</td>
+<td align="left">创建一个本地分支并切换到该分支。</td>
+</tr>
+<tr>
+<td align="left">git checkout branch_name</td>
+<td align="left">切换到现有分支。</td>
+</tr>
+<tr>
+<td align="left">git push origin branch_name</td>
+<td align="left">将分支推送到远程。</td>
+</tr>
+<tr>
+<td align="left">git branch -m new_name</td>
+<td align="left">重命名当前分支。</td>
+</tr>
+<tr>
+<td align="left">git branch -d branch_name</td>
+<td align="left">删除本地分支。</td>
+</tr>
+<tr>
+<td align="left">git push origin :branch_name</td>
+<td align="left">删除远程分支。</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th align="left">日志命令</th>
+<th align="left">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">git log --oneline</td>
+<td align="left">单行显示提交历史记录。</td>
+</tr>
+<tr>
+<td align="left">git log -2</td>
+<td align="left">显示最近N次提交的提交历史记录。</td>
+</tr>
+<tr>
+<td align="left">git log -p -2</td>
+<td align="left">用diff显示最近N次提交的提交历史记录。</td>
+</tr>
+<tr>
+<td align="left">git diff</td>
+<td align="left">在工作树中显示所有本地文件更改。</td>
+</tr>
+<tr>
+<td align="left">git diff myfile</td>
+<td align="left">显示对文件所做的更改。</td>
+</tr>
+<tr>
+<td align="left">git blame myfile</td>
+<td align="left">显示谁更改了文件的内容和时间。</td>
+</tr>
+<tr>
+<td align="left">git remote show origin</td>
+<td align="left">显示远程分支及其到本地的映射。</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th align="left">清理命令</th>
+<th align="left">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">git clean -f</td>
+<td align="left">删除所有未跟踪的文件。</td>
+</tr>
+<tr>
+<td align="left">git clean -df</td>
+<td align="left">删除所有未跟踪的文件和目录。</td>
+</tr>
+<tr>
+<td align="left">git checkout -- .</td>
+<td align="left">撤消对所有文件的本地修改。</td>
+</tr>
+<tr>
+<td align="left">git reset HEAD myfile</td>
+<td align="left">取消暂存文件。</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th align="left">标签命令</th>
+<th align="left">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">git tag</td>
+<td align="left">列出所有标签。</td>
+</tr>
+<tr>
+<td align="left">git tag -a tag_name -m "tag message"</td>
+<td align="left">创建一个新标签。</td>
+</tr>
+<tr>
+<td align="left">git push --tags</td>
+<td align="left">将所有标签推送到远程仓库。</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th align="left">存放命令</th>
+<th align="left">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">git stash save "stash name" &amp;&amp; git stash</td>
+<td align="left">将更改保存到存储中。</td>
+</tr>
+<tr>
+<td align="left">git stash list</td>
+<td align="left">列出所有藏匿处。</td>
+</tr>
+<tr>
+<td align="left">git stash pop</td>
+<td align="left">应用藏匿处。</td>
+</tr>
+</tbody>
+</table>
                 
                   
                 

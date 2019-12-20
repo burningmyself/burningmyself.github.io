@@ -1,0 +1,2555 @@
+
+
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+        <meta name="description" content=".net,java,php,python,docker,web">
+      
+      
+        <link rel="canonical" href="https://burningmyself.github.io/blog/web/react_interview/">
+      
+      
+        <meta name="author" content="朽木自雕">
+      
+      
+        <meta name="lang:clipboard.copy" content="Copy to clipboard">
+      
+        <meta name="lang:clipboard.copied" content="Copied to clipboard">
+      
+        <meta name="lang:search.language" content="en">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="No matching documents">
+      
+        <meta name="lang:search.result.one" content="1 matching document">
+      
+        <meta name="lang:search.result.other" content="# matching documents">
+      
+        <meta name="lang:search.tokenizer" content="[\s\-]+">
+      
+      <link rel="shortcut icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.4.0">
+    
+    
+      
+        <title>React 面试 - BurningMyself</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/application.0284f74d.css">
+      
+      
+    
+    
+      <script src="../../assets/javascripts/modernizr.74668098.js"></script>
+    
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700|Roboto+Mono&display=fallback">
+        <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
+      
+    
+    <link rel="stylesheet" href="../../assets/fonts/material-icons.css">
+    
+    
+    
+      
+    
+    
+  </head>
+  
+    <body dir="ltr">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+          <svg xmlns="http://www.w3.org/2000/svg" width="416" height="448" viewBox="0 0 416 448" id="__github"><path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19T128 352t-18.125-8.5-10.75-19T96 304t3.125-20.5 10.75-19T128 256t18.125 8.5 10.75 19T160 304zm160 0q0 10-3.125 20.5t-10.75 19T288 352t-18.125-8.5-10.75-19T256 304t3.125-20.5 10.75-19T288 256t18.125 8.5 10.75 19T320 304zm40 0q0-30-17.25-51T296 232q-10.25 0-48.75 5.25Q229.5 240 208 240t-39.25-2.75Q130.75 232 120 232q-29.5 0-46.75 21T56 304q0 22 8 38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0 37.25-1.75t35-7.375 30.5-15 20.25-25.75T360 304zm56-44q0 51.75-15.25 82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5T212 416q-19.5 0-35.5-.75t-36.875-3.125-38.125-7.5-34.25-12.875T37 371.5t-21.5-28.75Q0 312 0 260q0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25 30.875Q171.5 96 212 96q37 0 70 8 26.25-20.5 46.75-30.25T376 64q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34 99.5z"/></svg>
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+    
+      <a href="#react" tabindex="1" class="md-skip">
+        Skip to content
+      </a>
+    
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="https://burningmyself.github.io/blog/" title="BurningMyself" class="md-header-nav__button md-logo">
+          
+            <i class="md-icon"></i>
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          
+            <span class="md-header-nav__topic">
+              BurningMyself
+            </span>
+            <span class="md-header-nav__topic">
+              
+                React 面试
+              
+            </span>
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
+          
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="__search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            Type to start searching
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+        
+      </div>
+      
+        <div class="md-flex__cell md-flex__cell--shrink">
+          <div class="md-header-nav__source">
+            
+
+
+  
+
+<a href="https://github.com/burningmyself/blog/" title="Go to repository" class="md-source" data-md-source="github">
+  
+    <div class="md-source__icon">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
+    burningmyself/blog
+  </div>
+</a>
+          </div>
+        </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+      <main class="md-main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="__drawer">
+    <a href="https://burningmyself.github.io/blog/" title="BurningMyself" class="md-nav__button md-logo">
+      
+        <i class="md-icon"></i>
+      
+    </a>
+    BurningMyself
+  </label>
+  
+    <div class="md-nav__source">
+      
+
+
+  
+
+<a href="https://github.com/burningmyself/blog/" title="Go to repository" class="md-source" data-md-source="github">
+  
+    <div class="md-source__icon">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
+    burningmyself/blog
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../.." title="介绍" class="md-nav__link">
+      介绍
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2" checked>
+    
+    <label class="md-nav__link" for="nav-2">
+      技术博文
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-2">
+        技术博文
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-1" type="checkbox" id="nav-2-1">
+    
+    <label class="md-nav__link" for="nav-2-1">
+      .NET
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-2-1">
+        .NET
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../net/c_sharp/" title="C# 6" class="md-nav__link">
+      C# 6
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../net/c_docker/" title=".Ner Core Docker 部署" class="md-nav__link">
+      .Ner Core Docker 部署
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../net/c_mysql_nginx/" title="使用 Docker 容器化部署 ASP.NET Core + MySQL + Nginx" class="md-nav__link">
+      使用 Docker 容器化部署 ASP.NET Core + MySQL + Nginx
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../net/c_core_safety/" title="让你的ASP.NET Core应用程序更安全" class="md-nav__link">
+      让你的ASP.NET Core应用程序更安全
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../net/c_core_study_route/" title="ASP.NET Core开发者指南" class="md-nav__link">
+      ASP.NET Core开发者指南
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-2" type="checkbox" id="nav-2-2">
+    
+    <label class="md-nav__link" for="nav-2-2">
+      Java
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-2-2">
+        Java
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../java/feature/" title="Java特性" class="md-nav__link">
+      Java特性
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../java/load-class/" title="Java类加载" class="md-nav__link">
+      Java类加载
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../java/orm/" title="Orm的优缺点" class="md-nav__link">
+      Orm的优缺点
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../java/bio-nio/" title="BIO与NIO" class="md-nav__link">
+      BIO与NIO
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../java/rocketmq/rmq-1/" title="RocketMq下载与安装" class="md-nav__link">
+      RocketMq下载与安装
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../java/springAnnotation/" title="Spring常用注解" class="md-nav__link">
+      Spring常用注解
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-3" type="checkbox" id="nav-2-3">
+    
+    <label class="md-nav__link" for="nav-2-3">
+      Python
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-2-3">
+        Python
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../python/feature/" title="Python特性" class="md-nav__link">
+      Python特性
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../python/str_joint/" title="Python字符拼接" class="md-nav__link">
+      Python字符拼接
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../python/syntax_rule/" title="Python语法技巧" class="md-nav__link">
+      Python语法技巧
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../python/fabric/" title="远程部署神器 Fabric" class="md-nav__link">
+      远程部署神器 Fabric
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-4" type="checkbox" id="nav-2-4">
+    
+    <label class="md-nav__link" for="nav-2-4">
+      PHP
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-2-4">
+        PHP
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../php/kj/" title="框架" class="md-nav__link">
+      框架
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-5" type="checkbox" id="nav-2-5" checked>
+    
+    <label class="md-nav__link" for="nav-2-5">
+      Web
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-2-5">
+        Web
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../es6/" title="es6语法" class="md-nav__link">
+      es6语法
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../ali_js_style/" title="阿里js样式规范" class="md-nav__link">
+      阿里js样式规范
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../node.js/" title="node.js文档" class="md-nav__link">
+      node.js文档
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../react/" title="React 开发者指南" class="md-nav__link">
+      React 开发者指南
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../dart/syntax/" title="Dart语法学习" class="md-nav__link">
+      Dart语法学习
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        React 面试
+      </label>
+    
+    <a href="./" title="React 面试" class="md-nav__link md-nav__link--active">
+      React 面试
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#react_1" title="React 面试问题——常规知识" class="md-nav__link">
+    React 面试问题——常规知识
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../js_tool_method/" title="js 工具函数" class="md-nav__link">
+      js 工具函数
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../vue-cp-react.md" title="vue与react比较" class="md-nav__link">
+      vue与react比较
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-6" type="checkbox" id="nav-2-6">
+    
+    <label class="md-nav__link" for="nav-2-6">
+      SQL
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-2-6">
+        SQL
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../sql/mysql_yh/" title="MySQL优化" class="md-nav__link">
+      MySQL优化
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../sql/mysql_yh17/" title="MySQL优化" class="md-nav__link">
+      MySQL优化
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../sql/mysql_log/" title="MySQL日志" class="md-nav__link">
+      MySQL日志
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../sql/mysql_index/" title="MySQL索引" class="md-nav__link">
+      MySQL索引
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../sql/mysql_pxc/" title="MySQL PXC集群" class="md-nav__link">
+      MySQL PXC集群
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../sql/mysql_use/" title="MySQL 数据库应用" class="md-nav__link">
+      MySQL 数据库应用
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../sql/sql_server_master/" title="Sql Server 主从备份" class="md-nav__link">
+      Sql Server 主从备份
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../sql/data_split/" title="数据库之互联网常用分库分表方案" class="md-nav__link">
+      数据库之互联网常用分库分表方案
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../sql/mybatis/" title="Mybatis使用心德" class="md-nav__link">
+      Mybatis使用心德
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-7" type="checkbox" id="nav-2-7">
+    
+    <label class="md-nav__link" for="nav-2-7">
+      Linux
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-2-7">
+        Linux
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../linux/often/" title="常用命令" class="md-nav__link">
+      常用命令
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../linux/ope/" title="实用的Linux 命令" class="md-nav__link">
+      实用的Linux 命令
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../linux/centos_docker/" title="Centos配置 docker java mysql mongodb redis nginx 环境" class="md-nav__link">
+      Centos配置 docker java mysql mongodb redis nginx 环境
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-8" type="checkbox" id="nav-2-8">
+    
+    <label class="md-nav__link" for="nav-2-8">
+      Docker
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-2-8">
+        Docker
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../docker/docker/" title="Docker全科" class="md-nav__link">
+      Docker全科
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-9" type="checkbox" id="nav-2-9">
+    
+    <label class="md-nav__link" for="nav-2-9">
+      Tool
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-2-9">
+        Tool
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tool/git/" title="Git" class="md-nav__link">
+      Git
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tool/gitquestion/" title="Git问题处理" class="md-nav__link">
+      Git问题处理
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tool/gitflow/" title="GitFlow" class="md-nav__link">
+      GitFlow
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tool/gitbook/" title="GitBook" class="md-nav__link">
+      GitBook
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tool/gitcmr/" title="Git提交日志规范" class="md-nav__link">
+      Git提交日志规范
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tool/markdown/" title="Markdown" class="md-nav__link">
+      Markdown
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tool/cicd/" title="CI/CD" class="md-nav__link">
+      CI/CD
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tool/mkdocs/" title="mkdocs简单使用" class="md-nav__link">
+      mkdocs简单使用
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tool/gitstudy/" title="Git的黑魔法" class="md-nav__link">
+      Git的黑魔法
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3">
+    
+    <label class="md-nav__link" for="nav-3">
+      微服务
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-3">
+        微服务
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../micro/spring-cloud/" title="基于SpringCloud的微服务架构演变史" class="md-nav__link">
+      基于SpringCloud的微服务架构演变史
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../micro/fbs-lock/" title="分布式锁" class="md-nav__link">
+      分布式锁
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../micro/design/" title="微服务设计" class="md-nav__link">
+      微服务设计
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../micro/distrimsg/" title="分布式系统与消息的投递" class="md-nav__link">
+      分布式系统与消息的投递
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../micro/ddd/" title="基于DDD的微服务设计和开发实战" class="md-nav__link">
+      基于DDD的微服务设计和开发实战
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4">
+    
+    <label class="md-nav__link" for="nav-4">
+      经验分析
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-4">
+        经验分析
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../exp/devops/" title="DevOps" class="md-nav__link">
+      DevOps
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../exp/micro-service/" title="Micro-Service" class="md-nav__link">
+      Micro-Service
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../exp/raft-gossip/" title="Raft算法和Gossip协议" class="md-nav__link">
+      Raft算法和Gossip协议
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../exp/cl/" title="集群和负载均衡" class="md-nav__link">
+      集群和负载均衡
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../exp/ai/" title="人工智能" class="md-nav__link">
+      人工智能
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../exp/code-principle/" title="代码原则" class="md-nav__link">
+      代码原则
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../exp/techbig/" title="如何成为技术大牛" class="md-nav__link">
+      如何成为技术大牛
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../exp/learnweetout/" title="程序员如何技术成长" class="md-nav__link">
+      程序员如何技术成长
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../exp/pt/" title="产品与技术" class="md-nav__link">
+      产品与技术
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../exp/four_deep_learning/" title="深度学习框架" class="md-nav__link">
+      深度学习框架
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../exp/tl/" title="在阿里做了5年技术Leader，我总结出这些套路！" class="md-nav__link">
+      在阿里做了5年技术Leader，我总结出这些套路！
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../exp/cto/" title="CTO 技能图谱" class="md-nav__link">
+      CTO 技能图谱
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5">
+    
+    <label class="md-nav__link" for="nav-5">
+      医学
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-5">
+        医学
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../doctor/ae/" title="脑炎" class="md-nav__link">
+      脑炎
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6" type="checkbox" id="nav-6">
+    
+    <label class="md-nav__link" for="nav-6">
+      构架
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-6">
+        构架
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../framework/split/" title="构架拆分" class="md-nav__link">
+      构架拆分
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../framework/fgb/" title="分布式、高并发、多线程" class="md-nav__link">
+      分布式、高并发、多线程
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../framework/agility/" title="如何理解敏捷开发" class="md-nav__link">
+      如何理解敏捷开发
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../framework/fwork/" title="走向架构师必备的技能" class="md-nav__link">
+      走向架构师必备的技能
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7" type="checkbox" id="nav-7">
+    
+    <label class="md-nav__link" for="nav-7">
+      情感
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-7">
+        情感
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/eq/" title="情商" class="md-nav__link">
+      情商
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/workheard/" title="工作心得" class="md-nav__link">
+      工作心得
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/lookbook/" title="看书" class="md-nav__link">
+      看书
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/fmf/" title="4种男朋友" class="md-nav__link">
+      4种男朋友
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/notheart/" title="不上心" class="md-nav__link">
+      不上心
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/selfdiscipline/" title="自律" class="md-nav__link">
+      自律
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/notlike/" title="喜欢与不喜欢" class="md-nav__link">
+      喜欢与不喜欢
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/latemarry/" title="晚婚" class="md-nav__link">
+      晚婚
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/understand/" title="追女生要明白这些事" class="md-nav__link">
+      追女生要明白这些事
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/backup/" title="备胎" class="md-nav__link">
+      备胎
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/chase/" title="为什么追不到她" class="md-nav__link">
+      为什么追不到她
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/livefail/" title="为什么活着失败" class="md-nav__link">
+      为什么活着失败
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/emotion/" title="情绪管理" class="md-nav__link">
+      情绪管理
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/abolish/" title="废掉的三个迹象" class="md-nav__link">
+      废掉的三个迹象
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/uptime/" title="余生，好好珍惜" class="md-nav__link">
+      余生，好好珍惜
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/losecome/" title="所有的失去，都会以另一种方式归来" class="md-nav__link">
+      所有的失去，都会以另一种方式归来
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/threeheart/" title="人生有这三种好心态" class="md-nav__link">
+      人生有这三种好心态
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/onelike/" title="一个感情真相" class="md-nav__link">
+      一个感情真相
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/notruth/" title="情商与道理" class="md-nav__link">
+      情商与道理
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/smf/" title="六种男人远离" class="md-nav__link">
+      六种男人远离
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/select/" title="决定接下来人生归属的，不是努力，而是选择" class="md-nav__link">
+      决定接下来人生归属的，不是努力，而是选择
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/nolike/" title="被你拉黑的那个人，你一定很喜欢吧" class="md-nav__link">
+      被你拉黑的那个人，你一定很喜欢吧
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/onepath/" title="余生，学会一个人走，不管有没有人陪" class="md-nav__link">
+      余生，学会一个人走，不管有没有人陪
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/twopath/" title="往后余生还很精彩，别被熬夜拖垮了" class="md-nav__link">
+      往后余生还很精彩，别被熬夜拖垮了
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/lifetime/" title="心态好的人，一辈子都好" class="md-nav__link">
+      心态好的人，一辈子都好
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/hearttoheart/" title="将心比心，方得人心" class="md-nav__link">
+      将心比心，方得人心
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/ttt/" title="别睡太晚，别爱太满，别要太多" class="md-nav__link">
+      别睡太晚，别爱太满，别要太多
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/profess/" title="表白" class="md-nav__link">
+      表白
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#react_1" title="React 面试问题——常规知识" class="md-nav__link">
+    React 面试问题——常规知识
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/burningmyself/blog/edit/master/docs/web/react_interview.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
+                
+                
+                <h1 id="react">React 面试问题<a class="headerlink" href="#react" title="Permanent link">&para;</a></h1>
+<blockquote>
+<p>如果你是一位有理想的前端开发人员，并且正在准备面试，那么这篇文章就是为你准备的。本文收集了 React 面试中最常见的 50 大问题，这是一份理想的指南，让你为 React 相关的面试做好充分的准备工作。首先我们快速了解一下 React 在市场上的需求和现状，然后再开始讨论 React 面试问题。</p>
+</blockquote>
+<p>JavaScript 工具的市场地位正在缓慢而稳定地上升当中，而对 React 认证的需求正在飞速增长。选择正确的技术来开发应用程序或网站变得愈加艰难。React 被认为是 Javascript 语言中增长最快的框架。</p>
+<p>虚拟 DOM 和可复用部件等独特特性吸引了前端开发人员的注意。尽管成熟的框架（如 Angular、Meteor 和 Vue 等）在 MVC（模型 - 视图 - 控制器）中只是一个“视图”库，但它们都有很强的竞争力。下图显示了常见 JS 框架的趋势：</p>
+<p><img alt="react-top" src="../../img/react-top.png" /></p>
+<p>以下是面试官最有可能提出的 50 个面试问题和答案。</p>
+<h2 id="react_1">React 面试问题——常规知识<a class="headerlink" href="#react_1" title="Permanent link">&para;</a></h2>
+<ol>
+<li>
+<p>真实 DOM 和虚拟 DOM 的区别</p>
+<p>真实 DOM|虚拟 DOM
+--|:--|
+1.更新较慢| 1.更新较快
+2.可以直接更新 HTML|2.不能直接更新 HTML
+3.元素更新时创建一个新 DOM|3.元素更新时更新 JSX
+4.DOM 操作开销较大|4.DOM 操作非常容易
+5.内存浪费严重|5.没有内存浪费</p>
+</li>
+<li>
+<p>什么是 React？</p>
+<ul>
+<li>React 是 2011 年由 Facebook 开发的前端 JavaScript 库。</li>
+<li>它遵循基于组件的方法，这种方法可以用来构建可复用的 UI 组件。</li>
+<li>它用于复杂的交互式 Web 端和移动端用户界面开发。</li>
+<li>尽管它在 2015 年才开源，但得到了一家巨头的支持。</li>
+</ul>
+</li>
+<li>
+<p>React 的特点是什么？</p>
+<ul>
+<li>轻量级 DOM，以获得更好的性能。</li>
+<li>在 React 中，一切都被视为组件。</li>
+<li>React 使用 JSX（JavaScript eXtension），使我们可以编写类似于 HTML 的 JavaScript。</li>
+<li>React 不是直接运行在浏览器的文档对象模型（DOM）上，而是运行在虚拟 DOM 上。</li>
+<li>ReactJS 遵循单向数据流或单向数据绑定。</li>
+</ul>
+</li>
+<li>
+<p>列出 React 的一些主要优势。</p>
+<ul>
+<li>可以提高应用程序的性能。</li>
+<li>可以方便地用在客户端和服务端。</li>
+<li>由于有了 JSX，代码的可读性提高了。</li>
+<li>使用 React 后，编写 UI 测试用例变得非常容易。</li>
+</ul>
+</li>
+<li>
+<p>React 有哪些局限？</p>
+<ul>
+<li>React 只是一个库，而不是一个成熟的框架。</li>
+<li>它的库很大，需要花费一些时间来理解。</li>
+<li>新手程序员可能很难入门。</li>
+<li>由于它使用了内联模板和 JSX，编码也比较复杂。</li>
+</ul>
+</li>
+<li>
+<p>什么是 JSX？</p>
+</li>
+</ol>
+<p>JSX 是 JavaScript XML 的简写。这是 React 使用的一种文件类型，具备 JavaScript 的表现力，并使用 HTML 作为模板语法。这样一来 HTML 文件理解起来就非常简单。这种文件可以创造稳健的应用程序并提高其效率。下面是一个 JSX 实例：</p>
+<p><div class="codehilite"><pre><span></span>render(){
+    return(        
+           &lt;div&gt;
+                &lt;h1&gt; Hello World from Codersera!!&lt;/h1&gt;
+           &lt;/div&gt;
+          );
+        }
+</pre></div>
+7. 你对虚拟 DOM 有什么了解？解释其工作机制。</p>
+<p>虚拟 DOM 是轻量级的 JavaScript 对象，一开始只是真实 DOM 的一个副本。它是一个节点树，将组件列为对象及其属性和内容的列表。React 的渲染功能从 React 的各个部分生成一个节点树。然后，它会根据由不同用户或系统行为引起的信息模型突变来更新此树。
+虚拟 DOM 的工作机制只有简单的三步组成。</p>
+<div class="codehilite"><pre><span></span>1. 每当任何基础信息更改时，整个 UI 就会以虚拟 DOM 的表示形式重新渲染。
+</pre></div>
+
+
+<p><img alt="ui-dom" src="../../img/ui-dom-1.png" /></p>
+<div class="codehilite"><pre><span></span>2. 然后计算先前的 DOM 表示和新的 DOM 表示之间的区别。
+</pre></div>
+
+
+<p><img alt="ui-dom" src="../../img/ui-dom-2.png" />  </p>
+<div class="codehilite"><pre><span></span>3. 计算完成后，只有实际更改的内容才会更新到真实 DOM。
+</pre></div>
+
+
+<p><img alt="ui-dom" src="../../img/ui-dom-3.png" />  </p>
+<ol>
+<li>为什么浏览器无法读取 JSX？</li>
+</ol>
+<p>React 使用 JSX（JavaScript eXtension），我们可以用它编写类似于 HTML 的 JavaScript。但由于 JSX 不是合法的 JavaScript，因此浏览器无法直接读取它。如果 JavaScript 文件包含 JSX，则必须将其转换。你需要一个转换器将 JSX 转换为浏览器可以理解的常规 Javascript。目前最常用的转换器是 Babel。</p>
+<ol>
+<li>与 ES5 相比，React 的 ES6 语法有何不同？</li>
+</ol>
+<p>ES5 和 ES6 的语法区别如下：</p>
+<div class="codehilite"><pre><span></span><span class="c1">// ES5</span>
+<span class="kd">var</span> <span class="nx">React</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;react&#39;</span><span class="p">);</span>
+<span class="c1">// ES6</span>
+<span class="kr">import</span> <span class="nx">React</span> <span class="nx">from</span> <span class="s1">&#39;react&#39;</span><span class="p">;</span>
+
+<span class="o">********</span>  <span class="kr">export</span> <span class="nx">vs</span> <span class="nx">exports</span> <span class="o">*********</span>
+
+<span class="c1">// ES5</span>
+<span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="nx">Component</span><span class="p">;</span>
+<span class="c1">// ES6</span>
+<span class="kr">export</span> <span class="k">default</span> <span class="nx">Component</span><span class="p">;</span>
+
+<span class="o">******</span> <span class="kd">function</span> <span class="o">*****</span>
+<span class="c1">// ES5</span>
+
+<span class="kd">var</span> <span class="nx">MyComponent</span> <span class="o">=</span> <span class="nx">React</span><span class="p">.</span><span class="nx">createClass</span><span class="p">({</span>
+  <span class="nx">render</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="o">&lt;</span><span class="nx">h3</span><span class="o">&gt;</span> <span class="nx">Hello</span> <span class="nx">CoderSera</span><span class="o">!</span> <span class="o">&lt;</span><span class="err">/h3&gt;</span>
+  <span class="p">},</span>
+<span class="p">});</span>
+
+<span class="c1">// ES6</span>
+<span class="kr">class</span> <span class="nx">MyComponent</span> <span class="kr">extends</span> <span class="nx">React</span><span class="p">.</span><span class="nx">Component</span> <span class="p">{</span>
+  <span class="nx">render</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="o">&lt;</span><span class="nx">h3</span><span class="o">&gt;</span> <span class="nx">Hello</span> <span class="nx">CoderSera</span><span class="o">!</span> <span class="o">&lt;</span><span class="err">/h3&gt;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+ <span class="o">*******</span>  <span class="nx">props</span>  <span class="o">******</span>
+
+<span class="c1">// ES5</span>
+<span class="kd">var</span> <span class="nx">App</span> <span class="o">=</span> <span class="nx">React</span><span class="p">.</span><span class="nx">createClass</span><span class="p">({</span>
+  <span class="nx">propTypes</span><span class="o">:</span> <span class="p">{</span> <span class="nx">name</span><span class="o">:</span> <span class="nx">React</span><span class="p">.</span><span class="nx">PropTypes</span><span class="p">.</span><span class="nx">string</span> <span class="p">},</span>
+  <span class="nx">render</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="o">&lt;</span><span class="nx">h3</span><span class="o">&gt;</span> <span class="nx">Hello</span><span class="p">,</span> <span class="p">{</span> <span class="k">this</span><span class="p">.</span><span class="nx">props</span><span class="p">.</span><span class="nx">name</span> <span class="p">}</span><span class="o">!</span> <span class="o">&lt;</span> <span class="err">/h3&gt;</span>
+  <span class="p">},</span>
+<span class="p">});</span>
+
+<span class="c1">// ES6</span>
+<span class="kr">class</span> <span class="nx">App</span> <span class="kr">extends</span> <span class="nx">React</span><span class="p">.</span><span class="nx">Component</span> <span class="p">{</span>
+  <span class="nx">render</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="o">&lt;</span><span class="nx">h3</span><span class="o">&gt;</span> <span class="nx">Hello</span><span class="p">,</span> <span class="p">{</span> <span class="k">this</span><span class="p">.</span><span class="nx">props</span><span class="p">.</span><span class="nx">name</span> <span class="p">}</span><span class="o">!</span> <span class="o">&lt;</span><span class="err">/h3&gt;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+ <span class="o">******</span> <span class="nx">state</span> <span class="o">*****</span>
+
+<span class="c1">// ES5</span>
+<span class="kd">var</span> <span class="nx">App</span> <span class="o">=</span> <span class="nx">React</span><span class="p">.</span><span class="nx">createClass</span><span class="p">({</span>
+  <span class="nx">getInitialState</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="p">{</span> <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;world&#39;</span> <span class="p">};</span>
+  <span class="p">}</span> 
+
+  <span class="nx">render</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="o">&lt;</span><span class="nx">h3</span><span class="o">&gt;</span> <span class="nx">Hello</span><span class="p">,</span> <span class="p">{</span> <span class="k">this</span><span class="p">.</span><span class="nx">state</span><span class="p">.</span><span class="nx">name</span> <span class="p">}</span><span class="o">!</span> <span class="o">&lt;</span> <span class="err">/h3&gt;;</span>
+  <span class="p">},</span>
+<span class="p">});</span>
+
+<span class="c1">// ES6</span>
+<span class="kr">class</span> <span class="nx">App</span> <span class="kr">extends</span> <span class="nx">React</span><span class="p">.</span><span class="nx">Component</span> <span class="p">{</span>
+  <span class="nx">constructor</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kr">super</span><span class="p">();</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">state</span> <span class="o">=</span> <span class="p">{</span> <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;world&#39;</span> <span class="p">};</span>
+  <span class="p">}</span>
+
+  <span class="nx">render</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="o">&lt;</span><span class="nx">h3</span><span class="o">&gt;</span> <span class="nx">Hello</span><span class="p">,</span> <span class="p">{</span> <span class="k">this</span><span class="p">.</span><span class="nx">state</span><span class="p">.</span><span class="nx">name</span> <span class="p">}</span><span class="o">!</span> <span class="o">&lt;</span> <span class="err">/h3&gt;</span>
+  <span class="p">}</span>
+  <span class="nx">render</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span><span class="p">;</span>
+    <span class="o">&lt;</span><span class="nx">h3</span><span class="o">&gt;</span> <span class="nx">Hello</span><span class="p">,</span> <span class="p">{</span> <span class="k">this</span><span class="p">.</span><span class="nx">state</span><span class="p">.</span><span class="nx">name</span> <span class="p">}</span><span class="o">!</span> <span class="o">&lt;</span> <span class="err">/h3&gt;</span>
+  <span class="p">}</span>
+</pre></div>
+
+<ol>
+<li>React 和 Angular 有何不同？</li>
+</ol>
+<p>React 对比 Angular|React|Angular
+--|:--|:--|
+架构|使用虚拟 DOM|使用真实 DOM
+渲染|服务端渲染|客户端渲染
+DOM|使用虚拟 DOM|使用真实 DOM
+数据绑定|单向数据绑定|双向数据绑定
+调试|编译时调试|运行时调试
+开发者|Facebook|谷歌</p>
+<ol>
+<li>如何理解“在 React 中，一切都是组件”。</li>
+</ol>
+<p>React 应用程序的 UI 构建块都是组件。这些部分将整个 UI 划分为许多可自治和可复用的微小部分。然后独立的某个部分发生变化就不会影响 UI 的其余部分。</p>
+<ol>
+<li>解释 React 中 render() 的目的。</li>
+</ol>
+<p>它被视为普通函数，但 render() 函数必须返回某些值，无论值是否为空。调用组件文件时默认会调用 render() 方法，因为组件需要显示 HTML 标记，或者我们可以说 JSX 语法。每个 React 组件必须有一个 render() 函数，它返回单个 React 元素，该元素代表原生 DOM 组件。如果需要渲染多个 HTML 元素，则必须将它们分组在一个封闭的标签内，如form、group和div等。此函数必须保持纯净，就是说它在每次调用时必须返回相同的结果。</p>
+<div class="codehilite"><pre><span></span>import React, { Component } from &#39;react&#39;;
+
+class App extends Component {
+  render() {
+    return (&lt;div&gt; &lt;h1 className=&#39;App-title&#39;&gt; hello CoderSera &lt;/h1&gt;&lt;/div&gt;)
+  }
+}
+
+export default App;
+</pre></div>
+
+<ol>
+<li>什么是 Hooks？</li>
+</ol>
+<p>Hooks 是一项新功能，使你无需编写类即可使用状态等 React 功能。来看一个 useState hook 示例。</p>
+<div class="codehilite"><pre><span></span>&lt;em&gt;import &lt;/em&gt;{useState} &lt;em&gt;from &lt;/em&gt;&#39;react&#39;;&lt;br&gt;&lt;br&gt;&lt;em&gt;function &lt;/em&gt;Example() {&lt;br&gt;    &lt;em&gt;// Declare a new
+</pre></div>
+
+<ol>
+<li>
+<p>什么是 props？</p>
+</li>
+<li>
+<p>Props 用于将数据从父级传递到子级或由组件本身传递。它们是不可变的，因此不会更改。</p>
+</li>
+<li>
+<p>Props 是不可变的。因为它们是基于纯函数的概念开发的。在纯函数中，我们无法更改参数数据。因此在 ReactJS 中也无法更改 props 的数据。</p>
+</li>
+<li>
+<p>React 中的状态是什么，如何使用？</p>
+</li>
+</ol>
+<p>组件可以通过状态来跟踪其执行的任何渲染之间的信息。</p>
+<p>状态用于可变数据或将要更改的数据。这对于用户输入尤其方便。以搜索栏为例，用户输入数据时他们看到的内容也会更新。</p>
+<ol>
+<li>状态和 props 的区别。</li>
+</ol>
+<p>条件|状态|Props
+--|:--|:--|
+从父组件接收初始值|是|是
+父组件可以更改值|否|是
+在组件内设置默认值|是|是
+在组件内更改|是|否
+为子组件设置初始值|是|是
+在子组件内更改|否|是</p>
+<ol>
+<li>如何更新组件的状态？</li>
+</ol>
+<p>可以使用 this.setState() 更新组件的状态。</p>
+<div class="codehilite"><pre><span></span>class MyComponent extends React.Component {
+    constructor() {
+        super();
+        this.state = {
+            name: &#39;Maxx&#39;,
+            id: &#39;101&#39;
+        }
+    }
+    render()
+        {
+            setTimeout(()=&gt;{this.setState({name:&#39;Jaeha&#39;, id:&#39;222&#39;})},2000)
+            return (              
+                    &lt;div&gt;
+                         &lt;h1&gt;Hello {this.state.name}&lt;/h1&gt;
+                         &lt;h2&gt;Your Id is {this.state.id}&lt;/h2&gt;
+                    &lt;/div&gt;
+             );
+        }
+    }
+    ReactDOM.render(
+               &lt;MyComponent/&gt;, document.getElementById(&#39;content&#39;)
+);
+</pre></div>
+
+<p>18.React 中的箭头函数是什么？如何使用？</p>
+<p><strong>粗箭头</strong>=&gt; 用于定义匿名函数，这通常是将参数传递给回调函数的最简单方法。但是你需要在使用它时优化性能。注意：每次渲染组件时，在 render 方法中使用箭头函数都会创建一个新函数，这可能会影响性能。</p>
+<div class="codehilite"><pre><span></span>//General way
+render() {    
+    return(
+        &lt;MyInput onChange={this.handleChange.bind(this) } /&gt;
+    );
+}
+//With Arrow Function
+render() {  
+    return(
+        &lt;MyInput onChange={ (e) =&gt; this.handleOnChange(e) } /&gt;
+    );
+}
+</pre></div>
+
+<ol>
+<li>有状态和无状态组件的区别。</li>
+</ol>
+<p>有状态组件|无状态组件
+--|:--|
+在内存中存储组件状态更改的信息|计算组件的内部状态
+有权更改状态|无权更改状态
+包含过去、现在和可能的未来状态更改的信息|没有包含关于状态更改的信息
+无状态组件通知它们关于状态更改的需求，然后它们将 props 传递给前者|它们从有状态组件接收 props，将其视为回调函数</p>
+<ol>
+<li>React 组件的生命周期有哪些阶段？</li>
+</ol>
+<p>React 组件的生命周期分为三个不同阶段：</p>
+<ul>
+<li>
+<p><strong>初始化</strong>：在初始化阶段，我们为 this.props 和 this.state 定义默认值和初始值。</p>
+</li>
+<li>
+<p><strong>挂载</strong>：挂载是将组件插入 DOM 时发生的过程</p>
+</li>
+<li><strong>更新</strong>：这个阶段中，每当状态更改或组件收到新的 prop 时，组件都会更新</li>
+<li>
+<p><strong>卸载</strong>：这是从 DOM 卸载组件的阶段。</p>
+</li>
+<li>
+<p>详细解释 React 组件的生命周期技术。</p>
+</li>
+</ul>
+<p>一些最重要的生命周期方法包括：</p>
+<ul>
+<li>
+<p>componentWillMount()——在初始渲染发生之前，即在 React 将组件插入 DOM 之前立即调用一次。请务必注意，在此方法中调用 this.setState() 不会触发重新渲染。</p>
+</li>
+<li>
+<p>componentDidMount()——在渲染函数之后触发此方法。现在可以访问更新的 DOM，这意味着该方法是初始化其他需要访问 DOM 的 Javascript 库以及数据提取操作的最佳选择。</p>
+</li>
+<li>
+<p>componentWillReceiveProps()——componentWillReceiveProps() 在组件接收新 props 时调用。在调用 render() 方法之前，我们可以用这个方法对 prop 过渡做出反应。在此函数中调用 this.setState() 不会触发额外的重新渲染，我们可以通过 this.props 访问旧的 props。</p>
+</li>
+<li>
+<p>shouldComponentUpdate()——我们可以用它来决定下一个组件的状态是否应触发重新渲染。此方法返回一个布尔值，默认为 true。但是我们可以返回 false，并且不会调用以下方法：</p>
+</li>
+<li>
+<p>componentWillUpdate()——当接收到新的 props 或状态时，在渲染（更新）之前立即调用此方法。我们可以用它在更新之前做准备，但是不允许使用 this.setState()。</p>
+</li>
+<li>
+<p>componentDidUpdate()——React 更新 DOM 后立即调用此方法。我们可以使用此方法与更新后的 DOM 交互，或执行任何渲染后操作。</p>
+</li>
+<li>
+<p>componentWillUnmount()——从 DOM 卸载组件之前立即调用此方法。我们可以用它执行可能需要的任何清理工作。</p>
+</li>
+<li>
+<p>React 中的事件是什么？</p>
+</li>
+</ul>
+<p>在 React 中，事件是对特定动作（如鼠标悬停、鼠标单击和按键等）触发的反应。处理这些事件类似于处理 DOM 元素上的事件。但是在语法上存在一些差异，例如：</p>
+<ul>
+<li>
+<p>事件命名使用驼峰式大小写，而不是仅使用小写字母。</p>
+</li>
+<li>
+<p>事件作为函数而不是字符串传递。</p>
+</li>
+</ul>
+<p>事件参数包含一组特定于事件的属性。每个事件类型都包含它自己的属性和行为，这些属性和行为只能通过它的事件处理程序访问。</p>
+<ol>
+<li>如何在 React 中创建事件？</li>
+</ol>
+<div class="codehilite"><pre><span></span>class Display extends React.Component({    
+    show(evt) {
+        // code   
+    },   
+    render() {      
+        // Render the div with an onClick prop (value is a function)        
+        return (            
+                &lt;div onClick={this.show}&gt;Click Me!&lt;/div&gt;
+         );    
+    }
+});
+</pre></div>
+
+<ol>
+<li>什么是 React 中的合成事件？</li>
+</ol>
+<p>合成事件是围绕浏览器原生事件充当跨浏览器包装器的对象。它们将不同的浏览器行为合并为一个 API。这样做是为了确保在各个浏览器的事件中显示一致的特征。</p>
+<ol>
+<li>如何理解 React 中的引用？</li>
+</ol>
+<p>Ref 是 React 引用的简写。它是一个属性，帮助存储对特定元素或组件的引用，由组件渲染的配置函数返回。它用于返回对渲染返回的特定元素或组件的引用。当我们需要 DOM 测量或向组件添加方法时，它们会派上用场。</p>
+<div class="codehilite"><pre><span></span>class ReferenceDemo extends React.Component{
+     display() {
+         const name = this.inputDemo.value;
+         document.getElementById(&#39;disp&#39;).innerHTML = name;
+               }
+     render() {
+             return(        
+                  &lt;div&gt;
+            Name: &lt;input type=&quot;text&quot; ref={input =&gt; this.inputDemo = input} /&gt;
+            &lt;button name=&quot;Click&quot; onClick={this.display}&gt;Click&lt;/button&gt;            
+
+                        &lt;h2&gt;Hello &lt;span id=&quot;disp&quot;&gt;&lt;/span&gt; !!!&lt;/h2&gt;
+                  &lt;/div&gt;
+     );
+   }
+ }
+</pre></div>
+
+<ol>
+<li>列出一些应该使用引用的情况？</li>
+</ol>
+<p>以下是应使用 ref 的情况：</p>
+<ul>
+<li>
+<p>当你需要管理焦点、选择文本或媒体播放时。</p>
+</li>
+<li>
+<p>触发命令式动画。</p>
+</li>
+<li>
+<p>与第三方 DOM 库集成。</p>
+</li>
+<li>
+<p>如何模块化 React 代码？</p>
+</li>
+</ul>
+<p>可以使用 export 和 import 属性来模块化软件。它们有助于在不同的文档中单独编写组件。</p>
+<div class="codehilite"><pre><span></span>//ChildComponent.jsx
+export default class ChildComponent extends React.Component {
+    render() {
+        return(  &lt;div&gt;
+                       &lt;h1&gt;This is a child component&lt;/h1&gt;
+                 &lt;/div&gt;)
+    }
+}
+
+//ParentComponent.jsx
+import ChildComponent from &#39;./childcomponent.js&#39;;
+class ParentComponent extends React.Component {    
+    render() {        
+        return(           
+             &lt;div&gt;               
+                &lt;App /&gt;          
+            &lt;/div&gt;
+        );  
+    }
+}
+</pre></div>
+
+<ol>
+<li>在 React 中如何创建表单？</li>
+</ol>
+<p>React 提供了一种有状态的，响应式的方法来构建表单。与其他 DOM 元素不同，HTML 表单元素在 React 中的工作机制有所不同。例如，表单数据通常由组件而不是 DOM 处理，并且通常使用受控组件来实现。
+区别在于可以使用回调函数来处理表单事件，然后使用容器的状态存储表单数据。这使你的组件可以更好地控制表单控制元素和表单数据。
+回调函数是在发生事件（包括更改表单控制值或表单提交）时触发的。</p>
+<div class="codehilite"><pre><span></span>handleSubmit(event) {
+    alert(&#39;A name was submitted: &#39; + this.state.value);
+    event.preventDefault();
+}
+
+render() {
+    return (        
+
+
+
+&lt;form onSubmit={this.handleSubmit}&gt;
+            &lt;label&gt;
+                Name:
+                &lt;input type=&quot;text&quot; value={this.state.value} onChange={this.handleSubmit} /&gt;
+            &lt;/label&gt;
+            &lt;input type=&quot;submit&quot; value=&quot;Submit&quot; /&gt;
+        &lt;/form&gt;
+
+
+
+    );
+}
+</pre></div>
+
+<ol>
+<li>如何理解受控和非受控组件？</li>
+</ol>
+<p>受控组件|非受控组件
+--|:--|
+它们不维护自己的状态|它们维护自己的状态
+数据由父组件控制|数据由 DOM 控制
+它们通过 props 获得当前值，然后通过回调通知更改|使用引用来获得它们的当前值</p>
+<ol>
+<li>高阶组件（HOC）是什么意思？</li>
+</ol>
+<p>React 中的高阶组件是一种在组件之间共享通用功能而无需重复代码的模式。
+高阶组件实际上不是组件，它是一个接受组件并返回新组件的函数。它将一个组件转换为另一个组件，并添加其他数据或功能</p>
+<ol>
+<li>HOC 可以做什么？</li>
+</ol>
+<p>HOC 可用于许多任务，例如：</p>
+<ul>
+<li>
+<p>代码复用，逻辑和引导抽象。</p>
+</li>
+<li>
+<p>渲染劫持。</p>
+</li>
+<li>状态抽象和控制。</li>
+<li>
+<p>Props 操控。</p>
+</li>
+<li>
+<p>什么是纯组件？</p>
+</li>
+</ul>
+<p>React 并没有在我们的组件中编写 shouldComponent 方法，而是引入了一个带有内置 shouldComponentUpdate 实现的新组件，它是 React.PureComponent 组件。
+React.PureComponent 通过浅层 prop 和状态比较来实现它。在某些情况下，你可以使用 React.PureComponent 来提高性能。</p>
+<ol>
+<li>React 中键有什么用途？</li>
+</ol>
+<p>键可帮助 React 识别哪些项目已更改、添加或删除。应该为数组内的元素提供键，以赋予元素稳定的身份。键必须是唯一的。
+当使用动态创建的组件或用户更改列表时，React 键非常有用。设置键值后，更改后的组件就能保持唯一标识。</p>
+<ol>
+<li>MVC 框架的主要问题有哪些？</li>
+</ol>
+<p>以下是 MVC 框架的一些主要问题：</p>
+<ul>
+<li>MVC 不能解决代码复杂性问题。它也不能解决代码复用或灵活性问题。</li>
+<li>
+<p>它不保证解耦代码。</p>
+</li>
+<li>
+<p>你对 Flux 有什么了解？</p>
+</li>
+</ul>
+<p>Flux 是 Facebook 内部与 React 搭配使用的架构。它不是框架或库。只是一种新型的体系结构，是对 React 和单向数据流概念的补充：</p>
+<p>Flux 的各个组成部分如下：</p>
+<ul>
+<li>动作（Actions）——帮助数据传递到调度器的辅助方法。</li>
+<li>调度器（Dispatcher）——接收动作并将负载广播到已注册的回调。</li>
+<li>存储（Stores）——具有已注册到调度器的回调的应用程序状态和逻辑的容器。</li>
+<li>控制器视图（Controller Views）——从组件中获取状态并通过 props 传递给子组件的 React 组件。</li>
+</ul>
+<p><img alt="'ui-dom-4'" src="../../img/ui-dom-4.png" /></p>
+<ol>
+<li>什么是 Redux？</li>
+</ol>
+<p>Redux 是一种状态管理工具。尽管它主要与 React 搭配使用，但也可以与其他任何 JavaScript 框架或库搭配。</p>
+<p>Redux 允许你在一个称为存储（Store）的对象中管理整个应用程序状态。</p>
+<p>对存储的更新将触发与存储的已更新部分连接的组件的重新渲染。当我们想要更新某些东西时，我们称之为动作（Action）。我们还创建函数来处理这些动作并返回更新的存储。这些函数称为 Reducer。</p>
+<ol>
+<li>
+<p>Redux 遵循的三大原则是什么？</p>
+</li>
+<li>
+<p>单一可信来源：整个应用程序的状态存储在单个存储区中的对象 / 状态树中。单一状态树使我们能更容易地跟踪历史更改，更方便地调试或检查应用程序。</p>
+</li>
+<li>
+<p>状态是只读的：更改状态的唯一方法是触发动作。动作是描述更改的普通 JS 对象。就像状态是数据的最小表示一样，动作是数据更改的最小表示。</p>
+</li>
+<li>
+<p>使用纯函数更改：为了确认动作是如何转换状态树的，你需要纯函数。纯函数是返回值仅取决于其参数值的函数。</p>
+</li>
+<li>
+<p>如何理解“单一可信源”？</p>
+</li>
+</ol>
+<p>单一可信源（SSOT）是构造信息模型和相关数据模式的实践，其中每个数据元素都只能在一个地方掌握（或编辑）
+Redux 使用“存储”将应用程序的整个状态存储在一个位置。因此，组件的所有状态都存储在存储中，并且存储本身会接收更新。单一状态树使我们能更容易地跟踪历史更改，更方便地调试或检查应用程序。</p>
+<ol>
+<li>列出 Redux 的组件。</li>
+</ol>
+<p>Redux 由以下组件组成：</p>
+<ul>
+<li>动作——这是一个描述发生了什么的对象。</li>
+<li>Reducer——确定状态如何变化的地方。</li>
+<li>存储——整个应用程序的状态 / 对象树保存在存储中。</li>
+<li>
+<p>视图——仅显示存储提供的数据。</p>
+</li>
+<li>
+<p>数据在 Redux 中是如何流动的？</p>
+</li>
+</ul>
+<p><img alt="'ui-dom-5'" src="../../img/ui-dom-5.png" /></p>
+<ol>
+<li>在 Redux 中如何定义动作？</li>
+</ol>
+<p>React 中的动作必须具有 type 属性，该属性指示正在执行的 ACTION 的类型。必须将它们定义为字符串常量，你也可以为其添加更多属性。在 Redux 中使用称为“动作创建者”的函数来创建动作。以下是动作和动作创建者的示例：</p>
+<div class="codehilite"><pre><span></span>function addTodo(text) {
+       return {
+                type: ADD_TODO,    
+                 text    
+    }
+}
+</pre></div>
+
+<ol>
+<li>说明 Reducer 的作用。</li>
+</ol>
+<p>Reducer 是用于指示 ACTION 反应中应用程序状态变化的简单功能。它接收先前的状态和动作，然后返回新的状态。它根据动作类型确定需要哪种更新，然后返回新值。如果没有要完成的工作，它将按原样返回先前状态。</p>
+<ol>
+<li>在 Redux 中存储的用途是什么？</li>
+</ol>
+<p>存储是一个 JavaScript 对象，可以保存应用程序的状态，并提供一些辅助方法来访问状态、调度动作并记录侦听器。应用程序的整个状态 / 对象树存储在单个存储中。因此 Redux 非常容易理解且可预测。我们可以将中间件转移到存储，以管理数据处理任务，并维护更改存储状态的各种活动的日志。通过 Reducer，所有活动都返回新的状态。</p>
+<ol>
+<li>Redux 与 Flux 有何不同？</li>
+</ol>
+<p>Flux|Redux
+--|:--|
+存储包括状态和更改逻辑|存储和更改逻辑是分离的
+有多个存储|只有一个存储
+所有存储不互通，是平行的|带有分层 Reducer 的单个存储
+有单个调度器|没有调度器的概念
+React 组件订阅到存储|容器组件是有联系的
+状态是可变的|状态是不可变的</p>
+<ol>
+<li>Redux 有哪些优势？</li>
+</ol>
+<p>Redux 的优点如下：</p>
+<ul>
+<li>结果的可预测性——由于总是有单一可信源，比如存储，因此当前状态与动作及应用程序的其他部分同步时不会出现混乱。</li>
+<li>可维护性——代码易于维护，具有可预测的结果和严格的结构。</li>
+<li>服务端渲染——你只需将在服务器上创建的存储传递给客户端即可。这对于初始渲染非常有用，并优化了应用程序性能，提供了更好的用户体验。</li>
+<li>开发人员工具——从动作到状态更改，开发人员可以利用这些工具实时跟踪应用程序中发生的所有事情。</li>
+<li>社区和生态系统——Redux 背后拥有巨大的社区，用起来更加便利。大批优秀的开发者为库的发展做出了贡献，并开发了很多应用程序。</li>
+<li>易于测试——Redux 的代码主要是较小的、纯净的和孤立的函数。这使代码可测试且独立。</li>
+<li>
+<p>组织——Redux 精确地规定了代码的组织方式，这使得团队合作时代码更加一致，更容易理解。</p>
+</li>
+<li>
+<p>什么是 React Router？</p>
+</li>
+</ul>
+<p>React Router 是建立在 React 之上的功能强大的路由库。它使 URL 与网页上显示的数据保持同步。它保持标准化的结构和行为，可用于开发单页 Web 应用程序。React Router 有一个简单的 API。React Router 提供了一种方法，<strong>只会显示你的应用中路由匹配你的定义的那些组件</strong>。</p>
+<ol>
+<li>为什么在 React Router v4 中使用 switch 关键字？</li>
+</ol>
+<p>在 Switch 组件内，**Route**和**Redirect**组件嵌套在内部。从 Switch 顶部的 Route/Redirect 组件开始到底部的 Route/Redirect，根据浏览器中当前的 URL 是否与 Route/Redirect 组件的 prop/ 路径匹配，将每个组件评估为 true 或 false。
+Switch 只会渲染第一个匹配的子级。当我们嵌套了下面这样的路由时真的很方便：</p>
+<div class="codehilite"><pre><span></span>&lt;Switch&gt;
+  &lt;Route path=&quot;/accounts/new&quot; component={AddForm} /&gt;
+  &lt;Route path={`/accounts/:accountId`} component={Profile} /&gt;
+&lt;/Switch&gt;
+</pre></div>
+
+<ol>
+<li>为什么我们在 React 中需要一个路由器？</li>
+</ol>
+<p>路由器用于定义多个路由，并且当用户键入特定的 URL 时，如果该 URL 与路由器内部定义的任何“路由”的路径匹配，则该用户将被重定向到该路由。因此我们需要在应用程序中添加一个路由器库，以允许创建多个路由，每个路由都为我们指向一个独特的视图。</p>
+<p>从 React Router 包导入的组件有两个属性，一个是将用户引导到指定路径的 path，另一个是用于定义所述路径中内容的 component。</p>
+<div class="codehilite"><pre><span></span>&lt;switch&gt;
+    &lt;route exact path=’/’ component={Home}/&gt;
+    &lt;route path=’/posts/:id’ component={Newpost}/&gt;
+    &lt;route path=’/posts’   component={Post}/&gt;
+&lt;/switch&gt;
+</pre></div>
+
+<ol>
+<li>列出 React Router 的优点。</li>
+</ol>
+<p>几个优点是：</p>
+<ol>
+<li>就像 React 基于组件的理念一样，在 React Router v4 中 API 是“完全组件化的”。路由器可以可视化为单个根组件（），其中包含特定的子路由（）。</li>
+<li>无需手动设置历史值：在 React Router v4 中，我们要做的就是将路由包装在组件中。</li>
+<li>
+<p>包是拆分的：三个包分别用于 Web、Native 和 Core。这使我们的应用更加紧凑。它们的编码样式类似，所以很容易来回切换。</p>
+</li>
+<li>
+<p>React Router 与传统路由有何不同？</p>
+</li>
+</ol>
+<p>~|传统路由|React 路由
+--|:--|:--|
+参与的页面|每个视图对应一个新页面|只涉及单个 HTML 页面
+URL 更改|向服务器发送一个 HTTP 请求并接收对应的 HTML 页面|只有历史属性被更改
+体验|用户其实是在每个视图的不同页面间切换|用户以为自己正在不同的页面间切换</p>
+<p><a href="https://codersera.com/blog/top-50-react-questions-you-need-to-prepare-for-the-interview-in-2019/">原文链接：</a><a href="https://codersera.com/blog/top-50-react-questions-you-need-to-prepare-for-the-interview-in-2019/">https://codersera.com/blog/top-50-react-questions-you-need-to-prepare-for-the-interview-in-2019/</a> </p>
+                
+                  
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="../../dart/syntax/" title="Dart语法学习" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                Dart语法学习
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="../js_tool_method/" title="js 工具函数" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                js 工具函数
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        powered by
+        <a href="https://www.mkdocs.org">MkDocs</a>
+        and
+        <a href="https://squidfunk.github.io/mkdocs-material/">
+          Material for MkDocs</a>
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../assets/javascripts/application.245445c6.js"></script>
+      
+      <script>app.initialize({version:"1.0.4",url:{base:"../.."}})</script>
+      
+    
+  </body>
+</html>

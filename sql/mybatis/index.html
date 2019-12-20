@@ -1,0 +1,2302 @@
+
+
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+        <meta name="description" content=".net,java,php,python,docker,web">
+      
+      
+        <link rel="canonical" href="https://burningmyself.github.io/blog/sql/mybatis/">
+      
+      
+        <meta name="author" content="朽木自雕">
+      
+      
+        <meta name="lang:clipboard.copy" content="Copy to clipboard">
+      
+        <meta name="lang:clipboard.copied" content="Copied to clipboard">
+      
+        <meta name="lang:search.language" content="en">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="No matching documents">
+      
+        <meta name="lang:search.result.one" content="1 matching document">
+      
+        <meta name="lang:search.result.other" content="# matching documents">
+      
+        <meta name="lang:search.tokenizer" content="[\s\-]+">
+      
+      <link rel="shortcut icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.4.0">
+    
+    
+      
+        <title>Mybatis使用心德 - BurningMyself</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/application.0284f74d.css">
+      
+      
+    
+    
+      <script src="../../assets/javascripts/modernizr.74668098.js"></script>
+    
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700|Roboto+Mono&display=fallback">
+        <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
+      
+    
+    <link rel="stylesheet" href="../../assets/fonts/material-icons.css">
+    
+    
+    
+      
+    
+    
+  </head>
+  
+    <body dir="ltr">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+          <svg xmlns="http://www.w3.org/2000/svg" width="416" height="448" viewBox="0 0 416 448" id="__github"><path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19T128 352t-18.125-8.5-10.75-19T96 304t3.125-20.5 10.75-19T128 256t18.125 8.5 10.75 19T160 304zm160 0q0 10-3.125 20.5t-10.75 19T288 352t-18.125-8.5-10.75-19T256 304t3.125-20.5 10.75-19T288 256t18.125 8.5 10.75 19T320 304zm40 0q0-30-17.25-51T296 232q-10.25 0-48.75 5.25Q229.5 240 208 240t-39.25-2.75Q130.75 232 120 232q-29.5 0-46.75 21T56 304q0 22 8 38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0 37.25-1.75t35-7.375 30.5-15 20.25-25.75T360 304zm56-44q0 51.75-15.25 82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5T212 416q-19.5 0-35.5-.75t-36.875-3.125-38.125-7.5-34.25-12.875T37 371.5t-21.5-28.75Q0 312 0 260q0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25 30.875Q171.5 96 212 96q37 0 70 8 26.25-20.5 46.75-30.25T376 64q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34 99.5z"/></svg>
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+    
+      <a href="#mybatis" tabindex="1" class="md-skip">
+        Skip to content
+      </a>
+    
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="https://burningmyself.github.io/blog/" title="BurningMyself" class="md-header-nav__button md-logo">
+          
+            <i class="md-icon"></i>
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          
+            <span class="md-header-nav__topic">
+              BurningMyself
+            </span>
+            <span class="md-header-nav__topic">
+              
+                Mybatis使用心德
+              
+            </span>
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
+          
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="__search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            Type to start searching
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+        
+      </div>
+      
+        <div class="md-flex__cell md-flex__cell--shrink">
+          <div class="md-header-nav__source">
+            
+
+
+  
+
+<a href="https://github.com/burningmyself/blog/" title="Go to repository" class="md-source" data-md-source="github">
+  
+    <div class="md-source__icon">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
+    burningmyself/blog
+  </div>
+</a>
+          </div>
+        </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+      <main class="md-main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="__drawer">
+    <a href="https://burningmyself.github.io/blog/" title="BurningMyself" class="md-nav__button md-logo">
+      
+        <i class="md-icon"></i>
+      
+    </a>
+    BurningMyself
+  </label>
+  
+    <div class="md-nav__source">
+      
+
+
+  
+
+<a href="https://github.com/burningmyself/blog/" title="Go to repository" class="md-source" data-md-source="github">
+  
+    <div class="md-source__icon">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
+    burningmyself/blog
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../.." title="介绍" class="md-nav__link">
+      介绍
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2" checked>
+    
+    <label class="md-nav__link" for="nav-2">
+      技术博文
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-2">
+        技术博文
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-1" type="checkbox" id="nav-2-1">
+    
+    <label class="md-nav__link" for="nav-2-1">
+      .NET
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-2-1">
+        .NET
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../net/c_sharp/" title="C# 6" class="md-nav__link">
+      C# 6
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../net/c_docker/" title=".Ner Core Docker 部署" class="md-nav__link">
+      .Ner Core Docker 部署
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../net/c_mysql_nginx/" title="使用 Docker 容器化部署 ASP.NET Core + MySQL + Nginx" class="md-nav__link">
+      使用 Docker 容器化部署 ASP.NET Core + MySQL + Nginx
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../net/c_core_safety/" title="让你的ASP.NET Core应用程序更安全" class="md-nav__link">
+      让你的ASP.NET Core应用程序更安全
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../net/c_core_study_route/" title="ASP.NET Core开发者指南" class="md-nav__link">
+      ASP.NET Core开发者指南
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-2" type="checkbox" id="nav-2-2">
+    
+    <label class="md-nav__link" for="nav-2-2">
+      Java
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-2-2">
+        Java
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../java/feature/" title="Java特性" class="md-nav__link">
+      Java特性
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../java/load-class/" title="Java类加载" class="md-nav__link">
+      Java类加载
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../java/orm/" title="Orm的优缺点" class="md-nav__link">
+      Orm的优缺点
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../java/bio-nio/" title="BIO与NIO" class="md-nav__link">
+      BIO与NIO
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../java/rocketmq/rmq-1/" title="RocketMq下载与安装" class="md-nav__link">
+      RocketMq下载与安装
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../java/springAnnotation/" title="Spring常用注解" class="md-nav__link">
+      Spring常用注解
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-3" type="checkbox" id="nav-2-3">
+    
+    <label class="md-nav__link" for="nav-2-3">
+      Python
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-2-3">
+        Python
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../python/feature/" title="Python特性" class="md-nav__link">
+      Python特性
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../python/str_joint/" title="Python字符拼接" class="md-nav__link">
+      Python字符拼接
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../python/syntax_rule/" title="Python语法技巧" class="md-nav__link">
+      Python语法技巧
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../python/fabric/" title="远程部署神器 Fabric" class="md-nav__link">
+      远程部署神器 Fabric
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-4" type="checkbox" id="nav-2-4">
+    
+    <label class="md-nav__link" for="nav-2-4">
+      PHP
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-2-4">
+        PHP
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../php/kj/" title="框架" class="md-nav__link">
+      框架
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-5" type="checkbox" id="nav-2-5">
+    
+    <label class="md-nav__link" for="nav-2-5">
+      Web
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-2-5">
+        Web
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../web/es6/" title="es6语法" class="md-nav__link">
+      es6语法
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../web/ali_js_style/" title="阿里js样式规范" class="md-nav__link">
+      阿里js样式规范
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../web/node.js/" title="node.js文档" class="md-nav__link">
+      node.js文档
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../web/react/" title="React 开发者指南" class="md-nav__link">
+      React 开发者指南
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../dart/syntax/" title="Dart语法学习" class="md-nav__link">
+      Dart语法学习
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../web/react_interview/" title="React 面试" class="md-nav__link">
+      React 面试
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../web/js_tool_method/" title="js 工具函数" class="md-nav__link">
+      js 工具函数
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../web/vue-cp-react.md" title="vue与react比较" class="md-nav__link">
+      vue与react比较
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-6" type="checkbox" id="nav-2-6" checked>
+    
+    <label class="md-nav__link" for="nav-2-6">
+      SQL
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-2-6">
+        SQL
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../mysql_yh/" title="MySQL优化" class="md-nav__link">
+      MySQL优化
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../mysql_yh17/" title="MySQL优化" class="md-nav__link">
+      MySQL优化
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../mysql_log/" title="MySQL日志" class="md-nav__link">
+      MySQL日志
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../mysql_index/" title="MySQL索引" class="md-nav__link">
+      MySQL索引
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../mysql_pxc/" title="MySQL PXC集群" class="md-nav__link">
+      MySQL PXC集群
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../mysql_use/" title="MySQL 数据库应用" class="md-nav__link">
+      MySQL 数据库应用
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../sql_server_master/" title="Sql Server 主从备份" class="md-nav__link">
+      Sql Server 主从备份
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../data_split/" title="数据库之互联网常用分库分表方案" class="md-nav__link">
+      数据库之互联网常用分库分表方案
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Mybatis使用心德
+      </label>
+    
+    <a href="./" title="Mybatis使用心德" class="md-nav__link md-nav__link--active">
+      Mybatis使用心德
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#mybatis_1" title="什么是Mybatis？" class="md-nav__link">
+    什么是Mybatis？
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mybaits" title="Mybaits的优点：" class="md-nav__link">
+    Mybaits的优点：
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mybatis_2" title="MyBatis框架的缺点：" class="md-nav__link">
+    MyBatis框架的缺点：
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mybatis_3" title="MyBatis框架适用场合：" class="md-nav__link">
+    MyBatis框架适用场合：
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mybatishibernate" title="MyBatis与Hibernate有哪些不同？" class="md-nav__link">
+    MyBatis与Hibernate有哪些不同？
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_1" title="#{}和${}的区别是什么？" class="md-nav__link">
+    #{}和${}的区别是什么？
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-7" type="checkbox" id="nav-2-7">
+    
+    <label class="md-nav__link" for="nav-2-7">
+      Linux
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-2-7">
+        Linux
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../linux/often/" title="常用命令" class="md-nav__link">
+      常用命令
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../linux/ope/" title="实用的Linux 命令" class="md-nav__link">
+      实用的Linux 命令
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../linux/centos_docker/" title="Centos配置 docker java mysql mongodb redis nginx 环境" class="md-nav__link">
+      Centos配置 docker java mysql mongodb redis nginx 环境
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-8" type="checkbox" id="nav-2-8">
+    
+    <label class="md-nav__link" for="nav-2-8">
+      Docker
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-2-8">
+        Docker
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../docker/docker/" title="Docker全科" class="md-nav__link">
+      Docker全科
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-9" type="checkbox" id="nav-2-9">
+    
+    <label class="md-nav__link" for="nav-2-9">
+      Tool
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-2-9">
+        Tool
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tool/git/" title="Git" class="md-nav__link">
+      Git
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tool/gitquestion/" title="Git问题处理" class="md-nav__link">
+      Git问题处理
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tool/gitflow/" title="GitFlow" class="md-nav__link">
+      GitFlow
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tool/gitbook/" title="GitBook" class="md-nav__link">
+      GitBook
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tool/gitcmr/" title="Git提交日志规范" class="md-nav__link">
+      Git提交日志规范
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tool/markdown/" title="Markdown" class="md-nav__link">
+      Markdown
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tool/cicd/" title="CI/CD" class="md-nav__link">
+      CI/CD
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tool/mkdocs/" title="mkdocs简单使用" class="md-nav__link">
+      mkdocs简单使用
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tool/gitstudy/" title="Git的黑魔法" class="md-nav__link">
+      Git的黑魔法
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3">
+    
+    <label class="md-nav__link" for="nav-3">
+      微服务
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-3">
+        微服务
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../micro/spring-cloud/" title="基于SpringCloud的微服务架构演变史" class="md-nav__link">
+      基于SpringCloud的微服务架构演变史
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../micro/fbs-lock/" title="分布式锁" class="md-nav__link">
+      分布式锁
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../micro/design/" title="微服务设计" class="md-nav__link">
+      微服务设计
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../micro/distrimsg/" title="分布式系统与消息的投递" class="md-nav__link">
+      分布式系统与消息的投递
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../micro/ddd/" title="基于DDD的微服务设计和开发实战" class="md-nav__link">
+      基于DDD的微服务设计和开发实战
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4">
+    
+    <label class="md-nav__link" for="nav-4">
+      经验分析
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-4">
+        经验分析
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../exp/devops/" title="DevOps" class="md-nav__link">
+      DevOps
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../exp/micro-service/" title="Micro-Service" class="md-nav__link">
+      Micro-Service
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../exp/raft-gossip/" title="Raft算法和Gossip协议" class="md-nav__link">
+      Raft算法和Gossip协议
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../exp/cl/" title="集群和负载均衡" class="md-nav__link">
+      集群和负载均衡
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../exp/ai/" title="人工智能" class="md-nav__link">
+      人工智能
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../exp/code-principle/" title="代码原则" class="md-nav__link">
+      代码原则
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../exp/techbig/" title="如何成为技术大牛" class="md-nav__link">
+      如何成为技术大牛
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../exp/learnweetout/" title="程序员如何技术成长" class="md-nav__link">
+      程序员如何技术成长
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../exp/pt/" title="产品与技术" class="md-nav__link">
+      产品与技术
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../exp/four_deep_learning/" title="深度学习框架" class="md-nav__link">
+      深度学习框架
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../exp/tl/" title="在阿里做了5年技术Leader，我总结出这些套路！" class="md-nav__link">
+      在阿里做了5年技术Leader，我总结出这些套路！
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../exp/cto/" title="CTO 技能图谱" class="md-nav__link">
+      CTO 技能图谱
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5">
+    
+    <label class="md-nav__link" for="nav-5">
+      医学
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-5">
+        医学
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../doctor/ae/" title="脑炎" class="md-nav__link">
+      脑炎
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6" type="checkbox" id="nav-6">
+    
+    <label class="md-nav__link" for="nav-6">
+      构架
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-6">
+        构架
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../framework/split/" title="构架拆分" class="md-nav__link">
+      构架拆分
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../framework/fgb/" title="分布式、高并发、多线程" class="md-nav__link">
+      分布式、高并发、多线程
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../framework/agility/" title="如何理解敏捷开发" class="md-nav__link">
+      如何理解敏捷开发
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../framework/fwork/" title="走向架构师必备的技能" class="md-nav__link">
+      走向架构师必备的技能
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7" type="checkbox" id="nav-7">
+    
+    <label class="md-nav__link" for="nav-7">
+      情感
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-7">
+        情感
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/eq/" title="情商" class="md-nav__link">
+      情商
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/workheard/" title="工作心得" class="md-nav__link">
+      工作心得
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/lookbook/" title="看书" class="md-nav__link">
+      看书
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/fmf/" title="4种男朋友" class="md-nav__link">
+      4种男朋友
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/notheart/" title="不上心" class="md-nav__link">
+      不上心
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/selfdiscipline/" title="自律" class="md-nav__link">
+      自律
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/notlike/" title="喜欢与不喜欢" class="md-nav__link">
+      喜欢与不喜欢
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/latemarry/" title="晚婚" class="md-nav__link">
+      晚婚
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/understand/" title="追女生要明白这些事" class="md-nav__link">
+      追女生要明白这些事
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/backup/" title="备胎" class="md-nav__link">
+      备胎
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/chase/" title="为什么追不到她" class="md-nav__link">
+      为什么追不到她
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/livefail/" title="为什么活着失败" class="md-nav__link">
+      为什么活着失败
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/emotion/" title="情绪管理" class="md-nav__link">
+      情绪管理
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/abolish/" title="废掉的三个迹象" class="md-nav__link">
+      废掉的三个迹象
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/uptime/" title="余生，好好珍惜" class="md-nav__link">
+      余生，好好珍惜
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/losecome/" title="所有的失去，都会以另一种方式归来" class="md-nav__link">
+      所有的失去，都会以另一种方式归来
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/threeheart/" title="人生有这三种好心态" class="md-nav__link">
+      人生有这三种好心态
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/onelike/" title="一个感情真相" class="md-nav__link">
+      一个感情真相
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/notruth/" title="情商与道理" class="md-nav__link">
+      情商与道理
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/smf/" title="六种男人远离" class="md-nav__link">
+      六种男人远离
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/select/" title="决定接下来人生归属的，不是努力，而是选择" class="md-nav__link">
+      决定接下来人生归属的，不是努力，而是选择
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/nolike/" title="被你拉黑的那个人，你一定很喜欢吧" class="md-nav__link">
+      被你拉黑的那个人，你一定很喜欢吧
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/onepath/" title="余生，学会一个人走，不管有没有人陪" class="md-nav__link">
+      余生，学会一个人走，不管有没有人陪
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/twopath/" title="往后余生还很精彩，别被熬夜拖垮了" class="md-nav__link">
+      往后余生还很精彩，别被熬夜拖垮了
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/lifetime/" title="心态好的人，一辈子都好" class="md-nav__link">
+      心态好的人，一辈子都好
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/hearttoheart/" title="将心比心，方得人心" class="md-nav__link">
+      将心比心，方得人心
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/ttt/" title="别睡太晚，别爱太满，别要太多" class="md-nav__link">
+      别睡太晚，别爱太满，别要太多
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/profess/" title="表白" class="md-nav__link">
+      表白
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#mybatis_1" title="什么是Mybatis？" class="md-nav__link">
+    什么是Mybatis？
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mybaits" title="Mybaits的优点：" class="md-nav__link">
+    Mybaits的优点：
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mybatis_2" title="MyBatis框架的缺点：" class="md-nav__link">
+    MyBatis框架的缺点：
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mybatis_3" title="MyBatis框架适用场合：" class="md-nav__link">
+    MyBatis框架适用场合：
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mybatishibernate" title="MyBatis与Hibernate有哪些不同？" class="md-nav__link">
+    MyBatis与Hibernate有哪些不同？
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_1" title="#{}和${}的区别是什么？" class="md-nav__link">
+    #{}和${}的区别是什么？
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/burningmyself/blog/edit/master/docs/sql/mybatis.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
+                
+                
+                <h1 id="mybatis">Mybatis使用心德<a class="headerlink" href="#mybatis" title="Permanent link">&para;</a></h1>
+<h2 id="mybatis_1">什么是Mybatis？<a class="headerlink" href="#mybatis_1" title="Permanent link">&para;</a></h2>
+<ol>
+<li>
+<p>Mybatis是一个半ORM（对象关系映射）框架，它内部封装了JDBC，开发时只需要关注SQL语句本身，不需要花费精力去处理加载驱动、创建连接、创建statement等繁杂的过程。程序员直接编写原生态sql，可以严格控制sql执行性能，灵活度高。</p>
+</li>
+<li>
+<p>MyBatis 可以使用 XML 或注解来配置和映射原生信息，将 POJO映射成数据库中的记录，避免了几乎所有的 JDBC 代码和手动设置参数以及获取结果集。</p>
+</li>
+<li>
+<p>通过xml 文件或注解的方式将要执行的各种 statement 配置起来，并通过java对象和 statement中sql的动态参数进行映射生成最终执行的sql语句，最后由mybatis框架执行sql并将结果映射为java对象并返回。（从执行sql到返回result的过程）。</p>
+</li>
+</ol>
+<h2 id="mybaits">Mybaits的优点：<a class="headerlink" href="#mybaits" title="Permanent link">&para;</a></h2>
+<ol>
+<li>
+<p>基于SQL语句编程，相当灵活，不会对应用程序或者数据库的现有设计造成任何影响，SQL写在XML里，解除sql与程序代码的耦合，便于统一管理；提供XML标签，支持编写动态SQL语句，并可重用。</p>
+</li>
+<li>
+<p>与JDBC相比，减少了50%以上的代码量，消除了JDBC大量冗余的代码，不需要手动开关连接；</p>
+</li>
+<li>
+<p>很好的与各种数据库兼容（因为MyBatis使用JDBC来连接数据库，所以只要JDBC支持的数据库MyBatis都支持）。</p>
+</li>
+<li>
+<p>能够与Spring很好的集成；</p>
+</li>
+<li>
+<p>提供映射标签，支持对象与数据库的ORM字段关系映射；提供对象关系映射标签，支持对象关系组件维护。</p>
+</li>
+</ol>
+<h2 id="mybatis_2">MyBatis框架的缺点：<a class="headerlink" href="#mybatis_2" title="Permanent link">&para;</a></h2>
+<ol>
+<li>
+<p>SQL语句的编写工作量较大，尤其当字段多、关联表多时，对开发人员编写SQL语句的功底有一定要求。</p>
+</li>
+<li>
+<p>SQL语句依赖于数据库，导致数据库移植性差，不能随意更换数据库。</p>
+</li>
+</ol>
+<h2 id="mybatis_3">MyBatis框架适用场合：<a class="headerlink" href="#mybatis_3" title="Permanent link">&para;</a></h2>
+<ol>
+<li>
+<p>MyBatis专注于SQL本身，是一个足够灵活的DAO层解决方案。</p>
+</li>
+<li>
+<p>对性能的要求很高，或者需求变化较多的项目，如互联网项目，MyBatis将是不错的选择。</p>
+</li>
+</ol>
+<h2 id="mybatishibernate">MyBatis与Hibernate有哪些不同？<a class="headerlink" href="#mybatishibernate" title="Permanent link">&para;</a></h2>
+<ol>
+<li>
+<p>Mybatis和hibernate不同，它不完全是一个ORM框架，因为MyBatis需要程序员自己编写Sql语句。</p>
+</li>
+<li>
+<p>Mybatis直接编写原生态sql，可以严格控制sql执行性能，灵活度高，非常适合对关系数据模型要求不高的软件开发，因为这类软件需求变化频繁，一但需求变化要求迅速输出成果。但是灵活的前提是mybatis无法做到数据库无关性，如果需要实现支持多种数据库的软件，则需要自定义多套sql映射文件，工作量大。</p>
+</li>
+<li>
+<p>Hibernate对象/关系映射能力强，数据库无关性好，对于关系模型要求高的软件，如果用hibernate开发可以节省很多代码，提高效率。</p>
+</li>
+</ol>
+<h2 id="_1">#{}和${}的区别是什么？<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<ol>
+<li>
+<h1 id="_2">{}是预编译处理，${}是字符串替换。<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h1>
+</li>
+<li>
+<p>Mybatis在处理#{}时，会将sql中的#{}替换为?号，调用PreparedStatement的set方法来赋值；</p>
+</li>
+<li>
+<p>Mybatis在处理<span><span class="MathJax_Preview">{}时，就是把</span><script type="math/tex">{}时，就是把</script></span>{}替换成变量的值。</p>
+</li>
+<li>
+<p>使用#{}可以有效的防止SQL注入，提高系统安全性。</p>
+</li>
+</ol>
+<h2 id="_3">当实体类中的属性名和表中的字段名不一样 ，怎么办 ？<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
+<p>第1种：通过在查询的sql语句中定义字段名的别名，让字段名的别名和实体类的属性名一致。</p>
+<div class="codehilite"><pre><span></span><span class="nt">&lt;select</span> <span class="na">id =</span> <span class="s">”selectorder”</span> <span class="na">parametertype =</span> <span class="s">”int”</span> <span class="na">resultetype =</span> <span class="s">”me.gacl.domain.order”</span><span class="nt">&gt;</span>
+       select order_id id, order_no orderno ,order_price price form orders where order_id=#{id};
+<span class="nt">&lt;/select&gt;</span>
+</pre></div>
+
+<p>第2种：通过 <resultMap>来映射字段名和实体类属性名的一一对应的关系。</p>
+<div class="codehilite"><pre><span></span><span class="nt">&lt;select</span> <span class="na">id=</span><span class="s">&quot;getOrder&quot;</span> <span class="na">parameterType=</span><span class="s">&quot;int&quot;</span> <span class="na">resultMap=</span><span class="s">&quot;orderresultmap&quot;</span><span class="nt">&gt;</span>
+select * from orders where order_id=#{id}
+<span class="nt">&lt;/select&gt;</span>
+<span class="nt">&lt;resultMap</span> <span class="na">type=</span><span class="s">”me.gacl.domain.order”</span> <span class="na">id=</span><span class="s">”orderresultmap”</span><span class="nt">&gt;</span>
+    <span class="cp">&lt;!–用id属性来映射主键字段–&gt;</span>
+    <span class="nt">&lt;id</span> <span class="na">property=</span><span class="s">”id”</span> <span class="na">column=</span><span class="s">”order_id”</span><span class="nt">&gt;</span>
+    <span class="cp">&lt;!–用result属性来映射非主键字段，property为实体类属性名，column为数据表中的属性–&gt;</span>
+    <span class="nt">&lt;result</span> <span class="na">property =</span> <span class="s">“orderno”</span> <span class="na">column =</span><span class="s">”order_no”/</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;result</span> <span class="na">property=</span><span class="s">”price”</span> <span class="na">column=</span><span class="s">”order_price”</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;/reslutMap&gt;</span>
+</pre></div>
+
+<h2 id="like">模糊查询like语句该怎么写?<a class="headerlink" href="#like" title="Permanent link">&para;</a></h2>
+<p>第1种：在Java代码中添加sql通配符。
+<div class="codehilite"><pre><span></span>string wildcardname = “%smi%”;
+list<span class="nt">&lt;name&gt;</span> names = mapper.selectlike(wildcardname);
+<span class="nt">&lt;select</span> <span class="na">id=</span><span class="s">”selectlike”</span><span class="nt">&gt;</span>
+select * from foo where bar like #{value}
+<span class="nt">&lt;/select&gt;</span>
+</pre></div>
+第2种：在sql语句中拼接通配符，会引起sql注入
+<div class="codehilite"><pre><span></span>string wildcardname = “smi”;
+list<span class="nt">&lt;name&gt;</span> names = mapper.selectlike(wildcardname);
+<span class="nt">&lt;select</span> <span class="na">id=</span><span class="s">”selectlike”</span><span class="nt">&gt;</span>
+select * from foo where bar like &quot;%&quot;#{value}&quot;%&quot;
+<span class="nt">&lt;/select&gt;</span>
+</pre></div></p>
+<h2 id="xmldaodaodao">通常一个Xml映射文件，都会写一个Dao接口与之对应，请问，这个Dao接口的工作原理是什么？Dao接口里的方法，参数不同时，方法能重载吗？<a class="headerlink" href="#xmldaodaodao" title="Permanent link">&para;</a></h2>
+<p>Dao接口即Mapper接口。接口的全限名，就是映射文件中的namespace的值；接口的方法名，就是映射文件中Mapper的Statement的id值；接口方法内的参数，就是传递给sql的参数。</p>
+<p>Mapper接口是没有实现类的，当调用接口方法时，接口全限名+方法名拼接字符串作为key值，可唯一定位一个MapperStatement。在Mybatis中，每一个 <code>&lt;select&gt;、&lt;insert&gt;、&lt;update&gt;、&lt;delete&gt;</code>标签，都会被解析为一个MapperStatement对象。</p>
+<p>举例：com.mybatis3.mappers.StudentDao.findStudentById，可以唯一找到namespace为 com.mybatis3.mappers.StudentDao下面 id 为 findStudentById 的 MapperStatement。</p>
+<p>Mapper接口里的方法，是不能重载的，因为是使用 全限名+方法名 的保存和寻找策略。Mapper 接口的工作原理是JDK动态代理，Mybatis运行时会使用JDK动态代理为Mapper接口生成代理对象proxy，代理对象会拦截接口方法，转而执行MapperStatement所代表的sql，然后将sql执行结果返回。</p>
+<h2 id="mybatis_4">Mybatis是如何进行分页的？分页插件的原理是什么？<a class="headerlink" href="#mybatis_4" title="Permanent link">&para;</a></h2>
+<p>Mybatis使用RowBounds对象进行分页，它是针对ResultSet结果集执行的内存分页，而非物理分页。可以在sql内直接书写带有物理分页的参数来完成物理分页功能，也可以使用分页插件来完成物理分页。</p>
+<p>分页插件的基本原理是使用Mybatis提供的插件接口，实现自定义插件，在插件的拦截方法内拦截待执行的sql，然后重写sql，根据dialect方言，添加对应的物理分页语句和物理分页参数。</p>
+<h2 id="mybatissql">Mybatis是如何将sql执行结果封装为目标对象并返回的？都有哪些映射形式？<a class="headerlink" href="#mybatissql" title="Permanent link">&para;</a></h2>
+<p>第一种是使用 <resultMap>标签，逐一定义数据库列名和对象属性名之间的映射关系。</p>
+<p>第二种是使用sql列的别名功能，将列的别名书写为对象属性名。</p>
+<p>有了列名与属性名的映射关系后，Mybatis通过反射创建对象，同时使用反射给对象的属性逐一赋值并返回，那些找不到映射关系的属性，是无法完成赋值的。</p>
+<h2 id="_4">如何执行批量插入?<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
+<p>首先,创建一个简单的insert语句:</p>
+<p><div class="codehilite"><pre><span></span><span class="nt">&lt;insert</span> <span class="na">id=</span><span class="s">”insertname”</span><span class="nt">&gt;</span>
+insert into names (name) values (#{value})
+<span class="nt">&lt;/insert&gt;</span>
+</pre></div>
+然后在java代码中像下面这样执行批处理插入:</p>
+<div class="codehilite"><pre><span></span><span class="n">list</span> <span class="o">&lt;</span> <span class="n">string</span> <span class="o">&gt;</span> <span class="n">names</span> <span class="o">=</span> <span class="k">new</span> <span class="n">arraylist</span><span class="o">();</span>
+<span class="n">names</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="err">“</span><span class="n">fred</span><span class="err">”</span><span class="o">);</span>
+<span class="n">names</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="err">“</span><span class="n">barney</span><span class="err">”</span><span class="o">);</span>
+<span class="n">names</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="err">“</span><span class="n">betty</span><span class="err">”</span><span class="o">);</span>
+<span class="n">names</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="err">“</span><span class="n">wilma</span><span class="err">”</span><span class="o">);</span>
+<span class="c1">// 注意这里 executortype.batch</span>
+<span class="n">sqlsession</span> <span class="n">sqlsession</span> <span class="o">=</span> <span class="n">sqlsessionfactory</span><span class="o">.</span><span class="na">opensession</span><span class="o">(</span><span class="n">executortype</span><span class="o">.</span><span class="na">batch</span><span class="o">);</span>
+<span class="k">try</span> <span class="o">{</span>
+    <span class="n">namemapper</span> <span class="n">mapper</span> <span class="o">=</span> <span class="n">sqlsession</span><span class="o">.</span><span class="na">getmapper</span><span class="o">(</span><span class="n">namemapper</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+    <span class="k">for</span> <span class="o">(</span><span class="n">string</span> <span class="n">name</span><span class="o">:</span> <span class="n">names</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">mapper</span><span class="o">.</span><span class="na">insertname</span><span class="o">(</span><span class="n">name</span><span class="o">);</span>
+    <span class="o">}</span>
+    <span class="n">sqlsession</span><span class="o">.</span><span class="na">commit</span><span class="o">();</span>
+<span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">Exception</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+    <span class="n">sqlSession</span><span class="o">.</span><span class="na">rollback</span><span class="o">();</span>
+    <span class="k">throw</span> <span class="n">e</span><span class="o">;</span>
+<span class="o">}</span>
+<span class="k">finally</span> <span class="o">{</span>
+    <span class="n">sqlsession</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+<span class="o">}</span>
+</pre></div>
+
+<h2 id="_5">如何获取自动生成的(主)键值?<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
+<p>insert 方法总是返回一个int值 ，这个值代表的是插入的行数。</p>
+<p>如果采用自增长策略，自动生成的键值在 insert 方法执行完后可以被设置到传入的参数对象中。</p>
+<p>示例：</p>
+<div class="codehilite"><pre><span></span><span class="o">&lt;</span><span class="n">insert</span> <span class="n">id</span><span class="o">=</span><span class="err">”</span><span class="n">insertname</span><span class="err">”</span> <span class="n">usegeneratedkeys</span><span class="o">=</span><span class="err">”</span><span class="kc">true</span><span class="err">”</span> <span class="n">keyproperty</span><span class="o">=</span><span class="err">”</span><span class="n">id</span><span class="err">”</span><span class="o">&gt;</span>
+     <span class="n">insert</span> <span class="n">into</span> <span class="nf">names</span> <span class="o">(</span><span class="n">name</span><span class="o">)</span> <span class="n">values</span> <span class="o">(</span><span class="err">#</span><span class="o">{</span><span class="n">name</span><span class="o">})</span>
+<span class="o">&lt;/</span><span class="n">insert</span><span class="o">&gt;</span>
+<span class="n">name</span> <span class="n">name</span> <span class="o">=</span> <span class="k">new</span> <span class="n">name</span><span class="o">();</span>
+<span class="n">name</span><span class="o">.</span><span class="na">setname</span><span class="o">(</span><span class="err">“</span><span class="n">fred</span><span class="err">”</span><span class="o">);</span>
+<span class="kt">int</span> <span class="n">rows</span> <span class="o">=</span> <span class="n">mapper</span><span class="o">.</span><span class="na">insertname</span><span class="o">(</span><span class="n">name</span><span class="o">);</span>
+<span class="c1">// 完成后,id已经被设置到对象中</span>
+<span class="n">system</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="err">“</span><span class="n">rows</span> <span class="n">inserted</span> <span class="o">=</span> <span class="err">”</span> <span class="o">+</span> <span class="n">rows</span><span class="o">);</span>
+<span class="n">system</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="err">“</span><span class="n">generated</span> <span class="n">key</span> <span class="n">value</span> <span class="o">=</span> <span class="err">”</span> <span class="o">+</span> <span class="n">name</span><span class="o">.</span><span class="na">getid</span><span class="o">());</span>
+</pre></div>
+
+<h2 id="mapper">在mapper中如何传递多个参数?<a class="headerlink" href="#mapper" title="Permanent link">&para;</a></h2>
+<ol>
+<li>第一种：
+DAO层的函数</li>
+</ol>
+<p><div class="codehilite"><pre><span></span><span class="c">&lt;!-- public UserselectUser(String name,String area);</span>
+<span class="c">对应的xml,#{0}代表接收的是dao层中的第一个参数，#{1}代表dao层中第二参数，更多参数一致往后加即可。 --&gt;</span>
+<span class="nt">&lt;select</span> <span class="na">id=</span><span class="s">&quot;selectUser&quot;</span><span class="na">resultMap=</span><span class="s">&quot;BaseResultMap&quot;</span><span class="nt">&gt;</span>  
+    select *  fromuser_user_t   whereuser_name = #{0} anduser_area=#{1}
+<span class="nt">&lt;/select&gt;</span>
+</pre></div>
+2. 第二种：使用 @param 注解:</p>
+<p><div class="codehilite"><pre><span></span><span class="kd">public</span> <span class="kd">interface</span> <span class="nc">usermapper</span> <span class="o">{</span>
+   <span class="n">user</span> <span class="nf">selectuser</span><span class="o">(</span><span class="nd">@param</span><span class="o">(</span><span class="err">“</span><span class="n">username</span><span class="err">”</span><span class="o">)</span> <span class="n">string</span> <span class="n">username</span><span class="o">,</span><span class="nd">@param</span><span class="o">(</span><span class="err">“</span><span class="n">hashedpassword</span><span class="err">”</span><span class="o">)</span> <span class="n">string</span> <span class="n">hashedpassword</span><span class="o">);</span>
+<span class="o">}</span>
+</pre></div>
+然后,就可以在xml像下面这样使用(推荐封装为一个map,作为单个参数传递给mapper):</p>
+<div class="codehilite"><pre><span></span><span class="nt">&lt;select</span> <span class="na">id=</span><span class="s">”selectuser”</span> <span class="na">resulttype=</span><span class="s">”user”</span><span class="nt">&gt;</span>
+         select id, username, hashedpassword
+         from some_table
+         where username = #{username}
+         and hashedpassword = #{hashedpassword}
+<span class="nt">&lt;/select&gt;</span>
+</pre></div>
+
+<ol>
+<li>第三种：多个参数封装成map</li>
+</ol>
+<div class="codehilite"><pre><span></span><span class="k">try</span> <span class="o">{</span>
+    <span class="c1">//映射文件的命名空间.SQL片段的ID，就可以调用对应的映射文件中的SQL</span>
+    <span class="c1">//由于我们的参数超过了两个，而方法中只有一个Object参数收集，因此我们使用Map集合来装载我们的参数</span>
+    <span class="n">Map</span> <span class="o">&lt;</span> <span class="n">String</span><span class="o">,</span> <span class="n">Object</span> <span class="o">&gt;</span> <span class="n">map</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashMap</span><span class="o">();</span>
+    <span class="n">map</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">&quot;start&quot;</span><span class="o">,</span> <span class="n">start</span><span class="o">);</span>
+    <span class="n">map</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">&quot;end&quot;</span><span class="o">,</span> <span class="n">end</span><span class="o">);</span>
+    <span class="k">return</span> <span class="n">sqlSession</span><span class="o">.</span><span class="na">selectList</span><span class="o">(</span><span class="s">&quot;StudentID.pagination&quot;</span><span class="o">,</span> <span class="n">map</span><span class="o">);</span>
+<span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">Exception</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+    <span class="n">sqlSession</span><span class="o">.</span><span class="na">rollback</span><span class="o">();</span>
+    <span class="k">throw</span> <span class="n">e</span><span class="o">;</span>
+<span class="o">}</span> <span class="k">finally</span> <span class="o">{</span>
+    <span class="n">MybatisUtil</span><span class="o">.</span><span class="na">closeSqlSession</span><span class="o">();</span>
+</pre></div>
+
+<h2 id="mybatissqlsql">Mybatis动态sql有什么用？执行原理？有哪些动态sql？<a class="headerlink" href="#mybatissqlsql" title="Permanent link">&para;</a></h2>
+<p>Mybatis动态sql可以在Xml映射文件内，以标签的形式编写动态sql，执行原理是根据表达式的值 完成逻辑判断并动态拼接sql的功能。</p>
+<p>Mybatis提供了9种动态sql标签：</p>
+<p>trim|where|set|foreach|if|choose|when|otherwise|bind。</p>
+<h2 id="xmlselectinsertupdaedelete">Xml映射文件中，除了常见的select|insert|updae|delete标签之外，还有哪些标签？<a class="headerlink" href="#xmlselectinsertupdaedelete" title="Permanent link">&para;</a></h2>
+<p><code>&lt;resultMap&gt;、&lt;parameterMap&gt;、&lt;sql&gt;、&lt;include&gt;、&lt;selectKey&gt;</code>，加上动态sql的9个标签，其中 <code>&lt;sql&gt;</code>为sql片段标签，通过 <code>&lt;include&gt;</code>标签引入sql片段， <code>&lt;selectKey&gt;</code>为不支持自增的主键生成策略标签。</p>
+<h2 id="mybatisxmlxmlid">Mybatis的Xml映射文件中，不同的Xml映射文件，id是否可以重复？<a class="headerlink" href="#mybatisxmlxmlid" title="Permanent link">&para;</a></h2>
+<p>不同的Xml映射文件，如果配置了namespace，那么id可以重复；如果没有配置namespace，那么id不能重复；</p>
+<p>原因就是namespace+id是作为Map <String,MapperStatement>的key使用的，如果没有namespace，就剩下id，那么，id重复会导致数据互相覆盖。有了namespace，自然id就可以重复，namespace不同，namespace+id自然也就不同。</p>
+<h2 id="mybatisorm">为什么说Mybatis是半自动ORM映射工具？它与全自动的区别在哪里？<a class="headerlink" href="#mybatisorm" title="Permanent link">&para;</a></h2>
+<p>Hibernate属于全自动ORM映射工具，使用Hibernate查询关联对象或者关联集合对象时，可以根据对象关系模型直接获取，所以它是全自动的。而Mybatis在查询关联对象或关联集合对象时，需要手动编写sql来完成，所以，称之为半自动ORM映射工具。</p>
+<h2 id="_6">一对一、一对多的关联查询 ？<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
+<div class="codehilite"><pre><span></span><span class="nt">&lt;mapper</span> <span class="na">namespace=</span><span class="s">&quot;com.lcb.mapping.userMapper&quot;</span><span class="nt">&gt;</span>  
+    <span class="c">&lt;!--association  一对一关联查询 --&gt;</span>  
+    <span class="nt">&lt;select</span> <span class="na">id=</span><span class="s">&quot;getClass&quot;</span> <span class="na">parameterType=</span><span class="s">&quot;int&quot;</span> <span class="na">resultMap=</span><span class="s">&quot;ClassesResultMap&quot;</span><span class="nt">&gt;</span>  
+        select * from class c,teacher t where c.teacher_id=t.t_id and c.c_id=#{id}
+    <span class="nt">&lt;/select&gt;</span>  
+    <span class="nt">&lt;resultMap</span> <span class="na">type=</span><span class="s">&quot;com.lcb.user.Classes&quot;</span> <span class="na">id=</span><span class="s">&quot;ClassesResultMap&quot;</span><span class="nt">&gt;</span>  
+        <span class="c">&lt;!-- 实体类的字段名和数据表的字段名映射 --&gt;</span>  
+        <span class="nt">&lt;id</span> <span class="na">property=</span><span class="s">&quot;id&quot;</span> <span class="na">column=</span><span class="s">&quot;c_id&quot;</span><span class="nt">/&gt;</span>  
+        <span class="nt">&lt;result</span> <span class="na">property=</span><span class="s">&quot;name&quot;</span> <span class="na">column=</span><span class="s">&quot;c_name&quot;</span><span class="nt">/&gt;</span>  
+        <span class="nt">&lt;association</span> <span class="na">property=</span><span class="s">&quot;teacher&quot;</span> <span class="na">javaType=</span><span class="s">&quot;com.lcb.user.Teacher&quot;</span><span class="nt">&gt;</span>  
+            <span class="nt">&lt;id</span> <span class="na">property=</span><span class="s">&quot;id&quot;</span> <span class="na">column=</span><span class="s">&quot;t_id&quot;</span><span class="nt">/&gt;</span>  
+            <span class="nt">&lt;result</span> <span class="na">property=</span><span class="s">&quot;name&quot;</span> <span class="na">column=</span><span class="s">&quot;t_name&quot;</span><span class="nt">/&gt;</span>  
+        <span class="nt">&lt;/association&gt;</span>  
+    <span class="nt">&lt;/resultMap&gt;</span>  
+    <span class="c">&lt;!--collection  一对多关联查询 --&gt;</span>  
+    <span class="nt">&lt;select</span> <span class="na">id=</span><span class="s">&quot;getClass2&quot;</span> <span class="na">parameterType=</span><span class="s">&quot;int&quot;</span> <span class="na">resultMap=</span><span class="s">&quot;ClassesResultMap2&quot;</span><span class="nt">&gt;</span>  
+        select * from class c,teacher t,student s where c.teacher_id=t.t_id and c.c_id=s.class_id and c.c_id=#{id}
+    <span class="nt">&lt;/select&gt;</span>  
+    <span class="nt">&lt;resultMap</span> <span class="na">type=</span><span class="s">&quot;com.lcb.user.Classes&quot;</span> <span class="na">id=</span><span class="s">&quot;ClassesResultMap2&quot;</span><span class="nt">&gt;</span>  
+        <span class="nt">&lt;id</span> <span class="na">property=</span><span class="s">&quot;id&quot;</span> <span class="na">column=</span><span class="s">&quot;c_id&quot;</span><span class="nt">/&gt;</span>  
+        <span class="nt">&lt;result</span> <span class="na">property=</span><span class="s">&quot;name&quot;</span> <span class="na">column=</span><span class="s">&quot;c_name&quot;</span><span class="nt">/&gt;</span>  
+        <span class="nt">&lt;association</span> <span class="na">property=</span><span class="s">&quot;teacher&quot;</span> <span class="na">javaType=</span><span class="s">&quot;com.lcb.user.Teacher&quot;</span><span class="nt">&gt;</span>  
+            <span class="nt">&lt;id</span> <span class="na">property=</span><span class="s">&quot;id&quot;</span> <span class="na">column=</span><span class="s">&quot;t_id&quot;</span><span class="nt">/&gt;</span>  
+            <span class="nt">&lt;result</span> <span class="na">property=</span><span class="s">&quot;name&quot;</span> <span class="na">column=</span><span class="s">&quot;t_name&quot;</span><span class="nt">/&gt;</span>  
+        <span class="nt">&lt;/association&gt;</span>  
+
+
+        <span class="nt">&lt;collection</span> <span class="na">property=</span><span class="s">&quot;student&quot;</span> <span class="na">ofType=</span><span class="s">&quot;com.lcb.user.Student&quot;</span><span class="nt">&gt;</span>  
+            <span class="nt">&lt;id</span> <span class="na">property=</span><span class="s">&quot;id&quot;</span> <span class="na">column=</span><span class="s">&quot;s_id&quot;</span><span class="nt">/&gt;</span>  
+            <span class="nt">&lt;result</span> <span class="na">property=</span><span class="s">&quot;name&quot;</span> <span class="na">column=</span><span class="s">&quot;s_name&quot;</span><span class="nt">/&gt;</span>  
+        <span class="nt">&lt;/collection&gt;</span>  
+    <span class="nt">&lt;/resultMap&gt;</span>  
+<span class="nt">&lt;/mapper&gt;</span>
+</pre></div>
+
+<h2 id="mybatis_5">MyBatis实现一对一有几种方式?具体怎么操作的？<a class="headerlink" href="#mybatis_5" title="Permanent link">&para;</a></h2>
+<p>有联合查询和嵌套查询,联合查询是几个表联合查询,只查询一次, 通过在resultMap里面配置association节点配置一对一的类就可以完成；</p>
+<p>嵌套查询是先查一个表，根据这个表里面的结果的 外键id，去再另外一个表里面查询数据,也是通过association配置，但另外一个表的查询通过select属性配置。</p>
+<h2 id="mybatis_6">MyBatis实现一对多有几种方式,怎么操作的？<a class="headerlink" href="#mybatis_6" title="Permanent link">&para;</a></h2>
+<p>有联合查询和嵌套查询。联合查询是几个表联合查询,只查询一次,通过在resultMap里面的collection节点配置一对多的类就可以完成；嵌套查询是先查一个表,根据这个表里面的 结果的外键id,去再另外一个表里面查询数据,也是通过配置collection,但另外一个表的查询通过select节点配置。</p>
+<h2 id="mybatis_7">Mybatis是否支持延迟加载？如果支持，它的实现原理是什么？<a class="headerlink" href="#mybatis_7" title="Permanent link">&para;</a></h2>
+<p>Mybatis仅支持association关联对象和collection关联集合对象的延迟加载，association指的就是一对一，collection指的就是一对多查询。在Mybatis配置文件中，可以配置是否启用延迟加载lazyLoadingEnabled=true|false。</p>
+<p>它的原理是，使用CGLIB创建目标对象的代理对象，当调用目标方法时，进入拦截器方法，比如调用a.getB().getName()，拦截器invoke()方法发现a.getB()是null值，那么就会单独发送事先保存好的查询关联B对象的sql，把B查询上来，然后调用a.setB(b)，于是a的对象b属性就有值了，接着完成a.getB().getName()方法的调用。这就是延迟加载的基本原理。</p>
+<p>当然了，不光是Mybatis，几乎所有的包括Hibernate，支持延迟加载的原理都是一样的。</p>
+<h2 id="mybatis_8">Mybatis的一级、二级缓存:<a class="headerlink" href="#mybatis_8" title="Permanent link">&para;</a></h2>
+<p>1）一级缓存: 基于 PerpetualCache 的 HashMap 本地缓存，其存储作用域为 Session，当 Session flush 或 close 之后，该 Session 中的所有 Cache 就将清空，默认打开一级缓存。</p>
+<p>2）二级缓存与一级缓存其机制相同，默认也是采用 PerpetualCache，HashMap 存储，不同在于其存储作用域为 Mapper(Namespace)，并且可自定义存储源，如 Ehcache。默认不打开二级缓存，要开启二级缓存，使用二级缓存属性类需要实现Serializable序列化接口(可用来保存对象的状态),可在它的映射文件中配置 <cache/> ；</p>
+<p>3）对于缓存数据更新机制，当某一个作用域(一级缓存 Session/二级缓存Namespaces)的进行了C/U/D 操作后，默认该作用域下所有 select 中的缓存将被 clear。</p>
+<h2 id="mybatis_9">什么是MyBatis的接口绑定？有哪些实现方式？<a class="headerlink" href="#mybatis_9" title="Permanent link">&para;</a></h2>
+<p>接口绑定，就是在MyBatis中任意定义接口,然后把接口里面的方法和SQL语句绑定, 我们直接调用接口方法就可以,这样比起原来了SqlSession提供的方法我们可以有更加灵活的选择和设置。</p>
+<p>接口绑定有两种实现方式,一种是通过注解绑定，就是在接口的方法上面加上 @Select、@Update等注解，里面包含Sql语句来绑定；另外一种就是通过xml里面写SQL来绑定, 在这种情况下,要指定xml映射文件里面的namespace必须为接口的全路径名。当Sql语句比较简单时候,用注解绑定, 当SQL语句比较复杂时候,用xml绑定,一般用xml绑定的比较多。</p>
+<h2 id="mybatismapper">使用MyBatis的mapper接口调用时有哪些要求？<a class="headerlink" href="#mybatismapper" title="Permanent link">&para;</a></h2>
+<p>1、Mapper接口方法名和mapper.xml中定义的每个sql的id相同；
+2、Mapper接口方法的输入参数类型和mapper.xml中定义的每个sql 的parameterType的类型相同；
+3、Mapper接口方法的输出参数类型和mapper.xml中定义的每个sql的resultType的类型相同；
+4、Mapper.xml文件中的namespace即是mapper接口的类路径。</p>
+<h2 id="mapper_1">Mapper编写有哪几种方式？<a class="headerlink" href="#mapper_1" title="Permanent link">&para;</a></h2>
+<p>接口实现类继承SqlSessionDaoSupport：使用此种方法需要编写mapper接口，mapper接口实现类、mapper.xml文件。</p>
+<p>1、在sqlMapConfig.xml中配置mapper.xml的位置</p>
+<div class="codehilite"><pre><span></span><span class="nt">&lt;mappers&gt;</span>
+    <span class="nt">&lt;mapper</span> <span class="na">resource=</span><span class="s">&quot;mapper.xml文件的地址&quot;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;mapper</span> <span class="na">resource=</span><span class="s">&quot;mapper.xml文件的地址&quot;</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;/mappers&gt;</span>
+</pre></div>
+
+<p>2、定义mapper接口</p>
+<p>3、实现类集成SqlSessionDaoSupportmapper方法中可以this.getSqlSession()进行数据增删改查。</p>
+<p>4、spring 配置</p>
+<div class="codehilite"><pre><span></span><span class="nt">&lt;bean</span> <span class="na">id=</span><span class="s">&quot; &quot;</span> <span class="na">class=</span><span class="s">&quot;mapper接口的实现&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">&quot;sqlSessionFactory&quot;</span> <span class="na">ref=</span><span class="s">&quot;sqlSessionFactory&quot;</span><span class="nt">&gt;&lt;/property&gt;</span>
+<span class="nt">&lt;/bean&gt;</span>
+</pre></div>
+
+<p>第二种：使用 org.mybatis.spring.mapper.MapperFactoryBean：
+1、在sqlMapConfig.xml中配置mapper.xml的位置，如果mapper.xml和mappre接口的名称相同且在同一个目录，这里可以不用配置
+<div class="codehilite"><pre><span></span><span class="nt">&lt;mappers&gt;</span>
+    <span class="nt">&lt;mapper</span> <span class="na">resource=</span><span class="s">&quot;mapper.xml文件的地址&quot;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;mapper</span> <span class="na">resource=</span><span class="s">&quot;mapper.xml文件的地址&quot;</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;/mappers&gt;</span>
+</pre></div></p>
+<p>2、定义mapper接口：</p>
+<p>mapper.xml中的namespace为mapper接口的地址
+  mapper接口中的方法名和mapper.xml中的定义的statement的id保持一致
+  Spring中定义</p>
+<div class="codehilite"><pre><span></span><span class="nt">&lt;bean</span> <span class="na">id=</span><span class="s">&quot;&quot;</span> <span class="na">class=</span><span class="s">&quot;org.mybatis.spring.mapper.MapperFactoryBean&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">&quot;mapperInterface&quot;</span>   <span class="na">value=</span><span class="s">&quot;mapper接口地址&quot;</span> <span class="nt">/&gt;</span> 
+    <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">&quot;sqlSessionFactory&quot;</span> <span class="na">ref=</span><span class="s">&quot;sqlSessionFactory&quot;</span> <span class="nt">/&gt;</span> 
+<span class="nt">&lt;/bean&gt;</span>
+</pre></div>
+
+<p>第三种：使用mapper扫描器：</p>
+<p>1、mapper.xml文件编写：</p>
+<p>mapper.xml中的namespace为mapper接口的地址；mapper接口中的方法名和mapper.xml中的定义的statement的id保持一致；如果将mapper.xml和mapper接口的名称保持一致则不用在sqlMapConfig.xml中进行配置。</p>
+<p>2、定义mapper接口：</p>
+<p>注意mapper.xml的文件名和mapper的接口名称保持一致，且放在同一个目录</p>
+<p>3、配置mapper扫描器：</p>
+<p><div class="codehilite"><pre><span></span><span class="nt">&lt;bean</span> <span class="na">class=</span><span class="s">&quot;org.mybatis.spring.mapper.MapperScannerConfigurer&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">&quot;basePackage&quot;</span> <span class="na">value=</span><span class="s">&quot;mapper接口包地址&quot;</span><span class="nt">&gt;&lt;/property&gt;</span>
+    <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">&quot;sqlSessionFactoryBeanName&quot;</span> <span class="na">value=</span><span class="s">&quot;sqlSessionFactory&quot;</span><span class="nt">/&gt;</span> 
+<span class="nt">&lt;/bean&gt;</span>
+</pre></div>
+4、使用扫描器后从spring容器中获取mapper的实现对象。</p>
+<h2 id="mybatis_10">简述Mybatis的插件运行原理，以及如何编写一个插件。<a class="headerlink" href="#mybatis_10" title="Permanent link">&para;</a></h2>
+<p>Mybatis仅可以编写针对ParameterHandler、ResultSetHandler、StatementHandler、Executor这4种接口的插件，Mybatis使用JDK的动态代理，为需要拦截的接口生成代理对象以实现接口方法拦截功能，每当执行这4种接口对象的方法时，就会进入拦截方法，具体就是InvocationHandler的invoke()方法，当然，只会拦截那些你指定需要拦截的方法。</p>
+<p>编写插件：实现Mybatis的Interceptor接口并复写intercept()方法，然后在给插件编写注解，指定要拦截哪一个接口的哪些方法即可，记住，别忘了在配置文件中配置你编写的插件。</p>
+                
+                  
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="../data_split/" title="数据库之互联网常用分库分表方案" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                数据库之互联网常用分库分表方案
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="../../linux/often/" title="常用命令" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                常用命令
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        powered by
+        <a href="https://www.mkdocs.org">MkDocs</a>
+        and
+        <a href="https://squidfunk.github.io/mkdocs-material/">
+          Material for MkDocs</a>
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../assets/javascripts/application.245445c6.js"></script>
+      
+      <script>app.initialize({version:"1.0.4",url:{base:"../.."}})</script>
+      
+    
+  </body>
+</html>
