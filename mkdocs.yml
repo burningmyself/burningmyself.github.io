@@ -39,7 +39,7 @@ nav:
         - Dart语法学习: dart/syntax.md
         - React 面试: web/react_interview.md
         - js 工具函数: web/js_tool_method.md
-        - vue与react比较: web/vue-cp-react.md
+        - vue与react比较: web/vue_cp_react.md
     - SQL:
         - MySQL优化: sql/mysql_yh.md
         - MySQL优化: sql/mysql_yh17.md
