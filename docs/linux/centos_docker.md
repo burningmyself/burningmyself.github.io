@@ -56,7 +56,7 @@ docker run -p 27017:27017  --name mongo \ # run 运行容器 -p 将容器的2701
 ## 拉取 Redis 镜像
 
 ``` shell
-docker pull redis
+docker pull redis #拉取 redis
 docker run -p 6379:6379 --name redis \ # run 运行容器 -p 将容器的6379端口映射到主机的6379端口 --name 容器运行的名字
 --restart=always \ # 挂断自动重新启动
 -v /etc/localtime:/etc/localtime\ # 将主机本地时间夹挂在到容器
