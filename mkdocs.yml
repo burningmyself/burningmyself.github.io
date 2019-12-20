@@ -53,7 +53,7 @@ nav:
     - Linux: 
         - 常用命令: linux/often.md
         - 实用的Linux 命令: linux/ope.md
-        - Centos配置 docker java mysql mongodb redis 环境: linux/centos_docker.md
+        - Centos配置 docker java mysql mongodb redis nginx 环境: linux/centos_docker.md
     - Docker: 
         - Docker全科: docker/docker.md    
     - Tool: 
