@@ -1,4 +1,4 @@
-# Mybatis使用心得
+# Mybatis使用心德
 
 ## 什么是Mybatis？
 
