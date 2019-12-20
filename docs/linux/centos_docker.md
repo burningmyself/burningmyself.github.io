@@ -71,11 +71,11 @@ docker run -p 6379:6379 --name redis \ # run 运行容器 -p 将容器的6379端
 systemctl start docker #启动docker
 systemctl stop docker #停止容器
 docker images # 列出镜像
-docker rmi --name # 删除镜像  
+docker rmi --name # 删除镜像  -f 强制删除
 docker ps # 列出容器 -a 所有
 docker stop --name # 停止容器
 docker start --name # 启动容器
-docker rm --name # 删除容器
+docker rm --name # 删除容器  -f 强制删除
 docker stats -a # 查看所有容器情况
 docker system df # 查看Docker磁盘使用情况
 docker exec -it --name  /bin/bash #进入Docker容器内部的bash
