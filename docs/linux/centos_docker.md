@@ -46,11 +46,15 @@ docker run -p 3306:3306 --name mysql \ # run 运行容器 -p 将容器的3306端
 
 ``` shell
 docker pull mongo #拉取 mongodb
-docker run -p 27017:27017  --name mongo \ # run 运行容器 -p 将容器的27017端口映射到主机的27017端口 --name 容器运行的名字
+docker run -p 27017:27017  --name mongo --auth\ # run 运行容器 -p 将容器的27017端口映射到主机的27017端口 --name 容器运行的名字 --需要密码才能访问容器服务
 --restart=always \ # 挂断自动重新启动
 -v /etc/localtime:/etc/localtime \ # 将主机本地时间夹挂在到容器
 -v /data/mongodb:/var/lib/mongodb \ # 将数据文件夹挂载到主机
 -d mongo #后台运行
+
+docker exec -it mongo mongo admin # 进入mongo
+db.createUser({ user:'admin',pwd:'123456',roles:[ { role:'userAdminAnyDatabase', db: 'admin'}]}); #创建一个名为 admin，密码为 123456 的用户。
+db.auth('admin', '123456') # 尝试使用上面创建的用户信息进行连接。
 ```
 
 ## 拉取 Redis 镜像
