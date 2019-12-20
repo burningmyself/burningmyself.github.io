@@ -1,4 +1,4 @@
-# Centos配置 docker java mysql mongodb redis 环境
+# Centos配置 docker java mysql mongodb redis nginx 环境
 
 ## 磁盘挂载
 
@@ -63,6 +63,82 @@ docker run -p 6379:6379 --name redis \ # run 运行容器 -p 将容器的6379端
 -v /data/redis:/data/redis \ # 将数据文件夹挂载到主机
 -d redis \ # -d 后台运行
 --requirepass "123456" # 设置密码123456
+```
+
+## 拉取 Nginx 镜像
+
+``` shell
+docker pull nginx #拉取 nginx
+docker run -p 80:80 -p 443:443 --name nginx \ # run 运行容器 -p 将容器的80,443端口映射到主机的80,443端口 --name 容器运行的名字
+-v /etc/localtime:/etc/localtime \ # 将主机本地时间夹挂在到容器
+-v /data/nginx/html:/usr/share/nginx/html \ # nginx 静态资源
+-v /data/nginx/logs:/var/log/nginx  \ # 将日志文件夹挂载到主机
+-v /data/nginx/conf:/etc/nginx \ # 将配置文件夹挂在到主机
+-v /data/nginx/conf/ssl:/ssl \ # 将证书文件夹挂在到主机
+-d nginx
+```
+
+nginx 配置文件
+
+``` conf
+
+user  nginx;
+worker_processes  1;
+
+error_log  /var/log/nginx/error_log.log warn;
+pid        /var/run/nginx.pid;
+
+
+events {
+    worker_connections  1024;
+}
+
+
+http {
+    include       /etc/nginx/mime.types;
+    default_type  application/octet-stream;
+
+    log_format  main  '$remote_addr - $remote_user [$time_local] "$request" '
+                      '$status $body_bytes_sent "$http_referer" '
+                      '"$http_user_agent" "$http_x_forwarded_for"';
+
+    access_log   /var/log/nginx/access.log  main;
+
+    sendfile        on;
+    #tcp_nopush     on;
+
+    keepalive_timeout  65;
+
+    #gzip  on;
+
+    gzip on; #开启gzip
+    gzip_disable "msie6"; #IE6不使用gzip
+    gzip_vary on; #设置为on会在Header里增加 "Vary: Accept-Encoding"
+    gzip_proxied any; #代理结果数据的压缩
+    gzip_comp_level 6; #gzip压缩比（1~9），越小压缩效果越差，但是越大处理越慢，所以一般取中间值
+    gzip_buffers 16 8k; #获取多少内存用于缓存压缩结果
+    gzip_http_version 1.1; #识别http协议的版本
+    gzip_min_length 1k; #设置允许压缩的页面最小字节数，超过1k的文件会被压缩
+    gzip_types application/javascript text/css; #对特定的MIME类型生效,js和css文件会被压缩
+
+    include /etc/nginx/conf.d/*.conf;
+
+    server {
+      #nginx同时开启http和https
+    	listen 80 default backlog=2048;
+    	listen 443 ssl;
+    	server_name ysf.djtlpay.com;
+    	
+    	ssl_certificate  /ssl/1_ysf.djtlpay.com_bundle.crt;
+    	ssl_certificate_key  /ssl/2_ysf.djtlpay.com.key;
+	
+        location / {
+            root /usr/share/nginx/html;
+            index  index.html index.htm;
+        }
+   }		
+}
+
 ```
 
 ## docker 常用命令
