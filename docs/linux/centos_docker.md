@@ -145,14 +145,19 @@ http {
 
 ``` shell
 systemctl start docker #启动docker
+systemtctl enable docker #将docker服务设为开机启动
 systemctl stop docker #停止容器
+systemctl restart docker #重启docker服务
 docker images # 列出镜像
 docker rmi --name # 删除镜像  -f 强制删除
 docker ps # 列出容器 -a 所有
-docker stop --name # 停止容器
 docker start --name # 启动容器
+docker stop --name # 停止容器
+docker restart # 重启docker容器
 docker rm --name # 删除容器  -f 强制删除
 docker stats -a # 查看所有容器情况
 docker system df # 查看Docker磁盘使用情况
 docker exec -it --name  /bin/bash #进入Docker容器内部的bash
+docker cp 主机文件  容器名称:容器路径 #复制文件到docker容器中
+docker logs 镜像名称 #查看docker镜像日志
 ```
