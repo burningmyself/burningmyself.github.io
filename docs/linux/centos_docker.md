@@ -69,13 +69,9 @@ docker run -p 6379:6379 --name redis \ # run 运行容器 -p 将容器的6379端
 
 ``` shell
 docker pull nginx #拉取 nginx
-docker run -p 80:80 -p 443:443 --name nginx \ # run 运行容器 -p 将容器的80,443端口映射到主机的80,443端口 --name 容器运行的名字
--v /etc/localtime:/etc/localtime \ # 将主机本地时间夹挂在到容器
--v /data/nginx/html:/usr/share/nginx/html \ # nginx 静态资源
--v /data/nginx/logs:/var/log/nginx  \ # 将日志文件夹挂载到主机
--v /data/nginx/conf:/etc/nginx \ # 将配置文件夹挂在到主机
--v /data/nginx/conf/ssl:/ssl \ # 将证书文件夹挂在到主机
--d nginx
+docker run -p 80:80 -p 443:443 --name nginx -d nginx # 运行容器
+docker container cp nginx:/etc/nginx /data/nginx/ #拷贝容器配置
+docker rm -f nginx # 删除容器
 ```
 
 nginx 配置文件
@@ -139,6 +135,16 @@ http {
    }		
 }
 
+```
+运行 nginx
+``` shell
+docker run -p 80:80 -p 443:443 --name nginx \ # run 运行容器 -p 将容器的80,443端口映射到主机的80,443端口 --name 容器运行的名字
+-v /etc/localtime:/etc/localtime \ # 将主机本地时间夹挂在到容器
+-v /data/nginx/html:/usr/share/nginx/html \ # nginx 静态资源
+-v /data/nginx/logs:/var/log/nginx  \ # 将日志文件夹挂载到主机
+-v /data/nginx/conf:/etc/nginx \ # 将配置文件夹挂在到主机
+-v /data/nginx/conf/ssl:/ssl \ # 将证书文件夹挂在到主机
+-d nginx
 ```
 
 ## docker 常用命令
