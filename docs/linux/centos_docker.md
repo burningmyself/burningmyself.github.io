@@ -19,6 +19,13 @@ yum install -y yum-utils device-mapper-persistent-data lvm2 #安装yum-utils
 yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo #为yum源添加docker仓库位置
 yum install docker-ce #安装docker
 systemctl start docker #启动docker
+systemctl stop docker #暂停docker
+mv /var/lib/docker /data/docker # 修改Docker镜像的存放位置
+ln -s /data/docker /var/lib/docker #建立软连接
+echo '{
+  "registry-mirrors": ["https://registry.docker-cn.com"]
+}
+'>> /etc/docker/daemon.json # 镜像下载代理
 ```
 
 ## 拉取 java 镜像
@@ -38,8 +45,9 @@ docker run -p 3306:3306 --name mysql \ # run 运行容器 -p 将容器的3306端
 -v /data/mysql/data:/var/lib/mysql \ # 将数据文件夹挂载到主机
 -v /data/mysql/mysql-files:/var/lib/mysql-files \ # 将数据文件夹挂载到主机
 -v /data/mysql/conf:/etc/mysql \ # 将配置文件夹挂在到主机
--e MYSQL_ROOT_PASSWORD=xiuingmysql. \ # 初始化root用户的密码
+-e MYSQL_ROOT_PASSWORD=xiujingmysql. \ # 初始化root用户的密码
 -d mysql # -d 后台运行
+docker exec -it mysql /bin/bash # 进入Docker容器内部的bash
 ```
 
 ## 拉取 Mongodb 镜像
@@ -163,7 +171,7 @@ docker rmi --name # 删除镜像  -f 强制删除
 docker ps # 列出容器 -a 所有
 docker start --name # 启动容器
 docker stop --name # 停止容器
-docker restart # 重启docker容器
+docker restart --name # 重启docker容器
 docker rm --name # 删除容器  -f 强制删除
 docker stats -a # 查看所有容器情况
 docker system df # 查看Docker磁盘使用情况
