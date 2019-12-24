@@ -1,4 +1,4 @@
-# Centos配置 docker java mysql mongodb redis nginx 环境
+# docker和docker-compose 配置 mysql mongodb redis nginx 环境
 
 ## 磁盘挂载
 
@@ -11,7 +11,9 @@ mount -a #校验自动挂载脚本
 df -h #查看磁盘挂载后信息
 ```
 
-## 安装 docker
+## docker
+
+### 安装 docker
 
 ``` shell
 yum update #更新系统包
@@ -28,13 +30,7 @@ echo '{
 '>> /etc/docker/daemon.json # 镜像下载代理
 ```
 
-## 拉取 java 镜像
-
-``` shell
-docker pull java:8
-```
-
-## 拉取 MySql 镜像
+### 拉取 MySql 镜像
 
 ``` shell
 docker pull mysql #拉取 MySql
@@ -50,11 +46,11 @@ docker run -p 3306:3306 --name mysql \ # run 运行容器 -p 将容器的3306端
 docker exec -it mysql /bin/bash # 进入Docker容器内部的bash
 ```
 
-## 拉取 Mongodb 镜像
+### 拉取 Mongodb 镜像
 
 ``` shell
 docker pull mongo #拉取 mongodb
-docker run -p 27017:27017  --name mongo --auth\ # run 运行容器 -p 将容器的27017端口映射到主机的27017端口 --name 容器运行的名字 --需要密码才能访问容器服务
+docker run -p 27017:27017  --name mongo --auth \ # run 运行容器 -p 将容器的27017端口映射到主机的27017端口 --name 容器运行的名字 --需要密码才能访问容器服务
 --restart=always \ # 挂断自动重新启动
 -v /etc/localtime:/etc/localtime \ # 将主机本地时间夹挂在到容器
 -v /data/mongodb:/var/lib/mongodb \ # 将数据文件夹挂载到主机
@@ -65,19 +61,19 @@ db.createUser({ user:'admin',pwd:'123456',roles:[ { role:'userAdminAnyDatabase',
 db.auth('admin', '123456') # 尝试使用上面创建的用户信息进行连接。
 ```
 
-## 拉取 Redis 镜像
+### 拉取 Redis 镜像
 
 ``` shell
 docker pull redis #拉取 redis
 docker run -p 6379:6379 --name redis \ # run 运行容器 -p 将容器的6379端口映射到主机的6379端口 --name 容器运行的名字
 --restart=always \ # 挂断自动重新启动
--v /etc/localtime:/etc/localtime\ # 将主机本地时间夹挂在到容器
+-v /etc/localtime:/etc/localtime \ # 将主机本地时间夹挂在到容器
 -v /data/redis:/data/redis \ # 将数据文件夹挂载到主机
 -d redis \ # -d 后台运行
 --requirepass "123456" # 设置密码123456
 ```
 
-## 拉取 Nginx 镜像
+### 拉取 Nginx 镜像
 
 ``` shell
 docker pull nginx #拉取 nginx
@@ -151,6 +147,7 @@ http {
 运行 nginx
 ``` shell
 docker run -p 80:80 -p 443:443 --name nginx \ # run 运行容器 -p 将容器的80,443端口映射到主机的80,443端口 --name 容器运行的名字
+--restart=always \
 -v /etc/localtime:/etc/localtime \ # 将主机本地时间夹挂在到容器
 -v /data/nginx/html:/usr/share/nginx/html \ # nginx 静态资源
 -v /data/nginx/logs:/var/log/nginx  \ # 将日志文件夹挂载到主机
@@ -159,7 +156,7 @@ docker run -p 80:80 -p 443:443 --name nginx \ # run 运行容器 -p 将容器的
 -d nginx
 ```
 
-## docker 常用命令
+### docker 常用命令
 
 ``` shell
 systemctl start docker #启动docker
@@ -178,4 +175,150 @@ docker system df # 查看Docker磁盘使用情况
 docker exec -it --name  /bin/bash #进入Docker容器内部的bash
 docker cp 主机文件  容器名称:容器路径 #复制文件到docker容器中
 docker logs 镜像名称 #查看docker镜像日志
+```
+
+## docker-compose 
+
+### 安装 docker-compose
+```shell
+# 下载Docker Compose
+curl -L https://get.daocloud.io/docker/compose/releases/download/1.24.0/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
+# 修改该文件的权限为可执行
+chmod +x /usr/local/bin/docker-compose
+# 查看是否已经安装成功
+docker-compose --version
+```
+### 使用Docker Compose的步骤
+* 使用Dockerfile定义应用程序环境，一般需要修改初始镜像行为时才需要使用；
+* 使用docker-compose.yml定义需要部署的应用程序服务，以便执行脚本一次性部署；
+* 使用docker-compose up命令将所有应用服务一次性部署起来。
+
+### docker-compose.yml常用命令
+``` shell
+# 指定运行的镜像名称
+image: name:version
+# 配置容器名称
+container_name: name
+# 指定宿主机和容器的端口映射
+ports:
+  - 3306:3306
+# 将宿主机的文件或目录挂载到容器中
+volumes:
+  - /mydata/mysql/log:/var/log/mysql
+  - /mydata/mysql/data:/var/lib/mysql
+  - /mydata/mysql/conf:/etc/mysql
+# 配置环境变量
+environment:
+  - MYSQL_ROOT_PASSWORD=xiujingmysql.
+# 连接其他容器的服务
+links:
+  - db:database #可以以database为域名访问服务名称为db的容器
+# 挂断自动重新启动
+restart: always
+# 指定容器执行命令
+command: redis-server --requirepass xiujingredis.
+```
+
+### Docker Compose常用命令
+
+```shell
+# 构建、创建、启动相关容器
+docker-compose up -d # -d表示在后台运行
+# 停止所有相关容器
+docker-compose stop
+# 列出所有容器信息
+docker-compose ps
+```
+
+### 使用Docker Compose 部署应用
+
+编写docker-compose.yml文件
+``` yml
+version: '3'
+services:
+  # 指定服务名称
+  nginx:
+    # 指定服务使用的镜像
+    image: nginx
+    # 指定容器名称
+    container_name: nginx
+    # 指定服务运行的端口
+    ports:
+      - 80:80
+      - 443:443
+    # 指定容器中需要挂载的文件
+    volumes:
+      - /etc/localtime:/etc/localtime
+    # 挂断自动重新启动
+    restart: always
+    # 指定容器的环境变量
+    environment:
+      - MYSQL_ROOT_PASSWORD=xiujingmysql.
+  # 指定服务名称
+  mysql:
+    # 指定服务使用的镜像
+    image: mysql
+    # 指定容器名称
+    container_name: mysql
+    # 指定服务运行的端口
+    ports:
+      - 13306:3306
+    # 指定容器中需要挂载的文件
+    volumes:
+      - /etc/localtime:/etc/localtime
+      - /data/mysql/log:/var/log/mysql
+      - /data/mysql/data:/var/lib/mysql
+      - /data/mysql/mysql-files:/var/lib/mysql-files
+      - /data/mysql/conf:/etc/mysql
+    # 挂断自动重新启动
+    restart: always
+    # 指定容器的环境变量
+    environment:
+      - MYSQL_ROOT_PASSWORD=xiujingmysql.
+  # 指定服务名称
+  redis:
+    # 指定服务使用的镜像
+    image: redis
+    # 指定容器名称
+    container_name: redis
+    # 指定服务运行的端口
+    ports:
+      - 16379:6379
+    # 指定容器中需要挂载的文件
+    volumes:
+      - /etc/localtime:/etc/localtime
+      - /data/redis:/data/redis
+    # 挂断自动重新启动
+    restart: always
+    # 指定容器执行命令
+    command: redis-server --requirepass xiujingredis.
+  # 指定服务名称
+  mongo:
+    # 指定服务使用的镜像
+    image: mongo
+    # 指定容器名称
+    container_name: mongo
+    # 指定服务运行的端口
+    ports:
+      - 27017:27017
+    # 指定容器中需要挂载的文件
+    volumes:
+      - /etc/localtime:/etc/localtime
+      - /data/mongo:/data/mongo
+    # 挂断自动重新启动
+    restart: always
+    # 指定容器执行命令
+    command: mongod --bind-ip 0.0.0.0
+    # 指定容器的环境变量
+    environment:
+      - AUTH=yes
+      - ADMIN_USER=admin
+      - ADMIN_PASS=admin
+      - APPLICATION_DATABASE=test
+      - APPLICATION_USER=test
+      - APPLICATION_PASS=test
+```
+运行Docker Compose命令启动所有服务
+``` shell
+docker-compose up -d
 ```

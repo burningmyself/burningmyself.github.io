@@ -21,6 +21,7 @@
 * [README.md](README.md)
 * [Docker]
 * * [Docker介绍使用](docs/docker/docker.md)
+* * [docker和docker-compose 配置 mysql mongodb redis nginx 环境](docs/docker/docker-compose.md)
 * [经验]
 * * [集群和负载均衡](docs/exp/cl.md)
 * * [DevOps是什么](docs/exp/devops.md)  
@@ -45,7 +46,6 @@
 * [Linux]
 * * [Linux常用命令](docs/linux/often.md)
 * * [实用的Linux 命令](docs/linux/ope.md)
-* * [Centos配置 docker java mysql mongodb redis nginx 环境](docs/linux/centos_docker.md)
 * [微服务]
 * * [SpringCloud的微服务架构](docs/micro/spring-cloud.md)
 * * [分布式锁](docs/micro/fbs-lock.md)

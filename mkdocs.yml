@@ -1,5 +1,6 @@
 site_name: BurningMyself
 site_description: .net,java,php,python,docker,web
+site_keywords: .net,java,php,python,docker,web
 site_author: 朽木自雕
 site_url: https://burningmyself.github.io/blog/
 
@@ -52,10 +53,10 @@ nav:
         - Mybatis使用心德: sql/mybatis.md
     - Linux: 
         - 常用命令: linux/often.md
-        - 实用的Linux 命令: linux/ope.md
-        - Centos配置 docker java mysql mongodb redis nginx 环境: linux/centos_docker.md
+        - 实用的Linux 命令: linux/ope.md        
     - Docker: 
-        - Docker全科: docker/docker.md    
+        - Docker全科: docker/docker.md
+        - docker和docker-compose 配置 mysql mongodb redis nginx 环境: docker/docker-compose.md    
     - Tool: 
         - Git: tool/git.md
         - Git问题处理: tool/gitquestion.md
