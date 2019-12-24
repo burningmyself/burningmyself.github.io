@@ -307,8 +307,6 @@ services:
       - /data/mongo:/data/mongo
     # 挂断自动重新启动
     restart: always
-    # 指定容器执行命令
-    command: mongod --bind-ip 0.0.0.0
     # 指定容器的环境变量
     environment:
       - AUTH=yes
