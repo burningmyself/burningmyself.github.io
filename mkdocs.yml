@@ -56,7 +56,8 @@ nav:
         - 实用的Linux 命令: linux/ope.md        
     - Docker: 
         - Docker全科: docker/docker.md
-        - docker和docker-compose 配置 mysql mongodb redis nginx 环境: docker/docker-compose.md    
+        - docker和docker-compose 配置 mysql mongodb redis nginx 环境: docker/docker-compose.md   
+        - Docker部署Jenkins: docker/docker-jenkins.md 
     - Tool: 
         - Git: tool/git.md
         - Git问题处理: tool/gitquestion.md

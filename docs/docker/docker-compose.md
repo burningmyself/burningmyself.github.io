@@ -156,7 +156,17 @@ docker run -p 80:80 -p 443:443 --name nginx \ # run 运行容器 -p 将容器的
 -d nginx
 ```
 
-### docker 常用命令
+### Docker 开启远程API
+
+* 用vi编辑器修改docker.service文件
+``` shell
+#需要修改的部分：
+ExecStart=/usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock
+#修改后的部分：
+ExecStart=/usr/bin/dockerd -H tcp://0.0.0.0:2375 -H unix://var/run/docker.sock
+```
+
+### Docker 常用命令
 
 ``` shell
 systemctl start docker #启动docker
