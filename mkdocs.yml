@@ -1,14 +1,16 @@
 site_name: BurningMyself
 site_description: .net,java,php,python,docker,web
-site_keywords: .net,java,php,python,docker,web
 site_author: 朽木自雕
 site_url: https://burningmyself.github.io
+site_favicon: favicon.ico
+copyright: BurningMyself
+google_analytics: ['UA-36723568-3', 'mkdocs.org']
 
-repo_name: 'burningmyself/blog'
+repo_name: 'burningmyself.github.io'
 repo_url: 'https://github.com/burningmyself/burningmyself.github.io'
 
 theme:
-  name: material
+  name:  mkdocs
 nav: 
   - 介绍: index.md 
   - 技术博文: 
@@ -133,16 +135,3 @@ markdown_extensions:
   - footnotes
   - meta
   - def_list
-  - pymdownx.arithmatex
-  - pymdownx.betterem:
-      smart_enable: all
-  - pymdownx.caret
-  - pymdownx.critic
-  - pymdownx.details
-  - pymdownx.inlinehilite
-  - pymdownx.magiclink
-  - pymdownx.mark
-  - pymdownx.smartsymbols
-  - pymdownx.superfences
-  - pymdownx.tasklist
-  - pymdownx.tilde
