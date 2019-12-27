@@ -180,7 +180,7 @@ extra_javascript:
 
 
 extra:
-    disqus: "disqus"
+    # disqus: "disqus"
     version: 1.0  
     search:
         language: 'zh,en,ja'
