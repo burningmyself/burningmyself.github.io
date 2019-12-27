@@ -1,4 +1,4 @@
-# docker和docker-compose 配置 mysql mongodb redis nginx 环境
+# docker和docker-compose 配置 mysql mongodb redis nginx jenkins 环境
 
 ## 磁盘挂载
 
@@ -30,6 +30,12 @@ echo '{
 '>> /etc/docker/daemon.json # 镜像下载代理
 ```
 
+### 拉取 Java 镜像
+
+``` shell
+docker pull java
+```
+
 ### 拉取 MySql 镜像
 
 ``` shell
@@ -54,7 +60,7 @@ docker run -p 27017:27017  --name mongo --auth \ # run 运行容器 -p 将容器
 --restart=always \ # 挂断自动重新启动
 -v /etc/localtime:/etc/localtime \ # 将主机本地时间夹挂在到容器
 -v /data/mongodb:/var/lib/mongodb \ # 将数据文件夹挂载到主机
--d mongo #后台运行
+-d mongo # -d 后台运行
 
 docker exec -it mongo mongo admin # 进入mongo
 db.createUser({ user:'admin',pwd:'123456',roles:[ { role:'userAdminAnyDatabase', db: 'admin'}]}); #创建一个名为 admin，密码为 123456 的用户。
@@ -153,7 +159,18 @@ docker run -p 80:80 -p 443:443 --name nginx \ # run 运行容器 -p 将容器的
 -v /data/nginx/logs:/var/log/nginx  \ # 将日志文件夹挂载到主机
 -v /data/nginx/conf:/etc/nginx \ # 将配置文件夹挂在到主机
 -v /data/nginx/conf/ssl:/ssl \ # 将证书文件夹挂在到主机
--d nginx
+-d nginx #
+```
+
+### 拉取Jenkins镜像：
+```shell
+docker pull jenkins/jenkins:lts # 拉取 jenkins
+docker run -p 8080:8080 -p 50000:50000 --name jenkins \ # run 运行容器 -p 将容器的80,443端口映射到主机的8080,50000端口 --name 容器运行的名字
+-u root \ # 运行的用户为root
+-v /etc/localtime:/etc/localtime \ # 将主机本地时间夹挂在到容器
+-v /data/jenkins_home:/var/jenkins_home \ # 将jenkins_home文件夹挂在到主机
+-e JAVA_OPTS=-Duser.timezone=Asia/Shanghai \ #设置jenkins运行环境时区
+-d jenkins/jenkins:lts # -d 后台运行
 ```
 
 ### Docker 开启远程API
@@ -184,7 +201,11 @@ docker stats -a # 查看所有容器情况
 docker system df # 查看Docker磁盘使用情况
 docker exec -it --name  /bin/bash #进入Docker容器内部的bash
 docker cp 主机文件  容器名称:容器路径 #复制文件到docker容器中
-docker logs 镜像名称 #查看docker镜像日志
+docker logs --name #查看docker镜像日志
+docker rm $(docker ps -a -q) # 删除所有容器 -f 强制删除
+docker rmi $(docker images -a -q) # 删除所有镜像 -f 强制删除
+docker rm -f `docker ps -a | grep -vE 'mysql|nginx|redis|jenkins' | awk '{print $1}'` # 删除mysql|nginx|redis|jenkins非容器 -f 强制删除
+docker rmi -f `docker images | grep none | awk '{print $3}'` # 删除镜像none镜像 -f 强制删除
 ```
 
 ## docker-compose 
@@ -214,9 +235,11 @@ ports:
   - 3306:3306
 # 将宿主机的文件或目录挂载到容器中
 volumes:
-  - /mydata/mysql/log:/var/log/mysql
-  - /mydata/mysql/data:/var/lib/mysql
-  - /mydata/mysql/conf:/etc/mysql
+  - /etc/localtime:/etc/localtime
+  - /data/mysql/log:/var/log/mysql
+  - /data/mysql/data:/var/lib/mysql
+  - /data/mysql/conf:/etc/mysql
+  - /data/mysql/mysql-files:/var/lib/mysql-files
 # 配置环境变量
 environment:
   - MYSQL_ROOT_PASSWORD=xiujingmysql.
@@ -236,8 +259,14 @@ command: redis-server --requirepass xiujingredis.
 docker-compose up -d # -d表示在后台运行
 # 停止所有相关容器
 docker-compose stop
+# 删除容器文件
+docker-compose rm
+# 重启容器
+docker-compose restart
 # 列出所有容器信息
 docker-compose ps
+# 查看容器日志
+docker-compose logs
 ```
 
 ### 使用Docker Compose 部署应用
@@ -325,6 +354,25 @@ services:
       - APPLICATION_DATABASE=test
       - APPLICATION_USER=test
       - APPLICATION_PASS=test
+    # 指定服务名称
+  mysql:
+    # 指定服务使用的镜像
+    image: jenkins
+    # 指定容器名称
+    container_name: jenkins
+    # 指定服务运行的端口
+    ports:
+      - 8080:8080
+      - 50000:50000
+    # 指定容器中需要挂载的文件
+    volumes:
+      - /etc/localtime:/etc/localtime
+      - /data/jenkins_home:/var/jenkins_home 
+    # 挂断自动重新启动
+    restart: always
+    # 指定容器的环境变量
+    environment:
+      - JAVA_OPTS=-Duser.timezone=Asia/Shanghai   
 ```
 运行Docker Compose命令启动所有服务
 ``` shell

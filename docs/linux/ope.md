@@ -116,3 +116,89 @@ ssh -p 22 -C -f -N -g -L 9200:192.168.1.19:9200 ihavecar@192.168.1.19`
 记住：前提是先进行秘钥传输。
 
 命令执行完后，访问192.168.1.15:9200端口则真实是访问192.168.1.19:9200端口。
+
+###  grep命令进阶
+
+grep命令是一种强大的文本搜索工具，它能使用正则表达式搜索文本，并把匹 配的行打印出来
+
+grep搜索成功，则返回0，如果搜索不成功，则返回1，如果搜索的文件不存在，则返回2。
+
+* grep的规则表达式（正则一定要转义）
+
+``` shell
+^    #锚定行的开始 如：'^grep'匹配所有以grep开头的行。    
+$    #锚定行的结束 如：'grep$'匹配所有以grep结尾的行。 
+.    #匹配一个非换行符的字符 如：'gr.p'匹配gr后接一个任意字符，然后是p。
+*    #匹配零个或多个先前字符 如：'*grep'匹配所有一个或多个空格后紧跟grep的行。  
+.*   #一起用代表任意字符。   
+[]   #匹配一个指定范围内的字符，如'[Gg]rep'匹配Grep和grep。    
+[^]  #匹配一个不在指定范围内的字符
+\(..\)  #标记匹配字符，如'\(love\)'，love被标记为1。    
+\<      #锚定单词的开始，如:'\<grep'匹配包含以grep开头的单词的行。    
+\>      #锚定单词的结束，如'grep\>'匹配包含以grep结尾的单词的行。    
+x\{m\}  #重复字符x，m次，如：'0\{5\}'匹配包含5个o的行。    
+x\{m,\} #重复字符x,至少m次，如：'o\{5,\}'匹配至少有5个o的行。    
+x\{m,n\}#重复字符x，至少m次，不多于n次，如：'o\{5,10\}'匹配5--10个o的行。   
+\w    #匹配文字和数字字符，也就是[A-Za-z0-9]，
+\W    #\w的反置形式，匹配一个或多个非单词字符，如点号句号等。   
+\b    #单词锁定符，如: '\bgrep\b'只匹配grep。 
+```
+
+* grep常见命令参数
+
+``` shell
+-n  打印行号
+    grep -n ".*" h.txt        所有打印行号
+    grep -n "root" h.txt    匹配的内容显示行号
+-v  不包括
+-E  表示过滤 多个参数
+    grep -Ev "sshd|network|crond|sysstat|"
+-o:仅打印你需要的东西，默认打印正行
+     grep -o "hello" h.txt
+-i:忽略大小写
+    grep -i "hello" h.txt
+-c: 用于统计文中出现的次数
+--color=auto  过滤字段添加颜色
+    利用正则打印特定字符
+\b：作为边界符，边界只包含特定字符的行
+    grep "\boldboy\b" /etc/passwd   -->只过滤包含oldboy的行
+```
+
+* Linux egrep命令详解
+
+``` shell
+egrep: == grep -E 用于显示文件中符合条件的字符
+          env|egrep "USER|MAIL|PWD|LOGNAME"
+          用的表达式不一样 ，egerp更加规范
+egrep -o "oldboy|hello" h.txt   -->仅仅输出 oldboy 和 hello
+```
+
+* 常用的命令展示
+
+``` shell
+#查找指定关键字个数
+grep '\bboot\b' logs_bak.txt 【\b单词锁定符，只匹配boot】
+#输出logs_bak.txt 文件中含有从logs.txt文件中读取出的关键词的内容行
+cat logs_bak.txt 
+    cat logs.txt 
+    cat logs.txt | grep -nf logs_bak.txt
+#从多个文件中查找关键词
+grep "omc" /etc/passwd /etc/shadow 【多文件查询时，会用冒号前添加文件名】
+#打印IP信息
+ifconfig eth0|grep -E "([0-9]{1,3}\.){3}" 【-E 表达式匹配，用小括号括起来表示一个整体】
+#同时过滤多个关键字
+cat /etc/passwd|grep -E "boy|omc"
+   ==> cat /etc/passwd|egrep "omc|boy" 【用 | 划分多个关键字】
+#显示当前目录下面以.txt 结尾的文件中的所有包含每个字符串至少有7个连续小写字符的字符串的行
+grep '\w\{7\}' *.txt
+   ==> grep '[a-z]\{7\}' *.txt 【注意特殊字符的转义】       
+```
+
+*  上下文的控制(了解)           
+
+``` shell
+# A   查询匹配内容的一行之外，后n行的显示
+    # B   查询匹配内容的一行之外，前n行的显示
+    # C   查询匹配内容的一行之外，显示上下n行
+grep -n 'yum' -A 3 logs_bak.txt
+```

@@ -21,7 +21,7 @@
 * [README.md](README.md)
 * [Docker]
 * * [Docker介绍使用](docs/docker/docker.md)
-* * [docker和docker-compose 配置 mysql mongodb redis nginx 环境](docs/docker/docker-compose.md)
+* * [docker和docker-compose 配置 mysql mongodb redis nginx jenkins 环境](docs/docker/docker-compose.md)
 * * [Docker部署Jenkins](docs/docker/docker-jenkins.md)
 * [经验]
 * * [集群和负载均衡](docs/exp/cl.md)
