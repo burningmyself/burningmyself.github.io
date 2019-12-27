@@ -260,7 +260,7 @@ docker-compose up -d # -d表示在后台运行
 # 停止所有相关容器
 docker-compose stop
 # 删除容器文件
-docker-compose rm
+docker-compose rm -f # -f 强制删除
 # 重启容器
 docker-compose restart
 # 列出所有容器信息
@@ -354,8 +354,8 @@ services:
       - APPLICATION_DATABASE=test
       - APPLICATION_USER=test
       - APPLICATION_PASS=test
-    # 指定服务名称
-  mysql:
+  # 指定服务名称
+  jenkins:
     # 指定服务使用的镜像
     image: jenkins
     # 指定容器名称
