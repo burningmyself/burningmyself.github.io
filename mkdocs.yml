@@ -1,16 +1,30 @@
 site_name: BurningMyself
 site_description: .net,java,php,python,docker,web
-site_author: 朽木自雕
+site_author: BurningMyself
 site_url: https://burningmyself.github.io
-site_favicon: favicon.ico
+# site_favicon: favicon.ico
 copyright: BurningMyself
-google_analytics: ['UA-36723568-3', 'mkdocs.org']
-
+google_analytics: ['UA-36723568-3', 'burningmyself.github.io']
+site_url: https://rosemarys.gitee.io
 repo_name: 'burningmyself.github.io'
 repo_url: 'https://github.com/burningmyself/burningmyself.github.io'
 
 theme:
-  name:  mkdocs
+    name: material
+    highlightjs: true
+    favicon: favicon.ico
+    language: 'zh'
+    feature:
+        tabs: true
+    hljs_languages:
+        - yaml
+        - rust
+    shortcuts:
+        help: 191    # ?
+        next: 78     # n
+        previous: 80 # p
+        search: 83   # s    
+           
 nav: 
   - 介绍: index.md 
   - 技术博文: 
@@ -125,6 +139,7 @@ nav:
     - 将心比心，方得人心: emotion/hearttoheart.md
     - 别睡太晚，别爱太满，别要太多: emotion/ttt.md
     - 表白: emotion/profess.md
+    
 markdown_extensions:
   - admonition
   - codehilite:
@@ -132,6 +147,49 @@ markdown_extensions:
       linenums: false
   - toc:
       permalink: true
+      baselevel: 1
+      separator: "_"
   - footnotes
   - meta
   - def_list
+  - pymdownx.arithmatex
+  - pymdownx.betterem:
+      smart_enable: all
+  - pymdownx.caret
+  - pymdownx.critic
+  - pymdownx.details
+  - pymdownx.emoji:
+      emoji_generator: !!python/name:pymdownx.emoji.to_png
+      #emoji_generator: !!python/name:pymdownx.emoji.to_svg
+      #emoji_generator: !!python/name:pymdownx.emoji.to_png_sprite
+      #emoji_generator: !!python/name:pymdownx.emoji.to_svg_sprite
+      #emoji_generator: !!python/name:pymdownx.emoji.to_awesome
+      #emoji_generator: !!python/name:pymdownx.emoji.to_alt
+  - pymdownx.inlinehilite
+  - pymdownx.magiclink
+  - pymdownx.mark
+  - pymdownx.smartsymbols
+  - pymdownx.superfences
+  - pymdownx.tasklist
+  - pymdownx.tilde
+
+extra_javascript:
+  - 'js/extra.js'
+  - 'js/baidu-tongji.js'
+  - 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML'
+
+
+extra:
+    disqus: "disqus"
+    version: 1.0  
+    search:
+        language: 'zh,en,ja'
+        tokenizer: '[\ s \-\ .. +'
+    palette:
+        primary: 'Blue Grey'
+        accent: 'Pink'  
+    social:
+    - type: 'github'
+      link: 'https://github.com/burningmyself'
+    - type: 'gitee'
+      link: 'https://gitee.com/rosemarys'
