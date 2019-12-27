@@ -1,573 +1,2403 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        
-        <meta name="author" content="朽木自雕">
-        <link rel="canonical" href="https://burningmyself.github.io/python/feature/">
-        <link rel="shortcut icon" href="../../favicon.ico">
-        
+
+
+
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+        <meta name="description" content=".net,java,php,python,docker,web">
+      
+      
+        <link rel="canonical" href="https://rosemarys.gitee.io/python/feature/">
+      
+      
+        <meta name="author" content="BurningMyself">
+      
+      
+        <meta name="lang:clipboard.copy" content="复制">
+      
+        <meta name="lang:clipboard.copied" content="已复制">
+      
+        <meta name="lang:search.language" content="zh,en,ja">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="没有找到符合条件的结果">
+      
+        <meta name="lang:search.result.one" content="找到 1 个符合条件的结果">
+      
+        <meta name="lang:search.result.other" content="# 个符合条件的结果">
+      
+        <meta name="lang:search.tokenizer" content="[\ s \-\ .. +">
+      
+      <link rel="shortcut icon" href="../../favicon.ico">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.6.0">
+    
+    
+      
         <title>Python特性 - BurningMyself</title>
-        <link href="../../css/bootstrap-custom.min.css" rel="stylesheet">
-        <link href="../../css/font-awesome.min.css" rel="stylesheet">
-        <link href="../../css/base.css" rel="stylesheet">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
-        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-        <!--[if lt IE 9]>
-            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-        <![endif]-->
-
-        <script src="../../js/jquery-1.10.2.min.js" defer></script>
-        <script src="../../js/bootstrap-3.0.3.min.js" defer></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
-        <script>hljs.initHighlightingOnLoad();</script>
-        <script>
-            (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-            })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-
-            ga('create', 'UA-36723568-3', 'mkdocs.org');
-            ga('send', 'pageview');
-        </script> 
-    </head>
-
-    <body>
-
-        <div class="navbar navbar-default navbar-fixed-top" role="navigation">
-            <div class="container">
-
-                <!-- Collapsed navigation -->
-                <div class="navbar-header">
-                    <!-- Expander button -->
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" href="../..">BurningMyself</a>
-                </div>
-
-                <!-- Expanded navigation -->
-                <div class="navbar-collapse collapse">
-                        <!-- Main navigation -->
-                        <ul class="nav navbar-nav">
-                            <li >
-                                <a href="../..">介绍</a>
-                            </li>
-                            <li class="dropdown active">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">技术博文 <b class="caret"></b></a>
-                                <ul class="dropdown-menu">
-                                    
-  <li class="dropdown-submenu">
-    <a href="#">.NET</a>
-    <ul class="dropdown-menu">
-            
-<li >
-    <a href="../../net/c_sharp/">C# 6</a>
-</li>
-            
-<li >
-    <a href="../../net/c_docker/">.Ner Core Docker 部署</a>
-</li>
-            
-<li >
-    <a href="../../net/c_mysql_nginx/">使用 Docker 容器化部署 ASP.NET Core + MySQL + Nginx</a>
-</li>
-            
-<li >
-    <a href="../../net/c_core_safety/">让你的ASP.NET Core应用程序更安全</a>
-</li>
-            
-<li >
-    <a href="../../net/c_core_study_route/">ASP.NET Core开发者指南</a>
-</li>
-    </ul>
-  </li>
-                                    
-  <li class="dropdown-submenu">
-    <a href="#">Java</a>
-    <ul class="dropdown-menu">
-            
-<li >
-    <a href="../../java/feature/">Java特性</a>
-</li>
-            
-<li >
-    <a href="../../java/load-class/">Java类加载</a>
-</li>
-            
-<li >
-    <a href="../../java/orm/">Orm的优缺点</a>
-</li>
-            
-<li >
-    <a href="../../java/bio-nio/">BIO与NIO</a>
-</li>
-            
-<li >
-    <a href="../../java/rocketmq/rmq-1/">RocketMq下载与安装</a>
-</li>
-            
-<li >
-    <a href="../../java/springAnnotation/">Spring常用注解</a>
-</li>
-    </ul>
-  </li>
-                                    
-  <li class="dropdown-submenu">
-    <a href="#">Python</a>
-    <ul class="dropdown-menu">
-            
-<li class="active">
-    <a href="./">Python特性</a>
-</li>
-            
-<li >
-    <a href="../str_joint/">Python字符拼接</a>
-</li>
-            
-<li >
-    <a href="../syntax_rule/">Python语法技巧</a>
-</li>
-            
-<li >
-    <a href="../fabric/">远程部署神器 Fabric</a>
-</li>
-    </ul>
-  </li>
-                                    
-  <li class="dropdown-submenu">
-    <a href="#">PHP</a>
-    <ul class="dropdown-menu">
-            
-<li >
-    <a href="../../php/kj/">框架</a>
-</li>
-    </ul>
-  </li>
-                                    
-  <li class="dropdown-submenu">
-    <a href="#">Web</a>
-    <ul class="dropdown-menu">
-            
-<li >
-    <a href="../../web/es6/">es6语法</a>
-</li>
-            
-<li >
-    <a href="../../web/ali_js_style/">阿里js样式规范</a>
-</li>
-            
-<li >
-    <a href="../../web/node.js/">node.js文档</a>
-</li>
-            
-<li >
-    <a href="../../web/react/">React 开发者指南</a>
-</li>
-            
-<li >
-    <a href="../../dart/syntax/">Dart语法学习</a>
-</li>
-            
-<li >
-    <a href="../../web/react_interview/">React 面试</a>
-</li>
-            
-<li >
-    <a href="../../web/js_tool_method/">js 工具函数</a>
-</li>
-            
-<li >
-    <a href="../../web/vue_cp_react/">vue与react比较</a>
-</li>
-    </ul>
-  </li>
-                                    
-  <li class="dropdown-submenu">
-    <a href="#">SQL</a>
-    <ul class="dropdown-menu">
-            
-<li >
-    <a href="../../sql/mysql_yh/">MySQL优化</a>
-</li>
-            
-<li >
-    <a href="../../sql/mysql_yh17/">MySQL优化</a>
-</li>
-            
-<li >
-    <a href="../../sql/mysql_log/">MySQL日志</a>
-</li>
-            
-<li >
-    <a href="../../sql/mysql_index/">MySQL索引</a>
-</li>
-            
-<li >
-    <a href="../../sql/mysql_pxc/">MySQL PXC集群</a>
-</li>
-            
-<li >
-    <a href="../../sql/mysql_use/">MySQL 数据库应用</a>
-</li>
-            
-<li >
-    <a href="../../sql/sql_server_master/">Sql Server 主从备份</a>
-</li>
-            
-<li >
-    <a href="../../sql/data_split/">数据库之互联网常用分库分表方案</a>
-</li>
-            
-<li >
-    <a href="../../sql/mybatis/">Mybatis使用心德</a>
-</li>
-    </ul>
-  </li>
-                                    
-  <li class="dropdown-submenu">
-    <a href="#">Linux</a>
-    <ul class="dropdown-menu">
-            
-<li >
-    <a href="../../linux/often/">常用命令</a>
-</li>
-            
-<li >
-    <a href="../../linux/ope/">实用的Linux 命令</a>
-</li>
-    </ul>
-  </li>
-                                    
-  <li class="dropdown-submenu">
-    <a href="#">Docker</a>
-    <ul class="dropdown-menu">
-            
-<li >
-    <a href="../../docker/docker/">Docker全科</a>
-</li>
-            
-<li >
-    <a href="../../docker/docker-compose/">docker和docker-compose 配置 mysql mongodb redis nginx jenkins 环境</a>
-</li>
-            
-<li >
-    <a href="../../docker/docker-jenkins/">Docker部署Jenkins</a>
-</li>
-    </ul>
-  </li>
-                                    
-  <li class="dropdown-submenu">
-    <a href="#">Tool</a>
-    <ul class="dropdown-menu">
-            
-<li >
-    <a href="../../tool/git/">Git</a>
-</li>
-            
-<li >
-    <a href="../../tool/gitquestion/">Git问题处理</a>
-</li>
-            
-<li >
-    <a href="../../tool/gitflow/">GitFlow</a>
-</li>
-            
-<li >
-    <a href="../../tool/gitbook/">GitBook</a>
-</li>
-            
-<li >
-    <a href="../../tool/gitcmr/">Git提交日志规范</a>
-</li>
-            
-<li >
-    <a href="../../tool/markdown/">Markdown</a>
-</li>
-            
-<li >
-    <a href="../../tool/cicd/">CI/CD</a>
-</li>
-            
-<li >
-    <a href="../../tool/mkdocs/">mkdocs简单使用</a>
-</li>
-            
-<li >
-    <a href="../../tool/gitstudy/">Git的黑魔法</a>
-</li>
-    </ul>
-  </li>
-                                </ul>
-                            </li>
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">微服务 <b class="caret"></b></a>
-                                <ul class="dropdown-menu">
-                                    
-<li >
-    <a href="../../micro/spring-cloud/">基于SpringCloud的微服务架构演变史</a>
-</li>
-                                    
-<li >
-    <a href="../../micro/fbs-lock/">分布式锁</a>
-</li>
-                                    
-<li >
-    <a href="../../micro/design/">微服务设计</a>
-</li>
-                                    
-<li >
-    <a href="../../micro/distrimsg/">分布式系统与消息的投递</a>
-</li>
-                                    
-<li >
-    <a href="../../micro/ddd/">基于DDD的微服务设计和开发实战</a>
-</li>
-                                </ul>
-                            </li>
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">经验分析 <b class="caret"></b></a>
-                                <ul class="dropdown-menu">
-                                    
-<li >
-    <a href="../../exp/devops/">DevOps</a>
-</li>
-                                    
-<li >
-    <a href="../../exp/micro-service/">Micro-Service</a>
-</li>
-                                    
-<li >
-    <a href="../../exp/raft-gossip/">Raft算法和Gossip协议</a>
-</li>
-                                    
-<li >
-    <a href="../../exp/cl/">集群和负载均衡</a>
-</li>
-                                    
-<li >
-    <a href="../../exp/ai/">人工智能</a>
-</li>
-                                    
-<li >
-    <a href="../../exp/code-principle/">代码原则</a>
-</li>
-                                    
-<li >
-    <a href="../../exp/techbig/">如何成为技术大牛</a>
-</li>
-                                    
-<li >
-    <a href="../../exp/learnweetout/">程序员如何技术成长</a>
-</li>
-                                    
-<li >
-    <a href="../../exp/pt/">产品与技术</a>
-</li>
-                                    
-<li >
-    <a href="../../exp/four_deep_learning/">深度学习框架</a>
-</li>
-                                    
-<li >
-    <a href="../../exp/tl/">在阿里做了5年技术Leader，我总结出这些套路！</a>
-</li>
-                                    
-<li >
-    <a href="../../exp/cto/">CTO 技能图谱</a>
-</li>
-                                </ul>
-                            </li>
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">医学 <b class="caret"></b></a>
-                                <ul class="dropdown-menu">
-                                    
-<li >
-    <a href="../../doctor/ae/">脑炎</a>
-</li>
-                                </ul>
-                            </li>
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">构架 <b class="caret"></b></a>
-                                <ul class="dropdown-menu">
-                                    
-<li >
-    <a href="../../framework/split/">构架拆分</a>
-</li>
-                                    
-<li >
-    <a href="../../framework/fgb/">分布式、高并发、多线程</a>
-</li>
-                                    
-<li >
-    <a href="../../framework/agility/">如何理解敏捷开发</a>
-</li>
-                                    
-<li >
-    <a href="../../framework/fwork/">走向架构师必备的技能</a>
-</li>
-                                </ul>
-                            </li>
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">情感 <b class="caret"></b></a>
-                                <ul class="dropdown-menu">
-                                    
-<li >
-    <a href="../../emotion/eq/">情商</a>
-</li>
-                                    
-<li >
-    <a href="../../emotion/workheard/">工作心得</a>
-</li>
-                                    
-<li >
-    <a href="../../emotion/lookbook/">看书</a>
-</li>
-                                    
-<li >
-    <a href="../../emotion/fmf/">4种男朋友</a>
-</li>
-                                    
-<li >
-    <a href="../../emotion/notheart/">不上心</a>
-</li>
-                                    
-<li >
-    <a href="../../emotion/selfdiscipline/">自律</a>
-</li>
-                                    
-<li >
-    <a href="../../emotion/notlike/">喜欢与不喜欢</a>
-</li>
-                                    
-<li >
-    <a href="../../emotion/latemarry/">晚婚</a>
-</li>
-                                    
-<li >
-    <a href="../../emotion/understand/">追女生要明白这些事</a>
-</li>
-                                    
-<li >
-    <a href="../../emotion/backup/">备胎</a>
-</li>
-                                    
-<li >
-    <a href="../../emotion/chase/">为什么追不到她</a>
-</li>
-                                    
-<li >
-    <a href="../../emotion/livefail/">为什么活着失败</a>
-</li>
-                                    
-<li >
-    <a href="../../emotion/emotion/">情绪管理</a>
-</li>
-                                    
-<li >
-    <a href="../../emotion/abolish/">废掉的三个迹象</a>
-</li>
-                                    
-<li >
-    <a href="../../emotion/uptime/">余生，好好珍惜</a>
-</li>
-                                    
-<li >
-    <a href="../../emotion/losecome/">所有的失去，都会以另一种方式归来</a>
-</li>
-                                    
-<li >
-    <a href="../../emotion/threeheart/">人生有这三种好心态</a>
-</li>
-                                    
-<li >
-    <a href="../../emotion/onelike/">一个感情真相</a>
-</li>
-                                    
-<li >
-    <a href="../../emotion/notruth/">情商与道理</a>
-</li>
-                                    
-<li >
-    <a href="../../emotion/smf/">六种男人远离</a>
-</li>
-                                    
-<li >
-    <a href="../../emotion/select/">决定接下来人生归属的，不是努力，而是选择</a>
-</li>
-                                    
-<li >
-    <a href="../../emotion/nolike/">被你拉黑的那个人，你一定很喜欢吧</a>
-</li>
-                                    
-<li >
-    <a href="../../emotion/onepath/">余生，学会一个人走，不管有没有人陪</a>
-</li>
-                                    
-<li >
-    <a href="../../emotion/twopath/">往后余生还很精彩，别被熬夜拖垮了</a>
-</li>
-                                    
-<li >
-    <a href="../../emotion/lifetime/">心态好的人，一辈子都好</a>
-</li>
-                                    
-<li >
-    <a href="../../emotion/hearttoheart/">将心比心，方得人心</a>
-</li>
-                                    
-<li >
-    <a href="../../emotion/ttt/">别睡太晚，别爱太满，别要太多</a>
-</li>
-                                    
-<li >
-    <a href="../../emotion/profess/">表白</a>
-</li>
-                                </ul>
-                            </li>
-                        </ul>
-
-                    <ul class="nav navbar-nav navbar-right">
-                        <li>
-                            <a href="#" data-toggle="modal" data-target="#mkdocs_search_modal">
-                                <i class="fa fa-search"></i> Search
-                            </a>
-                        </li>
-                            <li >
-                                <a rel="next" href="../../java/springAnnotation/">
-                                    <i class="fa fa-arrow-left"></i> Previous
-                                </a>
-                            </li>
-                            <li >
-                                <a rel="prev" href="../str_joint/">
-                                    Next <i class="fa fa-arrow-right"></i>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="https://github.com/burningmyself/burningmyself.github.io/edit/master/docs/python/feature.md">Edit on burningmyself.github.io</a>
-                            </li>
-                    </ul>
-                </div>
-            </div>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/application.1b62728e.css">
+      
+      
+    
+    
+      <script src="../../assets/javascripts/modernizr.268332fc.js"></script>
+    
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
+      
+    
+    <link rel="stylesheet" href="../../assets/fonts/material-icons.css">
+    
+    
+    
+      
+        
+<script>
+  window.ga = window.ga || function() {
+    (ga.q = ga.q || []).push(arguments)
+  }
+  ga.l = +new Date
+  /* Setup integration and send page view */
+  ga("create", "UA-36723568-3", "burningmyself.github.io")
+  ga("set", "anonymizeIp", true)
+  ga("send", "pageview")
+  /* Register handler to log search on blur */
+  document.addEventListener("DOMContentLoaded", () => {
+    if (document.forms.search) {
+      var query = document.forms.search.query
+      query.addEventListener("blur", function() {
+        if (this.value) {
+          var path = document.location.pathname;
+          ga("send", "pageview", path + "?q=" + this.value)
+        }
+      })
+    }
+  })
+</script>
+<script async src="https://www.google-analytics.com/analytics.js"></script>
+      
+    
+    
+  </head>
+  
+    <body dir="ltr">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+          <svg xmlns="http://www.w3.org/2000/svg" width="416" height="448" viewBox="0 0 416 448" id="__github"><path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19T128 352t-18.125-8.5-10.75-19T96 304t3.125-20.5 10.75-19T128 256t18.125 8.5 10.75 19T160 304zm160 0q0 10-3.125 20.5t-10.75 19T288 352t-18.125-8.5-10.75-19T256 304t3.125-20.5 10.75-19T288 256t18.125 8.5 10.75 19T320 304zm40 0q0-30-17.25-51T296 232q-10.25 0-48.75 5.25Q229.5 240 208 240t-39.25-2.75Q130.75 232 120 232q-29.5 0-46.75 21T56 304q0 22 8 38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0 37.25-1.75t35-7.375 30.5-15 20.25-25.75T360 304zm56-44q0 51.75-15.25 82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5T212 416q-19.5 0-35.5-.75t-36.875-3.125-38.125-7.5-34.25-12.875T37 371.5t-21.5-28.75Q0 312 0 260q0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25 30.875Q171.5 96 212 96q37 0 70 8 26.25-20.5 46.75-30.25T376 64q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34 99.5z"/></svg>
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+    
+      <a href="#python" tabindex="1" class="md-skip">
+        跳转至
+      </a>
+    
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="https://rosemarys.gitee.io" title="BurningMyself" class="md-header-nav__button md-logo">
+          
+            <i class="md-icon"></i>
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          
+            <span class="md-header-nav__topic">
+              BurningMyself
+            </span>
+            <span class="md-header-nav__topic">
+              
+                Python特性
+              
+            </span>
+          
         </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
+          
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="__search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            键入以开始搜索
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+        
+      </div>
+      
+        <div class="md-flex__cell md-flex__cell--shrink">
+          <div class="md-header-nav__source">
+            
 
-        <div class="container">
-                <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
-    <ul class="nav bs-sidenav">
-        <li class="main active"><a href="#python">Python新特性</a></li>
-            <li><a href="#python2x3x">Python2.x与3​​.x版本区别</a></li>
-            <li><a href="#python3">Python3.+新特性</a></li>
+
+  
+
+<a href="https://github.com/burningmyself/burningmyself.github.io/" title="前往 Github 仓库" class="md-source" data-md-source="github">
+  
+    <div class="md-source__icon">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
+    burningmyself.github.io
+  </div>
+</a>
+          </div>
+        </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+        
+
+  
+
+<nav class="md-tabs md-tabs--active" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  <li class="md-tabs__item">
+    
+      <a href="../.." class="md-tabs__link">
+        介绍
+      </a>
+    
+  </li>
+
+      
+        
+  
+  
+    
+    
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../net/c_sharp/" class="md-tabs__link">
+          技术博文
+        </a>
+      
+    </li>
+  
+
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../micro/spring-cloud/" class="md-tabs__link">
+          微服务
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../exp/devops/" class="md-tabs__link">
+          经验分析
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../doctor/ae/" class="md-tabs__link">
+          医学
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../framework/split/" class="md-tabs__link">
+          构架
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../emotion/eq/" class="md-tabs__link">
+          情感
+        </a>
+      
+    </li>
+  
+
+      
     </ul>
-</div></div>
-                <div class="col-md-9" role="main">
+  </div>
+</nav>
+      
+      <main class="md-main" role="main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="__drawer">
+    <a href="https://rosemarys.gitee.io" title="BurningMyself" class="md-nav__button md-logo">
+      
+        <i class="md-icon"></i>
+      
+    </a>
+    BurningMyself
+  </label>
+  
+    <div class="md-nav__source">
+      
 
-<h1 id="python">Python新特性<a class="headerlink" href="#python" title="Permanent link">&para;</a></h1>
+
+  
+
+<a href="https://github.com/burningmyself/burningmyself.github.io/" title="前往 Github 仓库" class="md-source" data-md-source="github">
+  
+    <div class="md-source__icon">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
+    burningmyself.github.io
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../.." title="介绍" class="md-nav__link">
+      介绍
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2" checked>
+    
+    <label class="md-nav__link" for="nav-2">
+      技术博文
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-2">
+        技术博文
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-1" type="checkbox" id="nav-2-1">
+    
+    <label class="md-nav__link" for="nav-2-1">
+      .NET
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-2-1">
+        .NET
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../net/c_sharp/" title="C# 6" class="md-nav__link">
+      C# 6
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../net/c_docker/" title=".Ner Core Docker 部署" class="md-nav__link">
+      .Ner Core Docker 部署
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../net/c_mysql_nginx/" title="使用 Docker 容器化部署 ASP.NET Core + MySQL + Nginx" class="md-nav__link">
+      使用 Docker 容器化部署 ASP.NET Core + MySQL + Nginx
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../net/c_core_safety/" title="让你的ASP.NET Core应用程序更安全" class="md-nav__link">
+      让你的ASP.NET Core应用程序更安全
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../net/c_core_study_route/" title="ASP.NET Core开发者指南" class="md-nav__link">
+      ASP.NET Core开发者指南
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-2" type="checkbox" id="nav-2-2">
+    
+    <label class="md-nav__link" for="nav-2-2">
+      Java
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-2-2">
+        Java
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../java/feature/" title="Java特性" class="md-nav__link">
+      Java特性
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../java/load-class/" title="Java类加载" class="md-nav__link">
+      Java类加载
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../java/orm/" title="Orm的优缺点" class="md-nav__link">
+      Orm的优缺点
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../java/bio-nio/" title="BIO与NIO" class="md-nav__link">
+      BIO与NIO
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../java/rocketmq/rmq-1/" title="RocketMq下载与安装" class="md-nav__link">
+      RocketMq下载与安装
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../java/springAnnotation/" title="Spring常用注解" class="md-nav__link">
+      Spring常用注解
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-3" type="checkbox" id="nav-2-3" checked>
+    
+    <label class="md-nav__link" for="nav-2-3">
+      Python
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-2-3">
+        Python
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Python特性
+      </label>
+    
+    <a href="./" title="Python特性" class="md-nav__link md-nav__link--active">
+      Python特性
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">目录</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#python2x3x" class="md-nav__link">
+    Python2.x与3​​.x版本区别
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#print" class="md-nav__link">
+    print 函数
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#unicode" class="md-nav__link">
+    Unicode
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    除法运算
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    异常
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#xrange" class="md-nav__link">
+    xrange
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    八进制字面量表示
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    不等运算符
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#repr" class="md-nav__link">
+    去掉了repr表达式``
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pep8" class="md-nav__link">
+    多个模块被改名（根据PEP8）
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#python3" class="md-nav__link">
+    Python3.+新特性
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    新的模块
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cpython" class="md-nav__link">
+    CPython实现改进
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    重大的标准库改进
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    安全改进
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#windows" class="md-nav__link">
+    Windows改进
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#formatted" class="md-nav__link">
+    Formatted字符串字面值
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    数字中支持下划线
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    变量注释语法
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    异步生成器
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    异步列表推导
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#python_1" class="md-nav__link">
+    Python数据类
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#python_2" class="md-nav__link">
+    Python生成器异常处理
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#python_3" class="md-nav__link">
+    Python开发模式
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#python_4" class="md-nav__link">
+    具有纳秒分辨率的Python时间函数
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#python_utf-8" class="md-nav__link">
+    Python UTF-8模式
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#breakpoint" class="md-nav__link">
+    内置breakpoint()函数
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#python_37" class="md-nav__link">
+    其他新的Python 3.7功能
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    更多特性
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+        <li class="md-nav__item">
+          <a href="#__comments" class="md-nav__link md-nav__link--active">
+            评论
+          </a>
+        </li>
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../str_joint/" title="Python字符拼接" class="md-nav__link">
+      Python字符拼接
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../syntax_rule/" title="Python语法技巧" class="md-nav__link">
+      Python语法技巧
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../fabric/" title="远程部署神器 Fabric" class="md-nav__link">
+      远程部署神器 Fabric
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-4" type="checkbox" id="nav-2-4">
+    
+    <label class="md-nav__link" for="nav-2-4">
+      PHP
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-2-4">
+        PHP
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../php/kj/" title="框架" class="md-nav__link">
+      框架
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-5" type="checkbox" id="nav-2-5">
+    
+    <label class="md-nav__link" for="nav-2-5">
+      Web
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-2-5">
+        Web
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../web/es6/" title="es6语法" class="md-nav__link">
+      es6语法
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../web/ali_js_style/" title="阿里js样式规范" class="md-nav__link">
+      阿里js样式规范
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../web/node.js/" title="node.js文档" class="md-nav__link">
+      node.js文档
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../web/react/" title="React 开发者指南" class="md-nav__link">
+      React 开发者指南
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../dart/syntax/" title="Dart语法学习" class="md-nav__link">
+      Dart语法学习
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../web/react_interview/" title="React 面试" class="md-nav__link">
+      React 面试
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../web/js_tool_method/" title="js 工具函数" class="md-nav__link">
+      js 工具函数
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../web/vue_cp_react/" title="vue与react比较" class="md-nav__link">
+      vue与react比较
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-6" type="checkbox" id="nav-2-6">
+    
+    <label class="md-nav__link" for="nav-2-6">
+      SQL
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-2-6">
+        SQL
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../sql/mysql_yh/" title="MySQL优化" class="md-nav__link">
+      MySQL优化
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../sql/mysql_yh17/" title="MySQL优化" class="md-nav__link">
+      MySQL优化
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../sql/mysql_log/" title="MySQL日志" class="md-nav__link">
+      MySQL日志
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../sql/mysql_index/" title="MySQL索引" class="md-nav__link">
+      MySQL索引
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../sql/mysql_pxc/" title="MySQL PXC集群" class="md-nav__link">
+      MySQL PXC集群
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../sql/mysql_use/" title="MySQL 数据库应用" class="md-nav__link">
+      MySQL 数据库应用
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../sql/sql_server_master/" title="Sql Server 主从备份" class="md-nav__link">
+      Sql Server 主从备份
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../sql/data_split/" title="数据库之互联网常用分库分表方案" class="md-nav__link">
+      数据库之互联网常用分库分表方案
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../sql/mybatis/" title="Mybatis使用心德" class="md-nav__link">
+      Mybatis使用心德
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-7" type="checkbox" id="nav-2-7">
+    
+    <label class="md-nav__link" for="nav-2-7">
+      Linux
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-2-7">
+        Linux
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../linux/often/" title="常用命令" class="md-nav__link">
+      常用命令
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../linux/ope/" title="实用的Linux 命令" class="md-nav__link">
+      实用的Linux 命令
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-8" type="checkbox" id="nav-2-8">
+    
+    <label class="md-nav__link" for="nav-2-8">
+      Docker
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-2-8">
+        Docker
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../docker/docker/" title="Docker全科" class="md-nav__link">
+      Docker全科
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../docker/docker-compose/" title="docker和docker-compose 配置 mysql mongodb redis nginx jenkins 环境" class="md-nav__link">
+      docker和docker-compose 配置 mysql mongodb redis nginx jenkins 环境
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../docker/docker-jenkins/" title="Docker部署Jenkins" class="md-nav__link">
+      Docker部署Jenkins
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-9" type="checkbox" id="nav-2-9">
+    
+    <label class="md-nav__link" for="nav-2-9">
+      Tool
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-2-9">
+        Tool
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tool/git/" title="Git" class="md-nav__link">
+      Git
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tool/gitquestion/" title="Git问题处理" class="md-nav__link">
+      Git问题处理
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tool/gitflow/" title="GitFlow" class="md-nav__link">
+      GitFlow
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tool/gitbook/" title="GitBook" class="md-nav__link">
+      GitBook
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tool/gitcmr/" title="Git提交日志规范" class="md-nav__link">
+      Git提交日志规范
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tool/markdown/" title="Markdown" class="md-nav__link">
+      Markdown
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tool/cicd/" title="CI/CD" class="md-nav__link">
+      CI/CD
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tool/mkdocs/" title="mkdocs简单使用" class="md-nav__link">
+      mkdocs简单使用
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tool/gitstudy/" title="Git的黑魔法" class="md-nav__link">
+      Git的黑魔法
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3">
+    
+    <label class="md-nav__link" for="nav-3">
+      微服务
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-3">
+        微服务
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../micro/spring-cloud/" title="基于SpringCloud的微服务架构演变史" class="md-nav__link">
+      基于SpringCloud的微服务架构演变史
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../micro/fbs-lock/" title="分布式锁" class="md-nav__link">
+      分布式锁
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../micro/design/" title="微服务设计" class="md-nav__link">
+      微服务设计
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../micro/distrimsg/" title="分布式系统与消息的投递" class="md-nav__link">
+      分布式系统与消息的投递
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../micro/ddd/" title="基于DDD的微服务设计和开发实战" class="md-nav__link">
+      基于DDD的微服务设计和开发实战
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4">
+    
+    <label class="md-nav__link" for="nav-4">
+      经验分析
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-4">
+        经验分析
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../exp/devops/" title="DevOps" class="md-nav__link">
+      DevOps
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../exp/micro-service/" title="Micro-Service" class="md-nav__link">
+      Micro-Service
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../exp/raft-gossip/" title="Raft算法和Gossip协议" class="md-nav__link">
+      Raft算法和Gossip协议
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../exp/cl/" title="集群和负载均衡" class="md-nav__link">
+      集群和负载均衡
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../exp/ai/" title="人工智能" class="md-nav__link">
+      人工智能
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../exp/code-principle/" title="代码原则" class="md-nav__link">
+      代码原则
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../exp/techbig/" title="如何成为技术大牛" class="md-nav__link">
+      如何成为技术大牛
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../exp/learnweetout/" title="程序员如何技术成长" class="md-nav__link">
+      程序员如何技术成长
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../exp/pt/" title="产品与技术" class="md-nav__link">
+      产品与技术
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../exp/four_deep_learning/" title="深度学习框架" class="md-nav__link">
+      深度学习框架
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../exp/tl/" title="在阿里做了5年技术Leader，我总结出这些套路！" class="md-nav__link">
+      在阿里做了5年技术Leader，我总结出这些套路！
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../exp/cto/" title="CTO 技能图谱" class="md-nav__link">
+      CTO 技能图谱
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5">
+    
+    <label class="md-nav__link" for="nav-5">
+      医学
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-5">
+        医学
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../doctor/ae/" title="脑炎" class="md-nav__link">
+      脑炎
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6" type="checkbox" id="nav-6">
+    
+    <label class="md-nav__link" for="nav-6">
+      构架
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-6">
+        构架
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../framework/split/" title="构架拆分" class="md-nav__link">
+      构架拆分
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../framework/fgb/" title="分布式、高并发、多线程" class="md-nav__link">
+      分布式、高并发、多线程
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../framework/agility/" title="如何理解敏捷开发" class="md-nav__link">
+      如何理解敏捷开发
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../framework/fwork/" title="走向架构师必备的技能" class="md-nav__link">
+      走向架构师必备的技能
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7" type="checkbox" id="nav-7">
+    
+    <label class="md-nav__link" for="nav-7">
+      情感
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-7">
+        情感
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/eq/" title="情商" class="md-nav__link">
+      情商
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/workheard/" title="工作心得" class="md-nav__link">
+      工作心得
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/lookbook/" title="看书" class="md-nav__link">
+      看书
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/fmf/" title="4种男朋友" class="md-nav__link">
+      4种男朋友
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/notheart/" title="不上心" class="md-nav__link">
+      不上心
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/selfdiscipline/" title="自律" class="md-nav__link">
+      自律
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/notlike/" title="喜欢与不喜欢" class="md-nav__link">
+      喜欢与不喜欢
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/latemarry/" title="晚婚" class="md-nav__link">
+      晚婚
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/understand/" title="追女生要明白这些事" class="md-nav__link">
+      追女生要明白这些事
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/backup/" title="备胎" class="md-nav__link">
+      备胎
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/chase/" title="为什么追不到她" class="md-nav__link">
+      为什么追不到她
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/livefail/" title="为什么活着失败" class="md-nav__link">
+      为什么活着失败
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/emotion/" title="情绪管理" class="md-nav__link">
+      情绪管理
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/abolish/" title="废掉的三个迹象" class="md-nav__link">
+      废掉的三个迹象
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/uptime/" title="余生，好好珍惜" class="md-nav__link">
+      余生，好好珍惜
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/losecome/" title="所有的失去，都会以另一种方式归来" class="md-nav__link">
+      所有的失去，都会以另一种方式归来
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/threeheart/" title="人生有这三种好心态" class="md-nav__link">
+      人生有这三种好心态
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/onelike/" title="一个感情真相" class="md-nav__link">
+      一个感情真相
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/notruth/" title="情商与道理" class="md-nav__link">
+      情商与道理
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/smf/" title="六种男人远离" class="md-nav__link">
+      六种男人远离
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/select/" title="决定接下来人生归属的，不是努力，而是选择" class="md-nav__link">
+      决定接下来人生归属的，不是努力，而是选择
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/nolike/" title="被你拉黑的那个人，你一定很喜欢吧" class="md-nav__link">
+      被你拉黑的那个人，你一定很喜欢吧
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/onepath/" title="余生，学会一个人走，不管有没有人陪" class="md-nav__link">
+      余生，学会一个人走，不管有没有人陪
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/twopath/" title="往后余生还很精彩，别被熬夜拖垮了" class="md-nav__link">
+      往后余生还很精彩，别被熬夜拖垮了
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/lifetime/" title="心态好的人，一辈子都好" class="md-nav__link">
+      心态好的人，一辈子都好
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/hearttoheart/" title="将心比心，方得人心" class="md-nav__link">
+      将心比心，方得人心
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/ttt/" title="别睡太晚，别爱太满，别要太多" class="md-nav__link">
+      别睡太晚，别爱太满，别要太多
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/profess/" title="表白" class="md-nav__link">
+      表白
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">目录</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#python2x3x" class="md-nav__link">
+    Python2.x与3​​.x版本区别
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#print" class="md-nav__link">
+    print 函数
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#unicode" class="md-nav__link">
+    Unicode
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    除法运算
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    异常
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#xrange" class="md-nav__link">
+    xrange
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    八进制字面量表示
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    不等运算符
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#repr" class="md-nav__link">
+    去掉了repr表达式``
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pep8" class="md-nav__link">
+    多个模块被改名（根据PEP8）
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#python3" class="md-nav__link">
+    Python3.+新特性
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    新的模块
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cpython" class="md-nav__link">
+    CPython实现改进
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    重大的标准库改进
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    安全改进
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#windows" class="md-nav__link">
+    Windows改进
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#formatted" class="md-nav__link">
+    Formatted字符串字面值
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    数字中支持下划线
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    变量注释语法
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    异步生成器
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    异步列表推导
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#python_1" class="md-nav__link">
+    Python数据类
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#python_2" class="md-nav__link">
+    Python生成器异常处理
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#python_3" class="md-nav__link">
+    Python开发模式
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#python_4" class="md-nav__link">
+    具有纳秒分辨率的Python时间函数
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#python_utf-8" class="md-nav__link">
+    Python UTF-8模式
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#breakpoint" class="md-nav__link">
+    内置breakpoint()函数
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#python_37" class="md-nav__link">
+    其他新的Python 3.7功能
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    更多特性
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+        <li class="md-nav__item">
+          <a href="#__comments" class="md-nav__link md-nav__link--active">
+            评论
+          </a>
+        </li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/burningmyself/burningmyself.github.io/edit/master/docs/python/feature.md" title="编辑此页" class="md-icon md-content__icon">&#xE3C9;</a>
+                
+                
+                <h1 id="python">Python新特性<a class="headerlink" href="#python" title="Permanent link">&para;</a></h1>
 <h2 id="python2x3x">Python2.x与3​​.x版本区别<a class="headerlink" href="#python2x3x" title="Permanent link">&para;</a></h2>
 <p>Python的3​​.0版本，常被称为Python 3000，或简称Py3k。相对于Python的早期版本，这是一个较大的升级。 
 为了不带入过多的累赘，Python 3.0在设计的时候没有考虑向下相容。
@@ -578,78 +2408,68 @@
 大多数第三方库都正在努力地相容Python 3.0版本。即使无法立即使用Python 3.0，也建议编写相容Python 3.0版本的程式，然后使用Python 2.6, Python 2.7来执行。
 Python 3.0的变化主要在以下几个方面:</p>
 <h3 id="print">print 函数<a class="headerlink" href="#print" title="Permanent link">&para;</a></h3>
-<p>print语句没有了，取而代之的是print()函数。 Python 2.6与Python 2.7部分地支持这种形式的print语法。在Python 2.6与Python 2.7里面，以下三种形式是等价的：</p>
-<pre class="codehilite"><code class="language-python">print &quot;fish&quot;
-print (&quot;fish&quot;) #注意print后面有个空格
-print(&quot;fish&quot;) #print()不能带有任何其它参数</code></pre>
-
-
-<p>然而，Python 2.6实际已经支持新的print()语法：</p>
-<pre class="codehilite"><code class="language-python">from __future__ import print_function
-print(&quot;fish&quot;, &quot;panda&quot;, sep=', ')</code></pre>
-
-
+<p>print语句没有了，取而代之的是print()函数。 Python 2.6与Python 2.7部分地支持这种形式的print语法。在Python 2.6与Python 2.7里面，以下三种形式是等价的：
+<div class="codehilite"><pre><span></span><span class="nb">print</span> <span class="s2">&quot;fish&quot;</span>
+<span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;fish&quot;</span><span class="p">)</span> <span class="c1">#注意print后面有个空格</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;fish&quot;</span><span class="p">)</span> <span class="c1">#print()不能带有任何其它参数</span>
+</pre></div>
+然而，Python 2.6实际已经支持新的print()语法：
+<div class="codehilite"><pre><span></span><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">print_function</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;fish&quot;</span><span class="p">,</span> <span class="s2">&quot;panda&quot;</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">&#39;, &#39;</span><span class="p">)</span>
+</pre></div></p>
 <h3 id="unicode">Unicode<a class="headerlink" href="#unicode" title="Permanent link">&para;</a></h3>
 <p>Python 2 有 ASCII str() 类型，unicode() 是单独的，不是 byte 类型。 
 现在， 在 Python 3，我们最终有了 Unicode (utf-8) 字符串，以及一个字节类：byte 和 bytearrays。</p>
-<p>由于 Python3.X 源码文件默认使用utf-8编码，这就使得以下代码是合法的： </p>
-<pre class="codehilite"><code class="language-python">&gt;&gt;&gt; 中国 = 'china' 
-&gt;&gt;&gt;print(中国) 
-china</code></pre>
-
-
-<p>Python 2.x</p>
-<pre class="codehilite"><code class="language-python">&gt;&gt;&gt; str = &quot;我爱北京天安门&quot;
-&gt;&gt;&gt; str
-'\xe6\x88\x91\xe7\x88\xb1\xe5\x8c\x97\xe4\xba\xac\xe5\xa4\xa9\xe5\xae\x89\xe9\x97\xa8'
-&gt;&gt;&gt; str = u&quot;我爱北京天安门&quot;
-&gt;&gt;&gt; str
-u'\u6211\u7231\u5317\u4eac\u5929\u5b89\u95e8'</code></pre>
-
-
-<p>Python 3.x</p>
-<pre class="codehilite"><code class="language-python">&gt;&gt;&gt; str = &quot;我爱北京天安门&quot;
-&gt;&gt;&gt; str
-'我爱北京天安门'</code></pre>
-
-
+<p>由于 Python3.X 源码文件默认使用utf-8编码，这就使得以下代码是合法的： 
+<div class="codehilite"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="n">中国</span> <span class="o">=</span> <span class="s1">&#39;china&#39;</span> 
+<span class="o">&gt;&gt;&gt;</span><span class="nb">print</span><span class="p">(</span><span class="n">中国</span><span class="p">)</span> 
+<span class="n">china</span>
+</pre></div>
+Python 2.x
+<div class="codehilite"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;我爱北京天安门&quot;</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">str</span>
+<span class="s1">&#39;</span><span class="se">\xe6\x88\x91\xe7\x88\xb1\xe5\x8c\x97\xe4\xba\xac\xe5\xa4\xa9\xe5\xae\x89\xe9\x97\xa8</span><span class="s1">&#39;</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">str</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">&quot;我爱北京天安门&quot;</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">str</span>
+<span class="sa">u</span><span class="s1">&#39;</span><span class="se">\u6211\u7231\u5317\u4eac\u5929\u5b89\u95e8</span><span class="s1">&#39;</span>
+</pre></div>
+Python 3.x
+<div class="codehilite"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;我爱北京天安门&quot;</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">str</span>
+<span class="s1">&#39;我爱北京天安门&#39;</span>
+</pre></div></p>
 <h3 id="_1">除法运算<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h3>
 <p>Python中的除法较其它语言显得非常高端，有套很复杂的规则。Python中的除法有两个运算符，/和// 
 首先来说/除法:
 在python 2.x中/除法就跟我们熟悉的大多数语言，比如Java啊C啊差不多，整数相除的结果是一个整数，把小数部分完全忽略掉，浮点数除法会保留小数点的部分得到一个浮点数的结果。
 在python 3.x中/除法不再这么做了，对于整数之间的相除，结果也会是浮点数。 
-Python 2.x:</p>
-<pre class="codehilite"><code class="language-python">&gt;&gt;&gt; 1 / 2
-0
-&gt;&gt;&gt; 1.0 / 2.0
-0.5</code></pre>
-
-
-<p>Python 3.x:</p>
-<pre class="codehilite"><code class="language-python">&gt;&gt;&gt; 1/2
-0.5</code></pre>
-
-
-<p>而对于//除法，这种除法叫做floor除法，会对除法的结果自动进行一个floor操作，在python 2.x和python 3.x中是一致的。
-python 2.x:</p>
-<pre class="codehilite"><code class="language-python">&gt;&gt;&gt; -1 // 2
--1</code></pre>
-
-
-<p>python 3.x:</p>
-<pre class="codehilite"><code class="language-python">&gt;&gt;&gt; -1 // 2
--1</code></pre>
-
-
-<p>注意的是并不是舍弃小数部分，而是执行 floor 操作，如果要截取整数部分，那么需要使用 math 模块的 trunc 函数
-python 3.x:</p>
-<pre class="codehilite"><code class="language-python">&gt;&gt;&gt; import math
-&gt;&gt;&gt; math.trunc(1 / 2)
-0
-&gt;&gt;&gt; math.trunc(-1 / 2)
-0</code></pre>
-
-
+Python 2.x:
+<div class="codehilite"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="mi">1</span> <span class="o">/</span> <span class="mi">2</span>
+<span class="mi">0</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="mf">2.0</span>
+<span class="mf">0.5</span>
+</pre></div>
+Python 3.x:
+<div class="codehilite"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="mi">1</span><span class="o">/</span><span class="mi">2</span>
+<span class="mf">0.5</span>
+</pre></div>
+而对于//除法，这种除法叫做floor除法，会对除法的结果自动进行一个floor操作，在python 2.x和python 3.x中是一致的。
+python 2.x:
+<div class="codehilite"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="o">-</span><span class="mi">1</span> <span class="o">//</span> <span class="mi">2</span>
+<span class="o">-</span><span class="mi">1</span>
+</pre></div>
+python 3.x:
+<div class="codehilite"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="o">-</span><span class="mi">1</span> <span class="o">//</span> <span class="mi">2</span>
+<span class="o">-</span><span class="mi">1</span>
+</pre></div>
+注意的是并不是舍弃小数部分，而是执行 floor 操作，如果要截取整数部分，那么需要使用 math 模块的 trunc 函数
+python 3.x:
+<div class="codehilite"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="kn">import</span> <span class="nn">math</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">math</span><span class="o">.</span><span class="n">trunc</span><span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span>
+<span class="mi">0</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">math</span><span class="o">.</span><span class="n">trunc</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span>
+<span class="mi">0</span>
+</pre></div></p>
 <h3 id="_2">异常<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
 <p>在 Python 3 中处理异常也轻微的改变了，在 Python 3 中我们现在使用 as 作为关键词。
 捕获异常的语法由 except exc, var 改为 except exc as var。
@@ -661,90 +2481,83 @@ python 3.x:</p>
 <p>在 Python 2 中 xrange() 创建迭代对象的用法是非常流行的。比如： for 循环或者是列表/集合/字典推导式。 
 这个表现十分像生成器（比如。"惰性求值"）。但是这个 xrange-iterable 是无穷的，意味着你可以无限遍历。 
 由于它的惰性求值，如果你不得仅仅不遍历它一次，xrange() 函数 比 range() 更快（比如 for 循环）。尽管如此，对比迭代一次，不建议你重复迭代多次，因为生成器每次都从头开始。 
-在 Python 3 中，range() 是像 xrange() 那样实现以至于一个专门的 xrange() 函数都不再存在（在 Python 3 中 xrange() 会抛出命名异常）。</p>
-<pre class="codehilite"><code class="language-python">import timeit
+在 Python 3 中，range() 是像 xrange() 那样实现以至于一个专门的 xrange() 函数都不再存在（在 Python 3 中 xrange() 会抛出命名异常）。
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="nn">timeit</span>
 
-n = 10000
-def test_range(n):
-    return for i in range(n):
-        pass
+<span class="n">n</span> <span class="o">=</span> <span class="mi">10000</span>
+<span class="k">def</span> <span class="nf">test_range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="k">return</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+        <span class="k">pass</span>
 
-def test_xrange(n):
-    for i in xrange(n):
-        pass   </code></pre>
+<span class="k">def</span> <span class="nf">test_xrange</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">xrange</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+        <span class="k">pass</span>   
+</pre></div>
+Python 2
+<div class="codehilite"><pre><span></span><span class="nb">print</span> <span class="s1">&#39;Python&#39;</span><span class="p">,</span> <span class="n">python_version</span><span class="p">()</span>
 
+<span class="nb">print</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">timing range()&#39;</span> 
+<span class="o">%</span><span class="n">timeit</span> <span class="n">test_range</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
 
-<p>Python 2</p>
-<pre class="codehilite"><code class="language-python">print 'Python', python_version()
+<span class="nb">print</span> <span class="s1">&#39;</span><span class="se">\n\n</span><span class="s1">timing xrange()&#39;</span> 
+<span class="o">%</span><span class="n">timeit</span> <span class="n">test_xrange</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
 
-print '\ntiming range()' 
-%timeit test_range(n)
+<span class="c1">#Python 2.7.6</span>
 
-print '\n\ntiming xrange()' 
-%timeit test_xrange(n)
-
-#Python 2.7.6
-
-timing range()
-1000 loops, best of 3: 433 µs per loop
-
-
-timing xrange()
-1000 loops, best of 3: 350 µs per loop</code></pre>
+<span class="n">timing</span> <span class="nb">range</span><span class="p">()</span>
+<span class="mi">1000</span> <span class="n">loops</span><span class="p">,</span> <span class="n">best</span> <span class="n">of</span> <span class="mi">3</span><span class="p">:</span> <span class="mi">433</span> <span class="n">µs</span> <span class="n">per</span> <span class="n">loop</span>
 
 
-<p>Python 3</p>
-<pre class="codehilite"><code class="language-python">print('Python', python_version())
+<span class="n">timing</span> <span class="n">xrange</span><span class="p">()</span>
+<span class="mi">1000</span> <span class="n">loops</span><span class="p">,</span> <span class="n">best</span> <span class="n">of</span> <span class="mi">3</span><span class="p">:</span> <span class="mi">350</span> <span class="n">µs</span> <span class="n">per</span> <span class="n">loop</span>
+</pre></div>
+Python 3
+<div class="codehilite"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Python&#39;</span><span class="p">,</span> <span class="n">python_version</span><span class="p">())</span>
 
-print('\ntiming range()')
-%timeit test_range(n)
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">timing range()&#39;</span><span class="p">)</span>
+<span class="o">%</span><span class="n">timeit</span> <span class="n">test_range</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
 
-#Python 3.4.1
+<span class="c1">#Python 3.4.1</span>
 
-timing range()
-1000 loops, best of 3: 520 µs per loop</code></pre>
+<span class="n">timing</span> <span class="nb">range</span><span class="p">()</span>
+<span class="mi">1000</span> <span class="n">loops</span><span class="p">,</span> <span class="n">best</span> <span class="n">of</span> <span class="mi">3</span><span class="p">:</span> <span class="mi">520</span> <span class="n">µs</span> <span class="n">per</span> <span class="n">loop</span>
+</pre></div>
+<div class="codehilite"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">xrange</span><span class="p">(</span><span class="mi">10</span><span class="p">))</span>
+<span class="o">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span>                                 <span class="n">Traceback</span> <span class="p">(</span><span class="n">most</span> <span class="n">recent</span> <span class="n">call</span> <span class="n">last</span><span class="p">)</span>
+<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">5</span><span class="o">-</span><span class="mi">5</span><span class="n">d8f9b79ea70</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span><span class="p">()</span>
+<span class="o">----&gt;</span> <span class="mi">1</span> <span class="nb">print</span><span class="p">(</span><span class="n">xrange</span><span class="p">(</span><span class="mi">10</span><span class="p">))</span>
 
-
-<pre class="codehilite"><code class="language-python">print(xrange(10))
----------------------------------------------------------------------------
-NameError                                 Traceback (most recent call last)
-&lt;ipython-input-5-5d8f9b79ea70&gt; in &lt;module&gt;()
-----&gt; 1 print(xrange(10))
-
-NameError: name 'xrange' is not defined</code></pre>
-
-
+<span class="ne">NameError</span><span class="p">:</span> <span class="n">name</span> <span class="s1">&#39;xrange&#39;</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">defined</span>
+</pre></div></p>
 <h3 id="_3">八进制字面量表示<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
 <p>八进制数必须写成0o777，原来的形式0777不能用了；二进制必须写成0b111。
 新增了一个bin()函数用于将一个整数转换成二进制字串。 Python 2.6已经支持这两种语法。
 在Python 3.x中，表示八进制字面量的方式只有一种，就是0o1000。
-python 2.x</p>
-<pre class="codehilite"><code class="language-python">&gt;&gt;&gt; 0o1000
-512
-&gt;&gt;&gt; 01000
-512</code></pre>
-
-
-<p>python 3.x</p>
-<pre class="codehilite"><code class="language-python">&gt;&gt;&gt; 01000
-  File &quot;&lt;stdin&gt;&quot;, line 1
-    01000
-        ^
-SyntaxError: invalid token
-&gt;&gt;&gt; 0o1000
-512</code></pre>
-
-
+python 2.x
+<div class="codehilite"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="mo">0o1000</span>
+<span class="mi">512</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="mi">01000</span>
+<span class="mi">512</span>
+</pre></div>
+python 3.x
+<div class="codehilite"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="mi">01000</span>
+  <span class="n">File</span> <span class="s2">&quot;&lt;stdin&gt;&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">1</span>
+    <span class="mi">01000</span>
+        <span class="o">^</span>
+<span class="ne">SyntaxError</span><span class="p">:</span> <span class="n">invalid</span> <span class="n">token</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="mo">0o1000</span>
+<span class="mi">512</span>
+</pre></div></p>
 <h3 id="_4">不等运算符<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
 <p>Python 2.x中不等于有两种写法 != 和 &lt;&gt;
 Python 3.x中去掉了&lt;&gt;, 只有!=一种写法，还好，我从来没有使用&lt;&gt;的习惯 </p>
 <h3 id="repr">去掉了repr表达式``<a class="headerlink" href="#repr" title="Permanent link">&para;</a></h3>
 <p>Python 2.x 中反引号<code>相当于repr函数的作用 
-Python 3.x 中去掉了</code>这种写法，只允许使用repr函数，这样做的目的是为了使代码看上去更清晰么？不过我感觉用repr的机会很少，一般只在debug的时候才用，多数时候还是用str函数来用字符串描述对象。</p>
-<pre class="codehilite"><code class="language-python">def sendMail(from_: str, to: str, title: str, body: str) -&gt; bool:
-    pass</code></pre>
-
-
+Python 3.x 中去掉了</code>这种写法，只允许使用repr函数，这样做的目的是为了使代码看上去更清晰么？不过我感觉用repr的机会很少，一般只在debug的时候才用，多数时候还是用str函数来用字符串描述对象。
+<div class="codehilite"><pre><span></span><span class="k">def</span> <span class="nf">sendMail</span><span class="p">(</span><span class="n">from_</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">to</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">title</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">body</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+    <span class="k">pass</span>
+</pre></div></p>
 <h3 id="pep8">多个模块被改名（根据PEP8）<a class="headerlink" href="#pep8" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
@@ -802,93 +2615,141 @@ Python 3.x 中去掉了</code>这种写法，只允许使用repr函数，这样�
 <td>2. 新增了bytes类型，对应于2.X版本的八位串，定义一个bytes字面量的方法如下：</td>
 <td></td>
 </tr>
+<tr>
+<td><div class="codehilite"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="n">b</span> <span class="o">=</span> <span class="sa">b</span><span class="s1">&#39;china&#39;</span> 
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">type</span><span class="p">(</span><span class="n">b</span><span class="p">)</span> 
+<span class="o">&lt;</span><span class="nb">type</span> <span class="s1">&#39;bytes&#39;</span><span class="o">&gt;</span> 
+</pre></div></td>
+<td></td>
+</tr>
+<tr>
+<td>str对象和bytes对象可以使用.encode() (str -&gt; bytes) or .decode() (bytes -&gt; str)方法相互转化。</td>
+<td></td>
+</tr>
+<tr>
+<td><div class="codehilite"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="n">s</span> <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">decode</span><span class="p">()</span> 
+<span class="o">&gt;&gt;&gt;</span> <span class="n">s</span> 
+<span class="s1">&#39;china&#39;</span> 
+<span class="o">&gt;&gt;&gt;</span> <span class="n">b1</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">encode</span><span class="p">()</span> 
+<span class="o">&gt;&gt;&gt;</span> <span class="n">b1</span> 
+<span class="sa">b</span><span class="s1">&#39;china&#39;</span> 
+</pre></div></td>
+<td></td>
+</tr>
+<tr>
+<td>3. dict的.keys()、.items 和.values()方法返回迭代器，返回的值不再是list，而是view。所以dict.iterkeys(),dict.iteritems()和dict.itervalues()被去掉了。同时去掉的还有 dict.has_key()，用 in替代它吧 。</td>
+<td></td>
+</tr>
+<tr>
+<td>### 打开文件</td>
+<td></td>
+</tr>
+<tr>
+<td>原：</td>
+<td></td>
+</tr>
+<tr>
+<td><div class="codehilite"><pre><span></span><span class="n">file</span><span class="p">(</span> <span class="o">.....</span> <span class="p">)</span>
+<span class="c1">#或 </span>
+<span class="nb">open</span><span class="p">(</span><span class="o">.....</span><span class="p">)</span>
+</pre></div></td>
+<td></td>
+</tr>
+<tr>
+<td>改为只能用</td>
+<td></td>
+</tr>
+<tr>
+<td><div class="codehilite"><pre><span></span><span class="nb">open</span><span class="p">(</span><span class="o">.....</span><span class="p">)</span>
+</pre></div></td>
+<td></td>
+</tr>
+<tr>
+<td>### 从键盘录入一个字符串</td>
+<td></td>
+</tr>
+<tr>
+<td>在python2.x中raw_input()和input( )，两个函数都存在，其中区别为：</td>
+<td></td>
+</tr>
+<tr>
+<td>raw_input()---将所有输入作为字符串看待，返回字符串类型</td>
+<td></td>
+</tr>
+<tr>
+<td>input()-----只能接收"数字"的输入，在对待纯数字输入时具有自己的特性，它返回所输入的数字的类型（int, float ）</td>
+<td></td>
+</tr>
+<tr>
+<td>在python3.x中raw_input()和input( )进行了整合，去除了raw_input()，仅保留了input()函数，其接收任意任性输入，将所有输入默认为字符串处理，并返回字符串类型。</td>
+<td></td>
+</tr>
+<tr>
+<td>原:</td>
+<td></td>
+</tr>
+<tr>
+<td><div class="codehilite"><pre><span></span><span class="n">raw_input</span><span class="p">(</span> <span class="s2">&quot;提示信息&quot;</span> <span class="p">)</span>
+</pre></div></td>
+<td></td>
+</tr>
+<tr>
+<td>改为:</td>
+<td></td>
+</tr>
+<tr>
+<td><div class="codehilite"><pre><span></span><span class="nb">input</span><span class="p">(</span> <span class="s2">&quot;提示信息&quot;</span> <span class="p">)</span>
+</pre></div></td>
+<td></td>
+</tr>
+<tr>
+<td>### map、filter 和 reduce</td>
+<td></td>
+</tr>
+<tr>
+<td>这三个函数号称是函数式编程的代表。在 Python3.x 和 Python2.x 中也有了很大的差异。</td>
+<td></td>
+</tr>
 </tbody>
 </table>
-<pre class="codehilite"><code class="language-python">&gt;&gt;&gt; b = b'china' 
-&gt;&gt;&gt; type(b) 
-&lt;type 'bytes'&gt; </code></pre>
-
-
-<p>str对象和bytes对象可以使用.encode() (str -&gt; bytes) or .decode() (bytes -&gt; str)方法相互转化。 </p>
-<pre class="codehilite"><code class="language-python">&gt;&gt;&gt; s = b.decode() 
-&gt;&gt;&gt; s 
-'china' 
-&gt;&gt;&gt; b1 = s.encode() 
-&gt;&gt;&gt; b1 
-b'china' </code></pre>
-
-
-<ol>
-<li>dict的.keys()、.items 和.values()方法返回迭代器，返回的值不再是list，而是view。所以dict.iterkeys(),dict.iteritems()和dict.itervalues()被去掉了。同时去掉的还有 dict.has_key()，用 in替代它吧 。</li>
-</ol>
-<h3 id="_5">打开文件<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
-<p>原：</p>
-<pre class="codehilite"><code class="language-python">file( ..... )
-#或 
-open(.....)</code></pre>
-
-
-<p>改为只能用</p>
-<pre class="codehilite"><code class="language-python">open(.....)</code></pre>
-
-
-<h3 id="_6">从键盘录入一个字符串<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
-<p>在python2.x中raw_input()和input( )，两个函数都存在，其中区别为：
- raw_input()---将所有输入作为字符串看待，返回字符串类型 
- input()-----只能接收"数字"的输入，在对待纯数字输入时具有自己的特性，它返回所输入的数字的类型（int, float ） 
-在python3.x中raw_input()和input( )进行了整合，去除了raw_input()，仅保留了input()函数，其接收任意任性输入，将所有输入默认为字符串处理，并返回字符串类型。
-原:</p>
-<pre class="codehilite"><code class="language-python">raw_input( &quot;提示信息&quot; )</code></pre>
-
-
-<p>改为:</p>
-<pre class="codehilite"><code class="language-python">input( &quot;提示信息&quot; )</code></pre>
-
-
-<h3 id="mapfilter-reduce">map、filter 和 reduce<a class="headerlink" href="#mapfilter-reduce" title="Permanent link">&para;</a></h3>
-<p>这三个函数号称是函数式编程的代表。在 Python3.x 和 Python2.x 中也有了很大的差异。</p>
-<p>首先我们先简单的在 Python2.x 的交互下输入 map 和 filter,看到它们两者的类型是 built-in function(内置函数):</p>
-<pre class="codehilite"><code class="language-python">&gt;&gt;&gt; map
-&lt;built-in function map&gt;
-&gt;&gt;&gt; filter
-&lt;built-in function filter&gt;
-&gt;&gt;&gt;</code></pre>
-
-
-<p>它们输出的结果类型都是列表:</p>
-<pre class="codehilite"><code class="language-python">&gt;&gt;&gt; map(lambda x:x *2, [1,2,3])
-[2, 4, 6]
-&gt;&gt;&gt; filter(lambda x:x %2 ==0,range(10))
-[0, 2, 4, 6, 8]
-&gt;&gt;&gt;</code></pre>
-
-
-<p>但是在Python 3.x中它们却不是这个样子了：</p>
-<pre class="codehilite"><code class="language-python">&gt;&gt;&gt; map
-&lt;class 'map'&gt;
-&gt;&gt;&gt; map(print,[1,2,3])
-&lt;map object at 0x10d8bd400&gt;
-&gt;&gt;&gt; filter
-&lt;class 'filter'&gt;
-&gt;&gt;&gt; filter(lambda x:x % 2 == 0, range(10))
-&lt;filter object at 0x10d8bd3c8&gt;
-&gt;&gt;&gt;</code></pre>
-
-
-<p>首先它们从函数变成了类，其次，它们的返回结果也从当初的列表成了一个可迭代的对象, 我们尝试用 next 函数来进行手工迭代:</p>
-<pre class="codehilite"><code class="language-python">&gt;&gt;&gt; f =filter(lambda x:x %2 ==0, range(10))
-&gt;&gt;&gt; next(f)
-0
-&gt;&gt;&gt; next(f)
-2
-&gt;&gt;&gt; next(f)
-4
-&gt;&gt;&gt; next(f)
-6
-&gt;&gt;&gt;</code></pre>
-
-
-<p>对于比较高端的 reduce 函数，它在 Python 3.x 中已经不属于 built-in 了，被挪到 functools 模块当中。</p>
+<p>首先我们先简单的在 Python2.x 的交互下输入 map 和 filter,看到它们两者的类型是 built-in function(内置函数):
+<div class="codehilite"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="nb">map</span>
+<span class="o">&lt;</span><span class="n">built</span><span class="o">-</span><span class="ow">in</span> <span class="n">function</span> <span class="nb">map</span><span class="o">&gt;</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">filter</span>
+<span class="o">&lt;</span><span class="n">built</span><span class="o">-</span><span class="ow">in</span> <span class="n">function</span> <span class="nb">filter</span><span class="o">&gt;</span>
+<span class="o">&gt;&gt;&gt;</span>
+</pre></div>
+它们输出的结果类型都是列表:
+<div class="codehilite"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span><span class="n">x</span> <span class="o">*</span><span class="mi">2</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">])</span>
+<span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">]</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span><span class="n">x</span> <span class="o">%</span><span class="mi">2</span> <span class="o">==</span><span class="mi">0</span><span class="p">,</span><span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">))</span>
+<span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">8</span><span class="p">]</span>
+<span class="o">&gt;&gt;&gt;</span>
+</pre></div>
+但是在Python 3.x中它们却不是这个样子了：
+<div class="codehilite"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="nb">map</span>
+<span class="o">&lt;</span><span class="k">class</span> <span class="err">&#39;</span><span class="nc">map</span><span class="s1">&#39;&gt;</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">map</span><span class="p">(</span><span class="nb">print</span><span class="p">,[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">])</span>
+<span class="o">&lt;</span><span class="nb">map</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x10d8bd400</span><span class="o">&gt;</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">filter</span>
+<span class="o">&lt;</span><span class="k">class</span> <span class="err">&#39;</span><span class="nc">filter</span><span class="s1">&#39;&gt;</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span><span class="n">x</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">,</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">))</span>
+<span class="o">&lt;</span><span class="nb">filter</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x10d8bd3c8</span><span class="o">&gt;</span>
+<span class="o">&gt;&gt;&gt;</span>
+</pre></div>
+首先它们从函数变成了类，其次，它们的返回结果也从当初的列表成了一个可迭代的对象, 我们尝试用 next 函数来进行手工迭代:
+<div class="codehilite"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="n">f</span> <span class="o">=</span><span class="nb">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span><span class="n">x</span> <span class="o">%</span><span class="mi">2</span> <span class="o">==</span><span class="mi">0</span><span class="p">,</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">))</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">next</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+<span class="mi">0</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">next</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+<span class="mi">2</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">next</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+<span class="mi">4</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">next</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+<span class="mi">6</span>
+<span class="o">&gt;&gt;&gt;</span>
+</pre></div>
+对于比较高端的 reduce 函数，它在 Python 3.x 中已经不属于 built-in 了，被挪到 functools 模块当中。</p>
 <h2 id="python3">Python3.+新特性<a class="headerlink" href="#python3" title="Permanent link">&para;</a></h2>
 <p>新的语法特性：
 * 格式化字符串字面值
@@ -902,7 +2763,7 @@ open(.....)</code></pre>
 * 具有纳秒分辨率的时间对象
 * 环境中默认使用UTF-8编码的UTF-8模式
 * 触发调试器的一个新的内置函数</p>
-<h3 id="_7">新的模块<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
+<h3 id="_5">新的模块<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
 <p>添加了一个安全模块secrets到标准库中</p>
 <h3 id="cpython">CPython实现改进<a class="headerlink" href="#cpython" title="Permanent link">&para;</a></h3>
 <ul>
@@ -913,7 +2774,7 @@ open(.....)</code></pre>
 <li>添加了DTrace和SystemTap探测的支持。</li>
 <li>新的PYTHONMALLOC环境变量可以用于调试解释器内存分配和访问错误。</li>
 </ul>
-<h3 id="_8">重大的标准库改进<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
+<h3 id="_6">重大的标准库改进<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
 <ul>
 <li>asyncio模块接收了新特性，重大的可用性和性能改进，然后修复了大量的BUG。从Python 3.6开始asyncio模块不再是临时的了，它已经被认为是稳定的了。</li>
 <li>新的文件系统路径协议已实现，用于支持路径类对象。所有标准库函数在处理路径时已使用新的协议。</li>
@@ -921,7 +2782,7 @@ open(.....)</code></pre>
 <li>typing模块接受了一些改进。</li>
 <li>tracemalloc模块经过重大改造，现在可以为ResourceWarnning提供更好的输出，也为内存分配错误提供更好的诊断。</li>
 </ul>
-<h3 id="_9">安全改进<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h3>
+<h3 id="_7">安全改进<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
 <ul>
 <li>secrets模块已被添加，可以生成更安全的伪随机数。</li>
 <li>在Linux上，os.urandom()现在会被锁住，直到系统的伪随机滴池被初始化增加安全。</li>
@@ -935,84 +2796,74 @@ open(.....)</code></pre>
 <li>一个._pth文件可以被添加用于隔离模块，避免全路径搜索，详情请看文档。</li>
 </ul>
 <h3 id="formatted">Formatted字符串字面值<a class="headerlink" href="#formatted" title="Permanent link">&para;</a></h3>
-<p>Formatted字符串是带有’f’字符前缀的字符串，可以很方便的格式化字符串。</p>
-<pre class="codehilite"><code class="language-python">&gt;&gt;&gt; name = &quot;xiaoming&quot;
-&gt;&gt;&gt; f&quot;He name is {name}&quot;
-'He name is xiaoming'
-&gt;&gt;&gt; width = 10
-&gt;&gt;&gt; precision = 4
-&gt;&gt;&gt; value = decimal.Decimal(&quot;12.34567&quot;)
-&gt;&gt;&gt; f&quot;result: {value:{width}.{precision}}&quot;
-'result:      12.35'</code></pre>
-
-
-<h3 id="_10">数字中支持下划线<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h3>
-<p>数字中支持使用下划线，方便阅读，例如：</p>
-<pre class="codehilite"><code class="language-python">&gt;&gt;&gt; 1_000_000_000_000_000
-1000000000000000
-&gt;&gt;&gt; 0x_FF_FF_FF_FF
-4294967295</code></pre>
-
-
-<p>字符串format方法也支持了’_’选项，当格式化为浮点数或整数时，以3位分隔，当格式化为’b’,’o’,’x’和’X’时，以4位分隔</p>
-<pre class="codehilite"><code class="language-python">&gt;&gt;&gt; '{:_}'.format(10000000)
-'10_000_000'
-&gt;&gt;&gt; '{:_b}'.format(10000000)
-'1001_1000_1001_0110_1000_0000'</code></pre>
-
-
-<h3 id="_11">变量注释语法<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h3>
-<p>变量注释没有给变量带来特殊的意义，只是为了方便IDE做类型检查。</p>
-<pre class="codehilite"><code class="language-python">&gt;&gt;&gt; from typing import List,Dict
-&gt;&gt;&gt; primes: List[int] = []
-&gt;&gt;&gt; stats: Dict[str, int] = {}</code></pre>
-
-
-<p>上面代码中primes为变量名，List[int]为变量注释，用来说明primes列表是用来存放int类型数据的，但是这个不是强制性的，你使用append()方法添加一个str类型数据也是可以的，IDE会提示你添加的数据有误，但是运行时不会报错。</p>
-<h3 id="_12">异步生成器<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h3>
-<p>在Python3.5中，await和yield不能再同一个函数中使用，但是Python3.6已经取消了这个限制，可以在同一个函数体中使用了</p>
-<pre class="codehilite"><code class="language-python">async def ticker(delay, to):
-    &quot;&quot;&quot;Yield numbers from 0 to *to* every *delay* seconds.&quot;&quot;&quot;
-    for i in range(to):
-        yield i
-        await asyncio.sleep(delay)</code></pre>
-
-
-<h3 id="_13">异步列表推导<a class="headerlink" href="#_13" title="Permanent link">&para;</a></h3>
+<p>Formatted字符串是带有’f’字符前缀的字符串，可以很方便的格式化字符串。
+<div class="codehilite"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;xiaoming&quot;</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="sa">f</span><span class="s2">&quot;He name is </span><span class="si">{name}</span><span class="s2">&quot;</span>
+<span class="s1">&#39;He name is xiaoming&#39;</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">width</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">precision</span> <span class="o">=</span> <span class="mi">4</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">value</span> <span class="o">=</span> <span class="n">decimal</span><span class="o">.</span><span class="n">Decimal</span><span class="p">(</span><span class="s2">&quot;12.34567&quot;</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="sa">f</span><span class="s2">&quot;result: {value:</span><span class="si">{width}</span><span class="s2">.</span><span class="si">{precision}</span><span class="s2">}&quot;</span>
+<span class="s1">&#39;result:      12.35&#39;</span>
+</pre></div></p>
+<h3 id="_8">数字中支持下划线<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
+<p>数字中支持使用下划线，方便阅读，例如：
+<div class="codehilite"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="mi">1_000_000_000_000_000</span>
+<span class="mi">1000000000000000</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="mh">0x_FF_FF_FF_FF</span>
+<span class="mi">4294967295</span>
+</pre></div>
+字符串format方法也支持了’_’选项，当格式化为浮点数或整数时，以3位分隔，当格式化为’b’,’o’,’x’和’X’时，以4位分隔
+<div class="codehilite"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="s1">&#39;{:_}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="mi">10000000</span><span class="p">)</span>
+<span class="s1">&#39;10_000_000&#39;</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="s1">&#39;{:_b}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="mi">10000000</span><span class="p">)</span>
+<span class="s1">&#39;1001_1000_1001_0110_1000_0000&#39;</span>
+</pre></div></p>
+<h3 id="_9">变量注释语法<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h3>
+<p>变量注释没有给变量带来特殊的意义，只是为了方便IDE做类型检查。
+<div class="codehilite"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span><span class="p">,</span><span class="n">Dict</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">primes</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">stats</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+</pre></div>
+上面代码中primes为变量名，List[int]为变量注释，用来说明primes列表是用来存放int类型数据的，但是这个不是强制性的，你使用append()方法添加一个str类型数据也是可以的，IDE会提示你添加的数据有误，但是运行时不会报错。</p>
+<h3 id="_10">异步生成器<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h3>
+<p>在Python3.5中，await和yield不能再同一个函数中使用，但是Python3.6已经取消了这个限制，可以在同一个函数体中使用了
+<div class="codehilite"><pre><span></span><span class="k">async</span> <span class="k">def</span> <span class="nf">ticker</span><span class="p">(</span><span class="n">delay</span><span class="p">,</span> <span class="n">to</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Yield numbers from 0 to *to* every *delay* seconds.&quot;&quot;&quot;</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">to</span><span class="p">):</span>
+        <span class="k">yield</span> <span class="n">i</span>
+        <span class="k">await</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="n">delay</span><span class="p">)</span>
+</pre></div></p>
+<h3 id="_11">异步列表推导<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h3>
 <p>增加在list、set和dict的列表推导和生成表达式中使用async for。 
-如下面这段代码:</p>
-<pre class="codehilite"><code class="language-python">result = []
-async for i in aiter():
-    if i % 2:
-        result.append(i)</code></pre>
-
-
-<p>使用异步推导式之后，可以简写成</p>
-<pre class="codehilite"><code class="language-python">result = [i async for i in aiter() if i % 2]</code></pre>
-
-
-<p>现在也支持在所有的推导式中使用await表达式</p>
-<pre class="codehilite"><code>result = [await fun() for fun in funcs]</code></pre>
-
-
+如下面这段代码:
+<div class="codehilite"><pre><span></span><span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">async</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">aiter</span><span class="p">():</span>
+    <span class="k">if</span> <span class="n">i</span> <span class="o">%</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+</pre></div>
+使用异步推导式之后，可以简写成
+<div class="codehilite"><pre><span></span><span class="n">result</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="k">async</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">aiter</span><span class="p">()</span> <span class="k">if</span> <span class="n">i</span> <span class="o">%</span> <span class="mi">2</span><span class="p">]</span>
+</pre></div>
+现在也支持在所有的推导式中使用await表达式
+<div class="codehilite"><pre><span></span>result = [await fun() for fun in funcs]
+</pre></div></p>
 <h3 id="python_1">Python数据类<a class="headerlink" href="#python_1" title="Permanent link">&para;</a></h3>
-<p>众所周知，Python是处理结构化数据的一种快捷又方便的方法。Python提供了用来组织管理结构，并将常见行为与数据实例联系起来的类，但是拥有许多初始化器的类历来存在这个弊端：需要大量的样板代码为它们创建实例。比如说：</p>
-<pre class="codehilite"><code class="language-python">class User():
-    def __init__(self,name,user_id,just_joined=True):
-        self.name=name
-        self.id=user_id
-        self.just_joined=just_joined</code></pre>
-
-
-<p>为了使这实现自动化：为类创建实例，Python 3.7引入了一个新的模块dataclasses，如<a href="https://www.python.org/dev/peps/pep-0557/">pep-0557</a>中所述。它提供了一个装饰器，能够以异常简单的方式重现上述行为：</p>
-<pre class="codehilite"><code class="language-python">@dataclass
-class User():
-    name:str
-    user_id:int
-    just_joined:bool=True</code></pre>
-
-
-<p>因而生成的类运行起来如同普通的Python类。你还可以声明某些字段是“冻结”或不可变的，并且使创建属性的特殊方法（比如__hash__或__repr__）实现自动化（或手动覆盖）。</p>
+<p>众所周知，Python是处理结构化数据的一种快捷又方便的方法。Python提供了用来组织管理结构，并将常见行为与数据实例联系起来的类，但是拥有许多初始化器的类历来存在这个弊端：需要大量的样板代码为它们创建实例。比如说：
+<div class="codehilite"><pre><span></span><span class="k">class</span> <span class="nc">User</span><span class="p">():</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">name</span><span class="p">,</span><span class="n">user_id</span><span class="p">,</span><span class="n">just_joined</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="o">=</span><span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="o">=</span><span class="n">user_id</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">just_joined</span><span class="o">=</span><span class="n">just_joined</span>
+</pre></div>
+为了使这实现自动化：为类创建实例，Python 3.7引入了一个新的模块dataclasses，如<a href="https://www.python.org/dev/peps/pep-0557/">pep-0557</a>中所述。它提供了一个装饰器，能够以异常简单的方式重现上述行为：
+<div class="codehilite"><pre><span></span><span class="nd">@dataclass</span>
+<span class="k">class</span> <span class="nc">User</span><span class="p">():</span>
+    <span class="n">name</span><span class="p">:</span><span class="nb">str</span>
+    <span class="n">user_id</span><span class="p">:</span><span class="nb">int</span>
+    <span class="n">just_joined</span><span class="p">:</span><span class="nb">bool</span><span class="o">=</span><span class="kc">True</span>
+</pre></div>
+因而生成的类运行起来如同普通的Python类。你还可以声明某些字段是“冻结”或不可变的，并且使创建属性的特殊方法（比如__hash__或__repr__）实现自动化（或手动覆盖）。</p>
 <h3 id="python_2">Python生成器异常处理<a class="headerlink" href="#python_2" title="Permanent link">&para;</a></h3>
 <p>正如<a href="https://www.python.org/dev/peps/pep-0479/">PEP 479</a>中概述，开发了一段时间的一处变更旨在让人们更容易调试Python生成器引发的StopIteration异常。以前，生成器遇到另一个问题时很容易引发StopIteration，而不是由于它用完了需要迭代的东西。这带来了一整批很难追踪的代码缺陷。</p>
 <p>在Python 3.7中，生成器引发StopIteration异常后，StopIteration异常将被转换成RuntimeError异常，那样它不会悄悄一路影响应用程序的堆栈框架。这意味着如何处理生成器的行为方面不太敏锐的一些程序会在Python 3.7中抛出RuntimeError。而在Python 3.6中，这种行为生成一个弃用警告；在Python 3.7中，它生成一个完整的错误。</p>
@@ -1026,13 +2877,13 @@ class User():
 <h3 id="python_4">具有纳秒分辨率的Python时间函数<a class="headerlink" href="#python_4" title="Permanent link">&para;</a></h3>
 <p>Python 3.7中一类新的时间函数返回纳秒精度的时间值。尽管Python是一种解释型语言，但是Python的核心开发人员维克多•斯廷纳（Victor Stinner）主张报告纳秒精度的时间。最主要的原因是，在处理转换其他程序（比如数据库）记录的时间值时，可以避免丢失精度。</p>
 <p>新的时间函数使用后缀_ns。比如说，time.process_time()的纳秒版本是time.process_time_ns()。请注意，并非所有的时间函数都有对应的纳秒版本，因为其中一些时间函数并不得益于此。</p>
-<h3 id="python-utf-8">Python UTF-8模式<a class="headerlink" href="#python-utf-8" title="Permanent link">&para;</a></h3>
+<h3 id="python_utf-8">Python UTF-8模式<a class="headerlink" href="#python_utf-8" title="Permanent link">&para;</a></h3>
 <p>Python一直支持UTF-8，以便轻松处理字符串和文本。但是周围环境中的语言环境（locale）有时仍是ASCII，而不是UTF-8，检测语言环境的机制并不总是很可靠。</p>
 <p>Python 3.7添加了所谓的“UTF-8模式”，可通过-X命令行开关启用该模式，该模式假设UTF-8是环境提供的语言环境。在POSIX语言环境中，UTF-8模式默认情况下已被启用，但在其他位置默认情况下被禁用，以免破坏向后兼容。值得试一试在默认情况下开启UTF-8模式，但不应该在生产环境下启用它，除非你确信Python与周围环境的所有交互都使用UTF-8。</p>
 <h3 id="breakpoint">内置breakpoint()函数<a class="headerlink" href="#breakpoint" title="Permanent link">&para;</a></h3>
 <p>Python随带内置的调试器，不过它也可以连入到第三方调试工具，只要它们能与Python的内部调试API进行对话。不过，Python到目前为止缺少一种从Python应用程序里面以编程方式触发调试器的标准化方法。</p>
 <p>Python 3.7添加了breakpoint()，这个内置函数使得函数被调用时，让执行切换到调试器。相应的调试器不一定是Python自己的pdb，可以是之前被设为首选调试器的任何调试器。以前，调试器不得不手动设置，然后调用，因而使代码更冗长。而有了breakpoint()，只需一个命令即可调用调试器，并且让设置调试器和调用调试器泾渭分明。</p>
-<h3 id="python-37">其他新的Python 3.7功能<a class="headerlink" href="#python-37" title="Permanent link">&para;</a></h3>
+<h3 id="python_37">其他新的Python 3.7功能<a class="headerlink" href="#python_37" title="Permanent link">&para;</a></h3>
 <p>Python 3.7有另外的众多变更。下面是你在使用最新版本的Python时可能会遇到的其他一些功能：</p>
 <p>面向线程本地存储支持的C-API</p>
 <p><a href="https://www.python.org/dev/peps/pep-0539/">PEP 539</a>中描述，线程特定存储（TSS）API取代了老式的线程本地存储（TLS）API。如果谁定制CPython或编写使用解释器的内部API的CPython扩展件，就要明白这一点。</p>
@@ -1045,85 +2896,143 @@ class User():
 <p>由于新的操作码，方法调用起来最多快20%。（除非你在编写直接处理Python操作码的代码，否则不需要担心由此带来的影响。）
 正则表达式中不区分大小写的匹配速度更快了，有时要快20倍。
 源代码中的一些常量现在可以更高效地优化。</p>
-<h3 id="_14">更多特性<a class="headerlink" href="#_14" title="Permanent link">&para;</a></h3>
-<p><a href="https://github.com/leisurelicht/wtfpython-cn">Python Feature</a></p></div>
-        </div>
+<h3 id="_12">更多特性<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h3>
+<p><a href="https://github.com/leisurelicht/wtfpython-cn">Python Feature</a></p>
+                
+                  
+                
+                
+              
+              
+                
 
-        <footer class="col-md-12">
-            <hr>
-                <p>BurningMyself</p>
-            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
-        </footer>
-        <script>
-            var base_url = "../..",
-                shortcuts = {"search": 83, "next": 78, "help": 191, "previous": 80};
-        </script>
-        <script src="../../js/base.js" defer></script>
-        <script src="../../search/main.js" defer></script>
 
-        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                <h4 class="modal-title" id="exampleModalLabel">Search</h4>
-            </div>
-            <div class="modal-body">
-                <p>
-                    From here you can search these documents. Enter
-                    your search terms below.
-                </p>
-                <form role="form">
-                    <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
-                    </div>
-                </form>
-                <div id="mkdocs-search-results"></div>
-            </div>
-            <div class="modal-footer">
-            </div>
+  <h2 id="__comments">评论</h2>
+  <div id="disqus_thread"></div>
+  <script>
+    var disqus_config = function () {
+      this.page.url = "https://rosemarys.gitee.io/python/feature/";
+      this.page.identifier =
+        "/python/feature/";
+    };
+    (function() {
+      var d = document, s = d.createElement("script");
+      s.src = "//disqus.disqus.com/embed.js";
+      s.setAttribute("data-timestamp", +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+
+              
+            </article>
+          </div>
         </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="../../java/springAnnotation/" title="Spring常用注解" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  上一页
+                </span>
+                Spring常用注解
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="../str_joint/" title="Python字符拼接" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  下一页
+                </span>
+                Python字符拼接
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
     </div>
-</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="Keyboard Shortcuts Modal" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                <h4 class="modal-title" id="exampleModalLabel">Keyboard Shortcuts</h4>
-            </div>
-            <div class="modal-body">
-              <table class="table">
-                <thead>
-                  <tr>
-                    <th style="width: 20%;">Keys</th>
-                    <th>Action</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td class="help shortcut"><kbd>?</kbd></td>
-                    <td>Open this help</td>
-                  </tr>
-                  <tr>
-                    <td class="next shortcut"><kbd>n</kbd></td>
-                    <td>Next page</td>
-                  </tr>
-                  <tr>
-                    <td class="prev shortcut"><kbd>p</kbd></td>
-                    <td>Previous page</td>
-                  </tr>
-                  <tr>
-                    <td class="search shortcut"><kbd>s</kbd></td>
-                    <td>Search</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-            <div class="modal-footer">
-            </div>
-        </div>
-    </div>
-</div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+          <div class="md-footer-copyright__highlight">
+            BurningMyself
+          </div>
+        
+        powered by
+        <a href="https://www.mkdocs.org">MkDocs</a>
+        and
+        <a href="https://squidfunk.github.io/mkdocs-material/">
+          Material for MkDocs</a>
+      </div>
+      
+  <div class="md-footer-social">
+    <link rel="stylesheet" href="../../assets/fonts/font-awesome.css">
+    
+      <a href="https://github.com/burningmyself" class="md-footer-social__link fa fa-github"></a>
+    
+      <a href="https://gitee.com/rosemarys" class="md-footer-social__link fa fa-gitee"></a>
+    
+  </div>
 
-    </body>
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../assets/javascripts/application.808e90bb.js"></script>
+      
+        
+        
+          
+          <script src="../../assets/javascripts/lunr/lunr.stemmer.support.js"></script>
+          
+            
+              
+              
+            
+          
+            
+          
+            
+              
+                <script src="../../assets/javascripts/lunr/tinyseg.js"></script>
+              
+              
+                <script src="../../assets/javascripts/lunr/lunr.ja.js"></script>
+              
+            
+          
+          
+            <script src="../../assets/javascripts/lunr/lunr.multi.js"></script>
+          
+        
+      
+      <script>app.initialize({version:"1.0.4",url:{base:"../.."}})</script>
+      
+        <script src="../../js/extra.js"></script>
+      
+        <script src="../../js/baidu-tongji.js"></script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+      
+    
+  </body>
 </html>

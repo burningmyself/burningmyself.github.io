@@ -1,607 +1,2425 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        
-        <meta name="author" content="朽木自雕">
-        <link rel="canonical" href="https://burningmyself.github.io/sql/mysql_yh/">
-        <link rel="shortcut icon" href="../../favicon.ico">
-        
+
+
+
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+        <meta name="description" content=".net,java,php,python,docker,web">
+      
+      
+        <link rel="canonical" href="https://rosemarys.gitee.io/sql/mysql_yh/">
+      
+      
+        <meta name="author" content="BurningMyself">
+      
+      
+        <meta name="lang:clipboard.copy" content="复制">
+      
+        <meta name="lang:clipboard.copied" content="已复制">
+      
+        <meta name="lang:search.language" content="zh,en,ja">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="没有找到符合条件的结果">
+      
+        <meta name="lang:search.result.one" content="找到 1 个符合条件的结果">
+      
+        <meta name="lang:search.result.other" content="# 个符合条件的结果">
+      
+        <meta name="lang:search.tokenizer" content="[\ s \-\ .. +">
+      
+      <link rel="shortcut icon" href="../../favicon.ico">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.6.0">
+    
+    
+      
         <title>MySQL优化 - BurningMyself</title>
-        <link href="../../css/bootstrap-custom.min.css" rel="stylesheet">
-        <link href="../../css/font-awesome.min.css" rel="stylesheet">
-        <link href="../../css/base.css" rel="stylesheet">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
-        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-        <!--[if lt IE 9]>
-            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-        <![endif]-->
-
-        <script src="../../js/jquery-1.10.2.min.js" defer></script>
-        <script src="../../js/bootstrap-3.0.3.min.js" defer></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
-        <script>hljs.initHighlightingOnLoad();</script>
-        <script>
-            (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-            })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-
-            ga('create', 'UA-36723568-3', 'mkdocs.org');
-            ga('send', 'pageview');
-        </script> 
-    </head>
-
-    <body>
-
-        <div class="navbar navbar-default navbar-fixed-top" role="navigation">
-            <div class="container">
-
-                <!-- Collapsed navigation -->
-                <div class="navbar-header">
-                    <!-- Expander button -->
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" href="../..">BurningMyself</a>
-                </div>
-
-                <!-- Expanded navigation -->
-                <div class="navbar-collapse collapse">
-                        <!-- Main navigation -->
-                        <ul class="nav navbar-nav">
-                            <li >
-                                <a href="../..">介绍</a>
-                            </li>
-                            <li class="dropdown active">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">技术博文 <b class="caret"></b></a>
-                                <ul class="dropdown-menu">
-                                    
-  <li class="dropdown-submenu">
-    <a href="#">.NET</a>
-    <ul class="dropdown-menu">
-            
-<li >
-    <a href="../../net/c_sharp/">C# 6</a>
-</li>
-            
-<li >
-    <a href="../../net/c_docker/">.Ner Core Docker 部署</a>
-</li>
-            
-<li >
-    <a href="../../net/c_mysql_nginx/">使用 Docker 容器化部署 ASP.NET Core + MySQL + Nginx</a>
-</li>
-            
-<li >
-    <a href="../../net/c_core_safety/">让你的ASP.NET Core应用程序更安全</a>
-</li>
-            
-<li >
-    <a href="../../net/c_core_study_route/">ASP.NET Core开发者指南</a>
-</li>
-    </ul>
-  </li>
-                                    
-  <li class="dropdown-submenu">
-    <a href="#">Java</a>
-    <ul class="dropdown-menu">
-            
-<li >
-    <a href="../../java/feature/">Java特性</a>
-</li>
-            
-<li >
-    <a href="../../java/load-class/">Java类加载</a>
-</li>
-            
-<li >
-    <a href="../../java/orm/">Orm的优缺点</a>
-</li>
-            
-<li >
-    <a href="../../java/bio-nio/">BIO与NIO</a>
-</li>
-            
-<li >
-    <a href="../../java/rocketmq/rmq-1/">RocketMq下载与安装</a>
-</li>
-            
-<li >
-    <a href="../../java/springAnnotation/">Spring常用注解</a>
-</li>
-    </ul>
-  </li>
-                                    
-  <li class="dropdown-submenu">
-    <a href="#">Python</a>
-    <ul class="dropdown-menu">
-            
-<li >
-    <a href="../../python/feature/">Python特性</a>
-</li>
-            
-<li >
-    <a href="../../python/str_joint/">Python字符拼接</a>
-</li>
-            
-<li >
-    <a href="../../python/syntax_rule/">Python语法技巧</a>
-</li>
-            
-<li >
-    <a href="../../python/fabric/">远程部署神器 Fabric</a>
-</li>
-    </ul>
-  </li>
-                                    
-  <li class="dropdown-submenu">
-    <a href="#">PHP</a>
-    <ul class="dropdown-menu">
-            
-<li >
-    <a href="../../php/kj/">框架</a>
-</li>
-    </ul>
-  </li>
-                                    
-  <li class="dropdown-submenu">
-    <a href="#">Web</a>
-    <ul class="dropdown-menu">
-            
-<li >
-    <a href="../../web/es6/">es6语法</a>
-</li>
-            
-<li >
-    <a href="../../web/ali_js_style/">阿里js样式规范</a>
-</li>
-            
-<li >
-    <a href="../../web/node.js/">node.js文档</a>
-</li>
-            
-<li >
-    <a href="../../web/react/">React 开发者指南</a>
-</li>
-            
-<li >
-    <a href="../../dart/syntax/">Dart语法学习</a>
-</li>
-            
-<li >
-    <a href="../../web/react_interview/">React 面试</a>
-</li>
-            
-<li >
-    <a href="../../web/js_tool_method/">js 工具函数</a>
-</li>
-            
-<li >
-    <a href="../../web/vue_cp_react/">vue与react比较</a>
-</li>
-    </ul>
-  </li>
-                                    
-  <li class="dropdown-submenu">
-    <a href="#">SQL</a>
-    <ul class="dropdown-menu">
-            
-<li class="active">
-    <a href="./">MySQL优化</a>
-</li>
-            
-<li >
-    <a href="../mysql_yh17/">MySQL优化</a>
-</li>
-            
-<li >
-    <a href="../mysql_log/">MySQL日志</a>
-</li>
-            
-<li >
-    <a href="../mysql_index/">MySQL索引</a>
-</li>
-            
-<li >
-    <a href="../mysql_pxc/">MySQL PXC集群</a>
-</li>
-            
-<li >
-    <a href="../mysql_use/">MySQL 数据库应用</a>
-</li>
-            
-<li >
-    <a href="../sql_server_master/">Sql Server 主从备份</a>
-</li>
-            
-<li >
-    <a href="../data_split/">数据库之互联网常用分库分表方案</a>
-</li>
-            
-<li >
-    <a href="../mybatis/">Mybatis使用心德</a>
-</li>
-    </ul>
-  </li>
-                                    
-  <li class="dropdown-submenu">
-    <a href="#">Linux</a>
-    <ul class="dropdown-menu">
-            
-<li >
-    <a href="../../linux/often/">常用命令</a>
-</li>
-            
-<li >
-    <a href="../../linux/ope/">实用的Linux 命令</a>
-</li>
-    </ul>
-  </li>
-                                    
-  <li class="dropdown-submenu">
-    <a href="#">Docker</a>
-    <ul class="dropdown-menu">
-            
-<li >
-    <a href="../../docker/docker/">Docker全科</a>
-</li>
-            
-<li >
-    <a href="../../docker/docker-compose/">docker和docker-compose 配置 mysql mongodb redis nginx jenkins 环境</a>
-</li>
-            
-<li >
-    <a href="../../docker/docker-jenkins/">Docker部署Jenkins</a>
-</li>
-    </ul>
-  </li>
-                                    
-  <li class="dropdown-submenu">
-    <a href="#">Tool</a>
-    <ul class="dropdown-menu">
-            
-<li >
-    <a href="../../tool/git/">Git</a>
-</li>
-            
-<li >
-    <a href="../../tool/gitquestion/">Git问题处理</a>
-</li>
-            
-<li >
-    <a href="../../tool/gitflow/">GitFlow</a>
-</li>
-            
-<li >
-    <a href="../../tool/gitbook/">GitBook</a>
-</li>
-            
-<li >
-    <a href="../../tool/gitcmr/">Git提交日志规范</a>
-</li>
-            
-<li >
-    <a href="../../tool/markdown/">Markdown</a>
-</li>
-            
-<li >
-    <a href="../../tool/cicd/">CI/CD</a>
-</li>
-            
-<li >
-    <a href="../../tool/mkdocs/">mkdocs简单使用</a>
-</li>
-            
-<li >
-    <a href="../../tool/gitstudy/">Git的黑魔法</a>
-</li>
-    </ul>
-  </li>
-                                </ul>
-                            </li>
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">微服务 <b class="caret"></b></a>
-                                <ul class="dropdown-menu">
-                                    
-<li >
-    <a href="../../micro/spring-cloud/">基于SpringCloud的微服务架构演变史</a>
-</li>
-                                    
-<li >
-    <a href="../../micro/fbs-lock/">分布式锁</a>
-</li>
-                                    
-<li >
-    <a href="../../micro/design/">微服务设计</a>
-</li>
-                                    
-<li >
-    <a href="../../micro/distrimsg/">分布式系统与消息的投递</a>
-</li>
-                                    
-<li >
-    <a href="../../micro/ddd/">基于DDD的微服务设计和开发实战</a>
-</li>
-                                </ul>
-                            </li>
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">经验分析 <b class="caret"></b></a>
-                                <ul class="dropdown-menu">
-                                    
-<li >
-    <a href="../../exp/devops/">DevOps</a>
-</li>
-                                    
-<li >
-    <a href="../../exp/micro-service/">Micro-Service</a>
-</li>
-                                    
-<li >
-    <a href="../../exp/raft-gossip/">Raft算法和Gossip协议</a>
-</li>
-                                    
-<li >
-    <a href="../../exp/cl/">集群和负载均衡</a>
-</li>
-                                    
-<li >
-    <a href="../../exp/ai/">人工智能</a>
-</li>
-                                    
-<li >
-    <a href="../../exp/code-principle/">代码原则</a>
-</li>
-                                    
-<li >
-    <a href="../../exp/techbig/">如何成为技术大牛</a>
-</li>
-                                    
-<li >
-    <a href="../../exp/learnweetout/">程序员如何技术成长</a>
-</li>
-                                    
-<li >
-    <a href="../../exp/pt/">产品与技术</a>
-</li>
-                                    
-<li >
-    <a href="../../exp/four_deep_learning/">深度学习框架</a>
-</li>
-                                    
-<li >
-    <a href="../../exp/tl/">在阿里做了5年技术Leader，我总结出这些套路！</a>
-</li>
-                                    
-<li >
-    <a href="../../exp/cto/">CTO 技能图谱</a>
-</li>
-                                </ul>
-                            </li>
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">医学 <b class="caret"></b></a>
-                                <ul class="dropdown-menu">
-                                    
-<li >
-    <a href="../../doctor/ae/">脑炎</a>
-</li>
-                                </ul>
-                            </li>
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">构架 <b class="caret"></b></a>
-                                <ul class="dropdown-menu">
-                                    
-<li >
-    <a href="../../framework/split/">构架拆分</a>
-</li>
-                                    
-<li >
-    <a href="../../framework/fgb/">分布式、高并发、多线程</a>
-</li>
-                                    
-<li >
-    <a href="../../framework/agility/">如何理解敏捷开发</a>
-</li>
-                                    
-<li >
-    <a href="../../framework/fwork/">走向架构师必备的技能</a>
-</li>
-                                </ul>
-                            </li>
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">情感 <b class="caret"></b></a>
-                                <ul class="dropdown-menu">
-                                    
-<li >
-    <a href="../../emotion/eq/">情商</a>
-</li>
-                                    
-<li >
-    <a href="../../emotion/workheard/">工作心得</a>
-</li>
-                                    
-<li >
-    <a href="../../emotion/lookbook/">看书</a>
-</li>
-                                    
-<li >
-    <a href="../../emotion/fmf/">4种男朋友</a>
-</li>
-                                    
-<li >
-    <a href="../../emotion/notheart/">不上心</a>
-</li>
-                                    
-<li >
-    <a href="../../emotion/selfdiscipline/">自律</a>
-</li>
-                                    
-<li >
-    <a href="../../emotion/notlike/">喜欢与不喜欢</a>
-</li>
-                                    
-<li >
-    <a href="../../emotion/latemarry/">晚婚</a>
-</li>
-                                    
-<li >
-    <a href="../../emotion/understand/">追女生要明白这些事</a>
-</li>
-                                    
-<li >
-    <a href="../../emotion/backup/">备胎</a>
-</li>
-                                    
-<li >
-    <a href="../../emotion/chase/">为什么追不到她</a>
-</li>
-                                    
-<li >
-    <a href="../../emotion/livefail/">为什么活着失败</a>
-</li>
-                                    
-<li >
-    <a href="../../emotion/emotion/">情绪管理</a>
-</li>
-                                    
-<li >
-    <a href="../../emotion/abolish/">废掉的三个迹象</a>
-</li>
-                                    
-<li >
-    <a href="../../emotion/uptime/">余生，好好珍惜</a>
-</li>
-                                    
-<li >
-    <a href="../../emotion/losecome/">所有的失去，都会以另一种方式归来</a>
-</li>
-                                    
-<li >
-    <a href="../../emotion/threeheart/">人生有这三种好心态</a>
-</li>
-                                    
-<li >
-    <a href="../../emotion/onelike/">一个感情真相</a>
-</li>
-                                    
-<li >
-    <a href="../../emotion/notruth/">情商与道理</a>
-</li>
-                                    
-<li >
-    <a href="../../emotion/smf/">六种男人远离</a>
-</li>
-                                    
-<li >
-    <a href="../../emotion/select/">决定接下来人生归属的，不是努力，而是选择</a>
-</li>
-                                    
-<li >
-    <a href="../../emotion/nolike/">被你拉黑的那个人，你一定很喜欢吧</a>
-</li>
-                                    
-<li >
-    <a href="../../emotion/onepath/">余生，学会一个人走，不管有没有人陪</a>
-</li>
-                                    
-<li >
-    <a href="../../emotion/twopath/">往后余生还很精彩，别被熬夜拖垮了</a>
-</li>
-                                    
-<li >
-    <a href="../../emotion/lifetime/">心态好的人，一辈子都好</a>
-</li>
-                                    
-<li >
-    <a href="../../emotion/hearttoheart/">将心比心，方得人心</a>
-</li>
-                                    
-<li >
-    <a href="../../emotion/ttt/">别睡太晚，别爱太满，别要太多</a>
-</li>
-                                    
-<li >
-    <a href="../../emotion/profess/">表白</a>
-</li>
-                                </ul>
-                            </li>
-                        </ul>
-
-                    <ul class="nav navbar-nav navbar-right">
-                        <li>
-                            <a href="#" data-toggle="modal" data-target="#mkdocs_search_modal">
-                                <i class="fa fa-search"></i> Search
-                            </a>
-                        </li>
-                            <li >
-                                <a rel="next" href="../../web/vue_cp_react/">
-                                    <i class="fa fa-arrow-left"></i> Previous
-                                </a>
-                            </li>
-                            <li >
-                                <a rel="prev" href="../mysql_yh17/">
-                                    Next <i class="fa fa-arrow-right"></i>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="https://github.com/burningmyself/burningmyself.github.io/edit/master/docs/sql/mysql_yh.md">Edit on burningmyself.github.io</a>
-                            </li>
-                    </ul>
-                </div>
-            </div>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/application.1b62728e.css">
+      
+      
+    
+    
+      <script src="../../assets/javascripts/modernizr.268332fc.js"></script>
+    
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
+      
+    
+    <link rel="stylesheet" href="../../assets/fonts/material-icons.css">
+    
+    
+    
+      
+        
+<script>
+  window.ga = window.ga || function() {
+    (ga.q = ga.q || []).push(arguments)
+  }
+  ga.l = +new Date
+  /* Setup integration and send page view */
+  ga("create", "UA-36723568-3", "burningmyself.github.io")
+  ga("set", "anonymizeIp", true)
+  ga("send", "pageview")
+  /* Register handler to log search on blur */
+  document.addEventListener("DOMContentLoaded", () => {
+    if (document.forms.search) {
+      var query = document.forms.search.query
+      query.addEventListener("blur", function() {
+        if (this.value) {
+          var path = document.location.pathname;
+          ga("send", "pageview", path + "?q=" + this.value)
+        }
+      })
+    }
+  })
+</script>
+<script async src="https://www.google-analytics.com/analytics.js"></script>
+      
+    
+    
+  </head>
+  
+    <body dir="ltr">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+          <svg xmlns="http://www.w3.org/2000/svg" width="416" height="448" viewBox="0 0 416 448" id="__github"><path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19T128 352t-18.125-8.5-10.75-19T96 304t3.125-20.5 10.75-19T128 256t18.125 8.5 10.75 19T160 304zm160 0q0 10-3.125 20.5t-10.75 19T288 352t-18.125-8.5-10.75-19T256 304t3.125-20.5 10.75-19T288 256t18.125 8.5 10.75 19T320 304zm40 0q0-30-17.25-51T296 232q-10.25 0-48.75 5.25Q229.5 240 208 240t-39.25-2.75Q130.75 232 120 232q-29.5 0-46.75 21T56 304q0 22 8 38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0 37.25-1.75t35-7.375 30.5-15 20.25-25.75T360 304zm56-44q0 51.75-15.25 82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5T212 416q-19.5 0-35.5-.75t-36.875-3.125-38.125-7.5-34.25-12.875T37 371.5t-21.5-28.75Q0 312 0 260q0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25 30.875Q171.5 96 212 96q37 0 70 8 26.25-20.5 46.75-30.25T376 64q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34 99.5z"/></svg>
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+    
+      <a href="#mysql" tabindex="1" class="md-skip">
+        跳转至
+      </a>
+    
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="https://rosemarys.gitee.io" title="BurningMyself" class="md-header-nav__button md-logo">
+          
+            <i class="md-icon"></i>
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          
+            <span class="md-header-nav__topic">
+              BurningMyself
+            </span>
+            <span class="md-header-nav__topic">
+              
+                MySQL优化
+              
+            </span>
+          
         </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
+          
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="__search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            键入以开始搜索
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+        
+      </div>
+      
+        <div class="md-flex__cell md-flex__cell--shrink">
+          <div class="md-header-nav__source">
+            
 
-        <div class="container">
-                <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
-    <ul class="nav bs-sidenav">
-        <li class="main active"><a href="#mysql">MySQL 优化指南</a></li>
-            <li><a href="#_1">慢查询日志 开启撒网模式</a></li>
-            <li><a href="#mysql_1">编辑MySQL的配置文件：</a></li>
-            <li><a href="#mysql_2">重启MySQL</a></li>
-            <li><a href="#_2">服务器开一个监控：</a></li>
-            <li><a href="#sql">客户端走一条SQL：</a></li>
-            <li><a href="#explain">EXPLAIN 点对点分析</a></li>
-            <li><a href="#select_typeselect">select_type：表示select类型 取值如下</a></li>
-            <li><a href="#typemysqltype">type：表示MySQL在表中查找数据的方式，或者叫访问类型，以下对于type取值的说明 从上往下性能由最差到最好</a></li>
-            <li><a href="#possible_keys">possible_keys：表示查询时可能使用的索引</a></li>
-            <li><a href="#key">key：表示实际使用的索引</a></li>
-            <li><a href="#key_len">key_len：使用到索引字段的长度</a></li>
-            <li><a href="#rows">rows：扫描数量</a></li>
-            <li><a href="#extra">Extra：执行情况的说明和描述，包含不适合在其他列中显示但是对执行计划非常重要的额外信息，常用取值如下：</a></li>
-            <li><a href="#count">优化争议无数的count()</a></li>
-            <li><a href="#_3">统计列与统计行？</a></li>
-            <li><a href="#myisam">解密MyiSAM的‘快’</a></li>
-            <li><a href="#count1countcount">COUNT(1)、COUNT(*)、COUNT(列)</a></li>
-            <li><a href="#order-by">优化order by 语句</a></li>
-            <li><a href="#mysql_3">MySQL的排序方式</a></li>
-            <li><a href="#filesort">filesort的优化</a></li>
-            <li><a href="#group-by">优化group by 语句</a></li>
-            <li><a href="#order-bygroup-by">为什么order by后面不能跟group by</a></li>
-            <li><a href="#_4">禁止排序</a></li>
-            <li><a href="#limit">优化limit 分页</a></li>
-            <li><a href="#_5">第一种思路 在索引上分页</a></li>
-            <li><a href="#limit_1">第二种思路 将limit转换成位置查询</a></li>
-            <li><a href="#_6">优化子查询</a></li>
-            <li><a href="#_7">改变执行计划</a></li>
-            <li><a href="#_8">提高索引优先级</a></li>
-            <li><a href="#_9">忽略索引</a></li>
-            <li><a href="#_10">强制使用索引</a></li>
-            <li><a href="#_11">个人分享</a></li>
+
+  
+
+<a href="https://github.com/burningmyself/burningmyself.github.io/" title="前往 Github 仓库" class="md-source" data-md-source="github">
+  
+    <div class="md-source__icon">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
+    burningmyself.github.io
+  </div>
+</a>
+          </div>
+        </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+        
+
+  
+
+<nav class="md-tabs md-tabs--active" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  <li class="md-tabs__item">
+    
+      <a href="../.." class="md-tabs__link">
+        介绍
+      </a>
+    
+  </li>
+
+      
+        
+  
+  
+    
+    
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../net/c_sharp/" class="md-tabs__link">
+          技术博文
+        </a>
+      
+    </li>
+  
+
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../micro/spring-cloud/" class="md-tabs__link">
+          微服务
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../exp/devops/" class="md-tabs__link">
+          经验分析
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../doctor/ae/" class="md-tabs__link">
+          医学
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../framework/split/" class="md-tabs__link">
+          构架
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../emotion/eq/" class="md-tabs__link">
+          情感
+        </a>
+      
+    </li>
+  
+
+      
     </ul>
-</div></div>
-                <div class="col-md-9" role="main">
+  </div>
+</nav>
+      
+      <main class="md-main" role="main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="__drawer">
+    <a href="https://rosemarys.gitee.io" title="BurningMyself" class="md-nav__button md-logo">
+      
+        <i class="md-icon"></i>
+      
+    </a>
+    BurningMyself
+  </label>
+  
+    <div class="md-nav__source">
+      
 
-<h1 id="mysql">MySQL 优化指南<a class="headerlink" href="#mysql" title="Permanent link">&para;</a></h1>
+
+  
+
+<a href="https://github.com/burningmyself/burningmyself.github.io/" title="前往 Github 仓库" class="md-source" data-md-source="github">
+  
+    <div class="md-source__icon">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
+    burningmyself.github.io
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../.." title="介绍" class="md-nav__link">
+      介绍
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2" checked>
+    
+    <label class="md-nav__link" for="nav-2">
+      技术博文
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-2">
+        技术博文
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-1" type="checkbox" id="nav-2-1">
+    
+    <label class="md-nav__link" for="nav-2-1">
+      .NET
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-2-1">
+        .NET
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../net/c_sharp/" title="C# 6" class="md-nav__link">
+      C# 6
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../net/c_docker/" title=".Ner Core Docker 部署" class="md-nav__link">
+      .Ner Core Docker 部署
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../net/c_mysql_nginx/" title="使用 Docker 容器化部署 ASP.NET Core + MySQL + Nginx" class="md-nav__link">
+      使用 Docker 容器化部署 ASP.NET Core + MySQL + Nginx
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../net/c_core_safety/" title="让你的ASP.NET Core应用程序更安全" class="md-nav__link">
+      让你的ASP.NET Core应用程序更安全
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../net/c_core_study_route/" title="ASP.NET Core开发者指南" class="md-nav__link">
+      ASP.NET Core开发者指南
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-2" type="checkbox" id="nav-2-2">
+    
+    <label class="md-nav__link" for="nav-2-2">
+      Java
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-2-2">
+        Java
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../java/feature/" title="Java特性" class="md-nav__link">
+      Java特性
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../java/load-class/" title="Java类加载" class="md-nav__link">
+      Java类加载
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../java/orm/" title="Orm的优缺点" class="md-nav__link">
+      Orm的优缺点
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../java/bio-nio/" title="BIO与NIO" class="md-nav__link">
+      BIO与NIO
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../java/rocketmq/rmq-1/" title="RocketMq下载与安装" class="md-nav__link">
+      RocketMq下载与安装
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../java/springAnnotation/" title="Spring常用注解" class="md-nav__link">
+      Spring常用注解
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-3" type="checkbox" id="nav-2-3">
+    
+    <label class="md-nav__link" for="nav-2-3">
+      Python
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-2-3">
+        Python
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../python/feature/" title="Python特性" class="md-nav__link">
+      Python特性
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../python/str_joint/" title="Python字符拼接" class="md-nav__link">
+      Python字符拼接
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../python/syntax_rule/" title="Python语法技巧" class="md-nav__link">
+      Python语法技巧
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../python/fabric/" title="远程部署神器 Fabric" class="md-nav__link">
+      远程部署神器 Fabric
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-4" type="checkbox" id="nav-2-4">
+    
+    <label class="md-nav__link" for="nav-2-4">
+      PHP
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-2-4">
+        PHP
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../php/kj/" title="框架" class="md-nav__link">
+      框架
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-5" type="checkbox" id="nav-2-5">
+    
+    <label class="md-nav__link" for="nav-2-5">
+      Web
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-2-5">
+        Web
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../web/es6/" title="es6语法" class="md-nav__link">
+      es6语法
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../web/ali_js_style/" title="阿里js样式规范" class="md-nav__link">
+      阿里js样式规范
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../web/node.js/" title="node.js文档" class="md-nav__link">
+      node.js文档
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../web/react/" title="React 开发者指南" class="md-nav__link">
+      React 开发者指南
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../dart/syntax/" title="Dart语法学习" class="md-nav__link">
+      Dart语法学习
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../web/react_interview/" title="React 面试" class="md-nav__link">
+      React 面试
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../web/js_tool_method/" title="js 工具函数" class="md-nav__link">
+      js 工具函数
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../web/vue_cp_react/" title="vue与react比较" class="md-nav__link">
+      vue与react比较
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-6" type="checkbox" id="nav-2-6" checked>
+    
+    <label class="md-nav__link" for="nav-2-6">
+      SQL
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-2-6">
+        SQL
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        MySQL优化
+      </label>
+    
+    <a href="./" title="MySQL优化" class="md-nav__link md-nav__link--active">
+      MySQL优化
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">目录</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    慢查询日志 开启撒网模式
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mysql_1" class="md-nav__link">
+    编辑MySQL的配置文件：
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mysql_2" class="md-nav__link">
+    重启MySQL
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    服务器开一个监控：
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sql" class="md-nav__link">
+    客户端走一条SQL：
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#explain" class="md-nav__link">
+    EXPLAIN 点对点分析
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#select_typeselect" class="md-nav__link">
+    select_type：表示select类型 取值如下
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#typemysqltype" class="md-nav__link">
+    type：表示MySQL在表中查找数据的方式，或者叫访问类型，以下对于type取值的说明 从上往下性能由最差到最好
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#possible_keys" class="md-nav__link">
+    possible_keys：表示查询时可能使用的索引
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#key" class="md-nav__link">
+    key：表示实际使用的索引
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#key_len" class="md-nav__link">
+    key_len：使用到索引字段的长度
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#rows" class="md-nav__link">
+    rows：扫描数量
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#extra" class="md-nav__link">
+    Extra：执行情况的说明和描述，包含不适合在其他列中显示但是对执行计划非常重要的额外信息，常用取值如下：
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#count" class="md-nav__link">
+    优化争议无数的count()
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    统计列与统计行？
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#myisam" class="md-nav__link">
+    解密MyiSAM的‘快’
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#count1countcount" class="md-nav__link">
+    COUNT(1)、COUNT(*)、COUNT(列)
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#order_by" class="md-nav__link">
+    优化order by 语句
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mysql_3" class="md-nav__link">
+    MySQL的排序方式
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#filesort" class="md-nav__link">
+    filesort的优化
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#group_by" class="md-nav__link">
+    优化group by 语句
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#order_bygroup_by" class="md-nav__link">
+    为什么order by后面不能跟group by
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    禁止排序
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#limit" class="md-nav__link">
+    优化limit 分页
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    第一种思路 在索引上分页
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#limit_1" class="md-nav__link">
+    第二种思路 将limit转换成位置查询
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    优化子查询
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    改变执行计划
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    提高索引优先级
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    忽略索引
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    强制使用索引
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    个人分享
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+        <li class="md-nav__item">
+          <a href="#__comments" class="md-nav__link md-nav__link--active">
+            评论
+          </a>
+        </li>
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../mysql_yh17/" title="MySQL优化" class="md-nav__link">
+      MySQL优化
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../mysql_log/" title="MySQL日志" class="md-nav__link">
+      MySQL日志
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../mysql_index/" title="MySQL索引" class="md-nav__link">
+      MySQL索引
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../mysql_pxc/" title="MySQL PXC集群" class="md-nav__link">
+      MySQL PXC集群
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../mysql_use/" title="MySQL 数据库应用" class="md-nav__link">
+      MySQL 数据库应用
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../sql_server_master/" title="Sql Server 主从备份" class="md-nav__link">
+      Sql Server 主从备份
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../data_split/" title="数据库之互联网常用分库分表方案" class="md-nav__link">
+      数据库之互联网常用分库分表方案
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../mybatis/" title="Mybatis使用心德" class="md-nav__link">
+      Mybatis使用心德
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-7" type="checkbox" id="nav-2-7">
+    
+    <label class="md-nav__link" for="nav-2-7">
+      Linux
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-2-7">
+        Linux
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../linux/often/" title="常用命令" class="md-nav__link">
+      常用命令
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../linux/ope/" title="实用的Linux 命令" class="md-nav__link">
+      实用的Linux 命令
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-8" type="checkbox" id="nav-2-8">
+    
+    <label class="md-nav__link" for="nav-2-8">
+      Docker
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-2-8">
+        Docker
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../docker/docker/" title="Docker全科" class="md-nav__link">
+      Docker全科
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../docker/docker-compose/" title="docker和docker-compose 配置 mysql mongodb redis nginx jenkins 环境" class="md-nav__link">
+      docker和docker-compose 配置 mysql mongodb redis nginx jenkins 环境
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../docker/docker-jenkins/" title="Docker部署Jenkins" class="md-nav__link">
+      Docker部署Jenkins
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-9" type="checkbox" id="nav-2-9">
+    
+    <label class="md-nav__link" for="nav-2-9">
+      Tool
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-2-9">
+        Tool
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tool/git/" title="Git" class="md-nav__link">
+      Git
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tool/gitquestion/" title="Git问题处理" class="md-nav__link">
+      Git问题处理
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tool/gitflow/" title="GitFlow" class="md-nav__link">
+      GitFlow
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tool/gitbook/" title="GitBook" class="md-nav__link">
+      GitBook
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tool/gitcmr/" title="Git提交日志规范" class="md-nav__link">
+      Git提交日志规范
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tool/markdown/" title="Markdown" class="md-nav__link">
+      Markdown
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tool/cicd/" title="CI/CD" class="md-nav__link">
+      CI/CD
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tool/mkdocs/" title="mkdocs简单使用" class="md-nav__link">
+      mkdocs简单使用
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tool/gitstudy/" title="Git的黑魔法" class="md-nav__link">
+      Git的黑魔法
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3">
+    
+    <label class="md-nav__link" for="nav-3">
+      微服务
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-3">
+        微服务
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../micro/spring-cloud/" title="基于SpringCloud的微服务架构演变史" class="md-nav__link">
+      基于SpringCloud的微服务架构演变史
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../micro/fbs-lock/" title="分布式锁" class="md-nav__link">
+      分布式锁
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../micro/design/" title="微服务设计" class="md-nav__link">
+      微服务设计
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../micro/distrimsg/" title="分布式系统与消息的投递" class="md-nav__link">
+      分布式系统与消息的投递
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../micro/ddd/" title="基于DDD的微服务设计和开发实战" class="md-nav__link">
+      基于DDD的微服务设计和开发实战
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4">
+    
+    <label class="md-nav__link" for="nav-4">
+      经验分析
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-4">
+        经验分析
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../exp/devops/" title="DevOps" class="md-nav__link">
+      DevOps
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../exp/micro-service/" title="Micro-Service" class="md-nav__link">
+      Micro-Service
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../exp/raft-gossip/" title="Raft算法和Gossip协议" class="md-nav__link">
+      Raft算法和Gossip协议
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../exp/cl/" title="集群和负载均衡" class="md-nav__link">
+      集群和负载均衡
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../exp/ai/" title="人工智能" class="md-nav__link">
+      人工智能
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../exp/code-principle/" title="代码原则" class="md-nav__link">
+      代码原则
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../exp/techbig/" title="如何成为技术大牛" class="md-nav__link">
+      如何成为技术大牛
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../exp/learnweetout/" title="程序员如何技术成长" class="md-nav__link">
+      程序员如何技术成长
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../exp/pt/" title="产品与技术" class="md-nav__link">
+      产品与技术
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../exp/four_deep_learning/" title="深度学习框架" class="md-nav__link">
+      深度学习框架
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../exp/tl/" title="在阿里做了5年技术Leader，我总结出这些套路！" class="md-nav__link">
+      在阿里做了5年技术Leader，我总结出这些套路！
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../exp/cto/" title="CTO 技能图谱" class="md-nav__link">
+      CTO 技能图谱
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5">
+    
+    <label class="md-nav__link" for="nav-5">
+      医学
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-5">
+        医学
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../doctor/ae/" title="脑炎" class="md-nav__link">
+      脑炎
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6" type="checkbox" id="nav-6">
+    
+    <label class="md-nav__link" for="nav-6">
+      构架
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-6">
+        构架
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../framework/split/" title="构架拆分" class="md-nav__link">
+      构架拆分
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../framework/fgb/" title="分布式、高并发、多线程" class="md-nav__link">
+      分布式、高并发、多线程
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../framework/agility/" title="如何理解敏捷开发" class="md-nav__link">
+      如何理解敏捷开发
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../framework/fwork/" title="走向架构师必备的技能" class="md-nav__link">
+      走向架构师必备的技能
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7" type="checkbox" id="nav-7">
+    
+    <label class="md-nav__link" for="nav-7">
+      情感
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-7">
+        情感
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/eq/" title="情商" class="md-nav__link">
+      情商
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/workheard/" title="工作心得" class="md-nav__link">
+      工作心得
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/lookbook/" title="看书" class="md-nav__link">
+      看书
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/fmf/" title="4种男朋友" class="md-nav__link">
+      4种男朋友
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/notheart/" title="不上心" class="md-nav__link">
+      不上心
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/selfdiscipline/" title="自律" class="md-nav__link">
+      自律
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/notlike/" title="喜欢与不喜欢" class="md-nav__link">
+      喜欢与不喜欢
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/latemarry/" title="晚婚" class="md-nav__link">
+      晚婚
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/understand/" title="追女生要明白这些事" class="md-nav__link">
+      追女生要明白这些事
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/backup/" title="备胎" class="md-nav__link">
+      备胎
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/chase/" title="为什么追不到她" class="md-nav__link">
+      为什么追不到她
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/livefail/" title="为什么活着失败" class="md-nav__link">
+      为什么活着失败
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/emotion/" title="情绪管理" class="md-nav__link">
+      情绪管理
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/abolish/" title="废掉的三个迹象" class="md-nav__link">
+      废掉的三个迹象
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/uptime/" title="余生，好好珍惜" class="md-nav__link">
+      余生，好好珍惜
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/losecome/" title="所有的失去，都会以另一种方式归来" class="md-nav__link">
+      所有的失去，都会以另一种方式归来
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/threeheart/" title="人生有这三种好心态" class="md-nav__link">
+      人生有这三种好心态
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/onelike/" title="一个感情真相" class="md-nav__link">
+      一个感情真相
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/notruth/" title="情商与道理" class="md-nav__link">
+      情商与道理
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/smf/" title="六种男人远离" class="md-nav__link">
+      六种男人远离
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/select/" title="决定接下来人生归属的，不是努力，而是选择" class="md-nav__link">
+      决定接下来人生归属的，不是努力，而是选择
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/nolike/" title="被你拉黑的那个人，你一定很喜欢吧" class="md-nav__link">
+      被你拉黑的那个人，你一定很喜欢吧
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/onepath/" title="余生，学会一个人走，不管有没有人陪" class="md-nav__link">
+      余生，学会一个人走，不管有没有人陪
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/twopath/" title="往后余生还很精彩，别被熬夜拖垮了" class="md-nav__link">
+      往后余生还很精彩，别被熬夜拖垮了
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/lifetime/" title="心态好的人，一辈子都好" class="md-nav__link">
+      心态好的人，一辈子都好
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/hearttoheart/" title="将心比心，方得人心" class="md-nav__link">
+      将心比心，方得人心
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/ttt/" title="别睡太晚，别爱太满，别要太多" class="md-nav__link">
+      别睡太晚，别爱太满，别要太多
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/profess/" title="表白" class="md-nav__link">
+      表白
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">目录</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    慢查询日志 开启撒网模式
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mysql_1" class="md-nav__link">
+    编辑MySQL的配置文件：
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mysql_2" class="md-nav__link">
+    重启MySQL
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    服务器开一个监控：
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sql" class="md-nav__link">
+    客户端走一条SQL：
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#explain" class="md-nav__link">
+    EXPLAIN 点对点分析
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#select_typeselect" class="md-nav__link">
+    select_type：表示select类型 取值如下
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#typemysqltype" class="md-nav__link">
+    type：表示MySQL在表中查找数据的方式，或者叫访问类型，以下对于type取值的说明 从上往下性能由最差到最好
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#possible_keys" class="md-nav__link">
+    possible_keys：表示查询时可能使用的索引
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#key" class="md-nav__link">
+    key：表示实际使用的索引
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#key_len" class="md-nav__link">
+    key_len：使用到索引字段的长度
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#rows" class="md-nav__link">
+    rows：扫描数量
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#extra" class="md-nav__link">
+    Extra：执行情况的说明和描述，包含不适合在其他列中显示但是对执行计划非常重要的额外信息，常用取值如下：
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#count" class="md-nav__link">
+    优化争议无数的count()
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    统计列与统计行？
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#myisam" class="md-nav__link">
+    解密MyiSAM的‘快’
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#count1countcount" class="md-nav__link">
+    COUNT(1)、COUNT(*)、COUNT(列)
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#order_by" class="md-nav__link">
+    优化order by 语句
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mysql_3" class="md-nav__link">
+    MySQL的排序方式
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#filesort" class="md-nav__link">
+    filesort的优化
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#group_by" class="md-nav__link">
+    优化group by 语句
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#order_bygroup_by" class="md-nav__link">
+    为什么order by后面不能跟group by
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    禁止排序
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#limit" class="md-nav__link">
+    优化limit 分页
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    第一种思路 在索引上分页
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#limit_1" class="md-nav__link">
+    第二种思路 将limit转换成位置查询
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    优化子查询
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    改变执行计划
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    提高索引优先级
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    忽略索引
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    强制使用索引
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    个人分享
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+        <li class="md-nav__item">
+          <a href="#__comments" class="md-nav__link md-nav__link--active">
+            评论
+          </a>
+        </li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/burningmyself/burningmyself.github.io/edit/master/docs/sql/mysql_yh.md" title="编辑此页" class="md-icon md-content__icon">&#xE3C9;</a>
+                
+                
+                <h1 id="mysql">MySQL 优化指南<a class="headerlink" href="#mysql" title="Permanent link">&para;</a></h1>
 <h2 id="_1">慢查询日志 开启撒网模式<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
 <p>开启了MySQL慢查询日志之后，MySQL会自动将执行时间超过指定秒数的SQL统统记录下来，这对于搜罗线上慢SQL有很大的帮助。</p>
-<pre class="codehilite"><code class="language-sql">SHOW VARIABLES LIKE 'slow%'</code></pre>
-
+<div class="codehilite"><pre><span></span><span class="k">SHOW</span> <span class="n">VARIABLES</span> <span class="k">LIKE</span> <span class="s1">&#39;slow%&#39;</span>
+</pre></div>
 
 <p>以我刚安装的mysql5.7为例 查询结果是这样子的：</p>
 <p><img alt="sql" src="../../img/sql1.png" title="sql_show" /></p>
@@ -610,54 +2428,54 @@
 <li>slow_query_log：是否开启慢查询日志 ON开启，OFF关闭 默认没有开启</li>
 <li>slow_query_log_file：日志保存路径</li>
 </ol>
-<pre class="codehilite"><code class="language-sql">SHOW VARIABLES LIKE 'long%'</code></pre>
-
+<div class="codehilite"><pre><span></span><span class="k">SHOW</span> <span class="n">VARIABLES</span> <span class="k">LIKE</span> <span class="s1">&#39;long%&#39;</span>
+</pre></div>
 
 <p><img alt="sql" src="../../img/sql2.png" /></p>
 <p>long_query_time：达到多少秒的sql就记录日志</p>
 <p>客户端可以用set设置变量的方式让慢查询开启，但是个人不推荐，因为真实操作起来会有一些问题，比如说，重启MySQL后就失效了，或者是开启了慢查询，我又去改变量值，它就不生效了。</p>
 <h2 id="mysql_1">编辑MySQL的配置文件：<a class="headerlink" href="#mysql_1" title="Permanent link">&para;</a></h2>
-<pre class="codehilite"><code class="language-shell">vim /etc/my.cnf</code></pre>
-
+<div class="codehilite"><pre><span></span>vim /etc/my.cnf
+</pre></div>
 
 <p>加入如下三行：</p>
-<pre class="codehilite"><code class="language-config">slow_query_log=ON
+<div class="codehilite"><pre><span></span>slow_query_log=ON
 slow_query_log_file=/var/lib/mysql/localhost-centos-slow.log
-long_query_time=3</code></pre>
-
+long_query_time=3
+</pre></div>
 
 <p>我这里设置的是3秒</p>
 <h2 id="mysql_2">重启MySQL<a class="headerlink" href="#mysql_2" title="Permanent link">&para;</a></h2>
-<pre class="codehilite"><code class="language-shell">systemctl restart mysqld;</code></pre>
-
+<div class="codehilite"><pre><span></span>systemctl restart mysqld<span class="p">;</span>
+</pre></div>
 
 <h2 id="_2">服务器开一个监控：<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
-<pre class="codehilite"><code class="language-shell">tail -f /var/lib/mysql/localhost-centos-slow.log</code></pre>
-
+<div class="codehilite"><pre><span></span>tail -f /var/lib/mysql/localhost-centos-slow.log
+</pre></div>
 
 <h2 id="sql">客户端走一条SQL：<a class="headerlink" href="#sql" title="Permanent link">&para;</a></h2>
-<pre class="codehilite"><code class="language-sql">SELECT SLEEP(3)</code></pre>
-
+<div class="codehilite"><pre><span></span><span class="k">SELECT</span> <span class="n">SLEEP</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
 
 <p>此时发现sql已经被记录到日志里了。（有时候不一定，我看到很多博客讲的是超过指定秒数，但我实验得出的结果是达到指定秒数）</p>
 <h2 id="explain">EXPLAIN 点对点分析<a class="headerlink" href="#explain" title="Permanent link">&para;</a></h2>
 <p>explain是一个神奇的命令，可以查看sql的具体的执行计划。</p>
 <p>以一条联查sql为例：</p>
-<pre class="codehilite"><code class="language-sql">SELECT a.id,a.cn_name,a.role_id,r.name
-FROM tb_usr_admins a
-INNER JOIN tb_base_roles r ON r.id=a.role_id
-WHERE a.cn_name=&quot;接单人员&quot;</code></pre>
-
+<div class="codehilite"><pre><span></span><span class="k">SELECT</span> <span class="n">a</span><span class="p">.</span><span class="n">id</span><span class="p">,</span><span class="n">a</span><span class="p">.</span><span class="n">cn_name</span><span class="p">,</span><span class="n">a</span><span class="p">.</span><span class="n">role_id</span><span class="p">,</span><span class="n">r</span><span class="p">.</span><span class="n">name</span>
+<span class="k">FROM</span> <span class="n">tb_usr_admins</span> <span class="n">a</span>
+<span class="k">INNER</span> <span class="k">JOIN</span> <span class="n">tb_base_roles</span> <span class="n">r</span> <span class="k">ON</span> <span class="n">r</span><span class="p">.</span><span class="n">id</span><span class="o">=</span><span class="n">a</span><span class="p">.</span><span class="n">role_id</span>
+<span class="k">WHERE</span> <span class="n">a</span><span class="p">.</span><span class="n">cn_name</span><span class="o">=</span><span class="ss">&quot;接单人员&quot;</span>
+</pre></div>
 
 <p>查询结果是：
 <img alt="sql" src="../../img/sql3.png" title="sql" /></p>
 <p>加上explain命令来执行：</p>
-<pre class="codehilite"><code class="language-sql">EXPLAIN
-SELECT a.id,a.cn_name,a.role_id,r.name
-FROM tb_usr_admins a
-INNER JOIN tb_base_roles r ON r.id=a.role_id
-WHERE a.cn_name=&quot;接单人员&quot;</code></pre>
-
+<div class="codehilite"><pre><span></span><span class="k">EXPLAIN</span>
+<span class="k">SELECT</span> <span class="n">a</span><span class="p">.</span><span class="n">id</span><span class="p">,</span><span class="n">a</span><span class="p">.</span><span class="n">cn_name</span><span class="p">,</span><span class="n">a</span><span class="p">.</span><span class="n">role_id</span><span class="p">,</span><span class="n">r</span><span class="p">.</span><span class="n">name</span>
+<span class="k">FROM</span> <span class="n">tb_usr_admins</span> <span class="n">a</span>
+<span class="k">INNER</span> <span class="k">JOIN</span> <span class="n">tb_base_roles</span> <span class="n">r</span> <span class="k">ON</span> <span class="n">r</span><span class="p">.</span><span class="n">id</span><span class="o">=</span><span class="n">a</span><span class="p">.</span><span class="n">role_id</span>
+<span class="k">WHERE</span> <span class="n">a</span><span class="p">.</span><span class="n">cn_name</span><span class="o">=</span><span class="ss">&quot;接单人员&quot;</span>
+</pre></div>
 
 <p>查询结果是：
 <img alt="sql" src="../../img/sql4.png" title="sql" /></p>
@@ -698,7 +2516,7 @@ WHERE a.cn_name=&quot;接单人员&quot;</code></pre>
 <h2 id="_3">统计列与统计行？<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
 <p>COUNT()是一个特殊的函数，有两种不同的作用，它可以统计某个列值的数量，也可以统计行数。</p>
 <p>在统计列值的时候要求列值是非空的，也就是不统计null。</p>
-<p>当我们统计行的时候，常见的是COUNT(<em>)，这种情况下，通配符</em>并不会像我们猜想的那样扩展成所有的列，实际上，它会忽略所有的列而直接统计所有的行数</p>
+<p>当我们统计行的时候，常见的是COUNT(*)，这种情况下，通配符*并不会像我们猜想的那样扩展成所有的列，实际上，它会忽略所有的列而直接统计所有的行数</p>
 <h2 id="myisam">解密MyiSAM的‘快’<a class="headerlink" href="#myisam" title="Permanent link">&para;</a></h2>
 <p>这是一个容易产生误解的事情：MyiSAM的count()函数总是非常快。</p>
 <p>不过它是有前提条件的，条件是没有任何where条件的count(<em>)才非常快，因为此时无须实际的去计算表的行数，mysql可以利用存储引擎的特性直接获得这个值，如果mysql知道某列不可能有null值，那么mysql内部会将count(列)表达式优化为count(</em>)。</p>
@@ -713,7 +2531,7 @@ WHERE a.cn_name=&quot;接单人员&quot;</code></pre>
 <p>如果count(列)中的字段是索引的话，count(列)和count(*)一样快，否则count(列)走全表扫描。</p>
 </li>
 </ol>
-<h2 id="order-by">优化order by 语句<a class="headerlink" href="#order-by" title="Permanent link">&para;</a></h2>
+<h2 id="order_by">优化order by 语句<a class="headerlink" href="#order_by" title="Permanent link">&para;</a></h2>
 <h2 id="mysql_3">MySQL的排序方式<a class="headerlink" href="#mysql_3" title="Permanent link">&para;</a></h2>
 <p>优化order by语句就不得不了解mysql的排序方式。</p>
 <ol>
@@ -734,15 +2552,15 @@ WHERE a.cn_name=&quot;接单人员&quot;</code></pre>
 <p>查询时尽量只使用必要的字段，select 具体字段的名称，而不是select * 选择所有字段，这样可以减少排序区的使用，提高SQL性能。</p>
 </li>
 </ol>
-<h2 id="group-by">优化group by 语句<a class="headerlink" href="#group-by" title="Permanent link">&para;</a></h2>
-<h2 id="order-bygroup-by">为什么order by后面不能跟group by<a class="headerlink" href="#order-bygroup-by" title="Permanent link">&para;</a></h2>
+<h2 id="group_by">优化group by 语句<a class="headerlink" href="#group_by" title="Permanent link">&para;</a></h2>
+<h2 id="order_bygroup_by">为什么order by后面不能跟group by<a class="headerlink" href="#order_bygroup_by" title="Permanent link">&para;</a></h2>
 <p>事实上，MySQL在所有的group by 后面隐式的加了order by ，也就是说group by语句的结果会默认进行排序。</p>
 <p>如果你要在order by后面加group by ，那结果执行的SQL是不是这样：select * from tb order by … group by … order by … ？ 这不是搞笑吗？</p>
 <h2 id="_4">禁止排序<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
 <p>既然知道问题了，那么就容易优化了，如果查询包括group by但又不关心结果集的顺序，而这种默认排序又导致了需要文件排序，则可以指定order by null 禁止排序。</p>
 <p>例如：</p>
-<pre class="codehilite"><code class="language-sql">select * from tb group by name order by null;</code></pre>
-
+<div class="codehilite"><pre><span></span><span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">tb</span> <span class="k">group</span> <span class="k">by</span> <span class="n">name</span> <span class="k">order</span> <span class="k">by</span> <span class="k">null</span><span class="p">;</span>
+</pre></div>
 
 <h2 id="limit">优化limit 分页<a class="headerlink" href="#limit" title="Permanent link">&para;</a></h2>
 <p>一个非常常见又非常头痛的场景：‘limit 1000,20’。</p>
@@ -750,18 +2568,18 @@ WHERE a.cn_name=&quot;接单人员&quot;</code></pre>
 <h2 id="_5">第一种思路 在索引上分页<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
 <p>在索引上完成分页操作，最后根据主键关联回原表查询所需要的其他列的内容。</p>
 <p>例如：</p>
-<pre class="codehilite"><code class="language-sql">SELECT * FROM tb_user LIMIT 1000,10</code></pre>
-
+<div class="codehilite"><pre><span></span><span class="k">SELECT</span> <span class="o">*</span> <span class="k">FROM</span> <span class="n">tb_user</span> <span class="k">LIMIT</span> <span class="mi">1000</span><span class="p">,</span><span class="mi">10</span>
+</pre></div>
 
 <p>可以优化成这样：</p>
-<pre class="codehilite"><code class="language-sql">SELECT * FROM tb_user u
-INNER JOIN (SELECT id FROM tb_user LIMIT 1000,10) AS b ON b.id=u.id</code></pre>
-
+<div class="codehilite"><pre><span></span><span class="k">SELECT</span> <span class="o">*</span> <span class="k">FROM</span> <span class="n">tb_user</span> <span class="n">u</span>
+<span class="k">INNER</span> <span class="k">JOIN</span> <span class="p">(</span><span class="k">SELECT</span> <span class="n">id</span> <span class="k">FROM</span> <span class="n">tb_user</span> <span class="k">LIMIT</span> <span class="mi">1000</span><span class="p">,</span><span class="mi">10</span><span class="p">)</span> <span class="k">AS</span> <span class="n">b</span> <span class="k">ON</span> <span class="n">b</span><span class="p">.</span><span class="n">id</span><span class="o">=</span><span class="n">u</span><span class="p">.</span><span class="n">id</span>
+</pre></div>
 
 <h2 id="limit_1">第二种思路 将limit转换成位置查询<a class="headerlink" href="#limit_1" title="Permanent link">&para;</a></h2>
 <p>这种思路需要加一个参数来辅助，标记分页的开始位置：</p>
-<pre class="codehilite"><code class="language-sql">SELECT * FROM tb_user WHERE id &gt; 1000 LIMIT 10</code></pre>
-
+<div class="codehilite"><pre><span></span><span class="k">SELECT</span> <span class="o">*</span> <span class="k">FROM</span> <span class="n">tb_user</span> <span class="k">WHERE</span> <span class="n">id</span> <span class="o">&gt;</span> <span class="mi">1000</span> <span class="k">LIMIT</span> <span class="mi">10</span>
+</pre></div>
 
 <h2 id="_6">优化子查询<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
 <p>子查询，也就是查询中有查询，常见的是where后面跟一个括号里面又是一条查询sql</p>
@@ -771,8 +2589,8 @@ INNER JOIN (SELECT id FROM tb_user LIMIT 1000,10) AS b ON b.id=u.id</code></pre>
 <h2 id="_7">改变执行计划<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h2>
 <h2 id="_8">提高索引优先级<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h2>
 <p>use index 可以让MySQL去参考指定的索引，但是无法强制MySQL去使用这个索引，当MySQL觉得这个索引效率太差，它宁愿去走全表扫描。。。</p>
-<pre class="codehilite"><code class="language-sql">SELECT * FROM tb_user USE INDEX (user_name)</code></pre>
-
+<div class="codehilite"><pre><span></span><span class="k">SELECT</span> <span class="o">*</span> <span class="k">FROM</span> <span class="n">tb_user</span> <span class="n">USE</span> <span class="k">INDEX</span> <span class="p">(</span><span class="n">user_name</span><span class="p">)</span>
+</pre></div>
 
 <p>注意：必须是索引，不能是普通字段，（亲测主键也不行）。</p>
 <h2 id="_9">忽略索引<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h2>
@@ -780,8 +2598,8 @@ INNER JOIN (SELECT id FROM tb_user LIMIT 1000,10) AS b ON b.id=u.id</code></pre>
 <p>SELECT * FROM tb_user IGNORE INDEX (user_name) WHERE user_name="张学友"</p>
 <h2 id="_10">强制使用索引<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h2>
 <p>使用了force index 之后 尽管效率非常低，MySQL也会照你的话去执行</p>
-<pre class="codehilite"><code class="language-sql">SELECT * FROM tb_user FORCE INDEX (user_name) WHERE user_name=&quot;张学友&quot;</code></pre>
-
+<div class="codehilite"><pre><span></span><span class="k">SELECT</span> <span class="o">*</span> <span class="k">FROM</span> <span class="n">tb_user</span> <span class="k">FORCE</span> <span class="k">INDEX</span> <span class="p">(</span><span class="n">user_name</span><span class="p">)</span> <span class="k">WHERE</span> <span class="n">user_name</span><span class="o">=</span><span class="ss">&quot;张学友&quot;</span>
+</pre></div>
 
 <h2 id="_11">个人分享<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h2>
 <p>查看执行计划时建议依次观察以下几个要点：</p>
@@ -791,84 +2609,142 @@ INNER JOIN (SELECT id FROM tb_user LIMIT 1000,10) AS b ON b.id=u.id</code></pre>
 <li>实际有没有使用索引。</li>
 <li>Extra描述信息</li>
 </ol>
-<p>PS:一定要养成查看执行计划的习惯，这个习惯非常重要。</p></div>
-        </div>
+<p>PS:一定要养成查看执行计划的习惯，这个习惯非常重要。</p>
+                
+                  
+                
+                
+              
+              
+                
 
-        <footer class="col-md-12">
-            <hr>
-                <p>BurningMyself</p>
-            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
-        </footer>
-        <script>
-            var base_url = "../..",
-                shortcuts = {"search": 83, "next": 78, "help": 191, "previous": 80};
-        </script>
-        <script src="../../js/base.js" defer></script>
-        <script src="../../search/main.js" defer></script>
 
-        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                <h4 class="modal-title" id="exampleModalLabel">Search</h4>
-            </div>
-            <div class="modal-body">
-                <p>
-                    From here you can search these documents. Enter
-                    your search terms below.
-                </p>
-                <form role="form">
-                    <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
-                    </div>
-                </form>
-                <div id="mkdocs-search-results"></div>
-            </div>
-            <div class="modal-footer">
-            </div>
+  <h2 id="__comments">评论</h2>
+  <div id="disqus_thread"></div>
+  <script>
+    var disqus_config = function () {
+      this.page.url = "https://rosemarys.gitee.io/sql/mysql_yh/";
+      this.page.identifier =
+        "/sql/mysql_yh/";
+    };
+    (function() {
+      var d = document, s = d.createElement("script");
+      s.src = "//disqus.disqus.com/embed.js";
+      s.setAttribute("data-timestamp", +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+
+              
+            </article>
+          </div>
         </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="../../web/vue_cp_react/" title="vue与react比较" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  上一页
+                </span>
+                vue与react比较
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="../mysql_yh17/" title="MySQL优化" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  下一页
+                </span>
+                MySQL优化
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
     </div>
-</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="Keyboard Shortcuts Modal" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                <h4 class="modal-title" id="exampleModalLabel">Keyboard Shortcuts</h4>
-            </div>
-            <div class="modal-body">
-              <table class="table">
-                <thead>
-                  <tr>
-                    <th style="width: 20%;">Keys</th>
-                    <th>Action</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td class="help shortcut"><kbd>?</kbd></td>
-                    <td>Open this help</td>
-                  </tr>
-                  <tr>
-                    <td class="next shortcut"><kbd>n</kbd></td>
-                    <td>Next page</td>
-                  </tr>
-                  <tr>
-                    <td class="prev shortcut"><kbd>p</kbd></td>
-                    <td>Previous page</td>
-                  </tr>
-                  <tr>
-                    <td class="search shortcut"><kbd>s</kbd></td>
-                    <td>Search</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-            <div class="modal-footer">
-            </div>
-        </div>
-    </div>
-</div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+          <div class="md-footer-copyright__highlight">
+            BurningMyself
+          </div>
+        
+        powered by
+        <a href="https://www.mkdocs.org">MkDocs</a>
+        and
+        <a href="https://squidfunk.github.io/mkdocs-material/">
+          Material for MkDocs</a>
+      </div>
+      
+  <div class="md-footer-social">
+    <link rel="stylesheet" href="../../assets/fonts/font-awesome.css">
+    
+      <a href="https://github.com/burningmyself" class="md-footer-social__link fa fa-github"></a>
+    
+      <a href="https://gitee.com/rosemarys" class="md-footer-social__link fa fa-gitee"></a>
+    
+  </div>
 
-    </body>
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../assets/javascripts/application.808e90bb.js"></script>
+      
+        
+        
+          
+          <script src="../../assets/javascripts/lunr/lunr.stemmer.support.js"></script>
+          
+            
+              
+              
+            
+          
+            
+          
+            
+              
+                <script src="../../assets/javascripts/lunr/tinyseg.js"></script>
+              
+              
+                <script src="../../assets/javascripts/lunr/lunr.ja.js"></script>
+              
+            
+          
+          
+            <script src="../../assets/javascripts/lunr/lunr.multi.js"></script>
+          
+        
+      
+      <script>app.initialize({version:"1.0.4",url:{base:"../.."}})</script>
+      
+        <script src="../../js/extra.js"></script>
+      
+        <script src="../../js/baidu-tongji.js"></script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+      
+    
+  </body>
 </html>

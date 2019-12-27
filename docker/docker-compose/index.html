@@ -1,649 +1,2310 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        
-        <meta name="author" content="朽木自雕">
-        <link rel="canonical" href="https://burningmyself.github.io/docker/docker-compose/">
-        <link rel="shortcut icon" href="../../favicon.ico">
-        
+
+
+
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+        <meta name="description" content=".net,java,php,python,docker,web">
+      
+      
+        <link rel="canonical" href="https://rosemarys.gitee.io/docker/docker-compose/">
+      
+      
+        <meta name="author" content="BurningMyself">
+      
+      
+        <meta name="lang:clipboard.copy" content="复制">
+      
+        <meta name="lang:clipboard.copied" content="已复制">
+      
+        <meta name="lang:search.language" content="zh,en,ja">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="没有找到符合条件的结果">
+      
+        <meta name="lang:search.result.one" content="找到 1 个符合条件的结果">
+      
+        <meta name="lang:search.result.other" content="# 个符合条件的结果">
+      
+        <meta name="lang:search.tokenizer" content="[\ s \-\ .. +">
+      
+      <link rel="shortcut icon" href="../../favicon.ico">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.6.0">
+    
+    
+      
         <title>docker和docker-compose 配置 mysql mongodb redis nginx jenkins 环境 - BurningMyself</title>
-        <link href="../../css/bootstrap-custom.min.css" rel="stylesheet">
-        <link href="../../css/font-awesome.min.css" rel="stylesheet">
-        <link href="../../css/base.css" rel="stylesheet">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
-        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-        <!--[if lt IE 9]>
-            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-        <![endif]-->
-
-        <script src="../../js/jquery-1.10.2.min.js" defer></script>
-        <script src="../../js/bootstrap-3.0.3.min.js" defer></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
-        <script>hljs.initHighlightingOnLoad();</script>
-        <script>
-            (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-            })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-
-            ga('create', 'UA-36723568-3', 'mkdocs.org');
-            ga('send', 'pageview');
-        </script> 
-    </head>
-
-    <body>
-
-        <div class="navbar navbar-default navbar-fixed-top" role="navigation">
-            <div class="container">
-
-                <!-- Collapsed navigation -->
-                <div class="navbar-header">
-                    <!-- Expander button -->
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" href="../..">BurningMyself</a>
-                </div>
-
-                <!-- Expanded navigation -->
-                <div class="navbar-collapse collapse">
-                        <!-- Main navigation -->
-                        <ul class="nav navbar-nav">
-                            <li >
-                                <a href="../..">介绍</a>
-                            </li>
-                            <li class="dropdown active">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">技术博文 <b class="caret"></b></a>
-                                <ul class="dropdown-menu">
-                                    
-  <li class="dropdown-submenu">
-    <a href="#">.NET</a>
-    <ul class="dropdown-menu">
-            
-<li >
-    <a href="../../net/c_sharp/">C# 6</a>
-</li>
-            
-<li >
-    <a href="../../net/c_docker/">.Ner Core Docker 部署</a>
-</li>
-            
-<li >
-    <a href="../../net/c_mysql_nginx/">使用 Docker 容器化部署 ASP.NET Core + MySQL + Nginx</a>
-</li>
-            
-<li >
-    <a href="../../net/c_core_safety/">让你的ASP.NET Core应用程序更安全</a>
-</li>
-            
-<li >
-    <a href="../../net/c_core_study_route/">ASP.NET Core开发者指南</a>
-</li>
-    </ul>
-  </li>
-                                    
-  <li class="dropdown-submenu">
-    <a href="#">Java</a>
-    <ul class="dropdown-menu">
-            
-<li >
-    <a href="../../java/feature/">Java特性</a>
-</li>
-            
-<li >
-    <a href="../../java/load-class/">Java类加载</a>
-</li>
-            
-<li >
-    <a href="../../java/orm/">Orm的优缺点</a>
-</li>
-            
-<li >
-    <a href="../../java/bio-nio/">BIO与NIO</a>
-</li>
-            
-<li >
-    <a href="../../java/rocketmq/rmq-1/">RocketMq下载与安装</a>
-</li>
-            
-<li >
-    <a href="../../java/springAnnotation/">Spring常用注解</a>
-</li>
-    </ul>
-  </li>
-                                    
-  <li class="dropdown-submenu">
-    <a href="#">Python</a>
-    <ul class="dropdown-menu">
-            
-<li >
-    <a href="../../python/feature/">Python特性</a>
-</li>
-            
-<li >
-    <a href="../../python/str_joint/">Python字符拼接</a>
-</li>
-            
-<li >
-    <a href="../../python/syntax_rule/">Python语法技巧</a>
-</li>
-            
-<li >
-    <a href="../../python/fabric/">远程部署神器 Fabric</a>
-</li>
-    </ul>
-  </li>
-                                    
-  <li class="dropdown-submenu">
-    <a href="#">PHP</a>
-    <ul class="dropdown-menu">
-            
-<li >
-    <a href="../../php/kj/">框架</a>
-</li>
-    </ul>
-  </li>
-                                    
-  <li class="dropdown-submenu">
-    <a href="#">Web</a>
-    <ul class="dropdown-menu">
-            
-<li >
-    <a href="../../web/es6/">es6语法</a>
-</li>
-            
-<li >
-    <a href="../../web/ali_js_style/">阿里js样式规范</a>
-</li>
-            
-<li >
-    <a href="../../web/node.js/">node.js文档</a>
-</li>
-            
-<li >
-    <a href="../../web/react/">React 开发者指南</a>
-</li>
-            
-<li >
-    <a href="../../dart/syntax/">Dart语法学习</a>
-</li>
-            
-<li >
-    <a href="../../web/react_interview/">React 面试</a>
-</li>
-            
-<li >
-    <a href="../../web/js_tool_method/">js 工具函数</a>
-</li>
-            
-<li >
-    <a href="../../web/vue_cp_react/">vue与react比较</a>
-</li>
-    </ul>
-  </li>
-                                    
-  <li class="dropdown-submenu">
-    <a href="#">SQL</a>
-    <ul class="dropdown-menu">
-            
-<li >
-    <a href="../../sql/mysql_yh/">MySQL优化</a>
-</li>
-            
-<li >
-    <a href="../../sql/mysql_yh17/">MySQL优化</a>
-</li>
-            
-<li >
-    <a href="../../sql/mysql_log/">MySQL日志</a>
-</li>
-            
-<li >
-    <a href="../../sql/mysql_index/">MySQL索引</a>
-</li>
-            
-<li >
-    <a href="../../sql/mysql_pxc/">MySQL PXC集群</a>
-</li>
-            
-<li >
-    <a href="../../sql/mysql_use/">MySQL 数据库应用</a>
-</li>
-            
-<li >
-    <a href="../../sql/sql_server_master/">Sql Server 主从备份</a>
-</li>
-            
-<li >
-    <a href="../../sql/data_split/">数据库之互联网常用分库分表方案</a>
-</li>
-            
-<li >
-    <a href="../../sql/mybatis/">Mybatis使用心德</a>
-</li>
-    </ul>
-  </li>
-                                    
-  <li class="dropdown-submenu">
-    <a href="#">Linux</a>
-    <ul class="dropdown-menu">
-            
-<li >
-    <a href="../../linux/often/">常用命令</a>
-</li>
-            
-<li >
-    <a href="../../linux/ope/">实用的Linux 命令</a>
-</li>
-    </ul>
-  </li>
-                                    
-  <li class="dropdown-submenu">
-    <a href="#">Docker</a>
-    <ul class="dropdown-menu">
-            
-<li >
-    <a href="../docker/">Docker全科</a>
-</li>
-            
-<li class="active">
-    <a href="./">docker和docker-compose 配置 mysql mongodb redis nginx jenkins 环境</a>
-</li>
-            
-<li >
-    <a href="../docker-jenkins/">Docker部署Jenkins</a>
-</li>
-    </ul>
-  </li>
-                                    
-  <li class="dropdown-submenu">
-    <a href="#">Tool</a>
-    <ul class="dropdown-menu">
-            
-<li >
-    <a href="../../tool/git/">Git</a>
-</li>
-            
-<li >
-    <a href="../../tool/gitquestion/">Git问题处理</a>
-</li>
-            
-<li >
-    <a href="../../tool/gitflow/">GitFlow</a>
-</li>
-            
-<li >
-    <a href="../../tool/gitbook/">GitBook</a>
-</li>
-            
-<li >
-    <a href="../../tool/gitcmr/">Git提交日志规范</a>
-</li>
-            
-<li >
-    <a href="../../tool/markdown/">Markdown</a>
-</li>
-            
-<li >
-    <a href="../../tool/cicd/">CI/CD</a>
-</li>
-            
-<li >
-    <a href="../../tool/mkdocs/">mkdocs简单使用</a>
-</li>
-            
-<li >
-    <a href="../../tool/gitstudy/">Git的黑魔法</a>
-</li>
-    </ul>
-  </li>
-                                </ul>
-                            </li>
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">微服务 <b class="caret"></b></a>
-                                <ul class="dropdown-menu">
-                                    
-<li >
-    <a href="../../micro/spring-cloud/">基于SpringCloud的微服务架构演变史</a>
-</li>
-                                    
-<li >
-    <a href="../../micro/fbs-lock/">分布式锁</a>
-</li>
-                                    
-<li >
-    <a href="../../micro/design/">微服务设计</a>
-</li>
-                                    
-<li >
-    <a href="../../micro/distrimsg/">分布式系统与消息的投递</a>
-</li>
-                                    
-<li >
-    <a href="../../micro/ddd/">基于DDD的微服务设计和开发实战</a>
-</li>
-                                </ul>
-                            </li>
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">经验分析 <b class="caret"></b></a>
-                                <ul class="dropdown-menu">
-                                    
-<li >
-    <a href="../../exp/devops/">DevOps</a>
-</li>
-                                    
-<li >
-    <a href="../../exp/micro-service/">Micro-Service</a>
-</li>
-                                    
-<li >
-    <a href="../../exp/raft-gossip/">Raft算法和Gossip协议</a>
-</li>
-                                    
-<li >
-    <a href="../../exp/cl/">集群和负载均衡</a>
-</li>
-                                    
-<li >
-    <a href="../../exp/ai/">人工智能</a>
-</li>
-                                    
-<li >
-    <a href="../../exp/code-principle/">代码原则</a>
-</li>
-                                    
-<li >
-    <a href="../../exp/techbig/">如何成为技术大牛</a>
-</li>
-                                    
-<li >
-    <a href="../../exp/learnweetout/">程序员如何技术成长</a>
-</li>
-                                    
-<li >
-    <a href="../../exp/pt/">产品与技术</a>
-</li>
-                                    
-<li >
-    <a href="../../exp/four_deep_learning/">深度学习框架</a>
-</li>
-                                    
-<li >
-    <a href="../../exp/tl/">在阿里做了5年技术Leader，我总结出这些套路！</a>
-</li>
-                                    
-<li >
-    <a href="../../exp/cto/">CTO 技能图谱</a>
-</li>
-                                </ul>
-                            </li>
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">医学 <b class="caret"></b></a>
-                                <ul class="dropdown-menu">
-                                    
-<li >
-    <a href="../../doctor/ae/">脑炎</a>
-</li>
-                                </ul>
-                            </li>
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">构架 <b class="caret"></b></a>
-                                <ul class="dropdown-menu">
-                                    
-<li >
-    <a href="../../framework/split/">构架拆分</a>
-</li>
-                                    
-<li >
-    <a href="../../framework/fgb/">分布式、高并发、多线程</a>
-</li>
-                                    
-<li >
-    <a href="../../framework/agility/">如何理解敏捷开发</a>
-</li>
-                                    
-<li >
-    <a href="../../framework/fwork/">走向架构师必备的技能</a>
-</li>
-                                </ul>
-                            </li>
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">情感 <b class="caret"></b></a>
-                                <ul class="dropdown-menu">
-                                    
-<li >
-    <a href="../../emotion/eq/">情商</a>
-</li>
-                                    
-<li >
-    <a href="../../emotion/workheard/">工作心得</a>
-</li>
-                                    
-<li >
-    <a href="../../emotion/lookbook/">看书</a>
-</li>
-                                    
-<li >
-    <a href="../../emotion/fmf/">4种男朋友</a>
-</li>
-                                    
-<li >
-    <a href="../../emotion/notheart/">不上心</a>
-</li>
-                                    
-<li >
-    <a href="../../emotion/selfdiscipline/">自律</a>
-</li>
-                                    
-<li >
-    <a href="../../emotion/notlike/">喜欢与不喜欢</a>
-</li>
-                                    
-<li >
-    <a href="../../emotion/latemarry/">晚婚</a>
-</li>
-                                    
-<li >
-    <a href="../../emotion/understand/">追女生要明白这些事</a>
-</li>
-                                    
-<li >
-    <a href="../../emotion/backup/">备胎</a>
-</li>
-                                    
-<li >
-    <a href="../../emotion/chase/">为什么追不到她</a>
-</li>
-                                    
-<li >
-    <a href="../../emotion/livefail/">为什么活着失败</a>
-</li>
-                                    
-<li >
-    <a href="../../emotion/emotion/">情绪管理</a>
-</li>
-                                    
-<li >
-    <a href="../../emotion/abolish/">废掉的三个迹象</a>
-</li>
-                                    
-<li >
-    <a href="../../emotion/uptime/">余生，好好珍惜</a>
-</li>
-                                    
-<li >
-    <a href="../../emotion/losecome/">所有的失去，都会以另一种方式归来</a>
-</li>
-                                    
-<li >
-    <a href="../../emotion/threeheart/">人生有这三种好心态</a>
-</li>
-                                    
-<li >
-    <a href="../../emotion/onelike/">一个感情真相</a>
-</li>
-                                    
-<li >
-    <a href="../../emotion/notruth/">情商与道理</a>
-</li>
-                                    
-<li >
-    <a href="../../emotion/smf/">六种男人远离</a>
-</li>
-                                    
-<li >
-    <a href="../../emotion/select/">决定接下来人生归属的，不是努力，而是选择</a>
-</li>
-                                    
-<li >
-    <a href="../../emotion/nolike/">被你拉黑的那个人，你一定很喜欢吧</a>
-</li>
-                                    
-<li >
-    <a href="../../emotion/onepath/">余生，学会一个人走，不管有没有人陪</a>
-</li>
-                                    
-<li >
-    <a href="../../emotion/twopath/">往后余生还很精彩，别被熬夜拖垮了</a>
-</li>
-                                    
-<li >
-    <a href="../../emotion/lifetime/">心态好的人，一辈子都好</a>
-</li>
-                                    
-<li >
-    <a href="../../emotion/hearttoheart/">将心比心，方得人心</a>
-</li>
-                                    
-<li >
-    <a href="../../emotion/ttt/">别睡太晚，别爱太满，别要太多</a>
-</li>
-                                    
-<li >
-    <a href="../../emotion/profess/">表白</a>
-</li>
-                                </ul>
-                            </li>
-                        </ul>
-
-                    <ul class="nav navbar-nav navbar-right">
-                        <li>
-                            <a href="#" data-toggle="modal" data-target="#mkdocs_search_modal">
-                                <i class="fa fa-search"></i> Search
-                            </a>
-                        </li>
-                            <li >
-                                <a rel="next" href="../docker/">
-                                    <i class="fa fa-arrow-left"></i> Previous
-                                </a>
-                            </li>
-                            <li >
-                                <a rel="prev" href="../docker-jenkins/">
-                                    Next <i class="fa fa-arrow-right"></i>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="https://github.com/burningmyself/burningmyself.github.io/edit/master/docs/docker/docker-compose.md">Edit on burningmyself.github.io</a>
-                            </li>
-                    </ul>
-                </div>
-            </div>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/application.1b62728e.css">
+      
+      
+    
+    
+      <script src="../../assets/javascripts/modernizr.268332fc.js"></script>
+    
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
+      
+    
+    <link rel="stylesheet" href="../../assets/fonts/material-icons.css">
+    
+    
+    
+      
+        
+<script>
+  window.ga = window.ga || function() {
+    (ga.q = ga.q || []).push(arguments)
+  }
+  ga.l = +new Date
+  /* Setup integration and send page view */
+  ga("create", "UA-36723568-3", "burningmyself.github.io")
+  ga("set", "anonymizeIp", true)
+  ga("send", "pageview")
+  /* Register handler to log search on blur */
+  document.addEventListener("DOMContentLoaded", () => {
+    if (document.forms.search) {
+      var query = document.forms.search.query
+      query.addEventListener("blur", function() {
+        if (this.value) {
+          var path = document.location.pathname;
+          ga("send", "pageview", path + "?q=" + this.value)
+        }
+      })
+    }
+  })
+</script>
+<script async src="https://www.google-analytics.com/analytics.js"></script>
+      
+    
+    
+  </head>
+  
+    <body dir="ltr">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+          <svg xmlns="http://www.w3.org/2000/svg" width="416" height="448" viewBox="0 0 416 448" id="__github"><path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19T128 352t-18.125-8.5-10.75-19T96 304t3.125-20.5 10.75-19T128 256t18.125 8.5 10.75 19T160 304zm160 0q0 10-3.125 20.5t-10.75 19T288 352t-18.125-8.5-10.75-19T256 304t3.125-20.5 10.75-19T288 256t18.125 8.5 10.75 19T320 304zm40 0q0-30-17.25-51T296 232q-10.25 0-48.75 5.25Q229.5 240 208 240t-39.25-2.75Q130.75 232 120 232q-29.5 0-46.75 21T56 304q0 22 8 38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0 37.25-1.75t35-7.375 30.5-15 20.25-25.75T360 304zm56-44q0 51.75-15.25 82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5T212 416q-19.5 0-35.5-.75t-36.875-3.125-38.125-7.5-34.25-12.875T37 371.5t-21.5-28.75Q0 312 0 260q0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25 30.875Q171.5 96 212 96q37 0 70 8 26.25-20.5 46.75-30.25T376 64q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34 99.5z"/></svg>
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+    
+      <a href="#dockerdocker-compose_mysql_mongodb_redis_nginx_jenkins" tabindex="1" class="md-skip">
+        跳转至
+      </a>
+    
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="https://rosemarys.gitee.io" title="BurningMyself" class="md-header-nav__button md-logo">
+          
+            <i class="md-icon"></i>
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          
+            <span class="md-header-nav__topic">
+              BurningMyself
+            </span>
+            <span class="md-header-nav__topic">
+              
+                docker和docker-compose 配置 mysql mongodb redis nginx jenkins 环境
+              
+            </span>
+          
         </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
+          
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="__search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            键入以开始搜索
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+        
+      </div>
+      
+        <div class="md-flex__cell md-flex__cell--shrink">
+          <div class="md-header-nav__source">
+            
 
-        <div class="container">
-                <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
-    <ul class="nav bs-sidenav">
-        <li class="main active"><a href="#dockerdocker-compose-mysql-mongodb-redis-nginx-jenkins">docker和docker-compose 配置 mysql mongodb redis nginx jenkins 环境</a></li>
-            <li><a href="#_1">磁盘挂载</a></li>
-            <li><a href="#docker">docker</a></li>
-            <li><a href="#docker-compose">docker-compose</a></li>
+
+  
+
+<a href="https://github.com/burningmyself/burningmyself.github.io/" title="前往 Github 仓库" class="md-source" data-md-source="github">
+  
+    <div class="md-source__icon">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
+    burningmyself.github.io
+  </div>
+</a>
+          </div>
+        </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+        
+
+  
+
+<nav class="md-tabs md-tabs--active" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  <li class="md-tabs__item">
+    
+      <a href="../.." class="md-tabs__link">
+        介绍
+      </a>
+    
+  </li>
+
+      
+        
+  
+  
+    
+    
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../net/c_sharp/" class="md-tabs__link">
+          技术博文
+        </a>
+      
+    </li>
+  
+
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../micro/spring-cloud/" class="md-tabs__link">
+          微服务
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../exp/devops/" class="md-tabs__link">
+          经验分析
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../doctor/ae/" class="md-tabs__link">
+          医学
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../framework/split/" class="md-tabs__link">
+          构架
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../emotion/eq/" class="md-tabs__link">
+          情感
+        </a>
+      
+    </li>
+  
+
+      
     </ul>
-</div></div>
-                <div class="col-md-9" role="main">
+  </div>
+</nav>
+      
+      <main class="md-main" role="main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="__drawer">
+    <a href="https://rosemarys.gitee.io" title="BurningMyself" class="md-nav__button md-logo">
+      
+        <i class="md-icon"></i>
+      
+    </a>
+    BurningMyself
+  </label>
+  
+    <div class="md-nav__source">
+      
 
-<h1 id="dockerdocker-compose-mysql-mongodb-redis-nginx-jenkins">docker和docker-compose 配置 mysql mongodb redis nginx jenkins 环境<a class="headerlink" href="#dockerdocker-compose-mysql-mongodb-redis-nginx-jenkins" title="Permanent link">&para;</a></h1>
+
+  
+
+<a href="https://github.com/burningmyself/burningmyself.github.io/" title="前往 Github 仓库" class="md-source" data-md-source="github">
+  
+    <div class="md-source__icon">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
+    burningmyself.github.io
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../.." title="介绍" class="md-nav__link">
+      介绍
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2" checked>
+    
+    <label class="md-nav__link" for="nav-2">
+      技术博文
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-2">
+        技术博文
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-1" type="checkbox" id="nav-2-1">
+    
+    <label class="md-nav__link" for="nav-2-1">
+      .NET
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-2-1">
+        .NET
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../net/c_sharp/" title="C# 6" class="md-nav__link">
+      C# 6
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../net/c_docker/" title=".Ner Core Docker 部署" class="md-nav__link">
+      .Ner Core Docker 部署
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../net/c_mysql_nginx/" title="使用 Docker 容器化部署 ASP.NET Core + MySQL + Nginx" class="md-nav__link">
+      使用 Docker 容器化部署 ASP.NET Core + MySQL + Nginx
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../net/c_core_safety/" title="让你的ASP.NET Core应用程序更安全" class="md-nav__link">
+      让你的ASP.NET Core应用程序更安全
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../net/c_core_study_route/" title="ASP.NET Core开发者指南" class="md-nav__link">
+      ASP.NET Core开发者指南
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-2" type="checkbox" id="nav-2-2">
+    
+    <label class="md-nav__link" for="nav-2-2">
+      Java
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-2-2">
+        Java
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../java/feature/" title="Java特性" class="md-nav__link">
+      Java特性
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../java/load-class/" title="Java类加载" class="md-nav__link">
+      Java类加载
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../java/orm/" title="Orm的优缺点" class="md-nav__link">
+      Orm的优缺点
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../java/bio-nio/" title="BIO与NIO" class="md-nav__link">
+      BIO与NIO
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../java/rocketmq/rmq-1/" title="RocketMq下载与安装" class="md-nav__link">
+      RocketMq下载与安装
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../java/springAnnotation/" title="Spring常用注解" class="md-nav__link">
+      Spring常用注解
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-3" type="checkbox" id="nav-2-3">
+    
+    <label class="md-nav__link" for="nav-2-3">
+      Python
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-2-3">
+        Python
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../python/feature/" title="Python特性" class="md-nav__link">
+      Python特性
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../python/str_joint/" title="Python字符拼接" class="md-nav__link">
+      Python字符拼接
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../python/syntax_rule/" title="Python语法技巧" class="md-nav__link">
+      Python语法技巧
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../python/fabric/" title="远程部署神器 Fabric" class="md-nav__link">
+      远程部署神器 Fabric
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-4" type="checkbox" id="nav-2-4">
+    
+    <label class="md-nav__link" for="nav-2-4">
+      PHP
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-2-4">
+        PHP
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../php/kj/" title="框架" class="md-nav__link">
+      框架
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-5" type="checkbox" id="nav-2-5">
+    
+    <label class="md-nav__link" for="nav-2-5">
+      Web
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-2-5">
+        Web
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../web/es6/" title="es6语法" class="md-nav__link">
+      es6语法
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../web/ali_js_style/" title="阿里js样式规范" class="md-nav__link">
+      阿里js样式规范
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../web/node.js/" title="node.js文档" class="md-nav__link">
+      node.js文档
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../web/react/" title="React 开发者指南" class="md-nav__link">
+      React 开发者指南
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../dart/syntax/" title="Dart语法学习" class="md-nav__link">
+      Dart语法学习
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../web/react_interview/" title="React 面试" class="md-nav__link">
+      React 面试
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../web/js_tool_method/" title="js 工具函数" class="md-nav__link">
+      js 工具函数
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../web/vue_cp_react/" title="vue与react比较" class="md-nav__link">
+      vue与react比较
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-6" type="checkbox" id="nav-2-6">
+    
+    <label class="md-nav__link" for="nav-2-6">
+      SQL
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-2-6">
+        SQL
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../sql/mysql_yh/" title="MySQL优化" class="md-nav__link">
+      MySQL优化
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../sql/mysql_yh17/" title="MySQL优化" class="md-nav__link">
+      MySQL优化
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../sql/mysql_log/" title="MySQL日志" class="md-nav__link">
+      MySQL日志
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../sql/mysql_index/" title="MySQL索引" class="md-nav__link">
+      MySQL索引
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../sql/mysql_pxc/" title="MySQL PXC集群" class="md-nav__link">
+      MySQL PXC集群
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../sql/mysql_use/" title="MySQL 数据库应用" class="md-nav__link">
+      MySQL 数据库应用
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../sql/sql_server_master/" title="Sql Server 主从备份" class="md-nav__link">
+      Sql Server 主从备份
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../sql/data_split/" title="数据库之互联网常用分库分表方案" class="md-nav__link">
+      数据库之互联网常用分库分表方案
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../sql/mybatis/" title="Mybatis使用心德" class="md-nav__link">
+      Mybatis使用心德
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-7" type="checkbox" id="nav-2-7">
+    
+    <label class="md-nav__link" for="nav-2-7">
+      Linux
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-2-7">
+        Linux
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../linux/often/" title="常用命令" class="md-nav__link">
+      常用命令
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../linux/ope/" title="实用的Linux 命令" class="md-nav__link">
+      实用的Linux 命令
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-8" type="checkbox" id="nav-2-8" checked>
+    
+    <label class="md-nav__link" for="nav-2-8">
+      Docker
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-2-8">
+        Docker
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../docker/" title="Docker全科" class="md-nav__link">
+      Docker全科
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        docker和docker-compose 配置 mysql mongodb redis nginx jenkins 环境
+      </label>
+    
+    <a href="./" title="docker和docker-compose 配置 mysql mongodb redis nginx jenkins 环境" class="md-nav__link md-nav__link--active">
+      docker和docker-compose 配置 mysql mongodb redis nginx jenkins 环境
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">目录</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    磁盘挂载
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#docker" class="md-nav__link">
+    docker
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#docker_1" class="md-nav__link">
+    安装 docker
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#java" class="md-nav__link">
+    拉取 Java 镜像
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mysql" class="md-nav__link">
+    拉取 MySql 镜像
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mongodb" class="md-nav__link">
+    拉取 Mongodb 镜像
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#redis" class="md-nav__link">
+    拉取 Redis 镜像
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#nginx" class="md-nav__link">
+    拉取 Nginx 镜像
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#jenkins" class="md-nav__link">
+    拉取Jenkins镜像：
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#docker_api" class="md-nav__link">
+    Docker 开启远程API
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#docker_2" class="md-nav__link">
+    Docker 常用命令
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#docker-compose" class="md-nav__link">
+    docker-compose
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#docker-compose_1" class="md-nav__link">
+    安装 docker-compose
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#docker_compose" class="md-nav__link">
+    使用Docker Compose的步骤
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#docker-composeyml" class="md-nav__link">
+    docker-compose.yml常用命令
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#docker_compose_1" class="md-nav__link">
+    Docker Compose常用命令
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#docker_compose_2" class="md-nav__link">
+    使用Docker Compose 部署应用
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+        <li class="md-nav__item">
+          <a href="#__comments" class="md-nav__link md-nav__link--active">
+            评论
+          </a>
+        </li>
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../docker-jenkins/" title="Docker部署Jenkins" class="md-nav__link">
+      Docker部署Jenkins
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-9" type="checkbox" id="nav-2-9">
+    
+    <label class="md-nav__link" for="nav-2-9">
+      Tool
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-2-9">
+        Tool
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tool/git/" title="Git" class="md-nav__link">
+      Git
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tool/gitquestion/" title="Git问题处理" class="md-nav__link">
+      Git问题处理
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tool/gitflow/" title="GitFlow" class="md-nav__link">
+      GitFlow
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tool/gitbook/" title="GitBook" class="md-nav__link">
+      GitBook
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tool/gitcmr/" title="Git提交日志规范" class="md-nav__link">
+      Git提交日志规范
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tool/markdown/" title="Markdown" class="md-nav__link">
+      Markdown
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tool/cicd/" title="CI/CD" class="md-nav__link">
+      CI/CD
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tool/mkdocs/" title="mkdocs简单使用" class="md-nav__link">
+      mkdocs简单使用
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tool/gitstudy/" title="Git的黑魔法" class="md-nav__link">
+      Git的黑魔法
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3">
+    
+    <label class="md-nav__link" for="nav-3">
+      微服务
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-3">
+        微服务
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../micro/spring-cloud/" title="基于SpringCloud的微服务架构演变史" class="md-nav__link">
+      基于SpringCloud的微服务架构演变史
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../micro/fbs-lock/" title="分布式锁" class="md-nav__link">
+      分布式锁
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../micro/design/" title="微服务设计" class="md-nav__link">
+      微服务设计
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../micro/distrimsg/" title="分布式系统与消息的投递" class="md-nav__link">
+      分布式系统与消息的投递
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../micro/ddd/" title="基于DDD的微服务设计和开发实战" class="md-nav__link">
+      基于DDD的微服务设计和开发实战
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4">
+    
+    <label class="md-nav__link" for="nav-4">
+      经验分析
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-4">
+        经验分析
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../exp/devops/" title="DevOps" class="md-nav__link">
+      DevOps
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../exp/micro-service/" title="Micro-Service" class="md-nav__link">
+      Micro-Service
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../exp/raft-gossip/" title="Raft算法和Gossip协议" class="md-nav__link">
+      Raft算法和Gossip协议
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../exp/cl/" title="集群和负载均衡" class="md-nav__link">
+      集群和负载均衡
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../exp/ai/" title="人工智能" class="md-nav__link">
+      人工智能
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../exp/code-principle/" title="代码原则" class="md-nav__link">
+      代码原则
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../exp/techbig/" title="如何成为技术大牛" class="md-nav__link">
+      如何成为技术大牛
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../exp/learnweetout/" title="程序员如何技术成长" class="md-nav__link">
+      程序员如何技术成长
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../exp/pt/" title="产品与技术" class="md-nav__link">
+      产品与技术
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../exp/four_deep_learning/" title="深度学习框架" class="md-nav__link">
+      深度学习框架
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../exp/tl/" title="在阿里做了5年技术Leader，我总结出这些套路！" class="md-nav__link">
+      在阿里做了5年技术Leader，我总结出这些套路！
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../exp/cto/" title="CTO 技能图谱" class="md-nav__link">
+      CTO 技能图谱
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5">
+    
+    <label class="md-nav__link" for="nav-5">
+      医学
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-5">
+        医学
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../doctor/ae/" title="脑炎" class="md-nav__link">
+      脑炎
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6" type="checkbox" id="nav-6">
+    
+    <label class="md-nav__link" for="nav-6">
+      构架
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-6">
+        构架
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../framework/split/" title="构架拆分" class="md-nav__link">
+      构架拆分
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../framework/fgb/" title="分布式、高并发、多线程" class="md-nav__link">
+      分布式、高并发、多线程
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../framework/agility/" title="如何理解敏捷开发" class="md-nav__link">
+      如何理解敏捷开发
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../framework/fwork/" title="走向架构师必备的技能" class="md-nav__link">
+      走向架构师必备的技能
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7" type="checkbox" id="nav-7">
+    
+    <label class="md-nav__link" for="nav-7">
+      情感
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-7">
+        情感
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/eq/" title="情商" class="md-nav__link">
+      情商
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/workheard/" title="工作心得" class="md-nav__link">
+      工作心得
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/lookbook/" title="看书" class="md-nav__link">
+      看书
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/fmf/" title="4种男朋友" class="md-nav__link">
+      4种男朋友
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/notheart/" title="不上心" class="md-nav__link">
+      不上心
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/selfdiscipline/" title="自律" class="md-nav__link">
+      自律
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/notlike/" title="喜欢与不喜欢" class="md-nav__link">
+      喜欢与不喜欢
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/latemarry/" title="晚婚" class="md-nav__link">
+      晚婚
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/understand/" title="追女生要明白这些事" class="md-nav__link">
+      追女生要明白这些事
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/backup/" title="备胎" class="md-nav__link">
+      备胎
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/chase/" title="为什么追不到她" class="md-nav__link">
+      为什么追不到她
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/livefail/" title="为什么活着失败" class="md-nav__link">
+      为什么活着失败
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/emotion/" title="情绪管理" class="md-nav__link">
+      情绪管理
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/abolish/" title="废掉的三个迹象" class="md-nav__link">
+      废掉的三个迹象
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/uptime/" title="余生，好好珍惜" class="md-nav__link">
+      余生，好好珍惜
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/losecome/" title="所有的失去，都会以另一种方式归来" class="md-nav__link">
+      所有的失去，都会以另一种方式归来
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/threeheart/" title="人生有这三种好心态" class="md-nav__link">
+      人生有这三种好心态
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/onelike/" title="一个感情真相" class="md-nav__link">
+      一个感情真相
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/notruth/" title="情商与道理" class="md-nav__link">
+      情商与道理
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/smf/" title="六种男人远离" class="md-nav__link">
+      六种男人远离
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/select/" title="决定接下来人生归属的，不是努力，而是选择" class="md-nav__link">
+      决定接下来人生归属的，不是努力，而是选择
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/nolike/" title="被你拉黑的那个人，你一定很喜欢吧" class="md-nav__link">
+      被你拉黑的那个人，你一定很喜欢吧
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/onepath/" title="余生，学会一个人走，不管有没有人陪" class="md-nav__link">
+      余生，学会一个人走，不管有没有人陪
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/twopath/" title="往后余生还很精彩，别被熬夜拖垮了" class="md-nav__link">
+      往后余生还很精彩，别被熬夜拖垮了
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/lifetime/" title="心态好的人，一辈子都好" class="md-nav__link">
+      心态好的人，一辈子都好
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/hearttoheart/" title="将心比心，方得人心" class="md-nav__link">
+      将心比心，方得人心
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/ttt/" title="别睡太晚，别爱太满，别要太多" class="md-nav__link">
+      别睡太晚，别爱太满，别要太多
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/profess/" title="表白" class="md-nav__link">
+      表白
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">目录</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    磁盘挂载
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#docker" class="md-nav__link">
+    docker
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#docker_1" class="md-nav__link">
+    安装 docker
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#java" class="md-nav__link">
+    拉取 Java 镜像
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mysql" class="md-nav__link">
+    拉取 MySql 镜像
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mongodb" class="md-nav__link">
+    拉取 Mongodb 镜像
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#redis" class="md-nav__link">
+    拉取 Redis 镜像
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#nginx" class="md-nav__link">
+    拉取 Nginx 镜像
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#jenkins" class="md-nav__link">
+    拉取Jenkins镜像：
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#docker_api" class="md-nav__link">
+    Docker 开启远程API
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#docker_2" class="md-nav__link">
+    Docker 常用命令
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#docker-compose" class="md-nav__link">
+    docker-compose
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#docker-compose_1" class="md-nav__link">
+    安装 docker-compose
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#docker_compose" class="md-nav__link">
+    使用Docker Compose的步骤
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#docker-composeyml" class="md-nav__link">
+    docker-compose.yml常用命令
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#docker_compose_1" class="md-nav__link">
+    Docker Compose常用命令
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#docker_compose_2" class="md-nav__link">
+    使用Docker Compose 部署应用
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+        <li class="md-nav__item">
+          <a href="#__comments" class="md-nav__link md-nav__link--active">
+            评论
+          </a>
+        </li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/burningmyself/burningmyself.github.io/edit/master/docs/docker/docker-compose.md" title="编辑此页" class="md-icon md-content__icon">&#xE3C9;</a>
+                
+                
+                <h1 id="dockerdocker-compose_mysql_mongodb_redis_nginx_jenkins">docker和docker-compose 配置 mysql mongodb redis nginx jenkins 环境<a class="headerlink" href="#dockerdocker-compose_mysql_mongodb_redis_nginx_jenkins" title="Permanent link">&para;</a></h1>
 <h2 id="_1">磁盘挂载<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
-<pre class="codehilite"><code class="language-shell">fdisk -l #查看磁盘列表
-mkfs.ext4 /dev/vdb #格式化磁盘
-mount /dev/vdb /data #挂载磁盘在/data
-echo '/dev/vdb /data ext4 defaults,nofail 0 1'&gt;&gt; /etc/fstab # 启动服务器自动挂载
-mount -a #校验自动挂载脚本
-df -h #查看磁盘挂载后信息</code></pre>
-
+<div class="codehilite"><pre><span></span>fdisk -l <span class="c1">#查看磁盘列表</span>
+mkfs.ext4 /dev/vdb <span class="c1">#格式化磁盘</span>
+mount /dev/vdb /data <span class="c1">#挂载磁盘在/data</span>
+<span class="nb">echo</span> <span class="s1">&#39;/dev/vdb /data ext4 defaults,nofail 0 1&#39;</span>&gt;&gt; /etc/fstab <span class="c1"># 启动服务器自动挂载</span>
+mount -a <span class="c1">#校验自动挂载脚本</span>
+df -h <span class="c1">#查看磁盘挂载后信息</span>
+</pre></div>
 
 <h2 id="docker">docker<a class="headerlink" href="#docker" title="Permanent link">&para;</a></h2>
 <h3 id="docker_1">安装 docker<a class="headerlink" href="#docker_1" title="Permanent link">&para;</a></h3>
-<pre class="codehilite"><code class="language-shell">yum update #更新系统包
-yum install -y yum-utils device-mapper-persistent-data lvm2 #安装yum-utils
-yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo #为yum源添加docker仓库位置
-yum install docker-ce #安装docker
-systemctl start docker #启动docker
-systemctl stop docker #暂停docker
-mv /var/lib/docker /data/docker # 修改Docker镜像的存放位置
-ln -s /data/docker /var/lib/docker #建立软连接
-echo '{
-  &quot;registry-mirrors&quot;: [&quot;https://registry.docker-cn.com&quot;]
-}
-'&gt;&gt; /etc/docker/daemon.json # 镜像下载代理</code></pre>
-
+<div class="codehilite"><pre><span></span>yum update <span class="c1">#更新系统包</span>
+yum install -y yum-utils device-mapper-persistent-data lvm2 <span class="c1">#安装yum-utils</span>
+yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo <span class="c1">#为yum源添加docker仓库位置</span>
+yum install docker-ce <span class="c1">#安装docker</span>
+systemctl start docker <span class="c1">#启动docker</span>
+systemctl stop docker <span class="c1">#暂停docker</span>
+mv /var/lib/docker /data/docker <span class="c1"># 修改Docker镜像的存放位置</span>
+ln -s /data/docker /var/lib/docker <span class="c1">#建立软连接</span>
+<span class="nb">echo</span> <span class="s1">&#39;{</span>
+<span class="s1">  &quot;registry-mirrors&quot;: [&quot;https://registry.docker-cn.com&quot;]</span>
+<span class="s1">}</span>
+<span class="s1">&#39;</span>&gt;&gt; /etc/docker/daemon.json <span class="c1"># 镜像下载代理</span>
+</pre></div>
 
 <h3 id="java">拉取 Java 镜像<a class="headerlink" href="#java" title="Permanent link">&para;</a></h3>
-<pre class="codehilite"><code class="language-shell">docker pull java</code></pre>
-
+<div class="codehilite"><pre><span></span>docker pull java
+</pre></div>
 
 <h3 id="mysql">拉取 MySql 镜像<a class="headerlink" href="#mysql" title="Permanent link">&para;</a></h3>
-<pre class="codehilite"><code class="language-shell">docker pull mysql #拉取 MySql
-docker run -p 3306:3306 --name mysql \ # run 运行容器 -p 将容器的3306端口映射到主机的3306端口 --name 容器运行的名字
---restart=always \ # 挂断自动重新启动
--v /etc/localtime:/etc/localtime \ # 将主机本地时间夹挂在到容器
--v /data/mysql/log:/var/log/mysql \ # 将日志文件夹挂载到主机
--v /data/mysql/data:/var/lib/mysql \ # 将数据文件夹挂载到主机
--v /data/mysql/mysql-files:/var/lib/mysql-files \ # 将数据文件夹挂载到主机
--v /data/mysql/conf:/etc/mysql \ # 将配置文件夹挂在到主机
--e MYSQL_ROOT_PASSWORD=xiujingmysql. \ # 初始化root用户的密码
--d mysql # -d 后台运行
-docker exec -it mysql /bin/bash # 进入Docker容器内部的bash</code></pre>
-
+<div class="codehilite"><pre><span></span>docker pull mysql <span class="c1">#拉取 MySql</span>
+docker run -p <span class="m">3306</span>:3306 --name mysql <span class="se">\ </span><span class="c1"># run 运行容器 -p 将容器的3306端口映射到主机的3306端口 --name 容器运行的名字</span>
+--restart<span class="o">=</span>always <span class="se">\ </span><span class="c1"># 挂断自动重新启动</span>
+-v /etc/localtime:/etc/localtime <span class="se">\ </span><span class="c1"># 将主机本地时间夹挂在到容器</span>
+-v /data/mysql/log:/var/log/mysql <span class="se">\ </span><span class="c1"># 将日志文件夹挂载到主机</span>
+-v /data/mysql/data:/var/lib/mysql <span class="se">\ </span><span class="c1"># 将数据文件夹挂载到主机</span>
+-v /data/mysql/mysql-files:/var/lib/mysql-files <span class="se">\ </span><span class="c1"># 将数据文件夹挂载到主机</span>
+-v /data/mysql/conf:/etc/mysql <span class="se">\ </span><span class="c1"># 将配置文件夹挂在到主机</span>
+-e <span class="nv">MYSQL_ROOT_PASSWORD</span><span class="o">=</span>xiujingmysql. <span class="se">\ </span><span class="c1"># 初始化root用户的密码</span>
+-d mysql <span class="c1"># -d 后台运行</span>
+docker <span class="nb">exec</span> -it mysql /bin/bash <span class="c1"># 进入Docker容器内部的bash</span>
+</pre></div>
 
 <h3 id="mongodb">拉取 Mongodb 镜像<a class="headerlink" href="#mongodb" title="Permanent link">&para;</a></h3>
-<pre class="codehilite"><code class="language-shell">docker pull mongo #拉取 mongodb
-docker run -p 27017:27017  --name mongo --auth \ # run 运行容器 -p 将容器的27017端口映射到主机的27017端口 --name 容器运行的名字 --需要密码才能访问容器服务
---restart=always \ # 挂断自动重新启动
--v /etc/localtime:/etc/localtime \ # 将主机本地时间夹挂在到容器
--v /data/mongodb:/var/lib/mongodb \ # 将数据文件夹挂载到主机
--d mongo # -d 后台运行
+<div class="codehilite"><pre><span></span>docker pull mongo <span class="c1">#拉取 mongodb</span>
+docker run -p <span class="m">27017</span>:27017  --name mongo --auth <span class="se">\ </span><span class="c1"># run 运行容器 -p 将容器的27017端口映射到主机的27017端口 --name 容器运行的名字 --需要密码才能访问容器服务</span>
+--restart<span class="o">=</span>always <span class="se">\ </span><span class="c1"># 挂断自动重新启动</span>
+-v /etc/localtime:/etc/localtime <span class="se">\ </span><span class="c1"># 将主机本地时间夹挂在到容器</span>
+-v /data/mongodb:/var/lib/mongodb <span class="se">\ </span><span class="c1"># 将数据文件夹挂载到主机</span>
+-d mongo <span class="c1"># -d 后台运行</span>
 
-docker exec -it mongo mongo admin # 进入mongo
-db.createUser({ user:'admin',pwd:'123456',roles:[ { role:'userAdminAnyDatabase', db: 'admin'}]}); #创建一个名为 admin，密码为 123456 的用户。
-db.auth('admin', '123456') # 尝试使用上面创建的用户信息进行连接。</code></pre>
-
+docker <span class="nb">exec</span> -it mongo mongo admin <span class="c1"># 进入mongo</span>
+db.createUser<span class="o">({</span> user:<span class="s1">&#39;admin&#39;</span>,pwd:<span class="s1">&#39;123456&#39;</span>,roles:<span class="o">[</span> <span class="o">{</span> role:<span class="s1">&#39;userAdminAnyDatabase&#39;</span>, db: <span class="s1">&#39;admin&#39;</span><span class="o">}]})</span><span class="p">;</span> <span class="c1">#创建一个名为 admin，密码为 123456 的用户。</span>
+db.auth<span class="o">(</span><span class="s1">&#39;admin&#39;</span>, <span class="s1">&#39;123456&#39;</span><span class="o">)</span> <span class="c1"># 尝试使用上面创建的用户信息进行连接。</span>
+</pre></div>
 
 <h3 id="redis">拉取 Redis 镜像<a class="headerlink" href="#redis" title="Permanent link">&para;</a></h3>
-<pre class="codehilite"><code class="language-shell">docker pull redis #拉取 redis
-docker run -p 6379:6379 --name redis \ # run 运行容器 -p 将容器的6379端口映射到主机的6379端口 --name 容器运行的名字
---restart=always \ # 挂断自动重新启动
--v /etc/localtime:/etc/localtime \ # 将主机本地时间夹挂在到容器
--v /data/redis:/data/redis \ # 将数据文件夹挂载到主机
--d redis \ # -d 后台运行
---requirepass &quot;123456&quot; # 设置密码123456</code></pre>
-
+<div class="codehilite"><pre><span></span>docker pull redis <span class="c1">#拉取 redis</span>
+docker run -p <span class="m">6379</span>:6379 --name redis <span class="se">\ </span><span class="c1"># run 运行容器 -p 将容器的6379端口映射到主机的6379端口 --name 容器运行的名字</span>
+--restart<span class="o">=</span>always <span class="se">\ </span><span class="c1"># 挂断自动重新启动</span>
+-v /etc/localtime:/etc/localtime <span class="se">\ </span><span class="c1"># 将主机本地时间夹挂在到容器</span>
+-v /data/redis:/data/redis <span class="se">\ </span><span class="c1"># 将数据文件夹挂载到主机</span>
+-d redis <span class="se">\ </span><span class="c1"># -d 后台运行</span>
+--requirepass <span class="s2">&quot;123456&quot;</span> <span class="c1"># 设置密码123456</span>
+</pre></div>
 
 <h3 id="nginx">拉取 Nginx 镜像<a class="headerlink" href="#nginx" title="Permanent link">&para;</a></h3>
-<pre class="codehilite"><code class="language-shell">docker pull nginx #拉取 nginx
-docker run -p 80:80 -p 443:443 --name nginx -d nginx # 运行容器
-docker container cp nginx:/etc/nginx /data/nginx/ #拷贝容器配置
-docker rm -f nginx # 删除容器</code></pre>
-
+<div class="codehilite"><pre><span></span>docker pull nginx <span class="c1">#拉取 nginx</span>
+docker run -p <span class="m">80</span>:80 -p <span class="m">443</span>:443 --name nginx -d nginx <span class="c1"># 运行容器</span>
+docker container cp nginx:/etc/nginx /data/nginx/ <span class="c1">#拷贝容器配置</span>
+docker rm -f nginx <span class="c1"># 删除容器</span>
+</pre></div>
 
 <p>nginx 配置文件</p>
-<pre class="codehilite"><code class="language-conf">user  nginx;
+<p><div class="codehilite"><pre><span></span>user  nginx;
 worker_processes  1;
 
 error_log  /var/log/nginx/error_log.log warn;
@@ -659,9 +2320,9 @@ http {
     include       /etc/nginx/mime.types;
     default_type  application/octet-stream;
 
-    log_format  main  '$remote_addr - $remote_user [$time_local] &quot;$request&quot; '
-                      '$status $body_bytes_sent &quot;$http_referer&quot; '
-                      '&quot;$http_user_agent&quot; &quot;$http_x_forwarded_for&quot;';
+    log_format  main  &#39;$remote_addr - $remote_user [$time_local] &quot;$request&quot; &#39;
+                      &#39;$status $body_bytes_sent &quot;$http_referer&quot; &#39;
+                      &#39;&quot;$http_user_agent&quot; &quot;$http_x_forwarded_for&quot;&#39;;
 
     access_log   /var/log/nginx/access.log  main;
 
@@ -698,124 +2359,121 @@ http {
             index  index.html index.htm;
         }
    }        
-}</code></pre>
-
-
-<p>运行 nginx</p>
-<pre class="codehilite"><code class="language-shell">docker run -p 80:80 -p 443:443 --name nginx \ # run 运行容器 -p 将容器的80,443端口映射到主机的80,443端口 --name 容器运行的名字
---restart=always \
--v /etc/localtime:/etc/localtime \ # 将主机本地时间夹挂在到容器
--v /data/nginx/html:/usr/share/nginx/html \ # nginx 静态资源
--v /data/nginx/logs:/var/log/nginx  \ # 将日志文件夹挂载到主机
--v /data/nginx/conf:/etc/nginx \ # 将配置文件夹挂在到主机
--v /data/nginx/conf/ssl:/ssl \ # 将证书文件夹挂在到主机
--d nginx #</code></pre>
-
-
+}
+</pre></div>
+运行 nginx
+<div class="codehilite"><pre><span></span>docker run -p <span class="m">80</span>:80 -p <span class="m">443</span>:443 --name nginx <span class="se">\ </span><span class="c1"># run 运行容器 -p 将容器的80,443端口映射到主机的80,443端口 --name 容器运行的名字</span>
+--restart<span class="o">=</span>always <span class="se">\</span>
+-v /etc/localtime:/etc/localtime <span class="se">\ </span><span class="c1"># 将主机本地时间夹挂在到容器</span>
+-v /data/nginx/html:/usr/share/nginx/html <span class="se">\ </span><span class="c1"># nginx 静态资源</span>
+-v /data/nginx/logs:/var/log/nginx  <span class="se">\ </span><span class="c1"># 将日志文件夹挂载到主机</span>
+-v /data/nginx/conf:/etc/nginx <span class="se">\ </span><span class="c1"># 将配置文件夹挂在到主机</span>
+-v /data/nginx/conf/ssl:/ssl <span class="se">\ </span><span class="c1"># 将证书文件夹挂在到主机</span>
+-d nginx <span class="c1">#</span>
+</pre></div></p>
 <h3 id="jenkins">拉取Jenkins镜像：<a class="headerlink" href="#jenkins" title="Permanent link">&para;</a></h3>
-<pre class="codehilite"><code class="language-shell">docker pull jenkins/jenkins:lts # 拉取 jenkins
-docker run -p 8080:8080 -p 50000:50000 --name jenkins \ # run 运行容器 -p 将容器的80,443端口映射到主机的8080,50000端口 --name 容器运行的名字
--u root \ # 运行的用户为root
--v /etc/localtime:/etc/localtime \ # 将主机本地时间夹挂在到容器
--v /data/jenkins_home:/var/jenkins_home \ # 将jenkins_home文件夹挂在到主机
--e JAVA_OPTS=-Duser.timezone=Asia/Shanghai \ #设置jenkins运行环境时区
--d jenkins/jenkins:lts # -d 后台运行</code></pre>
+<div class="codehilite"><pre><span></span>docker pull jenkins/jenkins:lts <span class="c1"># 拉取 jenkins</span>
+docker run -p <span class="m">8080</span>:8080 -p <span class="m">50000</span>:50000 --name jenkins <span class="se">\ </span><span class="c1"># run 运行容器 -p 将容器的80,443端口映射到主机的8080,50000端口 --name 容器运行的名字</span>
+-u root <span class="se">\ </span><span class="c1"># 运行的用户为root</span>
+-v /etc/localtime:/etc/localtime <span class="se">\ </span><span class="c1"># 将主机本地时间夹挂在到容器</span>
+-v /data/jenkins_home:/var/jenkins_home <span class="se">\ </span><span class="c1"># 将jenkins_home文件夹挂在到主机</span>
+-e <span class="nv">JAVA_OPTS</span><span class="o">=</span>-Duser.timezone<span class="o">=</span>Asia/Shanghai <span class="se">\ </span><span class="c1">#设置jenkins运行环境时区</span>
+-d jenkins/jenkins:lts <span class="c1"># -d 后台运行</span>
+</pre></div>
 
-
-<h3 id="docker-api">Docker 开启远程API<a class="headerlink" href="#docker-api" title="Permanent link">&para;</a></h3>
+<h3 id="docker_api">Docker 开启远程API<a class="headerlink" href="#docker_api" title="Permanent link">&para;</a></h3>
 <ul>
-<li>用vi编辑器修改docker.service文件</li>
+<li>用vi编辑器修改docker.service文件
+<div class="codehilite"><pre><span></span><span class="c1">#需要修改的部分：</span>
+<span class="nv">ExecStart</span><span class="o">=</span>/usr/bin/dockerd -H fd:// --containerd<span class="o">=</span>/run/containerd/containerd.sock
+<span class="c1">#修改后的部分：</span>
+<span class="nv">ExecStart</span><span class="o">=</span>/usr/bin/dockerd -H tcp://0.0.0.0:2375 -H unix://var/run/docker.sock
+</pre></div></li>
 </ul>
-<pre class="codehilite"><code class="language-shell">#需要修改的部分：
-ExecStart=/usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock
-#修改后的部分：
-ExecStart=/usr/bin/dockerd -H tcp://0.0.0.0:2375 -H unix://var/run/docker.sock</code></pre>
-
-
 <h3 id="docker_2">Docker 常用命令<a class="headerlink" href="#docker_2" title="Permanent link">&para;</a></h3>
-<pre class="codehilite"><code class="language-shell">systemctl start docker #启动docker
-systemtctl enable docker #将docker服务设为开机启动
-systemctl stop docker #停止容器
-systemctl restart docker #重启docker服务
-docker images # 列出镜像
-docker rmi --name # 删除镜像  -f 强制删除
-docker ps # 列出容器 -a 所有
-docker start --name # 启动容器
-docker stop --name # 停止容器
-docker restart --name # 重启docker容器
-docker rm --name # 删除容器  -f 强制删除
-docker stats -a # 查看所有容器情况
-docker system df # 查看Docker磁盘使用情况
-docker exec -it --name  /bin/bash #进入Docker容器内部的bash
-docker cp 主机文件  容器名称:容器路径 #复制文件到docker容器中
-docker logs --name #查看docker镜像日志
-docker rm $(docker ps -a -q) # 删除所有容器 -f 强制删除
-docker rmi $(docker images -a -q) # 删除所有镜像 -f 强制删除
-docker rm -f `docker ps -a | grep -vE 'mysql|nginx|redis|jenkins' | awk '{print $1}'` # 删除mysql|nginx|redis|jenkins非容器 -f 强制删除
-docker rmi -f `docker images | grep none | awk '{print $3}'` # 删除镜像none镜像 -f 强制删除</code></pre>
-
+<div class="codehilite"><pre><span></span>systemctl start docker <span class="c1">#启动docker</span>
+systemtctl <span class="nb">enable</span> docker <span class="c1">#将docker服务设为开机启动</span>
+systemctl stop docker <span class="c1">#停止容器</span>
+systemctl restart docker <span class="c1">#重启docker服务</span>
+docker images <span class="c1"># 列出镜像</span>
+docker rmi --name <span class="c1"># 删除镜像  -f 强制删除</span>
+docker ps <span class="c1"># 列出容器 -a 所有</span>
+docker start --name <span class="c1"># 启动容器</span>
+docker stop --name <span class="c1"># 停止容器</span>
+docker restart --name <span class="c1"># 重启docker容器</span>
+docker rm --name <span class="c1"># 删除容器  -f 强制删除</span>
+docker stats -a <span class="c1"># 查看所有容器情况</span>
+docker system df <span class="c1"># 查看Docker磁盘使用情况</span>
+docker <span class="nb">exec</span> -it --name  /bin/bash <span class="c1">#进入Docker容器内部的bash</span>
+docker cp 主机文件  容器名称:容器路径 <span class="c1">#复制文件到docker容器中</span>
+docker logs --name <span class="c1">#查看docker镜像日志</span>
+docker rm <span class="k">$(</span>docker ps -a -q<span class="k">)</span> <span class="c1"># 删除所有容器 -f 强制删除</span>
+docker rmi <span class="k">$(</span>docker images -a -q<span class="k">)</span> <span class="c1"># 删除所有镜像 -f 强制删除</span>
+docker rm -f <span class="sb">`</span>docker ps -a <span class="p">|</span> grep -vE <span class="s1">&#39;mysql|nginx|redis|jenkins&#39;</span> <span class="p">|</span> awk <span class="s1">&#39;{print $1}&#39;</span><span class="sb">`</span> <span class="c1"># 删除mysql|nginx|redis|jenkins非容器 -f 强制删除</span>
+docker rmi -f <span class="sb">`</span>docker images <span class="p">|</span> grep none <span class="p">|</span> awk <span class="s1">&#39;{print $3}&#39;</span><span class="sb">`</span> <span class="c1"># 删除镜像none镜像 -f 强制删除</span>
+</pre></div>
 
 <h2 id="docker-compose">docker-compose<a class="headerlink" href="#docker-compose" title="Permanent link">&para;</a></h2>
 <h3 id="docker-compose_1">安装 docker-compose<a class="headerlink" href="#docker-compose_1" title="Permanent link">&para;</a></h3>
-<pre class="codehilite"><code class="language-shell"># 下载Docker Compose
-curl -L https://get.daocloud.io/docker/compose/releases/download/1.24.0/docker-compose-`uname -s`-`uname -m` &gt; /usr/local/bin/docker-compose
-# 修改该文件的权限为可执行
+<div class="codehilite"><pre><span></span><span class="c1"># 下载Docker Compose</span>
+curl -L https://get.daocloud.io/docker/compose/releases/download/1.24.0/docker-compose-<span class="sb">`</span>uname -s<span class="sb">`</span>-<span class="sb">`</span>uname -m<span class="sb">`</span> &gt; /usr/local/bin/docker-compose
+<span class="c1"># 修改该文件的权限为可执行</span>
 chmod +x /usr/local/bin/docker-compose
-# 查看是否已经安装成功
-docker-compose --version</code></pre>
+<span class="c1"># 查看是否已经安装成功</span>
+docker-compose --version
+</pre></div>
 
-
-<h3 id="docker-compose_2">使用Docker Compose的步骤<a class="headerlink" href="#docker-compose_2" title="Permanent link">&para;</a></h3>
+<h3 id="docker_compose">使用Docker Compose的步骤<a class="headerlink" href="#docker_compose" title="Permanent link">&para;</a></h3>
 <ul>
 <li>使用Dockerfile定义应用程序环境，一般需要修改初始镜像行为时才需要使用；</li>
 <li>使用docker-compose.yml定义需要部署的应用程序服务，以便执行脚本一次性部署；</li>
 <li>使用docker-compose up命令将所有应用服务一次性部署起来。</li>
 </ul>
 <h3 id="docker-composeyml">docker-compose.yml常用命令<a class="headerlink" href="#docker-composeyml" title="Permanent link">&para;</a></h3>
-<pre class="codehilite"><code class="language-shell"># 指定运行的镜像名称
+<div class="codehilite"><pre><span></span><span class="c1"># 指定运行的镜像名称</span>
 image: name:version
-# 配置容器名称
+<span class="c1"># 配置容器名称</span>
 container_name: name
-# 指定宿主机和容器的端口映射
+<span class="c1"># 指定宿主机和容器的端口映射</span>
 ports:
-  - 3306:3306
-# 将宿主机的文件或目录挂载到容器中
+  - <span class="m">3306</span>:3306
+<span class="c1"># 将宿主机的文件或目录挂载到容器中</span>
 volumes:
   - /etc/localtime:/etc/localtime
   - /data/mysql/log:/var/log/mysql
   - /data/mysql/data:/var/lib/mysql
   - /data/mysql/conf:/etc/mysql
   - /data/mysql/mysql-files:/var/lib/mysql-files
-# 配置环境变量
+<span class="c1"># 配置环境变量</span>
 environment:
-  - MYSQL_ROOT_PASSWORD=xiujingmysql.
-# 连接其他容器的服务
+  - <span class="nv">MYSQL_ROOT_PASSWORD</span><span class="o">=</span>xiujingmysql.
+<span class="c1"># 连接其他容器的服务</span>
 links:
-  - db:database #可以以database为域名访问服务名称为db的容器
-# 挂断自动重新启动
+  - db:database <span class="c1">#可以以database为域名访问服务名称为db的容器</span>
+<span class="c1"># 挂断自动重新启动</span>
 restart: always
-# 指定容器执行命令
-command: redis-server --requirepass xiujingredis.</code></pre>
+<span class="c1"># 指定容器执行命令</span>
+command: redis-server --requirepass xiujingredis.
+</pre></div>
 
-
-<h3 id="docker-compose_3">Docker Compose常用命令<a class="headerlink" href="#docker-compose_3" title="Permanent link">&para;</a></h3>
-<pre class="codehilite"><code class="language-shell"># 构建、创建、启动相关容器
-docker-compose up -d # -d表示在后台运行
-# 停止所有相关容器
+<h3 id="docker_compose_1">Docker Compose常用命令<a class="headerlink" href="#docker_compose_1" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="c1"># 构建、创建、启动相关容器</span>
+docker-compose up -d <span class="c1"># -d表示在后台运行</span>
+<span class="c1"># 停止所有相关容器</span>
 docker-compose stop
-# 删除容器文件
-docker-compose rm -f # -f 强制删除
-# 重启容器
+<span class="c1"># 删除容器文件</span>
+docker-compose rm -f <span class="c1"># -f 强制删除</span>
+<span class="c1"># 重启容器</span>
 docker-compose restart
-# 列出所有容器信息
+<span class="c1"># 列出所有容器信息</span>
 docker-compose ps
-# 查看容器日志
-docker-compose logs</code></pre>
+<span class="c1"># 查看容器日志</span>
+docker-compose logs
+</pre></div>
 
-
-<h3 id="docker-compose_4">使用Docker Compose 部署应用<a class="headerlink" href="#docker-compose_4" title="Permanent link">&para;</a></h3>
-<p>编写docker-compose.yml文件</p>
-<pre class="codehilite"><code class="language-yml">version: '3'
+<h3 id="docker_compose_2">使用Docker Compose 部署应用<a class="headerlink" href="#docker_compose_2" title="Permanent link">&para;</a></h3>
+<p>编写docker-compose.yml文件
+<div class="codehilite"><pre><span></span>version: &#39;3&#39;
 services:
   # 指定服务名称
   nginx:
@@ -917,88 +2575,146 @@ services:
       - JAVA_OPTS=-Duser.timezone=Asia/Shanghai   
     # 指定容器运行的用户为root
     user:
-      root    </code></pre>
+      root    
+</pre></div>
+运行Docker Compose命令启动所有服务
+<div class="codehilite"><pre><span></span>docker-compose up -d
+</pre></div></p>
+                
+                  
+                
+                
+              
+              
+                
 
 
-<p>运行Docker Compose命令启动所有服务</p>
-<pre class="codehilite"><code class="language-shell">docker-compose up -d</code></pre></div>
+  <h2 id="__comments">评论</h2>
+  <div id="disqus_thread"></div>
+  <script>
+    var disqus_config = function () {
+      this.page.url = "https://rosemarys.gitee.io/docker/docker-compose/";
+      this.page.identifier =
+        "/docker/docker-compose/";
+    };
+    (function() {
+      var d = document, s = d.createElement("script");
+      s.src = "//disqus.disqus.com/embed.js";
+      s.setAttribute("data-timestamp", +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+
+              
+            </article>
+          </div>
         </div>
-
-        <footer class="col-md-12">
-            <hr>
-                <p>BurningMyself</p>
-            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
-        </footer>
-        <script>
-            var base_url = "../..",
-                shortcuts = {"search": 83, "next": 78, "help": 191, "previous": 80};
-        </script>
-        <script src="../../js/base.js" defer></script>
-        <script src="../../search/main.js" defer></script>
-
-        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                <h4 class="modal-title" id="exampleModalLabel">Search</h4>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="../docker/" title="Docker全科" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
             </div>
-            <div class="modal-body">
-                <p>
-                    From here you can search these documents. Enter
-                    your search terms below.
-                </p>
-                <form role="form">
-                    <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
-                    </div>
-                </form>
-                <div id="mkdocs-search-results"></div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  上一页
+                </span>
+                Docker全科
+              </span>
             </div>
-            <div class="modal-footer">
+          </a>
+        
+        
+          <a href="../docker-jenkins/" title="Docker部署Jenkins" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  下一页
+                </span>
+                Docker部署Jenkins
+              </span>
             </div>
-        </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
     </div>
-</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="Keyboard Shortcuts Modal" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                <h4 class="modal-title" id="exampleModalLabel">Keyboard Shortcuts</h4>
-            </div>
-            <div class="modal-body">
-              <table class="table">
-                <thead>
-                  <tr>
-                    <th style="width: 20%;">Keys</th>
-                    <th>Action</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td class="help shortcut"><kbd>?</kbd></td>
-                    <td>Open this help</td>
-                  </tr>
-                  <tr>
-                    <td class="next shortcut"><kbd>n</kbd></td>
-                    <td>Next page</td>
-                  </tr>
-                  <tr>
-                    <td class="prev shortcut"><kbd>p</kbd></td>
-                    <td>Previous page</td>
-                  </tr>
-                  <tr>
-                    <td class="search shortcut"><kbd>s</kbd></td>
-                    <td>Search</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-            <div class="modal-footer">
-            </div>
-        </div>
-    </div>
-</div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+          <div class="md-footer-copyright__highlight">
+            BurningMyself
+          </div>
+        
+        powered by
+        <a href="https://www.mkdocs.org">MkDocs</a>
+        and
+        <a href="https://squidfunk.github.io/mkdocs-material/">
+          Material for MkDocs</a>
+      </div>
+      
+  <div class="md-footer-social">
+    <link rel="stylesheet" href="../../assets/fonts/font-awesome.css">
+    
+      <a href="https://github.com/burningmyself" class="md-footer-social__link fa fa-github"></a>
+    
+      <a href="https://gitee.com/rosemarys" class="md-footer-social__link fa fa-gitee"></a>
+    
+  </div>
 
-    </body>
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../assets/javascripts/application.808e90bb.js"></script>
+      
+        
+        
+          
+          <script src="../../assets/javascripts/lunr/lunr.stemmer.support.js"></script>
+          
+            
+              
+              
+            
+          
+            
+          
+            
+              
+                <script src="../../assets/javascripts/lunr/tinyseg.js"></script>
+              
+              
+                <script src="../../assets/javascripts/lunr/lunr.ja.js"></script>
+              
+            
+          
+          
+            <script src="../../assets/javascripts/lunr/lunr.multi.js"></script>
+          
+        
+      
+      <script>app.initialize({version:"1.0.4",url:{base:"../.."}})</script>
+      
+        <script src="../../js/extra.js"></script>
+      
+        <script src="../../js/baidu-tongji.js"></script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+      
+    
+  </body>
 </html>

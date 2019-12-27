@@ -1,629 +1,2263 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        
-        <meta name="author" content="朽木自雕">
-        <link rel="canonical" href="https://burningmyself.github.io/java/springAnnotation/">
-        <link rel="shortcut icon" href="../../favicon.ico">
-        
+
+
+
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+        <meta name="description" content=".net,java,php,python,docker,web">
+      
+      
+        <link rel="canonical" href="https://rosemarys.gitee.io/java/springAnnotation/">
+      
+      
+        <meta name="author" content="BurningMyself">
+      
+      
+        <meta name="lang:clipboard.copy" content="复制">
+      
+        <meta name="lang:clipboard.copied" content="已复制">
+      
+        <meta name="lang:search.language" content="zh,en,ja">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="没有找到符合条件的结果">
+      
+        <meta name="lang:search.result.one" content="找到 1 个符合条件的结果">
+      
+        <meta name="lang:search.result.other" content="# 个符合条件的结果">
+      
+        <meta name="lang:search.tokenizer" content="[\ s \-\ .. +">
+      
+      <link rel="shortcut icon" href="../../favicon.ico">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.6.0">
+    
+    
+      
         <title>Spring常用注解 - BurningMyself</title>
-        <link href="../../css/bootstrap-custom.min.css" rel="stylesheet">
-        <link href="../../css/font-awesome.min.css" rel="stylesheet">
-        <link href="../../css/base.css" rel="stylesheet">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
-        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-        <!--[if lt IE 9]>
-            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-        <![endif]-->
-
-        <script src="../../js/jquery-1.10.2.min.js" defer></script>
-        <script src="../../js/bootstrap-3.0.3.min.js" defer></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
-        <script>hljs.initHighlightingOnLoad();</script>
-        <script>
-            (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-            })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-
-            ga('create', 'UA-36723568-3', 'mkdocs.org');
-            ga('send', 'pageview');
-        </script> 
-    </head>
-
-    <body>
-
-        <div class="navbar navbar-default navbar-fixed-top" role="navigation">
-            <div class="container">
-
-                <!-- Collapsed navigation -->
-                <div class="navbar-header">
-                    <!-- Expander button -->
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" href="../..">BurningMyself</a>
-                </div>
-
-                <!-- Expanded navigation -->
-                <div class="navbar-collapse collapse">
-                        <!-- Main navigation -->
-                        <ul class="nav navbar-nav">
-                            <li >
-                                <a href="../..">介绍</a>
-                            </li>
-                            <li class="dropdown active">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">技术博文 <b class="caret"></b></a>
-                                <ul class="dropdown-menu">
-                                    
-  <li class="dropdown-submenu">
-    <a href="#">.NET</a>
-    <ul class="dropdown-menu">
-            
-<li >
-    <a href="../../net/c_sharp/">C# 6</a>
-</li>
-            
-<li >
-    <a href="../../net/c_docker/">.Ner Core Docker 部署</a>
-</li>
-            
-<li >
-    <a href="../../net/c_mysql_nginx/">使用 Docker 容器化部署 ASP.NET Core + MySQL + Nginx</a>
-</li>
-            
-<li >
-    <a href="../../net/c_core_safety/">让你的ASP.NET Core应用程序更安全</a>
-</li>
-            
-<li >
-    <a href="../../net/c_core_study_route/">ASP.NET Core开发者指南</a>
-</li>
-    </ul>
-  </li>
-                                    
-  <li class="dropdown-submenu">
-    <a href="#">Java</a>
-    <ul class="dropdown-menu">
-            
-<li >
-    <a href="../feature/">Java特性</a>
-</li>
-            
-<li >
-    <a href="../load-class/">Java类加载</a>
-</li>
-            
-<li >
-    <a href="../orm/">Orm的优缺点</a>
-</li>
-            
-<li >
-    <a href="../bio-nio/">BIO与NIO</a>
-</li>
-            
-<li >
-    <a href="../rocketmq/rmq-1/">RocketMq下载与安装</a>
-</li>
-            
-<li class="active">
-    <a href="./">Spring常用注解</a>
-</li>
-    </ul>
-  </li>
-                                    
-  <li class="dropdown-submenu">
-    <a href="#">Python</a>
-    <ul class="dropdown-menu">
-            
-<li >
-    <a href="../../python/feature/">Python特性</a>
-</li>
-            
-<li >
-    <a href="../../python/str_joint/">Python字符拼接</a>
-</li>
-            
-<li >
-    <a href="../../python/syntax_rule/">Python语法技巧</a>
-</li>
-            
-<li >
-    <a href="../../python/fabric/">远程部署神器 Fabric</a>
-</li>
-    </ul>
-  </li>
-                                    
-  <li class="dropdown-submenu">
-    <a href="#">PHP</a>
-    <ul class="dropdown-menu">
-            
-<li >
-    <a href="../../php/kj/">框架</a>
-</li>
-    </ul>
-  </li>
-                                    
-  <li class="dropdown-submenu">
-    <a href="#">Web</a>
-    <ul class="dropdown-menu">
-            
-<li >
-    <a href="../../web/es6/">es6语法</a>
-</li>
-            
-<li >
-    <a href="../../web/ali_js_style/">阿里js样式规范</a>
-</li>
-            
-<li >
-    <a href="../../web/node.js/">node.js文档</a>
-</li>
-            
-<li >
-    <a href="../../web/react/">React 开发者指南</a>
-</li>
-            
-<li >
-    <a href="../../dart/syntax/">Dart语法学习</a>
-</li>
-            
-<li >
-    <a href="../../web/react_interview/">React 面试</a>
-</li>
-            
-<li >
-    <a href="../../web/js_tool_method/">js 工具函数</a>
-</li>
-            
-<li >
-    <a href="../../web/vue_cp_react/">vue与react比较</a>
-</li>
-    </ul>
-  </li>
-                                    
-  <li class="dropdown-submenu">
-    <a href="#">SQL</a>
-    <ul class="dropdown-menu">
-            
-<li >
-    <a href="../../sql/mysql_yh/">MySQL优化</a>
-</li>
-            
-<li >
-    <a href="../../sql/mysql_yh17/">MySQL优化</a>
-</li>
-            
-<li >
-    <a href="../../sql/mysql_log/">MySQL日志</a>
-</li>
-            
-<li >
-    <a href="../../sql/mysql_index/">MySQL索引</a>
-</li>
-            
-<li >
-    <a href="../../sql/mysql_pxc/">MySQL PXC集群</a>
-</li>
-            
-<li >
-    <a href="../../sql/mysql_use/">MySQL 数据库应用</a>
-</li>
-            
-<li >
-    <a href="../../sql/sql_server_master/">Sql Server 主从备份</a>
-</li>
-            
-<li >
-    <a href="../../sql/data_split/">数据库之互联网常用分库分表方案</a>
-</li>
-            
-<li >
-    <a href="../../sql/mybatis/">Mybatis使用心德</a>
-</li>
-    </ul>
-  </li>
-                                    
-  <li class="dropdown-submenu">
-    <a href="#">Linux</a>
-    <ul class="dropdown-menu">
-            
-<li >
-    <a href="../../linux/often/">常用命令</a>
-</li>
-            
-<li >
-    <a href="../../linux/ope/">实用的Linux 命令</a>
-</li>
-    </ul>
-  </li>
-                                    
-  <li class="dropdown-submenu">
-    <a href="#">Docker</a>
-    <ul class="dropdown-menu">
-            
-<li >
-    <a href="../../docker/docker/">Docker全科</a>
-</li>
-            
-<li >
-    <a href="../../docker/docker-compose/">docker和docker-compose 配置 mysql mongodb redis nginx jenkins 环境</a>
-</li>
-            
-<li >
-    <a href="../../docker/docker-jenkins/">Docker部署Jenkins</a>
-</li>
-    </ul>
-  </li>
-                                    
-  <li class="dropdown-submenu">
-    <a href="#">Tool</a>
-    <ul class="dropdown-menu">
-            
-<li >
-    <a href="../../tool/git/">Git</a>
-</li>
-            
-<li >
-    <a href="../../tool/gitquestion/">Git问题处理</a>
-</li>
-            
-<li >
-    <a href="../../tool/gitflow/">GitFlow</a>
-</li>
-            
-<li >
-    <a href="../../tool/gitbook/">GitBook</a>
-</li>
-            
-<li >
-    <a href="../../tool/gitcmr/">Git提交日志规范</a>
-</li>
-            
-<li >
-    <a href="../../tool/markdown/">Markdown</a>
-</li>
-            
-<li >
-    <a href="../../tool/cicd/">CI/CD</a>
-</li>
-            
-<li >
-    <a href="../../tool/mkdocs/">mkdocs简单使用</a>
-</li>
-            
-<li >
-    <a href="../../tool/gitstudy/">Git的黑魔法</a>
-</li>
-    </ul>
-  </li>
-                                </ul>
-                            </li>
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">微服务 <b class="caret"></b></a>
-                                <ul class="dropdown-menu">
-                                    
-<li >
-    <a href="../../micro/spring-cloud/">基于SpringCloud的微服务架构演变史</a>
-</li>
-                                    
-<li >
-    <a href="../../micro/fbs-lock/">分布式锁</a>
-</li>
-                                    
-<li >
-    <a href="../../micro/design/">微服务设计</a>
-</li>
-                                    
-<li >
-    <a href="../../micro/distrimsg/">分布式系统与消息的投递</a>
-</li>
-                                    
-<li >
-    <a href="../../micro/ddd/">基于DDD的微服务设计和开发实战</a>
-</li>
-                                </ul>
-                            </li>
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">经验分析 <b class="caret"></b></a>
-                                <ul class="dropdown-menu">
-                                    
-<li >
-    <a href="../../exp/devops/">DevOps</a>
-</li>
-                                    
-<li >
-    <a href="../../exp/micro-service/">Micro-Service</a>
-</li>
-                                    
-<li >
-    <a href="../../exp/raft-gossip/">Raft算法和Gossip协议</a>
-</li>
-                                    
-<li >
-    <a href="../../exp/cl/">集群和负载均衡</a>
-</li>
-                                    
-<li >
-    <a href="../../exp/ai/">人工智能</a>
-</li>
-                                    
-<li >
-    <a href="../../exp/code-principle/">代码原则</a>
-</li>
-                                    
-<li >
-    <a href="../../exp/techbig/">如何成为技术大牛</a>
-</li>
-                                    
-<li >
-    <a href="../../exp/learnweetout/">程序员如何技术成长</a>
-</li>
-                                    
-<li >
-    <a href="../../exp/pt/">产品与技术</a>
-</li>
-                                    
-<li >
-    <a href="../../exp/four_deep_learning/">深度学习框架</a>
-</li>
-                                    
-<li >
-    <a href="../../exp/tl/">在阿里做了5年技术Leader，我总结出这些套路！</a>
-</li>
-                                    
-<li >
-    <a href="../../exp/cto/">CTO 技能图谱</a>
-</li>
-                                </ul>
-                            </li>
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">医学 <b class="caret"></b></a>
-                                <ul class="dropdown-menu">
-                                    
-<li >
-    <a href="../../doctor/ae/">脑炎</a>
-</li>
-                                </ul>
-                            </li>
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">构架 <b class="caret"></b></a>
-                                <ul class="dropdown-menu">
-                                    
-<li >
-    <a href="../../framework/split/">构架拆分</a>
-</li>
-                                    
-<li >
-    <a href="../../framework/fgb/">分布式、高并发、多线程</a>
-</li>
-                                    
-<li >
-    <a href="../../framework/agility/">如何理解敏捷开发</a>
-</li>
-                                    
-<li >
-    <a href="../../framework/fwork/">走向架构师必备的技能</a>
-</li>
-                                </ul>
-                            </li>
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">情感 <b class="caret"></b></a>
-                                <ul class="dropdown-menu">
-                                    
-<li >
-    <a href="../../emotion/eq/">情商</a>
-</li>
-                                    
-<li >
-    <a href="../../emotion/workheard/">工作心得</a>
-</li>
-                                    
-<li >
-    <a href="../../emotion/lookbook/">看书</a>
-</li>
-                                    
-<li >
-    <a href="../../emotion/fmf/">4种男朋友</a>
-</li>
-                                    
-<li >
-    <a href="../../emotion/notheart/">不上心</a>
-</li>
-                                    
-<li >
-    <a href="../../emotion/selfdiscipline/">自律</a>
-</li>
-                                    
-<li >
-    <a href="../../emotion/notlike/">喜欢与不喜欢</a>
-</li>
-                                    
-<li >
-    <a href="../../emotion/latemarry/">晚婚</a>
-</li>
-                                    
-<li >
-    <a href="../../emotion/understand/">追女生要明白这些事</a>
-</li>
-                                    
-<li >
-    <a href="../../emotion/backup/">备胎</a>
-</li>
-                                    
-<li >
-    <a href="../../emotion/chase/">为什么追不到她</a>
-</li>
-                                    
-<li >
-    <a href="../../emotion/livefail/">为什么活着失败</a>
-</li>
-                                    
-<li >
-    <a href="../../emotion/emotion/">情绪管理</a>
-</li>
-                                    
-<li >
-    <a href="../../emotion/abolish/">废掉的三个迹象</a>
-</li>
-                                    
-<li >
-    <a href="../../emotion/uptime/">余生，好好珍惜</a>
-</li>
-                                    
-<li >
-    <a href="../../emotion/losecome/">所有的失去，都会以另一种方式归来</a>
-</li>
-                                    
-<li >
-    <a href="../../emotion/threeheart/">人生有这三种好心态</a>
-</li>
-                                    
-<li >
-    <a href="../../emotion/onelike/">一个感情真相</a>
-</li>
-                                    
-<li >
-    <a href="../../emotion/notruth/">情商与道理</a>
-</li>
-                                    
-<li >
-    <a href="../../emotion/smf/">六种男人远离</a>
-</li>
-                                    
-<li >
-    <a href="../../emotion/select/">决定接下来人生归属的，不是努力，而是选择</a>
-</li>
-                                    
-<li >
-    <a href="../../emotion/nolike/">被你拉黑的那个人，你一定很喜欢吧</a>
-</li>
-                                    
-<li >
-    <a href="../../emotion/onepath/">余生，学会一个人走，不管有没有人陪</a>
-</li>
-                                    
-<li >
-    <a href="../../emotion/twopath/">往后余生还很精彩，别被熬夜拖垮了</a>
-</li>
-                                    
-<li >
-    <a href="../../emotion/lifetime/">心态好的人，一辈子都好</a>
-</li>
-                                    
-<li >
-    <a href="../../emotion/hearttoheart/">将心比心，方得人心</a>
-</li>
-                                    
-<li >
-    <a href="../../emotion/ttt/">别睡太晚，别爱太满，别要太多</a>
-</li>
-                                    
-<li >
-    <a href="../../emotion/profess/">表白</a>
-</li>
-                                </ul>
-                            </li>
-                        </ul>
-
-                    <ul class="nav navbar-nav navbar-right">
-                        <li>
-                            <a href="#" data-toggle="modal" data-target="#mkdocs_search_modal">
-                                <i class="fa fa-search"></i> Search
-                            </a>
-                        </li>
-                            <li >
-                                <a rel="next" href="../rocketmq/rmq-1/">
-                                    <i class="fa fa-arrow-left"></i> Previous
-                                </a>
-                            </li>
-                            <li >
-                                <a rel="prev" href="../../python/feature/">
-                                    Next <i class="fa fa-arrow-right"></i>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="https://github.com/burningmyself/burningmyself.github.io/edit/master/docs/java/springAnnotation.md">Edit on burningmyself.github.io</a>
-                            </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-
-        <div class="container">
-                <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
-    <ul class="nav bs-sidenav">
-        <li class="main active"><a href="#spring-18">Spring 中的 18 个注解</a></li>
-            <li><a href="#1-controller">1 @Controller</a></li>
-            <li><a href="#2-restcontroller">2 @RestController</a></li>
-            <li><a href="#3-service">3 @Service</a></li>
-            <li><a href="#4-autowired">4 @Autowired</a></li>
-            <li><a href="#5-requestmapping">5 @RequestMapping</a></li>
-            <li><a href="#6-requestparam">6 @RequestParam</a></li>
-            <li><a href="#7-modelattribute">7 @ModelAttribute</a></li>
-            <li><a href="#8-cacheable">8 @Cacheable</a></li>
-            <li><a href="#9-cacheevict">9 @CacheEvict</a></li>
-            <li><a href="#10-resource">10 @Resource</a></li>
-            <li><a href="#11-postconstruct">11 @PostConstruct</a></li>
-            <li><a href="#12-predestory">12 @PreDestory</a></li>
-            <li><a href="#13-repository">13 @Repository</a></li>
-            <li><a href="#14-component">14 @Component</a></li>
-            <li><a href="#15-scope">15 @Scope</a></li>
-            <li><a href="#16-sessionattributes">16 @SessionAttributes</a></li>
-            <li><a href="#17-required">17 @Required</a></li>
-            <li><a href="#18-qualifier">18 @Qualifier</a></li>
-    </ul>
-</div></div>
-                <div class="col-md-9" role="main">
-
-<h1 id="spring-18">Spring 中的 18 个注解<a class="headerlink" href="#spring-18" title="Permanent link">&para;</a></h1>
-<h2 id="1-controller">1 @Controller<a class="headerlink" href="#1-controller" title="Permanent link">&para;</a></h2>
-<p>标识一个该类是Spring MVC controller处理器，用来创建处理http请求的对象.</p>
-<pre class="codehilite"><code class="language-java">@Controller
-public class TestController{
-
-  public String test(Map&lt;String,Object&gt; map){
-    return &quot;hello&quot;;
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/application.1b62728e.css">
+      
+      
+    
+    
+      <script src="../../assets/javascripts/modernizr.268332fc.js"></script>
+    
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
+      
+    
+    <link rel="stylesheet" href="../../assets/fonts/material-icons.css">
+    
+    
+    
+      
+        
+<script>
+  window.ga = window.ga || function() {
+    (ga.q = ga.q || []).push(arguments)
   }
-}</code></pre>
+  ga.l = +new Date
+  /* Setup integration and send page view */
+  ga("create", "UA-36723568-3", "burningmyself.github.io")
+  ga("set", "anonymizeIp", true)
+  ga("send", "pageview")
+  /* Register handler to log search on blur */
+  document.addEventListener("DOMContentLoaded", () => {
+    if (document.forms.search) {
+      var query = document.forms.search.query
+      query.addEventListener("blur", function() {
+        if (this.value) {
+          var path = document.location.pathname;
+          ga("send", "pageview", path + "?q=" + this.value)
+        }
+      })
+    }
+  })
+</script>
+<script async src="https://www.google-analytics.com/analytics.js"></script>
+      
+    
+    
+  </head>
+  
+    <body dir="ltr">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+          <svg xmlns="http://www.w3.org/2000/svg" width="416" height="448" viewBox="0 0 416 448" id="__github"><path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19T128 352t-18.125-8.5-10.75-19T96 304t3.125-20.5 10.75-19T128 256t18.125 8.5 10.75 19T160 304zm160 0q0 10-3.125 20.5t-10.75 19T288 352t-18.125-8.5-10.75-19T256 304t3.125-20.5 10.75-19T288 256t18.125 8.5 10.75 19T320 304zm40 0q0-30-17.25-51T296 232q-10.25 0-48.75 5.25Q229.5 240 208 240t-39.25-2.75Q130.75 232 120 232q-29.5 0-46.75 21T56 304q0 22 8 38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0 37.25-1.75t35-7.375 30.5-15 20.25-25.75T360 304zm56-44q0 51.75-15.25 82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5T212 416q-19.5 0-35.5-.75t-36.875-3.125-38.125-7.5-34.25-12.875T37 371.5t-21.5-28.75Q0 312 0 260q0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25 30.875Q171.5 96 212 96q37 0 70 8 26.25-20.5 46.75-30.25T376 64q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34 99.5z"/></svg>
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+    
+      <a href="#spring_18" tabindex="1" class="md-skip">
+        跳转至
+      </a>
+    
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="https://rosemarys.gitee.io" title="BurningMyself" class="md-header-nav__button md-logo">
+          
+            <i class="md-icon"></i>
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          
+            <span class="md-header-nav__topic">
+              BurningMyself
+            </span>
+            <span class="md-header-nav__topic">
+              
+                Spring常用注解
+              
+            </span>
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
+          
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="__search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            键入以开始搜索
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+        
+      </div>
+      
+        <div class="md-flex__cell md-flex__cell--shrink">
+          <div class="md-header-nav__source">
+            
 
 
-<h2 id="2-restcontroller">2 @RestController<a class="headerlink" href="#2-restcontroller" title="Permanent link">&para;</a></h2>
+  
+
+<a href="https://github.com/burningmyself/burningmyself.github.io/" title="前往 Github 仓库" class="md-source" data-md-source="github">
+  
+    <div class="md-source__icon">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
+    burningmyself.github.io
+  </div>
+</a>
+          </div>
+        </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+        
+
+  
+
+<nav class="md-tabs md-tabs--active" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  <li class="md-tabs__item">
+    
+      <a href="../.." class="md-tabs__link">
+        介绍
+      </a>
+    
+  </li>
+
+      
+        
+  
+  
+    
+    
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../net/c_sharp/" class="md-tabs__link">
+          技术博文
+        </a>
+      
+    </li>
+  
+
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../micro/spring-cloud/" class="md-tabs__link">
+          微服务
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../exp/devops/" class="md-tabs__link">
+          经验分析
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../doctor/ae/" class="md-tabs__link">
+          医学
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../framework/split/" class="md-tabs__link">
+          构架
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../emotion/eq/" class="md-tabs__link">
+          情感
+        </a>
+      
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+      
+      <main class="md-main" role="main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="__drawer">
+    <a href="https://rosemarys.gitee.io" title="BurningMyself" class="md-nav__button md-logo">
+      
+        <i class="md-icon"></i>
+      
+    </a>
+    BurningMyself
+  </label>
+  
+    <div class="md-nav__source">
+      
+
+
+  
+
+<a href="https://github.com/burningmyself/burningmyself.github.io/" title="前往 Github 仓库" class="md-source" data-md-source="github">
+  
+    <div class="md-source__icon">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
+    burningmyself.github.io
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../.." title="介绍" class="md-nav__link">
+      介绍
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2" checked>
+    
+    <label class="md-nav__link" for="nav-2">
+      技术博文
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-2">
+        技术博文
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-1" type="checkbox" id="nav-2-1">
+    
+    <label class="md-nav__link" for="nav-2-1">
+      .NET
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-2-1">
+        .NET
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../net/c_sharp/" title="C# 6" class="md-nav__link">
+      C# 6
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../net/c_docker/" title=".Ner Core Docker 部署" class="md-nav__link">
+      .Ner Core Docker 部署
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../net/c_mysql_nginx/" title="使用 Docker 容器化部署 ASP.NET Core + MySQL + Nginx" class="md-nav__link">
+      使用 Docker 容器化部署 ASP.NET Core + MySQL + Nginx
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../net/c_core_safety/" title="让你的ASP.NET Core应用程序更安全" class="md-nav__link">
+      让你的ASP.NET Core应用程序更安全
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../net/c_core_study_route/" title="ASP.NET Core开发者指南" class="md-nav__link">
+      ASP.NET Core开发者指南
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-2" type="checkbox" id="nav-2-2" checked>
+    
+    <label class="md-nav__link" for="nav-2-2">
+      Java
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-2-2">
+        Java
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../feature/" title="Java特性" class="md-nav__link">
+      Java特性
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../load-class/" title="Java类加载" class="md-nav__link">
+      Java类加载
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../orm/" title="Orm的优缺点" class="md-nav__link">
+      Orm的优缺点
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../bio-nio/" title="BIO与NIO" class="md-nav__link">
+      BIO与NIO
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../rocketmq/rmq-1/" title="RocketMq下载与安装" class="md-nav__link">
+      RocketMq下载与安装
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Spring常用注解
+      </label>
+    
+    <a href="./" title="Spring常用注解" class="md-nav__link md-nav__link--active">
+      Spring常用注解
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">目录</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1_controller" class="md-nav__link">
+    1 @Controller
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2_restcontroller" class="md-nav__link">
+    2 @RestController
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3_service" class="md-nav__link">
+    3 @Service
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4_autowired" class="md-nav__link">
+    4 @Autowired
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5_requestmapping" class="md-nav__link">
+    5 @RequestMapping
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6_requestparam" class="md-nav__link">
+    6 @RequestParam
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7_modelattribute" class="md-nav__link">
+    7 @ModelAttribute
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8_cacheable" class="md-nav__link">
+    8 @Cacheable
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9_cacheevict" class="md-nav__link">
+    9 @CacheEvict
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10_resource" class="md-nav__link">
+    10 @Resource
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11_postconstruct" class="md-nav__link">
+    11 @PostConstruct
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12_predestory" class="md-nav__link">
+    12 @PreDestory
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#13_repository" class="md-nav__link">
+    13 @Repository
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#14_component" class="md-nav__link">
+    14 @Component
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#15_scope" class="md-nav__link">
+    15 @Scope
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#16_sessionattributes" class="md-nav__link">
+    16 @SessionAttributes
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#17_required" class="md-nav__link">
+    17 @Required
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#18_qualifier" class="md-nav__link">
+    18 @Qualifier
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+        <li class="md-nav__item">
+          <a href="#__comments" class="md-nav__link md-nav__link--active">
+            评论
+          </a>
+        </li>
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-3" type="checkbox" id="nav-2-3">
+    
+    <label class="md-nav__link" for="nav-2-3">
+      Python
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-2-3">
+        Python
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../python/feature/" title="Python特性" class="md-nav__link">
+      Python特性
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../python/str_joint/" title="Python字符拼接" class="md-nav__link">
+      Python字符拼接
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../python/syntax_rule/" title="Python语法技巧" class="md-nav__link">
+      Python语法技巧
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../python/fabric/" title="远程部署神器 Fabric" class="md-nav__link">
+      远程部署神器 Fabric
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-4" type="checkbox" id="nav-2-4">
+    
+    <label class="md-nav__link" for="nav-2-4">
+      PHP
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-2-4">
+        PHP
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../php/kj/" title="框架" class="md-nav__link">
+      框架
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-5" type="checkbox" id="nav-2-5">
+    
+    <label class="md-nav__link" for="nav-2-5">
+      Web
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-2-5">
+        Web
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../web/es6/" title="es6语法" class="md-nav__link">
+      es6语法
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../web/ali_js_style/" title="阿里js样式规范" class="md-nav__link">
+      阿里js样式规范
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../web/node.js/" title="node.js文档" class="md-nav__link">
+      node.js文档
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../web/react/" title="React 开发者指南" class="md-nav__link">
+      React 开发者指南
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../dart/syntax/" title="Dart语法学习" class="md-nav__link">
+      Dart语法学习
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../web/react_interview/" title="React 面试" class="md-nav__link">
+      React 面试
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../web/js_tool_method/" title="js 工具函数" class="md-nav__link">
+      js 工具函数
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../web/vue_cp_react/" title="vue与react比较" class="md-nav__link">
+      vue与react比较
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-6" type="checkbox" id="nav-2-6">
+    
+    <label class="md-nav__link" for="nav-2-6">
+      SQL
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-2-6">
+        SQL
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../sql/mysql_yh/" title="MySQL优化" class="md-nav__link">
+      MySQL优化
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../sql/mysql_yh17/" title="MySQL优化" class="md-nav__link">
+      MySQL优化
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../sql/mysql_log/" title="MySQL日志" class="md-nav__link">
+      MySQL日志
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../sql/mysql_index/" title="MySQL索引" class="md-nav__link">
+      MySQL索引
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../sql/mysql_pxc/" title="MySQL PXC集群" class="md-nav__link">
+      MySQL PXC集群
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../sql/mysql_use/" title="MySQL 数据库应用" class="md-nav__link">
+      MySQL 数据库应用
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../sql/sql_server_master/" title="Sql Server 主从备份" class="md-nav__link">
+      Sql Server 主从备份
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../sql/data_split/" title="数据库之互联网常用分库分表方案" class="md-nav__link">
+      数据库之互联网常用分库分表方案
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../sql/mybatis/" title="Mybatis使用心德" class="md-nav__link">
+      Mybatis使用心德
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-7" type="checkbox" id="nav-2-7">
+    
+    <label class="md-nav__link" for="nav-2-7">
+      Linux
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-2-7">
+        Linux
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../linux/often/" title="常用命令" class="md-nav__link">
+      常用命令
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../linux/ope/" title="实用的Linux 命令" class="md-nav__link">
+      实用的Linux 命令
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-8" type="checkbox" id="nav-2-8">
+    
+    <label class="md-nav__link" for="nav-2-8">
+      Docker
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-2-8">
+        Docker
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../docker/docker/" title="Docker全科" class="md-nav__link">
+      Docker全科
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../docker/docker-compose/" title="docker和docker-compose 配置 mysql mongodb redis nginx jenkins 环境" class="md-nav__link">
+      docker和docker-compose 配置 mysql mongodb redis nginx jenkins 环境
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../docker/docker-jenkins/" title="Docker部署Jenkins" class="md-nav__link">
+      Docker部署Jenkins
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-9" type="checkbox" id="nav-2-9">
+    
+    <label class="md-nav__link" for="nav-2-9">
+      Tool
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-2-9">
+        Tool
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tool/git/" title="Git" class="md-nav__link">
+      Git
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tool/gitquestion/" title="Git问题处理" class="md-nav__link">
+      Git问题处理
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tool/gitflow/" title="GitFlow" class="md-nav__link">
+      GitFlow
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tool/gitbook/" title="GitBook" class="md-nav__link">
+      GitBook
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tool/gitcmr/" title="Git提交日志规范" class="md-nav__link">
+      Git提交日志规范
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tool/markdown/" title="Markdown" class="md-nav__link">
+      Markdown
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tool/cicd/" title="CI/CD" class="md-nav__link">
+      CI/CD
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tool/mkdocs/" title="mkdocs简单使用" class="md-nav__link">
+      mkdocs简单使用
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tool/gitstudy/" title="Git的黑魔法" class="md-nav__link">
+      Git的黑魔法
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3">
+    
+    <label class="md-nav__link" for="nav-3">
+      微服务
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-3">
+        微服务
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../micro/spring-cloud/" title="基于SpringCloud的微服务架构演变史" class="md-nav__link">
+      基于SpringCloud的微服务架构演变史
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../micro/fbs-lock/" title="分布式锁" class="md-nav__link">
+      分布式锁
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../micro/design/" title="微服务设计" class="md-nav__link">
+      微服务设计
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../micro/distrimsg/" title="分布式系统与消息的投递" class="md-nav__link">
+      分布式系统与消息的投递
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../micro/ddd/" title="基于DDD的微服务设计和开发实战" class="md-nav__link">
+      基于DDD的微服务设计和开发实战
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4">
+    
+    <label class="md-nav__link" for="nav-4">
+      经验分析
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-4">
+        经验分析
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../exp/devops/" title="DevOps" class="md-nav__link">
+      DevOps
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../exp/micro-service/" title="Micro-Service" class="md-nav__link">
+      Micro-Service
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../exp/raft-gossip/" title="Raft算法和Gossip协议" class="md-nav__link">
+      Raft算法和Gossip协议
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../exp/cl/" title="集群和负载均衡" class="md-nav__link">
+      集群和负载均衡
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../exp/ai/" title="人工智能" class="md-nav__link">
+      人工智能
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../exp/code-principle/" title="代码原则" class="md-nav__link">
+      代码原则
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../exp/techbig/" title="如何成为技术大牛" class="md-nav__link">
+      如何成为技术大牛
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../exp/learnweetout/" title="程序员如何技术成长" class="md-nav__link">
+      程序员如何技术成长
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../exp/pt/" title="产品与技术" class="md-nav__link">
+      产品与技术
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../exp/four_deep_learning/" title="深度学习框架" class="md-nav__link">
+      深度学习框架
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../exp/tl/" title="在阿里做了5年技术Leader，我总结出这些套路！" class="md-nav__link">
+      在阿里做了5年技术Leader，我总结出这些套路！
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../exp/cto/" title="CTO 技能图谱" class="md-nav__link">
+      CTO 技能图谱
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5">
+    
+    <label class="md-nav__link" for="nav-5">
+      医学
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-5">
+        医学
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../doctor/ae/" title="脑炎" class="md-nav__link">
+      脑炎
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6" type="checkbox" id="nav-6">
+    
+    <label class="md-nav__link" for="nav-6">
+      构架
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-6">
+        构架
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../framework/split/" title="构架拆分" class="md-nav__link">
+      构架拆分
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../framework/fgb/" title="分布式、高并发、多线程" class="md-nav__link">
+      分布式、高并发、多线程
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../framework/agility/" title="如何理解敏捷开发" class="md-nav__link">
+      如何理解敏捷开发
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../framework/fwork/" title="走向架构师必备的技能" class="md-nav__link">
+      走向架构师必备的技能
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7" type="checkbox" id="nav-7">
+    
+    <label class="md-nav__link" for="nav-7">
+      情感
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-7">
+        情感
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/eq/" title="情商" class="md-nav__link">
+      情商
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/workheard/" title="工作心得" class="md-nav__link">
+      工作心得
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/lookbook/" title="看书" class="md-nav__link">
+      看书
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/fmf/" title="4种男朋友" class="md-nav__link">
+      4种男朋友
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/notheart/" title="不上心" class="md-nav__link">
+      不上心
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/selfdiscipline/" title="自律" class="md-nav__link">
+      自律
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/notlike/" title="喜欢与不喜欢" class="md-nav__link">
+      喜欢与不喜欢
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/latemarry/" title="晚婚" class="md-nav__link">
+      晚婚
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/understand/" title="追女生要明白这些事" class="md-nav__link">
+      追女生要明白这些事
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/backup/" title="备胎" class="md-nav__link">
+      备胎
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/chase/" title="为什么追不到她" class="md-nav__link">
+      为什么追不到她
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/livefail/" title="为什么活着失败" class="md-nav__link">
+      为什么活着失败
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/emotion/" title="情绪管理" class="md-nav__link">
+      情绪管理
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/abolish/" title="废掉的三个迹象" class="md-nav__link">
+      废掉的三个迹象
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/uptime/" title="余生，好好珍惜" class="md-nav__link">
+      余生，好好珍惜
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/losecome/" title="所有的失去，都会以另一种方式归来" class="md-nav__link">
+      所有的失去，都会以另一种方式归来
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/threeheart/" title="人生有这三种好心态" class="md-nav__link">
+      人生有这三种好心态
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/onelike/" title="一个感情真相" class="md-nav__link">
+      一个感情真相
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/notruth/" title="情商与道理" class="md-nav__link">
+      情商与道理
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/smf/" title="六种男人远离" class="md-nav__link">
+      六种男人远离
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/select/" title="决定接下来人生归属的，不是努力，而是选择" class="md-nav__link">
+      决定接下来人生归属的，不是努力，而是选择
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/nolike/" title="被你拉黑的那个人，你一定很喜欢吧" class="md-nav__link">
+      被你拉黑的那个人，你一定很喜欢吧
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/onepath/" title="余生，学会一个人走，不管有没有人陪" class="md-nav__link">
+      余生，学会一个人走，不管有没有人陪
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/twopath/" title="往后余生还很精彩，别被熬夜拖垮了" class="md-nav__link">
+      往后余生还很精彩，别被熬夜拖垮了
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/lifetime/" title="心态好的人，一辈子都好" class="md-nav__link">
+      心态好的人，一辈子都好
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/hearttoheart/" title="将心比心，方得人心" class="md-nav__link">
+      将心比心，方得人心
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/ttt/" title="别睡太晚，别爱太满，别要太多" class="md-nav__link">
+      别睡太晚，别爱太满，别要太多
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/profess/" title="表白" class="md-nav__link">
+      表白
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">目录</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1_controller" class="md-nav__link">
+    1 @Controller
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2_restcontroller" class="md-nav__link">
+    2 @RestController
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3_service" class="md-nav__link">
+    3 @Service
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4_autowired" class="md-nav__link">
+    4 @Autowired
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5_requestmapping" class="md-nav__link">
+    5 @RequestMapping
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6_requestparam" class="md-nav__link">
+    6 @RequestParam
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7_modelattribute" class="md-nav__link">
+    7 @ModelAttribute
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8_cacheable" class="md-nav__link">
+    8 @Cacheable
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9_cacheevict" class="md-nav__link">
+    9 @CacheEvict
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10_resource" class="md-nav__link">
+    10 @Resource
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11_postconstruct" class="md-nav__link">
+    11 @PostConstruct
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12_predestory" class="md-nav__link">
+    12 @PreDestory
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#13_repository" class="md-nav__link">
+    13 @Repository
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#14_component" class="md-nav__link">
+    14 @Component
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#15_scope" class="md-nav__link">
+    15 @Scope
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#16_sessionattributes" class="md-nav__link">
+    16 @SessionAttributes
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#17_required" class="md-nav__link">
+    17 @Required
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#18_qualifier" class="md-nav__link">
+    18 @Qualifier
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+        <li class="md-nav__item">
+          <a href="#__comments" class="md-nav__link md-nav__link--active">
+            评论
+          </a>
+        </li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/burningmyself/burningmyself.github.io/edit/master/docs/java/springAnnotation.md" title="编辑此页" class="md-icon md-content__icon">&#xE3C9;</a>
+                
+                
+                <h1 id="spring_18">Spring 中的 18 个注解<a class="headerlink" href="#spring_18" title="Permanent link">&para;</a></h1>
+<h2 id="1_controller">1 @Controller<a class="headerlink" href="#1_controller" title="Permanent link">&para;</a></h2>
+<p>标识一个该类是Spring MVC controller处理器，用来创建处理http请求的对象.
+<div class="codehilite"><pre><span></span><span class="nd">@Controller</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">TestController</span><span class="p">{</span>
+
+  <span class="kd">public</span> <span class="n">String</span> <span class="nf">test</span><span class="p">(</span><span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="n">Object</span><span class="o">&gt;</span> <span class="n">map</span><span class="p">){</span>
+    <span class="k">return</span> <span class="s">&quot;hello&quot;</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre></div></p>
+<h2 id="2_restcontroller">2 @RestController<a class="headerlink" href="#2_restcontroller" title="Permanent link">&para;</a></h2>
 <p>Spring4之后加入的注解，原来在@Controller中返回json需要@ResponseBody来配合，如果直接用@RestController替代@Controller就不需要再配置@ResponseBody，默认返回json格式。</p>
-<h2 id="3-service">3 @Service<a class="headerlink" href="#3-service" title="Permanent link">&para;</a></h2>
+<h2 id="3_service">3 @Service<a class="headerlink" href="#3_service" title="Permanent link">&para;</a></h2>
 <p>用于标注业务层组件，说白了就是加入你有一个用注解的方式把这个类注入到spring配置中</p>
-<h2 id="4-autowired">4 @Autowired<a class="headerlink" href="#4-autowired" title="Permanent link">&para;</a></h2>
+<h2 id="4_autowired">4 @Autowired<a class="headerlink" href="#4_autowired" title="Permanent link">&para;</a></h2>
 <p>用来装配bean，都可以写在字段上，或者方法上。</p>
 <p>默认情况下必须要求依赖对象必须存在，如果要允许null值，可以设置它的required属性为false，例如：</p>
-<pre class="codehilite"><code class="language-java">@Autowired(required=false)</code></pre>
+<div class="codehilite"><pre><span></span><span class="nd">@Autowired</span><span class="p">(</span><span class="n">required</span><span class="o">=</span><span class="kc">false</span><span class="p">)</span>
+</pre></div>
 
-
-<h2 id="5-requestmapping">5 @RequestMapping<a class="headerlink" href="#5-requestmapping" title="Permanent link">&para;</a></h2>
+<h2 id="5_requestmapping">5 @RequestMapping<a class="headerlink" href="#5_requestmapping" title="Permanent link">&para;</a></h2>
 <p>类定义处: 提供初步的请求映射信息，相对于 WEB 应用的根目录。</p>
 <p>方法处: 提供进一步的细分映射信息，相对于类定义处的 URL。</p>
-<h2 id="6-requestparam">6 @RequestParam<a class="headerlink" href="#6-requestparam" title="Permanent link">&para;</a></h2>
+<h2 id="6_requestparam">6 @RequestParam<a class="headerlink" href="#6_requestparam" title="Permanent link">&para;</a></h2>
 <p>用于将请求参数区数据映射到功能处理方法的参数上</p>
 <p>例如</p>
-<pre class="codehilite"><code class="language-java">public Resp test(@RequestParam Integer id){
-  return Resp.success(customerInfoService.fetch(id));
-}</code></pre>
-
-
-<p>这个id就是要接收从接口传递过来的参数id的值的，如果接口传递过来的参数名和你接收的不一致，也可以如下</p>
-<pre class="codehilite"><code class="language-java">public Resp test (@RequestParam(value=&quot;course_id&quot;) Integer id){
-  return Resp.success(customerInfoService.fetch(id));
-}</code></pre>
-
+<p><div class="codehilite"><pre><span></span><span class="kd">public</span> <span class="n">Resp</span> <span class="nf">test</span><span class="p">(</span><span class="nd">@RequestParam</span> <span class="n">Integer</span> <span class="n">id</span><span class="p">){</span>
+  <span class="k">return</span> <span class="n">Resp</span><span class="p">.</span><span class="na">success</span><span class="p">(</span><span class="n">customerInfoService</span><span class="p">.</span><span class="na">fetch</span><span class="p">(</span><span class="n">id</span><span class="p">));</span>
+<span class="p">}</span>
+</pre></div>
+这个id就是要接收从接口传递过来的参数id的值的，如果接口传递过来的参数名和你接收的不一致，也可以如下</p>
+<div class="codehilite"><pre><span></span><span class="kd">public</span> <span class="n">Resp</span> <span class="nf">test</span> <span class="p">(</span><span class="nd">@RequestParam</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="s">&quot;course_id&quot;</span><span class="p">)</span> <span class="n">Integer</span> <span class="n">id</span><span class="p">){</span>
+  <span class="k">return</span> <span class="n">Resp</span><span class="p">.</span><span class="na">success</span><span class="p">(</span><span class="n">customerInfoService</span><span class="p">.</span><span class="na">fetch</span><span class="p">(</span><span class="n">id</span><span class="p">));</span>
+<span class="p">}</span>
+</pre></div>
 
 <p>其中course_id就是接口传递的参数，id就是映射course_id的参数名</p>
-<h2 id="7-modelattribute">7 @ModelAttribute<a class="headerlink" href="#7-modelattribute" title="Permanent link">&para;</a></h2>
+<h2 id="7_modelattribute">7 @ModelAttribute<a class="headerlink" href="#7_modelattribute" title="Permanent link">&para;</a></h2>
 <p>使用地方如下：</p>
 <ol>
 <li>标记在方法上</li>
@@ -631,36 +2265,31 @@ public class TestController{
 <p>标记在方法上，会在每一个@RequestMapping标注的方法前执行，如果有返回值，则自动将该返回值加入到ModelMap中。</p>
 <p>(1). 在有返回的方法上:当ModelAttribute设置了value，方法返回的值会以这个value为key，以参数接受到的值作为value，存入到Model中，如下面的方法执行之后，最终相当于 </p>
 <p>model.addAttribute("user_name", name);假如 @ModelAttribute没有自定义value，则相当于</p>
-<p>model.addAttribute("name", name);</p>
-<pre class="codehilite"><code class="language-java">@ModelAttribute(value=&quot;user_name&quot;)
-public String before(@RequestParam(required = false) String Name,Model model){
-  System.out.println(&quot;name is &quot;+name);
-}</code></pre>
-
-
-<p>(2) 在没返回的方法上：</p>
+<p>model.addAttribute("name", name);
+<div class="codehilite"><pre><span></span><span class="nd">@ModelAttribute</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="s">&quot;user_name&quot;</span><span class="p">)</span>
+<span class="kd">public</span> <span class="n">String</span> <span class="nf">before</span><span class="p">(</span><span class="nd">@RequestParam</span><span class="p">(</span><span class="n">required</span> <span class="o">=</span> <span class="kc">false</span><span class="p">)</span> <span class="n">String</span> <span class="n">Name</span><span class="p">,</span><span class="n">Model</span> <span class="n">model</span><span class="p">){</span>
+  <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;name is &quot;</span><span class="o">+</span><span class="n">name</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+(2) 在没返回的方法上：</p>
 <p>需要手动model.add方法</p>
-<pre class="codehilite"><code class="language-java">@ModelAttribute
-public void before(@RequestParam(required = false) Integer age,Model model) {
-  model.addAttribute(&quot;age&quot;,age);
-  System.out.println(&quot;age is &quot;+age);
-}</code></pre>
-
-
-<ol>
-<li>标记在方法的参数上</li>
-</ol>
+<p><div class="codehilite"><pre><span></span><span class="nd">@ModelAttribute</span>
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">before</span><span class="p">(</span><span class="nd">@RequestParam</span><span class="p">(</span><span class="n">required</span> <span class="o">=</span> <span class="kc">false</span><span class="p">)</span> <span class="n">Integer</span> <span class="n">age</span><span class="p">,</span><span class="n">Model</span> <span class="n">model</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">model</span><span class="p">.</span><span class="na">addAttribute</span><span class="p">(</span><span class="s">&quot;age&quot;</span><span class="p">,</span><span class="n">age</span><span class="p">);</span>
+  <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;age is &quot;</span><span class="o">+</span><span class="n">age</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+2. 标记在方法的参数上</p>
 <p>标记在方法的参数上，会将客户端传递过来的参数按名称注入到指定对象中，并且会将这个对象自动加入ModelMap中，便于View层使用.我们在上面的类中加入一个方法如下</p>
-<pre class="codehilite"><code class="language-java">public Resp model(@ModelAttribute(&quot;user_name&quot;) String user_name,
-    @ModelAttribute(&quot;name&quot;) String name,
-    @ModelAttribute(&quot;age&quot;) Integer age,Model model){
-      System.out.println(&quot;user_name=&quot;+user_name+&quot; name=&quot;+name+&quot; age=&quot;+age);
-      System.out.println(&quot;model=&quot;+model);
-    }</code></pre>
-
-
-<p>用在方法参数中的@ModelAttribute注解，实际上是一种接受参数并且自动放入Model对象中，便于使用。</p>
-<h2 id="8-cacheable">8 @Cacheable<a class="headerlink" href="#8-cacheable" title="Permanent link">&para;</a></h2>
+<p><div class="codehilite"><pre><span></span><span class="kd">public</span> <span class="n">Resp</span> <span class="nf">model</span><span class="p">(</span><span class="nd">@ModelAttribute</span><span class="p">(</span><span class="s">&quot;user_name&quot;</span><span class="p">)</span> <span class="n">String</span> <span class="n">user_name</span><span class="p">,</span>
+    <span class="nd">@ModelAttribute</span><span class="p">(</span><span class="s">&quot;name&quot;</span><span class="p">)</span> <span class="n">String</span> <span class="n">name</span><span class="p">,</span>
+    <span class="nd">@ModelAttribute</span><span class="p">(</span><span class="s">&quot;age&quot;</span><span class="p">)</span> <span class="n">Integer</span> <span class="n">age</span><span class="p">,</span><span class="n">Model</span> <span class="n">model</span><span class="p">){</span>
+      <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;user_name=&quot;</span><span class="o">+</span><span class="n">user_name</span><span class="o">+</span><span class="s">&quot; name=&quot;</span><span class="o">+</span><span class="n">name</span><span class="o">+</span><span class="s">&quot; age=&quot;</span><span class="o">+</span><span class="n">age</span><span class="p">);</span>
+      <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;model=&quot;</span><span class="o">+</span><span class="n">model</span><span class="p">);</span>
+    <span class="p">}</span>
+</pre></div>
+用在方法参数中的@ModelAttribute注解，实际上是一种接受参数并且自动放入Model对象中，便于使用。</p>
+<h2 id="8_cacheable">8 @Cacheable<a class="headerlink" href="#8_cacheable" title="Permanent link">&para;</a></h2>
 <p>用来标记缓存查询。可用用于方法或者类中，当标记在一个方法上时表示该方法是支持缓存的，当标记在一个类上时则表示该类所有的方法都是支持缓存的。</p>
 <p>参数列表</p>
 <p>参数|解释|例子
@@ -670,14 +2299,14 @@ key|key|@Cacheable(value="c1",key="#id")
 condition|条件|@Cacheable(value="c1",condition="#id=1")</p>
 <p>比如@Cacheable(value="UserCache") 标识的是当调用了标记了这个注解的方法时，逻辑默认加上从缓存中获取结果的逻辑，如果缓存中没有数据，则执行用户编写查询逻辑，查询成功之后，同时将结果放入缓存中。</p>
 <p>但凡说到缓存，都是key-value的形式的，因此key就是方法中的参数（id），value就是查询的结果，而命名空间UserCache是在spring*.xml中定义。</p>
-<pre class="codehilite"><code class="language-java">@Cacheable(value=&quot;UserCache&quot;)
-public int getUserAge(int id){
- int age=getAgeById(id);
- return age;
-}</code></pre>
+<div class="codehilite"><pre><span></span><span class="nd">@Cacheable</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="s">&quot;UserCache&quot;</span><span class="p">)</span>
+<span class="kd">public</span> <span class="kt">int</span> <span class="nf">getUserAge</span><span class="p">(</span><span class="kt">int</span> <span class="n">id</span><span class="p">){</span>
+ <span class="kt">int</span> <span class="n">age</span><span class="o">=</span><span class="n">getAgeById</span><span class="p">(</span><span class="n">id</span><span class="p">);</span>
+ <span class="k">return</span> <span class="n">age</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
 
-
-<h2 id="9-cacheevict">9 @CacheEvict<a class="headerlink" href="#9-cacheevict" title="Permanent link">&para;</a></h2>
+<h2 id="9_cacheevict">9 @CacheEvict<a class="headerlink" href="#9_cacheevict" title="Permanent link">&para;</a></h2>
 <p>@CacheEvict用来标记要清空缓存的方法，当这个方法被调用后，即会清空缓存。</p>
 <p>@CacheEvict(value=”UserCache”)</p>
 <p>参数列表</p>
@@ -688,7 +2317,7 @@ key|key|@CacheEvict(value="c1",key="#id")
 condition|缓存得条件可为空|
 allEntries|是否清空所有内容|@CacheEvict(value="c1",allEntries=true)
 beforeInvocation|是否在方法执行前清空|@CacheEvict(value="c1",beforeInvocation=true)</p>
-<h2 id="10-resource">10 @Resource<a class="headerlink" href="#10-resource" title="Permanent link">&para;</a></h2>
+<h2 id="10_resource">10 @Resource<a class="headerlink" href="#10_resource" title="Permanent link">&para;</a></h2>
 <p>@Resource的作用相当于@Autowired</p>
 <p>只不过@Autowired按byType自动注入，</p>
 <p>而@Resource默认按 byName自动注入罢了。</p>
@@ -698,17 +2327,17 @@ beforeInvocation|是否在方法执行前清空|@CacheEvict(value="c1",beforeInv
 <p>2、如果指定了name，则从上下文中查找名称（id）匹配的bean进行装配，找不到则抛出异常</p>
 <p>3、如果指定了type，则从上下文中找到类型匹配的唯一bean进行装配，找不到或者找到多个，都会抛出异常</p>
 <p>4、如果既没有指定name，又没有指定type，则自动按照byName方式进行装配；如果没有匹配，则回退为一个原始类型进行匹配，如果匹配则自动装配；</p>
-<h2 id="11-postconstruct">11 @PostConstruct<a class="headerlink" href="#11-postconstruct" title="Permanent link">&para;</a></h2>
+<h2 id="11_postconstruct">11 @PostConstruct<a class="headerlink" href="#11_postconstruct" title="Permanent link">&para;</a></h2>
 <p>@PostConstruct用来标记是在项目启动的时候执行这个方法。用来修饰一个非静态的void()方法 </p>
 <p>也就是spring容器启动时就执行，多用于一些全局配置、数据字典之类的加载</p>
 <p>被@PostConstruct修饰的方法会在服务器加载Servlet的时候运行，并且只会被服务器执行一次。PostConstruct在构造函数之后执行,init()方法之前执行。PreDestroy（）方法在destroy()方法执行之后执行</p>
-<h2 id="12-predestory">12 @PreDestory<a class="headerlink" href="#12-predestory" title="Permanent link">&para;</a></h2>
+<h2 id="12_predestory">12 @PreDestory<a class="headerlink" href="#12_predestory" title="Permanent link">&para;</a></h2>
 <p>被@PreDestroy修饰的方法会在服务器卸载Servlet的时候运行，并且只会被服务器调用一次，类似于Servlet的destroy()方法。被@PreDestroy修饰的方法会在destroy()方法之后运行，在Servlet被彻底卸载之前</p>
-<h2 id="13-repository">13 @Repository<a class="headerlink" href="#13-repository" title="Permanent link">&para;</a></h2>
+<h2 id="13_repository">13 @Repository<a class="headerlink" href="#13_repository" title="Permanent link">&para;</a></h2>
 <p>@Repository用于标注数据访问组件，即DAO组件</p>
-<h2 id="14-component">14 @Component<a class="headerlink" href="#14-component" title="Permanent link">&para;</a></h2>
+<h2 id="14_component">14 @Component<a class="headerlink" href="#14_component" title="Permanent link">&para;</a></h2>
 <p>@Component泛指组件，当组件不好归类的时候，我们可以使用这个注解进行标注</p>
-<h2 id="15-scope">15 @Scope<a class="headerlink" href="#15-scope" title="Permanent link">&para;</a></h2>
+<h2 id="15_scope">15 @Scope<a class="headerlink" href="#15_scope" title="Permanent link">&para;</a></h2>
 <p>@Scope用来配置 spring bean 的作用域，它标识 bean 的作用域。</p>
 <p>默认值是单例</p>
 <p>1、singleton:单例模式,全局有且仅有一个实例</p>
@@ -716,105 +2345,163 @@ beforeInvocation|是否在方法执行前清空|@CacheEvict(value="c1",beforeInv
 <p>3、request:request表示该针对每一次HTTP请求都会产生一个新的bean，同时该bean仅在当前HTTP request内有效</p>
 <p>4、session:session作用域表示该针对每一次HTTP请求都会产生一个新的bean，同时该bean仅在当前HTTP session内有效</p>
 <p>5、global session:只在portal应用中有用，给每一个 global http session 新建一个Bean实例。</p>
-<h2 id="16-sessionattributes">16 @SessionAttributes<a class="headerlink" href="#16-sessionattributes" title="Permanent link">&para;</a></h2>
+<h2 id="16_sessionattributes">16 @SessionAttributes<a class="headerlink" href="#16_sessionattributes" title="Permanent link">&para;</a></h2>
 <p>默认情况下Spring MVC将模型中的数据存储到request域中。当一个请求结束后，数据就失效了。如果要跨页面使用。那么需要使用到session。而@SessionAttributes注解就可以使得模型中的数据存储一份到session域中</p>
 <p>参数：</p>
 <p>1、names：这是一个字符串数组。里面应写需要存储到session中数据的名称。</p>
 <p>2、types：根据指定参数的类型，将模型中对应类型的参数存储到session中</p>
 <p>3、value：和names是一样的。</p>
-<pre class="codehilite"><code class="language-java">@Controller
-@SessionAttributes(value={&quot;names&quot;},types={Integer.class})
-public class ScopeService{
-  @RequestMapping(&quot;/testSession&quot;)
-  public String test(Map&lt;String,Object&gt; map){
-    map.put(&quot;names&quot;,Arrays.asList(&quot;a&quot;,&quot;b&quot;,&quot;c&quot;));
-    map.put(&quot;age&quot;,12);
-    return &quot;hello&quot;;
-  }
-}</code></pre>
+<div class="codehilite"><pre><span></span><span class="nd">@Controller</span>
+<span class="nd">@SessionAttributes</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="p">{</span><span class="s">&quot;names&quot;</span><span class="p">},</span><span class="n">types</span><span class="o">=</span><span class="p">{</span><span class="n">Integer</span><span class="p">.</span><span class="na">class</span><span class="p">})</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">ScopeService</span><span class="p">{</span>
+  <span class="nd">@RequestMapping</span><span class="p">(</span><span class="s">&quot;/testSession&quot;</span><span class="p">)</span>
+  <span class="kd">public</span> <span class="n">String</span> <span class="nf">test</span><span class="p">(</span><span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="n">Object</span><span class="o">&gt;</span> <span class="n">map</span><span class="p">){</span>
+    <span class="n">map</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="s">&quot;names&quot;</span><span class="p">,</span><span class="n">Arrays</span><span class="p">.</span><span class="na">asList</span><span class="p">(</span><span class="s">&quot;a&quot;</span><span class="p">,</span><span class="s">&quot;b&quot;</span><span class="p">,</span><span class="s">&quot;c&quot;</span><span class="p">));</span>
+    <span class="n">map</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="s">&quot;age&quot;</span><span class="p">,</span><span class="mi">12</span><span class="p">);</span>
+    <span class="k">return</span> <span class="s">&quot;hello&quot;</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
 
-
-<h2 id="17-required">17 @Required<a class="headerlink" href="#17-required" title="Permanent link">&para;</a></h2>
+<h2 id="17_required">17 @Required<a class="headerlink" href="#17_required" title="Permanent link">&para;</a></h2>
 <p>适用于bean属性setter方法，并表示受影响的bean属性必须在XML配置文件在配置时进行填充。否则，容器会抛出一个BeanInitializationException异常。</p>
-<h2 id="18-qualifier">18 @Qualifier<a class="headerlink" href="#18-qualifier" title="Permanent link">&para;</a></h2>
-<p>@Qualifier当你创建多个具有相同类型的 bean 时，并且想要用一个属性只为它们其中的一个进行装配，在这种情况下，你可以使用 @Qualifier 注释和 @Autowired 注释通过指定哪一个真正的 bean 将会被装配来消除混乱。</p></div>
-        </div>
+<h2 id="18_qualifier">18 @Qualifier<a class="headerlink" href="#18_qualifier" title="Permanent link">&para;</a></h2>
+<p>@Qualifier当你创建多个具有相同类型的 bean 时，并且想要用一个属性只为它们其中的一个进行装配，在这种情况下，你可以使用 @Qualifier 注释和 @Autowired 注释通过指定哪一个真正的 bean 将会被装配来消除混乱。</p>
+                
+                  
+                
+                
+              
+              
+                
 
-        <footer class="col-md-12">
-            <hr>
-                <p>BurningMyself</p>
-            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
-        </footer>
-        <script>
-            var base_url = "../..",
-                shortcuts = {"search": 83, "next": 78, "help": 191, "previous": 80};
-        </script>
-        <script src="../../js/base.js" defer></script>
-        <script src="../../search/main.js" defer></script>
 
-        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                <h4 class="modal-title" id="exampleModalLabel">Search</h4>
-            </div>
-            <div class="modal-body">
-                <p>
-                    From here you can search these documents. Enter
-                    your search terms below.
-                </p>
-                <form role="form">
-                    <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
-                    </div>
-                </form>
-                <div id="mkdocs-search-results"></div>
-            </div>
-            <div class="modal-footer">
-            </div>
+  <h2 id="__comments">评论</h2>
+  <div id="disqus_thread"></div>
+  <script>
+    var disqus_config = function () {
+      this.page.url = "https://rosemarys.gitee.io/java/springAnnotation/";
+      this.page.identifier =
+        "/java/springAnnotation/";
+    };
+    (function() {
+      var d = document, s = d.createElement("script");
+      s.src = "//disqus.disqus.com/embed.js";
+      s.setAttribute("data-timestamp", +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+
+              
+            </article>
+          </div>
         </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="../rocketmq/rmq-1/" title="RocketMq下载与安装" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  上一页
+                </span>
+                RocketMq下载与安装
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="../../python/feature/" title="Python特性" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  下一页
+                </span>
+                Python特性
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
     </div>
-</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="Keyboard Shortcuts Modal" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                <h4 class="modal-title" id="exampleModalLabel">Keyboard Shortcuts</h4>
-            </div>
-            <div class="modal-body">
-              <table class="table">
-                <thead>
-                  <tr>
-                    <th style="width: 20%;">Keys</th>
-                    <th>Action</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td class="help shortcut"><kbd>?</kbd></td>
-                    <td>Open this help</td>
-                  </tr>
-                  <tr>
-                    <td class="next shortcut"><kbd>n</kbd></td>
-                    <td>Next page</td>
-                  </tr>
-                  <tr>
-                    <td class="prev shortcut"><kbd>p</kbd></td>
-                    <td>Previous page</td>
-                  </tr>
-                  <tr>
-                    <td class="search shortcut"><kbd>s</kbd></td>
-                    <td>Search</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-            <div class="modal-footer">
-            </div>
-        </div>
-    </div>
-</div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+          <div class="md-footer-copyright__highlight">
+            BurningMyself
+          </div>
+        
+        powered by
+        <a href="https://www.mkdocs.org">MkDocs</a>
+        and
+        <a href="https://squidfunk.github.io/mkdocs-material/">
+          Material for MkDocs</a>
+      </div>
+      
+  <div class="md-footer-social">
+    <link rel="stylesheet" href="../../assets/fonts/font-awesome.css">
+    
+      <a href="https://github.com/burningmyself" class="md-footer-social__link fa fa-github"></a>
+    
+      <a href="https://gitee.com/rosemarys" class="md-footer-social__link fa fa-gitee"></a>
+    
+  </div>
 
-    </body>
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../assets/javascripts/application.808e90bb.js"></script>
+      
+        
+        
+          
+          <script src="../../assets/javascripts/lunr/lunr.stemmer.support.js"></script>
+          
+            
+              
+              
+            
+          
+            
+          
+            
+              
+                <script src="../../assets/javascripts/lunr/tinyseg.js"></script>
+              
+              
+                <script src="../../assets/javascripts/lunr/lunr.ja.js"></script>
+              
+            
+          
+          
+            <script src="../../assets/javascripts/lunr/lunr.multi.js"></script>
+          
+        
+      
+      <script>app.initialize({version:"1.0.4",url:{base:"../.."}})</script>
+      
+        <script src="../../js/extra.js"></script>
+      
+        <script src="../../js/baidu-tongji.js"></script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+      
+    
+  </body>
 </html>
