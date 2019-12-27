@@ -2,10 +2,10 @@ site_name: BurningMyself
 site_description: .net,java,php,python,docker,web
 site_keywords: .net,java,php,python,docker,web
 site_author: 朽木自雕
-site_url: https://burningmyself.github.io/blog/
+site_url: https://burningmyself.github.io
 
 repo_name: 'burningmyself/blog'
-repo_url: 'https://github.com/burningmyself/blog'
+repo_url: 'https://github.com/burningmyself/burningmyself.github.io'
 
 theme:
   name: material
