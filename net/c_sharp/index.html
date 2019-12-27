@@ -1,2302 +1,957 @@
-
-
-
-
-<!doctype html>
-<html lang="en" class="no-js">
-  <head>
-    
-      <meta charset="utf-8">
-      <meta name="viewport" content="width=device-width,initial-scale=1">
-      <meta http-equiv="x-ua-compatible" content="ie=edge">
-      
-        <meta name="description" content=".net,java,php,python,docker,web">
-      
-      
-        <link rel="canonical" href="https://burningmyself.github.io/blog/net/c_sharp/">
-      
-      
-        <meta name="author" content="朽木自雕">
-      
-      
-        <meta name="lang:clipboard.copy" content="Copy to clipboard">
-      
-        <meta name="lang:clipboard.copied" content="Copied to clipboard">
-      
-        <meta name="lang:search.language" content="en">
-      
-        <meta name="lang:search.pipeline.stopwords" content="True">
-      
-        <meta name="lang:search.pipeline.trimmer" content="True">
-      
-        <meta name="lang:search.result.none" content="No matching documents">
-      
-        <meta name="lang:search.result.one" content="1 matching document">
-      
-        <meta name="lang:search.result.other" content="# matching documents">
-      
-        <meta name="lang:search.tokenizer" content="[\s\-]+">
-      
-      <link rel="shortcut icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.4.0">
-    
-    
-      
-        <title>C# 6 - BurningMyself</title>
-      
-    
-    
-      <link rel="stylesheet" href="../../assets/stylesheets/application.0284f74d.css">
-      
-      
-    
-    
-      <script src="../../assets/javascripts/modernizr.74668098.js"></script>
-    
-    
-      
-        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700|Roboto+Mono&display=fallback">
-        <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
-      
-    
-    <link rel="stylesheet" href="../../assets/fonts/material-icons.css">
-    
-    
-    
-      
-    
-    
-  </head>
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-    <body dir="ltr">
+  <meta name="author" content="朽木自雕">
+  <link rel="shortcut icon" href="../../img/favicon.ico">
+  <title>C# 6 - BurningMyself</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
   
-    <svg class="md-svg">
-      <defs>
-        
-        
-          <svg xmlns="http://www.w3.org/2000/svg" width="416" height="448" viewBox="0 0 416 448" id="__github"><path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19T128 352t-18.125-8.5-10.75-19T96 304t3.125-20.5 10.75-19T128 256t18.125 8.5 10.75 19T160 304zm160 0q0 10-3.125 20.5t-10.75 19T288 352t-18.125-8.5-10.75-19T256 304t3.125-20.5 10.75-19T288 256t18.125 8.5 10.75 19T320 304zm40 0q0-30-17.25-51T296 232q-10.25 0-48.75 5.25Q229.5 240 208 240t-39.25-2.75Q130.75 232 120 232q-29.5 0-46.75 21T56 304q0 22 8 38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0 37.25-1.75t35-7.375 30.5-15 20.25-25.75T360 304zm56-44q0 51.75-15.25 82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5T212 416q-19.5 0-35.5-.75t-36.875-3.125-38.125-7.5-34.25-12.875T37 371.5t-21.5-28.75Q0 312 0 260q0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25 30.875Q171.5 96 212 96q37 0 70 8 26.25-20.5 46.75-30.25T376 64q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34 99.5z"/></svg>
-        
-      </defs>
-    </svg>
-    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
-    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
-    <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+  <script>
+    // Current page data
+    var mkdocs_page_name = "C# 6";
+    var mkdocs_page_input_path = "net\\c_sharp.md";
+    var mkdocs_page_url = "/net/c_sharp/";
+  </script>
+  
+  <script src="../../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
     
-      <a href="#c-6" tabindex="1" class="md-skip">
-        Skip to content
-      </a>
-    
-    
-      <header class="md-header" data-md-component="header">
-  <nav class="md-header-nav md-grid">
-    <div class="md-flex">
-      <div class="md-flex__cell md-flex__cell--shrink">
-        <a href="https://burningmyself.github.io/blog/" title="BurningMyself" class="md-header-nav__button md-logo">
-          
-            <i class="md-icon"></i>
-          
-        </a>
-      </div>
-      <div class="md-flex__cell md-flex__cell--shrink">
-        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
-      </div>
-      <div class="md-flex__cell md-flex__cell--stretch">
-        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
-          
-            <span class="md-header-nav__topic">
-              BurningMyself
-            </span>
-            <span class="md-header-nav__topic">
-              
-                C# 6
-              
-            </span>
-          
-        </div>
-      </div>
-      <div class="md-flex__cell md-flex__cell--shrink">
-        
-          <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
-          
-<div class="md-search" data-md-component="search" role="dialog">
-  <label class="md-search__overlay" for="__search"></label>
-  <div class="md-search__inner" role="search">
-    <form class="md-search__form" name="search">
-      <input type="text" class="md-search__input" name="query" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
-      <label class="md-icon md-search__icon" for="__search"></label>
-      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
-        &#xE5CD;
-      </button>
-    </form>
-    <div class="md-search__output">
-      <div class="md-search__scrollwrap" data-md-scrollfix>
-        <div class="md-search-result" data-md-component="result">
-          <div class="md-search-result__meta">
-            Type to start searching
-          </div>
-          <ol class="md-search-result__list"></ol>
-        </div>
-      </div>
-    </div>
-  </div>
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href="../.." class="icon icon-home"> BurningMyself</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
 </div>
-        
       </div>
-      
-        <div class="md-flex__cell md-flex__cell--shrink">
-          <div class="md-header-nav__source">
-            
 
-
-  
-
-<a href="https://github.com/burningmyself/blog/" title="Go to repository" class="md-source" data-md-source="github">
-  
-    <div class="md-source__icon">
-      <svg viewBox="0 0 24 24" width="24" height="24">
-        <use xlink:href="#__github" width="24" height="24"></use>
-      </svg>
-    </div>
-  
-  <div class="md-source__repository">
-    burningmyself/blog
-  </div>
-</a>
-          </div>
-        </div>
-      
-    </div>
-  </nav>
-</header>
-    
-    <div class="md-container">
-      
-        
-      
-      
-      <main class="md-main">
-        <div class="md-main__inner md-grid" data-md-component="container">
-          
-            
-              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
-                <div class="md-sidebar__scrollwrap">
-                  <div class="md-sidebar__inner">
-                    <nav class="md-nav md-nav--primary" data-md-level="0">
-  <label class="md-nav__title md-nav__title--site" for="__drawer">
-    <a href="https://burningmyself.github.io/blog/" title="BurningMyself" class="md-nav__button md-logo">
-      
-        <i class="md-icon"></i>
-      
-    </a>
-    BurningMyself
-  </label>
-  
-    <div class="md-nav__source">
-      
-
-
-  
-
-<a href="https://github.com/burningmyself/blog/" title="Go to repository" class="md-source" data-md-source="github">
-  
-    <div class="md-source__icon">
-      <svg viewBox="0 0 24 24" width="24" height="24">
-        <use xlink:href="#__github" width="24" height="24"></use>
-      </svg>
-    </div>
-  
-  <div class="md-source__repository">
-    burningmyself/blog
-  </div>
-</a>
-    </div>
-  
-  <ul class="md-nav__list" data-md-scrollfix>
-    
-      
-      
-      
-
-
-  <li class="md-nav__item">
-    <a href="../.." title="介绍" class="md-nav__link">
-      介绍
-    </a>
-  </li>
-
-    
-      
-      
-      
-
-  
-
-
-  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
-    
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2" checked>
-    
-    <label class="md-nav__link" for="nav-2">
-      技术博文
-    </label>
-    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
-      <label class="md-nav__title" for="nav-2">
-        技术博文
-      </label>
-      <ul class="md-nav__list" data-md-scrollfix>
-        
-        
-          
-          
-          
-
-  
-
-
-  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
-    
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-1" type="checkbox" id="nav-2-1" checked>
-    
-    <label class="md-nav__link" for="nav-2-1">
-      .NET
-    </label>
-    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
-      <label class="md-nav__title" for="nav-2-1">
-        .NET
-      </label>
-      <ul class="md-nav__list" data-md-scrollfix>
-        
-        
-          
-          
-          
-
-  
-
-
-  <li class="md-nav__item md-nav__item--active">
-    
-    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-    
-      
-    
-    
-      <label class="md-nav__link md-nav__link--active" for="__toc">
-        C# 6
-      </label>
-    
-    <a href="./" title="C# 6" class="md-nav__link md-nav__link--active">
-      C# 6
-    </a>
-    
-      
-<nav class="md-nav md-nav--secondary">
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">Table of contents</label>
-    <ul class="md-nav__list" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#string-interpolation" title="一、字符串插值 （String Interpolation）" class="md-nav__link">
-    一、字符串插值 （String Interpolation）
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_1" title="二、空操作符 ( ?. )" class="md-nav__link">
-    二、空操作符 ( ?. )
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#nameof" title="三、 NameOf" class="md-nav__link">
-    三、 NameOf
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#catchfinallyawait" title="四、在Catch和Finally里使用Await" class="md-nav__link">
-    四、在Catch和Finally里使用Await
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_2" title="五、表达式方法体" class="md-nav__link">
-    五、表达式方法体
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_3" title="六、自动属性初始化器" class="md-nav__link">
-    六、自动属性初始化器
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_4" title="七、只读自动属性" class="md-nav__link">
-    七、只读自动属性
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#exception-filter" title="八、异常过滤器 Exception Filter" class="md-nav__link">
-    八、异常过滤器 Exception Filter
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#index" title="九、 Index 初始化器" class="md-nav__link">
-    九、 Index 初始化器
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#using-static-using" title="十、using 静态类的方法可以使用 static using" class="md-nav__link">
-    十、using 静态类的方法可以使用 static using
-  </a>
-  
-</li>
-      
-      
-      
-      
-      
-    </ul>
-  
-</nav>
-    
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../c_docker/" title=".Ner Core Docker 部署" class="md-nav__link">
-      .Ner Core Docker 部署
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../c_mysql_nginx/" title="使用 Docker 容器化部署 ASP.NET Core + MySQL + Nginx" class="md-nav__link">
-      使用 Docker 容器化部署 ASP.NET Core + MySQL + Nginx
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../c_core_safety/" title="让你的ASP.NET Core应用程序更安全" class="md-nav__link">
-      让你的ASP.NET Core应用程序更安全
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../c_core_study_route/" title="ASP.NET Core开发者指南" class="md-nav__link">
-      ASP.NET Core开发者指南
-    </a>
-  </li>
-
-        
-      </ul>
-    </nav>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item md-nav__item--nested">
-    
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-2" type="checkbox" id="nav-2-2">
-    
-    <label class="md-nav__link" for="nav-2-2">
-      Java
-    </label>
-    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
-      <label class="md-nav__title" for="nav-2-2">
-        Java
-      </label>
-      <ul class="md-nav__list" data-md-scrollfix>
-        
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../java/feature/" title="Java特性" class="md-nav__link">
-      Java特性
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../java/load-class/" title="Java类加载" class="md-nav__link">
-      Java类加载
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../java/orm/" title="Orm的优缺点" class="md-nav__link">
-      Orm的优缺点
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../java/bio-nio/" title="BIO与NIO" class="md-nav__link">
-      BIO与NIO
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../java/rocketmq/rmq-1/" title="RocketMq下载与安装" class="md-nav__link">
-      RocketMq下载与安装
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../java/springAnnotation/" title="Spring常用注解" class="md-nav__link">
-      Spring常用注解
-    </a>
-  </li>
-
-        
-      </ul>
-    </nav>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item md-nav__item--nested">
-    
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-3" type="checkbox" id="nav-2-3">
-    
-    <label class="md-nav__link" for="nav-2-3">
-      Python
-    </label>
-    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
-      <label class="md-nav__title" for="nav-2-3">
-        Python
-      </label>
-      <ul class="md-nav__list" data-md-scrollfix>
-        
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../python/feature/" title="Python特性" class="md-nav__link">
-      Python特性
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../python/str_joint/" title="Python字符拼接" class="md-nav__link">
-      Python字符拼接
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../python/syntax_rule/" title="Python语法技巧" class="md-nav__link">
-      Python语法技巧
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../python/fabric/" title="远程部署神器 Fabric" class="md-nav__link">
-      远程部署神器 Fabric
-    </a>
-  </li>
-
-        
-      </ul>
-    </nav>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item md-nav__item--nested">
-    
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-4" type="checkbox" id="nav-2-4">
-    
-    <label class="md-nav__link" for="nav-2-4">
-      PHP
-    </label>
-    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
-      <label class="md-nav__title" for="nav-2-4">
-        PHP
-      </label>
-      <ul class="md-nav__list" data-md-scrollfix>
-        
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../php/kj/" title="框架" class="md-nav__link">
-      框架
-    </a>
-  </li>
-
-        
-      </ul>
-    </nav>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item md-nav__item--nested">
-    
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-5" type="checkbox" id="nav-2-5">
-    
-    <label class="md-nav__link" for="nav-2-5">
-      Web
-    </label>
-    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
-      <label class="md-nav__title" for="nav-2-5">
-        Web
-      </label>
-      <ul class="md-nav__list" data-md-scrollfix>
-        
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../web/es6/" title="es6语法" class="md-nav__link">
-      es6语法
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../web/ali_js_style/" title="阿里js样式规范" class="md-nav__link">
-      阿里js样式规范
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../web/node.js/" title="node.js文档" class="md-nav__link">
-      node.js文档
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../web/react/" title="React 开发者指南" class="md-nav__link">
-      React 开发者指南
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../dart/syntax/" title="Dart语法学习" class="md-nav__link">
-      Dart语法学习
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../web/react_interview/" title="React 面试" class="md-nav__link">
-      React 面试
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../web/js_tool_method/" title="js 工具函数" class="md-nav__link">
-      js 工具函数
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../web/vue_cp_react/" title="vue与react比较" class="md-nav__link">
-      vue与react比较
-    </a>
-  </li>
-
-        
-      </ul>
-    </nav>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item md-nav__item--nested">
-    
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-6" type="checkbox" id="nav-2-6">
-    
-    <label class="md-nav__link" for="nav-2-6">
-      SQL
-    </label>
-    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
-      <label class="md-nav__title" for="nav-2-6">
-        SQL
-      </label>
-      <ul class="md-nav__list" data-md-scrollfix>
-        
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../sql/mysql_yh/" title="MySQL优化" class="md-nav__link">
-      MySQL优化
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../sql/mysql_yh17/" title="MySQL优化" class="md-nav__link">
-      MySQL优化
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../sql/mysql_log/" title="MySQL日志" class="md-nav__link">
-      MySQL日志
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../sql/mysql_index/" title="MySQL索引" class="md-nav__link">
-      MySQL索引
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../sql/mysql_pxc/" title="MySQL PXC集群" class="md-nav__link">
-      MySQL PXC集群
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../sql/mysql_use/" title="MySQL 数据库应用" class="md-nav__link">
-      MySQL 数据库应用
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../sql/sql_server_master/" title="Sql Server 主从备份" class="md-nav__link">
-      Sql Server 主从备份
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../sql/data_split/" title="数据库之互联网常用分库分表方案" class="md-nav__link">
-      数据库之互联网常用分库分表方案
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../sql/mybatis/" title="Mybatis使用心德" class="md-nav__link">
-      Mybatis使用心德
-    </a>
-  </li>
-
-        
-      </ul>
-    </nav>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item md-nav__item--nested">
-    
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-7" type="checkbox" id="nav-2-7">
-    
-    <label class="md-nav__link" for="nav-2-7">
-      Linux
-    </label>
-    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
-      <label class="md-nav__title" for="nav-2-7">
-        Linux
-      </label>
-      <ul class="md-nav__list" data-md-scrollfix>
-        
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../linux/often/" title="常用命令" class="md-nav__link">
-      常用命令
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../linux/ope/" title="实用的Linux 命令" class="md-nav__link">
-      实用的Linux 命令
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../linux/centos_docker/" title="Centos配置 docker java mysql mongodb redis nginx 环境" class="md-nav__link">
-      Centos配置 docker java mysql mongodb redis nginx 环境
-    </a>
-  </li>
-
-        
-      </ul>
-    </nav>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item md-nav__item--nested">
-    
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-8" type="checkbox" id="nav-2-8">
-    
-    <label class="md-nav__link" for="nav-2-8">
-      Docker
-    </label>
-    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
-      <label class="md-nav__title" for="nav-2-8">
-        Docker
-      </label>
-      <ul class="md-nav__list" data-md-scrollfix>
-        
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../docker/docker/" title="Docker全科" class="md-nav__link">
-      Docker全科
-    </a>
-  </li>
-
-        
-      </ul>
-    </nav>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item md-nav__item--nested">
-    
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-9" type="checkbox" id="nav-2-9">
-    
-    <label class="md-nav__link" for="nav-2-9">
-      Tool
-    </label>
-    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
-      <label class="md-nav__title" for="nav-2-9">
-        Tool
-      </label>
-      <ul class="md-nav__list" data-md-scrollfix>
-        
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../tool/git/" title="Git" class="md-nav__link">
-      Git
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../tool/gitquestion/" title="Git问题处理" class="md-nav__link">
-      Git问题处理
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../tool/gitflow/" title="GitFlow" class="md-nav__link">
-      GitFlow
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../tool/gitbook/" title="GitBook" class="md-nav__link">
-      GitBook
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../tool/gitcmr/" title="Git提交日志规范" class="md-nav__link">
-      Git提交日志规范
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../tool/markdown/" title="Markdown" class="md-nav__link">
-      Markdown
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../tool/cicd/" title="CI/CD" class="md-nav__link">
-      CI/CD
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../tool/mkdocs/" title="mkdocs简单使用" class="md-nav__link">
-      mkdocs简单使用
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../tool/gitstudy/" title="Git的黑魔法" class="md-nav__link">
-      Git的黑魔法
-    </a>
-  </li>
-
-        
-      </ul>
-    </nav>
-  </li>
-
-        
-      </ul>
-    </nav>
-  </li>
-
-    
-      
-      
-      
-
-
-  <li class="md-nav__item md-nav__item--nested">
-    
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3">
-    
-    <label class="md-nav__link" for="nav-3">
-      微服务
-    </label>
-    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
-      <label class="md-nav__title" for="nav-3">
-        微服务
-      </label>
-      <ul class="md-nav__list" data-md-scrollfix>
-        
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../micro/spring-cloud/" title="基于SpringCloud的微服务架构演变史" class="md-nav__link">
-      基于SpringCloud的微服务架构演变史
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../micro/fbs-lock/" title="分布式锁" class="md-nav__link">
-      分布式锁
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../micro/design/" title="微服务设计" class="md-nav__link">
-      微服务设计
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../micro/distrimsg/" title="分布式系统与消息的投递" class="md-nav__link">
-      分布式系统与消息的投递
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../micro/ddd/" title="基于DDD的微服务设计和开发实战" class="md-nav__link">
-      基于DDD的微服务设计和开发实战
-    </a>
-  </li>
-
-        
-      </ul>
-    </nav>
-  </li>
-
-    
-      
-      
-      
-
-
-  <li class="md-nav__item md-nav__item--nested">
-    
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4">
-    
-    <label class="md-nav__link" for="nav-4">
-      经验分析
-    </label>
-    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
-      <label class="md-nav__title" for="nav-4">
-        经验分析
-      </label>
-      <ul class="md-nav__list" data-md-scrollfix>
-        
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../exp/devops/" title="DevOps" class="md-nav__link">
-      DevOps
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../exp/micro-service/" title="Micro-Service" class="md-nav__link">
-      Micro-Service
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../exp/raft-gossip/" title="Raft算法和Gossip协议" class="md-nav__link">
-      Raft算法和Gossip协议
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../exp/cl/" title="集群和负载均衡" class="md-nav__link">
-      集群和负载均衡
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../exp/ai/" title="人工智能" class="md-nav__link">
-      人工智能
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../exp/code-principle/" title="代码原则" class="md-nav__link">
-      代码原则
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../exp/techbig/" title="如何成为技术大牛" class="md-nav__link">
-      如何成为技术大牛
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../exp/learnweetout/" title="程序员如何技术成长" class="md-nav__link">
-      程序员如何技术成长
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../exp/pt/" title="产品与技术" class="md-nav__link">
-      产品与技术
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../exp/four_deep_learning/" title="深度学习框架" class="md-nav__link">
-      深度学习框架
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../exp/tl/" title="在阿里做了5年技术Leader，我总结出这些套路！" class="md-nav__link">
-      在阿里做了5年技术Leader，我总结出这些套路！
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../exp/cto/" title="CTO 技能图谱" class="md-nav__link">
-      CTO 技能图谱
-    </a>
-  </li>
-
-        
-      </ul>
-    </nav>
-  </li>
-
-    
-      
-      
-      
-
-
-  <li class="md-nav__item md-nav__item--nested">
-    
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5">
-    
-    <label class="md-nav__link" for="nav-5">
-      医学
-    </label>
-    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
-      <label class="md-nav__title" for="nav-5">
-        医学
-      </label>
-      <ul class="md-nav__list" data-md-scrollfix>
-        
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../doctor/ae/" title="脑炎" class="md-nav__link">
-      脑炎
-    </a>
-  </li>
-
-        
-      </ul>
-    </nav>
-  </li>
-
-    
-      
-      
-      
-
-
-  <li class="md-nav__item md-nav__item--nested">
-    
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6" type="checkbox" id="nav-6">
-    
-    <label class="md-nav__link" for="nav-6">
-      构架
-    </label>
-    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
-      <label class="md-nav__title" for="nav-6">
-        构架
-      </label>
-      <ul class="md-nav__list" data-md-scrollfix>
-        
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../framework/split/" title="构架拆分" class="md-nav__link">
-      构架拆分
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../framework/fgb/" title="分布式、高并发、多线程" class="md-nav__link">
-      分布式、高并发、多线程
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../framework/agility/" title="如何理解敏捷开发" class="md-nav__link">
-      如何理解敏捷开发
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../framework/fwork/" title="走向架构师必备的技能" class="md-nav__link">
-      走向架构师必备的技能
-    </a>
-  </li>
-
-        
-      </ul>
-    </nav>
-  </li>
-
-    
-      
-      
-      
-
-
-  <li class="md-nav__item md-nav__item--nested">
-    
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7" type="checkbox" id="nav-7">
-    
-    <label class="md-nav__link" for="nav-7">
-      情感
-    </label>
-    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
-      <label class="md-nav__title" for="nav-7">
-        情感
-      </label>
-      <ul class="md-nav__list" data-md-scrollfix>
-        
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../emotion/eq/" title="情商" class="md-nav__link">
-      情商
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../emotion/workheard/" title="工作心得" class="md-nav__link">
-      工作心得
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../emotion/lookbook/" title="看书" class="md-nav__link">
-      看书
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../emotion/fmf/" title="4种男朋友" class="md-nav__link">
-      4种男朋友
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../emotion/notheart/" title="不上心" class="md-nav__link">
-      不上心
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../emotion/selfdiscipline/" title="自律" class="md-nav__link">
-      自律
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../emotion/notlike/" title="喜欢与不喜欢" class="md-nav__link">
-      喜欢与不喜欢
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../emotion/latemarry/" title="晚婚" class="md-nav__link">
-      晚婚
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../emotion/understand/" title="追女生要明白这些事" class="md-nav__link">
-      追女生要明白这些事
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../emotion/backup/" title="备胎" class="md-nav__link">
-      备胎
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../emotion/chase/" title="为什么追不到她" class="md-nav__link">
-      为什么追不到她
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../emotion/livefail/" title="为什么活着失败" class="md-nav__link">
-      为什么活着失败
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../emotion/emotion/" title="情绪管理" class="md-nav__link">
-      情绪管理
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../emotion/abolish/" title="废掉的三个迹象" class="md-nav__link">
-      废掉的三个迹象
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../emotion/uptime/" title="余生，好好珍惜" class="md-nav__link">
-      余生，好好珍惜
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../emotion/losecome/" title="所有的失去，都会以另一种方式归来" class="md-nav__link">
-      所有的失去，都会以另一种方式归来
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../emotion/threeheart/" title="人生有这三种好心态" class="md-nav__link">
-      人生有这三种好心态
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../emotion/onelike/" title="一个感情真相" class="md-nav__link">
-      一个感情真相
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../emotion/notruth/" title="情商与道理" class="md-nav__link">
-      情商与道理
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../emotion/smf/" title="六种男人远离" class="md-nav__link">
-      六种男人远离
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../emotion/select/" title="决定接下来人生归属的，不是努力，而是选择" class="md-nav__link">
-      决定接下来人生归属的，不是努力，而是选择
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../emotion/nolike/" title="被你拉黑的那个人，你一定很喜欢吧" class="md-nav__link">
-      被你拉黑的那个人，你一定很喜欢吧
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../emotion/onepath/" title="余生，学会一个人走，不管有没有人陪" class="md-nav__link">
-      余生，学会一个人走，不管有没有人陪
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../emotion/twopath/" title="往后余生还很精彩，别被熬夜拖垮了" class="md-nav__link">
-      往后余生还很精彩，别被熬夜拖垮了
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../emotion/lifetime/" title="心态好的人，一辈子都好" class="md-nav__link">
-      心态好的人，一辈子都好
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../emotion/hearttoheart/" title="将心比心，方得人心" class="md-nav__link">
-      将心比心，方得人心
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../emotion/ttt/" title="别睡太晚，别爱太满，别要太多" class="md-nav__link">
-      别睡太晚，别爱太满，别要太多
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../emotion/profess/" title="表白" class="md-nav__link">
-      表白
-    </a>
-  </li>
-
-        
-      </ul>
-    </nav>
-  </li>
-
-    
-  </ul>
-</nav>
-                  </div>
-                </div>
-              </div>
-            
-            
-              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
-                <div class="md-sidebar__scrollwrap">
-                  <div class="md-sidebar__inner">
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../..">介绍</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">技术博文</span>
+    <ul class="subnav">
+                <li class=" current">
                     
-<nav class="md-nav md-nav--secondary">
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">Table of contents</label>
-    <ul class="md-nav__list" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#string-interpolation" title="一、字符串插值 （String Interpolation）" class="md-nav__link">
-    一、字符串插值 （String Interpolation）
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_1" title="二、空操作符 ( ?. )" class="md-nav__link">
-    二、空操作符 ( ?. )
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#nameof" title="三、 NameOf" class="md-nav__link">
-    三、 NameOf
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#catchfinallyawait" title="四、在Catch和Finally里使用Await" class="md-nav__link">
-    四、在Catch和Finally里使用Await
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_2" title="五、表达式方法体" class="md-nav__link">
-    五、表达式方法体
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_3" title="六、自动属性初始化器" class="md-nav__link">
-    六、自动属性初始化器
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_4" title="七、只读自动属性" class="md-nav__link">
-    七、只读自动属性
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#exception-filter" title="八、异常过滤器 Exception Filter" class="md-nav__link">
-    八、异常过滤器 Exception Filter
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#index" title="九、 Index 初始化器" class="md-nav__link">
-    九、 Index 初始化器
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#using-static-using" title="十、using 静态类的方法可以使用 static using" class="md-nav__link">
-    十、using 静态类的方法可以使用 static using
-  </a>
-  
-</li>
-      
-      
-      
-      
-      
-    </ul>
-  
-</nav>
-                  </div>
-                </div>
-              </div>
+    <span class="caption-text">.NET</span>
+    <ul class="subnav">
+                <li class="toctree-l3 current">
+                    
+    <a class="current" href="./">C# 6</a>
+    <ul class="subnav">
             
+    <li class="toctree-l4"><a href="#c-6">一小时学会C# 6</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l5" href="#string-interpolation">一、字符串插值 （String Interpolation）</a></li>
+        
+            <li><a class="toctree-l5" href="#_1">二、空操作符 ( ?. )</a></li>
+        
+            <li><a class="toctree-l5" href="#nameof">三、 NameOf</a></li>
+        
+            <li><a class="toctree-l5" href="#catchfinallyawait">四、在Catch和Finally里使用Await</a></li>
+        
+            <li><a class="toctree-l5" href="#_2">五、表达式方法体</a></li>
+        
+            <li><a class="toctree-l5" href="#_3">六、自动属性初始化器</a></li>
+        
+            <li><a class="toctree-l5" href="#_4">七、只读自动属性</a></li>
+        
+            <li><a class="toctree-l5" href="#exception-filter">八、异常过滤器 Exception Filter</a></li>
+        
+            <li><a class="toctree-l5" href="#index">九、 Index 初始化器</a></li>
+        
+            <li><a class="toctree-l5" href="#using-static-using">十、using 静态类的方法可以使用 static using</a></li>
+        
+        </ul>
+    
+
+    </ul>
+                </li>
+                <li class="toctree-l3">
+                    
+    <a class="" href="../c_docker/">.Ner Core Docker 部署</a>
+                </li>
+                <li class="toctree-l3">
+                    
+    <a class="" href="../c_mysql_nginx/">使用 Docker 容器化部署 ASP.NET Core + MySQL + Nginx</a>
+                </li>
+                <li class="toctree-l3">
+                    
+    <a class="" href="../c_core_safety/">让你的ASP.NET Core应用程序更安全</a>
+                </li>
+                <li class="toctree-l3">
+                    
+    <a class="" href="../c_core_study_route/">ASP.NET Core开发者指南</a>
+                </li>
+    </ul>
+                </li>
+                <li class="">
+                    
+    <span class="caption-text">Java</span>
+    <ul class="subnav">
+                <li class="toctree-l3">
+                    
+    <a class="" href="../../java/feature/">Java特性</a>
+                </li>
+                <li class="toctree-l3">
+                    
+    <a class="" href="../../java/load-class/">Java类加载</a>
+                </li>
+                <li class="toctree-l3">
+                    
+    <a class="" href="../../java/orm/">Orm的优缺点</a>
+                </li>
+                <li class="toctree-l3">
+                    
+    <a class="" href="../../java/bio-nio/">BIO与NIO</a>
+                </li>
+                <li class="toctree-l3">
+                    
+    <a class="" href="../../java/rocketmq/rmq-1/">RocketMq下载与安装</a>
+                </li>
+                <li class="toctree-l3">
+                    
+    <a class="" href="../../java/springAnnotation/">Spring常用注解</a>
+                </li>
+    </ul>
+                </li>
+                <li class="">
+                    
+    <span class="caption-text">Python</span>
+    <ul class="subnav">
+                <li class="toctree-l3">
+                    
+    <a class="" href="../../python/feature/">Python特性</a>
+                </li>
+                <li class="toctree-l3">
+                    
+    <a class="" href="../../python/str_joint/">Python字符拼接</a>
+                </li>
+                <li class="toctree-l3">
+                    
+    <a class="" href="../../python/syntax_rule/">Python语法技巧</a>
+                </li>
+                <li class="toctree-l3">
+                    
+    <a class="" href="../../python/fabric/">远程部署神器 Fabric</a>
+                </li>
+    </ul>
+                </li>
+                <li class="">
+                    
+    <span class="caption-text">PHP</span>
+    <ul class="subnav">
+                <li class="toctree-l3">
+                    
+    <a class="" href="../../php/kj/">框架</a>
+                </li>
+    </ul>
+                </li>
+                <li class="">
+                    
+    <span class="caption-text">Web</span>
+    <ul class="subnav">
+                <li class="toctree-l3">
+                    
+    <a class="" href="../../web/es6/">es6语法</a>
+                </li>
+                <li class="toctree-l3">
+                    
+    <a class="" href="../../web/ali_js_style/">阿里js样式规范</a>
+                </li>
+                <li class="toctree-l3">
+                    
+    <a class="" href="../../web/node.js/">node.js文档</a>
+                </li>
+                <li class="toctree-l3">
+                    
+    <a class="" href="../../web/react/">React 开发者指南</a>
+                </li>
+                <li class="toctree-l3">
+                    
+    <a class="" href="../../dart/syntax/">Dart语法学习</a>
+                </li>
+                <li class="toctree-l3">
+                    
+    <a class="" href="../../web/react_interview/">React 面试</a>
+                </li>
+                <li class="toctree-l3">
+                    
+    <a class="" href="../../web/js_tool_method/">js 工具函数</a>
+                </li>
+                <li class="toctree-l3">
+                    
+    <a class="" href="../../web/vue_cp_react/">vue与react比较</a>
+                </li>
+    </ul>
+                </li>
+                <li class="">
+                    
+    <span class="caption-text">SQL</span>
+    <ul class="subnav">
+                <li class="toctree-l3">
+                    
+    <a class="" href="../../sql/mysql_yh/">MySQL优化</a>
+                </li>
+                <li class="toctree-l3">
+                    
+    <a class="" href="../../sql/mysql_yh17/">MySQL优化</a>
+                </li>
+                <li class="toctree-l3">
+                    
+    <a class="" href="../../sql/mysql_log/">MySQL日志</a>
+                </li>
+                <li class="toctree-l3">
+                    
+    <a class="" href="../../sql/mysql_index/">MySQL索引</a>
+                </li>
+                <li class="toctree-l3">
+                    
+    <a class="" href="../../sql/mysql_pxc/">MySQL PXC集群</a>
+                </li>
+                <li class="toctree-l3">
+                    
+    <a class="" href="../../sql/mysql_use/">MySQL 数据库应用</a>
+                </li>
+                <li class="toctree-l3">
+                    
+    <a class="" href="../../sql/sql_server_master/">Sql Server 主从备份</a>
+                </li>
+                <li class="toctree-l3">
+                    
+    <a class="" href="../../sql/data_split/">数据库之互联网常用分库分表方案</a>
+                </li>
+                <li class="toctree-l3">
+                    
+    <a class="" href="../../sql/mybatis/">Mybatis使用心德</a>
+                </li>
+    </ul>
+                </li>
+                <li class="">
+                    
+    <span class="caption-text">Linux</span>
+    <ul class="subnav">
+                <li class="toctree-l3">
+                    
+    <a class="" href="../../linux/often/">常用命令</a>
+                </li>
+                <li class="toctree-l3">
+                    
+    <a class="" href="../../linux/ope/">实用的Linux 命令</a>
+                </li>
+    </ul>
+                </li>
+                <li class="">
+                    
+    <span class="caption-text">Docker</span>
+    <ul class="subnav">
+                <li class="toctree-l3">
+                    
+    <a class="" href="../../docker/docker/">Docker全科</a>
+                </li>
+                <li class="toctree-l3">
+                    
+    <a class="" href="../../docker/docker-compose/">docker和docker-compose 配置 mysql mongodb redis nginx jenkins 环境</a>
+                </li>
+                <li class="toctree-l3">
+                    
+    <a class="" href="../../docker/docker-jenkins/">Docker部署Jenkins</a>
+                </li>
+    </ul>
+                </li>
+                <li class="">
+                    
+    <span class="caption-text">Tool</span>
+    <ul class="subnav">
+                <li class="toctree-l3">
+                    
+    <a class="" href="../../tool/git/">Git</a>
+                </li>
+                <li class="toctree-l3">
+                    
+    <a class="" href="../../tool/gitquestion/">Git问题处理</a>
+                </li>
+                <li class="toctree-l3">
+                    
+    <a class="" href="../../tool/gitflow/">GitFlow</a>
+                </li>
+                <li class="toctree-l3">
+                    
+    <a class="" href="../../tool/gitbook/">GitBook</a>
+                </li>
+                <li class="toctree-l3">
+                    
+    <a class="" href="../../tool/gitcmr/">Git提交日志规范</a>
+                </li>
+                <li class="toctree-l3">
+                    
+    <a class="" href="../../tool/markdown/">Markdown</a>
+                </li>
+                <li class="toctree-l3">
+                    
+    <a class="" href="../../tool/cicd/">CI/CD</a>
+                </li>
+                <li class="toctree-l3">
+                    
+    <a class="" href="../../tool/mkdocs/">mkdocs简单使用</a>
+                </li>
+                <li class="toctree-l3">
+                    
+    <a class="" href="../../tool/gitstudy/">Git的黑魔法</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+	    </li>
           
-          <div class="md-content">
-            <article class="md-content__inner md-typeset">
+            <li class="toctree-l1">
+		
+    <span class="caption-text">微服务</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../micro/spring-cloud/">基于SpringCloud的微服务架构演变史</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../micro/fbs-lock/">分布式锁</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../micro/design/">微服务设计</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../micro/distrimsg/">分布式系统与消息的投递</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../micro/ddd/">基于DDD的微服务设计和开发实战</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">经验分析</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../exp/devops/">DevOps</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../exp/micro-service/">Micro-Service</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../exp/raft-gossip/">Raft算法和Gossip协议</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../exp/cl/">集群和负载均衡</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../exp/ai/">人工智能</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../exp/code-principle/">代码原则</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../exp/techbig/">如何成为技术大牛</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../exp/learnweetout/">程序员如何技术成长</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../exp/pt/">产品与技术</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../exp/four_deep_learning/">深度学习框架</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../exp/tl/">在阿里做了5年技术Leader，我总结出这些套路！</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../exp/cto/">CTO 技能图谱</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">医学</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../doctor/ae/">脑炎</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">构架</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../framework/split/">构架拆分</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../framework/fgb/">分布式、高并发、多线程</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../framework/agility/">如何理解敏捷开发</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../framework/fwork/">走向架构师必备的技能</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">情感</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../emotion/eq/">情商</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../emotion/workheard/">工作心得</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../emotion/lookbook/">看书</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../emotion/fmf/">4种男朋友</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../emotion/notheart/">不上心</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../emotion/selfdiscipline/">自律</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../emotion/notlike/">喜欢与不喜欢</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../emotion/latemarry/">晚婚</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../emotion/understand/">追女生要明白这些事</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../emotion/backup/">备胎</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../emotion/chase/">为什么追不到她</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../emotion/livefail/">为什么活着失败</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../emotion/emotion/">情绪管理</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../emotion/abolish/">废掉的三个迹象</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../emotion/uptime/">余生，好好珍惜</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../emotion/losecome/">所有的失去，都会以另一种方式归来</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../emotion/threeheart/">人生有这三种好心态</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../emotion/onelike/">一个感情真相</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../emotion/notruth/">情商与道理</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../emotion/smf/">六种男人远离</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../emotion/select/">决定接下来人生归属的，不是努力，而是选择</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../emotion/nolike/">被你拉黑的那个人，你一定很喜欢吧</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../emotion/onepath/">余生，学会一个人走，不管有没有人陪</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../emotion/twopath/">往后余生还很精彩，别被熬夜拖垮了</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../emotion/lifetime/">心态好的人，一辈子都好</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../emotion/hearttoheart/">将心比心，方得人心</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../emotion/ttt/">别睡太晚，别爱太满，别要太多</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../emotion/profess/">表白</a>
+                </li>
+    </ul>
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../..">BurningMyself</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../..">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>.NET &raquo;</li>
+        
+      
+        
+          <li>技术博文 &raquo;</li>
+        
+      
+    
+    <li>C# 6</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        <a href="https://github.com/burningmyself/burningmyself.github.io/edit/master/docs/net/c_sharp.md"> Edit on burningmyself/blog</a>
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
               
-                
-                  <a href="https://github.com/burningmyself/blog/edit/master/docs/net/c_sharp.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
-                
-                
                 <h1 id="c-6">一小时学会C# 6<a class="headerlink" href="#c-6" title="Permanent link">&para;</a></h1>
 <h2 id="string-interpolation">一、字符串插值 （String Interpolation）<a class="headerlink" href="#string-interpolation" title="Permanent link">&para;</a></h2>
-<p>C# 6之前我们拼接字符串时需要这样
-<div class="codehilite"><pre><span></span> <span class="kt">var</span> <span class="n">Name</span> <span class="p">=</span> <span class="s">&quot;Jack&quot;</span><span class="p">;</span>
- <span class="kt">var</span> <span class="n">results</span> <span class="p">=</span> <span class="s">&quot;Hello&quot;</span> <span class="p">+</span> <span class="n">Name</span><span class="p">;</span>
-</pre></div>
-或者
-<div class="codehilite"><pre><span></span> <span class="kt">var</span> <span class="n">Name</span> <span class="p">=</span> <span class="s">&quot;Jack&quot;</span><span class="p">;</span>
- <span class="kt">var</span> <span class="n">results</span> <span class="p">=</span> <span class="kt">string</span><span class="p">.</span><span class="n">Format</span><span class="p">(</span><span class="s">&quot;Hello {0}&quot;</span><span class="p">,</span> <span class="n">Name</span><span class="p">);</span>
-</pre></div>
-但是C#6里我们就可以使用新的字符串插值特性
-<div class="codehilite"><pre><span></span>  <span class="kt">var</span> <span class="n">Name</span> <span class="p">=</span> <span class="s">&quot;Jack&quot;</span><span class="p">;</span>
-  <span class="kt">var</span> <span class="n">results</span> <span class="p">=</span> <span class="err">$</span><span class="s">&quot;Hello {Name}&quot;</span><span class="p">;</span>
-</pre></div>
-上面只是一个简单的例子，想想如果有多个值要替换的话，用C#6的这个新特性，代码就会大大减小，而且可读性比起之前大大增强
-<div class="codehilite"><pre><span></span> <span class="n">Person</span> <span class="n">p</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Person</span> <span class="p">{</span><span class="n">FirstName</span> <span class="p">=</span> <span class="s">&quot;Jack&quot;</span><span class="p">,</span> <span class="n">LastName</span> <span class="p">=</span> <span class="s">&quot;Wang&quot;</span><span class="p">,</span> <span class="n">Age</span> <span class="p">=</span> <span class="m">100</span><span class="p">};</span>
- <span class="kt">var</span> <span class="n">results</span> <span class="p">=</span> <span class="kt">string</span><span class="p">.</span><span class="n">Format</span><span class="p">(</span><span class="s">&quot;First Name: {0} LastName: {1} Age: { 2} &quot;</span><span class="p">,</span> <span class="n">p</span><span class="p">.</span><span class="n">FirstName</span><span class="p">,</span> <span class="n">p</span><span class="p">.</span><span class="n">LastName</span><span class="p">,</span> <span class="n">p</span><span class="p">.</span><span class="n">Age</span><span class="p">);</span>
-</pre></div>
-有了字符串插值后:
-<div class="codehilite"><pre><span></span> <span class="kt">var</span> <span class="n">results</span> <span class="p">=</span> <span class="err">$</span><span class="s">&quot;First Name: {p.FirstName} LastName: {p.LastName} Age: {p.Age}&quot;</span><span class="p">;</span>
-</pre></div>
-字符串插值不光是可以插简单的字符串，还可以直接插入代码
-<div class="codehilite"><pre><span></span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="err">$</span><span class="s">&quot;Jack is saying { new Tools().SayHello() }&quot;</span><span class="p">);</span>
+<p>C# 6之前我们拼接字符串时需要这样</p>
+<pre class="codehilite"><code class="language-C#"> var Name = &quot;Jack&quot;;
+ var results = &quot;Hello&quot; + Name;</code></pre>
 
-<span class="kt">var</span> <span class="n">info</span> <span class="p">=</span> <span class="err">$</span><span class="s">&quot;Your discount is {await GetDiscount()}&quot;</span><span class="p">;</span>
-</pre></div>
-那么如何处理多语言呢？我们可以使用 IFormattable下面的代码如何实现多语言？
-<div class="codehilite"><pre><span></span> <span class="n">Double</span> <span class="n">remain</span> <span class="p">=</span> <span class="m">2000.5</span><span class="p">;</span> 
- <span class="kt">var</span> <span class="n">results</span><span class="p">=</span> <span class="err">$</span><span class="s">&quot;your money is {remain:C}&quot;</span><span class="p">;</span>  
-</pre></div>
-输出 your money is $2,000.50</p>
-<p>使用IFormattable 多语言
-<div class="codehilite"><pre><span></span><span class="k">class</span> <span class="nc">Program</span>
-<span class="p">{</span>
-    <span class="k">static</span> <span class="k">void</span> <span class="nf">Main</span><span class="p">(</span><span class="kt">string</span><span class="p">[]</span> <span class="n">args</span><span class="p">)</span>
-    <span class="p">{</span>
 
-        <span class="n">Double</span> <span class="n">remain</span> <span class="p">=</span> <span class="m">2000.5</span><span class="p">;</span> 
+<p>或者</p>
+<pre class="codehilite"><code class="language-C#"> var Name = &quot;Jack&quot;;
+ var results = string.Format(&quot;Hello {0}&quot;, Name);</code></pre>
 
-       <span class="kt">var</span> <span class="n">results</span><span class="p">=</span> <span class="n">ChineseText</span><span class="p">(</span><span class="err">$</span><span class="s">&quot;your money is {remain:C}&quot;</span><span class="p">);</span>
 
-        <span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">results</span><span class="p">);</span>
-        <span class="n">Console</span><span class="p">.</span><span class="n">Read</span><span class="p">();</span>
-    <span class="p">}</span>
+<p>但是C#6里我们就可以使用新的字符串插值特性</p>
+<pre class="codehilite"><code class="language-C#">  var Name = &quot;Jack&quot;;
+  var results = $&quot;Hello {Name}&quot;;</code></pre>
 
-    <span class="k">public</span> <span class="k">static</span> <span class="kt">string</span> <span class="nf">ChineseText</span><span class="p">(</span><span class="n">IFormattable</span> <span class="n">formattable</span><span class="p">)</span>
-    <span class="p">{</span>
-        <span class="k">return</span> <span class="n">formattable</span><span class="p">.</span><span class="n">ToString</span><span class="p">(</span><span class="k">null</span><span class="p">,</span> <span class="k">new</span> <span class="n">CultureInfo</span><span class="p">(</span><span class="s">&quot;zh-cn&quot;</span><span class="p">));</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-</pre></div>
-输出  your money is ￥2,000.50</p>
+
+<p>上面只是一个简单的例子，想想如果有多个值要替换的话，用C#6的这个新特性，代码就会大大减小，而且可读性比起之前大大增强</p>
+<pre class="codehilite"><code class="language-C#"> Person p = new Person {FirstName = &quot;Jack&quot;, LastName = &quot;Wang&quot;, Age = 100};
+ var results = string.Format(&quot;First Name: {0} LastName: {1} Age: { 2} &quot;, p.FirstName, p.LastName, p.Age);</code></pre>
+
+
+<p>有了字符串插值后:</p>
+<pre class="codehilite"><code class="language-C#"> var results = $&quot;First Name: {p.FirstName} LastName: {p.LastName} Age: {p.Age}&quot;;</code></pre>
+
+
+<p>字符串插值不光是可以插简单的字符串，还可以直接插入代码</p>
+<pre class="codehilite"><code class="language-C#">Console.WriteLine($&quot;Jack is saying { new Tools().SayHello() }&quot;);
+
+var info = $&quot;Your discount is {await GetDiscount()}&quot;;</code></pre>
+
+
+<p>那么如何处理多语言呢？我们可以使用 IFormattable下面的代码如何实现多语言？</p>
+<pre class="codehilite"><code class="language-C#"> Double remain = 2000.5; 
+ var results= $&quot;your money is {remain:C}&quot;;  </code></pre>
+
+
+<p>输出 your money is $2,000.50</p>
+<p>使用IFormattable 多语言</p>
+<pre class="codehilite"><code class="language-C#">class Program
+{
+    static void Main(string[] args)
+    {
+
+        Double remain = 2000.5; 
+
+       var results= ChineseText($&quot;your money is {remain:C}&quot;);
+
+        Console.WriteLine(results);
+        Console.Read();
+    }
+
+    public static string ChineseText(IFormattable formattable)
+    {
+        return formattable.ToString(null, new CultureInfo(&quot;zh-cn&quot;));
+    }
+}</code></pre>
+
+
+<p>输出  your money is ￥2,000.50</p>
 <h2 id="_1">二、空操作符 ( ?. )<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
-<p>C# 6添加了一个 ?. 操作符，当一个对象或者属性职为空时直接返回null, 就不再继续执行后面的代码，在之前我们的代码里经常出现 NullException, 所以我们就需要加很多Null的判断，比如
-<div class="codehilite"><pre><span></span> <span class="k">if</span> <span class="p">(</span><span class="n">user</span> <span class="p">!=</span> <span class="k">null</span> <span class="p">&amp;&amp;</span> <span class="n">user</span><span class="p">.</span><span class="n">Project</span> <span class="p">!=</span> <span class="k">null</span> <span class="p">&amp;&amp;</span> <span class="n">user</span><span class="p">.</span><span class="n">Project</span><span class="p">.</span><span class="n">Tasks</span> <span class="p">!=</span> <span class="k">null</span> <span class="p">&amp;&amp;</span> <span class="n">user</span><span class="p">.</span><span class="n">Project</span><span class="p">.</span><span class="n">Tasks</span><span class="p">.</span><span class="n">Count</span> <span class="p">&gt;</span> <span class="m">0</span><span class="p">)</span>
- <span class="p">{</span>
-   <span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">user</span><span class="p">.</span><span class="n">Project</span><span class="p">.</span><span class="n">Tasks</span><span class="p">.</span><span class="n">First</span><span class="p">().</span><span class="n">Name</span><span class="p">);</span>
- <span class="p">}</span>
-</pre></div>
-现在我们可以不用写 IF 直接写成如下这样
-<div class="codehilite"><pre><span></span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">user</span><span class="p">?.</span><span class="n">Project</span><span class="p">?.</span><span class="n">Tasks</span><span class="p">?.</span><span class="n">First</span><span class="p">()?.</span><span class="n">Name</span><span class="p">);</span>
-</pre></div>
-这个?. 特性不光是可以用于取值，也可以用于方法调用，如果对象为空将不进行任何操作，下面的代码不会报错，也不会有任何输出。
-<div class="codehilite"><pre><span></span><span class="k">class</span> <span class="nc">Program</span>
-<span class="p">{</span>
-    <span class="k">static</span> <span class="k">void</span> <span class="nf">Main</span><span class="p">(</span><span class="kt">string</span><span class="p">[]</span> <span class="n">args</span><span class="p">)</span>
-    <span class="p">{</span>
-        <span class="n">User</span> <span class="n">user</span> <span class="p">=</span> <span class="k">null</span><span class="p">;</span>
-        <span class="n">user</span><span class="p">?.</span><span class="n">SayHello</span><span class="p">();</span>
-        <span class="n">Console</span><span class="p">.</span><span class="n">Read</span><span class="p">();</span>
-    <span class="p">}</span>
-<span class="p">}</span>
+<p>C# 6添加了一个 ?. 操作符，当一个对象或者属性职为空时直接返回null, 就不再继续执行后面的代码，在之前我们的代码里经常出现 NullException, 所以我们就需要加很多Null的判断，比如</p>
+<pre class="codehilite"><code class="language-C#"> if (user != null &amp;&amp; user.Project != null &amp;&amp; user.Project.Tasks != null &amp;&amp; user.Project.Tasks.Count &gt; 0)
+ {
+   Console.WriteLine(user.Project.Tasks.First().Name);
+ }</code></pre>
 
-<span class="k">public</span> <span class="k">class</span> <span class="nc">User</span>
-<span class="p">{</span>
-    <span class="k">public</span> <span class="k">void</span> <span class="nf">SayHello</span><span class="p">()</span>
-    <span class="p">{</span>
-        <span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">&quot;Ha Ha&quot;</span><span class="p">);</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-</pre></div>
-还可以用于数组的索引器
-<div class="codehilite"><pre><span></span><span class="k">class</span> <span class="nc">Program</span>
-<span class="p">{</span>
-    <span class="k">static</span> <span class="k">void</span> <span class="nf">Main</span><span class="p">(</span><span class="kt">string</span><span class="p">[]</span> <span class="n">args</span><span class="p">)</span>
-    <span class="p">{</span>
-        <span class="n">User</span><span class="p">[]</span> <span class="n">users</span> <span class="p">=</span> <span class="k">null</span><span class="p">;</span>
 
-        <span class="n">List</span><span class="p">&lt;</span><span class="n">User</span><span class="p">&gt;</span> <span class="n">listUsers</span> <span class="p">=</span> <span class="k">null</span><span class="p">;</span>
+<p>现在我们可以不用写 IF 直接写成如下这样</p>
+<pre class="codehilite"><code class="language-C#">Console.WriteLine(user?.Project?.Tasks?.First()?.Name);</code></pre>
 
-        <span class="c1">// Console.WriteLine(users[1]?.Name); // 报错</span>
-        <span class="c1">// Console.WriteLine(listUsers[1]?.Name); //报错</span>
 
-        <span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">users</span><span class="p">?[</span><span class="m">1</span><span class="p">].</span><span class="n">Name</span><span class="p">);</span> <span class="c1">// 正常</span>
-        <span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">listUsers</span><span class="p">?[</span><span class="m">1</span><span class="p">].</span><span class="n">Name</span><span class="p">);</span> <span class="c1">// 正常</span>
+<p>这个?. 特性不光是可以用于取值，也可以用于方法调用，如果对象为空将不进行任何操作，下面的代码不会报错，也不会有任何输出。</p>
+<pre class="codehilite"><code class="language-C#">class Program
+{
+    static void Main(string[] args)
+    {
+        User user = null;
+        user?.SayHello();
+        Console.Read();
+    }
+}
 
-        <span class="n">Console</span><span class="p">.</span><span class="n">ReadLine</span><span class="p">();</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-</pre></div>
-注意： 上面的代码虽然可以让我们少些很多代码，而且也减少了空异常，但是我们却需要小心使用，因为有的时候我们确实是需要抛出空异常，那么使用这个特性反而隐藏了Bug</p>
+public class User
+{
+    public void SayHello()
+    {
+        Console.WriteLine(&quot;Ha Ha&quot;);
+    }
+}</code></pre>
+
+
+<p>还可以用于数组的索引器</p>
+<pre class="codehilite"><code class="language-C#">class Program
+{
+    static void Main(string[] args)
+    {
+        User[] users = null;
+
+        List&lt;User&gt; listUsers = null;
+
+        // Console.WriteLine(users[1]?.Name); // 报错
+        // Console.WriteLine(listUsers[1]?.Name); //报错
+
+        Console.WriteLine(users?[1].Name); // 正常
+        Console.WriteLine(listUsers?[1].Name); // 正常
+
+        Console.ReadLine();
+    }
+}</code></pre>
+
+
+<p>注意： 上面的代码虽然可以让我们少些很多代码，而且也减少了空异常，但是我们却需要小心使用，因为有的时候我们确实是需要抛出空异常，那么使用这个特性反而隐藏了Bug</p>
 <h2 id="nameof">三、 NameOf<a class="headerlink" href="#nameof" title="Permanent link">&para;</a></h2>
-<p>过去，我们有很多的地方需要些硬字符串，导致重构比较困难，而且一旦敲错字母很难察觉出来，比如
-<div class="codehilite"><pre><span></span><span class="k">if</span> <span class="p">(</span><span class="n">role</span> <span class="p">==</span> <span class="s">&quot;admin&quot;</span><span class="p">)</span>
-<span class="p">{</span>
-<span class="p">}</span>
-</pre></div>
-WPF 也经常有这样的代码
-<div class="codehilite"><pre><span></span><span class="k">public</span> <span class="kt">string</span> <span class="n">Name</span>
-<span class="p">{</span>
-  <span class="k">get</span> <span class="p">{</span> <span class="k">return</span> <span class="n">name</span><span class="p">;</span> <span class="p">}</span>
-  <span class="k">set</span>
-  <span class="p">{</span>
-      <span class="n">name</span><span class="p">=</span> <span class="k">value</span><span class="p">;</span>
-      <span class="n">RaisePropertyChanged</span><span class="p">(</span><span class="s">&quot;Name&quot;</span><span class="p">);</span>
-  <span class="p">}</span>
-<span class="p">}</span>
-</pre></div>
-现在有了C#6 NameOf后，我们可以这样
-<div class="codehilite"><pre><span></span><span class="k">public</span> <span class="kt">string</span> <span class="n">Name</span>
-<span class="p">{</span>
-  <span class="k">get</span> <span class="p">{</span> <span class="k">return</span> <span class="n">name</span><span class="p">;</span> <span class="p">}</span>
-  <span class="k">set</span>
-  <span class="p">{</span>
-      <span class="n">name</span><span class="p">=</span> <span class="k">value</span><span class="p">;</span>
-      <span class="n">RaisePropertyChanged</span><span class="p">(</span><span class="n">NameOf</span><span class="p">(</span><span class="n">Name</span><span class="p">));</span>
-  <span class="p">}</span>
-<span class="p">}</span>
-<span class="k">static</span> <span class="k">void</span> <span class="nf">Main</span><span class="p">(</span><span class="kt">string</span><span class="p">[]</span> <span class="n">args</span><span class="p">)</span>
-<span class="p">{</span>
-    <span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">nameof</span><span class="p">(</span><span class="n">User</span><span class="p">.</span><span class="n">Name</span><span class="p">));</span> <span class="c1">//  output: Name</span>
-    <span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">nameof</span><span class="p">(</span><span class="n">System</span><span class="p">.</span><span class="n">Linq</span><span class="p">));</span> <span class="c1">// output: Linq</span>
-    <span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">nameof</span><span class="p">(</span><span class="n">List</span><span class="p">&lt;</span><span class="n">User</span><span class="p">&gt;));</span> <span class="c1">// output: List</span>
-    <span class="n">Console</span><span class="p">.</span><span class="n">ReadLine</span><span class="p">();</span>
-<span class="p">}</span>
-</pre></div>
-注意： NameOf只会返回Member的字符串，如果前面有对象或者命名空间，NameOf只会返回 . 的最后一部分, 另外NameOf有很多情况是不支持的，比如方法，关键字，对象的实例以及字符串和表达式</p>
+<p>过去，我们有很多的地方需要些硬字符串，导致重构比较困难，而且一旦敲错字母很难察觉出来，比如</p>
+<pre class="codehilite"><code class="language-C#">if (role == &quot;admin&quot;)
+{
+}</code></pre>
+
+
+<p>WPF 也经常有这样的代码</p>
+<pre class="codehilite"><code class="language-C#">public string Name
+{
+  get { return name; }
+  set
+  {
+      name= value;
+      RaisePropertyChanged(&quot;Name&quot;);
+  }
+}</code></pre>
+
+
+<p>现在有了C#6 NameOf后，我们可以这样</p>
+<pre class="codehilite"><code class="language-C#">public string Name
+{
+  get { return name; }
+  set
+  {
+      name= value;
+      RaisePropertyChanged(NameOf(Name));
+  }
+}
+static void Main(string[] args)
+{
+    Console.WriteLine(nameof(User.Name)); //  output: Name
+    Console.WriteLine(nameof(System.Linq)); // output: Linq
+    Console.WriteLine(nameof(List&lt;User&gt;)); // output: List
+    Console.ReadLine();
+}</code></pre>
+
+
+<p>注意： NameOf只会返回Member的字符串，如果前面有对象或者命名空间，NameOf只会返回 . 的最后一部分, 另外NameOf有很多情况是不支持的，比如方法，关键字，对象的实例以及字符串和表达式</p>
 <h2 id="catchfinallyawait">四、在Catch和Finally里使用Await<a class="headerlink" href="#catchfinallyawait" title="Permanent link">&para;</a></h2>
-<p>在之前的版本里，C#开发团队认为在Catch和Finally里使用Await是不可能，而现在他们在C#6里实现了它。
-<div class="codehilite"><pre><span></span><span class="n">Resource</span> <span class="n">res</span> <span class="p">=</span> <span class="k">null</span><span class="p">;</span>
-<span class="k">try</span>
-<span class="p">{</span>
-    <span class="n">res</span> <span class="p">=</span> <span class="k">await</span> <span class="n">Resource</span><span class="p">.</span><span class="n">OpenAsync</span><span class="p">();</span> <span class="c1">// You could always do this.  </span>
-<span class="p">}</span>
-<span class="k">catch</span> <span class="p">(</span><span class="n">ResourceException</span> <span class="n">e</span><span class="p">)</span>
-<span class="p">{</span>
-    <span class="k">await</span> <span class="n">Resource</span><span class="p">.</span><span class="n">LogAsync</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="n">e</span><span class="p">);</span> <span class="c1">// Now you can do this … </span>
-<span class="p">}</span> 
-<span class="k">finally</span>
-<span class="p">{</span>
-    <span class="k">if</span> <span class="p">(</span><span class="n">res</span> <span class="p">!=</span> <span class="k">null</span><span class="p">)</span> <span class="k">await</span> <span class="n">res</span><span class="p">.</span><span class="n">CloseAsync</span><span class="p">();</span> <span class="c1">// … and this.</span>
-<span class="p">}</span>
-</pre></div></p>
+<p>在之前的版本里，C#开发团队认为在Catch和Finally里使用Await是不可能，而现在他们在C#6里实现了它。</p>
+<pre class="codehilite"><code class="language-C#">Resource res = null;
+try
+{
+    res = await Resource.OpenAsync(); // You could always do this.  
+}
+catch (ResourceException e)
+{
+    await Resource.LogAsync(res, e); // Now you can do this … 
+} 
+finally
+{
+    if (res != null) await res.CloseAsync(); // … and this.
+}</code></pre>
+
+
 <h2 id="_2">五、表达式方法体<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
-<p>一句话的方法体可以直接写成箭头函数，而不再需要大括号
-<div class="codehilite"><pre><span></span> <span class="k">class</span> <span class="nc">Program</span>
- <span class="p">{</span>
-    <span class="k">private</span> <span class="k">static</span> <span class="kt">string</span> <span class="nf">SayHello</span><span class="p">()</span> <span class="p">=&gt;</span> <span class="s">&quot;Hello World&quot;</span><span class="p">;</span>
-    <span class="k">private</span> <span class="k">static</span> <span class="kt">string</span> <span class="nf">JackSayHello</span><span class="p">()</span> <span class="p">=&gt;</span> <span class="err">$</span><span class="s">&quot;Jack {SayHello()}&quot;</span><span class="p">;</span>
+<p>一句话的方法体可以直接写成箭头函数，而不再需要大括号</p>
+<pre class="codehilite"><code class="language-C#"> class Program
+ {
+    private static string SayHello() =&gt; &quot;Hello World&quot;;
+    private static string JackSayHello() =&gt; $&quot;Jack {SayHello()}&quot;;
 
-    <span class="k">static</span> <span class="k">void</span> <span class="nf">Main</span><span class="p">(</span><span class="kt">string</span><span class="p">[]</span> <span class="n">args</span><span class="p">)</span>
-    <span class="p">{</span>
-        <span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">SayHello</span><span class="p">());</span>
-        <span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">JackSayHello</span><span class="p">());</span>
+    static void Main(string[] args)
+    {
+        Console.WriteLine(SayHello());
+        Console.WriteLine(JackSayHello());
 
-        <span class="n">Console</span><span class="p">.</span><span class="n">ReadLine</span><span class="p">();</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-</pre></div></p>
+        Console.ReadLine();
+    }
+}</code></pre>
+
+
 <h2 id="_3">六、自动属性初始化器<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
-<p>之前我们需要赋初始化值，一般需要这样
-<div class="codehilite"><pre><span></span><span class="k">public</span> <span class="k">class</span> <span class="nc">Person</span>
-<span class="p">{</span>
-    <span class="k">public</span> <span class="kt">int</span> <span class="n">Age</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+<p>之前我们需要赋初始化值，一般需要这样</p>
+<pre class="codehilite"><code class="language-C#">public class Person
+{
+    public int Age { get; set; }
 
-    <span class="k">public</span> <span class="nf">Person</span><span class="p">()</span>
-    <span class="p">{</span>
-        <span class="n">Age</span> <span class="p">=</span> <span class="m">100</span><span class="p">;</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-</pre></div>
-但是C# 6的新特性里我们这样赋值
-<div class="codehilite"><pre><span></span><span class="k">public</span> <span class="k">class</span> <span class="nc">Person</span>
-<span class="p">{</span>
-    <span class="k">public</span> <span class="kt">int</span> <span class="n">Age</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span> <span class="p">=</span> <span class="m">100</span><span class="p">;</span>
-<span class="p">}</span>
-</pre></div></p>
+    public Person()
+    {
+        Age = 100;
+    }
+}</code></pre>
+
+
+<p>但是C# 6的新特性里我们这样赋值</p>
+<pre class="codehilite"><code class="language-C#">public class Person
+{
+    public int Age { get; set; } = 100;
+}</code></pre>
+
+
 <h2 id="_4">七、只读自动属性<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
-<p>C# 1里我们可以这样实现只读属性
-<div class="codehilite"><pre><span></span><span class="k">public</span> <span class="k">class</span> <span class="nc">Person</span>
-<span class="p">{</span>
-    <span class="k">private</span> <span class="kt">int</span> <span class="n">age</span><span class="p">=</span><span class="m">100</span><span class="p">;</span>
+<p>C# 1里我们可以这样实现只读属性</p>
+<pre class="codehilite"><code class="language-C#">public class Person
+{
+    private int age=100;
 
-    <span class="k">public</span> <span class="kt">int</span> <span class="n">Age</span>
-    <span class="p">{</span>
-        <span class="k">get</span> <span class="p">{</span> <span class="k">return</span> <span class="n">age</span><span class="p">;</span> <span class="p">}</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-</pre></div>
-但是当我们有自动属性时，我们没办法实行只读属性，因为自动属性不支持readonly关键字，所以我们只能缩小访问权限
-<div class="codehilite"><pre><span></span><span class="k">public</span> <span class="k">class</span> <span class="nc">Person</span>
-<span class="p">{</span>
-    <span class="k">public</span>  <span class="kt">int</span> <span class="n">Age</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">private</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+    public int Age
+    {
+        get { return age; }
+    }
+}</code></pre>
 
-<span class="p">}</span>
-</pre></div>
-但是 C#6里我们可以实现readonly的自动属性了
-<div class="codehilite"><pre><span></span><span class="k">public</span> <span class="k">class</span> <span class="nc">Person</span>
-<span class="p">{</span>
-    <span class="k">public</span> <span class="kt">int</span> <span class="n">Age</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="p">}</span> <span class="p">=</span> <span class="m">100</span><span class="p">;</span>
-<span class="p">}</span>
-</pre></div></p>
+
+<p>但是当我们有自动属性时，我们没办法实行只读属性，因为自动属性不支持readonly关键字，所以我们只能缩小访问权限</p>
+<pre class="codehilite"><code class="language-C#">public class Person
+{
+    public  int Age { get; private set; }
+
+}</code></pre>
+
+
+<p>但是 C#6里我们可以实现readonly的自动属性了</p>
+<pre class="codehilite"><code class="language-C#">public class Person
+{
+    public int Age { get; } = 100;
+}</code></pre>
+
+
 <h2 id="exception-filter">八、异常过滤器 Exception Filter<a class="headerlink" href="#exception-filter" title="Permanent link">&para;</a></h2>
-<p><div class="codehilite"><pre><span></span><span class="k">static</span> <span class="k">void</span> <span class="nf">Main</span><span class="p">(</span><span class="kt">string</span><span class="p">[]</span> <span class="n">args</span><span class="p">)</span>
-<span class="p">{</span>
+<pre class="codehilite"><code class="language-C#">static void Main(string[] args)
+{
 
-    <span class="k">try</span>
-    <span class="p">{</span>
-        <span class="k">throw</span>  <span class="k">new</span> <span class="nf">ArgumentException</span><span class="p">(</span><span class="s">&quot;Age&quot;</span><span class="p">);</span>
-    <span class="p">}</span>
-    <span class="k">catch</span> <span class="p">(</span><span class="n">ArgumentException</span> <span class="n">argumentException</span><span class="p">)</span> <span class="n">when</span><span class="p">(</span> <span class="n">argumentException</span><span class="p">.</span><span class="n">Message</span><span class="p">.</span><span class="n">Equals</span><span class="p">(</span><span class="s">&quot;Name&quot;</span><span class="p">))</span>
-    <span class="p">{</span>
-        <span class="k">throw</span>  <span class="k">new</span> <span class="nf">ArgumentException</span><span class="p">(</span><span class="s">&quot;Name Exception&quot;</span><span class="p">);</span>
+    try
+    {
+        throw  new ArgumentException(&quot;Age&quot;);
+    }
+    catch (ArgumentException argumentException) when( argumentException.Message.Equals(&quot;Name&quot;))
+    {
+        throw  new ArgumentException(&quot;Name Exception&quot;);
 
-    <span class="p">}</span>
+    }
 
-    <span class="k">catch</span> <span class="p">(</span><span class="n">ArgumentException</span> <span class="n">argumentException</span><span class="p">)</span> <span class="n">when</span><span class="p">(</span> <span class="n">argumentException</span><span class="p">.</span><span class="n">Message</span><span class="p">.</span><span class="n">Equals</span><span class="p">(</span><span class="s">&quot;Age&quot;</span><span class="p">))</span>
-    <span class="p">{</span>
-        <span class="k">throw</span> <span class="k">new</span> <span class="nf">Exception</span><span class="p">(</span><span class="s">&quot;not handle&quot;</span><span class="p">);</span>
+    catch (ArgumentException argumentException) when( argumentException.Message.Equals(&quot;Age&quot;))
+    {
+        throw new Exception(&quot;not handle&quot;);
 
-    <span class="p">}</span>
-    <span class="k">catch</span>  <span class="p">(</span><span class="n">Exception</span> <span class="n">e</span><span class="p">)</span>
-    <span class="p">{</span>
+    }
+    catch  (Exception e)
+    {
 
-        <span class="k">throw</span><span class="p">;</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-</pre></div>
-在之前，一种异常只能被Catch一次，现在有了Filter后可以对相同的异常进行过滤，至于有什么用，那就是见仁见智了，我觉得上面的例子，定义两个具体的异常 NameArgumentException 和AgeArgumentException代码更易读。</p>
+        throw;
+    }
+}</code></pre>
+
+
+<p>在之前，一种异常只能被Catch一次，现在有了Filter后可以对相同的异常进行过滤，至于有什么用，那就是见仁见智了，我觉得上面的例子，定义两个具体的异常 NameArgumentException 和AgeArgumentException代码更易读。</p>
 <h2 id="index">九、 Index 初始化器<a class="headerlink" href="#index" title="Permanent link">&para;</a></h2>
-<p>这个主要是用在Dictionary上，至于有什么用，我目前没感觉到有一点用处，谁能知道很好的使用场景，欢迎补充:
-<div class="codehilite"><pre><span></span><span class="kt">var</span> <span class="n">names</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Dictionary</span><span class="p">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="kt">string</span><span class="p">&gt;</span>
-<span class="p">{</span>
-<span class="na">    [1]</span> <span class="p">=</span> <span class="s">&quot;Jack&quot;</span><span class="p">,</span>
-<span class="na">    [2]</span> <span class="p">=</span> <span class="s">&quot;Alex&quot;</span><span class="p">,</span>
-<span class="na">    [3]</span> <span class="p">=</span> <span class="s">&quot;Eric&quot;</span><span class="p">,</span>
-<span class="na">    [4]</span> <span class="p">=</span> <span class="s">&quot;Jo&quot;</span>
-<span class="p">};</span>
+<p>这个主要是用在Dictionary上，至于有什么用，我目前没感觉到有一点用处，谁能知道很好的使用场景，欢迎补充:</p>
+<pre class="codehilite"><code class="language-C#">var names = new Dictionary&lt;int, string&gt;
+{
+    [1] = &quot;Jack&quot;,
+    [2] = &quot;Alex&quot;,
+    [3] = &quot;Eric&quot;,
+    [4] = &quot;Jo&quot;
+};
 
-<span class="k">foreach</span> <span class="p">(</span><span class="kt">var</span> <span class="n">item</span> <span class="k">in</span> <span class="n">names</span><span class="p">)</span>
-<span class="p">{</span>
-    <span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="err">$</span><span class="s">&quot;{item.Key} = {item.Value}&quot;</span><span class="p">);</span>
-<span class="p">}</span>
-</pre></div></p>
+foreach (var item in names)
+{
+    Console.WriteLine($&quot;{item.Key} = {item.Value}&quot;);
+}</code></pre>
+
+
 <h2 id="using-static-using">十、using 静态类的方法可以使用 static using<a class="headerlink" href="#using-static-using" title="Permanent link">&para;</a></h2>
-<p>这个功能在我看来，同样是很没有用的功能，也为去掉前缀有的时候我们不知道这个是来自哪里的，而且如果有一个同名方法不知道具体用哪个，当然经证实是使用类本身的覆盖，但是容易搞混不是吗？
-<div class="codehilite"><pre><span></span><span class="k">using</span> <span class="nn">System</span><span class="p">;</span>
-<span class="k">using</span> <span class="nn">static</span> <span class="n">System</span><span class="p">.</span><span class="n">Math</span><span class="p">;</span>
-<span class="k">namespace</span> <span class="nn">CSharp6NewFeatures</span>
- <span class="p">{</span>
-  <span class="k">class</span> <span class="nc">Program</span>
-  <span class="p">{</span>
-      <span class="k">static</span> <span class="k">void</span> <span class="nf">Main</span><span class="p">(</span><span class="kt">string</span><span class="p">[]</span> <span class="n">args</span><span class="p">)</span>
-    <span class="p">{</span>
-        <span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">Log10</span><span class="p">(</span><span class="m">5</span><span class="p">)+</span><span class="n">PI</span><span class="p">);</span>
-    <span class="p">}</span>
-  <span class="p">}</span>
-<span class="p">}</span>
-</pre></div>
-总结
+<p>这个功能在我看来，同样是很没有用的功能，也为去掉前缀有的时候我们不知道这个是来自哪里的，而且如果有一个同名方法不知道具体用哪个，当然经证实是使用类本身的覆盖，但是容易搞混不是吗？</p>
+<pre class="codehilite"><code class="language-C#">using System;
+using static System.Math;
+namespace CSharp6NewFeatures
+ {
+  class Program
+  {
+      static void Main(string[] args)
+    {
+        Console.WriteLine(Log10(5)+PI);
+    }
+  }
+}</code></pre>
+
+
+<p>总结
 上面一到八我认为都是比较有用的新特性，后面的几个我觉得用处不大，当然如果找到合适的使用场景应该有用，欢迎大家补充。
 最后，祝大家编程愉快。</p>
-                
-                  
-                
               
-              
-                
-
-
-              
-            </article>
+            </div>
           </div>
-        </div>
-      </main>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        
-<footer class="md-footer">
-  
-    <div class="md-footer-nav">
-      <nav class="md-footer-nav__inner md-grid">
-        
-          <a href="../.." title="介绍" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
-            <div class="md-flex__cell md-flex__cell--shrink">
-              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
-            </div>
-            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
-              <span class="md-flex__ellipsis">
-                <span class="md-footer-nav__direction">
-                  Previous
-                </span>
-                介绍
-              </span>
-            </div>
-          </a>
-        
-        
-          <a href="../c_docker/" title=".Ner Core Docker 部署" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
-            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
-              <span class="md-flex__ellipsis">
-                <span class="md-footer-nav__direction">
-                  Next
-                </span>
-                .Ner Core Docker 部署
-              </span>
-            </div>
-            <div class="md-flex__cell md-flex__cell--shrink">
-              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
-            </div>
-          </a>
-        
-      </nav>
-    </div>
-  
-  <div class="md-footer-meta md-typeset">
-    <div class="md-footer-meta__inner md-grid">
-      <div class="md-footer-copyright">
-        
-        powered by
-        <a href="https://www.mkdocs.org">MkDocs</a>
-        and
-        <a href="https://squidfunk.github.io/mkdocs-material/">
-          Material for MkDocs</a>
-      </div>
+        <a href="../c_docker/" class="btn btn-neutral float-right" title=".Ner Core Docker 部署">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../.." class="btn btn-neutral" title="介绍"><span class="icon icon-circle-arrow-left"></span> Previous</a>
       
     </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
   </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
 </footer>
       
-    </div>
-    
-      <script src="../../assets/javascripts/application.245445c6.js"></script>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
       
-      <script>app.initialize({version:"1.0.4",url:{base:"../.."}})</script>
       
-    
-  </body>
+        <span><a href="../.." style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../c_docker/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script>var base_url = '../..';</script>
+    <script src="../../js/theme.js" defer></script>
+      <script src="../../search/main.js" defer></script>
+
+</body>
 </html>

@@ -1,1927 +1,602 @@
-
-
-
-
-<!doctype html>
-<html lang="en" class="no-js">
-  <head>
-    
-      <meta charset="utf-8">
-      <meta name="viewport" content="width=device-width,initial-scale=1">
-      <meta http-equiv="x-ua-compatible" content="ie=edge">
-      
-        <meta name="description" content=".net,java,php,python,docker,web">
-      
-      
-        <link rel="canonical" href="https://burningmyself.github.io/blog/java/load-class/">
-      
-      
-        <meta name="author" content="朽木自雕">
-      
-      
-        <meta name="lang:clipboard.copy" content="Copy to clipboard">
-      
-        <meta name="lang:clipboard.copied" content="Copied to clipboard">
-      
-        <meta name="lang:search.language" content="en">
-      
-        <meta name="lang:search.pipeline.stopwords" content="True">
-      
-        <meta name="lang:search.pipeline.trimmer" content="True">
-      
-        <meta name="lang:search.result.none" content="No matching documents">
-      
-        <meta name="lang:search.result.one" content="1 matching document">
-      
-        <meta name="lang:search.result.other" content="# matching documents">
-      
-        <meta name="lang:search.tokenizer" content="[\s\-]+">
-      
-      <link rel="shortcut icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.4.0">
-    
-    
-      
-        <title>Java类加载 - BurningMyself</title>
-      
-    
-    
-      <link rel="stylesheet" href="../../assets/stylesheets/application.0284f74d.css">
-      
-      
-    
-    
-      <script src="../../assets/javascripts/modernizr.74668098.js"></script>
-    
-    
-      
-        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700|Roboto+Mono&display=fallback">
-        <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
-      
-    
-    <link rel="stylesheet" href="../../assets/fonts/material-icons.css">
-    
-    
-    
-      
-    
-    
-  </head>
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-    <body dir="ltr">
+  <meta name="author" content="朽木自雕">
+  <link rel="shortcut icon" href="../../img/favicon.ico">
+  <title>Java类加载 - BurningMyself</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
   
-    <svg class="md-svg">
-      <defs>
-        
-        
-          <svg xmlns="http://www.w3.org/2000/svg" width="416" height="448" viewBox="0 0 416 448" id="__github"><path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19T128 352t-18.125-8.5-10.75-19T96 304t3.125-20.5 10.75-19T128 256t18.125 8.5 10.75 19T160 304zm160 0q0 10-3.125 20.5t-10.75 19T288 352t-18.125-8.5-10.75-19T256 304t3.125-20.5 10.75-19T288 256t18.125 8.5 10.75 19T320 304zm40 0q0-30-17.25-51T296 232q-10.25 0-48.75 5.25Q229.5 240 208 240t-39.25-2.75Q130.75 232 120 232q-29.5 0-46.75 21T56 304q0 22 8 38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0 37.25-1.75t35-7.375 30.5-15 20.25-25.75T360 304zm56-44q0 51.75-15.25 82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5T212 416q-19.5 0-35.5-.75t-36.875-3.125-38.125-7.5-34.25-12.875T37 371.5t-21.5-28.75Q0 312 0 260q0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25 30.875Q171.5 96 212 96q37 0 70 8 26.25-20.5 46.75-30.25T376 64q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34 99.5z"/></svg>
-        
-      </defs>
-    </svg>
-    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
-    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
-    <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Java\u7c7b\u52a0\u8f7d";
+    var mkdocs_page_input_path = "java\\load-class.md";
+    var mkdocs_page_url = "/java/load-class/";
+  </script>
+  
+  <script src="../../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
     
-      <a href="#java" tabindex="1" class="md-skip">
-        Skip to content
-      </a>
-    
-    
-      <header class="md-header" data-md-component="header">
-  <nav class="md-header-nav md-grid">
-    <div class="md-flex">
-      <div class="md-flex__cell md-flex__cell--shrink">
-        <a href="https://burningmyself.github.io/blog/" title="BurningMyself" class="md-header-nav__button md-logo">
-          
-            <i class="md-icon"></i>
-          
-        </a>
-      </div>
-      <div class="md-flex__cell md-flex__cell--shrink">
-        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
-      </div>
-      <div class="md-flex__cell md-flex__cell--stretch">
-        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
-          
-            <span class="md-header-nav__topic">
-              BurningMyself
-            </span>
-            <span class="md-header-nav__topic">
-              
-                Java类加载
-              
-            </span>
-          
-        </div>
-      </div>
-      <div class="md-flex__cell md-flex__cell--shrink">
-        
-          <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
-          
-<div class="md-search" data-md-component="search" role="dialog">
-  <label class="md-search__overlay" for="__search"></label>
-  <div class="md-search__inner" role="search">
-    <form class="md-search__form" name="search">
-      <input type="text" class="md-search__input" name="query" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
-      <label class="md-icon md-search__icon" for="__search"></label>
-      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
-        &#xE5CD;
-      </button>
-    </form>
-    <div class="md-search__output">
-      <div class="md-search__scrollwrap" data-md-scrollfix>
-        <div class="md-search-result" data-md-component="result">
-          <div class="md-search-result__meta">
-            Type to start searching
-          </div>
-          <ol class="md-search-result__list"></ol>
-        </div>
-      </div>
-    </div>
-  </div>
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href="../.." class="icon icon-home"> BurningMyself</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
 </div>
-        
       </div>
-      
-        <div class="md-flex__cell md-flex__cell--shrink">
-          <div class="md-header-nav__source">
-            
 
-
-  
-
-<a href="https://github.com/burningmyself/blog/" title="Go to repository" class="md-source" data-md-source="github">
-  
-    <div class="md-source__icon">
-      <svg viewBox="0 0 24 24" width="24" height="24">
-        <use xlink:href="#__github" width="24" height="24"></use>
-      </svg>
-    </div>
-  
-  <div class="md-source__repository">
-    burningmyself/blog
-  </div>
-</a>
-          </div>
-        </div>
-      
-    </div>
-  </nav>
-</header>
-    
-    <div class="md-container">
-      
-        
-      
-      
-      <main class="md-main">
-        <div class="md-main__inner md-grid" data-md-component="container">
-          
-            
-              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
-                <div class="md-sidebar__scrollwrap">
-                  <div class="md-sidebar__inner">
-                    <nav class="md-nav md-nav--primary" data-md-level="0">
-  <label class="md-nav__title md-nav__title--site" for="__drawer">
-    <a href="https://burningmyself.github.io/blog/" title="BurningMyself" class="md-nav__button md-logo">
-      
-        <i class="md-icon"></i>
-      
-    </a>
-    BurningMyself
-  </label>
-  
-    <div class="md-nav__source">
-      
-
-
-  
-
-<a href="https://github.com/burningmyself/blog/" title="Go to repository" class="md-source" data-md-source="github">
-  
-    <div class="md-source__icon">
-      <svg viewBox="0 0 24 24" width="24" height="24">
-        <use xlink:href="#__github" width="24" height="24"></use>
-      </svg>
-    </div>
-  
-  <div class="md-source__repository">
-    burningmyself/blog
-  </div>
-</a>
-    </div>
-  
-  <ul class="md-nav__list" data-md-scrollfix>
-    
-      
-      
-      
-
-
-  <li class="md-nav__item">
-    <a href="../.." title="介绍" class="md-nav__link">
-      介绍
-    </a>
-  </li>
-
-    
-      
-      
-      
-
-  
-
-
-  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
-    
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2" checked>
-    
-    <label class="md-nav__link" for="nav-2">
-      技术博文
-    </label>
-    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
-      <label class="md-nav__title" for="nav-2">
-        技术博文
-      </label>
-      <ul class="md-nav__list" data-md-scrollfix>
-        
-        
-          
-          
-          
-
-
-  <li class="md-nav__item md-nav__item--nested">
-    
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-1" type="checkbox" id="nav-2-1">
-    
-    <label class="md-nav__link" for="nav-2-1">
-      .NET
-    </label>
-    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
-      <label class="md-nav__title" for="nav-2-1">
-        .NET
-      </label>
-      <ul class="md-nav__list" data-md-scrollfix>
-        
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../net/c_sharp/" title="C# 6" class="md-nav__link">
-      C# 6
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../net/c_docker/" title=".Ner Core Docker 部署" class="md-nav__link">
-      .Ner Core Docker 部署
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../net/c_mysql_nginx/" title="使用 Docker 容器化部署 ASP.NET Core + MySQL + Nginx" class="md-nav__link">
-      使用 Docker 容器化部署 ASP.NET Core + MySQL + Nginx
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../net/c_core_safety/" title="让你的ASP.NET Core应用程序更安全" class="md-nav__link">
-      让你的ASP.NET Core应用程序更安全
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../net/c_core_study_route/" title="ASP.NET Core开发者指南" class="md-nav__link">
-      ASP.NET Core开发者指南
-    </a>
-  </li>
-
-        
-      </ul>
-    </nav>
-  </li>
-
-        
-          
-          
-          
-
-  
-
-
-  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
-    
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-2" type="checkbox" id="nav-2-2" checked>
-    
-    <label class="md-nav__link" for="nav-2-2">
-      Java
-    </label>
-    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
-      <label class="md-nav__title" for="nav-2-2">
-        Java
-      </label>
-      <ul class="md-nav__list" data-md-scrollfix>
-        
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../feature/" title="Java特性" class="md-nav__link">
-      Java特性
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-  
-
-
-  <li class="md-nav__item md-nav__item--active">
-    
-    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-    
-      
-    
-    
-      <label class="md-nav__link md-nav__link--active" for="__toc">
-        Java类加载
-      </label>
-    
-    <a href="./" title="Java类加载" class="md-nav__link md-nav__link--active">
-      Java类加载
-    </a>
-    
-      
-<nav class="md-nav md-nav--secondary">
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">Table of contents</label>
-    <ul class="md-nav__list" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#overview" title="Overview" class="md-nav__link">
-    Overview
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#api-for-class-loading" title="API for class loading" class="md-nav__link">
-    API for class loading
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#javalangclassloader" title="java.lang.ClassLoader" class="md-nav__link">
-    java.lang.ClassLoader
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#javasecuritysecureclassloader" title="java.security.SecureClassLoader" class="md-nav__link">
-    java.security.SecureClassLoader
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#javaneturlclassloader" title="java.net.URLClassLoader" class="md-nav__link">
-    java.net.URLClassLoader
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#tomcat-8515-class-loading-mechanism" title="Tomcat 8.5.15 class loading Mechanism" class="md-nav__link">
-    Tomcat 8.5.15 class loading Mechanism
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#reference" title="Reference" class="md-nav__link">
-    Reference
-  </a>
-  
-</li>
-      
-      
-      
-      
-      
-    </ul>
-  
-</nav>
-    
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../orm/" title="Orm的优缺点" class="md-nav__link">
-      Orm的优缺点
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../bio-nio/" title="BIO与NIO" class="md-nav__link">
-      BIO与NIO
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../rocketmq/rmq-1/" title="RocketMq下载与安装" class="md-nav__link">
-      RocketMq下载与安装
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../springAnnotation/" title="Spring常用注解" class="md-nav__link">
-      Spring常用注解
-    </a>
-  </li>
-
-        
-      </ul>
-    </nav>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item md-nav__item--nested">
-    
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-3" type="checkbox" id="nav-2-3">
-    
-    <label class="md-nav__link" for="nav-2-3">
-      Python
-    </label>
-    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
-      <label class="md-nav__title" for="nav-2-3">
-        Python
-      </label>
-      <ul class="md-nav__list" data-md-scrollfix>
-        
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../python/feature/" title="Python特性" class="md-nav__link">
-      Python特性
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../python/str_joint/" title="Python字符拼接" class="md-nav__link">
-      Python字符拼接
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../python/syntax_rule/" title="Python语法技巧" class="md-nav__link">
-      Python语法技巧
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../python/fabric/" title="远程部署神器 Fabric" class="md-nav__link">
-      远程部署神器 Fabric
-    </a>
-  </li>
-
-        
-      </ul>
-    </nav>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item md-nav__item--nested">
-    
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-4" type="checkbox" id="nav-2-4">
-    
-    <label class="md-nav__link" for="nav-2-4">
-      PHP
-    </label>
-    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
-      <label class="md-nav__title" for="nav-2-4">
-        PHP
-      </label>
-      <ul class="md-nav__list" data-md-scrollfix>
-        
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../php/kj/" title="框架" class="md-nav__link">
-      框架
-    </a>
-  </li>
-
-        
-      </ul>
-    </nav>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item md-nav__item--nested">
-    
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-5" type="checkbox" id="nav-2-5">
-    
-    <label class="md-nav__link" for="nav-2-5">
-      Web
-    </label>
-    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
-      <label class="md-nav__title" for="nav-2-5">
-        Web
-      </label>
-      <ul class="md-nav__list" data-md-scrollfix>
-        
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../web/es6/" title="es6语法" class="md-nav__link">
-      es6语法
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../web/ali_js_style/" title="阿里js样式规范" class="md-nav__link">
-      阿里js样式规范
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../web/node.js/" title="node.js文档" class="md-nav__link">
-      node.js文档
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../web/react/" title="React 开发者指南" class="md-nav__link">
-      React 开发者指南
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../dart/syntax/" title="Dart语法学习" class="md-nav__link">
-      Dart语法学习
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../web/react_interview/" title="React 面试" class="md-nav__link">
-      React 面试
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../web/js_tool_method/" title="js 工具函数" class="md-nav__link">
-      js 工具函数
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../web/vue_cp_react/" title="vue与react比较" class="md-nav__link">
-      vue与react比较
-    </a>
-  </li>
-
-        
-      </ul>
-    </nav>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item md-nav__item--nested">
-    
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-6" type="checkbox" id="nav-2-6">
-    
-    <label class="md-nav__link" for="nav-2-6">
-      SQL
-    </label>
-    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
-      <label class="md-nav__title" for="nav-2-6">
-        SQL
-      </label>
-      <ul class="md-nav__list" data-md-scrollfix>
-        
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../sql/mysql_yh/" title="MySQL优化" class="md-nav__link">
-      MySQL优化
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../sql/mysql_yh17/" title="MySQL优化" class="md-nav__link">
-      MySQL优化
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../sql/mysql_log/" title="MySQL日志" class="md-nav__link">
-      MySQL日志
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../sql/mysql_index/" title="MySQL索引" class="md-nav__link">
-      MySQL索引
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../sql/mysql_pxc/" title="MySQL PXC集群" class="md-nav__link">
-      MySQL PXC集群
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../sql/mysql_use/" title="MySQL 数据库应用" class="md-nav__link">
-      MySQL 数据库应用
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../sql/sql_server_master/" title="Sql Server 主从备份" class="md-nav__link">
-      Sql Server 主从备份
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../sql/data_split/" title="数据库之互联网常用分库分表方案" class="md-nav__link">
-      数据库之互联网常用分库分表方案
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../sql/mybatis/" title="Mybatis使用心德" class="md-nav__link">
-      Mybatis使用心德
-    </a>
-  </li>
-
-        
-      </ul>
-    </nav>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item md-nav__item--nested">
-    
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-7" type="checkbox" id="nav-2-7">
-    
-    <label class="md-nav__link" for="nav-2-7">
-      Linux
-    </label>
-    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
-      <label class="md-nav__title" for="nav-2-7">
-        Linux
-      </label>
-      <ul class="md-nav__list" data-md-scrollfix>
-        
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../linux/often/" title="常用命令" class="md-nav__link">
-      常用命令
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../linux/ope/" title="实用的Linux 命令" class="md-nav__link">
-      实用的Linux 命令
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../linux/centos_docker/" title="Centos配置 docker java mysql mongodb redis nginx 环境" class="md-nav__link">
-      Centos配置 docker java mysql mongodb redis nginx 环境
-    </a>
-  </li>
-
-        
-      </ul>
-    </nav>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item md-nav__item--nested">
-    
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-8" type="checkbox" id="nav-2-8">
-    
-    <label class="md-nav__link" for="nav-2-8">
-      Docker
-    </label>
-    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
-      <label class="md-nav__title" for="nav-2-8">
-        Docker
-      </label>
-      <ul class="md-nav__list" data-md-scrollfix>
-        
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../docker/docker/" title="Docker全科" class="md-nav__link">
-      Docker全科
-    </a>
-  </li>
-
-        
-      </ul>
-    </nav>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item md-nav__item--nested">
-    
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-9" type="checkbox" id="nav-2-9">
-    
-    <label class="md-nav__link" for="nav-2-9">
-      Tool
-    </label>
-    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
-      <label class="md-nav__title" for="nav-2-9">
-        Tool
-      </label>
-      <ul class="md-nav__list" data-md-scrollfix>
-        
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../tool/git/" title="Git" class="md-nav__link">
-      Git
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../tool/gitquestion/" title="Git问题处理" class="md-nav__link">
-      Git问题处理
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../tool/gitflow/" title="GitFlow" class="md-nav__link">
-      GitFlow
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../tool/gitbook/" title="GitBook" class="md-nav__link">
-      GitBook
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../tool/gitcmr/" title="Git提交日志规范" class="md-nav__link">
-      Git提交日志规范
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../tool/markdown/" title="Markdown" class="md-nav__link">
-      Markdown
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../tool/cicd/" title="CI/CD" class="md-nav__link">
-      CI/CD
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../tool/mkdocs/" title="mkdocs简单使用" class="md-nav__link">
-      mkdocs简单使用
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../tool/gitstudy/" title="Git的黑魔法" class="md-nav__link">
-      Git的黑魔法
-    </a>
-  </li>
-
-        
-      </ul>
-    </nav>
-  </li>
-
-        
-      </ul>
-    </nav>
-  </li>
-
-    
-      
-      
-      
-
-
-  <li class="md-nav__item md-nav__item--nested">
-    
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3">
-    
-    <label class="md-nav__link" for="nav-3">
-      微服务
-    </label>
-    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
-      <label class="md-nav__title" for="nav-3">
-        微服务
-      </label>
-      <ul class="md-nav__list" data-md-scrollfix>
-        
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../micro/spring-cloud/" title="基于SpringCloud的微服务架构演变史" class="md-nav__link">
-      基于SpringCloud的微服务架构演变史
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../micro/fbs-lock/" title="分布式锁" class="md-nav__link">
-      分布式锁
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../micro/design/" title="微服务设计" class="md-nav__link">
-      微服务设计
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../micro/distrimsg/" title="分布式系统与消息的投递" class="md-nav__link">
-      分布式系统与消息的投递
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../micro/ddd/" title="基于DDD的微服务设计和开发实战" class="md-nav__link">
-      基于DDD的微服务设计和开发实战
-    </a>
-  </li>
-
-        
-      </ul>
-    </nav>
-  </li>
-
-    
-      
-      
-      
-
-
-  <li class="md-nav__item md-nav__item--nested">
-    
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4">
-    
-    <label class="md-nav__link" for="nav-4">
-      经验分析
-    </label>
-    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
-      <label class="md-nav__title" for="nav-4">
-        经验分析
-      </label>
-      <ul class="md-nav__list" data-md-scrollfix>
-        
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../exp/devops/" title="DevOps" class="md-nav__link">
-      DevOps
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../exp/micro-service/" title="Micro-Service" class="md-nav__link">
-      Micro-Service
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../exp/raft-gossip/" title="Raft算法和Gossip协议" class="md-nav__link">
-      Raft算法和Gossip协议
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../exp/cl/" title="集群和负载均衡" class="md-nav__link">
-      集群和负载均衡
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../exp/ai/" title="人工智能" class="md-nav__link">
-      人工智能
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../exp/code-principle/" title="代码原则" class="md-nav__link">
-      代码原则
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../exp/techbig/" title="如何成为技术大牛" class="md-nav__link">
-      如何成为技术大牛
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../exp/learnweetout/" title="程序员如何技术成长" class="md-nav__link">
-      程序员如何技术成长
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../exp/pt/" title="产品与技术" class="md-nav__link">
-      产品与技术
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../exp/four_deep_learning/" title="深度学习框架" class="md-nav__link">
-      深度学习框架
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../exp/tl/" title="在阿里做了5年技术Leader，我总结出这些套路！" class="md-nav__link">
-      在阿里做了5年技术Leader，我总结出这些套路！
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../exp/cto/" title="CTO 技能图谱" class="md-nav__link">
-      CTO 技能图谱
-    </a>
-  </li>
-
-        
-      </ul>
-    </nav>
-  </li>
-
-    
-      
-      
-      
-
-
-  <li class="md-nav__item md-nav__item--nested">
-    
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5">
-    
-    <label class="md-nav__link" for="nav-5">
-      医学
-    </label>
-    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
-      <label class="md-nav__title" for="nav-5">
-        医学
-      </label>
-      <ul class="md-nav__list" data-md-scrollfix>
-        
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../doctor/ae/" title="脑炎" class="md-nav__link">
-      脑炎
-    </a>
-  </li>
-
-        
-      </ul>
-    </nav>
-  </li>
-
-    
-      
-      
-      
-
-
-  <li class="md-nav__item md-nav__item--nested">
-    
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6" type="checkbox" id="nav-6">
-    
-    <label class="md-nav__link" for="nav-6">
-      构架
-    </label>
-    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
-      <label class="md-nav__title" for="nav-6">
-        构架
-      </label>
-      <ul class="md-nav__list" data-md-scrollfix>
-        
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../framework/split/" title="构架拆分" class="md-nav__link">
-      构架拆分
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../framework/fgb/" title="分布式、高并发、多线程" class="md-nav__link">
-      分布式、高并发、多线程
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../framework/agility/" title="如何理解敏捷开发" class="md-nav__link">
-      如何理解敏捷开发
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../framework/fwork/" title="走向架构师必备的技能" class="md-nav__link">
-      走向架构师必备的技能
-    </a>
-  </li>
-
-        
-      </ul>
-    </nav>
-  </li>
-
-    
-      
-      
-      
-
-
-  <li class="md-nav__item md-nav__item--nested">
-    
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7" type="checkbox" id="nav-7">
-    
-    <label class="md-nav__link" for="nav-7">
-      情感
-    </label>
-    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
-      <label class="md-nav__title" for="nav-7">
-        情感
-      </label>
-      <ul class="md-nav__list" data-md-scrollfix>
-        
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../emotion/eq/" title="情商" class="md-nav__link">
-      情商
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../emotion/workheard/" title="工作心得" class="md-nav__link">
-      工作心得
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../emotion/lookbook/" title="看书" class="md-nav__link">
-      看书
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../emotion/fmf/" title="4种男朋友" class="md-nav__link">
-      4种男朋友
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../emotion/notheart/" title="不上心" class="md-nav__link">
-      不上心
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../emotion/selfdiscipline/" title="自律" class="md-nav__link">
-      自律
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../emotion/notlike/" title="喜欢与不喜欢" class="md-nav__link">
-      喜欢与不喜欢
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../emotion/latemarry/" title="晚婚" class="md-nav__link">
-      晚婚
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../emotion/understand/" title="追女生要明白这些事" class="md-nav__link">
-      追女生要明白这些事
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../emotion/backup/" title="备胎" class="md-nav__link">
-      备胎
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../emotion/chase/" title="为什么追不到她" class="md-nav__link">
-      为什么追不到她
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../emotion/livefail/" title="为什么活着失败" class="md-nav__link">
-      为什么活着失败
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../emotion/emotion/" title="情绪管理" class="md-nav__link">
-      情绪管理
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../emotion/abolish/" title="废掉的三个迹象" class="md-nav__link">
-      废掉的三个迹象
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../emotion/uptime/" title="余生，好好珍惜" class="md-nav__link">
-      余生，好好珍惜
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../emotion/losecome/" title="所有的失去，都会以另一种方式归来" class="md-nav__link">
-      所有的失去，都会以另一种方式归来
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../emotion/threeheart/" title="人生有这三种好心态" class="md-nav__link">
-      人生有这三种好心态
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../emotion/onelike/" title="一个感情真相" class="md-nav__link">
-      一个感情真相
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../emotion/notruth/" title="情商与道理" class="md-nav__link">
-      情商与道理
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../emotion/smf/" title="六种男人远离" class="md-nav__link">
-      六种男人远离
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../emotion/select/" title="决定接下来人生归属的，不是努力，而是选择" class="md-nav__link">
-      决定接下来人生归属的，不是努力，而是选择
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../emotion/nolike/" title="被你拉黑的那个人，你一定很喜欢吧" class="md-nav__link">
-      被你拉黑的那个人，你一定很喜欢吧
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../emotion/onepath/" title="余生，学会一个人走，不管有没有人陪" class="md-nav__link">
-      余生，学会一个人走，不管有没有人陪
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../emotion/twopath/" title="往后余生还很精彩，别被熬夜拖垮了" class="md-nav__link">
-      往后余生还很精彩，别被熬夜拖垮了
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../emotion/lifetime/" title="心态好的人，一辈子都好" class="md-nav__link">
-      心态好的人，一辈子都好
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../emotion/hearttoheart/" title="将心比心，方得人心" class="md-nav__link">
-      将心比心，方得人心
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../emotion/ttt/" title="别睡太晚，别爱太满，别要太多" class="md-nav__link">
-      别睡太晚，别爱太满，别要太多
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../emotion/profess/" title="表白" class="md-nav__link">
-      表白
-    </a>
-  </li>
-
-        
-      </ul>
-    </nav>
-  </li>
-
-    
-  </ul>
-</nav>
-                  </div>
-                </div>
-              </div>
-            
-            
-              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
-                <div class="md-sidebar__scrollwrap">
-                  <div class="md-sidebar__inner">
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../..">介绍</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">技术博文</span>
+    <ul class="subnav">
+                <li class="">
                     
-<nav class="md-nav md-nav--secondary">
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">Table of contents</label>
-    <ul class="md-nav__list" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#overview" title="Overview" class="md-nav__link">
-    Overview
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#api-for-class-loading" title="API for class loading" class="md-nav__link">
-    API for class loading
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#javalangclassloader" title="java.lang.ClassLoader" class="md-nav__link">
-    java.lang.ClassLoader
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#javasecuritysecureclassloader" title="java.security.SecureClassLoader" class="md-nav__link">
-    java.security.SecureClassLoader
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#javaneturlclassloader" title="java.net.URLClassLoader" class="md-nav__link">
-    java.net.URLClassLoader
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#tomcat-8515-class-loading-mechanism" title="Tomcat 8.5.15 class loading Mechanism" class="md-nav__link">
-    Tomcat 8.5.15 class loading Mechanism
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#reference" title="Reference" class="md-nav__link">
-    Reference
-  </a>
-  
-</li>
-      
-      
-      
-      
-      
+    <span class="caption-text">.NET</span>
+    <ul class="subnav">
+                <li class="toctree-l3">
+                    
+    <a class="" href="../../net/c_sharp/">C# 6</a>
+                </li>
+                <li class="toctree-l3">
+                    
+    <a class="" href="../../net/c_docker/">.Ner Core Docker 部署</a>
+                </li>
+                <li class="toctree-l3">
+                    
+    <a class="" href="../../net/c_mysql_nginx/">使用 Docker 容器化部署 ASP.NET Core + MySQL + Nginx</a>
+                </li>
+                <li class="toctree-l3">
+                    
+    <a class="" href="../../net/c_core_safety/">让你的ASP.NET Core应用程序更安全</a>
+                </li>
+                <li class="toctree-l3">
+                    
+    <a class="" href="../../net/c_core_study_route/">ASP.NET Core开发者指南</a>
+                </li>
     </ul>
-  
-</nav>
-                  </div>
-                </div>
-              </div>
+                </li>
+                <li class=" current">
+                    
+    <span class="caption-text">Java</span>
+    <ul class="subnav">
+                <li class="toctree-l3">
+                    
+    <a class="" href="../feature/">Java特性</a>
+                </li>
+                <li class="toctree-l3 current">
+                    
+    <a class="current" href="./">Java类加载</a>
+    <ul class="subnav">
             
+    <li class="toctree-l4"><a href="#java">谈谈 Java 类加载机制</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l5" href="#overview">Overview</a></li>
+        
+            <li><a class="toctree-l5" href="#api-for-class-loading">API for class loading</a></li>
+        
+            <li><a class="toctree-l5" href="#tomcat-8515-class-loading-mechanism">Tomcat 8.5.15 class loading Mechanism</a></li>
+        
+            <li><a class="toctree-l5" href="#reference">Reference</a></li>
+        
+        </ul>
+    
+
+    </ul>
+                </li>
+                <li class="toctree-l3">
+                    
+    <a class="" href="../orm/">Orm的优缺点</a>
+                </li>
+                <li class="toctree-l3">
+                    
+    <a class="" href="../bio-nio/">BIO与NIO</a>
+                </li>
+                <li class="toctree-l3">
+                    
+    <a class="" href="../rocketmq/rmq-1/">RocketMq下载与安装</a>
+                </li>
+                <li class="toctree-l3">
+                    
+    <a class="" href="../springAnnotation/">Spring常用注解</a>
+                </li>
+    </ul>
+                </li>
+                <li class="">
+                    
+    <span class="caption-text">Python</span>
+    <ul class="subnav">
+                <li class="toctree-l3">
+                    
+    <a class="" href="../../python/feature/">Python特性</a>
+                </li>
+                <li class="toctree-l3">
+                    
+    <a class="" href="../../python/str_joint/">Python字符拼接</a>
+                </li>
+                <li class="toctree-l3">
+                    
+    <a class="" href="../../python/syntax_rule/">Python语法技巧</a>
+                </li>
+                <li class="toctree-l3">
+                    
+    <a class="" href="../../python/fabric/">远程部署神器 Fabric</a>
+                </li>
+    </ul>
+                </li>
+                <li class="">
+                    
+    <span class="caption-text">PHP</span>
+    <ul class="subnav">
+                <li class="toctree-l3">
+                    
+    <a class="" href="../../php/kj/">框架</a>
+                </li>
+    </ul>
+                </li>
+                <li class="">
+                    
+    <span class="caption-text">Web</span>
+    <ul class="subnav">
+                <li class="toctree-l3">
+                    
+    <a class="" href="../../web/es6/">es6语法</a>
+                </li>
+                <li class="toctree-l3">
+                    
+    <a class="" href="../../web/ali_js_style/">阿里js样式规范</a>
+                </li>
+                <li class="toctree-l3">
+                    
+    <a class="" href="../../web/node.js/">node.js文档</a>
+                </li>
+                <li class="toctree-l3">
+                    
+    <a class="" href="../../web/react/">React 开发者指南</a>
+                </li>
+                <li class="toctree-l3">
+                    
+    <a class="" href="../../dart/syntax/">Dart语法学习</a>
+                </li>
+                <li class="toctree-l3">
+                    
+    <a class="" href="../../web/react_interview/">React 面试</a>
+                </li>
+                <li class="toctree-l3">
+                    
+    <a class="" href="../../web/js_tool_method/">js 工具函数</a>
+                </li>
+                <li class="toctree-l3">
+                    
+    <a class="" href="../../web/vue_cp_react/">vue与react比较</a>
+                </li>
+    </ul>
+                </li>
+                <li class="">
+                    
+    <span class="caption-text">SQL</span>
+    <ul class="subnav">
+                <li class="toctree-l3">
+                    
+    <a class="" href="../../sql/mysql_yh/">MySQL优化</a>
+                </li>
+                <li class="toctree-l3">
+                    
+    <a class="" href="../../sql/mysql_yh17/">MySQL优化</a>
+                </li>
+                <li class="toctree-l3">
+                    
+    <a class="" href="../../sql/mysql_log/">MySQL日志</a>
+                </li>
+                <li class="toctree-l3">
+                    
+    <a class="" href="../../sql/mysql_index/">MySQL索引</a>
+                </li>
+                <li class="toctree-l3">
+                    
+    <a class="" href="../../sql/mysql_pxc/">MySQL PXC集群</a>
+                </li>
+                <li class="toctree-l3">
+                    
+    <a class="" href="../../sql/mysql_use/">MySQL 数据库应用</a>
+                </li>
+                <li class="toctree-l3">
+                    
+    <a class="" href="../../sql/sql_server_master/">Sql Server 主从备份</a>
+                </li>
+                <li class="toctree-l3">
+                    
+    <a class="" href="../../sql/data_split/">数据库之互联网常用分库分表方案</a>
+                </li>
+                <li class="toctree-l3">
+                    
+    <a class="" href="../../sql/mybatis/">Mybatis使用心德</a>
+                </li>
+    </ul>
+                </li>
+                <li class="">
+                    
+    <span class="caption-text">Linux</span>
+    <ul class="subnav">
+                <li class="toctree-l3">
+                    
+    <a class="" href="../../linux/often/">常用命令</a>
+                </li>
+                <li class="toctree-l3">
+                    
+    <a class="" href="../../linux/ope/">实用的Linux 命令</a>
+                </li>
+    </ul>
+                </li>
+                <li class="">
+                    
+    <span class="caption-text">Docker</span>
+    <ul class="subnav">
+                <li class="toctree-l3">
+                    
+    <a class="" href="../../docker/docker/">Docker全科</a>
+                </li>
+                <li class="toctree-l3">
+                    
+    <a class="" href="../../docker/docker-compose/">docker和docker-compose 配置 mysql mongodb redis nginx jenkins 环境</a>
+                </li>
+                <li class="toctree-l3">
+                    
+    <a class="" href="../../docker/docker-jenkins/">Docker部署Jenkins</a>
+                </li>
+    </ul>
+                </li>
+                <li class="">
+                    
+    <span class="caption-text">Tool</span>
+    <ul class="subnav">
+                <li class="toctree-l3">
+                    
+    <a class="" href="../../tool/git/">Git</a>
+                </li>
+                <li class="toctree-l3">
+                    
+    <a class="" href="../../tool/gitquestion/">Git问题处理</a>
+                </li>
+                <li class="toctree-l3">
+                    
+    <a class="" href="../../tool/gitflow/">GitFlow</a>
+                </li>
+                <li class="toctree-l3">
+                    
+    <a class="" href="../../tool/gitbook/">GitBook</a>
+                </li>
+                <li class="toctree-l3">
+                    
+    <a class="" href="../../tool/gitcmr/">Git提交日志规范</a>
+                </li>
+                <li class="toctree-l3">
+                    
+    <a class="" href="../../tool/markdown/">Markdown</a>
+                </li>
+                <li class="toctree-l3">
+                    
+    <a class="" href="../../tool/cicd/">CI/CD</a>
+                </li>
+                <li class="toctree-l3">
+                    
+    <a class="" href="../../tool/mkdocs/">mkdocs简单使用</a>
+                </li>
+                <li class="toctree-l3">
+                    
+    <a class="" href="../../tool/gitstudy/">Git的黑魔法</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+	    </li>
           
-          <div class="md-content">
-            <article class="md-content__inner md-typeset">
+            <li class="toctree-l1">
+		
+    <span class="caption-text">微服务</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../micro/spring-cloud/">基于SpringCloud的微服务架构演变史</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../micro/fbs-lock/">分布式锁</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../micro/design/">微服务设计</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../micro/distrimsg/">分布式系统与消息的投递</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../micro/ddd/">基于DDD的微服务设计和开发实战</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">经验分析</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../exp/devops/">DevOps</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../exp/micro-service/">Micro-Service</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../exp/raft-gossip/">Raft算法和Gossip协议</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../exp/cl/">集群和负载均衡</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../exp/ai/">人工智能</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../exp/code-principle/">代码原则</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../exp/techbig/">如何成为技术大牛</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../exp/learnweetout/">程序员如何技术成长</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../exp/pt/">产品与技术</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../exp/four_deep_learning/">深度学习框架</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../exp/tl/">在阿里做了5年技术Leader，我总结出这些套路！</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../exp/cto/">CTO 技能图谱</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">医学</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../doctor/ae/">脑炎</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">构架</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../framework/split/">构架拆分</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../framework/fgb/">分布式、高并发、多线程</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../framework/agility/">如何理解敏捷开发</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../framework/fwork/">走向架构师必备的技能</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">情感</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../emotion/eq/">情商</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../emotion/workheard/">工作心得</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../emotion/lookbook/">看书</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../emotion/fmf/">4种男朋友</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../emotion/notheart/">不上心</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../emotion/selfdiscipline/">自律</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../emotion/notlike/">喜欢与不喜欢</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../emotion/latemarry/">晚婚</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../emotion/understand/">追女生要明白这些事</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../emotion/backup/">备胎</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../emotion/chase/">为什么追不到她</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../emotion/livefail/">为什么活着失败</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../emotion/emotion/">情绪管理</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../emotion/abolish/">废掉的三个迹象</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../emotion/uptime/">余生，好好珍惜</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../emotion/losecome/">所有的失去，都会以另一种方式归来</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../emotion/threeheart/">人生有这三种好心态</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../emotion/onelike/">一个感情真相</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../emotion/notruth/">情商与道理</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../emotion/smf/">六种男人远离</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../emotion/select/">决定接下来人生归属的，不是努力，而是选择</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../emotion/nolike/">被你拉黑的那个人，你一定很喜欢吧</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../emotion/onepath/">余生，学会一个人走，不管有没有人陪</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../emotion/twopath/">往后余生还很精彩，别被熬夜拖垮了</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../emotion/lifetime/">心态好的人，一辈子都好</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../emotion/hearttoheart/">将心比心，方得人心</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../emotion/ttt/">别睡太晚，别爱太满，别要太多</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../emotion/profess/">表白</a>
+                </li>
+    </ul>
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../..">BurningMyself</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../..">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>Java &raquo;</li>
+        
+      
+        
+          <li>技术博文 &raquo;</li>
+        
+      
+    
+    <li>Java类加载</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        <a href="https://github.com/burningmyself/burningmyself.github.io/edit/master/docs/java/load-class.md"> Edit on burningmyself/blog</a>
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
               
-                
-                  <a href="https://github.com/burningmyself/blog/edit/master/docs/java/load-class.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
-                
-                
                 <h1 id="java">谈谈 Java 类加载机制<a class="headerlink" href="#java" title="Permanent link">&para;</a></h1>
 <p>最近在学习 Tomcat 架构，其中很重要的一个模块是类加载器，因为以前学习的不够深入，所以趁这个机会好好把类加载机制搞明白。</p>
 <!-- TOC -->
@@ -1968,68 +643,70 @@ JDK 默认提供三种类加载器</p>
 <li>待加载的类必须用 <code>The Java™ Language Specification</code> 定义的全类名，全类名的定义请查阅 <a href="https://docs.oracle.com/javase/specs/jls/se8/html/jls-13.html#jls-13.1">The Form of a Binary</a>。</li>
 <li>给定一个全类名，类加载器应该去定位该类所在的位置。通用的策略是将全类名转换为类文件路径，然后通过类文件路径在文件系统中定位。</li>
 <li>每一个加载到内存的类都由一个 Class 对象来表示，每一个 Class 对象都有一个指向加载该类的类加载器的引用。但是数组的 Class 对象是由 Java 运行时环境创建的，通过 <code>Class.getClassLoader()</code> 方法返回的是数组元素的类加载器，若数组元素是基本类型，则返回 <code>null</code>，若类是由 <code>Bootstrap ClassLoader</code> 加载的话也是返回 <code>null</code>
-    <div class="codehilite"><pre><span></span><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Main</span> <span class="o">{</span>
-    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
-        <span class="c1">// Object 类在 &lt;java_home&gt;/jre/lib/rt.jar 中，</span>
-        <span class="c1">// 由 Bootstrap ClassLoader 加载，由于该类加载器是由 native code 编写</span>
-        <span class="c1">// 所以输出为 null</span>
-        <span class="n">Object</span><span class="o">[]</span> <span class="n">objects</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Object</span><span class="o">[</span><span class="mi">5</span><span class="o">];</span>
-        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">();</span>
-        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">objects</span><span class="o">.</span><span class="na">getClass</span><span class="o">().</span><span class="na">getClassLoader</span><span class="o">());</span>
+    ```java
+    public class Main {
+        public static void main(String[] args) {
+            // Object 类在 <java_home>/jre/lib/rt.jar 中，
+            // 由 Bootstrap ClassLoader 加载，由于该类加载器是由 native code 编写
+            // 所以输出为 null
+            Object[] objects = new Object[5];
+            System.out.println();
+            System.out.println(objects.getClass().getClassLoader());<pre class="codehilite"><code>    // ZipFileAttributes 类在 &lt;java_home&gt;/jre/lib/ext/zipfs.jar 中，
+    // 由 Extension ClassLoader 加载，
+    // 输出为  sun.misc.Launcher$ExtClassLoader@4b67cf4d
+    ZipFileAttributes[] attributes = new ZipFileAttributes[5];
+    System.out.println();
+    System.out.println(attributes.getClass().getClassLoader());
 
-        <span class="c1">// ZipFileAttributes 类在 &lt;java_home&gt;/jre/lib/ext/zipfs.jar 中，</span>
-        <span class="c1">// 由 Extension ClassLoader 加载，</span>
-        <span class="c1">// 输出为  sun.misc.Launcher$ExtClassLoader@4b67cf4d</span>
-        <span class="n">ZipFileAttributes</span><span class="o">[]</span> <span class="n">attributes</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ZipFileAttributes</span><span class="o">[</span><span class="mi">5</span><span class="o">];</span>
-        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">();</span>
-        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">attributes</span><span class="o">.</span><span class="na">getClass</span><span class="o">().</span><span class="na">getClassLoader</span><span class="o">());</span>
+    // Main 类是自定义的类，
+    // 默认由 System ClassLoader 加载，
+    // 输出为 sun.misc.Launcher$AppClassLoader@18b4aac2
+    Main[] array = new Main[5];
+    array[0] = new Main();
+    System.out.println();
+    System.out.println(array.getClass().getClassLoader());
+}</code></pre>
 
-        <span class="c1">// Main 类是自定义的类，</span>
-        <span class="c1">// 默认由 System ClassLoader 加载，</span>
-        <span class="c1">// 输出为 sun.misc.Launcher$AppClassLoader@18b4aac2</span>
-        <span class="n">Main</span><span class="o">[]</span> <span class="n">array</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Main</span><span class="o">[</span><span class="mi">5</span><span class="o">];</span>
-        <span class="n">array</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Main</span><span class="o">();</span>
-        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">();</span>
-        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">array</span><span class="o">.</span><span class="na">getClass</span><span class="o">().</span><span class="na">getClassLoader</span><span class="o">());</span>
-    <span class="o">}</span>
-<span class="o">}</span>
-</pre></div></li>
-<li><code>ClassLoader</code> 默认支持并行加载，但是其子类必须调用 <code>ClassLoader.registerAsParallelCapable()</code> 来启用并行加载</li>
-<li>一般来说,JVM 从本地文件系统加载类的行为是与平台有关的。</li>
-<li><code>defineClass()</code> 方法可以将字节流转换成一个 <code>Class</code> 对象。然后调用 <code>Class.newInstance()</code> 来创建类的实例</li>
+
+<p>}
+<code>``
+-</code>ClassLoader<code>默认支持并行加载，但是其子类必须调用</code>ClassLoader.registerAsParallelCapable()<code>来启用并行加载
+- 一般来说,JVM 从本地文件系统加载类的行为是与平台有关的。
+-</code>defineClass()<code>方法可以将字节流转换成一个</code>Class<code>对象。然后调用</code>Class.newInstance()` 来创建类的实例</p>
+</li>
 </ul>
 <h3 id="javasecuritysecureclassloader"><code>java.security.SecureClassLoader</code><a class="headerlink" href="#javasecuritysecureclassloader" title="Permanent link">&para;</a></h3>
 <p>增加了一层权限验证，因为关注点不在安全，所以暂不讨论。</p>
 <h3 id="javaneturlclassloader"><code>java.net.URLClassLoader</code><a class="headerlink" href="#javaneturlclassloader" title="Permanent link">&para;</a></h3>
 <p>该类加载器用来加载 URL 指定的 JAR 文件或目录中的类和资源，以 <code>/</code> 结尾的 URL 认为是目录，否则认为是 JAR 文件。</p>
-<div class="codehilite"><pre><span></span><span class="c1">// 尝试通过 URLClassLoader 来加载桌面下的 Test 类。</span>
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Main</span> <span class="o">{</span>
-    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
-        <span class="k">try</span> <span class="o">{</span>
-            <span class="n">URL</span><span class="o">[]</span> <span class="n">urls</span> <span class="o">=</span> <span class="k">new</span> <span class="n">URL</span><span class="o">[</span><span class="mi">1</span><span class="o">];</span>
-            <span class="n">URLStreamHandler</span> <span class="n">streamHandler</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
-            <span class="n">File</span> <span class="n">classPath</span> <span class="o">=</span> <span class="k">new</span> <span class="n">File</span><span class="o">(</span><span class="s">&quot;/home/chen/Desktop/&quot;</span><span class="o">);</span>
-            <span class="n">String</span> <span class="n">repository</span> <span class="o">=</span> <span class="o">(</span><span class="k">new</span> <span class="n">URL</span><span class="o">(</span><span class="s">&quot;file&quot;</span><span class="o">,</span> <span class="kc">null</span><span class="o">,</span>
-                    <span class="n">classPath</span><span class="o">.</span><span class="na">getCanonicalPath</span><span class="o">()</span> <span class="o">+</span> <span class="n">File</span><span class="o">.</span><span class="na">separator</span><span class="o">))</span>
-                    <span class="o">.</span><span class="na">toString</span><span class="o">();</span>
-            <span class="n">urls</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span> <span class="o">=</span> <span class="k">new</span> <span class="n">URL</span><span class="o">(</span><span class="kc">null</span><span class="o">,</span> <span class="n">repository</span><span class="o">,</span> <span class="n">streamHandler</span><span class="o">);</span>
+<pre class="codehilite"><code class="language-java">// 尝试通过 URLClassLoader 来加载桌面下的 Test 类。
+public class Main {
+    public static void main(String[] args) {
+        try {
+            URL[] urls = new URL[1];
+            URLStreamHandler streamHandler = null;
+            File classPath = new File(&quot;/home/chen/Desktop/&quot;);
+            String repository = (new URL(&quot;file&quot;, null,
+                    classPath.getCanonicalPath() + File.separator))
+                    .toString();
+            urls[0] = new URL(null, repository, streamHandler);
 
-            <span class="n">ClassLoader</span> <span class="n">loader</span> <span class="o">=</span> <span class="k">new</span> <span class="n">URLClassLoader</span><span class="o">(</span><span class="n">urls</span><span class="o">);</span>
+            ClassLoader loader = new URLClassLoader(urls);
 
-            <span class="n">Class</span> <span class="n">testClass</span> <span class="o">=</span> <span class="n">loader</span><span class="o">.</span><span class="na">loadClass</span><span class="o">(</span><span class="s">&quot;Test&quot;</span><span class="o">);</span>
+            Class testClass = loader.loadClass(&quot;Test&quot;);
 
-            <span class="c1">// output:  java.net.URLClassLoader@7f31245a</span>
-            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">testClass</span><span class="o">.</span><span class="na">getClassLoader</span><span class="o">());</span>
-        <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">MalformedURLException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
-            <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
-        <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">IOException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
-            <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
-        <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">ClassNotFoundException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
-            <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
-        <span class="o">}</span>
-    <span class="o">}</span>
-<span class="o">}</span>
-</pre></div>
+            // output:  java.net.URLClassLoader@7f31245a
+            System.out.println(testClass.getClassLoader());
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+}</code></pre>
+
 
 <h2 id="tomcat-8515-class-loading-mechanism">Tomcat 8.5.15 class loading Mechanism<a class="headerlink" href="#tomcat-8515-class-loading-mechanism" title="Permanent link">&para;</a></h2>
 <p><img alt="" src="../../img/tomcat-classloader.png" /></p>
@@ -2077,79 +754,52 @@ JDK 默认提供三种类加载器</p>
 <li><a href="">《Tomcat 架构解析》</a></li>
 <li><a href="">《深入理解 Java 虚拟机》</a></li>
 </ol>
-                
-                  
-                
               
-              
-                
-
-
-              
-            </article>
+            </div>
           </div>
-        </div>
-      </main>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        
-<footer class="md-footer">
-  
-    <div class="md-footer-nav">
-      <nav class="md-footer-nav__inner md-grid">
-        
-          <a href="../feature/" title="Java特性" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
-            <div class="md-flex__cell md-flex__cell--shrink">
-              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
-            </div>
-            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
-              <span class="md-flex__ellipsis">
-                <span class="md-footer-nav__direction">
-                  Previous
-                </span>
-                Java特性
-              </span>
-            </div>
-          </a>
-        
-        
-          <a href="../orm/" title="Orm的优缺点" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
-            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
-              <span class="md-flex__ellipsis">
-                <span class="md-footer-nav__direction">
-                  Next
-                </span>
-                Orm的优缺点
-              </span>
-            </div>
-            <div class="md-flex__cell md-flex__cell--shrink">
-              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
-            </div>
-          </a>
-        
-      </nav>
-    </div>
-  
-  <div class="md-footer-meta md-typeset">
-    <div class="md-footer-meta__inner md-grid">
-      <div class="md-footer-copyright">
-        
-        powered by
-        <a href="https://www.mkdocs.org">MkDocs</a>
-        and
-        <a href="https://squidfunk.github.io/mkdocs-material/">
-          Material for MkDocs</a>
-      </div>
+        <a href="../orm/" class="btn btn-neutral float-right" title="Orm的优缺点">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../feature/" class="btn btn-neutral" title="Java特性"><span class="icon icon-circle-arrow-left"></span> Previous</a>
       
     </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
   </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
 </footer>
       
-    </div>
-    
-      <script src="../../assets/javascripts/application.245445c6.js"></script>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
       
-      <script>app.initialize({version:"1.0.4",url:{base:"../.."}})</script>
       
-    
-  </body>
+        <span><a href="../feature/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../orm/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script>var base_url = '../..';</script>
+    <script src="../../js/theme.js" defer></script>
+      <script src="../../search/main.js" defer></script>
+
+</body>
 </html>

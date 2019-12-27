@@ -1,0 +1,1000 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <meta name="author" content="朽木自雕">
+  <link rel="shortcut icon" href="../../img/favicon.ico">
+  <title>docker和docker-compose 配置 mysql mongodb redis nginx jenkins 环境 - BurningMyself</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "docker\u548cdocker-compose \u914d\u7f6e mysql mongodb redis nginx jenkins \u73af\u5883";
+    var mkdocs_page_input_path = "docker\\docker-compose.md";
+    var mkdocs_page_url = "/docker/docker-compose/";
+  </script>
+  
+  <script src="../../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href="../.." class="icon icon-home"> BurningMyself</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../..">介绍</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">技术博文</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <span class="caption-text">.NET</span>
+    <ul class="subnav">
+                <li class="toctree-l3">
+                    
+    <a class="" href="../../net/c_sharp/">C# 6</a>
+                </li>
+                <li class="toctree-l3">
+                    
+    <a class="" href="../../net/c_docker/">.Ner Core Docker 部署</a>
+                </li>
+                <li class="toctree-l3">
+                    
+    <a class="" href="../../net/c_mysql_nginx/">使用 Docker 容器化部署 ASP.NET Core + MySQL + Nginx</a>
+                </li>
+                <li class="toctree-l3">
+                    
+    <a class="" href="../../net/c_core_safety/">让你的ASP.NET Core应用程序更安全</a>
+                </li>
+                <li class="toctree-l3">
+                    
+    <a class="" href="../../net/c_core_study_route/">ASP.NET Core开发者指南</a>
+                </li>
+    </ul>
+                </li>
+                <li class="">
+                    
+    <span class="caption-text">Java</span>
+    <ul class="subnav">
+                <li class="toctree-l3">
+                    
+    <a class="" href="../../java/feature/">Java特性</a>
+                </li>
+                <li class="toctree-l3">
+                    
+    <a class="" href="../../java/load-class/">Java类加载</a>
+                </li>
+                <li class="toctree-l3">
+                    
+    <a class="" href="../../java/orm/">Orm的优缺点</a>
+                </li>
+                <li class="toctree-l3">
+                    
+    <a class="" href="../../java/bio-nio/">BIO与NIO</a>
+                </li>
+                <li class="toctree-l3">
+                    
+    <a class="" href="../../java/rocketmq/rmq-1/">RocketMq下载与安装</a>
+                </li>
+                <li class="toctree-l3">
+                    
+    <a class="" href="../../java/springAnnotation/">Spring常用注解</a>
+                </li>
+    </ul>
+                </li>
+                <li class="">
+                    
+    <span class="caption-text">Python</span>
+    <ul class="subnav">
+                <li class="toctree-l3">
+                    
+    <a class="" href="../../python/feature/">Python特性</a>
+                </li>
+                <li class="toctree-l3">
+                    
+    <a class="" href="../../python/str_joint/">Python字符拼接</a>
+                </li>
+                <li class="toctree-l3">
+                    
+    <a class="" href="../../python/syntax_rule/">Python语法技巧</a>
+                </li>
+                <li class="toctree-l3">
+                    
+    <a class="" href="../../python/fabric/">远程部署神器 Fabric</a>
+                </li>
+    </ul>
+                </li>
+                <li class="">
+                    
+    <span class="caption-text">PHP</span>
+    <ul class="subnav">
+                <li class="toctree-l3">
+                    
+    <a class="" href="../../php/kj/">框架</a>
+                </li>
+    </ul>
+                </li>
+                <li class="">
+                    
+    <span class="caption-text">Web</span>
+    <ul class="subnav">
+                <li class="toctree-l3">
+                    
+    <a class="" href="../../web/es6/">es6语法</a>
+                </li>
+                <li class="toctree-l3">
+                    
+    <a class="" href="../../web/ali_js_style/">阿里js样式规范</a>
+                </li>
+                <li class="toctree-l3">
+                    
+    <a class="" href="../../web/node.js/">node.js文档</a>
+                </li>
+                <li class="toctree-l3">
+                    
+    <a class="" href="../../web/react/">React 开发者指南</a>
+                </li>
+                <li class="toctree-l3">
+                    
+    <a class="" href="../../dart/syntax/">Dart语法学习</a>
+                </li>
+                <li class="toctree-l3">
+                    
+    <a class="" href="../../web/react_interview/">React 面试</a>
+                </li>
+                <li class="toctree-l3">
+                    
+    <a class="" href="../../web/js_tool_method/">js 工具函数</a>
+                </li>
+                <li class="toctree-l3">
+                    
+    <a class="" href="../../web/vue_cp_react/">vue与react比较</a>
+                </li>
+    </ul>
+                </li>
+                <li class="">
+                    
+    <span class="caption-text">SQL</span>
+    <ul class="subnav">
+                <li class="toctree-l3">
+                    
+    <a class="" href="../../sql/mysql_yh/">MySQL优化</a>
+                </li>
+                <li class="toctree-l3">
+                    
+    <a class="" href="../../sql/mysql_yh17/">MySQL优化</a>
+                </li>
+                <li class="toctree-l3">
+                    
+    <a class="" href="../../sql/mysql_log/">MySQL日志</a>
+                </li>
+                <li class="toctree-l3">
+                    
+    <a class="" href="../../sql/mysql_index/">MySQL索引</a>
+                </li>
+                <li class="toctree-l3">
+                    
+    <a class="" href="../../sql/mysql_pxc/">MySQL PXC集群</a>
+                </li>
+                <li class="toctree-l3">
+                    
+    <a class="" href="../../sql/mysql_use/">MySQL 数据库应用</a>
+                </li>
+                <li class="toctree-l3">
+                    
+    <a class="" href="../../sql/sql_server_master/">Sql Server 主从备份</a>
+                </li>
+                <li class="toctree-l3">
+                    
+    <a class="" href="../../sql/data_split/">数据库之互联网常用分库分表方案</a>
+                </li>
+                <li class="toctree-l3">
+                    
+    <a class="" href="../../sql/mybatis/">Mybatis使用心德</a>
+                </li>
+    </ul>
+                </li>
+                <li class="">
+                    
+    <span class="caption-text">Linux</span>
+    <ul class="subnav">
+                <li class="toctree-l3">
+                    
+    <a class="" href="../../linux/often/">常用命令</a>
+                </li>
+                <li class="toctree-l3">
+                    
+    <a class="" href="../../linux/ope/">实用的Linux 命令</a>
+                </li>
+    </ul>
+                </li>
+                <li class=" current">
+                    
+    <span class="caption-text">Docker</span>
+    <ul class="subnav">
+                <li class="toctree-l3">
+                    
+    <a class="" href="../docker/">Docker全科</a>
+                </li>
+                <li class="toctree-l3 current">
+                    
+    <a class="current" href="./">docker和docker-compose 配置 mysql mongodb redis nginx jenkins 环境</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l4"><a href="#dockerdocker-compose-mysql-mongodb-redis-nginx-jenkins">docker和docker-compose 配置 mysql mongodb redis nginx jenkins 环境</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l5" href="#_1">磁盘挂载</a></li>
+        
+            <li><a class="toctree-l5" href="#docker">docker</a></li>
+        
+            <li><a class="toctree-l5" href="#docker-compose">docker-compose</a></li>
+        
+        </ul>
+    
+
+    </ul>
+                </li>
+                <li class="toctree-l3">
+                    
+    <a class="" href="../docker-jenkins/">Docker部署Jenkins</a>
+                </li>
+    </ul>
+                </li>
+                <li class="">
+                    
+    <span class="caption-text">Tool</span>
+    <ul class="subnav">
+                <li class="toctree-l3">
+                    
+    <a class="" href="../../tool/git/">Git</a>
+                </li>
+                <li class="toctree-l3">
+                    
+    <a class="" href="../../tool/gitquestion/">Git问题处理</a>
+                </li>
+                <li class="toctree-l3">
+                    
+    <a class="" href="../../tool/gitflow/">GitFlow</a>
+                </li>
+                <li class="toctree-l3">
+                    
+    <a class="" href="../../tool/gitbook/">GitBook</a>
+                </li>
+                <li class="toctree-l3">
+                    
+    <a class="" href="../../tool/gitcmr/">Git提交日志规范</a>
+                </li>
+                <li class="toctree-l3">
+                    
+    <a class="" href="../../tool/markdown/">Markdown</a>
+                </li>
+                <li class="toctree-l3">
+                    
+    <a class="" href="../../tool/cicd/">CI/CD</a>
+                </li>
+                <li class="toctree-l3">
+                    
+    <a class="" href="../../tool/mkdocs/">mkdocs简单使用</a>
+                </li>
+                <li class="toctree-l3">
+                    
+    <a class="" href="../../tool/gitstudy/">Git的黑魔法</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">微服务</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../micro/spring-cloud/">基于SpringCloud的微服务架构演变史</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../micro/fbs-lock/">分布式锁</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../micro/design/">微服务设计</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../micro/distrimsg/">分布式系统与消息的投递</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../micro/ddd/">基于DDD的微服务设计和开发实战</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">经验分析</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../exp/devops/">DevOps</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../exp/micro-service/">Micro-Service</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../exp/raft-gossip/">Raft算法和Gossip协议</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../exp/cl/">集群和负载均衡</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../exp/ai/">人工智能</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../exp/code-principle/">代码原则</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../exp/techbig/">如何成为技术大牛</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../exp/learnweetout/">程序员如何技术成长</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../exp/pt/">产品与技术</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../exp/four_deep_learning/">深度学习框架</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../exp/tl/">在阿里做了5年技术Leader，我总结出这些套路！</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../exp/cto/">CTO 技能图谱</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">医学</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../doctor/ae/">脑炎</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">构架</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../framework/split/">构架拆分</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../framework/fgb/">分布式、高并发、多线程</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../framework/agility/">如何理解敏捷开发</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../framework/fwork/">走向架构师必备的技能</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">情感</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../emotion/eq/">情商</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../emotion/workheard/">工作心得</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../emotion/lookbook/">看书</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../emotion/fmf/">4种男朋友</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../emotion/notheart/">不上心</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../emotion/selfdiscipline/">自律</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../emotion/notlike/">喜欢与不喜欢</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../emotion/latemarry/">晚婚</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../emotion/understand/">追女生要明白这些事</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../emotion/backup/">备胎</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../emotion/chase/">为什么追不到她</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../emotion/livefail/">为什么活着失败</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../emotion/emotion/">情绪管理</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../emotion/abolish/">废掉的三个迹象</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../emotion/uptime/">余生，好好珍惜</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../emotion/losecome/">所有的失去，都会以另一种方式归来</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../emotion/threeheart/">人生有这三种好心态</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../emotion/onelike/">一个感情真相</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../emotion/notruth/">情商与道理</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../emotion/smf/">六种男人远离</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../emotion/select/">决定接下来人生归属的，不是努力，而是选择</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../emotion/nolike/">被你拉黑的那个人，你一定很喜欢吧</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../emotion/onepath/">余生，学会一个人走，不管有没有人陪</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../emotion/twopath/">往后余生还很精彩，别被熬夜拖垮了</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../emotion/lifetime/">心态好的人，一辈子都好</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../emotion/hearttoheart/">将心比心，方得人心</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../emotion/ttt/">别睡太晚，别爱太满，别要太多</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../emotion/profess/">表白</a>
+                </li>
+    </ul>
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../..">BurningMyself</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../..">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>Docker &raquo;</li>
+        
+      
+        
+          <li>技术博文 &raquo;</li>
+        
+      
+    
+    <li>docker和docker-compose 配置 mysql mongodb redis nginx jenkins 环境</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        <a href="https://github.com/burningmyself/burningmyself.github.io/edit/master/docs/docker/docker-compose.md"> Edit on burningmyself/blog</a>
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="dockerdocker-compose-mysql-mongodb-redis-nginx-jenkins">docker和docker-compose 配置 mysql mongodb redis nginx jenkins 环境<a class="headerlink" href="#dockerdocker-compose-mysql-mongodb-redis-nginx-jenkins" title="Permanent link">&para;</a></h1>
+<h2 id="_1">磁盘挂载<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<pre class="codehilite"><code class="language-shell">fdisk -l #查看磁盘列表
+mkfs.ext4 /dev/vdb #格式化磁盘
+mount /dev/vdb /data #挂载磁盘在/data
+echo '/dev/vdb /data ext4 defaults,nofail 0 1'&gt;&gt; /etc/fstab # 启动服务器自动挂载
+mount -a #校验自动挂载脚本
+df -h #查看磁盘挂载后信息</code></pre>
+
+
+<h2 id="docker">docker<a class="headerlink" href="#docker" title="Permanent link">&para;</a></h2>
+<h3 id="docker_1">安装 docker<a class="headerlink" href="#docker_1" title="Permanent link">&para;</a></h3>
+<pre class="codehilite"><code class="language-shell">yum update #更新系统包
+yum install -y yum-utils device-mapper-persistent-data lvm2 #安装yum-utils
+yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo #为yum源添加docker仓库位置
+yum install docker-ce #安装docker
+systemctl start docker #启动docker
+systemctl stop docker #暂停docker
+mv /var/lib/docker /data/docker # 修改Docker镜像的存放位置
+ln -s /data/docker /var/lib/docker #建立软连接
+echo '{
+  &quot;registry-mirrors&quot;: [&quot;https://registry.docker-cn.com&quot;]
+}
+'&gt;&gt; /etc/docker/daemon.json # 镜像下载代理</code></pre>
+
+
+<h3 id="java">拉取 Java 镜像<a class="headerlink" href="#java" title="Permanent link">&para;</a></h3>
+<pre class="codehilite"><code class="language-shell">docker pull java</code></pre>
+
+
+<h3 id="mysql">拉取 MySql 镜像<a class="headerlink" href="#mysql" title="Permanent link">&para;</a></h3>
+<pre class="codehilite"><code class="language-shell">docker pull mysql #拉取 MySql
+docker run -p 3306:3306 --name mysql \ # run 运行容器 -p 将容器的3306端口映射到主机的3306端口 --name 容器运行的名字
+--restart=always \ # 挂断自动重新启动
+-v /etc/localtime:/etc/localtime \ # 将主机本地时间夹挂在到容器
+-v /data/mysql/log:/var/log/mysql \ # 将日志文件夹挂载到主机
+-v /data/mysql/data:/var/lib/mysql \ # 将数据文件夹挂载到主机
+-v /data/mysql/mysql-files:/var/lib/mysql-files \ # 将数据文件夹挂载到主机
+-v /data/mysql/conf:/etc/mysql \ # 将配置文件夹挂在到主机
+-e MYSQL_ROOT_PASSWORD=xiujingmysql. \ # 初始化root用户的密码
+-d mysql # -d 后台运行
+docker exec -it mysql /bin/bash # 进入Docker容器内部的bash</code></pre>
+
+
+<h3 id="mongodb">拉取 Mongodb 镜像<a class="headerlink" href="#mongodb" title="Permanent link">&para;</a></h3>
+<pre class="codehilite"><code class="language-shell">docker pull mongo #拉取 mongodb
+docker run -p 27017:27017  --name mongo --auth \ # run 运行容器 -p 将容器的27017端口映射到主机的27017端口 --name 容器运行的名字 --需要密码才能访问容器服务
+--restart=always \ # 挂断自动重新启动
+-v /etc/localtime:/etc/localtime \ # 将主机本地时间夹挂在到容器
+-v /data/mongodb:/var/lib/mongodb \ # 将数据文件夹挂载到主机
+-d mongo # -d 后台运行
+
+docker exec -it mongo mongo admin # 进入mongo
+db.createUser({ user:'admin',pwd:'123456',roles:[ { role:'userAdminAnyDatabase', db: 'admin'}]}); #创建一个名为 admin，密码为 123456 的用户。
+db.auth('admin', '123456') # 尝试使用上面创建的用户信息进行连接。</code></pre>
+
+
+<h3 id="redis">拉取 Redis 镜像<a class="headerlink" href="#redis" title="Permanent link">&para;</a></h3>
+<pre class="codehilite"><code class="language-shell">docker pull redis #拉取 redis
+docker run -p 6379:6379 --name redis \ # run 运行容器 -p 将容器的6379端口映射到主机的6379端口 --name 容器运行的名字
+--restart=always \ # 挂断自动重新启动
+-v /etc/localtime:/etc/localtime \ # 将主机本地时间夹挂在到容器
+-v /data/redis:/data/redis \ # 将数据文件夹挂载到主机
+-d redis \ # -d 后台运行
+--requirepass &quot;123456&quot; # 设置密码123456</code></pre>
+
+
+<h3 id="nginx">拉取 Nginx 镜像<a class="headerlink" href="#nginx" title="Permanent link">&para;</a></h3>
+<pre class="codehilite"><code class="language-shell">docker pull nginx #拉取 nginx
+docker run -p 80:80 -p 443:443 --name nginx -d nginx # 运行容器
+docker container cp nginx:/etc/nginx /data/nginx/ #拷贝容器配置
+docker rm -f nginx # 删除容器</code></pre>
+
+
+<p>nginx 配置文件</p>
+<pre class="codehilite"><code class="language-conf">user  nginx;
+worker_processes  1;
+
+error_log  /var/log/nginx/error_log.log warn;
+pid        /var/run/nginx.pid;
+
+
+events {
+    worker_connections  1024;
+}
+
+
+http {
+    include       /etc/nginx/mime.types;
+    default_type  application/octet-stream;
+
+    log_format  main  '$remote_addr - $remote_user [$time_local] &quot;$request&quot; '
+                      '$status $body_bytes_sent &quot;$http_referer&quot; '
+                      '&quot;$http_user_agent&quot; &quot;$http_x_forwarded_for&quot;';
+
+    access_log   /var/log/nginx/access.log  main;
+
+    sendfile        on;
+    #tcp_nopush     on;
+
+    keepalive_timeout  65;
+
+    #gzip  on;
+
+    gzip on; #开启gzip
+    gzip_disable &quot;msie6&quot;; #IE6不使用gzip
+    gzip_vary on; #设置为on会在Header里增加 &quot;Vary: Accept-Encoding&quot;
+    gzip_proxied any; #代理结果数据的压缩
+    gzip_comp_level 6; #gzip压缩比（1~9），越小压缩效果越差，但是越大处理越慢，所以一般取中间值
+    gzip_buffers 16 8k; #获取多少内存用于缓存压缩结果
+    gzip_http_version 1.1; #识别http协议的版本
+    gzip_min_length 1k; #设置允许压缩的页面最小字节数，超过1k的文件会被压缩
+    gzip_types application/javascript text/css; #对特定的MIME类型生效,js和css文件会被压缩
+
+    include /etc/nginx/conf.d/*.conf;
+
+    server {
+      #nginx同时开启http和https
+        listen 80 default backlog=2048;
+        listen 443 ssl;
+        server_name ysf.djtlpay.com;
+
+        ssl_certificate  /ssl/1_ysf.djtlpay.com_bundle.crt;
+        ssl_certificate_key  /ssl/2_ysf.djtlpay.com.key;
+
+        location / {
+            root /usr/share/nginx/html;
+            index  index.html index.htm;
+        }
+   }        
+}</code></pre>
+
+
+<p>运行 nginx</p>
+<pre class="codehilite"><code class="language-shell">docker run -p 80:80 -p 443:443 --name nginx \ # run 运行容器 -p 将容器的80,443端口映射到主机的80,443端口 --name 容器运行的名字
+--restart=always \
+-v /etc/localtime:/etc/localtime \ # 将主机本地时间夹挂在到容器
+-v /data/nginx/html:/usr/share/nginx/html \ # nginx 静态资源
+-v /data/nginx/logs:/var/log/nginx  \ # 将日志文件夹挂载到主机
+-v /data/nginx/conf:/etc/nginx \ # 将配置文件夹挂在到主机
+-v /data/nginx/conf/ssl:/ssl \ # 将证书文件夹挂在到主机
+-d nginx #</code></pre>
+
+
+<h3 id="jenkins">拉取Jenkins镜像：<a class="headerlink" href="#jenkins" title="Permanent link">&para;</a></h3>
+<pre class="codehilite"><code class="language-shell">docker pull jenkins/jenkins:lts # 拉取 jenkins
+docker run -p 8080:8080 -p 50000:50000 --name jenkins \ # run 运行容器 -p 将容器的80,443端口映射到主机的8080,50000端口 --name 容器运行的名字
+-u root \ # 运行的用户为root
+-v /etc/localtime:/etc/localtime \ # 将主机本地时间夹挂在到容器
+-v /data/jenkins_home:/var/jenkins_home \ # 将jenkins_home文件夹挂在到主机
+-e JAVA_OPTS=-Duser.timezone=Asia/Shanghai \ #设置jenkins运行环境时区
+-d jenkins/jenkins:lts # -d 后台运行</code></pre>
+
+
+<h3 id="docker-api">Docker 开启远程API<a class="headerlink" href="#docker-api" title="Permanent link">&para;</a></h3>
+<ul>
+<li>用vi编辑器修改docker.service文件</li>
+</ul>
+<pre class="codehilite"><code class="language-shell">#需要修改的部分：
+ExecStart=/usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock
+#修改后的部分：
+ExecStart=/usr/bin/dockerd -H tcp://0.0.0.0:2375 -H unix://var/run/docker.sock</code></pre>
+
+
+<h3 id="docker_2">Docker 常用命令<a class="headerlink" href="#docker_2" title="Permanent link">&para;</a></h3>
+<pre class="codehilite"><code class="language-shell">systemctl start docker #启动docker
+systemtctl enable docker #将docker服务设为开机启动
+systemctl stop docker #停止容器
+systemctl restart docker #重启docker服务
+docker images # 列出镜像
+docker rmi --name # 删除镜像  -f 强制删除
+docker ps # 列出容器 -a 所有
+docker start --name # 启动容器
+docker stop --name # 停止容器
+docker restart --name # 重启docker容器
+docker rm --name # 删除容器  -f 强制删除
+docker stats -a # 查看所有容器情况
+docker system df # 查看Docker磁盘使用情况
+docker exec -it --name  /bin/bash #进入Docker容器内部的bash
+docker cp 主机文件  容器名称:容器路径 #复制文件到docker容器中
+docker logs --name #查看docker镜像日志
+docker rm $(docker ps -a -q) # 删除所有容器 -f 强制删除
+docker rmi $(docker images -a -q) # 删除所有镜像 -f 强制删除
+docker rm -f `docker ps -a | grep -vE 'mysql|nginx|redis|jenkins' | awk '{print $1}'` # 删除mysql|nginx|redis|jenkins非容器 -f 强制删除
+docker rmi -f `docker images | grep none | awk '{print $3}'` # 删除镜像none镜像 -f 强制删除</code></pre>
+
+
+<h2 id="docker-compose">docker-compose<a class="headerlink" href="#docker-compose" title="Permanent link">&para;</a></h2>
+<h3 id="docker-compose_1">安装 docker-compose<a class="headerlink" href="#docker-compose_1" title="Permanent link">&para;</a></h3>
+<pre class="codehilite"><code class="language-shell"># 下载Docker Compose
+curl -L https://get.daocloud.io/docker/compose/releases/download/1.24.0/docker-compose-`uname -s`-`uname -m` &gt; /usr/local/bin/docker-compose
+# 修改该文件的权限为可执行
+chmod +x /usr/local/bin/docker-compose
+# 查看是否已经安装成功
+docker-compose --version</code></pre>
+
+
+<h3 id="docker-compose_2">使用Docker Compose的步骤<a class="headerlink" href="#docker-compose_2" title="Permanent link">&para;</a></h3>
+<ul>
+<li>使用Dockerfile定义应用程序环境，一般需要修改初始镜像行为时才需要使用；</li>
+<li>使用docker-compose.yml定义需要部署的应用程序服务，以便执行脚本一次性部署；</li>
+<li>使用docker-compose up命令将所有应用服务一次性部署起来。</li>
+</ul>
+<h3 id="docker-composeyml">docker-compose.yml常用命令<a class="headerlink" href="#docker-composeyml" title="Permanent link">&para;</a></h3>
+<pre class="codehilite"><code class="language-shell"># 指定运行的镜像名称
+image: name:version
+# 配置容器名称
+container_name: name
+# 指定宿主机和容器的端口映射
+ports:
+  - 3306:3306
+# 将宿主机的文件或目录挂载到容器中
+volumes:
+  - /etc/localtime:/etc/localtime
+  - /data/mysql/log:/var/log/mysql
+  - /data/mysql/data:/var/lib/mysql
+  - /data/mysql/conf:/etc/mysql
+  - /data/mysql/mysql-files:/var/lib/mysql-files
+# 配置环境变量
+environment:
+  - MYSQL_ROOT_PASSWORD=xiujingmysql.
+# 连接其他容器的服务
+links:
+  - db:database #可以以database为域名访问服务名称为db的容器
+# 挂断自动重新启动
+restart: always
+# 指定容器执行命令
+command: redis-server --requirepass xiujingredis.</code></pre>
+
+
+<h3 id="docker-compose_3">Docker Compose常用命令<a class="headerlink" href="#docker-compose_3" title="Permanent link">&para;</a></h3>
+<pre class="codehilite"><code class="language-shell"># 构建、创建、启动相关容器
+docker-compose up -d # -d表示在后台运行
+# 停止所有相关容器
+docker-compose stop
+# 删除容器文件
+docker-compose rm -f # -f 强制删除
+# 重启容器
+docker-compose restart
+# 列出所有容器信息
+docker-compose ps
+# 查看容器日志
+docker-compose logs</code></pre>
+
+
+<h3 id="docker-compose_4">使用Docker Compose 部署应用<a class="headerlink" href="#docker-compose_4" title="Permanent link">&para;</a></h3>
+<p>编写docker-compose.yml文件</p>
+<pre class="codehilite"><code class="language-yml">version: '3'
+services:
+  # 指定服务名称
+  nginx:
+    # 指定服务使用的镜像
+    image: nginx
+    # 指定容器名称
+    container_name: nginx
+    # 指定服务运行的端口
+    ports:
+      - 80:80
+      - 443:443
+    # 指定容器中需要挂载的文件
+    volumes:
+      - /etc/localtime:/etc/localtime
+    # 挂断自动重新启动
+    restart: always
+    # 指定容器的环境变量
+    environment:
+      - MYSQL_ROOT_PASSWORD=xiujingmysql.
+  # 指定服务名称
+  mysql:
+    # 指定服务使用的镜像
+    image: mysql
+    # 指定容器名称
+    container_name: mysql
+    # 指定服务运行的端口
+    ports:
+      - 13306:3306
+    # 指定容器中需要挂载的文件
+    volumes:
+      - /etc/localtime:/etc/localtime
+      - /data/mysql/log:/var/log/mysql
+      - /data/mysql/data:/var/lib/mysql
+      - /data/mysql/mysql-files:/var/lib/mysql-files
+      - /data/mysql/conf:/etc/mysql
+    # 挂断自动重新启动
+    restart: always
+    # 指定容器的环境变量
+    environment:
+      - MYSQL_ROOT_PASSWORD=xiujingmysql.
+  # 指定服务名称
+  redis:
+    # 指定服务使用的镜像
+    image: redis
+    # 指定容器名称
+    container_name: redis
+    # 指定服务运行的端口
+    ports:
+      - 16379:6379
+    # 指定容器中需要挂载的文件
+    volumes:
+      - /etc/localtime:/etc/localtime
+      - /data/redis:/data/redis
+    # 挂断自动重新启动
+    restart: always
+    # 指定容器执行命令
+    command: redis-server --requirepass xiujingredis.
+  # 指定服务名称
+  mongo:
+    # 指定服务使用的镜像
+    image: mongo
+    # 指定容器名称
+    container_name: mongo
+    # 指定服务运行的端口
+    ports:
+      - 27017:27017
+    # 指定容器中需要挂载的文件
+    volumes:
+      - /etc/localtime:/etc/localtime
+      - /data/mongo:/data/mongo
+    # 挂断自动重新启动
+    restart: always
+    # 指定容器的环境变量
+    environment:
+      - AUTH=yes
+      - ADMIN_USER=admin
+      - ADMIN_PASS=admin
+      - APPLICATION_DATABASE=test
+      - APPLICATION_USER=test
+      - APPLICATION_PASS=test
+  # 指定服务名称
+  jenkins:
+    # 指定服务使用的镜像
+    image: jenkins
+    # 指定容器名称
+    container_name: jenkins
+    # 指定服务运行的端口
+    ports:
+      - 8080:8080
+      - 50000:50000
+    # 指定容器中需要挂载的文件
+    volumes:
+      - /etc/localtime:/etc/localtime
+      - /data/jenkins_home:/var/jenkins_home 
+    # 挂断自动重新启动
+    restart: always
+    # 指定容器的环境变量
+    environment:
+      - JAVA_OPTS=-Duser.timezone=Asia/Shanghai   
+    # 指定容器运行的用户为root
+    user:
+      root    </code></pre>
+
+
+<p>运行Docker Compose命令启动所有服务</p>
+<pre class="codehilite"><code class="language-shell">docker-compose up -d</code></pre>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../docker-jenkins/" class="btn btn-neutral float-right" title="Docker部署Jenkins">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../docker/" class="btn btn-neutral" title="Docker全科"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+        <span><a href="../docker/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../docker-jenkins/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script>var base_url = '../..';</script>
+    <script src="../../js/theme.js" defer></script>
+      <script src="../../search/main.js" defer></script>
+
+</body>
+</html>

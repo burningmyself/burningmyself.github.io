@@ -1,1831 +1,596 @@
-
-
-
-
-<!doctype html>
-<html lang="en" class="no-js">
-  <head>
-    
-      <meta charset="utf-8">
-      <meta name="viewport" content="width=device-width,initial-scale=1">
-      <meta http-equiv="x-ua-compatible" content="ie=edge">
-      
-        <meta name="description" content=".net,java,php,python,docker,web">
-      
-      
-        <link rel="canonical" href="https://burningmyself.github.io/blog/web/react_interview/">
-      
-      
-        <meta name="author" content="朽木自雕">
-      
-      
-        <meta name="lang:clipboard.copy" content="Copy to clipboard">
-      
-        <meta name="lang:clipboard.copied" content="Copied to clipboard">
-      
-        <meta name="lang:search.language" content="en">
-      
-        <meta name="lang:search.pipeline.stopwords" content="True">
-      
-        <meta name="lang:search.pipeline.trimmer" content="True">
-      
-        <meta name="lang:search.result.none" content="No matching documents">
-      
-        <meta name="lang:search.result.one" content="1 matching document">
-      
-        <meta name="lang:search.result.other" content="# matching documents">
-      
-        <meta name="lang:search.tokenizer" content="[\s\-]+">
-      
-      <link rel="shortcut icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.4.0">
-    
-    
-      
-        <title>React 面试 - BurningMyself</title>
-      
-    
-    
-      <link rel="stylesheet" href="../../assets/stylesheets/application.0284f74d.css">
-      
-      
-    
-    
-      <script src="../../assets/javascripts/modernizr.74668098.js"></script>
-    
-    
-      
-        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700|Roboto+Mono&display=fallback">
-        <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
-      
-    
-    <link rel="stylesheet" href="../../assets/fonts/material-icons.css">
-    
-    
-    
-      
-    
-    
-  </head>
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-    <body dir="ltr">
+  <meta name="author" content="朽木自雕">
+  <link rel="shortcut icon" href="../../img/favicon.ico">
+  <title>React 面试 - BurningMyself</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
   
-    <svg class="md-svg">
-      <defs>
-        
-        
-          <svg xmlns="http://www.w3.org/2000/svg" width="416" height="448" viewBox="0 0 416 448" id="__github"><path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19T128 352t-18.125-8.5-10.75-19T96 304t3.125-20.5 10.75-19T128 256t18.125 8.5 10.75 19T160 304zm160 0q0 10-3.125 20.5t-10.75 19T288 352t-18.125-8.5-10.75-19T256 304t3.125-20.5 10.75-19T288 256t18.125 8.5 10.75 19T320 304zm40 0q0-30-17.25-51T296 232q-10.25 0-48.75 5.25Q229.5 240 208 240t-39.25-2.75Q130.75 232 120 232q-29.5 0-46.75 21T56 304q0 22 8 38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0 37.25-1.75t35-7.375 30.5-15 20.25-25.75T360 304zm56-44q0 51.75-15.25 82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5T212 416q-19.5 0-35.5-.75t-36.875-3.125-38.125-7.5-34.25-12.875T37 371.5t-21.5-28.75Q0 312 0 260q0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25 30.875Q171.5 96 212 96q37 0 70 8 26.25-20.5 46.75-30.25T376 64q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34 99.5z"/></svg>
-        
-      </defs>
-    </svg>
-    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
-    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
-    <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+  <script>
+    // Current page data
+    var mkdocs_page_name = "React \u9762\u8bd5";
+    var mkdocs_page_input_path = "web\\react_interview.md";
+    var mkdocs_page_url = "/web/react_interview/";
+  </script>
+  
+  <script src="../../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
     
-      <a href="#react" tabindex="1" class="md-skip">
-        Skip to content
-      </a>
-    
-    
-      <header class="md-header" data-md-component="header">
-  <nav class="md-header-nav md-grid">
-    <div class="md-flex">
-      <div class="md-flex__cell md-flex__cell--shrink">
-        <a href="https://burningmyself.github.io/blog/" title="BurningMyself" class="md-header-nav__button md-logo">
-          
-            <i class="md-icon"></i>
-          
-        </a>
-      </div>
-      <div class="md-flex__cell md-flex__cell--shrink">
-        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
-      </div>
-      <div class="md-flex__cell md-flex__cell--stretch">
-        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
-          
-            <span class="md-header-nav__topic">
-              BurningMyself
-            </span>
-            <span class="md-header-nav__topic">
-              
-                React 面试
-              
-            </span>
-          
-        </div>
-      </div>
-      <div class="md-flex__cell md-flex__cell--shrink">
-        
-          <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
-          
-<div class="md-search" data-md-component="search" role="dialog">
-  <label class="md-search__overlay" for="__search"></label>
-  <div class="md-search__inner" role="search">
-    <form class="md-search__form" name="search">
-      <input type="text" class="md-search__input" name="query" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
-      <label class="md-icon md-search__icon" for="__search"></label>
-      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
-        &#xE5CD;
-      </button>
-    </form>
-    <div class="md-search__output">
-      <div class="md-search__scrollwrap" data-md-scrollfix>
-        <div class="md-search-result" data-md-component="result">
-          <div class="md-search-result__meta">
-            Type to start searching
-          </div>
-          <ol class="md-search-result__list"></ol>
-        </div>
-      </div>
-    </div>
-  </div>
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href="../.." class="icon icon-home"> BurningMyself</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
 </div>
-        
       </div>
-      
-        <div class="md-flex__cell md-flex__cell--shrink">
-          <div class="md-header-nav__source">
-            
 
-
-  
-
-<a href="https://github.com/burningmyself/blog/" title="Go to repository" class="md-source" data-md-source="github">
-  
-    <div class="md-source__icon">
-      <svg viewBox="0 0 24 24" width="24" height="24">
-        <use xlink:href="#__github" width="24" height="24"></use>
-      </svg>
-    </div>
-  
-  <div class="md-source__repository">
-    burningmyself/blog
-  </div>
-</a>
-          </div>
-        </div>
-      
-    </div>
-  </nav>
-</header>
-    
-    <div class="md-container">
-      
-        
-      
-      
-      <main class="md-main">
-        <div class="md-main__inner md-grid" data-md-component="container">
-          
-            
-              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
-                <div class="md-sidebar__scrollwrap">
-                  <div class="md-sidebar__inner">
-                    <nav class="md-nav md-nav--primary" data-md-level="0">
-  <label class="md-nav__title md-nav__title--site" for="__drawer">
-    <a href="https://burningmyself.github.io/blog/" title="BurningMyself" class="md-nav__button md-logo">
-      
-        <i class="md-icon"></i>
-      
-    </a>
-    BurningMyself
-  </label>
-  
-    <div class="md-nav__source">
-      
-
-
-  
-
-<a href="https://github.com/burningmyself/blog/" title="Go to repository" class="md-source" data-md-source="github">
-  
-    <div class="md-source__icon">
-      <svg viewBox="0 0 24 24" width="24" height="24">
-        <use xlink:href="#__github" width="24" height="24"></use>
-      </svg>
-    </div>
-  
-  <div class="md-source__repository">
-    burningmyself/blog
-  </div>
-</a>
-    </div>
-  
-  <ul class="md-nav__list" data-md-scrollfix>
-    
-      
-      
-      
-
-
-  <li class="md-nav__item">
-    <a href="../.." title="介绍" class="md-nav__link">
-      介绍
-    </a>
-  </li>
-
-    
-      
-      
-      
-
-  
-
-
-  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
-    
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2" checked>
-    
-    <label class="md-nav__link" for="nav-2">
-      技术博文
-    </label>
-    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
-      <label class="md-nav__title" for="nav-2">
-        技术博文
-      </label>
-      <ul class="md-nav__list" data-md-scrollfix>
-        
-        
-          
-          
-          
-
-
-  <li class="md-nav__item md-nav__item--nested">
-    
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-1" type="checkbox" id="nav-2-1">
-    
-    <label class="md-nav__link" for="nav-2-1">
-      .NET
-    </label>
-    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
-      <label class="md-nav__title" for="nav-2-1">
-        .NET
-      </label>
-      <ul class="md-nav__list" data-md-scrollfix>
-        
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../net/c_sharp/" title="C# 6" class="md-nav__link">
-      C# 6
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../net/c_docker/" title=".Ner Core Docker 部署" class="md-nav__link">
-      .Ner Core Docker 部署
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../net/c_mysql_nginx/" title="使用 Docker 容器化部署 ASP.NET Core + MySQL + Nginx" class="md-nav__link">
-      使用 Docker 容器化部署 ASP.NET Core + MySQL + Nginx
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../net/c_core_safety/" title="让你的ASP.NET Core应用程序更安全" class="md-nav__link">
-      让你的ASP.NET Core应用程序更安全
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../net/c_core_study_route/" title="ASP.NET Core开发者指南" class="md-nav__link">
-      ASP.NET Core开发者指南
-    </a>
-  </li>
-
-        
-      </ul>
-    </nav>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item md-nav__item--nested">
-    
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-2" type="checkbox" id="nav-2-2">
-    
-    <label class="md-nav__link" for="nav-2-2">
-      Java
-    </label>
-    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
-      <label class="md-nav__title" for="nav-2-2">
-        Java
-      </label>
-      <ul class="md-nav__list" data-md-scrollfix>
-        
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../java/feature/" title="Java特性" class="md-nav__link">
-      Java特性
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../java/load-class/" title="Java类加载" class="md-nav__link">
-      Java类加载
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../java/orm/" title="Orm的优缺点" class="md-nav__link">
-      Orm的优缺点
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../java/bio-nio/" title="BIO与NIO" class="md-nav__link">
-      BIO与NIO
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../java/rocketmq/rmq-1/" title="RocketMq下载与安装" class="md-nav__link">
-      RocketMq下载与安装
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../java/springAnnotation/" title="Spring常用注解" class="md-nav__link">
-      Spring常用注解
-    </a>
-  </li>
-
-        
-      </ul>
-    </nav>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item md-nav__item--nested">
-    
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-3" type="checkbox" id="nav-2-3">
-    
-    <label class="md-nav__link" for="nav-2-3">
-      Python
-    </label>
-    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
-      <label class="md-nav__title" for="nav-2-3">
-        Python
-      </label>
-      <ul class="md-nav__list" data-md-scrollfix>
-        
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../python/feature/" title="Python特性" class="md-nav__link">
-      Python特性
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../python/str_joint/" title="Python字符拼接" class="md-nav__link">
-      Python字符拼接
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../python/syntax_rule/" title="Python语法技巧" class="md-nav__link">
-      Python语法技巧
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../python/fabric/" title="远程部署神器 Fabric" class="md-nav__link">
-      远程部署神器 Fabric
-    </a>
-  </li>
-
-        
-      </ul>
-    </nav>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item md-nav__item--nested">
-    
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-4" type="checkbox" id="nav-2-4">
-    
-    <label class="md-nav__link" for="nav-2-4">
-      PHP
-    </label>
-    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
-      <label class="md-nav__title" for="nav-2-4">
-        PHP
-      </label>
-      <ul class="md-nav__list" data-md-scrollfix>
-        
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../php/kj/" title="框架" class="md-nav__link">
-      框架
-    </a>
-  </li>
-
-        
-      </ul>
-    </nav>
-  </li>
-
-        
-          
-          
-          
-
-  
-
-
-  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
-    
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-5" type="checkbox" id="nav-2-5" checked>
-    
-    <label class="md-nav__link" for="nav-2-5">
-      Web
-    </label>
-    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
-      <label class="md-nav__title" for="nav-2-5">
-        Web
-      </label>
-      <ul class="md-nav__list" data-md-scrollfix>
-        
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../es6/" title="es6语法" class="md-nav__link">
-      es6语法
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../ali_js_style/" title="阿里js样式规范" class="md-nav__link">
-      阿里js样式规范
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../node.js/" title="node.js文档" class="md-nav__link">
-      node.js文档
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../react/" title="React 开发者指南" class="md-nav__link">
-      React 开发者指南
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../dart/syntax/" title="Dart语法学习" class="md-nav__link">
-      Dart语法学习
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-  
-
-
-  <li class="md-nav__item md-nav__item--active">
-    
-    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-    
-      
-    
-    
-      <label class="md-nav__link md-nav__link--active" for="__toc">
-        React 面试
-      </label>
-    
-    <a href="./" title="React 面试" class="md-nav__link md-nav__link--active">
-      React 面试
-    </a>
-    
-      
-<nav class="md-nav md-nav--secondary">
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">Table of contents</label>
-    <ul class="md-nav__list" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#react_1" title="React 面试问题——常规知识" class="md-nav__link">
-    React 面试问题——常规知识
-  </a>
-  
-</li>
-      
-      
-      
-      
-      
-    </ul>
-  
-</nav>
-    
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../js_tool_method/" title="js 工具函数" class="md-nav__link">
-      js 工具函数
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../vue_cp_react/" title="vue与react比较" class="md-nav__link">
-      vue与react比较
-    </a>
-  </li>
-
-        
-      </ul>
-    </nav>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item md-nav__item--nested">
-    
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-6" type="checkbox" id="nav-2-6">
-    
-    <label class="md-nav__link" for="nav-2-6">
-      SQL
-    </label>
-    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
-      <label class="md-nav__title" for="nav-2-6">
-        SQL
-      </label>
-      <ul class="md-nav__list" data-md-scrollfix>
-        
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../sql/mysql_yh/" title="MySQL优化" class="md-nav__link">
-      MySQL优化
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../sql/mysql_yh17/" title="MySQL优化" class="md-nav__link">
-      MySQL优化
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../sql/mysql_log/" title="MySQL日志" class="md-nav__link">
-      MySQL日志
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../sql/mysql_index/" title="MySQL索引" class="md-nav__link">
-      MySQL索引
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../sql/mysql_pxc/" title="MySQL PXC集群" class="md-nav__link">
-      MySQL PXC集群
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../sql/mysql_use/" title="MySQL 数据库应用" class="md-nav__link">
-      MySQL 数据库应用
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../sql/sql_server_master/" title="Sql Server 主从备份" class="md-nav__link">
-      Sql Server 主从备份
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../sql/data_split/" title="数据库之互联网常用分库分表方案" class="md-nav__link">
-      数据库之互联网常用分库分表方案
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../sql/mybatis/" title="Mybatis使用心德" class="md-nav__link">
-      Mybatis使用心德
-    </a>
-  </li>
-
-        
-      </ul>
-    </nav>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item md-nav__item--nested">
-    
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-7" type="checkbox" id="nav-2-7">
-    
-    <label class="md-nav__link" for="nav-2-7">
-      Linux
-    </label>
-    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
-      <label class="md-nav__title" for="nav-2-7">
-        Linux
-      </label>
-      <ul class="md-nav__list" data-md-scrollfix>
-        
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../linux/often/" title="常用命令" class="md-nav__link">
-      常用命令
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../linux/ope/" title="实用的Linux 命令" class="md-nav__link">
-      实用的Linux 命令
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../linux/centos_docker/" title="Centos配置 docker java mysql mongodb redis nginx 环境" class="md-nav__link">
-      Centos配置 docker java mysql mongodb redis nginx 环境
-    </a>
-  </li>
-
-        
-      </ul>
-    </nav>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item md-nav__item--nested">
-    
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-8" type="checkbox" id="nav-2-8">
-    
-    <label class="md-nav__link" for="nav-2-8">
-      Docker
-    </label>
-    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
-      <label class="md-nav__title" for="nav-2-8">
-        Docker
-      </label>
-      <ul class="md-nav__list" data-md-scrollfix>
-        
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../docker/docker/" title="Docker全科" class="md-nav__link">
-      Docker全科
-    </a>
-  </li>
-
-        
-      </ul>
-    </nav>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item md-nav__item--nested">
-    
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-9" type="checkbox" id="nav-2-9">
-    
-    <label class="md-nav__link" for="nav-2-9">
-      Tool
-    </label>
-    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
-      <label class="md-nav__title" for="nav-2-9">
-        Tool
-      </label>
-      <ul class="md-nav__list" data-md-scrollfix>
-        
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../tool/git/" title="Git" class="md-nav__link">
-      Git
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../tool/gitquestion/" title="Git问题处理" class="md-nav__link">
-      Git问题处理
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../tool/gitflow/" title="GitFlow" class="md-nav__link">
-      GitFlow
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../tool/gitbook/" title="GitBook" class="md-nav__link">
-      GitBook
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../tool/gitcmr/" title="Git提交日志规范" class="md-nav__link">
-      Git提交日志规范
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../tool/markdown/" title="Markdown" class="md-nav__link">
-      Markdown
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../tool/cicd/" title="CI/CD" class="md-nav__link">
-      CI/CD
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../tool/mkdocs/" title="mkdocs简单使用" class="md-nav__link">
-      mkdocs简单使用
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../tool/gitstudy/" title="Git的黑魔法" class="md-nav__link">
-      Git的黑魔法
-    </a>
-  </li>
-
-        
-      </ul>
-    </nav>
-  </li>
-
-        
-      </ul>
-    </nav>
-  </li>
-
-    
-      
-      
-      
-
-
-  <li class="md-nav__item md-nav__item--nested">
-    
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3">
-    
-    <label class="md-nav__link" for="nav-3">
-      微服务
-    </label>
-    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
-      <label class="md-nav__title" for="nav-3">
-        微服务
-      </label>
-      <ul class="md-nav__list" data-md-scrollfix>
-        
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../micro/spring-cloud/" title="基于SpringCloud的微服务架构演变史" class="md-nav__link">
-      基于SpringCloud的微服务架构演变史
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../micro/fbs-lock/" title="分布式锁" class="md-nav__link">
-      分布式锁
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../micro/design/" title="微服务设计" class="md-nav__link">
-      微服务设计
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../micro/distrimsg/" title="分布式系统与消息的投递" class="md-nav__link">
-      分布式系统与消息的投递
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../micro/ddd/" title="基于DDD的微服务设计和开发实战" class="md-nav__link">
-      基于DDD的微服务设计和开发实战
-    </a>
-  </li>
-
-        
-      </ul>
-    </nav>
-  </li>
-
-    
-      
-      
-      
-
-
-  <li class="md-nav__item md-nav__item--nested">
-    
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4">
-    
-    <label class="md-nav__link" for="nav-4">
-      经验分析
-    </label>
-    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
-      <label class="md-nav__title" for="nav-4">
-        经验分析
-      </label>
-      <ul class="md-nav__list" data-md-scrollfix>
-        
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../exp/devops/" title="DevOps" class="md-nav__link">
-      DevOps
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../exp/micro-service/" title="Micro-Service" class="md-nav__link">
-      Micro-Service
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../exp/raft-gossip/" title="Raft算法和Gossip协议" class="md-nav__link">
-      Raft算法和Gossip协议
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../exp/cl/" title="集群和负载均衡" class="md-nav__link">
-      集群和负载均衡
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../exp/ai/" title="人工智能" class="md-nav__link">
-      人工智能
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../exp/code-principle/" title="代码原则" class="md-nav__link">
-      代码原则
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../exp/techbig/" title="如何成为技术大牛" class="md-nav__link">
-      如何成为技术大牛
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../exp/learnweetout/" title="程序员如何技术成长" class="md-nav__link">
-      程序员如何技术成长
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../exp/pt/" title="产品与技术" class="md-nav__link">
-      产品与技术
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../exp/four_deep_learning/" title="深度学习框架" class="md-nav__link">
-      深度学习框架
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../exp/tl/" title="在阿里做了5年技术Leader，我总结出这些套路！" class="md-nav__link">
-      在阿里做了5年技术Leader，我总结出这些套路！
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../exp/cto/" title="CTO 技能图谱" class="md-nav__link">
-      CTO 技能图谱
-    </a>
-  </li>
-
-        
-      </ul>
-    </nav>
-  </li>
-
-    
-      
-      
-      
-
-
-  <li class="md-nav__item md-nav__item--nested">
-    
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5">
-    
-    <label class="md-nav__link" for="nav-5">
-      医学
-    </label>
-    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
-      <label class="md-nav__title" for="nav-5">
-        医学
-      </label>
-      <ul class="md-nav__list" data-md-scrollfix>
-        
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../doctor/ae/" title="脑炎" class="md-nav__link">
-      脑炎
-    </a>
-  </li>
-
-        
-      </ul>
-    </nav>
-  </li>
-
-    
-      
-      
-      
-
-
-  <li class="md-nav__item md-nav__item--nested">
-    
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6" type="checkbox" id="nav-6">
-    
-    <label class="md-nav__link" for="nav-6">
-      构架
-    </label>
-    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
-      <label class="md-nav__title" for="nav-6">
-        构架
-      </label>
-      <ul class="md-nav__list" data-md-scrollfix>
-        
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../framework/split/" title="构架拆分" class="md-nav__link">
-      构架拆分
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../framework/fgb/" title="分布式、高并发、多线程" class="md-nav__link">
-      分布式、高并发、多线程
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../framework/agility/" title="如何理解敏捷开发" class="md-nav__link">
-      如何理解敏捷开发
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../framework/fwork/" title="走向架构师必备的技能" class="md-nav__link">
-      走向架构师必备的技能
-    </a>
-  </li>
-
-        
-      </ul>
-    </nav>
-  </li>
-
-    
-      
-      
-      
-
-
-  <li class="md-nav__item md-nav__item--nested">
-    
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7" type="checkbox" id="nav-7">
-    
-    <label class="md-nav__link" for="nav-7">
-      情感
-    </label>
-    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
-      <label class="md-nav__title" for="nav-7">
-        情感
-      </label>
-      <ul class="md-nav__list" data-md-scrollfix>
-        
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../emotion/eq/" title="情商" class="md-nav__link">
-      情商
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../emotion/workheard/" title="工作心得" class="md-nav__link">
-      工作心得
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../emotion/lookbook/" title="看书" class="md-nav__link">
-      看书
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../emotion/fmf/" title="4种男朋友" class="md-nav__link">
-      4种男朋友
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../emotion/notheart/" title="不上心" class="md-nav__link">
-      不上心
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../emotion/selfdiscipline/" title="自律" class="md-nav__link">
-      自律
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../emotion/notlike/" title="喜欢与不喜欢" class="md-nav__link">
-      喜欢与不喜欢
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../emotion/latemarry/" title="晚婚" class="md-nav__link">
-      晚婚
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../emotion/understand/" title="追女生要明白这些事" class="md-nav__link">
-      追女生要明白这些事
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../emotion/backup/" title="备胎" class="md-nav__link">
-      备胎
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../emotion/chase/" title="为什么追不到她" class="md-nav__link">
-      为什么追不到她
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../emotion/livefail/" title="为什么活着失败" class="md-nav__link">
-      为什么活着失败
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../emotion/emotion/" title="情绪管理" class="md-nav__link">
-      情绪管理
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../emotion/abolish/" title="废掉的三个迹象" class="md-nav__link">
-      废掉的三个迹象
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../emotion/uptime/" title="余生，好好珍惜" class="md-nav__link">
-      余生，好好珍惜
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../emotion/losecome/" title="所有的失去，都会以另一种方式归来" class="md-nav__link">
-      所有的失去，都会以另一种方式归来
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../emotion/threeheart/" title="人生有这三种好心态" class="md-nav__link">
-      人生有这三种好心态
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../emotion/onelike/" title="一个感情真相" class="md-nav__link">
-      一个感情真相
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../emotion/notruth/" title="情商与道理" class="md-nav__link">
-      情商与道理
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../emotion/smf/" title="六种男人远离" class="md-nav__link">
-      六种男人远离
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../emotion/select/" title="决定接下来人生归属的，不是努力，而是选择" class="md-nav__link">
-      决定接下来人生归属的，不是努力，而是选择
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../emotion/nolike/" title="被你拉黑的那个人，你一定很喜欢吧" class="md-nav__link">
-      被你拉黑的那个人，你一定很喜欢吧
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../emotion/onepath/" title="余生，学会一个人走，不管有没有人陪" class="md-nav__link">
-      余生，学会一个人走，不管有没有人陪
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../emotion/twopath/" title="往后余生还很精彩，别被熬夜拖垮了" class="md-nav__link">
-      往后余生还很精彩，别被熬夜拖垮了
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../emotion/lifetime/" title="心态好的人，一辈子都好" class="md-nav__link">
-      心态好的人，一辈子都好
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../emotion/hearttoheart/" title="将心比心，方得人心" class="md-nav__link">
-      将心比心，方得人心
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../emotion/ttt/" title="别睡太晚，别爱太满，别要太多" class="md-nav__link">
-      别睡太晚，别爱太满，别要太多
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../emotion/profess/" title="表白" class="md-nav__link">
-      表白
-    </a>
-  </li>
-
-        
-      </ul>
-    </nav>
-  </li>
-
-    
-  </ul>
-</nav>
-                  </div>
-                </div>
-              </div>
-            
-            
-              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
-                <div class="md-sidebar__scrollwrap">
-                  <div class="md-sidebar__inner">
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../..">介绍</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">技术博文</span>
+    <ul class="subnav">
+                <li class="">
                     
-<nav class="md-nav md-nav--secondary">
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">Table of contents</label>
-    <ul class="md-nav__list" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#react_1" title="React 面试问题——常规知识" class="md-nav__link">
-    React 面试问题——常规知识
-  </a>
-  
-</li>
-      
-      
-      
-      
-      
+    <span class="caption-text">.NET</span>
+    <ul class="subnav">
+                <li class="toctree-l3">
+                    
+    <a class="" href="../../net/c_sharp/">C# 6</a>
+                </li>
+                <li class="toctree-l3">
+                    
+    <a class="" href="../../net/c_docker/">.Ner Core Docker 部署</a>
+                </li>
+                <li class="toctree-l3">
+                    
+    <a class="" href="../../net/c_mysql_nginx/">使用 Docker 容器化部署 ASP.NET Core + MySQL + Nginx</a>
+                </li>
+                <li class="toctree-l3">
+                    
+    <a class="" href="../../net/c_core_safety/">让你的ASP.NET Core应用程序更安全</a>
+                </li>
+                <li class="toctree-l3">
+                    
+    <a class="" href="../../net/c_core_study_route/">ASP.NET Core开发者指南</a>
+                </li>
     </ul>
-  
-</nav>
-                  </div>
-                </div>
-              </div>
+                </li>
+                <li class="">
+                    
+    <span class="caption-text">Java</span>
+    <ul class="subnav">
+                <li class="toctree-l3">
+                    
+    <a class="" href="../../java/feature/">Java特性</a>
+                </li>
+                <li class="toctree-l3">
+                    
+    <a class="" href="../../java/load-class/">Java类加载</a>
+                </li>
+                <li class="toctree-l3">
+                    
+    <a class="" href="../../java/orm/">Orm的优缺点</a>
+                </li>
+                <li class="toctree-l3">
+                    
+    <a class="" href="../../java/bio-nio/">BIO与NIO</a>
+                </li>
+                <li class="toctree-l3">
+                    
+    <a class="" href="../../java/rocketmq/rmq-1/">RocketMq下载与安装</a>
+                </li>
+                <li class="toctree-l3">
+                    
+    <a class="" href="../../java/springAnnotation/">Spring常用注解</a>
+                </li>
+    </ul>
+                </li>
+                <li class="">
+                    
+    <span class="caption-text">Python</span>
+    <ul class="subnav">
+                <li class="toctree-l3">
+                    
+    <a class="" href="../../python/feature/">Python特性</a>
+                </li>
+                <li class="toctree-l3">
+                    
+    <a class="" href="../../python/str_joint/">Python字符拼接</a>
+                </li>
+                <li class="toctree-l3">
+                    
+    <a class="" href="../../python/syntax_rule/">Python语法技巧</a>
+                </li>
+                <li class="toctree-l3">
+                    
+    <a class="" href="../../python/fabric/">远程部署神器 Fabric</a>
+                </li>
+    </ul>
+                </li>
+                <li class="">
+                    
+    <span class="caption-text">PHP</span>
+    <ul class="subnav">
+                <li class="toctree-l3">
+                    
+    <a class="" href="../../php/kj/">框架</a>
+                </li>
+    </ul>
+                </li>
+                <li class=" current">
+                    
+    <span class="caption-text">Web</span>
+    <ul class="subnav">
+                <li class="toctree-l3">
+                    
+    <a class="" href="../es6/">es6语法</a>
+                </li>
+                <li class="toctree-l3">
+                    
+    <a class="" href="../ali_js_style/">阿里js样式规范</a>
+                </li>
+                <li class="toctree-l3">
+                    
+    <a class="" href="../node.js/">node.js文档</a>
+                </li>
+                <li class="toctree-l3">
+                    
+    <a class="" href="../react/">React 开发者指南</a>
+                </li>
+                <li class="toctree-l3">
+                    
+    <a class="" href="../../dart/syntax/">Dart语法学习</a>
+                </li>
+                <li class="toctree-l3 current">
+                    
+    <a class="current" href="./">React 面试</a>
+    <ul class="subnav">
             
+    <li class="toctree-l4"><a href="#react">React 面试问题</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l5" href="#react_1">React 面试问题——常规知识</a></li>
+        
+        </ul>
+    
+
+    </ul>
+                </li>
+                <li class="toctree-l3">
+                    
+    <a class="" href="../js_tool_method/">js 工具函数</a>
+                </li>
+                <li class="toctree-l3">
+                    
+    <a class="" href="../vue_cp_react/">vue与react比较</a>
+                </li>
+    </ul>
+                </li>
+                <li class="">
+                    
+    <span class="caption-text">SQL</span>
+    <ul class="subnav">
+                <li class="toctree-l3">
+                    
+    <a class="" href="../../sql/mysql_yh/">MySQL优化</a>
+                </li>
+                <li class="toctree-l3">
+                    
+    <a class="" href="../../sql/mysql_yh17/">MySQL优化</a>
+                </li>
+                <li class="toctree-l3">
+                    
+    <a class="" href="../../sql/mysql_log/">MySQL日志</a>
+                </li>
+                <li class="toctree-l3">
+                    
+    <a class="" href="../../sql/mysql_index/">MySQL索引</a>
+                </li>
+                <li class="toctree-l3">
+                    
+    <a class="" href="../../sql/mysql_pxc/">MySQL PXC集群</a>
+                </li>
+                <li class="toctree-l3">
+                    
+    <a class="" href="../../sql/mysql_use/">MySQL 数据库应用</a>
+                </li>
+                <li class="toctree-l3">
+                    
+    <a class="" href="../../sql/sql_server_master/">Sql Server 主从备份</a>
+                </li>
+                <li class="toctree-l3">
+                    
+    <a class="" href="../../sql/data_split/">数据库之互联网常用分库分表方案</a>
+                </li>
+                <li class="toctree-l3">
+                    
+    <a class="" href="../../sql/mybatis/">Mybatis使用心德</a>
+                </li>
+    </ul>
+                </li>
+                <li class="">
+                    
+    <span class="caption-text">Linux</span>
+    <ul class="subnav">
+                <li class="toctree-l3">
+                    
+    <a class="" href="../../linux/often/">常用命令</a>
+                </li>
+                <li class="toctree-l3">
+                    
+    <a class="" href="../../linux/ope/">实用的Linux 命令</a>
+                </li>
+    </ul>
+                </li>
+                <li class="">
+                    
+    <span class="caption-text">Docker</span>
+    <ul class="subnav">
+                <li class="toctree-l3">
+                    
+    <a class="" href="../../docker/docker/">Docker全科</a>
+                </li>
+                <li class="toctree-l3">
+                    
+    <a class="" href="../../docker/docker-compose/">docker和docker-compose 配置 mysql mongodb redis nginx jenkins 环境</a>
+                </li>
+                <li class="toctree-l3">
+                    
+    <a class="" href="../../docker/docker-jenkins/">Docker部署Jenkins</a>
+                </li>
+    </ul>
+                </li>
+                <li class="">
+                    
+    <span class="caption-text">Tool</span>
+    <ul class="subnav">
+                <li class="toctree-l3">
+                    
+    <a class="" href="../../tool/git/">Git</a>
+                </li>
+                <li class="toctree-l3">
+                    
+    <a class="" href="../../tool/gitquestion/">Git问题处理</a>
+                </li>
+                <li class="toctree-l3">
+                    
+    <a class="" href="../../tool/gitflow/">GitFlow</a>
+                </li>
+                <li class="toctree-l3">
+                    
+    <a class="" href="../../tool/gitbook/">GitBook</a>
+                </li>
+                <li class="toctree-l3">
+                    
+    <a class="" href="../../tool/gitcmr/">Git提交日志规范</a>
+                </li>
+                <li class="toctree-l3">
+                    
+    <a class="" href="../../tool/markdown/">Markdown</a>
+                </li>
+                <li class="toctree-l3">
+                    
+    <a class="" href="../../tool/cicd/">CI/CD</a>
+                </li>
+                <li class="toctree-l3">
+                    
+    <a class="" href="../../tool/mkdocs/">mkdocs简单使用</a>
+                </li>
+                <li class="toctree-l3">
+                    
+    <a class="" href="../../tool/gitstudy/">Git的黑魔法</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+	    </li>
           
-          <div class="md-content">
-            <article class="md-content__inner md-typeset">
+            <li class="toctree-l1">
+		
+    <span class="caption-text">微服务</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../micro/spring-cloud/">基于SpringCloud的微服务架构演变史</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../micro/fbs-lock/">分布式锁</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../micro/design/">微服务设计</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../micro/distrimsg/">分布式系统与消息的投递</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../micro/ddd/">基于DDD的微服务设计和开发实战</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">经验分析</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../exp/devops/">DevOps</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../exp/micro-service/">Micro-Service</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../exp/raft-gossip/">Raft算法和Gossip协议</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../exp/cl/">集群和负载均衡</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../exp/ai/">人工智能</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../exp/code-principle/">代码原则</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../exp/techbig/">如何成为技术大牛</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../exp/learnweetout/">程序员如何技术成长</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../exp/pt/">产品与技术</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../exp/four_deep_learning/">深度学习框架</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../exp/tl/">在阿里做了5年技术Leader，我总结出这些套路！</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../exp/cto/">CTO 技能图谱</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">医学</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../doctor/ae/">脑炎</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">构架</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../framework/split/">构架拆分</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../framework/fgb/">分布式、高并发、多线程</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../framework/agility/">如何理解敏捷开发</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../framework/fwork/">走向架构师必备的技能</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">情感</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../emotion/eq/">情商</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../emotion/workheard/">工作心得</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../emotion/lookbook/">看书</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../emotion/fmf/">4种男朋友</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../emotion/notheart/">不上心</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../emotion/selfdiscipline/">自律</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../emotion/notlike/">喜欢与不喜欢</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../emotion/latemarry/">晚婚</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../emotion/understand/">追女生要明白这些事</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../emotion/backup/">备胎</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../emotion/chase/">为什么追不到她</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../emotion/livefail/">为什么活着失败</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../emotion/emotion/">情绪管理</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../emotion/abolish/">废掉的三个迹象</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../emotion/uptime/">余生，好好珍惜</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../emotion/losecome/">所有的失去，都会以另一种方式归来</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../emotion/threeheart/">人生有这三种好心态</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../emotion/onelike/">一个感情真相</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../emotion/notruth/">情商与道理</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../emotion/smf/">六种男人远离</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../emotion/select/">决定接下来人生归属的，不是努力，而是选择</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../emotion/nolike/">被你拉黑的那个人，你一定很喜欢吧</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../emotion/onepath/">余生，学会一个人走，不管有没有人陪</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../emotion/twopath/">往后余生还很精彩，别被熬夜拖垮了</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../emotion/lifetime/">心态好的人，一辈子都好</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../emotion/hearttoheart/">将心比心，方得人心</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../emotion/ttt/">别睡太晚，别爱太满，别要太多</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../emotion/profess/">表白</a>
+                </li>
+    </ul>
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../..">BurningMyself</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../..">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>Web &raquo;</li>
+        
+      
+        
+          <li>技术博文 &raquo;</li>
+        
+      
+    
+    <li>React 面试</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        <a href="https://github.com/burningmyself/burningmyself.github.io/edit/master/docs/web/react_interview.md"> Edit on burningmyself/blog</a>
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
               
-                
-                  <a href="https://github.com/burningmyself/blog/edit/master/docs/web/react_interview.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
-                
-                
                 <h1 id="react">React 面试问题<a class="headerlink" href="#react" title="Permanent link">&para;</a></h1>
 <blockquote>
 <p>如果你是一位有理想的前端开发人员，并且正在准备面试，那么这篇文章就是为你准备的。本文收集了 React 面试中最常见的 50 大问题，这是一份理想的指南，让你为 React 相关的面试做好充分的准备工作。首先我们快速了解一下 React 在市场上的需求和现状，然后再开始讨论 React 面试问题。</p>
@@ -1888,29 +653,29 @@
 </li>
 </ol>
 <p>JSX 是 JavaScript XML 的简写。这是 React 使用的一种文件类型，具备 JavaScript 的表现力，并使用 HTML 作为模板语法。这样一来 HTML 文件理解起来就非常简单。这种文件可以创造稳健的应用程序并提高其效率。下面是一个 JSX 实例：</p>
-<p><div class="codehilite"><pre><span></span>render(){
+<pre class="codehilite"><code class="language-jsx">render(){
     return(        
            &lt;div&gt;
                 &lt;h1&gt; Hello World from Codersera!!&lt;/h1&gt;
            &lt;/div&gt;
           );
-        }
-</pre></div>
-7. 你对虚拟 DOM 有什么了解？解释其工作机制。</p>
+        }</code></pre>
+
+
+<ol>
+<li>你对虚拟 DOM 有什么了解？解释其工作机制。</li>
+</ol>
 <p>虚拟 DOM 是轻量级的 JavaScript 对象，一开始只是真实 DOM 的一个副本。它是一个节点树，将组件列为对象及其属性和内容的列表。React 的渲染功能从 React 的各个部分生成一个节点树。然后，它会根据由不同用户或系统行为引起的信息模型突变来更新此树。
 虚拟 DOM 的工作机制只有简单的三步组成。</p>
-<div class="codehilite"><pre><span></span>1. 每当任何基础信息更改时，整个 UI 就会以虚拟 DOM 的表示形式重新渲染。
-</pre></div>
+<pre class="codehilite"><code>1. 每当任何基础信息更改时，整个 UI 就会以虚拟 DOM 的表示形式重新渲染。</code></pre>
 
 
 <p><img alt="ui-dom" src="../../img/ui-dom-1.png" /></p>
-<div class="codehilite"><pre><span></span>2. 然后计算先前的 DOM 表示和新的 DOM 表示之间的区别。
-</pre></div>
+<pre class="codehilite"><code>2. 然后计算先前的 DOM 表示和新的 DOM 表示之间的区别。</code></pre>
 
 
 <p><img alt="ui-dom" src="../../img/ui-dom-2.png" />  </p>
-<div class="codehilite"><pre><span></span>3. 计算完成后，只有实际更改的内容才会更新到真实 DOM。
-</pre></div>
+<pre class="codehilite"><code>3. 计算完成后，只有实际更改的内容才会更新到真实 DOM。</code></pre>
 
 
 <p><img alt="ui-dom" src="../../img/ui-dom-3.png" />  </p>
@@ -1922,79 +687,79 @@
 <li>与 ES5 相比，React 的 ES6 语法有何不同？</li>
 </ol>
 <p>ES5 和 ES6 的语法区别如下：</p>
-<div class="codehilite"><pre><span></span><span class="c1">// ES5</span>
-<span class="kd">var</span> <span class="nx">React</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;react&#39;</span><span class="p">);</span>
-<span class="c1">// ES6</span>
-<span class="kr">import</span> <span class="nx">React</span> <span class="nx">from</span> <span class="s1">&#39;react&#39;</span><span class="p">;</span>
+<pre class="codehilite"><code class="language-javascript">// ES5
+var React = require('react');
+// ES6
+import React from 'react';
 
-<span class="o">********</span>  <span class="kr">export</span> <span class="nx">vs</span> <span class="nx">exports</span> <span class="o">*********</span>
+********  export vs exports *********
 
-<span class="c1">// ES5</span>
-<span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="nx">Component</span><span class="p">;</span>
-<span class="c1">// ES6</span>
-<span class="kr">export</span> <span class="k">default</span> <span class="nx">Component</span><span class="p">;</span>
+// ES5
+module.exports = Component;
+// ES6
+export default Component;
 
-<span class="o">******</span> <span class="kd">function</span> <span class="o">*****</span>
-<span class="c1">// ES5</span>
+****** function *****
+// ES5
 
-<span class="kd">var</span> <span class="nx">MyComponent</span> <span class="o">=</span> <span class="nx">React</span><span class="p">.</span><span class="nx">createClass</span><span class="p">({</span>
-  <span class="nx">render</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-    <span class="k">return</span> <span class="o">&lt;</span><span class="nx">h3</span><span class="o">&gt;</span> <span class="nx">Hello</span> <span class="nx">CoderSera</span><span class="o">!</span> <span class="o">&lt;</span><span class="err">/h3&gt;</span>
-  <span class="p">},</span>
-<span class="p">});</span>
+var MyComponent = React.createClass({
+  render: function() {
+    return &lt;h3&gt; Hello CoderSera! &lt;/h3&gt;
+  },
+});
 
-<span class="c1">// ES6</span>
-<span class="kr">class</span> <span class="nx">MyComponent</span> <span class="kr">extends</span> <span class="nx">React</span><span class="p">.</span><span class="nx">Component</span> <span class="p">{</span>
-  <span class="nx">render</span><span class="p">()</span> <span class="p">{</span>
-    <span class="k">return</span> <span class="o">&lt;</span><span class="nx">h3</span><span class="o">&gt;</span> <span class="nx">Hello</span> <span class="nx">CoderSera</span><span class="o">!</span> <span class="o">&lt;</span><span class="err">/h3&gt;</span>
-  <span class="p">}</span>
-<span class="p">}</span>
+// ES6
+class MyComponent extends React.Component {
+  render() {
+    return &lt;h3&gt; Hello CoderSera! &lt;/h3&gt;
+  }
+}
 
- <span class="o">*******</span>  <span class="nx">props</span>  <span class="o">******</span>
+ *******  props  ******
 
-<span class="c1">// ES5</span>
-<span class="kd">var</span> <span class="nx">App</span> <span class="o">=</span> <span class="nx">React</span><span class="p">.</span><span class="nx">createClass</span><span class="p">({</span>
-  <span class="nx">propTypes</span><span class="o">:</span> <span class="p">{</span> <span class="nx">name</span><span class="o">:</span> <span class="nx">React</span><span class="p">.</span><span class="nx">PropTypes</span><span class="p">.</span><span class="nx">string</span> <span class="p">},</span>
-  <span class="nx">render</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-    <span class="k">return</span> <span class="o">&lt;</span><span class="nx">h3</span><span class="o">&gt;</span> <span class="nx">Hello</span><span class="p">,</span> <span class="p">{</span> <span class="k">this</span><span class="p">.</span><span class="nx">props</span><span class="p">.</span><span class="nx">name</span> <span class="p">}</span><span class="o">!</span> <span class="o">&lt;</span> <span class="err">/h3&gt;</span>
-  <span class="p">},</span>
-<span class="p">});</span>
+// ES5
+var App = React.createClass({
+  propTypes: { name: React.PropTypes.string },
+  render: function() {
+    return &lt;h3&gt; Hello, { this.props.name }! &lt; /h3&gt;
+  },
+});
 
-<span class="c1">// ES6</span>
-<span class="kr">class</span> <span class="nx">App</span> <span class="kr">extends</span> <span class="nx">React</span><span class="p">.</span><span class="nx">Component</span> <span class="p">{</span>
-  <span class="nx">render</span><span class="p">()</span> <span class="p">{</span>
-    <span class="k">return</span> <span class="o">&lt;</span><span class="nx">h3</span><span class="o">&gt;</span> <span class="nx">Hello</span><span class="p">,</span> <span class="p">{</span> <span class="k">this</span><span class="p">.</span><span class="nx">props</span><span class="p">.</span><span class="nx">name</span> <span class="p">}</span><span class="o">!</span> <span class="o">&lt;</span><span class="err">/h3&gt;</span>
-  <span class="p">}</span>
-<span class="p">}</span>
+// ES6
+class App extends React.Component {
+  render() {
+    return &lt;h3&gt; Hello, { this.props.name }! &lt;/h3&gt;
+  }
+}
 
- <span class="o">******</span> <span class="nx">state</span> <span class="o">*****</span>
+ ****** state *****
 
-<span class="c1">// ES5</span>
-<span class="kd">var</span> <span class="nx">App</span> <span class="o">=</span> <span class="nx">React</span><span class="p">.</span><span class="nx">createClass</span><span class="p">({</span>
-  <span class="nx">getInitialState</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-    <span class="k">return</span> <span class="p">{</span> <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;world&#39;</span> <span class="p">};</span>
-  <span class="p">}</span> 
+// ES5
+var App = React.createClass({
+  getInitialState: function() {
+    return { name: 'world' };
+  } 
 
-  <span class="nx">render</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-    <span class="k">return</span> <span class="o">&lt;</span><span class="nx">h3</span><span class="o">&gt;</span> <span class="nx">Hello</span><span class="p">,</span> <span class="p">{</span> <span class="k">this</span><span class="p">.</span><span class="nx">state</span><span class="p">.</span><span class="nx">name</span> <span class="p">}</span><span class="o">!</span> <span class="o">&lt;</span> <span class="err">/h3&gt;;</span>
-  <span class="p">},</span>
-<span class="p">});</span>
+  render: function() {
+    return &lt;h3&gt; Hello, { this.state.name }! &lt; /h3&gt;;
+  },
+});
 
-<span class="c1">// ES6</span>
-<span class="kr">class</span> <span class="nx">App</span> <span class="kr">extends</span> <span class="nx">React</span><span class="p">.</span><span class="nx">Component</span> <span class="p">{</span>
-  <span class="nx">constructor</span><span class="p">()</span> <span class="p">{</span>
-    <span class="kr">super</span><span class="p">();</span>
-    <span class="k">this</span><span class="p">.</span><span class="nx">state</span> <span class="o">=</span> <span class="p">{</span> <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;world&#39;</span> <span class="p">};</span>
-  <span class="p">}</span>
+// ES6
+class App extends React.Component {
+  constructor() {
+    super();
+    this.state = { name: 'world' };
+  }
 
-  <span class="nx">render</span><span class="p">()</span> <span class="p">{</span>
-    <span class="k">return</span> <span class="o">&lt;</span><span class="nx">h3</span><span class="o">&gt;</span> <span class="nx">Hello</span><span class="p">,</span> <span class="p">{</span> <span class="k">this</span><span class="p">.</span><span class="nx">state</span><span class="p">.</span><span class="nx">name</span> <span class="p">}</span><span class="o">!</span> <span class="o">&lt;</span> <span class="err">/h3&gt;</span>
-  <span class="p">}</span>
-  <span class="nx">render</span><span class="p">()</span> <span class="p">{</span>
-    <span class="k">return</span><span class="p">;</span>
-    <span class="o">&lt;</span><span class="nx">h3</span><span class="o">&gt;</span> <span class="nx">Hello</span><span class="p">,</span> <span class="p">{</span> <span class="k">this</span><span class="p">.</span><span class="nx">state</span><span class="p">.</span><span class="nx">name</span> <span class="p">}</span><span class="o">!</span> <span class="o">&lt;</span> <span class="err">/h3&gt;</span>
-  <span class="p">}</span>
-</pre></div>
+  render() {
+    return &lt;h3&gt; Hello, { this.state.name }! &lt; /h3&gt;
+  }
+  render() {
+    return;
+    &lt;h3&gt; Hello, { this.state.name }! &lt; /h3&gt;
+  }</code></pre>
+
 
 <ol>
 <li>React 和 Angular 有何不同？</li>
@@ -2015,23 +780,23 @@ DOM|使用虚拟 DOM|使用真实 DOM
 <li>解释 React 中 render() 的目的。</li>
 </ol>
 <p>它被视为普通函数，但 render() 函数必须返回某些值，无论值是否为空。调用组件文件时默认会调用 render() 方法，因为组件需要显示 HTML 标记，或者我们可以说 JSX 语法。每个 React 组件必须有一个 render() 函数，它返回单个 React 元素，该元素代表原生 DOM 组件。如果需要渲染多个 HTML 元素，则必须将它们分组在一个封闭的标签内，如form、group和div等。此函数必须保持纯净，就是说它在每次调用时必须返回相同的结果。</p>
-<div class="codehilite"><pre><span></span>import React, { Component } from &#39;react&#39;;
+<pre class="codehilite"><code class="language-jsx">import React, { Component } from 'react';
 
 class App extends Component {
   render() {
-    return (&lt;div&gt; &lt;h1 className=&#39;App-title&#39;&gt; hello CoderSera &lt;/h1&gt;&lt;/div&gt;)
+    return (&lt;div&gt; &lt;h1 className='App-title'&gt; hello CoderSera &lt;/h1&gt;&lt;/div&gt;)
   }
 }
 
-export default App;
-</pre></div>
+export default App;</code></pre>
+
 
 <ol>
 <li>什么是 Hooks？</li>
 </ol>
 <p>Hooks 是一项新功能，使你无需编写类即可使用状态等 React 功能。来看一个 useState hook 示例。</p>
-<div class="codehilite"><pre><span></span>&lt;em&gt;import &lt;/em&gt;{useState} &lt;em&gt;from &lt;/em&gt;&#39;react&#39;;&lt;br&gt;&lt;br&gt;&lt;em&gt;function &lt;/em&gt;Example() {&lt;br&gt;    &lt;em&gt;// Declare a new
-</pre></div>
+<pre class="codehilite"><code class="language-jsx">&lt;em&gt;import &lt;/em&gt;{useState} &lt;em&gt;from &lt;/em&gt;'react';&lt;br&gt;&lt;br&gt;&lt;em&gt;function &lt;/em&gt;Example() {&lt;br&gt;    &lt;em&gt;// Declare a new</code></pre>
+
 
 <ol>
 <li>
@@ -2064,17 +829,17 @@ export default App;
 <li>如何更新组件的状态？</li>
 </ol>
 <p>可以使用 this.setState() 更新组件的状态。</p>
-<div class="codehilite"><pre><span></span>class MyComponent extends React.Component {
+<pre class="codehilite"><code class="language-jsx">class MyComponent extends React.Component {
     constructor() {
         super();
         this.state = {
-            name: &#39;Maxx&#39;,
-            id: &#39;101&#39;
+            name: 'Maxx',
+            id: '101'
         }
     }
     render()
         {
-            setTimeout(()=&gt;{this.setState({name:&#39;Jaeha&#39;, id:&#39;222&#39;})},2000)
+            setTimeout(()=&gt;{this.setState({name:'Jaeha', id:'222'})},2000)
             return (              
                     &lt;div&gt;
                          &lt;h1&gt;Hello {this.state.name}&lt;/h1&gt;
@@ -2084,13 +849,13 @@ export default App;
         }
     }
     ReactDOM.render(
-               &lt;MyComponent/&gt;, document.getElementById(&#39;content&#39;)
-);
-</pre></div>
+               &lt;MyComponent/&gt;, document.getElementById('content')
+);</code></pre>
+
 
 <p>18.React 中的箭头函数是什么？如何使用？</p>
 <p><strong>粗箭头</strong>=&gt; 用于定义匿名函数，这通常是将参数传递给回调函数的最简单方法。但是你需要在使用它时优化性能。注意：每次渲染组件时，在 render 方法中使用箭头函数都会创建一个新函数，这可能会影响性能。</p>
-<div class="codehilite"><pre><span></span>//General way
+<pre class="codehilite"><code class="language-jsx">//General way
 render() {    
     return(
         &lt;MyInput onChange={this.handleChange.bind(this) } /&gt;
@@ -2101,8 +866,8 @@ render() {
     return(
         &lt;MyInput onChange={ (e) =&gt; this.handleOnChange(e) } /&gt;
     );
-}
-</pre></div>
+}</code></pre>
+
 
 <ol>
 <li>有状态和无状态组件的区别。</li>
@@ -2172,7 +937,7 @@ render() {
 <ol>
 <li>如何在 React 中创建事件？</li>
 </ol>
-<div class="codehilite"><pre><span></span>class Display extends React.Component({    
+<pre class="codehilite"><code class="language-jsx">class Display extends React.Component({    
     show(evt) {
         // code   
     },   
@@ -2182,8 +947,8 @@ render() {
                 &lt;div onClick={this.show}&gt;Click Me!&lt;/div&gt;
          );    
     }
-});
-</pre></div>
+});</code></pre>
+
 
 <ol>
 <li>什么是 React 中的合成事件？</li>
@@ -2193,10 +958,10 @@ render() {
 <li>如何理解 React 中的引用？</li>
 </ol>
 <p>Ref 是 React 引用的简写。它是一个属性，帮助存储对特定元素或组件的引用，由组件渲染的配置函数返回。它用于返回对渲染返回的特定元素或组件的引用。当我们需要 DOM 测量或向组件添加方法时，它们会派上用场。</p>
-<div class="codehilite"><pre><span></span>class ReferenceDemo extends React.Component{
+<pre class="codehilite"><code class="language-jsx">class ReferenceDemo extends React.Component{
      display() {
          const name = this.inputDemo.value;
-         document.getElementById(&#39;disp&#39;).innerHTML = name;
+         document.getElementById('disp').innerHTML = name;
                }
      render() {
              return(        
@@ -2208,8 +973,8 @@ render() {
                   &lt;/div&gt;
      );
    }
- }
-</pre></div>
+ }</code></pre>
+
 
 <ol>
 <li>列出一些应该使用引用的情况？</li>
@@ -2230,7 +995,7 @@ render() {
 </li>
 </ul>
 <p>可以使用 export 和 import 属性来模块化软件。它们有助于在不同的文档中单独编写组件。</p>
-<div class="codehilite"><pre><span></span>//ChildComponent.jsx
+<pre class="codehilite"><code class="language-jsx">//ChildComponent.jsx
 export default class ChildComponent extends React.Component {
     render() {
         return(  &lt;div&gt;
@@ -2240,7 +1005,7 @@ export default class ChildComponent extends React.Component {
 }
 
 //ParentComponent.jsx
-import ChildComponent from &#39;./childcomponent.js&#39;;
+import ChildComponent from './childcomponent.js';
 class ParentComponent extends React.Component {    
     render() {        
         return(           
@@ -2249,8 +1014,8 @@ class ParentComponent extends React.Component {
             &lt;/div&gt;
         );  
     }
-}
-</pre></div>
+}</code></pre>
+
 
 <ol>
 <li>在 React 中如何创建表单？</li>
@@ -2258,8 +1023,8 @@ class ParentComponent extends React.Component {
 <p>React 提供了一种有状态的，响应式的方法来构建表单。与其他 DOM 元素不同，HTML 表单元素在 React 中的工作机制有所不同。例如，表单数据通常由组件而不是 DOM 处理，并且通常使用受控组件来实现。
 区别在于可以使用回调函数来处理表单事件，然后使用容器的状态存储表单数据。这使你的组件可以更好地控制表单控制元素和表单数据。
 回调函数是在发生事件（包括更改表单控制值或表单提交）时触发的。</p>
-<div class="codehilite"><pre><span></span>handleSubmit(event) {
-    alert(&#39;A name was submitted: &#39; + this.state.value);
+<pre class="codehilite"><code class="language-jsx">handleSubmit(event) {
+    alert('A name was submitted: ' + this.state.value);
     event.preventDefault();
 }
 
@@ -2279,8 +1044,8 @@ render() {
 
 
     );
-}
-</pre></div>
+}</code></pre>
+
 
 <ol>
 <li>如何理解受控和非受控组件？</li>
@@ -2388,13 +1153,13 @@ Redux 使用“存储”将应用程序的整个状态存储在一个位置。�
 <li>在 Redux 中如何定义动作？</li>
 </ol>
 <p>React 中的动作必须具有 type 属性，该属性指示正在执行的 ACTION 的类型。必须将它们定义为字符串常量，你也可以为其添加更多属性。在 Redux 中使用称为“动作创建者”的函数来创建动作。以下是动作和动作创建者的示例：</p>
-<div class="codehilite"><pre><span></span>function addTodo(text) {
+<pre class="codehilite"><code class="language-jsx">function addTodo(text) {
        return {
                 type: ADD_TODO,    
                  text    
     }
-}
-</pre></div>
+}</code></pre>
+
 
 <ol>
 <li>说明 Reducer 的作用。</li>
@@ -2437,25 +1202,25 @@ React 组件订阅到存储|容器组件是有联系的
 <ol>
 <li>为什么在 React Router v4 中使用 switch 关键字？</li>
 </ol>
-<p>在 Switch 组件内，**Route**和**Redirect**组件嵌套在内部。从 Switch 顶部的 Route/Redirect 组件开始到底部的 Route/Redirect，根据浏览器中当前的 URL 是否与 Route/Redirect 组件的 prop/ 路径匹配，将每个组件评估为 true 或 false。
+<p>在 Switch 组件内，<strong>Route</strong>和<strong>Redirect</strong>组件嵌套在内部。从 Switch 顶部的 Route/Redirect 组件开始到底部的 Route/Redirect，根据浏览器中当前的 URL 是否与 Route/Redirect 组件的 prop/ 路径匹配，将每个组件评估为 true 或 false。
 Switch 只会渲染第一个匹配的子级。当我们嵌套了下面这样的路由时真的很方便：</p>
-<div class="codehilite"><pre><span></span>&lt;Switch&gt;
+<pre class="codehilite"><code class="language-jsx">&lt;Switch&gt;
   &lt;Route path=&quot;/accounts/new&quot; component={AddForm} /&gt;
   &lt;Route path={`/accounts/:accountId`} component={Profile} /&gt;
-&lt;/Switch&gt;
-</pre></div>
+&lt;/Switch&gt;</code></pre>
+
 
 <ol>
 <li>为什么我们在 React 中需要一个路由器？</li>
 </ol>
 <p>路由器用于定义多个路由，并且当用户键入特定的 URL 时，如果该 URL 与路由器内部定义的任何“路由”的路径匹配，则该用户将被重定向到该路由。因此我们需要在应用程序中添加一个路由器库，以允许创建多个路由，每个路由都为我们指向一个独特的视图。</p>
 <p>从 React Router 包导入的组件有两个属性，一个是将用户引导到指定路径的 path，另一个是用于定义所述路径中内容的 component。</p>
-<div class="codehilite"><pre><span></span>&lt;switch&gt;
+<pre class="codehilite"><code class="language-jsx">&lt;switch&gt;
     &lt;route exact path=’/’ component={Home}/&gt;
     &lt;route path=’/posts/:id’ component={Newpost}/&gt;
     &lt;route path=’/posts’   component={Post}/&gt;
-&lt;/switch&gt;
-</pre></div>
+&lt;/switch&gt;</code></pre>
+
 
 <ol>
 <li>列出 React Router 的优点。</li>
@@ -2476,80 +1241,53 @@ Switch 只会渲染第一个匹配的子级。当我们嵌套了下面这样的�
 参与的页面|每个视图对应一个新页面|只涉及单个 HTML 页面
 URL 更改|向服务器发送一个 HTTP 请求并接收对应的 HTML 页面|只有历史属性被更改
 体验|用户其实是在每个视图的不同页面间切换|用户以为自己正在不同的页面间切换</p>
-<p><a href="https://codersera.com/blog/top-50-react-questions-you-need-to-prepare-for-the-interview-in-2019/">原文链接：</a><a href="https://codersera.com/blog/top-50-react-questions-you-need-to-prepare-for-the-interview-in-2019/">https://codersera.com/blog/top-50-react-questions-you-need-to-prepare-for-the-interview-in-2019/</a> </p>
-                
-                  
-                
+<p><a href="https://codersera.com/blog/top-50-react-questions-you-need-to-prepare-for-the-interview-in-2019/">原文链接：</a>https://codersera.com/blog/top-50-react-questions-you-need-to-prepare-for-the-interview-in-2019/ </p>
               
-              
-                
-
-
-              
-            </article>
+            </div>
           </div>
-        </div>
-      </main>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        
-<footer class="md-footer">
-  
-    <div class="md-footer-nav">
-      <nav class="md-footer-nav__inner md-grid">
-        
-          <a href="../../dart/syntax/" title="Dart语法学习" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
-            <div class="md-flex__cell md-flex__cell--shrink">
-              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
-            </div>
-            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
-              <span class="md-flex__ellipsis">
-                <span class="md-footer-nav__direction">
-                  Previous
-                </span>
-                Dart语法学习
-              </span>
-            </div>
-          </a>
-        
-        
-          <a href="../js_tool_method/" title="js 工具函数" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
-            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
-              <span class="md-flex__ellipsis">
-                <span class="md-footer-nav__direction">
-                  Next
-                </span>
-                js 工具函数
-              </span>
-            </div>
-            <div class="md-flex__cell md-flex__cell--shrink">
-              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
-            </div>
-          </a>
-        
-      </nav>
-    </div>
-  
-  <div class="md-footer-meta md-typeset">
-    <div class="md-footer-meta__inner md-grid">
-      <div class="md-footer-copyright">
-        
-        powered by
-        <a href="https://www.mkdocs.org">MkDocs</a>
-        and
-        <a href="https://squidfunk.github.io/mkdocs-material/">
-          Material for MkDocs</a>
-      </div>
+        <a href="../js_tool_method/" class="btn btn-neutral float-right" title="js 工具函数">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../../dart/syntax/" class="btn btn-neutral" title="Dart语法学习"><span class="icon icon-circle-arrow-left"></span> Previous</a>
       
     </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
   </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
 </footer>
       
-    </div>
-    
-      <script src="../../assets/javascripts/application.245445c6.js"></script>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
       
-      <script>app.initialize({version:"1.0.4",url:{base:"../.."}})</script>
       
-    
-  </body>
+        <span><a href="../../dart/syntax/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../js_tool_method/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script>var base_url = '../..';</script>
+    <script src="../../js/theme.js" defer></script>
+      <script src="../../search/main.js" defer></script>
+
+</body>
 </html>
