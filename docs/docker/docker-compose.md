@@ -373,6 +373,9 @@ services:
     # 指定容器的环境变量
     environment:
       - JAVA_OPTS=-Duser.timezone=Asia/Shanghai   
+    # 指定容器运行的用户为root
+    user:
+      root    
 ```
 运行Docker Compose命令启动所有服务
 ``` shell
