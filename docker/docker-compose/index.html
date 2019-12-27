@@ -1,601 +1,574 @@
 <!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
-  <meta name="author" content="朽木自雕">
-  <link rel="shortcut icon" href="../../img/favicon.ico">
-  <title>docker和docker-compose 配置 mysql mongodb redis nginx jenkins 环境 - BurningMyself</title>
-  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        <meta name="author" content="朽木自雕">
+        <link rel="canonical" href="https://burningmyself.github.io/docker/docker-compose/">
+        <link rel="shortcut icon" href="../../favicon.ico">
+        
+        <title>docker和docker-compose 配置 mysql mongodb redis nginx jenkins 环境 - BurningMyself</title>
+        <link href="../../css/bootstrap-custom.min.css" rel="stylesheet">
+        <link href="../../css/font-awesome.min.css" rel="stylesheet">
+        <link href="../../css/base.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
 
-  <link rel="stylesheet" href="../../css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../../css/theme_extra.css" type="text/css" />
-  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
-  
-  <script>
-    // Current page data
-    var mkdocs_page_name = "docker\u548cdocker-compose \u914d\u7f6e mysql mongodb redis nginx jenkins \u73af\u5883";
-    var mkdocs_page_input_path = "docker\\docker-compose.md";
-    var mkdocs_page_url = "/docker/docker-compose/";
-  </script>
-  
-  <script src="../../js/jquery-2.1.1.min.js" defer></script>
-  <script src="../../js/modernizr-2.8.3.min.js" defer></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
-  <script>hljs.initHighlightingOnLoad();</script> 
-  
-</head>
+        <script src="../../js/jquery-1.10.2.min.js" defer></script>
+        <script src="../../js/bootstrap-3.0.3.min.js" defer></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script>
+        <script>
+            (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+            })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
 
-<body class="wy-body-for-nav" role="document">
+            ga('create', 'UA-36723568-3', 'mkdocs.org');
+            ga('send', 'pageview');
+        </script> 
+    </head>
 
-  <div class="wy-grid-for-nav">
+    <body>
 
-    
-    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
-      <div class="wy-side-nav-search">
-        <a href="../.." class="icon icon-home"> BurningMyself</a>
-        <div role="search">
-  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
-  </form>
-</div>
-      </div>
+        <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+            <div class="container">
 
-      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-	<ul class="current">
-	  
-          
-            <li class="toctree-l1">
-		
-    <a class="" href="../..">介绍</a>
-	    </li>
-          
-            <li class="toctree-l1">
-		
-    <span class="caption-text">技术博文</span>
-    <ul class="subnav">
-                <li class="">
-                    
-    <span class="caption-text">.NET</span>
-    <ul class="subnav">
-                <li class="toctree-l3">
-                    
-    <a class="" href="../../net/c_sharp/">C# 6</a>
-                </li>
-                <li class="toctree-l3">
-                    
-    <a class="" href="../../net/c_docker/">.Ner Core Docker 部署</a>
-                </li>
-                <li class="toctree-l3">
-                    
-    <a class="" href="../../net/c_mysql_nginx/">使用 Docker 容器化部署 ASP.NET Core + MySQL + Nginx</a>
-                </li>
-                <li class="toctree-l3">
-                    
-    <a class="" href="../../net/c_core_safety/">让你的ASP.NET Core应用程序更安全</a>
-                </li>
-                <li class="toctree-l3">
-                    
-    <a class="" href="../../net/c_core_study_route/">ASP.NET Core开发者指南</a>
-                </li>
-    </ul>
-                </li>
-                <li class="">
-                    
-    <span class="caption-text">Java</span>
-    <ul class="subnav">
-                <li class="toctree-l3">
-                    
-    <a class="" href="../../java/feature/">Java特性</a>
-                </li>
-                <li class="toctree-l3">
-                    
-    <a class="" href="../../java/load-class/">Java类加载</a>
-                </li>
-                <li class="toctree-l3">
-                    
-    <a class="" href="../../java/orm/">Orm的优缺点</a>
-                </li>
-                <li class="toctree-l3">
-                    
-    <a class="" href="../../java/bio-nio/">BIO与NIO</a>
-                </li>
-                <li class="toctree-l3">
-                    
-    <a class="" href="../../java/rocketmq/rmq-1/">RocketMq下载与安装</a>
-                </li>
-                <li class="toctree-l3">
-                    
-    <a class="" href="../../java/springAnnotation/">Spring常用注解</a>
-                </li>
-    </ul>
-                </li>
-                <li class="">
-                    
-    <span class="caption-text">Python</span>
-    <ul class="subnav">
-                <li class="toctree-l3">
-                    
-    <a class="" href="../../python/feature/">Python特性</a>
-                </li>
-                <li class="toctree-l3">
-                    
-    <a class="" href="../../python/str_joint/">Python字符拼接</a>
-                </li>
-                <li class="toctree-l3">
-                    
-    <a class="" href="../../python/syntax_rule/">Python语法技巧</a>
-                </li>
-                <li class="toctree-l3">
-                    
-    <a class="" href="../../python/fabric/">远程部署神器 Fabric</a>
-                </li>
-    </ul>
-                </li>
-                <li class="">
-                    
-    <span class="caption-text">PHP</span>
-    <ul class="subnav">
-                <li class="toctree-l3">
-                    
-    <a class="" href="../../php/kj/">框架</a>
-                </li>
-    </ul>
-                </li>
-                <li class="">
-                    
-    <span class="caption-text">Web</span>
-    <ul class="subnav">
-                <li class="toctree-l3">
-                    
-    <a class="" href="../../web/es6/">es6语法</a>
-                </li>
-                <li class="toctree-l3">
-                    
-    <a class="" href="../../web/ali_js_style/">阿里js样式规范</a>
-                </li>
-                <li class="toctree-l3">
-                    
-    <a class="" href="../../web/node.js/">node.js文档</a>
-                </li>
-                <li class="toctree-l3">
-                    
-    <a class="" href="../../web/react/">React 开发者指南</a>
-                </li>
-                <li class="toctree-l3">
-                    
-    <a class="" href="../../dart/syntax/">Dart语法学习</a>
-                </li>
-                <li class="toctree-l3">
-                    
-    <a class="" href="../../web/react_interview/">React 面试</a>
-                </li>
-                <li class="toctree-l3">
-                    
-    <a class="" href="../../web/js_tool_method/">js 工具函数</a>
-                </li>
-                <li class="toctree-l3">
-                    
-    <a class="" href="../../web/vue_cp_react/">vue与react比较</a>
-                </li>
-    </ul>
-                </li>
-                <li class="">
-                    
-    <span class="caption-text">SQL</span>
-    <ul class="subnav">
-                <li class="toctree-l3">
-                    
-    <a class="" href="../../sql/mysql_yh/">MySQL优化</a>
-                </li>
-                <li class="toctree-l3">
-                    
-    <a class="" href="../../sql/mysql_yh17/">MySQL优化</a>
-                </li>
-                <li class="toctree-l3">
-                    
-    <a class="" href="../../sql/mysql_log/">MySQL日志</a>
-                </li>
-                <li class="toctree-l3">
-                    
-    <a class="" href="../../sql/mysql_index/">MySQL索引</a>
-                </li>
-                <li class="toctree-l3">
-                    
-    <a class="" href="../../sql/mysql_pxc/">MySQL PXC集群</a>
-                </li>
-                <li class="toctree-l3">
-                    
-    <a class="" href="../../sql/mysql_use/">MySQL 数据库应用</a>
-                </li>
-                <li class="toctree-l3">
-                    
-    <a class="" href="../../sql/sql_server_master/">Sql Server 主从备份</a>
-                </li>
-                <li class="toctree-l3">
-                    
-    <a class="" href="../../sql/data_split/">数据库之互联网常用分库分表方案</a>
-                </li>
-                <li class="toctree-l3">
-                    
-    <a class="" href="../../sql/mybatis/">Mybatis使用心德</a>
-                </li>
-    </ul>
-                </li>
-                <li class="">
-                    
-    <span class="caption-text">Linux</span>
-    <ul class="subnav">
-                <li class="toctree-l3">
-                    
-    <a class="" href="../../linux/often/">常用命令</a>
-                </li>
-                <li class="toctree-l3">
-                    
-    <a class="" href="../../linux/ope/">实用的Linux 命令</a>
-                </li>
-    </ul>
-                </li>
-                <li class=" current">
-                    
-    <span class="caption-text">Docker</span>
-    <ul class="subnav">
-                <li class="toctree-l3">
-                    
-    <a class="" href="../docker/">Docker全科</a>
-                </li>
-                <li class="toctree-l3 current">
-                    
-    <a class="current" href="./">docker和docker-compose 配置 mysql mongodb redis nginx jenkins 环境</a>
-    <ul class="subnav">
+                <!-- Collapsed navigation -->
+                <div class="navbar-header">
+                    <!-- Expander button -->
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="../..">BurningMyself</a>
+                </div>
+
+                <!-- Expanded navigation -->
+                <div class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li >
+                                <a href="../..">介绍</a>
+                            </li>
+                            <li class="dropdown active">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">技术博文 <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+  <li class="dropdown-submenu">
+    <a href="#">.NET</a>
+    <ul class="dropdown-menu">
             
-    <li class="toctree-l4"><a href="#dockerdocker-compose-mysql-mongodb-redis-nginx-jenkins">docker和docker-compose 配置 mysql mongodb redis nginx jenkins 环境</a></li>
-    
-        <ul>
-        
-            <li><a class="toctree-l5" href="#_1">磁盘挂载</a></li>
-        
-            <li><a class="toctree-l5" href="#docker">docker</a></li>
-        
-            <li><a class="toctree-l5" href="#docker-compose">docker-compose</a></li>
-        
-        </ul>
-    
+<li >
+    <a href="../../net/c_sharp/">C# 6</a>
+</li>
+            
+<li >
+    <a href="../../net/c_docker/">.Ner Core Docker 部署</a>
+</li>
+            
+<li >
+    <a href="../../net/c_mysql_nginx/">使用 Docker 容器化部署 ASP.NET Core + MySQL + Nginx</a>
+</li>
+            
+<li >
+    <a href="../../net/c_core_safety/">让你的ASP.NET Core应用程序更安全</a>
+</li>
+            
+<li >
+    <a href="../../net/c_core_study_route/">ASP.NET Core开发者指南</a>
+</li>
+    </ul>
+  </li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#">Java</a>
+    <ul class="dropdown-menu">
+            
+<li >
+    <a href="../../java/feature/">Java特性</a>
+</li>
+            
+<li >
+    <a href="../../java/load-class/">Java类加载</a>
+</li>
+            
+<li >
+    <a href="../../java/orm/">Orm的优缺点</a>
+</li>
+            
+<li >
+    <a href="../../java/bio-nio/">BIO与NIO</a>
+</li>
+            
+<li >
+    <a href="../../java/rocketmq/rmq-1/">RocketMq下载与安装</a>
+</li>
+            
+<li >
+    <a href="../../java/springAnnotation/">Spring常用注解</a>
+</li>
+    </ul>
+  </li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#">Python</a>
+    <ul class="dropdown-menu">
+            
+<li >
+    <a href="../../python/feature/">Python特性</a>
+</li>
+            
+<li >
+    <a href="../../python/str_joint/">Python字符拼接</a>
+</li>
+            
+<li >
+    <a href="../../python/syntax_rule/">Python语法技巧</a>
+</li>
+            
+<li >
+    <a href="../../python/fabric/">远程部署神器 Fabric</a>
+</li>
+    </ul>
+  </li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#">PHP</a>
+    <ul class="dropdown-menu">
+            
+<li >
+    <a href="../../php/kj/">框架</a>
+</li>
+    </ul>
+  </li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#">Web</a>
+    <ul class="dropdown-menu">
+            
+<li >
+    <a href="../../web/es6/">es6语法</a>
+</li>
+            
+<li >
+    <a href="../../web/ali_js_style/">阿里js样式规范</a>
+</li>
+            
+<li >
+    <a href="../../web/node.js/">node.js文档</a>
+</li>
+            
+<li >
+    <a href="../../web/react/">React 开发者指南</a>
+</li>
+            
+<li >
+    <a href="../../dart/syntax/">Dart语法学习</a>
+</li>
+            
+<li >
+    <a href="../../web/react_interview/">React 面试</a>
+</li>
+            
+<li >
+    <a href="../../web/js_tool_method/">js 工具函数</a>
+</li>
+            
+<li >
+    <a href="../../web/vue_cp_react/">vue与react比较</a>
+</li>
+    </ul>
+  </li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#">SQL</a>
+    <ul class="dropdown-menu">
+            
+<li >
+    <a href="../../sql/mysql_yh/">MySQL优化</a>
+</li>
+            
+<li >
+    <a href="../../sql/mysql_yh17/">MySQL优化</a>
+</li>
+            
+<li >
+    <a href="../../sql/mysql_log/">MySQL日志</a>
+</li>
+            
+<li >
+    <a href="../../sql/mysql_index/">MySQL索引</a>
+</li>
+            
+<li >
+    <a href="../../sql/mysql_pxc/">MySQL PXC集群</a>
+</li>
+            
+<li >
+    <a href="../../sql/mysql_use/">MySQL 数据库应用</a>
+</li>
+            
+<li >
+    <a href="../../sql/sql_server_master/">Sql Server 主从备份</a>
+</li>
+            
+<li >
+    <a href="../../sql/data_split/">数据库之互联网常用分库分表方案</a>
+</li>
+            
+<li >
+    <a href="../../sql/mybatis/">Mybatis使用心德</a>
+</li>
+    </ul>
+  </li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#">Linux</a>
+    <ul class="dropdown-menu">
+            
+<li >
+    <a href="../../linux/often/">常用命令</a>
+</li>
+            
+<li >
+    <a href="../../linux/ope/">实用的Linux 命令</a>
+</li>
+    </ul>
+  </li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#">Docker</a>
+    <ul class="dropdown-menu">
+            
+<li >
+    <a href="../docker/">Docker全科</a>
+</li>
+            
+<li class="active">
+    <a href="./">docker和docker-compose 配置 mysql mongodb redis nginx jenkins 环境</a>
+</li>
+            
+<li >
+    <a href="../docker-jenkins/">Docker部署Jenkins</a>
+</li>
+    </ul>
+  </li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#">Tool</a>
+    <ul class="dropdown-menu">
+            
+<li >
+    <a href="../../tool/git/">Git</a>
+</li>
+            
+<li >
+    <a href="../../tool/gitquestion/">Git问题处理</a>
+</li>
+            
+<li >
+    <a href="../../tool/gitflow/">GitFlow</a>
+</li>
+            
+<li >
+    <a href="../../tool/gitbook/">GitBook</a>
+</li>
+            
+<li >
+    <a href="../../tool/gitcmr/">Git提交日志规范</a>
+</li>
+            
+<li >
+    <a href="../../tool/markdown/">Markdown</a>
+</li>
+            
+<li >
+    <a href="../../tool/cicd/">CI/CD</a>
+</li>
+            
+<li >
+    <a href="../../tool/mkdocs/">mkdocs简单使用</a>
+</li>
+            
+<li >
+    <a href="../../tool/gitstudy/">Git的黑魔法</a>
+</li>
+    </ul>
+  </li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">微服务 <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li >
+    <a href="../../micro/spring-cloud/">基于SpringCloud的微服务架构演变史</a>
+</li>
+                                    
+<li >
+    <a href="../../micro/fbs-lock/">分布式锁</a>
+</li>
+                                    
+<li >
+    <a href="../../micro/design/">微服务设计</a>
+</li>
+                                    
+<li >
+    <a href="../../micro/distrimsg/">分布式系统与消息的投递</a>
+</li>
+                                    
+<li >
+    <a href="../../micro/ddd/">基于DDD的微服务设计和开发实战</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">经验分析 <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li >
+    <a href="../../exp/devops/">DevOps</a>
+</li>
+                                    
+<li >
+    <a href="../../exp/micro-service/">Micro-Service</a>
+</li>
+                                    
+<li >
+    <a href="../../exp/raft-gossip/">Raft算法和Gossip协议</a>
+</li>
+                                    
+<li >
+    <a href="../../exp/cl/">集群和负载均衡</a>
+</li>
+                                    
+<li >
+    <a href="../../exp/ai/">人工智能</a>
+</li>
+                                    
+<li >
+    <a href="../../exp/code-principle/">代码原则</a>
+</li>
+                                    
+<li >
+    <a href="../../exp/techbig/">如何成为技术大牛</a>
+</li>
+                                    
+<li >
+    <a href="../../exp/learnweetout/">程序员如何技术成长</a>
+</li>
+                                    
+<li >
+    <a href="../../exp/pt/">产品与技术</a>
+</li>
+                                    
+<li >
+    <a href="../../exp/four_deep_learning/">深度学习框架</a>
+</li>
+                                    
+<li >
+    <a href="../../exp/tl/">在阿里做了5年技术Leader，我总结出这些套路！</a>
+</li>
+                                    
+<li >
+    <a href="../../exp/cto/">CTO 技能图谱</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">医学 <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li >
+    <a href="../../doctor/ae/">脑炎</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">构架 <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li >
+    <a href="../../framework/split/">构架拆分</a>
+</li>
+                                    
+<li >
+    <a href="../../framework/fgb/">分布式、高并发、多线程</a>
+</li>
+                                    
+<li >
+    <a href="../../framework/agility/">如何理解敏捷开发</a>
+</li>
+                                    
+<li >
+    <a href="../../framework/fwork/">走向架构师必备的技能</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">情感 <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li >
+    <a href="../../emotion/eq/">情商</a>
+</li>
+                                    
+<li >
+    <a href="../../emotion/workheard/">工作心得</a>
+</li>
+                                    
+<li >
+    <a href="../../emotion/lookbook/">看书</a>
+</li>
+                                    
+<li >
+    <a href="../../emotion/fmf/">4种男朋友</a>
+</li>
+                                    
+<li >
+    <a href="../../emotion/notheart/">不上心</a>
+</li>
+                                    
+<li >
+    <a href="../../emotion/selfdiscipline/">自律</a>
+</li>
+                                    
+<li >
+    <a href="../../emotion/notlike/">喜欢与不喜欢</a>
+</li>
+                                    
+<li >
+    <a href="../../emotion/latemarry/">晚婚</a>
+</li>
+                                    
+<li >
+    <a href="../../emotion/understand/">追女生要明白这些事</a>
+</li>
+                                    
+<li >
+    <a href="../../emotion/backup/">备胎</a>
+</li>
+                                    
+<li >
+    <a href="../../emotion/chase/">为什么追不到她</a>
+</li>
+                                    
+<li >
+    <a href="../../emotion/livefail/">为什么活着失败</a>
+</li>
+                                    
+<li >
+    <a href="../../emotion/emotion/">情绪管理</a>
+</li>
+                                    
+<li >
+    <a href="../../emotion/abolish/">废掉的三个迹象</a>
+</li>
+                                    
+<li >
+    <a href="../../emotion/uptime/">余生，好好珍惜</a>
+</li>
+                                    
+<li >
+    <a href="../../emotion/losecome/">所有的失去，都会以另一种方式归来</a>
+</li>
+                                    
+<li >
+    <a href="../../emotion/threeheart/">人生有这三种好心态</a>
+</li>
+                                    
+<li >
+    <a href="../../emotion/onelike/">一个感情真相</a>
+</li>
+                                    
+<li >
+    <a href="../../emotion/notruth/">情商与道理</a>
+</li>
+                                    
+<li >
+    <a href="../../emotion/smf/">六种男人远离</a>
+</li>
+                                    
+<li >
+    <a href="../../emotion/select/">决定接下来人生归属的，不是努力，而是选择</a>
+</li>
+                                    
+<li >
+    <a href="../../emotion/nolike/">被你拉黑的那个人，你一定很喜欢吧</a>
+</li>
+                                    
+<li >
+    <a href="../../emotion/onepath/">余生，学会一个人走，不管有没有人陪</a>
+</li>
+                                    
+<li >
+    <a href="../../emotion/twopath/">往后余生还很精彩，别被熬夜拖垮了</a>
+</li>
+                                    
+<li >
+    <a href="../../emotion/lifetime/">心态好的人，一辈子都好</a>
+</li>
+                                    
+<li >
+    <a href="../../emotion/hearttoheart/">将心比心，方得人心</a>
+</li>
+                                    
+<li >
+    <a href="../../emotion/ttt/">别睡太晚，别爱太满，别要太多</a>
+</li>
+                                    
+<li >
+    <a href="../../emotion/profess/">表白</a>
+</li>
+                                </ul>
+                            </li>
+                        </ul>
 
-    </ul>
-                </li>
-                <li class="toctree-l3">
-                    
-    <a class="" href="../docker-jenkins/">Docker部署Jenkins</a>
-                </li>
-    </ul>
-                </li>
-                <li class="">
-                    
-    <span class="caption-text">Tool</span>
-    <ul class="subnav">
-                <li class="toctree-l3">
-                    
-    <a class="" href="../../tool/git/">Git</a>
-                </li>
-                <li class="toctree-l3">
-                    
-    <a class="" href="../../tool/gitquestion/">Git问题处理</a>
-                </li>
-                <li class="toctree-l3">
-                    
-    <a class="" href="../../tool/gitflow/">GitFlow</a>
-                </li>
-                <li class="toctree-l3">
-                    
-    <a class="" href="../../tool/gitbook/">GitBook</a>
-                </li>
-                <li class="toctree-l3">
-                    
-    <a class="" href="../../tool/gitcmr/">Git提交日志规范</a>
-                </li>
-                <li class="toctree-l3">
-                    
-    <a class="" href="../../tool/markdown/">Markdown</a>
-                </li>
-                <li class="toctree-l3">
-                    
-    <a class="" href="../../tool/cicd/">CI/CD</a>
-                </li>
-                <li class="toctree-l3">
-                    
-    <a class="" href="../../tool/mkdocs/">mkdocs简单使用</a>
-                </li>
-                <li class="toctree-l3">
-                    
-    <a class="" href="../../tool/gitstudy/">Git的黑魔法</a>
-                </li>
-    </ul>
-                </li>
-    </ul>
-	    </li>
-          
-            <li class="toctree-l1">
-		
-    <span class="caption-text">微服务</span>
-    <ul class="subnav">
-                <li class="">
-                    
-    <a class="" href="../../micro/spring-cloud/">基于SpringCloud的微服务架构演变史</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../../micro/fbs-lock/">分布式锁</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../../micro/design/">微服务设计</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../../micro/distrimsg/">分布式系统与消息的投递</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../../micro/ddd/">基于DDD的微服务设计和开发实战</a>
-                </li>
-    </ul>
-	    </li>
-          
-            <li class="toctree-l1">
-		
-    <span class="caption-text">经验分析</span>
-    <ul class="subnav">
-                <li class="">
-                    
-    <a class="" href="../../exp/devops/">DevOps</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../../exp/micro-service/">Micro-Service</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../../exp/raft-gossip/">Raft算法和Gossip协议</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../../exp/cl/">集群和负载均衡</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../../exp/ai/">人工智能</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../../exp/code-principle/">代码原则</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../../exp/techbig/">如何成为技术大牛</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../../exp/learnweetout/">程序员如何技术成长</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../../exp/pt/">产品与技术</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../../exp/four_deep_learning/">深度学习框架</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../../exp/tl/">在阿里做了5年技术Leader，我总结出这些套路！</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../../exp/cto/">CTO 技能图谱</a>
-                </li>
-    </ul>
-	    </li>
-          
-            <li class="toctree-l1">
-		
-    <span class="caption-text">医学</span>
-    <ul class="subnav">
-                <li class="">
-                    
-    <a class="" href="../../doctor/ae/">脑炎</a>
-                </li>
-    </ul>
-	    </li>
-          
-            <li class="toctree-l1">
-		
-    <span class="caption-text">构架</span>
-    <ul class="subnav">
-                <li class="">
-                    
-    <a class="" href="../../framework/split/">构架拆分</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../../framework/fgb/">分布式、高并发、多线程</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../../framework/agility/">如何理解敏捷开发</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../../framework/fwork/">走向架构师必备的技能</a>
-                </li>
-    </ul>
-	    </li>
-          
-            <li class="toctree-l1">
-		
-    <span class="caption-text">情感</span>
-    <ul class="subnav">
-                <li class="">
-                    
-    <a class="" href="../../emotion/eq/">情商</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../../emotion/workheard/">工作心得</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../../emotion/lookbook/">看书</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../../emotion/fmf/">4种男朋友</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../../emotion/notheart/">不上心</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../../emotion/selfdiscipline/">自律</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../../emotion/notlike/">喜欢与不喜欢</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../../emotion/latemarry/">晚婚</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../../emotion/understand/">追女生要明白这些事</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../../emotion/backup/">备胎</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../../emotion/chase/">为什么追不到她</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../../emotion/livefail/">为什么活着失败</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../../emotion/emotion/">情绪管理</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../../emotion/abolish/">废掉的三个迹象</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../../emotion/uptime/">余生，好好珍惜</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../../emotion/losecome/">所有的失去，都会以另一种方式归来</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../../emotion/threeheart/">人生有这三种好心态</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../../emotion/onelike/">一个感情真相</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../../emotion/notruth/">情商与道理</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../../emotion/smf/">六种男人远离</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../../emotion/select/">决定接下来人生归属的，不是努力，而是选择</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../../emotion/nolike/">被你拉黑的那个人，你一定很喜欢吧</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../../emotion/onepath/">余生，学会一个人走，不管有没有人陪</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../../emotion/twopath/">往后余生还很精彩，别被熬夜拖垮了</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../../emotion/lifetime/">心态好的人，一辈子都好</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../../emotion/hearttoheart/">将心比心，方得人心</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../../emotion/ttt/">别睡太晚，别爱太满，别要太多</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../../emotion/profess/">表白</a>
-                </li>
-    </ul>
-	    </li>
-          
-        </ul>
-      </div>
-      &nbsp;
-    </nav>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <a href="#" data-toggle="modal" data-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li >
+                                <a rel="next" href="../docker/">
+                                    <i class="fa fa-arrow-left"></i> Previous
+                                </a>
+                            </li>
+                            <li >
+                                <a rel="prev" href="../docker-jenkins/">
+                                    Next <i class="fa fa-arrow-right"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://github.com/burningmyself/burningmyself.github.io/edit/master/docs/docker/docker-compose.md">Edit on burningmyself.github.io</a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+        <div class="container">
+                <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
+    <ul class="nav bs-sidenav">
+        <li class="main active"><a href="#dockerdocker-compose-mysql-mongodb-redis-nginx-jenkins">docker和docker-compose 配置 mysql mongodb redis nginx jenkins 环境</a></li>
+            <li><a href="#_1">磁盘挂载</a></li>
+            <li><a href="#docker">docker</a></li>
+            <li><a href="#docker-compose">docker-compose</a></li>
+    </ul>
+</div></div>
+                <div class="col-md-9" role="main">
 
-      
-      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
-        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-        <a href="../..">BurningMyself</a>
-      </nav>
-
-      
-      <div class="wy-nav-content">
-        <div class="rst-content">
-          <div role="navigation" aria-label="breadcrumbs navigation">
-  <ul class="wy-breadcrumbs">
-    <li><a href="../..">Docs</a> &raquo;</li>
-    
-      
-        
-          <li>Docker &raquo;</li>
-        
-      
-        
-          <li>技术博文 &raquo;</li>
-        
-      
-    
-    <li>docker和docker-compose 配置 mysql mongodb redis nginx jenkins 环境</li>
-    <li class="wy-breadcrumbs-aside">
-      
-        <a href="https://github.com/burningmyself/burningmyself.github.io/edit/master/docs/docker/docker-compose.md"> Edit on burningmyself/blog</a>
-      
-    </li>
-  </ul>
-  <hr/>
-</div>
-          <div role="main">
-            <div class="section">
-              
-                <h1 id="dockerdocker-compose-mysql-mongodb-redis-nginx-jenkins">docker和docker-compose 配置 mysql mongodb redis nginx jenkins 环境<a class="headerlink" href="#dockerdocker-compose-mysql-mongodb-redis-nginx-jenkins" title="Permanent link">&para;</a></h1>
+<h1 id="dockerdocker-compose-mysql-mongodb-redis-nginx-jenkins">docker和docker-compose 配置 mysql mongodb redis nginx jenkins 环境<a class="headerlink" href="#dockerdocker-compose-mysql-mongodb-redis-nginx-jenkins" title="Permanent link">&para;</a></h1>
 <h2 id="_1">磁盘挂载<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
 <pre class="codehilite"><code class="language-shell">fdisk -l #查看磁盘列表
 mkfs.ext4 /dev/vdb #格式化磁盘
@@ -948,53 +921,84 @@ services:
 
 
 <p>运行Docker Compose命令启动所有服务</p>
-<pre class="codehilite"><code class="language-shell">docker-compose up -d</code></pre>
-              
-            </div>
-          </div>
-          <footer>
-  
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-      
-        <a href="../docker-jenkins/" class="btn btn-neutral float-right" title="Docker部署Jenkins">Next <span class="icon icon-circle-arrow-right"></span></a>
-      
-      
-        <a href="../docker/" class="btn btn-neutral" title="Docker全科"><span class="icon icon-circle-arrow-left"></span> Previous</a>
-      
-    </div>
-  
-
-  <hr/>
-
-  <div role="contentinfo">
-    <!-- Copyright etc -->
-    
-  </div>
-
-  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
-</footer>
-      
+<pre class="codehilite"><code class="language-shell">docker-compose up -d</code></pre></div>
         </div>
-      </div>
 
-    </section>
+        <footer class="col-md-12">
+            <hr>
+                <p>BurningMyself</p>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script>
+            var base_url = "../..",
+                shortcuts = {"search": 83, "next": 78, "help": 191, "previous": 80};
+        </script>
+        <script src="../../js/base.js" defer></script>
+        <script src="../../search/main.js" defer></script>
 
-  </div>
-
-  <div class="rst-versions" role="note" style="cursor: pointer">
-    <span class="rst-current-version" data-toggle="rst-current-version">
-      
-      
-        <span><a href="../docker/" style="color: #fcfcfc;">&laquo; Previous</a></span>
-      
-      
-        <span style="margin-left: 15px"><a href="../docker-jenkins/" style="color: #fcfcfc">Next &raquo;</a></span>
-      
-    </span>
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="exampleModalLabel">Search</h4>
+            </div>
+            <div class="modal-body">
+                <p>
+                    From here you can search these documents. Enter
+                    your search terms below.
+                </p>
+                <form role="form">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="Keyboard Shortcuts Modal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="exampleModalLabel">Keyboard Shortcuts</h4>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
 </div>
-    <script>var base_url = '../..';</script>
-    <script src="../../js/theme.js" defer></script>
-      <script src="../../search/main.js" defer></script>
 
-</body>
+    </body>
 </html>
