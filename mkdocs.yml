@@ -15,7 +15,7 @@ theme:
     favicon: favicon.ico
     language: 'zh'
     feature:
-        tabs: true
+        tabs: false
     hljs_languages:
         - yaml
         - rust
