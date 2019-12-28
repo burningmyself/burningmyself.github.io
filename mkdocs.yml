@@ -4,8 +4,8 @@ site_author: BurningMyself
 site_url: https://burningmyself.github.io
 # site_favicon: favicon.ico
 copyright: BurningMyself
-google_analytics: ['UA-36723568-3', 'burningmyself.github.io']
-site_url: https://rosemarys.gitee.io
+google_analytics: ['UA-155098979-1', 'burningmyself.github.io']
+site_url: https://burningmyself.gitee.io
 repo_name: 'burningmyself.github.io'
 repo_url: 'https://github.com/burningmyself/burningmyself.github.io'
 
@@ -176,6 +176,8 @@ markdown_extensions:
 extra_javascript:
   - 'js/extra.js'
   - 'js/baidu-tongji.js'
+  - 'https://www.googletagmanager.com/gtag/js?id=UA-155098979-1'
+  - 'js/google.js'
   - 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML'
 
 
