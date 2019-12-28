@@ -13,7 +13,7 @@
         <meta name="description" content=".net,java,php,python,docker,web">
       
       
-        <link rel="canonical" href="https://rosemarys.gitee.io/python/feature/">
+        <link rel="canonical" href="https://burningmyself.gitee.io/python/feature/">
       
       
         <meta name="author" content="BurningMyself">
@@ -72,7 +72,7 @@
   }
   ga.l = +new Date
   /* Setup integration and send page view */
-  ga("create", "UA-36723568-3", "burningmyself.github.io")
+  ga("create", "UA-155098979-1", "burningmyself.github.io")
   ga("set", "anonymizeIp", true)
   ga("send", "pageview")
   /* Register handler to log search on blur */
@@ -117,7 +117,7 @@
   <nav class="md-header-nav md-grid">
     <div class="md-flex">
       <div class="md-flex__cell md-flex__cell--shrink">
-        <a href="https://rosemarys.gitee.io" title="BurningMyself" class="md-header-nav__button md-logo">
+        <a href="https://burningmyself.gitee.io" title="BurningMyself" class="md-header-nav__button md-logo">
           
             <i class="md-icon"></i>
           
@@ -209,7 +209,7 @@
                   <div class="md-sidebar__inner">
                     <nav class="md-nav md-nav--primary" data-md-level="0">
   <label class="md-nav__title md-nav__title--site" for="__drawer">
-    <a href="https://rosemarys.gitee.io" title="BurningMyself" class="md-nav__button md-logo">
+    <a href="https://burningmyself.gitee.io" title="BurningMyself" class="md-nav__button md-logo">
       
         <i class="md-icon"></i>
       
@@ -2291,20 +2291,20 @@
 Python 3.0的变化主要在以下几个方面:</p>
 <h3 id="print">print 函数<a class="headerlink" href="#print" title="Permanent link">&para;</a></h3>
 <p>print语句没有了，取而代之的是print()函数。 Python 2.6与Python 2.7部分地支持这种形式的print语法。在Python 2.6与Python 2.7里面，以下三种形式是等价的：
-<div class="codehilite"><pre><span></span><span class="nb">print</span> <span class="s2">&quot;fish&quot;</span>
-<span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;fish&quot;</span><span class="p">)</span> <span class="c1">#注意print后面有个空格</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;fish&quot;</span><span class="p">)</span> <span class="c1">#print()不能带有任何其它参数</span>
+<div class="codehilite"><pre><span></span><span class="k">print</span> <span class="s2">&quot;fish&quot;</span>
+<span class="k">print</span> <span class="p">(</span><span class="s2">&quot;fish&quot;</span><span class="p">)</span> <span class="c1">#注意print后面有个空格</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;fish&quot;</span><span class="p">)</span> <span class="c1">#print()不能带有任何其它参数</span>
 </pre></div>
 然而，Python 2.6实际已经支持新的print()语法：
 <div class="codehilite"><pre><span></span><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">print_function</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;fish&quot;</span><span class="p">,</span> <span class="s2">&quot;panda&quot;</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">&#39;, &#39;</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;fish&quot;</span><span class="p">,</span> <span class="s2">&quot;panda&quot;</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">&#39;, &#39;</span><span class="p">)</span>
 </pre></div></p>
 <h3 id="unicode">Unicode<a class="headerlink" href="#unicode" title="Permanent link">&para;</a></h3>
 <p>Python 2 有 ASCII str() 类型，unicode() 是单独的，不是 byte 类型。 
 现在， 在 Python 3，我们最终有了 Unicode (utf-8) 字符串，以及一个字节类：byte 和 bytearrays。</p>
 <p>由于 Python3.X 源码文件默认使用utf-8编码，这就使得以下代码是合法的： 
-<div class="codehilite"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="n">中国</span> <span class="o">=</span> <span class="s1">&#39;china&#39;</span> 
-<span class="o">&gt;&gt;&gt;</span><span class="nb">print</span><span class="p">(</span><span class="n">中国</span><span class="p">)</span> 
+<div class="codehilite"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="err">中国</span> <span class="o">=</span> <span class="s1">&#39;china&#39;</span> 
+<span class="o">&gt;&gt;&gt;</span><span class="k">print</span><span class="p">(</span><span class="err">中国</span><span class="p">)</span> 
 <span class="n">china</span>
 </pre></div>
 Python 2.x
@@ -2372,43 +2372,43 @@ python 3.x:
         <span class="k">pass</span>
 
 <span class="k">def</span> <span class="nf">test_xrange</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">xrange</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
         <span class="k">pass</span>   
 </pre></div>
 Python 2
-<div class="codehilite"><pre><span></span><span class="nb">print</span> <span class="s1">&#39;Python&#39;</span><span class="p">,</span> <span class="n">python_version</span><span class="p">()</span>
+<div class="codehilite"><pre><span></span><span class="k">print</span> <span class="s1">&#39;Python&#39;</span><span class="p">,</span> <span class="n">python_version</span><span class="p">()</span>
 
-<span class="nb">print</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">timing range()&#39;</span> 
+<span class="k">print</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">timing range()&#39;</span> 
 <span class="o">%</span><span class="n">timeit</span> <span class="n">test_range</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
 
-<span class="nb">print</span> <span class="s1">&#39;</span><span class="se">\n\n</span><span class="s1">timing xrange()&#39;</span> 
+<span class="k">print</span> <span class="s1">&#39;</span><span class="se">\n\n</span><span class="s1">timing xrange()&#39;</span> 
 <span class="o">%</span><span class="n">timeit</span> <span class="n">test_xrange</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
 
 <span class="c1">#Python 2.7.6</span>
 
 <span class="n">timing</span> <span class="nb">range</span><span class="p">()</span>
-<span class="mi">1000</span> <span class="n">loops</span><span class="p">,</span> <span class="n">best</span> <span class="n">of</span> <span class="mi">3</span><span class="p">:</span> <span class="mi">433</span> <span class="n">µs</span> <span class="n">per</span> <span class="n">loop</span>
+<span class="mi">1000</span> <span class="n">loops</span><span class="p">,</span> <span class="n">best</span> <span class="n">of</span> <span class="mi">3</span><span class="p">:</span> <span class="mi">433</span> <span class="err">µ</span><span class="n">s</span> <span class="n">per</span> <span class="n">loop</span>
 
 
-<span class="n">timing</span> <span class="n">xrange</span><span class="p">()</span>
-<span class="mi">1000</span> <span class="n">loops</span><span class="p">,</span> <span class="n">best</span> <span class="n">of</span> <span class="mi">3</span><span class="p">:</span> <span class="mi">350</span> <span class="n">µs</span> <span class="n">per</span> <span class="n">loop</span>
+<span class="n">timing</span> <span class="nb">xrange</span><span class="p">()</span>
+<span class="mi">1000</span> <span class="n">loops</span><span class="p">,</span> <span class="n">best</span> <span class="n">of</span> <span class="mi">3</span><span class="p">:</span> <span class="mi">350</span> <span class="err">µ</span><span class="n">s</span> <span class="n">per</span> <span class="n">loop</span>
 </pre></div>
 Python 3
-<div class="codehilite"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Python&#39;</span><span class="p">,</span> <span class="n">python_version</span><span class="p">())</span>
+<div class="codehilite"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="s1">&#39;Python&#39;</span><span class="p">,</span> <span class="n">python_version</span><span class="p">())</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">timing range()&#39;</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">timing range()&#39;</span><span class="p">)</span>
 <span class="o">%</span><span class="n">timeit</span> <span class="n">test_range</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
 
 <span class="c1">#Python 3.4.1</span>
 
 <span class="n">timing</span> <span class="nb">range</span><span class="p">()</span>
-<span class="mi">1000</span> <span class="n">loops</span><span class="p">,</span> <span class="n">best</span> <span class="n">of</span> <span class="mi">3</span><span class="p">:</span> <span class="mi">520</span> <span class="n">µs</span> <span class="n">per</span> <span class="n">loop</span>
+<span class="mi">1000</span> <span class="n">loops</span><span class="p">,</span> <span class="n">best</span> <span class="n">of</span> <span class="mi">3</span><span class="p">:</span> <span class="mi">520</span> <span class="err">µ</span><span class="n">s</span> <span class="n">per</span> <span class="n">loop</span>
 </pre></div>
-<div class="codehilite"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">xrange</span><span class="p">(</span><span class="mi">10</span><span class="p">))</span>
+<div class="codehilite"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="nb">xrange</span><span class="p">(</span><span class="mi">10</span><span class="p">))</span>
 <span class="o">---------------------------------------------------------------------------</span>
 <span class="ne">NameError</span>                                 <span class="n">Traceback</span> <span class="p">(</span><span class="n">most</span> <span class="n">recent</span> <span class="n">call</span> <span class="n">last</span><span class="p">)</span>
 <span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">5</span><span class="o">-</span><span class="mi">5</span><span class="n">d8f9b79ea70</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span><span class="p">()</span>
-<span class="o">----&gt;</span> <span class="mi">1</span> <span class="nb">print</span><span class="p">(</span><span class="n">xrange</span><span class="p">(</span><span class="mi">10</span><span class="p">))</span>
+<span class="o">----&gt;</span> <span class="mi">1</span> <span class="k">print</span><span class="p">(</span><span class="nb">xrange</span><span class="p">(</span><span class="mi">10</span><span class="p">))</span>
 
 <span class="ne">NameError</span><span class="p">:</span> <span class="n">name</span> <span class="s1">&#39;xrange&#39;</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">defined</span>
 </pre></div></p>
@@ -2417,18 +2417,18 @@ Python 3
 新增了一个bin()函数用于将一个整数转换成二进制字串。 Python 2.6已经支持这两种语法。
 在Python 3.x中，表示八进制字面量的方式只有一种，就是0o1000。
 python 2.x
-<div class="codehilite"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="mo">0o1000</span>
+<div class="codehilite"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="mi">0</span><span class="n">o1000</span>
 <span class="mi">512</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="mi">01000</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="mo">01000</span>
 <span class="mi">512</span>
 </pre></div>
 python 3.x
-<div class="codehilite"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="mi">01000</span>
+<div class="codehilite"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="mo">01000</span>
   <span class="n">File</span> <span class="s2">&quot;&lt;stdin&gt;&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">1</span>
-    <span class="mi">01000</span>
+    <span class="mo">01000</span>
         <span class="o">^</span>
 <span class="ne">SyntaxError</span><span class="p">:</span> <span class="n">invalid</span> <span class="n">token</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="mo">0o1000</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="mi">0</span><span class="n">o1000</span>
 <span class="mi">512</span>
 </pre></div></p>
 <h3 id="_4">不等运算符<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
@@ -2531,7 +2531,7 @@ Python 3.x 中去掉了</code>这种写法，只允许使用repr函数，这样�
 <td></td>
 </tr>
 <tr>
-<td><div class="codehilite"><pre><span></span><span class="n">file</span><span class="p">(</span> <span class="o">.....</span> <span class="p">)</span>
+<td><div class="codehilite"><pre><span></span><span class="nb">file</span><span class="p">(</span> <span class="o">.....</span> <span class="p">)</span>
 <span class="c1">#或 </span>
 <span class="nb">open</span><span class="p">(</span><span class="o">.....</span><span class="p">)</span>
 </pre></div></td>
@@ -2571,7 +2571,7 @@ Python 3.x 中去掉了</code>这种写法，只允许使用repr函数，这样�
 <td></td>
 </tr>
 <tr>
-<td><div class="codehilite"><pre><span></span><span class="n">raw_input</span><span class="p">(</span> <span class="s2">&quot;提示信息&quot;</span> <span class="p">)</span>
+<td><div class="codehilite"><pre><span></span><span class="nb">raw_input</span><span class="p">(</span> <span class="s2">&quot;提示信息&quot;</span> <span class="p">)</span>
 </pre></div></td>
 <td></td>
 </tr>
@@ -2611,7 +2611,7 @@ Python 3.x 中去掉了</code>这种写法，只允许使用repr函数，这样�
 但是在Python 3.x中它们却不是这个样子了：
 <div class="codehilite"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="nb">map</span>
 <span class="o">&lt;</span><span class="k">class</span> <span class="err">&#39;</span><span class="nc">map</span><span class="s1">&#39;&gt;</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="nb">map</span><span class="p">(</span><span class="nb">print</span><span class="p">,[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">])</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">map</span><span class="p">(</span><span class="k">print</span><span class="p">,[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">])</span>
 <span class="o">&lt;</span><span class="nb">map</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x10d8bd400</span><span class="o">&gt;</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="nb">filter</span>
 <span class="o">&lt;</span><span class="k">class</span> <span class="err">&#39;</span><span class="nc">filter</span><span class="s1">&#39;&gt;</span>
@@ -2680,19 +2680,19 @@ Python 3.x 中去掉了</code>这种写法，只允许使用repr函数，这样�
 <h3 id="formatted">Formatted字符串字面值<a class="headerlink" href="#formatted" title="Permanent link">&para;</a></h3>
 <p>Formatted字符串是带有’f’字符前缀的字符串，可以很方便的格式化字符串。
 <div class="codehilite"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;xiaoming&quot;</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="sa">f</span><span class="s2">&quot;He name is </span><span class="si">{name}</span><span class="s2">&quot;</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">f</span><span class="s2">&quot;He name is {name}&quot;</span>
 <span class="s1">&#39;He name is xiaoming&#39;</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="n">width</span> <span class="o">=</span> <span class="mi">10</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="n">precision</span> <span class="o">=</span> <span class="mi">4</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="n">value</span> <span class="o">=</span> <span class="n">decimal</span><span class="o">.</span><span class="n">Decimal</span><span class="p">(</span><span class="s2">&quot;12.34567&quot;</span><span class="p">)</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="sa">f</span><span class="s2">&quot;result: {value:</span><span class="si">{width}</span><span class="s2">.</span><span class="si">{precision}</span><span class="s2">}&quot;</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">f</span><span class="s2">&quot;result: {value:{width}.{precision}}&quot;</span>
 <span class="s1">&#39;result:      12.35&#39;</span>
 </pre></div></p>
 <h3 id="_8">数字中支持下划线<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
 <p>数字中支持使用下划线，方便阅读，例如：
-<div class="codehilite"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="mi">1_000_000_000_000_000</span>
+<div class="codehilite"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="mi">1</span><span class="n">_000_000_000_000_000</span>
 <span class="mi">1000000000000000</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="mh">0x_FF_FF_FF_FF</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="mi">0</span><span class="n">x_FF_FF_FF_FF</span>
 <span class="mi">4294967295</span>
 </pre></div>
 字符串format方法也支持了’_’选项，当格式化为浮点数或整数时，以3位分隔，当格式化为’b’,’o’,’x’和’X’时，以4位分隔
@@ -2710,22 +2710,22 @@ Python 3.x 中去掉了</code>这种写法，只允许使用repr函数，这样�
 上面代码中primes为变量名，List[int]为变量注释，用来说明primes列表是用来存放int类型数据的，但是这个不是强制性的，你使用append()方法添加一个str类型数据也是可以的，IDE会提示你添加的数据有误，但是运行时不会报错。</p>
 <h3 id="_10">异步生成器<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h3>
 <p>在Python3.5中，await和yield不能再同一个函数中使用，但是Python3.6已经取消了这个限制，可以在同一个函数体中使用了
-<div class="codehilite"><pre><span></span><span class="k">async</span> <span class="k">def</span> <span class="nf">ticker</span><span class="p">(</span><span class="n">delay</span><span class="p">,</span> <span class="n">to</span><span class="p">):</span>
+<div class="codehilite"><pre><span></span><span class="n">async</span> <span class="k">def</span> <span class="nf">ticker</span><span class="p">(</span><span class="n">delay</span><span class="p">,</span> <span class="n">to</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Yield numbers from 0 to *to* every *delay* seconds.&quot;&quot;&quot;</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">to</span><span class="p">):</span>
         <span class="k">yield</span> <span class="n">i</span>
-        <span class="k">await</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="n">delay</span><span class="p">)</span>
+        <span class="n">await</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="n">delay</span><span class="p">)</span>
 </pre></div></p>
 <h3 id="_11">异步列表推导<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h3>
 <p>增加在list、set和dict的列表推导和生成表达式中使用async for。 
 如下面这段代码:
 <div class="codehilite"><pre><span></span><span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="k">async</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">aiter</span><span class="p">():</span>
+<span class="n">async</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">aiter</span><span class="p">():</span>
     <span class="k">if</span> <span class="n">i</span> <span class="o">%</span> <span class="mi">2</span><span class="p">:</span>
         <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
 </pre></div>
 使用异步推导式之后，可以简写成
-<div class="codehilite"><pre><span></span><span class="n">result</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="k">async</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">aiter</span><span class="p">()</span> <span class="k">if</span> <span class="n">i</span> <span class="o">%</span> <span class="mi">2</span><span class="p">]</span>
+<div class="codehilite"><pre><span></span><span class="n">result</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="n">async</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">aiter</span><span class="p">()</span> <span class="k">if</span> <span class="n">i</span> <span class="o">%</span> <span class="mi">2</span><span class="p">]</span>
 </pre></div>
 现在也支持在所有的推导式中使用await表达式
 <div class="codehilite"><pre><span></span>result = [await fun() for fun in funcs]
@@ -2733,7 +2733,7 @@ Python 3.x 中去掉了</code>这种写法，只允许使用repr函数，这样�
 <h3 id="python_1">Python数据类<a class="headerlink" href="#python_1" title="Permanent link">&para;</a></h3>
 <p>众所周知，Python是处理结构化数据的一种快捷又方便的方法。Python提供了用来组织管理结构，并将常见行为与数据实例联系起来的类，但是拥有许多初始化器的类历来存在这个弊端：需要大量的样板代码为它们创建实例。比如说：
 <div class="codehilite"><pre><span></span><span class="k">class</span> <span class="nc">User</span><span class="p">():</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">name</span><span class="p">,</span><span class="n">user_id</span><span class="p">,</span><span class="n">just_joined</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">name</span><span class="p">,</span><span class="n">user_id</span><span class="p">,</span><span class="n">just_joined</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="o">=</span><span class="n">name</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="o">=</span><span class="n">user_id</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">just_joined</span><span class="o">=</span><span class="n">just_joined</span>
@@ -2743,7 +2743,7 @@ Python 3.x 中去掉了</code>这种写法，只允许使用repr函数，这样�
 <span class="k">class</span> <span class="nc">User</span><span class="p">():</span>
     <span class="n">name</span><span class="p">:</span><span class="nb">str</span>
     <span class="n">user_id</span><span class="p">:</span><span class="nb">int</span>
-    <span class="n">just_joined</span><span class="p">:</span><span class="nb">bool</span><span class="o">=</span><span class="kc">True</span>
+    <span class="n">just_joined</span><span class="p">:</span><span class="nb">bool</span><span class="o">=</span><span class="bp">True</span>
 </pre></div>
 因而生成的类运行起来如同普通的Python类。你还可以声明某些字段是“冻结”或不可变的，并且使创建属性的特殊方法（比如__hash__或__repr__）实现自动化（或手动覆盖）。</p>
 <h3 id="python_2">Python生成器异常处理<a class="headerlink" href="#python_2" title="Permanent link">&para;</a></h3>
@@ -2896,6 +2896,10 @@ Python 3.x 中去掉了</code>这种写法，只允许使用repr函数，这样�
         <script src="../../js/extra.js"></script>
       
         <script src="../../js/baidu-tongji.js"></script>
+      
+        <script src="https://www.googletagmanager.com/gtag/js?id=UA-155098979-1"></script>
+      
+        <script src="../../js/google.js"></script>
       
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML"></script>
       

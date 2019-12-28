@@ -13,7 +13,7 @@
         <meta name="description" content=".net,java,php,python,docker,web">
       
       
-        <link rel="canonical" href="https://rosemarys.gitee.io/sql/mybatis/">
+        <link rel="canonical" href="https://burningmyself.gitee.io/sql/mybatis/">
       
       
         <meta name="author" content="BurningMyself">
@@ -72,7 +72,7 @@
   }
   ga.l = +new Date
   /* Setup integration and send page view */
-  ga("create", "UA-36723568-3", "burningmyself.github.io")
+  ga("create", "UA-155098979-1", "burningmyself.github.io")
   ga("set", "anonymizeIp", true)
   ga("send", "pageview")
   /* Register handler to log search on blur */
@@ -117,7 +117,7 @@
   <nav class="md-header-nav md-grid">
     <div class="md-flex">
       <div class="md-flex__cell md-flex__cell--shrink">
-        <a href="https://rosemarys.gitee.io" title="BurningMyself" class="md-header-nav__button md-logo">
+        <a href="https://burningmyself.gitee.io" title="BurningMyself" class="md-header-nav__button md-logo">
           
             <i class="md-icon"></i>
           
@@ -209,7 +209,7 @@
                   <div class="md-sidebar__inner">
                     <nav class="md-nav md-nav--primary" data-md-level="0">
   <label class="md-nav__title md-nav__title--site" for="__drawer">
-    <a href="https://rosemarys.gitee.io" title="BurningMyself" class="md-nav__button md-logo">
+    <a href="https://burningmyself.gitee.io" title="BurningMyself" class="md-nav__button md-logo">
       
         <i class="md-icon"></i>
       
@@ -2063,27 +2063,27 @@ insert into names (name) values (#{value})
 <span class="nt">&lt;/insert&gt;</span>
 </pre></div>
 然后在java代码中像下面这样执行批处理插入:</p>
-<div class="codehilite"><pre><span></span><span class="n">list</span> <span class="o">&lt;</span> <span class="n">string</span> <span class="o">&gt;</span> <span class="n">names</span> <span class="o">=</span> <span class="k">new</span> <span class="n">arraylist</span><span class="p">();</span>
-<span class="n">names</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="err">“</span><span class="n">fred</span><span class="err">”</span><span class="p">);</span>
-<span class="n">names</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="err">“</span><span class="n">barney</span><span class="err">”</span><span class="p">);</span>
-<span class="n">names</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="err">“</span><span class="n">betty</span><span class="err">”</span><span class="p">);</span>
-<span class="n">names</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="err">“</span><span class="n">wilma</span><span class="err">”</span><span class="p">);</span>
+<div class="codehilite"><pre><span></span><span class="n">list</span> <span class="o">&lt;</span> <span class="n">string</span> <span class="o">&gt;</span> <span class="n">names</span> <span class="o">=</span> <span class="k">new</span> <span class="n">arraylist</span><span class="o">();</span>
+<span class="n">names</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="err">“</span><span class="n">fred</span><span class="err">”</span><span class="o">);</span>
+<span class="n">names</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="err">“</span><span class="n">barney</span><span class="err">”</span><span class="o">);</span>
+<span class="n">names</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="err">“</span><span class="n">betty</span><span class="err">”</span><span class="o">);</span>
+<span class="n">names</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="err">“</span><span class="n">wilma</span><span class="err">”</span><span class="o">);</span>
 <span class="c1">// 注意这里 executortype.batch</span>
-<span class="n">sqlsession</span> <span class="n">sqlsession</span> <span class="o">=</span> <span class="n">sqlsessionfactory</span><span class="p">.</span><span class="na">opensession</span><span class="p">(</span><span class="n">executortype</span><span class="p">.</span><span class="na">batch</span><span class="p">);</span>
-<span class="k">try</span> <span class="p">{</span>
-    <span class="n">namemapper</span> <span class="n">mapper</span> <span class="o">=</span> <span class="n">sqlsession</span><span class="p">.</span><span class="na">getmapper</span><span class="p">(</span><span class="n">namemapper</span><span class="p">.</span><span class="na">class</span><span class="p">);</span>
-    <span class="k">for</span> <span class="p">(</span><span class="n">string</span> <span class="n">name</span><span class="p">:</span> <span class="n">names</span><span class="p">)</span> <span class="p">{</span>
-        <span class="n">mapper</span><span class="p">.</span><span class="na">insertname</span><span class="p">(</span><span class="n">name</span><span class="p">);</span>
-    <span class="p">}</span>
-    <span class="n">sqlsession</span><span class="p">.</span><span class="na">commit</span><span class="p">();</span>
-<span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="n">Exception</span> <span class="n">e</span><span class="p">)</span> <span class="p">{</span>
-    <span class="n">e</span><span class="p">.</span><span class="na">printStackTrace</span><span class="p">();</span>
-    <span class="n">sqlSession</span><span class="p">.</span><span class="na">rollback</span><span class="p">();</span>
-    <span class="k">throw</span> <span class="n">e</span><span class="p">;</span>
-<span class="p">}</span>
-<span class="k">finally</span> <span class="p">{</span>
-    <span class="n">sqlsession</span><span class="p">.</span><span class="na">close</span><span class="p">();</span>
-<span class="p">}</span>
+<span class="n">sqlsession</span> <span class="n">sqlsession</span> <span class="o">=</span> <span class="n">sqlsessionfactory</span><span class="o">.</span><span class="na">opensession</span><span class="o">(</span><span class="n">executortype</span><span class="o">.</span><span class="na">batch</span><span class="o">);</span>
+<span class="k">try</span> <span class="o">{</span>
+    <span class="n">namemapper</span> <span class="n">mapper</span> <span class="o">=</span> <span class="n">sqlsession</span><span class="o">.</span><span class="na">getmapper</span><span class="o">(</span><span class="n">namemapper</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+    <span class="k">for</span> <span class="o">(</span><span class="n">string</span> <span class="n">name</span><span class="o">:</span> <span class="n">names</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">mapper</span><span class="o">.</span><span class="na">insertname</span><span class="o">(</span><span class="n">name</span><span class="o">);</span>
+    <span class="o">}</span>
+    <span class="n">sqlsession</span><span class="o">.</span><span class="na">commit</span><span class="o">();</span>
+<span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">Exception</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+    <span class="n">sqlSession</span><span class="o">.</span><span class="na">rollback</span><span class="o">();</span>
+    <span class="k">throw</span> <span class="n">e</span><span class="o">;</span>
+<span class="o">}</span>
+<span class="k">finally</span> <span class="o">{</span>
+    <span class="n">sqlsession</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+<span class="o">}</span>
 </pre></div>
 
 <h2 id="_5">如何获取自动生成的(主)键值?<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
@@ -2091,14 +2091,14 @@ insert into names (name) values (#{value})
 <p>如果采用自增长策略，自动生成的键值在 insert 方法执行完后可以被设置到传入的参数对象中。</p>
 <p>示例：</p>
 <div class="codehilite"><pre><span></span><span class="o">&lt;</span><span class="n">insert</span> <span class="n">id</span><span class="o">=</span><span class="err">”</span><span class="n">insertname</span><span class="err">”</span> <span class="n">usegeneratedkeys</span><span class="o">=</span><span class="err">”</span><span class="kc">true</span><span class="err">”</span> <span class="n">keyproperty</span><span class="o">=</span><span class="err">”</span><span class="n">id</span><span class="err">”</span><span class="o">&gt;</span>
-     <span class="n">insert</span> <span class="n">into</span> <span class="nf">names</span> <span class="p">(</span><span class="n">name</span><span class="p">)</span> <span class="n">values</span> <span class="p">(</span><span class="err">#</span><span class="p">{</span><span class="n">name</span><span class="p">})</span>
+     <span class="n">insert</span> <span class="n">into</span> <span class="nf">names</span> <span class="o">(</span><span class="n">name</span><span class="o">)</span> <span class="n">values</span> <span class="o">(</span><span class="err">#</span><span class="o">{</span><span class="n">name</span><span class="o">})</span>
 <span class="o">&lt;/</span><span class="n">insert</span><span class="o">&gt;</span>
-<span class="n">name</span> <span class="n">name</span> <span class="o">=</span> <span class="k">new</span> <span class="n">name</span><span class="p">();</span>
-<span class="n">name</span><span class="p">.</span><span class="na">setname</span><span class="p">(</span><span class="err">“</span><span class="n">fred</span><span class="err">”</span><span class="p">);</span>
-<span class="kt">int</span> <span class="n">rows</span> <span class="o">=</span> <span class="n">mapper</span><span class="p">.</span><span class="na">insertname</span><span class="p">(</span><span class="n">name</span><span class="p">);</span>
+<span class="n">name</span> <span class="n">name</span> <span class="o">=</span> <span class="k">new</span> <span class="n">name</span><span class="o">();</span>
+<span class="n">name</span><span class="o">.</span><span class="na">setname</span><span class="o">(</span><span class="err">“</span><span class="n">fred</span><span class="err">”</span><span class="o">);</span>
+<span class="kt">int</span> <span class="n">rows</span> <span class="o">=</span> <span class="n">mapper</span><span class="o">.</span><span class="na">insertname</span><span class="o">(</span><span class="n">name</span><span class="o">);</span>
 <span class="c1">// 完成后,id已经被设置到对象中</span>
-<span class="n">system</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="err">“</span><span class="n">rows</span> <span class="n">inserted</span> <span class="o">=</span> <span class="err">”</span> <span class="o">+</span> <span class="n">rows</span><span class="p">);</span>
-<span class="n">system</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="err">“</span><span class="n">generated</span> <span class="n">key</span> <span class="n">value</span> <span class="o">=</span> <span class="err">”</span> <span class="o">+</span> <span class="n">name</span><span class="p">.</span><span class="na">getid</span><span class="p">());</span>
+<span class="n">system</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="err">“</span><span class="n">rows</span> <span class="n">inserted</span> <span class="o">=</span> <span class="err">”</span> <span class="o">+</span> <span class="n">rows</span><span class="o">);</span>
+<span class="n">system</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="err">“</span><span class="n">generated</span> <span class="n">key</span> <span class="n">value</span> <span class="o">=</span> <span class="err">”</span> <span class="o">+</span> <span class="n">name</span><span class="o">.</span><span class="na">getid</span><span class="o">());</span>
 </pre></div>
 
 <h2 id="mapper">在mapper中如何传递多个参数?<a class="headerlink" href="#mapper" title="Permanent link">&para;</a></h2>
@@ -2113,9 +2113,9 @@ DAO层的函数</li>
 <span class="nt">&lt;/select&gt;</span>
 </pre></div>
 2. 第二种：使用 @param 注解:</p>
-<p><div class="codehilite"><pre><span></span><span class="kd">public</span> <span class="kd">interface</span> <span class="nc">usermapper</span> <span class="p">{</span>
-   <span class="n">user</span> <span class="nf">selectuser</span><span class="p">(</span><span class="nd">@param</span><span class="p">(</span><span class="err">“</span><span class="n">username</span><span class="err">”</span><span class="p">)</span> <span class="n">string</span> <span class="n">username</span><span class="p">,</span><span class="nd">@param</span><span class="p">(</span><span class="err">“</span><span class="n">hashedpassword</span><span class="err">”</span><span class="p">)</span> <span class="n">string</span> <span class="n">hashedpassword</span><span class="p">);</span>
-<span class="p">}</span>
+<p><div class="codehilite"><pre><span></span><span class="kd">public</span> <span class="kd">interface</span> <span class="nc">usermapper</span> <span class="o">{</span>
+   <span class="n">user</span> <span class="nf">selectuser</span><span class="o">(</span><span class="nd">@param</span><span class="o">(</span><span class="err">“</span><span class="n">username</span><span class="err">”</span><span class="o">)</span> <span class="n">string</span> <span class="n">username</span><span class="o">,</span><span class="nd">@param</span><span class="o">(</span><span class="err">“</span><span class="n">hashedpassword</span><span class="err">”</span><span class="o">)</span> <span class="n">string</span> <span class="n">hashedpassword</span><span class="o">);</span>
+<span class="o">}</span>
 </pre></div>
 然后,就可以在xml像下面这样使用(推荐封装为一个map,作为单个参数传递给mapper):</p>
 <div class="codehilite"><pre><span></span><span class="nt">&lt;select</span> <span class="na">id=</span><span class="s">”selectuser”</span> <span class="na">resulttype=</span><span class="s">”user”</span><span class="nt">&gt;</span>
@@ -2129,19 +2129,19 @@ DAO层的函数</li>
 <ol>
 <li>第三种：多个参数封装成map</li>
 </ol>
-<div class="codehilite"><pre><span></span><span class="k">try</span> <span class="p">{</span>
+<div class="codehilite"><pre><span></span><span class="k">try</span> <span class="o">{</span>
     <span class="c1">//映射文件的命名空间.SQL片段的ID，就可以调用对应的映射文件中的SQL</span>
     <span class="c1">//由于我们的参数超过了两个，而方法中只有一个Object参数收集，因此我们使用Map集合来装载我们的参数</span>
-    <span class="n">Map</span> <span class="o">&lt;</span> <span class="n">String</span><span class="p">,</span> <span class="n">Object</span> <span class="o">&gt;</span> <span class="n">map</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashMap</span><span class="p">();</span>
-    <span class="n">map</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="s">&quot;start&quot;</span><span class="p">,</span> <span class="n">start</span><span class="p">);</span>
-    <span class="n">map</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="s">&quot;end&quot;</span><span class="p">,</span> <span class="n">end</span><span class="p">);</span>
-    <span class="k">return</span> <span class="n">sqlSession</span><span class="p">.</span><span class="na">selectList</span><span class="p">(</span><span class="s">&quot;StudentID.pagination&quot;</span><span class="p">,</span> <span class="n">map</span><span class="p">);</span>
-<span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="n">Exception</span> <span class="n">e</span><span class="p">)</span> <span class="p">{</span>
-    <span class="n">e</span><span class="p">.</span><span class="na">printStackTrace</span><span class="p">();</span>
-    <span class="n">sqlSession</span><span class="p">.</span><span class="na">rollback</span><span class="p">();</span>
-    <span class="k">throw</span> <span class="n">e</span><span class="p">;</span>
-<span class="p">}</span> <span class="k">finally</span> <span class="p">{</span>
-    <span class="n">MybatisUtil</span><span class="p">.</span><span class="na">closeSqlSession</span><span class="p">();</span>
+    <span class="n">Map</span> <span class="o">&lt;</span> <span class="n">String</span><span class="o">,</span> <span class="n">Object</span> <span class="o">&gt;</span> <span class="n">map</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashMap</span><span class="o">();</span>
+    <span class="n">map</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">&quot;start&quot;</span><span class="o">,</span> <span class="n">start</span><span class="o">);</span>
+    <span class="n">map</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">&quot;end&quot;</span><span class="o">,</span> <span class="n">end</span><span class="o">);</span>
+    <span class="k">return</span> <span class="n">sqlSession</span><span class="o">.</span><span class="na">selectList</span><span class="o">(</span><span class="s">&quot;StudentID.pagination&quot;</span><span class="o">,</span> <span class="n">map</span><span class="o">);</span>
+<span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">Exception</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+    <span class="n">sqlSession</span><span class="o">.</span><span class="na">rollback</span><span class="o">();</span>
+    <span class="k">throw</span> <span class="n">e</span><span class="o">;</span>
+<span class="o">}</span> <span class="k">finally</span> <span class="o">{</span>
+    <span class="n">MybatisUtil</span><span class="o">.</span><span class="na">closeSqlSession</span><span class="o">();</span>
 </pre></div>
 
 <h2 id="mybatissqlsql">Mybatis动态sql有什么用？执行原理？有哪些动态sql？<a class="headerlink" href="#mybatissqlsql" title="Permanent link">&para;</a></h2>
@@ -2377,6 +2377,10 @@ DAO层的函数</li>
         <script src="../../js/extra.js"></script>
       
         <script src="../../js/baidu-tongji.js"></script>
+      
+        <script src="https://www.googletagmanager.com/gtag/js?id=UA-155098979-1"></script>
+      
+        <script src="../../js/google.js"></script>
       
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML"></script>
       

@@ -13,7 +13,7 @@
         <meta name="description" content=".net,java,php,python,docker,web">
       
       
-        <link rel="canonical" href="https://rosemarys.gitee.io/python/syntax_rule/">
+        <link rel="canonical" href="https://burningmyself.gitee.io/python/syntax_rule/">
       
       
         <meta name="author" content="BurningMyself">
@@ -72,7 +72,7 @@
   }
   ga.l = +new Date
   /* Setup integration and send page view */
-  ga("create", "UA-36723568-3", "burningmyself.github.io")
+  ga("create", "UA-155098979-1", "burningmyself.github.io")
   ga("set", "anonymizeIp", true)
   ga("send", "pageview")
   /* Register handler to log search on blur */
@@ -117,7 +117,7 @@
   <nav class="md-header-nav md-grid">
     <div class="md-flex">
       <div class="md-flex__cell md-flex__cell--shrink">
-        <a href="https://rosemarys.gitee.io" title="BurningMyself" class="md-header-nav__button md-logo">
+        <a href="https://burningmyself.gitee.io" title="BurningMyself" class="md-header-nav__button md-logo">
           
             <i class="md-icon"></i>
           
@@ -209,7 +209,7 @@
                   <div class="md-sidebar__inner">
                     <nav class="md-nav md-nav--primary" data-md-level="0">
   <label class="md-nav__title md-nav__title--site" for="__drawer">
-    <a href="https://rosemarys.gitee.io" title="BurningMyself" class="md-nav__button md-logo">
+    <a href="https://burningmyself.gitee.io" title="BurningMyself" class="md-nav__button md-logo">
       
         <i class="md-icon"></i>
       
@@ -2306,7 +2306,7 @@
     <span class="k">yield from</span> <span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">i</span><span class="p">]</span>
 
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">dup</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
 
 <span class="o">&gt;&gt;&gt;</span>
 <span class="mi">0</span>
@@ -2332,7 +2332,7 @@
     <span class="k">elif</span> <span class="n">x</span> <span class="o">==</span> <span class="s1">&#39;b&#39;</span><span class="p">:</span>
         <span class="k">return</span> <span class="mi">2</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="k">return</span> <span class="kc">None</span>
+        <span class="k">return</span> <span class="bp">None</span>
 
 <span class="k">def</span> <span class="nf">fun</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
     <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;a&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">}</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
@@ -2340,7 +2340,7 @@
 
 <h2 id="_11">有下标索引的枚举<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h2>
 <div class="codehilite"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">e</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">([</span><span class="s2">&quot;a&quot;</span><span class="p">,</span><span class="s2">&quot;b&quot;</span><span class="p">,</span><span class="s2">&quot;c&quot;</span><span class="p">]):</span>
-<span class="o">...</span>     <span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>
+<span class="o">...</span>     <span class="k">print</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>
 <span class="o">...</span>
 <span class="mi">0</span> <span class="n">a</span>
 <span class="mi">1</span> <span class="n">b</span>
@@ -2353,7 +2353,7 @@
 <span class="o">&gt;&gt;&gt;</span> <span class="n">g</span>
 <span class="o">&lt;</span><span class="n">generator</span> <span class="nb">object</span> <span class="o">&lt;</span><span class="n">genexpr</span><span class="o">&gt;</span> <span class="n">at</span> <span class="mh">0x10881e518</span><span class="o">&gt;</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">g</span><span class="p">:</span>
-<span class="o">...</span>     <span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+<span class="o">...</span>     <span class="k">print</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
 <span class="o">...</span>
 <span class="mi">0</span>
 <span class="mi">1</span>
@@ -2375,7 +2375,7 @@
 
 <h2 id="_13">字符串格式化<a class="headerlink" href="#_13" title="Permanent link">&para;</a></h2>
 <div class="codehilite"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="n">lang</span> <span class="o">=</span> <span class="s1">&#39;python&#39;</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{lang}</span><span class="s1"> is most popular language in the world&#39;</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">f</span><span class="s1">&#39;{lang} is most popular language in the world&#39;</span>
 <span class="s1">&#39;python is most popular language in the world&#39;</span>
 </pre></div>
 
@@ -2384,7 +2384,7 @@
 <span class="o">&gt;&gt;&gt;</span> <span class="nb">max</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">nums</span><span class="p">),</span> <span class="n">key</span><span class="o">=</span><span class="n">nums</span><span class="o">.</span><span class="n">count</span><span class="p">)</span>
 <span class="mi">3</span>
 
-<span class="n">或者</span>
+<span class="err">或者</span>
 <span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">Counter</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="n">Counter</span><span class="p">(</span><span class="n">nums</span><span class="p">)</span><span class="o">.</span><span class="n">most_common</span><span class="p">()[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
 <span class="mi">3</span>
@@ -2397,14 +2397,14 @@
 
 <h2 id="_16">判断对象类型，可指定多个类型<a class="headerlink" href="#_16" title="Permanent link">&para;</a></h2>
 <div class="codehilite"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">str</span><span class="p">))</span>
-<span class="kc">True</span>
+<span class="bp">True</span>
 </pre></div>
 
 <h2 id="startswithendswith">类似的还有字符串的 startswith，endswith<a class="headerlink" href="#startswithendswith" title="Permanent link">&para;</a></h2>
 <div class="codehilite"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="s2">&quot;http://foofish.net&quot;</span><span class="o">.</span><span class="n">startswith</span><span class="p">((</span><span class="s1">&#39;http&#39;</span><span class="p">,</span><span class="s1">&#39;https&#39;</span><span class="p">))</span>
-<span class="kc">True</span>
+<span class="bp">True</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="s2">&quot;https://foofish.net&quot;</span><span class="o">.</span><span class="n">startswith</span><span class="p">((</span><span class="s1">&#39;http&#39;</span><span class="p">,</span><span class="s1">&#39;https&#39;</span><span class="p">))</span>
-<span class="kc">True</span>
+<span class="bp">True</span>
 </pre></div>
 
 <h2 id="str_repr"><strong>str</strong> 与 <strong>repr</strong> 区别<a class="headerlink" href="#str_repr" title="Permanent link">&para;</a></h2>
@@ -2552,6 +2552,10 @@
         <script src="../../js/extra.js"></script>
       
         <script src="../../js/baidu-tongji.js"></script>
+      
+        <script src="https://www.googletagmanager.com/gtag/js?id=UA-155098979-1"></script>
+      
+        <script src="../../js/google.js"></script>
       
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML"></script>
       

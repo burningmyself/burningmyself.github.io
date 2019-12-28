@@ -13,7 +13,7 @@
         <meta name="description" content=".net,java,php,python,docker,web">
       
       
-        <link rel="canonical" href="https://rosemarys.gitee.io/java/load-class/">
+        <link rel="canonical" href="https://burningmyself.gitee.io/java/load-class/">
       
       
         <meta name="author" content="BurningMyself">
@@ -72,7 +72,7 @@
   }
   ga.l = +new Date
   /* Setup integration and send page view */
-  ga("create", "UA-36723568-3", "burningmyself.github.io")
+  ga("create", "UA-155098979-1", "burningmyself.github.io")
   ga("set", "anonymizeIp", true)
   ga("send", "pageview")
   /* Register handler to log search on blur */
@@ -117,7 +117,7 @@
   <nav class="md-header-nav md-grid">
     <div class="md-flex">
       <div class="md-flex__cell md-flex__cell--shrink">
-        <a href="https://rosemarys.gitee.io" title="BurningMyself" class="md-header-nav__button md-logo">
+        <a href="https://burningmyself.gitee.io" title="BurningMyself" class="md-header-nav__button md-logo">
           
             <i class="md-icon"></i>
           
@@ -209,7 +209,7 @@
                   <div class="md-sidebar__inner">
                     <nav class="md-nav md-nav--primary" data-md-level="0">
   <label class="md-nav__title md-nav__title--site" for="__drawer">
-    <a href="https://rosemarys.gitee.io" title="BurningMyself" class="md-nav__button md-logo">
+    <a href="https://burningmyself.gitee.io" title="BurningMyself" class="md-nav__button md-logo">
       
         <i class="md-icon"></i>
       
@@ -2005,31 +2005,31 @@ JDK 默认提供三种类加载器</p>
 <li>待加载的类必须用 <code>The Java™ Language Specification</code> 定义的全类名，全类名的定义请查阅 <a href="https://docs.oracle.com/javase/specs/jls/se8/html/jls-13.html#jls-13.1">The Form of a Binary</a>。</li>
 <li>给定一个全类名，类加载器应该去定位该类所在的位置。通用的策略是将全类名转换为类文件路径，然后通过类文件路径在文件系统中定位。</li>
 <li>每一个加载到内存的类都由一个 Class 对象来表示，每一个 Class 对象都有一个指向加载该类的类加载器的引用。但是数组的 Class 对象是由 Java 运行时环境创建的，通过 <code>Class.getClassLoader()</code> 方法返回的是数组元素的类加载器，若数组元素是基本类型，则返回 <code>null</code>，若类是由 <code>Bootstrap ClassLoader</code> 加载的话也是返回 <code>null</code>
-    <div class="codehilite"><pre><span></span><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Main</span> <span class="p">{</span>
-    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="p">)</span> <span class="p">{</span>
+    <div class="codehilite"><pre><span></span><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Main</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
         <span class="c1">// Object 类在 &lt;java_home&gt;/jre/lib/rt.jar 中，</span>
         <span class="c1">// 由 Bootstrap ClassLoader 加载，由于该类加载器是由 native code 编写</span>
         <span class="c1">// 所以输出为 null</span>
-        <span class="n">Object</span><span class="o">[]</span> <span class="n">objects</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Object</span><span class="o">[</span><span class="mi">5</span><span class="o">]</span><span class="p">;</span>
-        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">();</span>
-        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">objects</span><span class="p">.</span><span class="na">getClass</span><span class="p">().</span><span class="na">getClassLoader</span><span class="p">());</span>
+        <span class="n">Object</span><span class="o">[]</span> <span class="n">objects</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Object</span><span class="o">[</span><span class="mi">5</span><span class="o">];</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">();</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">objects</span><span class="o">.</span><span class="na">getClass</span><span class="o">().</span><span class="na">getClassLoader</span><span class="o">());</span>
 
         <span class="c1">// ZipFileAttributes 类在 &lt;java_home&gt;/jre/lib/ext/zipfs.jar 中，</span>
         <span class="c1">// 由 Extension ClassLoader 加载，</span>
         <span class="c1">// 输出为  sun.misc.Launcher$ExtClassLoader@4b67cf4d</span>
-        <span class="n">ZipFileAttributes</span><span class="o">[]</span> <span class="n">attributes</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ZipFileAttributes</span><span class="o">[</span><span class="mi">5</span><span class="o">]</span><span class="p">;</span>
-        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">();</span>
-        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">attributes</span><span class="p">.</span><span class="na">getClass</span><span class="p">().</span><span class="na">getClassLoader</span><span class="p">());</span>
+        <span class="n">ZipFileAttributes</span><span class="o">[]</span> <span class="n">attributes</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ZipFileAttributes</span><span class="o">[</span><span class="mi">5</span><span class="o">];</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">();</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">attributes</span><span class="o">.</span><span class="na">getClass</span><span class="o">().</span><span class="na">getClassLoader</span><span class="o">());</span>
 
         <span class="c1">// Main 类是自定义的类，</span>
         <span class="c1">// 默认由 System ClassLoader 加载，</span>
         <span class="c1">// 输出为 sun.misc.Launcher$AppClassLoader@18b4aac2</span>
-        <span class="n">Main</span><span class="o">[]</span> <span class="n">array</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Main</span><span class="o">[</span><span class="mi">5</span><span class="o">]</span><span class="p">;</span>
-        <span class="n">array</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Main</span><span class="p">();</span>
-        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">();</span>
-        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">array</span><span class="p">.</span><span class="na">getClass</span><span class="p">().</span><span class="na">getClassLoader</span><span class="p">());</span>
-    <span class="p">}</span>
-<span class="p">}</span>
+        <span class="n">Main</span><span class="o">[]</span> <span class="n">array</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Main</span><span class="o">[</span><span class="mi">5</span><span class="o">];</span>
+        <span class="n">array</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Main</span><span class="o">();</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">();</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">array</span><span class="o">.</span><span class="na">getClass</span><span class="o">().</span><span class="na">getClassLoader</span><span class="o">());</span>
+    <span class="o">}</span>
+<span class="o">}</span>
 </pre></div></li>
 <li><code>ClassLoader</code> 默认支持并行加载，但是其子类必须调用 <code>ClassLoader.registerAsParallelCapable()</code> 来启用并行加载</li>
 <li>一般来说,JVM 从本地文件系统加载类的行为是与平台有关的。</li>
@@ -2040,32 +2040,32 @@ JDK 默认提供三种类加载器</p>
 <h3 id="javaneturlclassloader"><code>java.net.URLClassLoader</code><a class="headerlink" href="#javaneturlclassloader" title="Permanent link">&para;</a></h3>
 <p>该类加载器用来加载 URL 指定的 JAR 文件或目录中的类和资源，以 <code>/</code> 结尾的 URL 认为是目录，否则认为是 JAR 文件。</p>
 <div class="codehilite"><pre><span></span><span class="c1">// 尝试通过 URLClassLoader 来加载桌面下的 Test 类。</span>
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Main</span> <span class="p">{</span>
-    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">try</span> <span class="p">{</span>
-            <span class="n">URL</span><span class="o">[]</span> <span class="n">urls</span> <span class="o">=</span> <span class="k">new</span> <span class="n">URL</span><span class="o">[</span><span class="mi">1</span><span class="o">]</span><span class="p">;</span>
-            <span class="n">URLStreamHandler</span> <span class="n">streamHandler</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
-            <span class="n">File</span> <span class="n">classPath</span> <span class="o">=</span> <span class="k">new</span> <span class="n">File</span><span class="p">(</span><span class="s">&quot;/home/chen/Desktop/&quot;</span><span class="p">);</span>
-            <span class="n">String</span> <span class="n">repository</span> <span class="o">=</span> <span class="p">(</span><span class="k">new</span> <span class="n">URL</span><span class="p">(</span><span class="s">&quot;file&quot;</span><span class="p">,</span> <span class="kc">null</span><span class="p">,</span>
-                    <span class="n">classPath</span><span class="p">.</span><span class="na">getCanonicalPath</span><span class="p">()</span> <span class="o">+</span> <span class="n">File</span><span class="p">.</span><span class="na">separator</span><span class="p">))</span>
-                    <span class="p">.</span><span class="na">toString</span><span class="p">();</span>
-            <span class="n">urls</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span> <span class="o">=</span> <span class="k">new</span> <span class="n">URL</span><span class="p">(</span><span class="kc">null</span><span class="p">,</span> <span class="n">repository</span><span class="p">,</span> <span class="n">streamHandler</span><span class="p">);</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Main</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">try</span> <span class="o">{</span>
+            <span class="n">URL</span><span class="o">[]</span> <span class="n">urls</span> <span class="o">=</span> <span class="k">new</span> <span class="n">URL</span><span class="o">[</span><span class="mi">1</span><span class="o">];</span>
+            <span class="n">URLStreamHandler</span> <span class="n">streamHandler</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+            <span class="n">File</span> <span class="n">classPath</span> <span class="o">=</span> <span class="k">new</span> <span class="n">File</span><span class="o">(</span><span class="s">&quot;/home/chen/Desktop/&quot;</span><span class="o">);</span>
+            <span class="n">String</span> <span class="n">repository</span> <span class="o">=</span> <span class="o">(</span><span class="k">new</span> <span class="n">URL</span><span class="o">(</span><span class="s">&quot;file&quot;</span><span class="o">,</span> <span class="kc">null</span><span class="o">,</span>
+                    <span class="n">classPath</span><span class="o">.</span><span class="na">getCanonicalPath</span><span class="o">()</span> <span class="o">+</span> <span class="n">File</span><span class="o">.</span><span class="na">separator</span><span class="o">))</span>
+                    <span class="o">.</span><span class="na">toString</span><span class="o">();</span>
+            <span class="n">urls</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span> <span class="o">=</span> <span class="k">new</span> <span class="n">URL</span><span class="o">(</span><span class="kc">null</span><span class="o">,</span> <span class="n">repository</span><span class="o">,</span> <span class="n">streamHandler</span><span class="o">);</span>
 
-            <span class="n">ClassLoader</span> <span class="n">loader</span> <span class="o">=</span> <span class="k">new</span> <span class="n">URLClassLoader</span><span class="p">(</span><span class="n">urls</span><span class="p">);</span>
+            <span class="n">ClassLoader</span> <span class="n">loader</span> <span class="o">=</span> <span class="k">new</span> <span class="n">URLClassLoader</span><span class="o">(</span><span class="n">urls</span><span class="o">);</span>
 
-            <span class="n">Class</span> <span class="n">testClass</span> <span class="o">=</span> <span class="n">loader</span><span class="p">.</span><span class="na">loadClass</span><span class="p">(</span><span class="s">&quot;Test&quot;</span><span class="p">);</span>
+            <span class="n">Class</span> <span class="n">testClass</span> <span class="o">=</span> <span class="n">loader</span><span class="o">.</span><span class="na">loadClass</span><span class="o">(</span><span class="s">&quot;Test&quot;</span><span class="o">);</span>
 
             <span class="c1">// output:  java.net.URLClassLoader@7f31245a</span>
-            <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">testClass</span><span class="p">.</span><span class="na">getClassLoader</span><span class="p">());</span>
-        <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="n">MalformedURLException</span> <span class="n">e</span><span class="p">)</span> <span class="p">{</span>
-            <span class="n">e</span><span class="p">.</span><span class="na">printStackTrace</span><span class="p">();</span>
-        <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="n">IOException</span> <span class="n">e</span><span class="p">)</span> <span class="p">{</span>
-            <span class="n">e</span><span class="p">.</span><span class="na">printStackTrace</span><span class="p">();</span>
-        <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="n">ClassNotFoundException</span> <span class="n">e</span><span class="p">)</span> <span class="p">{</span>
-            <span class="n">e</span><span class="p">.</span><span class="na">printStackTrace</span><span class="p">();</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
-<span class="p">}</span>
+            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">testClass</span><span class="o">.</span><span class="na">getClassLoader</span><span class="o">());</span>
+        <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">MalformedURLException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+        <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">IOException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+        <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">ClassNotFoundException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+<span class="o">}</span>
 </pre></div>
 
 <h2 id="tomcat_8515_class_loading_mechanism">Tomcat 8.5.15 class loading Mechanism<a class="headerlink" href="#tomcat_8515_class_loading_mechanism" title="Permanent link">&para;</a></h2>
@@ -2230,6 +2230,10 @@ JDK 默认提供三种类加载器</p>
         <script src="../../js/extra.js"></script>
       
         <script src="../../js/baidu-tongji.js"></script>
+      
+        <script src="https://www.googletagmanager.com/gtag/js?id=UA-155098979-1"></script>
+      
+        <script src="../../js/google.js"></script>
       
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML"></script>
       

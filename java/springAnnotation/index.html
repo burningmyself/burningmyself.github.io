@@ -13,7 +13,7 @@
         <meta name="description" content=".net,java,php,python,docker,web">
       
       
-        <link rel="canonical" href="https://rosemarys.gitee.io/java/springAnnotation/">
+        <link rel="canonical" href="https://burningmyself.gitee.io/java/springAnnotation/">
       
       
         <meta name="author" content="BurningMyself">
@@ -72,7 +72,7 @@
   }
   ga.l = +new Date
   /* Setup integration and send page view */
-  ga("create", "UA-36723568-3", "burningmyself.github.io")
+  ga("create", "UA-155098979-1", "burningmyself.github.io")
   ga("set", "anonymizeIp", true)
   ga("send", "pageview")
   /* Register handler to log search on blur */
@@ -117,7 +117,7 @@
   <nav class="md-header-nav md-grid">
     <div class="md-flex">
       <div class="md-flex__cell md-flex__cell--shrink">
-        <a href="https://rosemarys.gitee.io" title="BurningMyself" class="md-header-nav__button md-logo">
+        <a href="https://burningmyself.gitee.io" title="BurningMyself" class="md-header-nav__button md-logo">
           
             <i class="md-icon"></i>
           
@@ -209,7 +209,7 @@
                   <div class="md-sidebar__inner">
                     <nav class="md-nav md-nav--primary" data-md-level="0">
   <label class="md-nav__title md-nav__title--site" for="__drawer">
-    <a href="https://rosemarys.gitee.io" title="BurningMyself" class="md-nav__button md-logo">
+    <a href="https://burningmyself.gitee.io" title="BurningMyself" class="md-nav__button md-logo">
       
         <i class="md-icon"></i>
       
@@ -2105,12 +2105,12 @@
 <h2 id="1_controller">1 @Controller<a class="headerlink" href="#1_controller" title="Permanent link">&para;</a></h2>
 <p>标识一个该类是Spring MVC controller处理器，用来创建处理http请求的对象.
 <div class="codehilite"><pre><span></span><span class="nd">@Controller</span>
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">TestController</span><span class="p">{</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">TestController</span><span class="o">{</span>
 
-  <span class="kd">public</span> <span class="n">String</span> <span class="nf">test</span><span class="p">(</span><span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="n">Object</span><span class="o">&gt;</span> <span class="n">map</span><span class="p">){</span>
-    <span class="k">return</span> <span class="s">&quot;hello&quot;</span><span class="p">;</span>
-  <span class="p">}</span>
-<span class="p">}</span>
+  <span class="kd">public</span> <span class="n">String</span> <span class="nf">test</span><span class="o">(</span><span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span><span class="n">Object</span><span class="o">&gt;</span> <span class="n">map</span><span class="o">){</span>
+    <span class="k">return</span> <span class="s">&quot;hello&quot;</span><span class="o">;</span>
+  <span class="o">}</span>
+<span class="o">}</span>
 </pre></div></p>
 <h2 id="2_restcontroller">2 @RestController<a class="headerlink" href="#2_restcontroller" title="Permanent link">&para;</a></h2>
 <p>Spring4之后加入的注解，原来在@Controller中返回json需要@ResponseBody来配合，如果直接用@RestController替代@Controller就不需要再配置@ResponseBody，默认返回json格式。</p>
@@ -2119,7 +2119,7 @@
 <h2 id="4_autowired">4 @Autowired<a class="headerlink" href="#4_autowired" title="Permanent link">&para;</a></h2>
 <p>用来装配bean，都可以写在字段上，或者方法上。</p>
 <p>默认情况下必须要求依赖对象必须存在，如果要允许null值，可以设置它的required属性为false，例如：</p>
-<div class="codehilite"><pre><span></span><span class="nd">@Autowired</span><span class="p">(</span><span class="n">required</span><span class="o">=</span><span class="kc">false</span><span class="p">)</span>
+<div class="codehilite"><pre><span></span><span class="nd">@Autowired</span><span class="o">(</span><span class="n">required</span><span class="o">=</span><span class="kc">false</span><span class="o">)</span>
 </pre></div>
 
 <h2 id="5_requestmapping">5 @RequestMapping<a class="headerlink" href="#5_requestmapping" title="Permanent link">&para;</a></h2>
@@ -2128,14 +2128,14 @@
 <h2 id="6_requestparam">6 @RequestParam<a class="headerlink" href="#6_requestparam" title="Permanent link">&para;</a></h2>
 <p>用于将请求参数区数据映射到功能处理方法的参数上</p>
 <p>例如</p>
-<p><div class="codehilite"><pre><span></span><span class="kd">public</span> <span class="n">Resp</span> <span class="nf">test</span><span class="p">(</span><span class="nd">@RequestParam</span> <span class="n">Integer</span> <span class="n">id</span><span class="p">){</span>
-  <span class="k">return</span> <span class="n">Resp</span><span class="p">.</span><span class="na">success</span><span class="p">(</span><span class="n">customerInfoService</span><span class="p">.</span><span class="na">fetch</span><span class="p">(</span><span class="n">id</span><span class="p">));</span>
-<span class="p">}</span>
+<p><div class="codehilite"><pre><span></span><span class="kd">public</span> <span class="n">Resp</span> <span class="nf">test</span><span class="o">(</span><span class="nd">@RequestParam</span> <span class="n">Integer</span> <span class="n">id</span><span class="o">){</span>
+  <span class="k">return</span> <span class="n">Resp</span><span class="o">.</span><span class="na">success</span><span class="o">(</span><span class="n">customerInfoService</span><span class="o">.</span><span class="na">fetch</span><span class="o">(</span><span class="n">id</span><span class="o">));</span>
+<span class="o">}</span>
 </pre></div>
 这个id就是要接收从接口传递过来的参数id的值的，如果接口传递过来的参数名和你接收的不一致，也可以如下</p>
-<div class="codehilite"><pre><span></span><span class="kd">public</span> <span class="n">Resp</span> <span class="nf">test</span> <span class="p">(</span><span class="nd">@RequestParam</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="s">&quot;course_id&quot;</span><span class="p">)</span> <span class="n">Integer</span> <span class="n">id</span><span class="p">){</span>
-  <span class="k">return</span> <span class="n">Resp</span><span class="p">.</span><span class="na">success</span><span class="p">(</span><span class="n">customerInfoService</span><span class="p">.</span><span class="na">fetch</span><span class="p">(</span><span class="n">id</span><span class="p">));</span>
-<span class="p">}</span>
+<div class="codehilite"><pre><span></span><span class="kd">public</span> <span class="n">Resp</span> <span class="nf">test</span> <span class="o">(</span><span class="nd">@RequestParam</span><span class="o">(</span><span class="n">value</span><span class="o">=</span><span class="s">&quot;course_id&quot;</span><span class="o">)</span> <span class="n">Integer</span> <span class="n">id</span><span class="o">){</span>
+  <span class="k">return</span> <span class="n">Resp</span><span class="o">.</span><span class="na">success</span><span class="o">(</span><span class="n">customerInfoService</span><span class="o">.</span><span class="na">fetch</span><span class="o">(</span><span class="n">id</span><span class="o">));</span>
+<span class="o">}</span>
 </pre></div>
 
 <p>其中course_id就是接口传递的参数，id就是映射course_id的参数名</p>
@@ -2148,27 +2148,27 @@
 <p>(1). 在有返回的方法上:当ModelAttribute设置了value，方法返回的值会以这个value为key，以参数接受到的值作为value，存入到Model中，如下面的方法执行之后，最终相当于 </p>
 <p>model.addAttribute("user_name", name);假如 @ModelAttribute没有自定义value，则相当于</p>
 <p>model.addAttribute("name", name);
-<div class="codehilite"><pre><span></span><span class="nd">@ModelAttribute</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="s">&quot;user_name&quot;</span><span class="p">)</span>
-<span class="kd">public</span> <span class="n">String</span> <span class="nf">before</span><span class="p">(</span><span class="nd">@RequestParam</span><span class="p">(</span><span class="n">required</span> <span class="o">=</span> <span class="kc">false</span><span class="p">)</span> <span class="n">String</span> <span class="n">Name</span><span class="p">,</span><span class="n">Model</span> <span class="n">model</span><span class="p">){</span>
-  <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;name is &quot;</span><span class="o">+</span><span class="n">name</span><span class="p">);</span>
-<span class="p">}</span>
+<div class="codehilite"><pre><span></span><span class="nd">@ModelAttribute</span><span class="o">(</span><span class="n">value</span><span class="o">=</span><span class="s">&quot;user_name&quot;</span><span class="o">)</span>
+<span class="kd">public</span> <span class="n">String</span> <span class="nf">before</span><span class="o">(</span><span class="nd">@RequestParam</span><span class="o">(</span><span class="n">required</span> <span class="o">=</span> <span class="kc">false</span><span class="o">)</span> <span class="n">String</span> <span class="n">Name</span><span class="o">,</span><span class="n">Model</span> <span class="n">model</span><span class="o">){</span>
+  <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;name is &quot;</span><span class="o">+</span><span class="n">name</span><span class="o">);</span>
+<span class="o">}</span>
 </pre></div>
 (2) 在没返回的方法上：</p>
 <p>需要手动model.add方法</p>
 <p><div class="codehilite"><pre><span></span><span class="nd">@ModelAttribute</span>
-<span class="kd">public</span> <span class="kt">void</span> <span class="nf">before</span><span class="p">(</span><span class="nd">@RequestParam</span><span class="p">(</span><span class="n">required</span> <span class="o">=</span> <span class="kc">false</span><span class="p">)</span> <span class="n">Integer</span> <span class="n">age</span><span class="p">,</span><span class="n">Model</span> <span class="n">model</span><span class="p">)</span> <span class="p">{</span>
-  <span class="n">model</span><span class="p">.</span><span class="na">addAttribute</span><span class="p">(</span><span class="s">&quot;age&quot;</span><span class="p">,</span><span class="n">age</span><span class="p">);</span>
-  <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;age is &quot;</span><span class="o">+</span><span class="n">age</span><span class="p">);</span>
-<span class="p">}</span>
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">before</span><span class="o">(</span><span class="nd">@RequestParam</span><span class="o">(</span><span class="n">required</span> <span class="o">=</span> <span class="kc">false</span><span class="o">)</span> <span class="n">Integer</span> <span class="n">age</span><span class="o">,</span><span class="n">Model</span> <span class="n">model</span><span class="o">)</span> <span class="o">{</span>
+  <span class="n">model</span><span class="o">.</span><span class="na">addAttribute</span><span class="o">(</span><span class="s">&quot;age&quot;</span><span class="o">,</span><span class="n">age</span><span class="o">);</span>
+  <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;age is &quot;</span><span class="o">+</span><span class="n">age</span><span class="o">);</span>
+<span class="o">}</span>
 </pre></div>
 2. 标记在方法的参数上</p>
 <p>标记在方法的参数上，会将客户端传递过来的参数按名称注入到指定对象中，并且会将这个对象自动加入ModelMap中，便于View层使用.我们在上面的类中加入一个方法如下</p>
-<p><div class="codehilite"><pre><span></span><span class="kd">public</span> <span class="n">Resp</span> <span class="nf">model</span><span class="p">(</span><span class="nd">@ModelAttribute</span><span class="p">(</span><span class="s">&quot;user_name&quot;</span><span class="p">)</span> <span class="n">String</span> <span class="n">user_name</span><span class="p">,</span>
-    <span class="nd">@ModelAttribute</span><span class="p">(</span><span class="s">&quot;name&quot;</span><span class="p">)</span> <span class="n">String</span> <span class="n">name</span><span class="p">,</span>
-    <span class="nd">@ModelAttribute</span><span class="p">(</span><span class="s">&quot;age&quot;</span><span class="p">)</span> <span class="n">Integer</span> <span class="n">age</span><span class="p">,</span><span class="n">Model</span> <span class="n">model</span><span class="p">){</span>
-      <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;user_name=&quot;</span><span class="o">+</span><span class="n">user_name</span><span class="o">+</span><span class="s">&quot; name=&quot;</span><span class="o">+</span><span class="n">name</span><span class="o">+</span><span class="s">&quot; age=&quot;</span><span class="o">+</span><span class="n">age</span><span class="p">);</span>
-      <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;model=&quot;</span><span class="o">+</span><span class="n">model</span><span class="p">);</span>
-    <span class="p">}</span>
+<p><div class="codehilite"><pre><span></span><span class="kd">public</span> <span class="n">Resp</span> <span class="nf">model</span><span class="o">(</span><span class="nd">@ModelAttribute</span><span class="o">(</span><span class="s">&quot;user_name&quot;</span><span class="o">)</span> <span class="n">String</span> <span class="n">user_name</span><span class="o">,</span>
+    <span class="nd">@ModelAttribute</span><span class="o">(</span><span class="s">&quot;name&quot;</span><span class="o">)</span> <span class="n">String</span> <span class="n">name</span><span class="o">,</span>
+    <span class="nd">@ModelAttribute</span><span class="o">(</span><span class="s">&quot;age&quot;</span><span class="o">)</span> <span class="n">Integer</span> <span class="n">age</span><span class="o">,</span><span class="n">Model</span> <span class="n">model</span><span class="o">){</span>
+      <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;user_name=&quot;</span><span class="o">+</span><span class="n">user_name</span><span class="o">+</span><span class="s">&quot; name=&quot;</span><span class="o">+</span><span class="n">name</span><span class="o">+</span><span class="s">&quot; age=&quot;</span><span class="o">+</span><span class="n">age</span><span class="o">);</span>
+      <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;model=&quot;</span><span class="o">+</span><span class="n">model</span><span class="o">);</span>
+    <span class="o">}</span>
 </pre></div>
 用在方法参数中的@ModelAttribute注解，实际上是一种接受参数并且自动放入Model对象中，便于使用。</p>
 <h2 id="8_cacheable">8 @Cacheable<a class="headerlink" href="#8_cacheable" title="Permanent link">&para;</a></h2>
@@ -2181,11 +2181,11 @@ key|key|@Cacheable(value="c1",key="#id")
 condition|条件|@Cacheable(value="c1",condition="#id=1")</p>
 <p>比如@Cacheable(value="UserCache") 标识的是当调用了标记了这个注解的方法时，逻辑默认加上从缓存中获取结果的逻辑，如果缓存中没有数据，则执行用户编写查询逻辑，查询成功之后，同时将结果放入缓存中。</p>
 <p>但凡说到缓存，都是key-value的形式的，因此key就是方法中的参数（id），value就是查询的结果，而命名空间UserCache是在spring*.xml中定义。</p>
-<div class="codehilite"><pre><span></span><span class="nd">@Cacheable</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="s">&quot;UserCache&quot;</span><span class="p">)</span>
-<span class="kd">public</span> <span class="kt">int</span> <span class="nf">getUserAge</span><span class="p">(</span><span class="kt">int</span> <span class="n">id</span><span class="p">){</span>
- <span class="kt">int</span> <span class="n">age</span><span class="o">=</span><span class="n">getAgeById</span><span class="p">(</span><span class="n">id</span><span class="p">);</span>
- <span class="k">return</span> <span class="n">age</span><span class="p">;</span>
-<span class="p">}</span>
+<div class="codehilite"><pre><span></span><span class="nd">@Cacheable</span><span class="o">(</span><span class="n">value</span><span class="o">=</span><span class="s">&quot;UserCache&quot;</span><span class="o">)</span>
+<span class="kd">public</span> <span class="kt">int</span> <span class="nf">getUserAge</span><span class="o">(</span><span class="kt">int</span> <span class="n">id</span><span class="o">){</span>
+ <span class="kt">int</span> <span class="n">age</span><span class="o">=</span><span class="n">getAgeById</span><span class="o">(</span><span class="n">id</span><span class="o">);</span>
+ <span class="k">return</span> <span class="n">age</span><span class="o">;</span>
+<span class="o">}</span>
 </pre></div>
 
 <h2 id="9_cacheevict">9 @CacheEvict<a class="headerlink" href="#9_cacheevict" title="Permanent link">&para;</a></h2>
@@ -2234,15 +2234,15 @@ beforeInvocation|是否在方法执行前清空|@CacheEvict(value="c1",beforeInv
 <p>2、types：根据指定参数的类型，将模型中对应类型的参数存储到session中</p>
 <p>3、value：和names是一样的。</p>
 <div class="codehilite"><pre><span></span><span class="nd">@Controller</span>
-<span class="nd">@SessionAttributes</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="p">{</span><span class="s">&quot;names&quot;</span><span class="p">},</span><span class="n">types</span><span class="o">=</span><span class="p">{</span><span class="n">Integer</span><span class="p">.</span><span class="na">class</span><span class="p">})</span>
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">ScopeService</span><span class="p">{</span>
-  <span class="nd">@RequestMapping</span><span class="p">(</span><span class="s">&quot;/testSession&quot;</span><span class="p">)</span>
-  <span class="kd">public</span> <span class="n">String</span> <span class="nf">test</span><span class="p">(</span><span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="n">Object</span><span class="o">&gt;</span> <span class="n">map</span><span class="p">){</span>
-    <span class="n">map</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="s">&quot;names&quot;</span><span class="p">,</span><span class="n">Arrays</span><span class="p">.</span><span class="na">asList</span><span class="p">(</span><span class="s">&quot;a&quot;</span><span class="p">,</span><span class="s">&quot;b&quot;</span><span class="p">,</span><span class="s">&quot;c&quot;</span><span class="p">));</span>
-    <span class="n">map</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="s">&quot;age&quot;</span><span class="p">,</span><span class="mi">12</span><span class="p">);</span>
-    <span class="k">return</span> <span class="s">&quot;hello&quot;</span><span class="p">;</span>
-  <span class="p">}</span>
-<span class="p">}</span>
+<span class="nd">@SessionAttributes</span><span class="o">(</span><span class="n">value</span><span class="o">={</span><span class="s">&quot;names&quot;</span><span class="o">},</span><span class="n">types</span><span class="o">={</span><span class="n">Integer</span><span class="o">.</span><span class="na">class</span><span class="o">})</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">ScopeService</span><span class="o">{</span>
+  <span class="nd">@RequestMapping</span><span class="o">(</span><span class="s">&quot;/testSession&quot;</span><span class="o">)</span>
+  <span class="kd">public</span> <span class="n">String</span> <span class="nf">test</span><span class="o">(</span><span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span><span class="n">Object</span><span class="o">&gt;</span> <span class="n">map</span><span class="o">){</span>
+    <span class="n">map</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">&quot;names&quot;</span><span class="o">,</span><span class="n">Arrays</span><span class="o">.</span><span class="na">asList</span><span class="o">(</span><span class="s">&quot;a&quot;</span><span class="o">,</span><span class="s">&quot;b&quot;</span><span class="o">,</span><span class="s">&quot;c&quot;</span><span class="o">));</span>
+    <span class="n">map</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">&quot;age&quot;</span><span class="o">,</span><span class="mi">12</span><span class="o">);</span>
+    <span class="k">return</span> <span class="s">&quot;hello&quot;</span><span class="o">;</span>
+  <span class="o">}</span>
+<span class="o">}</span>
 </pre></div>
 
 <h2 id="17_required">17 @Required<a class="headerlink" href="#17_required" title="Permanent link">&para;</a></h2>
@@ -2365,6 +2365,10 @@ beforeInvocation|是否在方法执行前清空|@CacheEvict(value="c1",beforeInv
         <script src="../../js/extra.js"></script>
       
         <script src="../../js/baidu-tongji.js"></script>
+      
+        <script src="https://www.googletagmanager.com/gtag/js?id=UA-155098979-1"></script>
+      
+        <script src="../../js/google.js"></script>
       
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML"></script>
       

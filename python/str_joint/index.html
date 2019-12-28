@@ -13,7 +13,7 @@
         <meta name="description" content=".net,java,php,python,docker,web">
       
       
-        <link rel="canonical" href="https://rosemarys.gitee.io/python/str_joint/">
+        <link rel="canonical" href="https://burningmyself.gitee.io/python/str_joint/">
       
       
         <meta name="author" content="BurningMyself">
@@ -72,7 +72,7 @@
   }
   ga.l = +new Date
   /* Setup integration and send page view */
-  ga("create", "UA-36723568-3", "burningmyself.github.io")
+  ga("create", "UA-155098979-1", "burningmyself.github.io")
   ga("set", "anonymizeIp", true)
   ga("send", "pageview")
   /* Register handler to log search on blur */
@@ -117,7 +117,7 @@
   <nav class="md-header-nav md-grid">
     <div class="md-flex">
       <div class="md-flex__cell md-flex__cell--shrink">
-        <a href="https://rosemarys.gitee.io" title="BurningMyself" class="md-header-nav__button md-logo">
+        <a href="https://burningmyself.gitee.io" title="BurningMyself" class="md-header-nav__button md-logo">
           
             <i class="md-icon"></i>
           
@@ -209,7 +209,7 @@
                   <div class="md-sidebar__inner">
                     <nav class="md-nav md-nav--primary" data-md-level="0">
   <label class="md-nav__title md-nav__title--site" for="__drawer">
-    <a href="https://rosemarys.gitee.io" title="BurningMyself" class="md-nav__button md-logo">
+    <a href="https://burningmyself.gitee.io" title="BurningMyself" class="md-nav__button md-logo">
       
         <i class="md-icon"></i>
       
@@ -1921,24 +1921,24 @@
                 
                 <h1 id="python_7">Python 拼接字符串的 7 种方式<a class="headerlink" href="#python_7" title="Permanent link">&para;</a></h1>
 <h2 id="1c">1、来自C语言的%方式<a class="headerlink" href="#1c" title="Permanent link">&para;</a></h2>
-<p><div class="codehilite"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1"> </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="s1">&#39;Hello&#39;</span><span class="p">,</span> <span class="s1">&#39;world&#39;</span><span class="p">))</span>
+<p><div class="codehilite"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1"> </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="s1">&#39;Hello&#39;</span><span class="p">,</span> <span class="s1">&#39;world&#39;</span><span class="p">))</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="n">Hello</span> <span class="n">world</span>
 </pre></div>
 %号格式化字符串的方式继承自古老的C语言，这在很多编程语言都有类似的实现。上例的%s是一个占位符，它仅代表一段字符串，并不是拼接的实际内容。实际的拼接内容在一个单独的%号后面，放在一个元组里。</p>
 <p>类似的占位符还有：%d（代表一个整数）、%f（代表一个浮点数）、%x（代表一个16进制数），等等。%占位符既是这种拼接方式的特点，同时也是其限制，因为每种占位符都有特定意义，实际使用起来太麻烦了。</p>
 <h2 id="2format">2、format()拼接方式<a class="headerlink" href="#2format" title="Permanent link">&para;</a></h2>
 <p><div class="codehilite"><pre><span></span><span class="c1"># 简洁版</span>
-<span class="n">s1</span> <span class="o">=</span> <span class="s1">&#39;Hello </span><span class="si">{}</span><span class="s1">! My name is </span><span class="si">{}</span><span class="s1">.&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s1">&#39;World&#39;</span><span class="p">,</span> <span class="s1">&#39;Python猫&#39;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">s1</span><span class="p">)</span>
-<span class="o">&gt;&gt;&gt;</span><span class="n">Hello</span> <span class="n">World</span><span class="err">!</span> <span class="n">My</span> <span class="n">name</span> <span class="ow">is</span> <span class="n">Python猫</span><span class="o">.</span>
+<span class="n">s1</span> <span class="o">=</span> <span class="s1">&#39;Hello {}! My name is {}.&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s1">&#39;World&#39;</span><span class="p">,</span> <span class="s1">&#39;Python猫&#39;</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">s1</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span><span class="n">Hello</span> <span class="n">World</span><span class="err">!</span> <span class="n">My</span> <span class="n">name</span> <span class="ow">is</span> <span class="n">Python</span><span class="err">猫</span><span class="o">.</span>
 
 <span class="c1"># 对号入座版</span>
-<span class="n">s2</span> <span class="o">=</span> <span class="s1">&#39;Hello </span><span class="si">{0}</span><span class="s1">! My name is </span><span class="si">{1}</span><span class="s1">.&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s1">&#39;World&#39;</span><span class="p">,</span> <span class="s1">&#39;Python猫&#39;</span><span class="p">)</span>
-<span class="n">s3</span> <span class="o">=</span> <span class="s1">&#39;Hello </span><span class="si">{name1}</span><span class="s1">! My name is </span><span class="si">{name2}</span><span class="s1">.&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">name1</span><span class="o">=</span><span class="s1">&#39;World&#39;</span><span class="p">,</span> <span class="n">name2</span><span class="o">=</span><span class="s1">&#39;Python猫&#39;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">s2</span><span class="p">)</span>
-<span class="o">&gt;&gt;&gt;</span><span class="n">Hello</span> <span class="n">World</span><span class="err">!</span> <span class="n">My</span> <span class="n">name</span> <span class="ow">is</span> <span class="n">Python猫</span><span class="o">.</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">s3</span><span class="p">)</span>
-<span class="o">&gt;&gt;&gt;</span><span class="n">Hello</span> <span class="n">World</span><span class="err">!</span> <span class="n">My</span> <span class="n">name</span> <span class="ow">is</span> <span class="n">Python猫</span><span class="o">.</span>
+<span class="n">s2</span> <span class="o">=</span> <span class="s1">&#39;Hello {0}! My name is {1}.&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s1">&#39;World&#39;</span><span class="p">,</span> <span class="s1">&#39;Python猫&#39;</span><span class="p">)</span>
+<span class="n">s3</span> <span class="o">=</span> <span class="s1">&#39;Hello {name1}! My name is {name2}.&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">name1</span><span class="o">=</span><span class="s1">&#39;World&#39;</span><span class="p">,</span> <span class="n">name2</span><span class="o">=</span><span class="s1">&#39;Python猫&#39;</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">s2</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span><span class="n">Hello</span> <span class="n">World</span><span class="err">!</span> <span class="n">My</span> <span class="n">name</span> <span class="ow">is</span> <span class="n">Python</span><span class="err">猫</span><span class="o">.</span>
+<span class="k">print</span><span class="p">(</span><span class="n">s3</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span><span class="n">Hello</span> <span class="n">World</span><span class="err">!</span> <span class="n">My</span> <span class="n">name</span> <span class="ow">is</span> <span class="n">Python</span><span class="err">猫</span><span class="o">.</span>
 </pre></div>
 这种方式使用花括号{}做占位符，在format方法中再转入实际的拼接值。容易看出，它实际上是对%号拼接方式的改进。这种方式在Python2.6中开始引入。</p>
 <p>上例中，简洁版的花括号中无内容，缺点是容易弄错次序。对号入座版主要有两种，一种传入序列号，一种则使用key-value的方式。实战中，我们更推荐后一种，既不会数错次序，又更直观可读。</p>
@@ -1946,9 +1946,9 @@
 <p><div class="codehilite"><pre><span></span><span class="n">s_tuple</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;Hello&#39;</span><span class="p">,</span> <span class="s1">&#39; &#39;</span><span class="p">,</span> <span class="s1">&#39;world&#39;</span><span class="p">)</span>
 <span class="n">s_like_tuple</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;Hello&#39;</span> <span class="s1">&#39; &#39;</span> <span class="s1">&#39;world&#39;</span><span class="p">)</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="n">s_tuple</span><span class="p">)</span> 
+<span class="k">print</span><span class="p">(</span><span class="n">s_tuple</span><span class="p">)</span> 
 <span class="o">&gt;&gt;&gt;</span><span class="p">(</span><span class="s1">&#39;Hello&#39;</span><span class="p">,</span> <span class="s1">&#39; &#39;</span><span class="p">,</span> <span class="s1">&#39;world&#39;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">s_like_tuple</span><span class="p">)</span> 
+<span class="k">print</span><span class="p">(</span><span class="n">s_like_tuple</span><span class="p">)</span> 
 <span class="o">&gt;&gt;&gt;</span><span class="n">Hello</span> <span class="n">world</span>
 
 <span class="nb">type</span><span class="p">(</span><span class="n">s_like_tuple</span><span class="p">)</span> <span class="o">&gt;&gt;&gt;</span><span class="nb">str</span>
@@ -1969,9 +1969,9 @@
 5、常用的+号方式
 <div class="codehilite"><pre><span></span><span class="n">str_1</span> <span class="o">=</span> <span class="s1">&#39;Hello world！ &#39;</span> 
 <span class="n">str_2</span> <span class="o">=</span> <span class="s1">&#39;My name is Python猫.&#39;</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">str_1</span> <span class="o">+</span> <span class="n">str_2</span><span class="p">)</span>
-<span class="o">&gt;&gt;&gt;</span><span class="n">Hello</span> <span class="n">world</span><span class="err">！</span> <span class="n">My</span> <span class="n">name</span> <span class="ow">is</span> <span class="n">Python猫</span><span class="o">.</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">str_1</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">str_1</span> <span class="o">+</span> <span class="n">str_2</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span><span class="n">Hello</span> <span class="n">world</span><span class="err">！</span> <span class="n">My</span> <span class="n">name</span> <span class="ow">is</span> <span class="n">Python</span><span class="err">猫</span><span class="o">.</span>
+<span class="k">print</span><span class="p">(</span><span class="n">str_1</span><span class="p">)</span>
 <span class="o">&gt;&gt;&gt;</span><span class="n">Hello</span> <span class="n">world</span><span class="err">！</span> 
 </pre></div>
 这种方式最常用、直观、易懂，是入门级的实现方式。但是，它也存在两处让人容易犯错的地方。</p>
@@ -1983,16 +1983,16 @@
 <p><div class="codehilite"><pre><span></span><span class="n">str_list</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Hello&#39;</span><span class="p">,</span> <span class="s1">&#39;world&#39;</span><span class="p">]</span>
 <span class="n">str_join1</span> <span class="o">=</span> <span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">str_list</span><span class="p">)</span>
 <span class="n">str_join2</span> <span class="o">=</span> <span class="s1">&#39;-&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">str_list</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">str_join1</span><span class="p">)</span> <span class="o">&gt;&gt;&gt;</span><span class="n">Hello</span> <span class="n">world</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">str_join2</span><span class="p">)</span> <span class="o">&gt;&gt;&gt;</span><span class="n">Hello</span><span class="o">-</span><span class="n">world</span>
+<span class="k">print</span><span class="p">(</span><span class="n">str_join1</span><span class="p">)</span> <span class="o">&gt;&gt;&gt;</span><span class="n">Hello</span> <span class="n">world</span>
+<span class="k">print</span><span class="p">(</span><span class="n">str_join2</span><span class="p">)</span> <span class="o">&gt;&gt;&gt;</span><span class="n">Hello</span><span class="o">-</span><span class="n">world</span>
 </pre></div>
 str对象自带的join()方法，接受一个序列参数，可以实现拼接。拼接时，元素若不是字符串，需要先转换一下。可以看出，这种方法比较适用于连接序列对象中（例如列表）的元素，并设置统一的间隔符。</p>
 <p>当拼接长度超过20时，这种方式基本上是首选。不过，它的缺点就是，不适合进行零散片段的、不处于序列集合的元素拼接。</p>
 <h2 id="7f-string">7、f-string方式<a class="headerlink" href="#7f-string" title="Permanent link">&para;</a></h2>
 <p><div class="codehilite"><pre><span></span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;world&#39;</span>
 <span class="n">myname</span> <span class="o">=</span> <span class="s1">&#39;python_cat&#39;</span>
-<span class="n">words</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;Hello </span><span class="si">{name}</span><span class="s1">. My name is </span><span class="si">{myname}</span><span class="s1">.&#39;</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">words</span><span class="p">)</span>
+<span class="n">words</span> <span class="o">=</span> <span class="n">f</span><span class="s1">&#39;Hello {name}. My name is {myname}.&#39;</span>
+<span class="k">print</span><span class="p">(</span><span class="n">words</span><span class="p">)</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="n">Hello</span> <span class="n">world</span><span class="o">.</span> <span class="n">My</span> <span class="n">name</span> <span class="ow">is</span> <span class="n">python_cat</span><span class="o">.</span>
 </pre></div>
 f-string方式出自PEP 498（Literal String Interpolation，字面字符串插值），从Python3.6版本引入。其特点是在字符串前加 f 标识，字符串中间则用花括号{}包裹其它字符串变量。</p>
@@ -2125,6 +2125,10 @@ f-string方式出自PEP 498（Literal String Interpolation，字面字符串插�
         <script src="../../js/extra.js"></script>
       
         <script src="../../js/baidu-tongji.js"></script>
+      
+        <script src="https://www.googletagmanager.com/gtag/js?id=UA-155098979-1"></script>
+      
+        <script src="../../js/google.js"></script>
       
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML"></script>
       

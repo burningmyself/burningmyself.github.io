@@ -13,7 +13,7 @@
         <meta name="description" content=".net,java,php,python,docker,web">
       
       
-        <link rel="canonical" href="https://rosemarys.gitee.io/python/fabric/">
+        <link rel="canonical" href="https://burningmyself.gitee.io/python/fabric/">
       
       
         <meta name="author" content="BurningMyself">
@@ -72,7 +72,7 @@
   }
   ga.l = +new Date
   /* Setup integration and send page view */
-  ga("create", "UA-36723568-3", "burningmyself.github.io")
+  ga("create", "UA-155098979-1", "burningmyself.github.io")
   ga("set", "anonymizeIp", true)
   ga("send", "pageview")
   /* Register handler to log search on blur */
@@ -117,7 +117,7 @@
   <nav class="md-header-nav md-grid">
     <div class="md-flex">
       <div class="md-flex__cell md-flex__cell--shrink">
-        <a href="https://rosemarys.gitee.io" title="BurningMyself" class="md-header-nav__button md-logo">
+        <a href="https://burningmyself.gitee.io" title="BurningMyself" class="md-header-nav__button md-logo">
           
             <i class="md-icon"></i>
           
@@ -209,7 +209,7 @@
                   <div class="md-sidebar__inner">
                     <nav class="md-nav md-nav--primary" data-md-level="0">
   <label class="md-nav__title md-nav__title--site" for="__drawer">
-    <a href="https://rosemarys.gitee.io" title="BurningMyself" class="md-nav__button md-logo">
+    <a href="https://burningmyself.gitee.io" title="BurningMyself" class="md-nav__button md-logo">
       
         <i class="md-icon"></i>
       
@@ -1959,12 +1959,12 @@
 <p>Fabric 不仅支持 Linux，而且在 Windows 平台也能很好的运行，在中小型项目，它是非常不错的运维工具，有了 Frabic ，管理上百台服务器都不成问题。</p>
 <h3 id="_2">构建连接<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
 <div class="codehilite"><pre><span></span><span class="k">class</span> <span class="nc">Connection</span><span class="p">(</span><span class="n">Context</span><span class="p">):</span>
-    <span class="n">host</span> <span class="o">=</span> <span class="kc">None</span>
-    <span class="n">user</span> <span class="o">=</span> <span class="kc">None</span>
-    <span class="n">port</span> <span class="o">=</span> <span class="kc">None</span>
-    <span class="n">ssh_config</span> <span class="o">=</span> <span class="kc">None</span>
-    <span class="n">connect_timeout</span> <span class="o">=</span> <span class="kc">None</span>
-    <span class="n">connect_kwargs</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">host</span> <span class="o">=</span> <span class="bp">None</span>
+    <span class="n">user</span> <span class="o">=</span> <span class="bp">None</span>
+    <span class="n">port</span> <span class="o">=</span> <span class="bp">None</span>
+    <span class="n">ssh_config</span> <span class="o">=</span> <span class="bp">None</span>
+    <span class="n">connect_timeout</span> <span class="o">=</span> <span class="bp">None</span>
+    <span class="n">connect_kwargs</span> <span class="o">=</span> <span class="bp">None</span>
     <span class="o">...</span>
 </pre></div>
 
@@ -1982,7 +1982,7 @@
 <span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="nn">fabric</span> <span class="kn">import</span> <span class="n">Connection</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="k">for</span> <span class="n">host</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">&#39;web1&#39;</span><span class="p">,</span> <span class="s1">&#39;web2&#39;</span><span class="p">,</span> <span class="s1">&#39;mac1&#39;</span><span class="p">):</span>
 <span class="o">&gt;&gt;&gt;</span>     <span class="n">result</span> <span class="o">=</span> <span class="n">Connection</span><span class="p">(</span><span class="n">host</span><span class="p">)</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="s1">&#39;uname -s&#39;</span><span class="p">)</span>
-<span class="o">...</span>     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{}</span><span class="s2">: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">host</span><span class="p">,</span> <span class="n">result</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">strip</span><span class="p">()))</span>
+<span class="o">...</span>     <span class="k">print</span><span class="p">(</span><span class="s2">&quot;{}: {}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">host</span><span class="p">,</span> <span class="n">result</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">strip</span><span class="p">()))</span>
 <span class="o">...</span>
 <span class="n">web1</span><span class="p">:</span> <span class="n">Linux</span>
 <span class="n">web2</span><span class="p">:</span> <span class="n">Linux</span>
@@ -2116,6 +2116,10 @@
         <script src="../../js/extra.js"></script>
       
         <script src="../../js/baidu-tongji.js"></script>
+      
+        <script src="https://www.googletagmanager.com/gtag/js?id=UA-155098979-1"></script>
+      
+        <script src="../../js/google.js"></script>
       
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML"></script>
       

@@ -13,7 +13,7 @@
         <meta name="description" content=".net,java,php,python,docker,web">
       
       
-        <link rel="canonical" href="https://rosemarys.gitee.io/tool/mkdocs/">
+        <link rel="canonical" href="https://burningmyself.gitee.io/tool/mkdocs/">
       
       
         <meta name="author" content="BurningMyself">
@@ -72,7 +72,7 @@
   }
   ga.l = +new Date
   /* Setup integration and send page view */
-  ga("create", "UA-36723568-3", "burningmyself.github.io")
+  ga("create", "UA-155098979-1", "burningmyself.github.io")
   ga("set", "anonymizeIp", true)
   ga("send", "pageview")
   /* Register handler to log search on blur */
@@ -117,7 +117,7 @@
   <nav class="md-header-nav md-grid">
     <div class="md-flex">
       <div class="md-flex__cell md-flex__cell--shrink">
-        <a href="https://rosemarys.gitee.io" title="BurningMyself" class="md-header-nav__button md-logo">
+        <a href="https://burningmyself.gitee.io" title="BurningMyself" class="md-header-nav__button md-logo">
           
             <i class="md-icon"></i>
           
@@ -209,7 +209,7 @@
                   <div class="md-sidebar__inner">
                     <nav class="md-nav md-nav--primary" data-md-level="0">
   <label class="md-nav__title md-nav__title--site" for="__drawer">
-    <a href="https://rosemarys.gitee.io" title="BurningMyself" class="md-nav__button md-logo">
+    <a href="https://burningmyself.gitee.io" title="BurningMyself" class="md-nav__button md-logo">
       
         <i class="md-icon"></i>
       
@@ -2004,15 +2004,15 @@ dev_addr 可以让你指定 serve 时监听的 IP:port</p>
   <span class="n">local</span> <span class="n">tmpOriProjName</span><span class="o">=</span><span class="err">$</span><span class="p">{</span><span class="n">tmpBaseName</span><span class="o">%.*</span><span class="p">}</span>
 
   <span class="c1"># 声明使用的映射文件</span>
-  <span class="n">local</span> <span class="n">tmpMappingFile</span><span class="o">=</span><span class="s2">&quot;$</span><span class="si">{scriptDir}</span><span class="s2">/mapForProject.txt&quot;</span>
+  <span class="n">local</span> <span class="n">tmpMappingFile</span><span class="o">=</span><span class="s2">&quot;${scriptDir}/mapForProject.txt&quot;</span>
   <span class="k">if</span> <span class="p">(</span><span class="err">!</span> <span class="p">[</span> <span class="o">-</span><span class="n">e</span> <span class="err">$</span><span class="p">{</span><span class="n">tmpMappingFile</span><span class="p">}</span> <span class="p">]);</span><span class="n">then</span>
     <span class="n">echo</span> <span class="err">$</span><span class="p">{</span><span class="n">tmpOriProjName</span><span class="p">}</span>
     <span class="k">return</span> <span class="mi">0</span>
   <span class="n">fi</span>
 
   <span class="c1"># 查找 git项目名称:yyy 中冒号后面的部分</span>
-  <span class="n">local</span> <span class="n">tmpMappedName</span><span class="o">=</span><span class="err">$</span><span class="p">(</span><span class="n">grep</span> <span class="o">-</span><span class="n">oP</span> <span class="s2">&quot;(?&lt;=$</span><span class="si">{tmpOriProjName}</span><span class="s2">:).*$&quot;</span> <span class="err">$</span><span class="p">{</span><span class="n">tmpMappingFile</span><span class="p">})</span>
-  <span class="k">if</span> <span class="p">([</span> <span class="o">-</span><span class="n">n</span> <span class="s2">&quot;$</span><span class="si">{tmpMappedName}</span><span class="s2">&quot;</span> <span class="p">]);</span><span class="n">then</span>
+  <span class="n">local</span> <span class="n">tmpMappedName</span><span class="o">=</span><span class="err">$</span><span class="p">(</span><span class="n">grep</span> <span class="o">-</span><span class="n">oP</span> <span class="s2">&quot;(?&lt;=${tmpOriProjName}:).*$&quot;</span> <span class="err">$</span><span class="p">{</span><span class="n">tmpMappingFile</span><span class="p">})</span>
+  <span class="k">if</span> <span class="p">([</span> <span class="o">-</span><span class="n">n</span> <span class="s2">&quot;${tmpMappedName}&quot;</span> <span class="p">]);</span><span class="n">then</span>
     <span class="n">echo</span> <span class="err">$</span><span class="p">{</span><span class="n">tmpMappedName</span><span class="p">}</span>
     <span class="k">return</span> <span class="mi">155</span>
   <span class="k">else</span>
@@ -2029,18 +2029,18 @@ dev_addr 可以让你指定 serve 时监听的 IP:port</p>
   <span class="c1"># 第二个参数是 index.html ，表示要追加内容的文件</span>
   <span class="n">local</span> <span class="n">indexFile</span><span class="o">=</span><span class="s2">&quot;$2&quot;</span>
 
-  <span class="k">if</span> <span class="p">([</span> <span class="o">-</span><span class="n">z</span> <span class="s2">&quot;$</span><span class="si">{nginxRootDir}</span><span class="s2">&quot;</span> <span class="p">]);</span><span class="n">then</span>
+  <span class="k">if</span> <span class="p">([</span> <span class="o">-</span><span class="n">z</span> <span class="s2">&quot;${nginxRootDir}&quot;</span> <span class="p">]);</span><span class="n">then</span>
     <span class="n">echo</span> <span class="s2">&quot;为doAddLinkForProjectInMap函数提供的参数错误&quot;</span>
     <span class="k">return</span> <span class="mi">1</span>
   <span class="n">fi</span> 
 
-  <span class="k">if</span> <span class="p">([</span> <span class="o">-</span><span class="n">z</span> <span class="s2">&quot;$</span><span class="si">{indexFile}</span><span class="s2">&quot;</span> <span class="p">]);</span><span class="n">then</span>
+  <span class="k">if</span> <span class="p">([</span> <span class="o">-</span><span class="n">z</span> <span class="s2">&quot;${indexFile}&quot;</span> <span class="p">]);</span><span class="n">then</span>
     <span class="n">echo</span> <span class="s2">&quot;为doAddLinkForProjectInMap函数提供的参数错误&quot;</span>
     <span class="k">return</span> <span class="mi">1</span>
   <span class="n">fi</span> 
 
   <span class="c1"># 声明使用的映射文件</span>
-  <span class="n">local</span> <span class="n">tmpMappingFile</span><span class="o">=</span><span class="s2">&quot;$</span><span class="si">{scriptDir}</span><span class="s2">/mapForProject.txt&quot;</span>
+  <span class="n">local</span> <span class="n">tmpMappingFile</span><span class="o">=</span><span class="s2">&quot;${scriptDir}/mapForProject.txt&quot;</span>
   <span class="k">if</span> <span class="p">(</span><span class="err">!</span> <span class="p">[</span> <span class="o">-</span><span class="n">e</span> <span class="err">$</span><span class="p">{</span><span class="n">tmpMappingFile</span><span class="p">}</span> <span class="p">]);</span><span class="n">then</span>
     <span class="n">echo</span> <span class="s2">&quot;映射文件不存在&quot;</span>
     <span class="k">return</span> <span class="mi">1</span>
@@ -2051,18 +2051,18 @@ dev_addr 可以让你指定 serve 时监听的 IP:port</p>
 <span class="o">&lt;</span><span class="n">ul</span><span class="o">&gt;</span>
 <span class="n">EOF</span>
 
-  <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="err">`</span><span class="n">cat</span> <span class="err">$</span><span class="p">{</span><span class="n">tmpMappingFile</span><span class="p">}</span><span class="err">`</span><span class="p">;</span><span class="n">do</span> 
+  <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="sb">`cat ${tmpMappingFile}`</span><span class="p">;</span><span class="n">do</span> 
     <span class="c1"># 获取每一行冒号前面的部分</span>
     <span class="n">tmpDirName</span><span class="o">=</span><span class="err">$</span><span class="p">{</span><span class="n">line</span><span class="o">%%</span><span class="p">:</span><span class="o">*</span><span class="p">}</span> <span class="c1"># 匹配 $string的后缀 的最长匹配,然后删除,支持正则表达式</span>
     <span class="n">tmpMapName</span><span class="o">=</span><span class="err">$</span><span class="p">{</span><span class="n">line</span><span class="c1">#*:} # 匹配 $string的前缀 的最短匹配,然后删除,支持正则表达式</span>
 
-    <span class="k">if</span> <span class="p">([</span> <span class="o">-</span><span class="n">z</span> <span class="s2">&quot;$</span><span class="si">{tmpDirName}</span><span class="s2">&quot;</span> <span class="p">]);</span><span class="n">then</span>
+    <span class="k">if</span> <span class="p">([</span> <span class="o">-</span><span class="n">z</span> <span class="s2">&quot;${tmpDirName}&quot;</span> <span class="p">]);</span><span class="n">then</span>
       <span class="k">continue</span>
     <span class="n">fi</span>
 
-    <span class="k">if</span> <span class="p">([</span> <span class="o">-</span><span class="n">e</span> <span class="s2">&quot;$</span><span class="si">{nginxRootDir}</span><span class="s2">/$</span><span class="si">{tmpDirName}</span><span class="s2">&quot;</span> <span class="p">]);</span><span class="n">then</span>
+    <span class="k">if</span> <span class="p">([</span> <span class="o">-</span><span class="n">e</span> <span class="s2">&quot;${nginxRootDir}/${tmpDirName}&quot;</span> <span class="p">]);</span><span class="n">then</span>
       <span class="c1"># 如果存在该文件夹</span>
-      <span class="n">echo</span> <span class="s2">&quot;&lt;li&gt;&lt;a href=</span><span class="se">\&quot;</span><span class="s2">./$</span><span class="si">{tmpDirName}</span><span class="se">\&quot;</span><span class="s2"> target=</span><span class="se">\&quot;</span><span class="s2">_self</span><span class="se">\&quot;</span><span class="s2">&gt;$</span><span class="si">{tmpMapName}</span><span class="s2">&lt;/a&gt;&lt;/li&gt;&quot;</span> <span class="o">&gt;&gt;</span> <span class="err">$</span><span class="p">{</span><span class="n">indexFile</span><span class="p">}</span>
+      <span class="n">echo</span> <span class="s2">&quot;&lt;li&gt;&lt;a href=</span><span class="se">\&quot;</span><span class="s2">./${tmpDirName}</span><span class="se">\&quot;</span><span class="s2"> target=</span><span class="se">\&quot;</span><span class="s2">_self</span><span class="se">\&quot;</span><span class="s2">&gt;${tmpMapName}&lt;/a&gt;&lt;/li&gt;&quot;</span> <span class="o">&gt;&gt;</span> <span class="err">$</span><span class="p">{</span><span class="n">indexFile</span><span class="p">}</span>
     <span class="n">fi</span>
   <span class="n">done</span>
 
@@ -2091,11 +2091,11 @@ dev_addr 可以让你指定 serve 时监听的 IP:port</p>
   <span class="n">local</span> <span class="n">exitCode</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="c1"># 返回 155 表示成功执行,且插入了内容,返回0表示成功执行</span>
 
   <span class="c1"># 先增加 index </span>
-  <span class="n">tmpFile</span><span class="o">=</span><span class="s2">&quot;$</span><span class="si">{tmpDir}</span><span class="s2">/index.md&quot;</span>
+  <span class="n">tmpFile</span><span class="o">=</span><span class="s2">&quot;${tmpDir}/index.md&quot;</span>
   <span class="k">if</span> <span class="p">([</span> <span class="o">-</span><span class="n">f</span> <span class="err">$</span><span class="p">{</span><span class="n">tmpFile</span><span class="p">}</span> <span class="p">]);</span><span class="n">then</span>
     <span class="n">tmpRelativeFilePath</span><span class="o">=</span><span class="err">$</span><span class="p">{</span><span class="n">tmpFile</span><span class="c1">#${dstDir}/docs/}</span>
     <span class="n">tmpBaseName</span><span class="o">=</span><span class="err">$</span><span class="p">(</span><span class="n">basename</span> <span class="err">$</span><span class="p">{</span><span class="n">tmpFile</span><span class="p">})</span>
-    <span class="n">echo</span> <span class="s2">&quot;$</span><span class="si">{indent}</span><span class="s2">- Home: $</span><span class="si">{tmpRelativeFilePath}</span><span class="s2">&quot;</span> <span class="o">&gt;&gt;</span> <span class="err">$</span><span class="p">{</span><span class="n">dstDir</span><span class="p">}</span><span class="o">/</span><span class="n">mkdocs</span><span class="o">.</span><span class="n">yml</span>
+    <span class="n">echo</span> <span class="s2">&quot;${indent}- Home: ${tmpRelativeFilePath}&quot;</span> <span class="o">&gt;&gt;</span> <span class="err">$</span><span class="p">{</span><span class="n">dstDir</span><span class="p">}</span><span class="o">/</span><span class="n">mkdocs</span><span class="o">.</span><span class="n">yml</span>
     <span class="c1"># 成功插入了内容,设置exitCode</span>
     <span class="n">exitCode</span><span class="o">=</span><span class="mi">155</span><span class="p">;</span>
   <span class="n">fi</span>
@@ -2105,19 +2105,19 @@ dev_addr 可以让你指定 serve 时监听的 IP:port</p>
     <span class="n">tmpRelativeFilePath</span><span class="o">=</span><span class="err">$</span><span class="p">{</span><span class="n">tmpFile</span><span class="c1">#${dstDir}/docs/}</span>
     <span class="n">tmpBaseName</span><span class="o">=</span><span class="err">$</span><span class="p">(</span><span class="n">basename</span> <span class="err">$</span><span class="p">{</span><span class="n">tmpFile</span><span class="p">})</span>
     <span class="n">tmpBaseNameWithoutExtension</span><span class="o">=</span><span class="err">$</span><span class="p">{</span><span class="n">tmpBaseName</span><span class="o">%.*</span><span class="p">}</span>
-    <span class="k">if</span> <span class="p">([</span> <span class="o">-</span><span class="n">f</span> <span class="s2">&quot;$</span><span class="si">{tmpFile}</span><span class="s2">&quot;</span> <span class="p">]</span> <span class="o">&amp;&amp;</span> <span class="p">[[</span> <span class="err">$</span><span class="p">(</span><span class="n">echo</span> <span class="err">$</span><span class="p">{</span><span class="n">tmpFile</span><span class="p">}</span> <span class="o">|</span> <span class="n">tr</span> <span class="s1">&#39;A-Z&#39;</span> <span class="s1">&#39;a-z&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="o">*.</span><span class="n">md</span> <span class="p">]]);</span><span class="n">then</span>
+    <span class="k">if</span> <span class="p">([</span> <span class="o">-</span><span class="n">f</span> <span class="s2">&quot;${tmpFile}&quot;</span> <span class="p">]</span> <span class="o">&amp;&amp;</span> <span class="p">[[</span> <span class="err">$</span><span class="p">(</span><span class="n">echo</span> <span class="err">$</span><span class="p">{</span><span class="n">tmpFile</span><span class="p">}</span> <span class="o">|</span> <span class="n">tr</span> <span class="s1">&#39;A-Z&#39;</span> <span class="s1">&#39;a-z&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="o">*.</span><span class="n">md</span> <span class="p">]]);</span><span class="n">then</span>
         <span class="k">if</span> <span class="p">([</span> <span class="err">$</span><span class="p">{</span><span class="n">tmpBaseNameWithoutExtension</span><span class="p">}</span> <span class="o">=</span> <span class="n">index</span> <span class="p">]);</span><span class="n">then</span>
           <span class="k">continue</span><span class="p">;</span>
         <span class="k">else</span> 
-          <span class="n">echo</span> <span class="s2">&quot;$</span><span class="si">{indent}</span><span class="s2">- $</span><span class="si">{tmpBaseNameWithoutExtension}</span><span class="s2">: $</span><span class="si">{tmpRelativeFilePath}</span><span class="s2">&quot;</span> <span class="o">&gt;&gt;</span> <span class="err">$</span><span class="p">{</span><span class="n">dstDir</span><span class="p">}</span><span class="o">/</span><span class="n">mkdocs</span><span class="o">.</span><span class="n">yml</span>
+          <span class="n">echo</span> <span class="s2">&quot;${indent}- ${tmpBaseNameWithoutExtension}: ${tmpRelativeFilePath}&quot;</span> <span class="o">&gt;&gt;</span> <span class="err">$</span><span class="p">{</span><span class="n">dstDir</span><span class="p">}</span><span class="o">/</span><span class="n">mkdocs</span><span class="o">.</span><span class="n">yml</span>
       <span class="c1"># 成功插入了内容,设置exitCode</span>
           <span class="n">exitCode</span><span class="o">=</span><span class="mi">155</span><span class="p">;</span>
         <span class="n">fi</span>
     <span class="n">fi</span>
 
-    <span class="k">if</span> <span class="p">([</span> <span class="o">-</span><span class="n">d</span> <span class="s2">&quot;$</span><span class="si">{tmpFile}</span><span class="s2">&quot;</span> <span class="p">]);</span><span class="n">then</span>
-      <span class="n">echo</span> <span class="s2">&quot;$</span><span class="si">{indent}</span><span class="s2">- $</span><span class="si">{tmpBaseNameWithoutExtension}</span><span class="s2">:&quot;</span> <span class="o">&gt;&gt;</span> <span class="err">$</span><span class="p">{</span><span class="n">dstDir</span><span class="p">}</span><span class="o">/</span><span class="n">mkdocs</span><span class="o">.</span><span class="n">yml</span>
-      <span class="n">appendPagesContent</span> <span class="err">$</span><span class="p">{</span><span class="n">dstDir</span><span class="p">}</span> <span class="err">$</span><span class="p">{</span><span class="n">tmpFile</span><span class="p">}</span> <span class="s2">&quot;$</span><span class="si">{indent}</span><span class="s2">  &quot;</span>
+    <span class="k">if</span> <span class="p">([</span> <span class="o">-</span><span class="n">d</span> <span class="s2">&quot;${tmpFile}&quot;</span> <span class="p">]);</span><span class="n">then</span>
+      <span class="n">echo</span> <span class="s2">&quot;${indent}- ${tmpBaseNameWithoutExtension}:&quot;</span> <span class="o">&gt;&gt;</span> <span class="err">$</span><span class="p">{</span><span class="n">dstDir</span><span class="p">}</span><span class="o">/</span><span class="n">mkdocs</span><span class="o">.</span><span class="n">yml</span>
+      <span class="n">appendPagesContent</span> <span class="err">$</span><span class="p">{</span><span class="n">dstDir</span><span class="p">}</span> <span class="err">$</span><span class="p">{</span><span class="n">tmpFile</span><span class="p">}</span> <span class="s2">&quot;${indent}  &quot;</span>
       <span class="n">local</span> <span class="n">tmpReturnCode</span><span class="o">=</span><span class="err">$?</span>
       <span class="k">if</span> <span class="p">([</span> <span class="err">$</span><span class="p">{</span><span class="n">tmpReturnCode</span><span class="p">}</span> <span class="o">-</span><span class="n">ne</span> <span class="mi">155</span> <span class="p">]);</span><span class="n">then</span>
     <span class="c1"># 没有追加任何内容</span>
@@ -2133,30 +2133,30 @@ dev_addr 可以让你指定 serve 时监听的 IP:port</p>
 
   <span class="c1"># 将文件夹下面的非md文档放到一个html文件中展示</span>
   <span class="c1"># 生成一个临时文件</span>
-  <span class="n">tmpOtherFileMd</span><span class="o">=</span><span class="err">`</span><span class="n">mktemp</span><span class="err">`</span>
+  <span class="n">tmpOtherFileMd</span><span class="o">=</span><span class="sb">`mktemp`</span>
 
   <span class="k">for</span> <span class="n">tmpFile</span> <span class="ow">in</span> <span class="err">$</span><span class="p">{</span><span class="n">tmpDir</span><span class="p">}</span><span class="o">/*</span><span class="p">;</span><span class="n">do</span>
     <span class="n">tmpRelativeFilePath</span><span class="o">=</span><span class="err">$</span><span class="p">{</span><span class="n">tmpFile</span><span class="c1">#${dstDir}/docs/}</span>
     <span class="n">tmpBaseName</span><span class="o">=</span><span class="err">$</span><span class="p">(</span><span class="n">basename</span> <span class="err">$</span><span class="p">{</span><span class="n">tmpFile</span><span class="p">})</span>
-    <span class="k">if</span> <span class="p">([</span> <span class="o">-</span><span class="n">f</span> <span class="s2">&quot;$</span><span class="si">{tmpFile}</span><span class="s2">&quot;</span> <span class="p">]</span> \
+    <span class="k">if</span> <span class="p">([</span> <span class="o">-</span><span class="n">f</span> <span class="s2">&quot;${tmpFile}&quot;</span> <span class="p">]</span> \
        <span class="o">&amp;&amp;</span> <span class="err">!</span> <span class="p">[[</span> <span class="err">$</span><span class="p">(</span><span class="n">echo</span> <span class="err">$</span><span class="p">{</span><span class="n">tmpFile</span><span class="p">}</span> <span class="o">|</span> <span class="n">tr</span> <span class="s1">&#39;A-Z&#39;</span> <span class="s1">&#39;a-z&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="o">*.</span><span class="n">md</span> <span class="p">]]</span> \
        <span class="o">&amp;&amp;</span> <span class="err">!</span> <span class="p">[[</span> <span class="err">$</span><span class="p">(</span><span class="n">echo</span> <span class="err">$</span><span class="p">{</span><span class="n">tmpFile</span><span class="p">}</span> <span class="o">|</span> <span class="n">tr</span> <span class="s1">&#39;A-Z&#39;</span> <span class="s1">&#39;a-z&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="o">*.</span><span class="n">png</span> <span class="p">]]</span> \
        <span class="o">&amp;&amp;</span> <span class="err">!</span> <span class="p">[[</span> <span class="err">$</span><span class="p">(</span><span class="n">echo</span> <span class="err">$</span><span class="p">{</span><span class="n">tmpFile</span><span class="p">}</span> <span class="o">|</span> <span class="n">tr</span> <span class="s1">&#39;A-Z&#39;</span> <span class="s1">&#39;a-z&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="o">*.</span><span class="n">jpg</span> <span class="p">]]</span> \
       <span class="p">);</span><span class="n">then</span>
-      <span class="n">echo</span> <span class="s2">&quot;###### [$</span><span class="si">{tmpBaseName}</span><span class="s2">](./$</span><span class="si">{tmpBaseName}</span><span class="s2">)&quot;</span> <span class="o">&gt;&gt;</span> <span class="err">$</span><span class="p">{</span><span class="n">tmpOtherFileMd</span><span class="p">}</span>
+      <span class="n">echo</span> <span class="s2">&quot;###### [${tmpBaseName}](./${tmpBaseName})&quot;</span> <span class="o">&gt;&gt;</span> <span class="err">$</span><span class="p">{</span><span class="n">tmpOtherFileMd</span><span class="p">}</span>
     <span class="n">fi</span>
   <span class="n">done</span>
 
-  <span class="k">if</span> <span class="p">([</span> <span class="o">-</span><span class="n">n</span> <span class="s2">&quot;$(cat $</span><span class="si">{tmpOtherFileMd}</span><span class="s2">)&quot;</span> <span class="p">]);</span><span class="n">then</span>
+  <span class="k">if</span> <span class="p">([</span> <span class="o">-</span><span class="n">n</span> <span class="s2">&quot;$(cat ${tmpOtherFileMd})&quot;</span> <span class="p">]);</span><span class="n">then</span>
     <span class="c1"># 将临时生成的md文件拷贝到目标文件夹</span>
-    <span class="n">tmpFile</span><span class="o">=</span><span class="s2">&quot;$</span><span class="si">{tmpDir}</span><span class="s2">/其他文档(自动生成).md&quot;</span>
+    <span class="n">tmpFile</span><span class="o">=</span><span class="s2">&quot;${tmpDir}/其他文档(自动生成).md&quot;</span>
     <span class="n">tmpRelativeFilePath</span><span class="o">=</span><span class="err">$</span><span class="p">{</span><span class="n">tmpFile</span><span class="c1">#${dstDir}/docs/}</span>
     <span class="n">tmpBaseName</span><span class="o">=</span><span class="err">$</span><span class="p">(</span><span class="n">basename</span> <span class="err">$</span><span class="p">{</span><span class="n">tmpFile</span><span class="p">})</span>
     <span class="n">tmpBaseNameWithoutExtension</span><span class="o">=</span><span class="err">$</span><span class="p">{</span><span class="n">tmpBaseName</span><span class="o">%.*</span><span class="p">}</span>
 
-    <span class="n">mv</span> <span class="err">$</span><span class="p">{</span><span class="n">tmpOtherFileMd</span><span class="p">}</span> <span class="s2">&quot;$</span><span class="si">{tmpFile}</span><span class="s2">&quot;</span>
+    <span class="n">mv</span> <span class="err">$</span><span class="p">{</span><span class="n">tmpOtherFileMd</span><span class="p">}</span> <span class="s2">&quot;${tmpFile}&quot;</span>
     <span class="c1"># 将md文件添加到mkdocs</span>
-    <span class="n">echo</span> <span class="s2">&quot;$</span><span class="si">{indent}</span><span class="s2">- $</span><span class="si">{tmpBaseNameWithoutExtension}</span><span class="s2">: $</span><span class="si">{tmpRelativeFilePath}</span><span class="s2">&quot;</span> <span class="o">&gt;&gt;</span> <span class="err">$</span><span class="p">{</span><span class="n">dstDir</span><span class="p">}</span><span class="o">/</span><span class="n">mkdocs</span><span class="o">.</span><span class="n">yml</span>
+    <span class="n">echo</span> <span class="s2">&quot;${indent}- ${tmpBaseNameWithoutExtension}: ${tmpRelativeFilePath}&quot;</span> <span class="o">&gt;&gt;</span> <span class="err">$</span><span class="p">{</span><span class="n">dstDir</span><span class="p">}</span><span class="o">/</span><span class="n">mkdocs</span><span class="o">.</span><span class="n">yml</span>
     <span class="c1"># 成功插入了内容,设置exitCode</span>
     <span class="n">exitCode</span><span class="o">=</span><span class="mi">155</span><span class="p">;</span>
   <span class="n">fi</span> 
@@ -2172,8 +2172,8 @@ dev_addr 可以让你指定 serve 时监听的 IP:port</p>
 
 <span class="c1"># 定义使用帮助说明</span>
 <span class="n">helpMsg</span><span class="o">=</span><span class="s2">&quot;</span>
-<span class="n">所有参数不区分大小写</span>
-<span class="o">--</span><span class="n">gituri</span> <span class="n">docs项目git地址</span>
+<span class="err">所有参数不区分大小写</span>
+<span class="o">--</span><span class="n">gituri</span> <span class="n">docs</span><span class="err">项目</span><span class="n">git</span><span class="err">地址</span>
 <span class="s2">&quot;</span>
 
 <span class="c1"># ================ 处理选项 ================</span>
@@ -2181,15 +2181,15 @@ dev_addr 可以让你指定 serve 时监听的 IP:port</p>
     <span class="n">tmpOpt</span><span class="o">=</span><span class="err">$</span><span class="p">(</span><span class="n">echo</span> <span class="s2">&quot;$1&quot;</span><span class="o">|</span><span class="n">tr</span> <span class="n">A</span><span class="o">-</span><span class="n">Z</span> <span class="n">a</span><span class="o">-</span><span class="n">z</span><span class="p">)</span>
     <span class="c1"># 判断参数是否是 --help , 是则显示帮助并退出</span>
     <span class="k">if</span> <span class="p">([</span> <span class="err">$</span><span class="n">tmpOpt</span> <span class="o">=</span> <span class="s2">&quot;--help&quot;</span> <span class="p">]);</span><span class="n">then</span>
-        <span class="n">echo</span> <span class="s2">&quot;$</span><span class="si">{helpMsg}</span><span class="s2">&quot;</span>
-        <span class="n">exit</span> <span class="mi">0</span>
+        <span class="n">echo</span> <span class="s2">&quot;${helpMsg}&quot;</span>
+        <span class="nb">exit</span> <span class="mi">0</span>
     <span class="n">fi</span>
 
     <span class="c1"># 判断参数是否是 --bool开头,如果是则将变量置为1 并 shift 1</span>
     <span class="k">if</span> <span class="p">([[</span> <span class="err">$</span><span class="n">tmpOpt</span> <span class="o">=</span> <span class="o">--</span><span class="nb">bool</span><span class="o">*</span> <span class="p">]]);</span><span class="n">then</span>
         <span class="n">tmpOpt</span><span class="o">=</span><span class="err">$</span><span class="p">{</span><span class="n">tmpOpt</span><span class="c1">#--}</span>
-        <span class="n">echo</span> <span class="s2">&quot;检测到参数 $</span><span class="si">{tmpOpt}</span><span class="s2">&quot;</span>
-        <span class="n">export</span> <span class="s2">&quot;$</span><span class="si">{tmpOpt}</span><span class="s2">&quot;</span><span class="o">=</span><span class="s2">&quot;1&quot;</span>
+        <span class="n">echo</span> <span class="s2">&quot;检测到参数 ${tmpOpt}&quot;</span>
+        <span class="n">export</span> <span class="s2">&quot;${tmpOpt}&quot;</span><span class="o">=</span><span class="s2">&quot;1&quot;</span>
         <span class="n">shift</span> <span class="mi">1</span>
         <span class="k">continue</span>
     <span class="n">fi</span>
@@ -2197,8 +2197,8 @@ dev_addr 可以让你指定 serve 时监听的 IP:port</p>
     <span class="c1"># 判断参数是否是 --开头,如果是则将变量置为下一个参数 并 shift 2</span>
     <span class="k">if</span> <span class="p">([[</span> <span class="err">$</span><span class="n">tmpOpt</span> <span class="o">=</span> <span class="o">--*</span> <span class="p">]]);</span><span class="n">then</span>
         <span class="n">tmpOpt</span><span class="o">=</span><span class="err">$</span><span class="p">{</span><span class="n">tmpOpt</span><span class="c1">#--}</span>
-        <span class="n">echo</span> <span class="s2">&quot;检测到参数 $</span><span class="si">{tmpOpt}</span><span class="s2"> = $2&quot;</span>
-        <span class="n">export</span> <span class="s2">&quot;$</span><span class="si">{tmpOpt}</span><span class="s2">&quot;</span><span class="o">=</span><span class="s2">&quot;$2&quot;</span>
+        <span class="n">echo</span> <span class="s2">&quot;检测到参数 ${tmpOpt} = $2&quot;</span>
+        <span class="n">export</span> <span class="s2">&quot;${tmpOpt}&quot;</span><span class="o">=</span><span class="s2">&quot;$2&quot;</span>
         <span class="n">shift</span> <span class="mi">2</span>
         <span class="k">if</span> <span class="p">([</span> <span class="err">$?</span> <span class="o">-</span><span class="n">ne</span> <span class="mi">0</span> <span class="p">]);</span><span class="n">then</span>
           <span class="n">shift</span> <span class="mi">1</span>
@@ -2213,13 +2213,13 @@ dev_addr 可以让你指定 serve 时监听的 IP:port</p>
 <span class="n">echo</span> <span class="s2">&quot;检查参数&quot;</span>
 
 <span class="n">echo</span> <span class="s2">&quot;检查gituri&quot;</span>
-<span class="k">if</span> <span class="p">([</span> <span class="o">-</span><span class="n">z</span> <span class="s2">&quot;$</span><span class="si">{gituri}</span><span class="s2">&quot;</span> <span class="p">]);</span><span class="n">then</span>
+<span class="k">if</span> <span class="p">([</span> <span class="o">-</span><span class="n">z</span> <span class="s2">&quot;${gituri}&quot;</span> <span class="p">]);</span><span class="n">then</span>
    <span class="n">echo</span>
    <span class="n">echo</span> <span class="s2">&quot;请指定 gituri&quot;</span>
    <span class="n">echo</span> <span class="s2">&quot;具体帮助如下:&quot;</span>
-   <span class="n">echo</span> <span class="s2">&quot;$</span><span class="si">{helpMsg}</span><span class="s2">&quot;</span>
+   <span class="n">echo</span> <span class="s2">&quot;${helpMsg}&quot;</span>
    <span class="n">echo</span>
-   <span class="n">exit</span> <span class="mi">1</span>
+   <span class="nb">exit</span> <span class="mi">1</span>
 <span class="n">fi</span>
 
 <span class="c1"># ================ 开始执行 ================</span>
@@ -2228,14 +2228,14 @@ dev_addr 可以让你指定 serve 时监听的 IP:port</p>
 <span class="n">echo</span> <span class="s2">&quot;使用git检出代码&quot;</span>
 
 <span class="c1"># 生成一个临时文件夹 用于存放 检出的代码</span>
-<span class="n">tmpMkdocsDir</span><span class="o">=</span><span class="err">`</span><span class="n">mktemp</span> <span class="o">-</span><span class="n">d</span><span class="err">`</span>
-<span class="n">tmpGitDir</span><span class="o">=</span><span class="s2">&quot;$</span><span class="si">{tmpMkdocsDir}</span><span class="s2">/docs&quot;</span>
+<span class="n">tmpMkdocsDir</span><span class="o">=</span><span class="sb">`mktemp -d`</span>
+<span class="n">tmpGitDir</span><span class="o">=</span><span class="s2">&quot;${tmpMkdocsDir}/docs&quot;</span>
 
 <span class="c1"># 检出代码</span>
-<span class="n">echo</span> <span class="s2">&quot;git clone --branch $</span><span class="si">{branch}</span><span class="s2"> --single-branch $</span><span class="si">{gituri}</span><span class="s2"> $</span><span class="si">{tmpGitDir}</span><span class="s2"> 1&gt;/dev/null&quot;</span>
+<span class="n">echo</span> <span class="s2">&quot;git clone --branch ${branch} --single-branch ${gituri} ${tmpGitDir} 1&gt;/dev/null&quot;</span>
 <span class="c1"># 把gituri加上用户名和密码</span>
-<span class="n">tmpHostAndPort</span><span class="o">=</span><span class="err">$</span><span class="p">(</span><span class="n">echo</span> <span class="s2">&quot;$</span><span class="si">{gituri}</span><span class="s2">&quot;</span> <span class="o">|</span> <span class="n">grep</span> <span class="o">-</span><span class="n">oP</span> <span class="s1">&#39;(?&lt;=://)[^/]+?\.[^/]+(?=/?)|^[^/]+?\.[^/]+(?=/?)&#39;</span><span class="p">)</span>
-<span class="n">gitrealuri</span><span class="o">=</span><span class="err">$</span><span class="p">{</span><span class="n">gituri</span><span class="o">/</span><span class="err">$</span><span class="p">{</span><span class="n">tmpHostAndPort</span><span class="p">}</span><span class="o">/</span><span class="err">$</span><span class="p">{</span><span class="n">gitusername</span><span class="p">}:</span><span class="err">$</span><span class="p">{</span><span class="n">gitpasswd</span><span class="p">}</span><span class="o">@</span><span class="err">$</span><span class="p">{</span><span class="n">tmpHostAndPort</span><span class="p">}}</span>
+<span class="n">tmpHostAndPort</span><span class="o">=</span><span class="err">$</span><span class="p">(</span><span class="n">echo</span> <span class="s2">&quot;${gituri}&quot;</span> <span class="o">|</span> <span class="n">grep</span> <span class="o">-</span><span class="n">oP</span> <span class="s1">&#39;(?&lt;=://)[^/]+?\.[^/]+(?=/?)|^[^/]+?\.[^/]+(?=/?)&#39;</span><span class="p">)</span>
+<span class="n">gitrealuri</span><span class="o">=</span><span class="err">$</span><span class="p">{</span><span class="n">gituri</span><span class="o">/</span><span class="err">$</span><span class="p">{</span><span class="n">tmpHostAndPort</span><span class="p">}</span><span class="o">/</span><span class="err">$</span><span class="p">{</span><span class="n">gitusername</span><span class="p">}:</span><span class="err">$</span><span class="p">{</span><span class="n">gitpasswd</span><span class="p">}</span><span class="err">@$</span><span class="p">{</span><span class="n">tmpHostAndPort</span><span class="p">}}</span>
 
 <span class="n">git</span> <span class="n">clone</span> <span class="o">--</span><span class="n">branch</span> <span class="err">$</span><span class="p">{</span><span class="n">branch</span><span class="p">}</span> <span class="o">--</span><span class="n">single</span><span class="o">-</span><span class="n">branch</span> <span class="err">$</span><span class="p">{</span><span class="n">gitrealuri</span><span class="p">}</span> <span class="err">$</span><span class="p">{</span><span class="n">tmpGitDir</span><span class="p">}</span> <span class="mi">1</span><span class="o">&gt;/</span><span class="n">dev</span><span class="o">/</span><span class="n">null</span>
 <span class="k">if</span> <span class="p">([</span> <span class="err">$?</span> <span class="o">-</span><span class="n">ne</span> <span class="mi">0</span> <span class="p">]);</span><span class="n">then</span>
@@ -2243,7 +2243,7 @@ dev_addr 可以让你指定 serve 时监听的 IP:port</p>
   <span class="n">echo</span> <span class="s2">&quot;git clone failed!&quot;</span>
   <span class="n">rm</span> <span class="o">-</span><span class="n">rf</span> <span class="err">$</span><span class="p">{</span><span class="n">tmpMkdocsDir</span><span class="p">}</span>
   <span class="n">echo</span>
-  <span class="n">exit</span> <span class="mi">1</span>
+  <span class="nb">exit</span> <span class="mi">1</span>
 <span class="n">fi</span>
 
 <span class="c1"># 加入 site_name 到 mkdocs.yml</span>
@@ -2273,7 +2273,7 @@ dev_addr 可以让你指定 serve 时监听的 IP:port</p>
 <span class="c1"># 运行 mkdocs build, 该命令会生成一个 mySiteName 目录</span>
 <span class="n">cd</span> <span class="err">$</span><span class="p">{</span><span class="n">tmpMkdocsDir</span><span class="p">}</span>
 <span class="n">echo</span> 
-<span class="n">echo</span> <span class="s2">&quot;cat $</span><span class="si">{tmpMkdocsDir}</span><span class="s2">/mkdocs.yml&quot;</span>
+<span class="n">echo</span> <span class="s2">&quot;cat ${tmpMkdocsDir}/mkdocs.yml&quot;</span>
 <span class="n">cat</span> <span class="err">$</span><span class="p">{</span><span class="n">tmpMkdocsDir</span><span class="p">}</span><span class="o">/</span><span class="n">mkdocs</span><span class="o">.</span><span class="n">yml</span>
 <span class="n">echo</span>
 <span class="n">echo</span>
@@ -2283,7 +2283,7 @@ dev_addr 可以让你指定 serve 时监听的 IP:port</p>
   <span class="n">echo</span> <span class="s2">&quot;mkdocs build failed!&quot;</span>
   <span class="n">rm</span> <span class="o">-</span><span class="n">rf</span> <span class="err">$</span><span class="p">{</span><span class="n">tmpMkdocsDir</span><span class="p">}</span>
   <span class="n">echo</span>
-  <span class="n">exit</span> <span class="mi">1</span>
+  <span class="nb">exit</span> <span class="mi">1</span>
 <span class="n">fi</span>
 
 <span class="c1"># 将 build 后的文件拷贝到指定位置</span>
@@ -2307,7 +2307,7 @@ dev_addr 可以让你指定 serve 时监听的 IP:port</p>
 <span class="c1"># 遍历nginx根目录下的文件夹，获取其映射后的名称 加入到index.html中</span>
 
 <span class="c1"># 先按顺序加入文档连接</span>
-<span class="n">doAddLinkForProjectInMap</span> <span class="s2">&quot;$</span><span class="si">{nginxDir}</span><span class="s2">&quot;</span> <span class="s2">&quot;$</span><span class="si">{nginxDir}</span><span class="s2">/index.html&quot;</span>
+<span class="n">doAddLinkForProjectInMap</span> <span class="s2">&quot;${nginxDir}&quot;</span> <span class="s2">&quot;${nginxDir}/index.html&quot;</span>
 
 <span class="c1"># 继续遍历nginx根目录下加入未映射到的文件夹</span>
 
@@ -2316,14 +2316,14 @@ dev_addr 可以让你指定 serve 时监听的 IP:port</p>
 <span class="o">&lt;</span><span class="n">ul</span><span class="o">&gt;</span>
 <span class="n">EOF</span>
 
-<span class="k">for</span> <span class="n">file</span> <span class="ow">in</span> <span class="err">$</span><span class="p">{</span><span class="n">nginxDir</span><span class="p">}</span><span class="o">/*</span><span class="p">;</span><span class="n">do</span>
-  <span class="k">if</span> <span class="p">([</span> <span class="err">$</span><span class="p">(</span><span class="n">basename</span> <span class="err">$</span><span class="p">{</span><span class="n">file</span><span class="p">})</span> <span class="o">!=</span> <span class="s2">&quot;index.html&quot;</span> <span class="p">]);</span><span class="n">then</span>
-    <span class="n">tmpMappedName</span><span class="o">=</span><span class="err">$</span><span class="p">(</span><span class="n">getMapNameForGitProjectName</span> <span class="err">$</span><span class="p">{</span><span class="n">file</span><span class="p">});</span>
+<span class="k">for</span> <span class="nb">file</span> <span class="ow">in</span> <span class="err">$</span><span class="p">{</span><span class="n">nginxDir</span><span class="p">}</span><span class="o">/*</span><span class="p">;</span><span class="n">do</span>
+  <span class="k">if</span> <span class="p">([</span> <span class="err">$</span><span class="p">(</span><span class="n">basename</span> <span class="err">$</span><span class="p">{</span><span class="nb">file</span><span class="p">})</span> <span class="o">!=</span> <span class="s2">&quot;index.html&quot;</span> <span class="p">]);</span><span class="n">then</span>
+    <span class="n">tmpMappedName</span><span class="o">=</span><span class="err">$</span><span class="p">(</span><span class="n">getMapNameForGitProjectName</span> <span class="err">$</span><span class="p">{</span><span class="nb">file</span><span class="p">});</span>
     <span class="n">tmpRetCode</span><span class="o">=</span><span class="err">$?</span>
     <span class="c1"># 存在映射的文档之前已经加过了,所以这时只添加未映射的文档</span>
     <span class="c1"># tmpRetCode = 155 表示获取到了映射名称</span>
     <span class="k">if</span> <span class="p">([</span> <span class="err">$</span><span class="p">{</span><span class="n">tmpRetCode</span><span class="p">}</span> <span class="o">-</span><span class="n">ne</span> <span class="mi">155</span> <span class="p">]);</span><span class="n">then</span>
-      <span class="n">echo</span> <span class="s2">&quot;&lt;li&gt;&lt;a href=</span><span class="se">\&quot;</span><span class="s2">./${file#$</span><span class="si">{nginxDir}</span><span class="s2">/}</span><span class="se">\&quot;</span><span class="s2"> target=</span><span class="se">\&quot;</span><span class="s2">_blank</span><span class="se">\&quot;</span><span class="s2">&gt;$</span><span class="si">{tmpMappedName}</span><span class="s2">&lt;/a&gt;&lt;/li&gt;&quot;</span> <span class="o">&gt;&gt;</span> <span class="err">$</span><span class="p">{</span><span class="n">nginxDir</span><span class="p">}</span><span class="o">/</span><span class="n">index</span><span class="o">.</span><span class="n">html</span>
+      <span class="n">echo</span> <span class="s2">&quot;&lt;li&gt;&lt;a href=</span><span class="se">\&quot;</span><span class="s2">./${file#${nginxDir}/}</span><span class="se">\&quot;</span><span class="s2"> target=</span><span class="se">\&quot;</span><span class="s2">_blank</span><span class="se">\&quot;</span><span class="s2">&gt;${tmpMappedName}&lt;/a&gt;&lt;/li&gt;&quot;</span> <span class="o">&gt;&gt;</span> <span class="err">$</span><span class="p">{</span><span class="n">nginxDir</span><span class="p">}</span><span class="o">/</span><span class="n">index</span><span class="o">.</span><span class="n">html</span>
     <span class="n">fi</span>
   <span class="n">fi</span>
 <span class="n">done</span>
@@ -2341,7 +2341,7 @@ dev_addr 可以让你指定 serve 时监听的 IP:port</p>
 <span class="c1"># 结束后删除文件</span>
 <span class="n">rm</span> <span class="o">-</span><span class="n">rf</span> <span class="err">$</span><span class="p">{</span><span class="n">tmpMkdocsDir</span><span class="p">}</span>
 
-<span class="n">echo</span> <span class="s2">&quot;成功使用mkdocs部署文档项目$</span><span class="si">{gituri}</span><span class="s2">&quot;</span>
+<span class="n">echo</span> <span class="s2">&quot;成功使用mkdocs部署文档项目${gituri}&quot;</span>
 <span class="n">echo</span>
 </pre></div>
 
@@ -2358,18 +2358,18 @@ dev_addr 可以让你指定 serve 时监听的 IP:port</p>
         <span class="c1"># 以下为新增部分</span>
         <span class="k">for</span> <span class="n">doc</span> <span class="ow">in</span> <span class="n">page_dicts</span><span class="p">[</span><span class="s1">&#39;docs&#39;</span><span class="p">]:</span>
         <span class="c1"># 调用jieba的cut接口生成分词库，过滤重复词，过滤空格</span>
-            <span class="n">tokens</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">([</span><span class="n">token</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="k">for</span> <span class="n">token</span> <span class="ow">in</span> <span class="n">jieba</span><span class="o">.</span><span class="n">cut_for_search</span><span class="p">(</span><span class="n">doc</span><span class="p">[</span><span class="s1">&#39;title&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">),</span> <span class="kc">True</span><span class="p">)]))</span>
+            <span class="n">tokens</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">([</span><span class="n">token</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="k">for</span> <span class="n">token</span> <span class="ow">in</span> <span class="n">jieba</span><span class="o">.</span><span class="n">cut_for_search</span><span class="p">(</span><span class="n">doc</span><span class="p">[</span><span class="s1">&#39;title&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">),</span> <span class="bp">True</span><span class="p">)]))</span>
             <span class="k">if</span> <span class="s1">&#39;&#39;</span> <span class="ow">in</span> <span class="n">tokens</span><span class="p">:</span>
                 <span class="n">tokens</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
             <span class="n">doc</span><span class="p">[</span><span class="s1">&#39;title_tokens&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">tokens</span>
 
-            <span class="n">tokens</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">([</span><span class="n">token</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="k">for</span> <span class="n">token</span> <span class="ow">in</span> <span class="n">jieba</span><span class="o">.</span><span class="n">cut_for_search</span><span class="p">(</span><span class="n">doc</span><span class="p">[</span><span class="s1">&#39;text&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">),</span> <span class="kc">True</span><span class="p">)]))</span>
+            <span class="n">tokens</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">([</span><span class="n">token</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="k">for</span> <span class="n">token</span> <span class="ow">in</span> <span class="n">jieba</span><span class="o">.</span><span class="n">cut_for_search</span><span class="p">(</span><span class="n">doc</span><span class="p">[</span><span class="s1">&#39;text&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">),</span> <span class="bp">True</span><span class="p">)]))</span>
             <span class="k">if</span> <span class="s1">&#39;&#39;</span> <span class="ow">in</span> <span class="n">tokens</span><span class="p">:</span>
                 <span class="n">tokens</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
             <span class="n">doc</span><span class="p">[</span><span class="s1">&#39;text_tokens&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">tokens</span>
 
         <span class="c1"># 新增部分结束</span>
-        <span class="k">return</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">page_dicts</span><span class="p">,</span> <span class="n">sort_keys</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">page_dicts</span><span class="p">,</span> <span class="n">sort_keys</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
 
 <span class="c1"># 修改 /usr/lib/python2.7/site-packages/mkdocs/contrib/legacy_search/templates/search/lunr.min.js</span>
 <span class="c1"># 这个是压缩过的, 是不是可以下载一个未压缩版的, 应该更好修改</span>
@@ -2384,9 +2384,9 @@ dev_addr 可以让你指定 serve 时监听的 IP:port</p>
       <span class="n">emitEvent</span> <span class="o">=</span> <span class="n">emitEvent</span> <span class="o">===</span> <span class="n">undefined</span> <span class="err">?</span> <span class="n">true</span> <span class="p">:</span> <span class="n">emitEvent</span>
 
   <span class="n">this</span><span class="o">.</span><span class="n">_fields</span><span class="o">.</span><span class="n">forEach</span><span class="p">(</span><span class="n">function</span> <span class="p">(</span><span class="n">field</span><span class="p">)</span> <span class="p">{</span>
-    <span class="o">//</span> <span class="n">删掉内部接口计算分词</span>
+    <span class="o">//</span> <span class="err">删掉内部接口计算分词</span>
     <span class="o">//</span> <span class="n">var</span> <span class="n">fieldTokens</span> <span class="o">=</span> <span class="n">this</span><span class="o">.</span><span class="n">pipeline</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">this</span><span class="o">.</span><span class="n">tokenizerFn</span><span class="p">(</span><span class="n">doc</span><span class="p">[</span><span class="n">field</span><span class="o">.</span><span class="n">name</span><span class="p">]))</span>
-    <span class="o">//</span> <span class="n">直接从文档词库加载</span>
+    <span class="o">//</span> <span class="err">直接从文档词库加载</span>
     <span class="n">var</span> <span class="n">fieldTokens</span> <span class="o">=</span> <span class="n">doc</span><span class="p">[</span><span class="n">field</span><span class="o">.</span><span class="n">name</span> <span class="o">+</span> <span class="s1">&#39;_tokens&#39;</span><span class="p">]</span>
 
     <span class="n">docTokens</span><span class="p">[</span><span class="n">field</span><span class="o">.</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">fieldTokens</span>
@@ -2523,6 +2523,10 @@ dev_addr 可以让你指定 serve 时监听的 IP:port</p>
         <script src="../../js/extra.js"></script>
       
         <script src="../../js/baidu-tongji.js"></script>
+      
+        <script src="https://www.googletagmanager.com/gtag/js?id=UA-155098979-1"></script>
+      
+        <script src="../../js/google.js"></script>
       
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML"></script>
       

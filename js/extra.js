@@ -1,20 +1,12 @@
-window.MathJax = {
-    tex2jax: {
-      inlineMath: [ ["\\(","\\)"] ],
-      displayMath: [ ["\\[","\\]"] ]
-    },
-    TeX: {
-      TagSide: "right",
-      TagIndent: ".8em",
-      MultLineWidth: "85%",
-      equationNumbers: {
-        autoNumber: "AMS",
-      },
-      unicode: {
-        fonts: "STIXGeneral,'Arial Unicode MS'"
-      }
-    },
-    displayAlign: "left",
-    showProcessingMessages: false,
-    messageStyle: "none"
-  };
+
+(function () {
+  let generator = document.getElementsByTagName("meta").generator;  
+  generator.name="keywords";
+  generator.content="net,java,php,python,docker,web";
+  let meta = document.createElement("meta");
+  let s = document.getElementsByTagName("meta")[0];
+  meta.name="google-site-verification";
+  meta.content="le9TAKnSKhLDEEGnDu2ofXi3taLVIxmKNT0bEIsetNE";
+  s.parentNode.insertBefore(meta, s);
+})();
+
