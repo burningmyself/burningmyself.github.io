@@ -13,7 +13,7 @@ docker pull jenkins/jenkins:lts
 ```
 * 在Docker容器中运行Jenkins：
 ``` shell
-docker run -p 8080:8080 -p 50000:5000 --name jenkins \
+docker run -p 8080:8080 -p 50000:50000 --name jenkins \
 -u root \
 -v /etc/localtime:/etc/localtime \
 -v /data/jenkins_home:/var/jenkins_home \

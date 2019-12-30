@@ -19,4 +19,4 @@
 如果大家觉得那里写的不合适的可以给我提 Issue
 
 [Github](https://github.com/burningmyself)
-[Gitee](https://gitee.com/yangfubing)
+[Gitee](https://gitee.com/burningmyself)
