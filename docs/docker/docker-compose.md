@@ -56,11 +56,16 @@ docker exec -it mysql /bin/bash # 进入Docker容器内部的bash
 
 ``` shell
 docker pull mongo #拉取 mongodb
-docker run -p 27017:27017  --name mongo --auth \ # run 运行容器 -p 将容器的27017端口映射到主机的27017端口 --name 容器运行的名字 --需要密码才能访问容器服务
+docker run -p 27017:27017  --name mongo \ # run 运行容器 -p 将容器的27017端口映射到主机的27017端口 --name 容器运行的名字 
 --restart=always \ # 挂断自动重新启动
 -v /etc/localtime:/etc/localtime \ # 将主机本地时间夹挂在到容器
--v /data/mongodb:/var/lib/mongodb \ # 将数据文件夹挂载到主机
--d mongo # -d 后台运行
+-v /data/mongodb/db:/data/db \ # 将数据文件夹挂载到主机
+-v /data/mongodb/configdb:/data/configdb \ # 将数据库配置文件挂载到主机
+-v /data/mongodb/initdb:/docker-entrypoint-initdb.d # 通过/docker-entrypoint-initdb.d/将更复杂的用户设置显式留给用户 当容器首次启动时它会执行/docker-entrypoint-initdb.d 目录下的sh 和js脚本 。 以脚本字母顺序执行
+-e MONGO_INITDB_ROOT_USERNAME=admin \ # 设置admin数据库账户名称 如果使用了此项，则不需要 --auth 参数
+-e MONGO_INITDB_ROOT_PASSWORD=admin  \ # 设置admin数据库账户密码 如果使用了此项，则不需要 --auth 参数
+-d mongo \ # -d 后台运行
+--auth # --auth 需要密码才能访问容器服务
 
 docker exec -it mongo mongo admin # 进入mongo
 db.createUser({ user:'admin',pwd:'123456',roles:[ { role:'userAdminAnyDatabase', db: 'admin'}]}); #创建一个名为 admin，密码为 123456 的用户。
@@ -349,11 +354,8 @@ services:
     # 指定容器的环境变量
     environment:
       - AUTH=yes
-      - ADMIN_USER=admin
-      - ADMIN_PASS=admin
-      - APPLICATION_DATABASE=test
-      - APPLICATION_USER=test
-      - APPLICATION_PASS=test
+      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_ROOT_PASSWORD=admin
   # 指定服务名称
   jenkins:
     # 指定服务使用的镜像
