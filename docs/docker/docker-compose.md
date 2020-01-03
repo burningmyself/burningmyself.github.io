@@ -79,8 +79,9 @@ docker pull redis #拉取 redis
 docker run -p 6379:6379 --name redis \ # run 运行容器 -p 将容器的6379端口映射到主机的6379端口 --name 容器运行的名字
 --restart=always \ # 挂断自动重新启动
 -v /etc/localtime:/etc/localtime \ # 将主机本地时间夹挂在到容器
--v /data/redis:/data/redis \ # 将数据文件夹挂载到主机
+-v /data/redis:/data \ # 将数据文件夹挂载到主机
 -d redis \ # -d 后台运行
+redis-server --appendonly yes \ # 在容器执行redis-server启动命令，并打开redis持久化配置
 --requirepass "123456" # 设置密码123456
 ```
 
@@ -297,7 +298,7 @@ services:
     restart: always
     # 指定容器的环境变量
     environment:
-      - MYSQL_ROOT_PASSWORD=xiujingmysql.
+      - TZ=Asia/Shanghai # 设置容器时区与宿主机保持一致
   # 指定服务名称
   mysql:
     # 指定服务使用的镜像
@@ -306,7 +307,7 @@ services:
     container_name: mysql
     # 指定服务运行的端口
     ports:
-      - 13306:3306
+      - 3306:3306
     # 指定容器中需要挂载的文件
     volumes:
       - /etc/localtime:/etc/localtime
@@ -318,7 +319,8 @@ services:
     restart: always
     # 指定容器的环境变量
     environment:
-      - MYSQL_ROOT_PASSWORD=xiujingmysql.
+      - TZ=Asia/Shanghai # 设置容器时区与宿主机保持一致
+      - MYSQL_ROOT_PASSWORD=xiujingmysql. # 设置root密码
   # 指定服务名称
   redis:
     # 指定服务使用的镜像
@@ -327,15 +329,19 @@ services:
     container_name: redis
     # 指定服务运行的端口
     ports:
-      - 16379:6379
+      - 6379:6379
     # 指定容器中需要挂载的文件
     volumes:
       - /etc/localtime:/etc/localtime
-      - /data/redis:/data/redis
+      - /data/redis:/data
+      - /data/redis/redis.conf:/etc/redis.conf
     # 挂断自动重新启动
     restart: always
     # 指定容器执行命令
-    command: redis-server --requirepass xiujingredis.
+    command: redis-server /etc/redis.conf --requirepass xiujingredis. --appendonly yes
+    # 指定容器的环境变量
+    environment:
+      - TZ=Asia/Shanghai # 设置容器时区与宿主机保持一致
   # 指定服务名称
   mongo:
     # 指定服务使用的镜像
@@ -355,6 +361,7 @@ services:
     restart: always
     # 指定容器的环境变量
     environment:
+      - TZ=Asia/Shanghai # 设置容器时区与宿主机保持一致
       - AUTH=yes
       - MONGO_INITDB_ROOT_USERNAME=admin
       - MONGO_INITDB_ROOT_PASSWORD=admin
@@ -376,6 +383,7 @@ services:
     restart: always
     # 指定容器的环境变量
     environment:
+      - TZ=Asia/Shanghai # 设置容器时区与宿主机保持一致
       - JAVA_OPTS=-Duser.timezone=Asia/Shanghai   
     # 指定容器运行的用户为root
     user:
