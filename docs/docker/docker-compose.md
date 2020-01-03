@@ -348,7 +348,9 @@ services:
     # 指定容器中需要挂载的文件
     volumes:
       - /etc/localtime:/etc/localtime
-      - /data/mongo:/data/mongo
+      - /data/mongodb/db:/data/db
+      - /data/mongodb/configdb:/data/configdb
+      - /data/mongodb/initdb:/docker-entrypoint-initdb.d      
     # 挂断自动重新启动
     restart: always
     # 指定容器的环境变量
