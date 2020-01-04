@@ -56,7 +56,7 @@
 * [.NET]
 * * [C#语法新特性](docs/net/c_sharp.md)
 * * [.Ner Core Docker 部署](docs/net/c_docker.md)
-* * [使用 Docker 容器化部署 ASP.NET Core + MySQL + Nginx](docs/net/c_mysql_nginx.md)
+* * [使用 Docker 容器化部署 ASP.NET Core + sqlserver + Nginx](docs/net/c_sqlserver_nginx.md)
 * * [让你的ASP.NET Core应用程序更安全](docs/net/c_core_safety.md)
 * * [ASP.NET Core开发者指南](docs/net/c_core_study_route.md)
 * [PHP]

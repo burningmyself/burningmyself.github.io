@@ -31,7 +31,7 @@ nav:
     - .NET: 
         - C# 6: net/c_sharp.md
         - .Ner Core Docker 部署: net/c_docker.md
-        - 使用 Docker 容器化部署 ASP.NET Core + MySQL + Nginx: net/c_mysql_nginx.md
+        - ASP.NET Core 实战：使用 Docker 容器化部署 ASP.NET Core + sqlserver + Nginx: net/c_sqlserver_nginx.md
         - 让你的ASP.NET Core应用程序更安全: net/c_core_safety.md
         - ASP.NET Core开发者指南: net/c_core_study_route.md
     - Java: 
