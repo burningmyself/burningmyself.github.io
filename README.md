@@ -21,7 +21,7 @@
 * [README.md](README.md)
 * [Docker]
 * * [Docker介绍使用](docs/docker/docker.md)
-* * [docker和docker-compose 配置 mysql mongodb redis nginx jenkins 环境](docs/docker/docker-compose.md)
+* * [docker和docker-compose配置常用环境](docs/docker/docker-compose.md)
 * * [Docker部署Jenkins](docs/docker/docker-jenkins.md)
 * [经验]
 * * [集群和负载均衡](docs/exp/cl.md)
@@ -55,8 +55,8 @@
 * * [基于DDD的微服务设计和开发实战](docs/micro/ddd.md)
 * [.NET]
 * * [C#语法新特性](docs/net/c_sharp.md)
-* * [.Ner Core Docker 部署](docs/net/c_docker.md)
-* * [使用 Docker 容器化部署 ASP.NET Core + sqlserver + Nginx](docs/net/c_sqlserver_nginx.md)
+* * [.Net Core Docker 部署](docs/net/c_docker.md)
+* * [Docker容器化部署ASP.NET Core](docs/net/c_sqlserver_nginx.md)
 * * [让你的ASP.NET Core应用程序更安全](docs/net/c_core_safety.md)
 * * [ASP.NET Core开发者指南](docs/net/c_core_study_route.md)
 * [PHP]

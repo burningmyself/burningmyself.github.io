@@ -267,9 +267,11 @@ services:
     restart: always
     environment:
       - TZ=Asia/Shanghai
-      - SA_PASSWORD=burningmyself
+      - SA_PASSWORD=mssql-MSSQL
       - ACCEPT_EULA=Y
-
+    # 指定容器运行的用户为root
+    user:
+      root
  # 指定服务名称
   redis:
     # 指定服务使用的镜像
@@ -367,7 +369,7 @@ services:
 
 #### 4、发布部署程序
 
-　　当我们构建好 docker compose 文件后就可以把整个文件上传到服务器上进行构建 docker 镜像了。这里我将所有的部署文件放在服务器的 /usr/wwwroot/psu/ 路径下，这时我们就可以通过 docker compose 命令进行镜像构建。
+　　当我们构建好 docker compose 文件后就可以把整个文件上传到服务器上进行构建 docker 镜像了。这里我将所有的部署文件放在服务器的 /data/wwwroot/micro/ 路径下，这时我们就可以通过 docker compose 命令进行镜像构建。
 
 　　定位到部署文件在的位置，我们可以直接使用下面的命令进行镜像的（重新）构建，启动，并链接一个服务相关的容器，整个过程都会在后台运行，如果你希望看到整个过程的话，你可以去掉 -d 参数。
 

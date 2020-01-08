@@ -1,4 +1,4 @@
-# docker和docker-compose 配置 mysql mongodb redis nginx jenkins 环境
+# docker和docker-compose 配置 mysql mssql mongodb redis nginx jenkins 环境
 
 ## 磁盘挂载
 
@@ -34,6 +34,19 @@ echo '{
 
 ``` shell
 docker pull java
+```
+
+### 拉取SqlServer镜像
+
+``` shell
+docker pull microsoft/mssql-server-linux # 拉取SqlServer镜像
+docker run -p 1433:1433 --name mssql \ # run 运行容器 -p 将容器的1433端口映射到主机的1433端口 --name 容器运行的名字
+--restart=always \ # 挂断自动重新启动
+-v /data/sqlserver:/var/opt/mssql \ # 挂载mssql文件夹到主机
+-e ACCEPT_EULA=Y \ # 同意协议
+-e MSSQL_SA_PASSWORD=mssql-MSSQL \ # 初始化sa密码
+-u root \ # 指定容器为root运行
+-d microsoft/mssql-server-linux # -d 后台运行
 ```
 
 ### 拉取 MySql 镜像
@@ -300,6 +313,25 @@ services:
     environment:
       - TZ=Asia/Shanghai # 设置容器时区与宿主机保持一致
   # 指定服务名称
+  sqlserver:
+    # 指定服务使用的镜像
+    image: mcr.microsoft.com/mssql/server
+    # 指定容器名称
+    container_name: sqlserver
+    # 指定服务运行的端口
+    ports:
+      - "1433"
+    # 指定容器中需要挂载的文件  
+    volumes:
+      - /etc/localtime:/etc/localtime
+      - /data/sqlserver:/var/opt/mssql
+    # 挂断自动重新启动  
+    restart: always
+    environment:
+      - TZ=Asia/Shanghai
+      - SA_PASSWORD=mssql-MSSQL
+      - ACCEPT_EULA=Y    
+  # 指定服务名称
   mysql:
     # 指定服务使用的镜像
     image: mysql
@@ -321,6 +353,9 @@ services:
     environment:
       - TZ=Asia/Shanghai # 设置容器时区与宿主机保持一致
       - MYSQL_ROOT_PASSWORD=xiujingmysql. # 设置root密码
+    # 指定容器运行的用户为root
+    user:
+      root     
   # 指定服务名称
   redis:
     # 指定服务使用的镜像
