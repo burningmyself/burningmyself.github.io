@@ -19,8 +19,8 @@ docker pull minio/minio
 ``` shell
 docker run -p 9090:9000 --name minio \
   -v /etc/localtime:/etc/localtime \
-  -v /mydata/minio/data:/data \
-  -v /mydata/minio/config:/root/.minio \
+  -v /data/minio/data:/data \
+  -v /data/minio/config:/root/.minio \
   -d minio/minio server /data
 ```
 

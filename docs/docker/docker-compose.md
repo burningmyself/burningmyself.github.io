@@ -199,6 +199,8 @@ docker run -p 9000:9000 --name minio \ # run 运行容器 -p 将容器的9000,90
 -v /etc/localtime:/etc/localtime \ # 将主机本地时间夹挂在到容器
 -v /data/minio/data:/data \ # 将data文件夹挂在到主机
 -v /data/minio/config:/root/.minio \ # 将配置文件夹挂在到主机
+-e "MINIO_ACCESS_KEY=AKIAIOSFODNN7EXAMPLE" \ # 设置MINIO_ACCESS_KEY的值
+-e "MINIO_SECRET_KEY=wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY" \ # 设置MINIO_SECRET_KEY值
 -d minio/minio server /data # -d 后台运行
 
 ```
