@@ -192,6 +192,17 @@ docker run -p 8080:8080 -p 50000:50000 --name jenkins \ # run 运行容器 -p �
 -d jenkins/jenkins:lts # -d 后台运行
 ```
 
+### 拉取MinIO镜像
+```shell
+docker pull minio/minio # 拉取MinIO镜像
+docker run -p 9000:9000 --name minio \ # run 运行容器 -p 将容器的9000,9000端口映射到主机的9000,9000端口 --name 容器运行的名
+-v /etc/localtime:/etc/localtime \ # 将主机本地时间夹挂在到容器
+-v /data/minio/data:/data \ # 将data文件夹挂在到主机
+-v /data/minio/config:/root/.minio \ # 将配置文件夹挂在到主机
+-d minio/minio server /data # -d 后台运行
+
+```
+
 ### Docker 开启远程API
 
 * 用vi编辑器修改docker.service文件
@@ -330,7 +341,10 @@ services:
     environment:
       - TZ=Asia/Shanghai
       - SA_PASSWORD=mssql-MSSQL
-      - ACCEPT_EULA=Y    
+      - ACCEPT_EULA=Y 
+    # 指定容器运行的用户为root
+    user:
+      root       
   # 指定服务名称
   mysql:
     # 指定服务使用的镜像
@@ -423,6 +437,22 @@ services:
     # 指定容器运行的用户为root
     user:
       root    
+    # 指定服务名称
+  minio:
+    # 指定服务使用的镜像
+    image: minio
+    # 指定容器名称
+    container_name: minio
+    # 指定服务运行的端口
+    ports:
+      - 9000:9000
+    # 指定容器中需要挂载的文件
+    volumes:
+      - /etc/localtime:/etc/localtime
+      - /data/minio/data:/data 
+      - /data/minio/config:/root/.minio
+    # 挂断自动重新启动
+    restart: always    
 ```
 运行Docker Compose命令启动所有服务
 ``` shell
