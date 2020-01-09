@@ -17,14 +17,14 @@ docker pull minio/minio
 * 在Docker容器中运行MinIO，这里我们将MiniIO的数据和配置文件夹挂在到宿主机上：
 
 ``` shell
-docker run -p 9090:9000 --name minio \
+docker run -p 9000:9000 --name minio \
   -v /etc/localtime:/etc/localtime \
   -v /data/minio/data:/data \
   -v /data/minio/config:/root/.minio \
   -d minio/minio server /data
 ```
 
-* 运行成功后，访问该地址来登录并使用MinIO，默认Access Key和Secret都是minioadmin：http://localhost:9090
+* 运行成功后，访问该地址来登录并使用MinIO，默认Access Key和Secret都是minioadmin：http://localhost:9000
 
 ![minio](./../img/minio1.png)
 
