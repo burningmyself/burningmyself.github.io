@@ -309,8 +309,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../../net/c_docker/" title=".Ner Core Docker 部署" class="md-nav__link">
-      .Ner Core Docker 部署
+    <a href="../../net/c_docker/" title=".Net Core Docker 部署" class="md-nav__link">
+      .Net Core Docker 部署
     </a>
   </li>
 
@@ -321,8 +321,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../../net/c_mysql_nginx/" title="使用 Docker 容器化部署 ASP.NET Core + MySQL + Nginx" class="md-nav__link">
-      使用 Docker 容器化部署 ASP.NET Core + MySQL + Nginx
+    <a href="../../net/c_sqlserver_nginx/" title="Docker 容器化部署 ASP.NET Core" class="md-nav__link">
+      Docker 容器化部署 ASP.NET Core
     </a>
   </li>
 
@@ -899,8 +899,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../docker-compose/" title="docker和docker-compose 配置 mysql mongodb redis nginx jenkins 环境" class="md-nav__link">
-      docker和docker-compose 配置 mysql mongodb redis nginx jenkins 环境
+    <a href="../docker-compose/" title="docker和docker-compose配置常用环境" class="md-nav__link">
+      docker和docker-compose配置常用环境
     </a>
   </li>
 
@@ -1117,6 +1117,18 @@
   <li class="md-nav__item">
     <a href="../../tool/gitstudy/" title="Git的黑魔法" class="md-nav__link">
       Git的黑魔法
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tool/minio/" title="MinIO 搭建使用" class="md-nav__link">
+      MinIO 搭建使用
     </a>
   </li>
 
@@ -1941,7 +1953,7 @@
 <div class="codehilite"><pre><span></span>docker pull jenkins/jenkins:lts
 </pre></div></li>
 <li>在Docker容器中运行Jenkins：
-<div class="codehilite"><pre><span></span>docker run -p <span class="m">8080</span>:8080 -p <span class="m">50000</span>:5000 --name jenkins <span class="se">\</span>
+<div class="codehilite"><pre><span></span>docker run -p <span class="m">8080</span>:8080 -p <span class="m">50000</span>:50000 --name jenkins <span class="se">\</span>
 -u root <span class="se">\</span>
 -v /etc/localtime:/etc/localtime <span class="se">\</span>
 -v /data/jenkins_home:/var/jenkins_home <span class="se">\</span>
@@ -2040,7 +2052,7 @@
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
         
-          <a href="../docker-compose/" title="docker和docker-compose 配置 mysql mongodb redis nginx jenkins 环境" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../docker-compose/" title="docker和docker-compose配置常用环境" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-flex__cell md-flex__cell--shrink">
               <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
             </div>
@@ -2049,7 +2061,7 @@
                 <span class="md-footer-nav__direction">
                   上一页
                 </span>
-                docker和docker-compose 配置 mysql mongodb redis nginx jenkins 环境
+                docker和docker-compose配置常用环境
               </span>
             </div>
           </a>

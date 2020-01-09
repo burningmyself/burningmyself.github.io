@@ -42,7 +42,7 @@
     
     
       
-        <title>docker和docker-compose 配置 mysql mongodb redis nginx jenkins 环境 - BurningMyself</title>
+        <title>docker和docker-compose配置常用环境 - BurningMyself</title>
       
     
     
@@ -108,7 +108,7 @@
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
     <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
     
-      <a href="#dockerdocker-compose_mysql_mongodb_redis_nginx_jenkins" tabindex="1" class="md-skip">
+      <a href="#dockerdocker-compose_mysql_mssql_mongodb_redis_nginx_jenkins" tabindex="1" class="md-skip">
         跳转至
       </a>
     
@@ -134,7 +134,7 @@
             </span>
             <span class="md-header-nav__topic">
               
-                docker和docker-compose 配置 mysql mongodb redis nginx jenkins 环境
+                docker和docker-compose配置常用环境
               
             </span>
           
@@ -309,8 +309,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../../net/c_docker/" title=".Ner Core Docker 部署" class="md-nav__link">
-      .Ner Core Docker 部署
+    <a href="../../net/c_docker/" title=".Net Core Docker 部署" class="md-nav__link">
+      .Net Core Docker 部署
     </a>
   </li>
 
@@ -321,8 +321,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../../net/c_mysql_nginx/" title="使用 Docker 容器化部署 ASP.NET Core + MySQL + Nginx" class="md-nav__link">
-      使用 Docker 容器化部署 ASP.NET Core + MySQL + Nginx
+    <a href="../../net/c_sqlserver_nginx/" title="Docker 容器化部署 ASP.NET Core" class="md-nav__link">
+      Docker 容器化部署 ASP.NET Core
     </a>
   </li>
 
@@ -908,11 +908,11 @@
     
     
       <label class="md-nav__link md-nav__link--active" for="__toc">
-        docker和docker-compose 配置 mysql mongodb redis nginx jenkins 环境
+        docker和docker-compose配置常用环境
       </label>
     
-    <a href="./" title="docker和docker-compose 配置 mysql mongodb redis nginx jenkins 环境" class="md-nav__link md-nav__link--active">
-      docker和docker-compose 配置 mysql mongodb redis nginx jenkins 环境
+    <a href="./" title="docker和docker-compose配置常用环境" class="md-nav__link md-nav__link--active">
+      docker和docker-compose配置常用环境
     </a>
     
       
@@ -955,6 +955,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#sqlserver" class="md-nav__link">
+    拉取SqlServer镜像
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#mysql" class="md-nav__link">
     拉取 MySql 镜像
   </a>
@@ -985,6 +992,13 @@
           <li class="md-nav__item">
   <a href="#jenkins" class="md-nav__link">
     拉取Jenkins镜像：
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#minio" class="md-nav__link">
+    拉取MinIO镜像
   </a>
   
 </li>
@@ -1207,6 +1221,18 @@
   <li class="md-nav__item">
     <a href="../../tool/gitstudy/" title="Git的黑魔法" class="md-nav__link">
       Git的黑魔法
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tool/minio/" title="MinIO 搭建使用" class="md-nav__link">
+      MinIO 搭建使用
     </a>
   </li>
 
@@ -1991,6 +2017,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#sqlserver" class="md-nav__link">
+    拉取SqlServer镜像
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#mysql" class="md-nav__link">
     拉取 MySql 镜像
   </a>
@@ -2021,6 +2054,13 @@
           <li class="md-nav__item">
   <a href="#jenkins" class="md-nav__link">
     拉取Jenkins镜像：
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#minio" class="md-nav__link">
+    拉取MinIO镜像
   </a>
   
 </li>
@@ -2111,7 +2151,7 @@
                   <a href="https://github.com/burningmyself/burningmyself.github.io/edit/master/docs/docker/docker-compose.md" title="编辑此页" class="md-icon md-content__icon">&#xE3C9;</a>
                 
                 
-                <h1 id="dockerdocker-compose_mysql_mongodb_redis_nginx_jenkins">docker和docker-compose 配置 mysql mongodb redis nginx jenkins 环境<a class="headerlink" href="#dockerdocker-compose_mysql_mongodb_redis_nginx_jenkins" title="Permanent link">&para;</a></h1>
+                <h1 id="dockerdocker-compose_mysql_mssql_mongodb_redis_nginx_jenkins">docker和docker-compose 配置 mysql mssql mongodb redis nginx jenkins 环境<a class="headerlink" href="#dockerdocker-compose_mysql_mssql_mongodb_redis_nginx_jenkins" title="Permanent link">&para;</a></h1>
 <h2 id="_1">磁盘挂载<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
 <div class="codehilite"><pre><span></span>fdisk -l <span class="c1">#查看磁盘列表</span>
 mkfs.ext4 /dev/vdb <span class="c1">#格式化磁盘</span>
@@ -2141,6 +2181,17 @@ ln -s /data/docker /var/lib/docker <span class="c1">#建立软连接</span>
 <div class="codehilite"><pre><span></span>docker pull java
 </pre></div>
 
+<h3 id="sqlserver">拉取SqlServer镜像<a class="headerlink" href="#sqlserver" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span>docker pull microsoft/mssql-server-linux <span class="c1"># 拉取SqlServer镜像</span>
+docker run -p <span class="m">1433</span>:1433 --name mssql <span class="se">\ </span><span class="c1"># run 运行容器 -p 将容器的1433端口映射到主机的1433端口 --name 容器运行的名字</span>
+--restart<span class="o">=</span>always <span class="se">\ </span><span class="c1"># 挂断自动重新启动</span>
+-v /data/sqlserver:/var/opt/mssql <span class="se">\ </span><span class="c1"># 挂载mssql文件夹到主机</span>
+-e <span class="nv">ACCEPT_EULA</span><span class="o">=</span>Y <span class="se">\ </span><span class="c1"># 同意协议</span>
+-e <span class="nv">MSSQL_SA_PASSWORD</span><span class="o">=</span>mssql-MSSQL <span class="se">\ </span><span class="c1"># 初始化sa密码</span>
+-u root <span class="se">\ </span><span class="c1"># 指定容器为root运行</span>
+-d microsoft/mssql-server-linux <span class="c1"># -d 后台运行</span>
+</pre></div>
+
 <h3 id="mysql">拉取 MySql 镜像<a class="headerlink" href="#mysql" title="Permanent link">&para;</a></h3>
 <div class="codehilite"><pre><span></span>docker pull mysql <span class="c1">#拉取 MySql</span>
 docker run -p <span class="m">3306</span>:3306 --name mysql <span class="se">\ </span><span class="c1"># run 运行容器 -p 将容器的3306端口映射到主机的3306端口 --name 容器运行的名字</span>
@@ -2157,11 +2208,16 @@ docker <span class="nb">exec</span> -it mysql /bin/bash <span class="c1"># 进�
 
 <h3 id="mongodb">拉取 Mongodb 镜像<a class="headerlink" href="#mongodb" title="Permanent link">&para;</a></h3>
 <div class="codehilite"><pre><span></span>docker pull mongo <span class="c1">#拉取 mongodb</span>
-docker run -p <span class="m">27017</span>:27017  --name mongo --auth <span class="se">\ </span><span class="c1"># run 运行容器 -p 将容器的27017端口映射到主机的27017端口 --name 容器运行的名字 --需要密码才能访问容器服务</span>
+docker run -p <span class="m">27017</span>:27017  --name mongo <span class="se">\ </span><span class="c1"># run 运行容器 -p 将容器的27017端口映射到主机的27017端口 --name 容器运行的名字 </span>
 --restart<span class="o">=</span>always <span class="se">\ </span><span class="c1"># 挂断自动重新启动</span>
 -v /etc/localtime:/etc/localtime <span class="se">\ </span><span class="c1"># 将主机本地时间夹挂在到容器</span>
--v /data/mongodb:/var/lib/mongodb <span class="se">\ </span><span class="c1"># 将数据文件夹挂载到主机</span>
--d mongo <span class="c1"># -d 后台运行</span>
+-v /data/mongodb/db:/data/db <span class="se">\ </span><span class="c1"># 将数据文件夹挂载到主机</span>
+-v /data/mongodb/configdb:/data/configdb <span class="se">\ </span><span class="c1"># 将数据库配置文件挂载到主机</span>
+-v /data/mongodb/initdb:/docker-entrypoint-initdb.d <span class="c1"># 通过/docker-entrypoint-initdb.d/将更复杂的用户设置显式留给用户 当容器首次启动时它会执行/docker-entrypoint-initdb.d 目录下的sh 和js脚本 。 以脚本字母顺序执行</span>
+-e <span class="nv">MONGO_INITDB_ROOT_USERNAME</span><span class="o">=</span>admin <span class="se">\ </span><span class="c1"># 设置admin数据库账户名称 如果使用了此项，则不需要 --auth 参数</span>
+-e <span class="nv">MONGO_INITDB_ROOT_PASSWORD</span><span class="o">=</span>admin  <span class="se">\ </span><span class="c1"># 设置admin数据库账户密码 如果使用了此项，则不需要 --auth 参数</span>
+-d mongo <span class="se">\ </span><span class="c1"># -d 后台运行</span>
+--auth <span class="c1"># --auth 需要密码才能访问容器服务</span>
 
 docker <span class="nb">exec</span> -it mongo mongo admin <span class="c1"># 进入mongo</span>
 db.createUser<span class="o">({</span> user:<span class="s1">&#39;admin&#39;</span>,pwd:<span class="s1">&#39;123456&#39;</span>,roles:<span class="o">[</span> <span class="o">{</span> role:<span class="s1">&#39;userAdminAnyDatabase&#39;</span>, db: <span class="s1">&#39;admin&#39;</span><span class="o">}]})</span><span class="p">;</span> <span class="c1">#创建一个名为 admin，密码为 123456 的用户。</span>
@@ -2173,8 +2229,9 @@ db.auth<span class="o">(</span><span class="s1">&#39;admin&#39;</span>, <span cl
 docker run -p <span class="m">6379</span>:6379 --name redis <span class="se">\ </span><span class="c1"># run 运行容器 -p 将容器的6379端口映射到主机的6379端口 --name 容器运行的名字</span>
 --restart<span class="o">=</span>always <span class="se">\ </span><span class="c1"># 挂断自动重新启动</span>
 -v /etc/localtime:/etc/localtime <span class="se">\ </span><span class="c1"># 将主机本地时间夹挂在到容器</span>
--v /data/redis:/data/redis <span class="se">\ </span><span class="c1"># 将数据文件夹挂载到主机</span>
+-v /data/redis:/data <span class="se">\ </span><span class="c1"># 将数据文件夹挂载到主机</span>
 -d redis <span class="se">\ </span><span class="c1"># -d 后台运行</span>
+redis-server --appendonly yes <span class="se">\ </span><span class="c1"># 在容器执行redis-server启动命令，并打开redis持久化配置</span>
 --requirepass <span class="s2">&quot;123456&quot;</span> <span class="c1"># 设置密码123456</span>
 </pre></div>
 
@@ -2261,6 +2318,17 @@ docker run -p <span class="m">8080</span>:8080 -p <span class="m">50000</span>:5
 -v /data/jenkins_home:/var/jenkins_home <span class="se">\ </span><span class="c1"># 将jenkins_home文件夹挂在到主机</span>
 -e <span class="nv">JAVA_OPTS</span><span class="o">=</span>-Duser.timezone<span class="o">=</span>Asia/Shanghai <span class="se">\ </span><span class="c1">#设置jenkins运行环境时区</span>
 -d jenkins/jenkins:lts <span class="c1"># -d 后台运行</span>
+</pre></div>
+
+<h3 id="minio">拉取MinIO镜像<a class="headerlink" href="#minio" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span>docker pull minio/minio <span class="c1"># 拉取MinIO镜像</span>
+docker run -p <span class="m">9000</span>:9000 --name minio <span class="se">\ </span><span class="c1"># run 运行容器 -p 将容器的9000,9000端口映射到主机的9000,9000端口 --name 容器运行的名</span>
+-v /etc/localtime:/etc/localtime <span class="se">\ </span><span class="c1"># 将主机本地时间夹挂在到容器</span>
+-v /data/minio/data:/data <span class="se">\ </span><span class="c1"># 将data文件夹挂在到主机</span>
+-v /data/minio/config:/root/.minio <span class="se">\ </span><span class="c1"># 将配置文件夹挂在到主机</span>
+-e <span class="s2">&quot;MINIO_ACCESS_KEY=AKIAIOSFODNN7EXAMPLE&quot;</span> <span class="se">\ </span><span class="c1"># 设置MINIO_ACCESS_KEY的值</span>
+-e <span class="s2">&quot;MINIO_SECRET_KEY=wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY&quot;</span> <span class="se">\ </span><span class="c1"># 设置MINIO_SECRET_KEY值</span>
+-d minio/minio server /data <span class="c1"># -d 后台运行</span>
 </pre></div>
 
 <h3 id="docker_api">Docker 开启远程API<a class="headerlink" href="#docker_api" title="Permanent link">&para;</a></h3>
@@ -2374,7 +2442,29 @@ services:
     restart: always
     # 指定容器的环境变量
     environment:
-      - MYSQL_ROOT_PASSWORD=xiujingmysql.
+      - TZ=Asia/Shanghai # 设置容器时区与宿主机保持一致
+  # 指定服务名称
+  sqlserver:
+    # 指定服务使用的镜像
+    image: mcr.microsoft.com/mssql/server
+    # 指定容器名称
+    container_name: sqlserver
+    # 指定服务运行的端口
+    ports:
+      - &quot;1433&quot;
+    # 指定容器中需要挂载的文件  
+    volumes:
+      - /etc/localtime:/etc/localtime
+      - /data/sqlserver:/var/opt/mssql
+    # 挂断自动重新启动  
+    restart: always
+    environment:
+      - TZ=Asia/Shanghai
+      - SA_PASSWORD=mssql-MSSQL
+      - ACCEPT_EULA=Y 
+    # 指定容器运行的用户为root
+    user:
+      root       
   # 指定服务名称
   mysql:
     # 指定服务使用的镜像
@@ -2383,7 +2473,7 @@ services:
     container_name: mysql
     # 指定服务运行的端口
     ports:
-      - 13306:3306
+      - 3306:3306
     # 指定容器中需要挂载的文件
     volumes:
       - /etc/localtime:/etc/localtime
@@ -2395,7 +2485,11 @@ services:
     restart: always
     # 指定容器的环境变量
     environment:
-      - MYSQL_ROOT_PASSWORD=xiujingmysql.
+      - TZ=Asia/Shanghai # 设置容器时区与宿主机保持一致
+      - MYSQL_ROOT_PASSWORD=xiujingmysql. # 设置root密码
+    # 指定容器运行的用户为root
+    user:
+      root     
   # 指定服务名称
   redis:
     # 指定服务使用的镜像
@@ -2404,15 +2498,19 @@ services:
     container_name: redis
     # 指定服务运行的端口
     ports:
-      - 16379:6379
+      - 6379:6379
     # 指定容器中需要挂载的文件
     volumes:
       - /etc/localtime:/etc/localtime
-      - /data/redis:/data/redis
+      - /data/redis:/data
+      - /data/redis/redis.conf:/etc/redis.conf
     # 挂断自动重新启动
     restart: always
     # 指定容器执行命令
-    command: redis-server --requirepass xiujingredis.
+    command: redis-server /etc/redis.conf --requirepass xiujingredis. --appendonly yes
+    # 指定容器的环境变量
+    environment:
+      - TZ=Asia/Shanghai # 设置容器时区与宿主机保持一致
   # 指定服务名称
   mongo:
     # 指定服务使用的镜像
@@ -2425,17 +2523,17 @@ services:
     # 指定容器中需要挂载的文件
     volumes:
       - /etc/localtime:/etc/localtime
-      - /data/mongo:/data/mongo
+      - /data/mongodb/db:/data/db
+      - /data/mongodb/configdb:/data/configdb
+      - /data/mongodb/initdb:/docker-entrypoint-initdb.d      
     # 挂断自动重新启动
     restart: always
     # 指定容器的环境变量
     environment:
+      - TZ=Asia/Shanghai # 设置容器时区与宿主机保持一致
       - AUTH=yes
-      - ADMIN_USER=admin
-      - ADMIN_PASS=admin
-      - APPLICATION_DATABASE=test
-      - APPLICATION_USER=test
-      - APPLICATION_PASS=test
+      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_ROOT_PASSWORD=admin
   # 指定服务名称
   jenkins:
     # 指定服务使用的镜像
@@ -2454,10 +2552,27 @@ services:
     restart: always
     # 指定容器的环境变量
     environment:
+      - TZ=Asia/Shanghai # 设置容器时区与宿主机保持一致
       - JAVA_OPTS=-Duser.timezone=Asia/Shanghai   
     # 指定容器运行的用户为root
     user:
       root    
+    # 指定服务名称
+  minio:
+    # 指定服务使用的镜像
+    image: minio
+    # 指定容器名称
+    container_name: minio
+    # 指定服务运行的端口
+    ports:
+      - 9000:9000
+    # 指定容器中需要挂载的文件
+    volumes:
+      - /etc/localtime:/etc/localtime
+      - /data/minio/data:/data 
+      - /data/minio/config:/root/.minio
+    # 挂断自动重新启动
+    restart: always    
 </pre></div>
 运行Docker Compose命令启动所有服务
 <div class="codehilite"><pre><span></span>docker-compose up -d
