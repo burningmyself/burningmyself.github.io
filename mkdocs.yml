@@ -41,6 +41,7 @@ nav:
         - BIO与NIO: java/bio-nio.md
         - RocketMq下载与安装: java/rocketmq/rmq-1.md
         - Spring常用注解: java/springAnnotation.md
+        - Java 虚拟机: java/javavm.md
     - Python: 
         - Python特性: python/feature.md 
         - Python字符拼接: python/str_joint.md
