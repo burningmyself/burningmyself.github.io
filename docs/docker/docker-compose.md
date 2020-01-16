@@ -172,7 +172,7 @@ http {
 运行 nginx
 ``` shell
 docker run -p 80:80 -p 443:443 --name nginx \ # run 运行容器 -p 将容器的80,443端口映射到主机的80,443端口 --name 容器运行的名字
---restart=always \
+--restart=always \ # 挂断自动重新启动
 -v /etc/localtime:/etc/localtime \ # 将主机本地时间夹挂在到容器
 -v /data/nginx/html:/usr/share/nginx/html \ # nginx 静态资源
 -v /data/nginx/logs:/var/log/nginx  \ # 将日志文件夹挂载到主机
@@ -184,7 +184,8 @@ docker run -p 80:80 -p 443:443 --name nginx \ # run 运行容器 -p 将容器的
 ### 拉取Jenkins镜像：
 ```shell
 docker pull jenkins/jenkins:lts # 拉取 jenkins
-docker run -p 8080:8080 -p 50000:50000 --name jenkins \ # run 运行容器 -p 将容器的80,443端口映射到主机的8080,50000端口 --name 容器运行的名字
+docker run -p 8080:8080 -p 50000:50000 --name jenkins \ # run 运行容器 -p 将容器的8080,50000端口映射到主机的8080,50000端口 --name 容器运行的名字
+--restart=always \ # 挂断自动重新启动
 -u root \ # 运行的用户为root
 -v /etc/localtime:/etc/localtime \ # 将主机本地时间夹挂在到容器
 -v /data/jenkins_home:/var/jenkins_home \ # 将jenkins_home文件夹挂在到主机
@@ -196,13 +197,26 @@ docker run -p 8080:8080 -p 50000:50000 --name jenkins \ # run 运行容器 -p �
 ```shell
 docker pull minio/minio # 拉取MinIO镜像
 docker run -p 9000:9000 --name minio \ # run 运行容器 -p 将容器的9000,9000端口映射到主机的9000,9000端口 --name 容器运行的名
+--restart=always \ # 挂断自动重新启动
 -v /etc/localtime:/etc/localtime \ # 将主机本地时间夹挂在到容器
 -v /data/minio/data:/data \ # 将data文件夹挂在到主机
 -v /data/minio/config:/root/.minio \ # 将配置文件夹挂在到主机
 -e "MINIO_ACCESS_KEY=AKIAIOSFODNN7EXAMPLE" \ # 设置MINIO_ACCESS_KEY的值
 -e "MINIO_SECRET_KEY=wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY" \ # 设置MINIO_SECRET_KEY值
--d minio/minio server /data # -d 后台运行
+-d minio/minio server /data # -d 后台运行 server /data 导出/data目录
 
+```
+
+### 拉取Portainer镜像
+
+``` shell
+docker pull portainer/portainer # 拉取MinIO镜像
+docker run -p 8001:8000 -p 9001:9000 --name portainer \ # run 运行容器 -p 将容器的8000,9000端口映射到主机的8000,9000端口 --name 容器运行的名
+--restart=always \ # 挂断自动重新启动
+-v /etc/localtime:/etc/localtime \ # 将主机本地时间夹挂在到容器
+-v /var/run/docker.sock:/var/run/docker.sock \ # 将docker.sock文件夹挂在到主机
+-v /data/portainer/data:/data \ # 将配置文件夹挂在到主机
+-d portainer/portainer portainer # -d 后台运行
 ```
 
 ### Docker 开启远程API
@@ -439,7 +453,7 @@ services:
     # 指定容器运行的用户为root
     user:
       root    
-    # 指定服务名称
+  # 指定服务名称
   minio:
     # 指定服务使用的镜像
     image: minio
@@ -454,7 +468,27 @@ services:
       - /data/minio/data:/data 
       - /data/minio/config:/root/.minio
     # 挂断自动重新启动
-    restart: always    
+    restart: always   
+    # 指定容器执行命令
+    command: server /data    
+  # 指定服务名称   
+  portainer :
+    # 指定服务使用的镜像
+    image: portainer 
+    # 指定容器名称
+    container_name: portainer 
+    # 指定服务运行的端口
+    ports:
+      - 8001:8000
+      - 9001:9000
+    # 指定容器中需要挂载的文件
+    volumes:
+      - /etc/localtime:/etc/localtime
+      - /var/run/docker.sock:/var/run/docker.sock 
+      - /data/portainer/data:/data
+
+    # 挂断自动重新启动
+    restart: always  
 ```
 运行Docker Compose命令启动所有服务
 ``` shell
