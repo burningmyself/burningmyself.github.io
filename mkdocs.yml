@@ -66,6 +66,7 @@ nav:
         - MySQL索引: sql/mysql_index.md
         - MySQL PXC集群: sql/mysql_pxc.md
         - MySQL 数据库应用: sql/mysql_use.md
+        - MySql 备份: sql/mysql_backups.md
         - Sql Server 主从备份: sql/sql_server_master.md
         - 数据库之互联网常用分库分表方案: sql/data_split.md
         - Mybatis使用心德: sql/mybatis.md
