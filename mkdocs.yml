@@ -58,6 +58,7 @@ nav:
         - React 面试: web/react_interview.md
         - js 工具函数: web/js_tool_method.md
         - vue与react比较: web/vue_cp_react.md
+        - JavaScript 基础: web/javascript.md
     - SQL:
         - MySQL优化: sql/mysql_yh.md
         - MySQL优化: sql/mysql_yh17.md

@@ -20,12 +20,17 @@ yum update #更新系统包
 yum install -y yum-utils device-mapper-persistent-data lvm2 #安装yum-utils
 yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo #为yum源添加docker仓库位置
 yum install docker-ce #安装docker
+systemctl enable docker #设置开机自动启动
 systemctl start docker #启动docker
 systemctl stop docker #暂停docker
 mv /var/lib/docker /data/docker # 修改Docker镜像的存放位置
 ln -s /data/docker /var/lib/docker #建立软连接
 echo '{
-  "registry-mirrors": ["https://registry.docker-cn.com"]
+  "registry-mirrors": [
+    "https://dockerhub.azk8s.cn",
+    "https://hub-mirror.c.163.com",
+    "https://registry.docker-cn.com"
+    ]
 }
 '>> /etc/docker/daemon.json # 镜像下载代理
 ```
@@ -223,6 +228,7 @@ docker run -p 8001:8000 -p 9001:9000 --name portainer \ # run 运行容器 -p �
 
 * 用vi编辑器修改docker.service文件
 ``` shell
+vi /usr/lib/systemd/system/docker.service
 #需要修改的部分：
 ExecStart=/usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock
 #修改后的部分：
@@ -233,7 +239,7 @@ ExecStart=/usr/bin/dockerd -H tcp://0.0.0.0:2375 -H unix://var/run/docker.sock
 
 ``` shell
 systemctl start docker #启动docker
-systemtctl enable docker #将docker服务设为开机启动
+systemctl enable docker #将docker服务设为开机启动
 systemctl stop docker #停止容器
 systemctl restart docker #重启docker服务
 docker images # 列出镜像
@@ -486,7 +492,6 @@ services:
       - /etc/localtime:/etc/localtime
       - /var/run/docker.sock:/var/run/docker.sock 
       - /data/portainer/data:/data
-
     # 挂断自动重新启动
     restart: always  
 ```
