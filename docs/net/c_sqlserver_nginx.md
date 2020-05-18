@@ -96,9 +96,6 @@ sudo chmod +x /usr/local/bin/docker-compose
 ```
 docker-compose --version
 ```
-
-![cmn](./../img/c_sqlserver_nginx3.png)
-
 #### 2、构建程序镜像
 
 　　当我们在服务器上安装好 docker 和 docker compose 之后，就可以开始构建我们的程序镜像了。首先我们需要对我们的运行程序添加对于 Docker 的支持。你可以自己手动在 MVC 项目中添加 Dockerfile 文件，或是通过右键添加 Docker 支持。
