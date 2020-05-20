@@ -111,10 +111,9 @@ Eureka Client 通过注册、心跳机制和 Eureka Server 同步当前客户端
 Eureka Client 会每隔 30 秒发送一次心跳来续约。 通过续约来告知 Eureka Server 该 Eureka Client 运行正常，没有出现问题。 默认情况下，如果 Eureka Server 在 90 秒内没有收到 Eureka Client 的续约，Server 端会将实例从其注册表中删除，此时间可配置，一般情况不建议更改
 
 * 服务续约的两个重要属性
-``` java
+```
 服务续约任务的调用间隔时间，默认为30秒
 eureka.instance.lease-renewal-interval-in-seconds=30
-
 服务失效的时间，默认为90秒。
 eureka.instance.lease-expiration-duration-in-seconds=90
 ```
@@ -126,7 +125,7 @@ eureka.instance.lease-expiration-duration-in-seconds=90
 
 Eureka Client 在程序关闭时向 Eureka Server 发送取消请求。 发送请求后，该客户端实例信息将从 Eureka Server 的实例注册表中删除。该下线请求不会自动完成，它需要调用以下内容：
 
-``` java
+```
 DiscoveryManager.getInstance().shutdownComponent()；
 ```
 * GetRegisty: 获取注册列表信息
@@ -136,13 +135,15 @@ Eureka Client 从服务器获取注册表信息，并将其缓存在本地。客
 如果由于某种原因导致注册列表信息不能及时匹配，Eureka Client 则会重新获取整个注册表信息。 Eureka Server 缓存注册列表信息，整个注册表以及每个应用程序的信息进行了压缩，压缩内容和没有压缩的内容完全相同。Eureka Client 和 Eureka Server 可以使用 JSON/XML 格式进行通讯。在默认情况下 Eureka Client 使用压缩 JSON 格式来获取注册列表的信息。
 
 * 获取服务是服务消费者的基础，所以必有两个重要参数需要注意：
-``` java
+
+```
 # 启用服务消费者从注册中心拉取服务列表的功能
 eureka.client.fetch-registry=true
 
 # 设置服务消费者从注册中心拉取服务列表的间隔
 eureka.client.registry-fetch-interval-seconds=30
 ```
+
 * Remote Call: 远程调用
 当 Eureka Client 从注册中心获取到服务提供者信息后，就可以通过 Http 请求调用对应的服务；服务提供者有多个时，Eureka Client 客户端会通过 Ribbon 自动进行负载均衡。
 
