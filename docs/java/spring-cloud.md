@@ -111,12 +111,14 @@ Eureka Client 通过注册、心跳机制和 Eureka Server 同步当前客户端
 Eureka Client 会每隔 30 秒发送一次心跳来续约。 通过续约来告知 Eureka Server 该 Eureka Client 运行正常，没有出现问题。 默认情况下，如果 Eureka Server 在 90 秒内没有收到 Eureka Client 的续约，Server 端会将实例从其注册表中删除，此时间可配置，一般情况不建议更改
 
 * 服务续约的两个重要属性
+
 ```
 服务续约任务的调用间隔时间，默认为30秒
 eureka.instance.lease-renewal-interval-in-seconds=30
 服务失效的时间，默认为90秒。
 eureka.instance.lease-expiration-duration-in-seconds=90
 ```
+
 * Eviction 服务剔除
 
 当 Eureka Client 和 Eureka Server 不再有心跳时，Eureka Server 会将该服务实例从服务注册列表中删除，即服务剔除。
@@ -128,6 +130,7 @@ Eureka Client 在程序关闭时向 Eureka Server 发送取消请求。 发送�
 ```
 DiscoveryManager.getInstance().shutdownComponent()；
 ```
+
 * GetRegisty: 获取注册列表信息
 
 Eureka Client 从服务器获取注册表信息，并将其缓存在本地。客户端会使用该信息查找其他服务，从而进行远程调用。该注册列表信息定期（每30秒钟）更新一次。每次返回注册列表信息可能与 Eureka Client 的缓存信息不同，Eureka Client 自动处理。
@@ -170,7 +173,8 @@ Eureka 自我保护机制是为了防止误杀服务而提供的一个机制。�
 如果在保护期内刚好这个服务提供者非正常下线了，此时服务消费者就会拿到一个无效的服务实例，即会调用失败。对于这个问题需要服务消费者端要有一些容错机制，如重试，断路器等。
 
 * 通过在 Eureka Server 配置如下参数，开启或者关闭保护机制，生产环境建议打开：
-``` java
+
+``` 
 eureka.server.enable-self-preservation=true
 ```
 
@@ -295,7 +299,7 @@ RetryRule: 重试策略。先按照 RoundRobinRule 策略获取 provider，若�
 
 🐦🐦🐦 还有很多，这里不一一举🌰了，你最需要知道的是默认轮询算法，并且可以更换默认的负载均衡算法，只需要在配置文件中做出修改就行。
 
-```java
+```
 providerName:
   ribbon:
     NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RandomRule
@@ -459,7 +463,7 @@ emmm，信息量有点大，我来解释一下。关于前面的知识我就不�
 
 上面的你理解了，那么就能理解关于 Zuul 最基本的配置了，看下面。
 
-``` java
+``` 
 server:
   port: 9000
 eureka:
@@ -475,7 +479,7 @@ eureka:
 
 这个很简单，就是我们可以在前面加一个统一的前缀，比如我们刚刚调用的是 localhost:9000/consumer1/studentInfo/update，这个时候我们在 yaml 配置文件中添加如下。
 
-``` java
+``` 
 zuul:
   prefix: /zuul
 ```
@@ -486,12 +490,12 @@ zuul:
 
 你会发现前面的访问方式(直接使用服务名)，需要将微服务名称暴露给用户，会存在安全性问题。所以，可以自定义路径来替代微服务名称，即自定义路由策略。
 
-``` java
+``` 
 zuul:
   routes:
     consumer1: /FrancisQ1/**
     consumer2: /FrancisQ2/**
-````
+```
 
 这个时候你就可以使用 localhost:9000/zuul/FrancisQ1/studentInfo/update 进行访问了。
 
@@ -499,7 +503,7 @@ zuul:
 
 这个时候你别以为你好了，你可以试试，在你配置完路由策略之后使用微服务名称还是可以访问的，这个时候你需要将服务名屏蔽。
 
-``` java
+``` 
 zuul:
   ignore-services: "*"
 ```
@@ -508,7 +512,7 @@ zuul:
 
 Zuul 还可以指定屏蔽掉的路径 URI，即只要用户请求中包含指定的 URI 路径，那么该请求将无法访问到指定的服务。通过该方式可以限制用户的权限。
 
-``` java
+``` 
 zuul:
   ignore-patterns: **/auto/**
 
@@ -569,6 +573,7 @@ public class PreRequestFilter extends ZuulFilter {
         return null;
     }
 }
+
 ```
 
 ``` java
