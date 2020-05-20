@@ -43,6 +43,7 @@ nav:
         - Spring常用注解: java/springAnnotation.md
         - Java 虚拟机: java/javavm.md
         - Spring 常用设计: java/springdesign.md
+        - Spring Cloud: java/spring-cloud.md
     - Python: 
         - Python特性: python/feature.md 
         - Python字符拼接: python/str_joint.md

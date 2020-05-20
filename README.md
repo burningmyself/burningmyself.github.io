@@ -46,6 +46,7 @@
 * * [Spring常用注解](docs/java/springAnnotation.md)
 * * [Java 虚拟机](docs/java/javavm.md)
 * * [Spring 常用设计](docs/java/springdesign.md)
+* * [Spring Cloud](docs/java/spring-cloud.md)
 * [Linux]
 * * [Linux常用命令](docs/linux/often.md)
 * * [实用的Linux 命令](docs/linux/ope.md)
