@@ -44,6 +44,7 @@ nav:
         - Java 虚拟机: java/javavm.md
         - Spring 常用设计: java/springdesign.md
         - Spring Cloud: java/spring-cloud.md
+        - Java simple: java/java-simple.md
     - Python: 
         - Python特性: python/feature.md 
         - Python字符拼接: python/str_joint.md
