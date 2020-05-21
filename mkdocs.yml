@@ -45,6 +45,9 @@ nav:
         - Spring 常用设计: java/springdesign.md
         - Spring Cloud: java/spring-cloud.md
         - Java simple: java/java-simple.md
+        - Java Validator: java/java-validator.md
+        - Java String: java/java-string.md
+        - Java Utils: java/java-utils.md
     - Python: 
         - Python特性: python/feature.md 
         - Python字符拼接: python/str_joint.md

@@ -48,6 +48,9 @@
 * * [Spring 常用设计](docs/java/springdesign.md)
 * * [Spring Cloud](docs/java/spring-cloud.md)
 * * [Java Simple](docs/java/java-simple.md)
+* * [Java Validator](docs/java/java-validator.md)
+* * [Java String](docs/java/java-string.md)
+* * [Java Utils](docs/java/java-utils.md)
 * [Linux]
 * * [Linux常用命令](docs/linux/often.md)
 * * [实用的Linux 命令](docs/linux/ope.md)
