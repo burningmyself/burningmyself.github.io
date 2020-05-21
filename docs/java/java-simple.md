@@ -573,6 +573,7 @@ public static <K, V> Map<K, V> newHashMap(K[] keys, V[] values) {
 ## 利用自身方法
 ### 利用构造方法
 >构造方法，可以简化对象的初始化和设置属性操作。对于属性字段较少的类，可以自定义构造方法。
+
 普通
 
 ``` java
@@ -1142,6 +1143,7 @@ String zipcode = Optional.ofNullable(user).map(User::getAddress)
 ```
 ## 利用 Stream
 > 流（Stream）是Java 8的新成员，允许你以声明式处理数据集合，可以看成为一个遍历数据集的高级迭代器。流主要有三部分构成：获取一个数据源→数据转换→执行操作获取想要的结果。每次转换原有 Stream 对象不改变，返回一个新的 Stream 对象，这就允许对其操作可以像链条一样排列，形成了一个管道。流（Stream）提供的功能非常有用，主要包括匹配、过滤、汇总、转化、分组、分组汇总等功能。
+
 ### 匹配集合数据
 
 普通
@@ -1815,7 +1817,7 @@ public interface UserDAO {
 public enum UserStatus {
     DISABLED(0, "禁用"),
     ENABLED(1, "启用");
-  private final Integer value;
+    private final Integer value;
     private final String desc;
     private UserStatus(Integer value, String desc) {
         this.value = value;
