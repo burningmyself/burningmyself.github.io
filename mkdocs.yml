@@ -101,6 +101,7 @@ nav:
         - 分布式系统与消息的投递: micro/distrimsg.md
         - 基于DDD的微服务设计和开发实战: micro/ddd.md
         - Kafka架构原理: micro/kafka.md
+        - Redis Cluster原理: micro/redis-cluster.md
   - 经验分析:
     - DevOps: exp/devops.md   
     - Micro-Service: exp/micro-service.md

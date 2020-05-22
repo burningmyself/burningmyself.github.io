@@ -61,6 +61,7 @@
 * * [分布式系统与消息的投递](docs/micro/distrimsg.md)
 * * [基于DDD的微服务设计和开发实战](docs/micro/ddd.md)
 * * [Kafka架构原理](docs/micro/kafka.md)
+* * [Redis Cluster原理](docs/micro/redis-cluster.md)
 * [.NET]
 * * [C#语法新特性](docs/net/c_sharp.md)
 * * [.Net Core Docker 部署](docs/net/c_docker.md)
