@@ -102,6 +102,7 @@ nav:
         - 基于DDD的微服务设计和开发实战: micro/ddd.md
         - Kafka架构原理: micro/kafka.md
         - Redis Cluster原理: micro/redis-cluster.md
+        - 分布式架构: micro/spring-cloud-micro.md
   - 经验分析:
     - DevOps: exp/devops.md   
     - Micro-Service: exp/micro-service.md

@@ -62,6 +62,7 @@
 * * [基于DDD的微服务设计和开发实战](docs/micro/ddd.md)
 * * [Kafka架构原理](docs/micro/kafka.md)
 * * [Redis Cluster原理](docs/micro/redis-cluster.md)
+* * [分布式架构](docs/micro/spring-cloud-micro.md)
 * [.NET]
 * * [C#语法新特性](docs/net/c_sharp.md)
 * * [.Net Core Docker 部署](docs/net/c_docker.md)
