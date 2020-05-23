@@ -55,7 +55,6 @@
 * * [Linux常用命令](docs/linux/often.md)
 * * [实用的Linux 命令](docs/linux/ope.md)
 * [微服务]
-* * [SpringCloud的微服务架构](docs/micro/spring-cloud.md)
 * * [分布式锁](docs/micro/fbs-lock.md)
 * * [微服务设计](docs/micro/design.md)
 * * [分布式系统与消息的投递](docs/micro/distrimsg.md)
@@ -113,6 +112,7 @@
 * * [分布式、高并发、多线程](docs/framework/fgb.md)
 * * [如何理解敏捷开发](docs/framework/agility.md)
 * * [走向架构师必备的技能](docs/framework/fwork.md)
+* * [数据中台的思考与总结](docs/framework/data-middle.md)
 * [医学]
 * * [脑炎](docs/doctor/ae.md)
 * [情感]

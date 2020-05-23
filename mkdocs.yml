@@ -95,7 +95,6 @@ nav:
         - Git的黑魔法: tool/gitstudy.md
         - MinIO 搭建使用: tool/minio.md
   - 微服务:  
-        - 基于SpringCloud的微服务架构演变史: micro/spring-cloud.md
         - 分布式锁: micro/fbs-lock.md
         - 微服务设计: micro/design.md
         - 分布式系统与消息的投递: micro/distrimsg.md
@@ -123,6 +122,7 @@ nav:
     - 分布式、高并发、多线程: framework/fgb.md 
     - 如何理解敏捷开发: framework/agility.md 
     - 走向架构师必备的技能: framework/fwork.md
+    - 数据中台的思考与总结: framework/data-middle.md
   - 情感:
     - 情商: emotion/eq.md
     - 工作心得: emotion/workheard.md
