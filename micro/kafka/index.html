@@ -1,0 +1,2532 @@
+
+
+
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+        <meta name="description" content=".net,java,php,python,docker,web">
+      
+      
+        <link rel="canonical" href="https://burningmyself.gitee.io/micro/kafka/">
+      
+      
+        <meta name="author" content="BurningMyself">
+      
+      
+        <meta name="lang:clipboard.copy" content="复制">
+      
+        <meta name="lang:clipboard.copied" content="已复制">
+      
+        <meta name="lang:search.language" content="zh,en,ja">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="没有找到符合条件的结果">
+      
+        <meta name="lang:search.result.one" content="找到 1 个符合条件的结果">
+      
+        <meta name="lang:search.result.other" content="# 个符合条件的结果">
+      
+        <meta name="lang:search.tokenizer" content="[\ s \-\ .. +">
+      
+      <link rel="shortcut icon" href="../../favicon.ico">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.6.0">
+    
+    
+      
+        <title>Kafka架构原理 - BurningMyself</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/application.1b62728e.css">
+      
+      
+    
+    
+      <script src="../../assets/javascripts/modernizr.268332fc.js"></script>
+    
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
+      
+    
+    <link rel="stylesheet" href="../../assets/fonts/material-icons.css">
+    
+    
+    
+      
+        
+<script>
+  window.ga = window.ga || function() {
+    (ga.q = ga.q || []).push(arguments)
+  }
+  ga.l = +new Date
+  /* Setup integration and send page view */
+  ga("create", "UA-155084439-1", "burningmyself.gitee.io")
+  ga("set", "anonymizeIp", true)
+  ga("send", "pageview")
+  /* Register handler to log search on blur */
+  document.addEventListener("DOMContentLoaded", () => {
+    if (document.forms.search) {
+      var query = document.forms.search.query
+      query.addEventListener("blur", function() {
+        if (this.value) {
+          var path = document.location.pathname;
+          ga("send", "pageview", path + "?q=" + this.value)
+        }
+      })
+    }
+  })
+</script>
+<script async src="https://www.google-analytics.com/analytics.js"></script>
+      
+    
+    
+  </head>
+  
+    <body dir="ltr">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+          <svg xmlns="http://www.w3.org/2000/svg" width="416" height="448" viewBox="0 0 416 448" id="__github"><path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19T128 352t-18.125-8.5-10.75-19T96 304t3.125-20.5 10.75-19T128 256t18.125 8.5 10.75 19T160 304zm160 0q0 10-3.125 20.5t-10.75 19T288 352t-18.125-8.5-10.75-19T256 304t3.125-20.5 10.75-19T288 256t18.125 8.5 10.75 19T320 304zm40 0q0-30-17.25-51T296 232q-10.25 0-48.75 5.25Q229.5 240 208 240t-39.25-2.75Q130.75 232 120 232q-29.5 0-46.75 21T56 304q0 22 8 38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0 37.25-1.75t35-7.375 30.5-15 20.25-25.75T360 304zm56-44q0 51.75-15.25 82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5T212 416q-19.5 0-35.5-.75t-36.875-3.125-38.125-7.5-34.25-12.875T37 371.5t-21.5-28.75Q0 312 0 260q0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25 30.875Q171.5 96 212 96q37 0 70 8 26.25-20.5 46.75-30.25T376 64q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34 99.5z"/></svg>
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+    
+      <a href="#kafka" tabindex="1" class="md-skip">
+        跳转至
+      </a>
+    
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="https://burningmyself.gitee.io" title="BurningMyself" class="md-header-nav__button md-logo">
+          
+            <i class="md-icon"></i>
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          
+            <span class="md-header-nav__topic">
+              BurningMyself
+            </span>
+            <span class="md-header-nav__topic">
+              
+                Kafka架构原理
+              
+            </span>
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
+          
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="__search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            键入以开始搜索
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+        
+      </div>
+      
+        <div class="md-flex__cell md-flex__cell--shrink">
+          <div class="md-header-nav__source">
+            
+
+
+  
+
+<a href="https://github.com/burningmyself/burningmyself.github.io/" title="前往 Github 仓库" class="md-source" data-md-source="github">
+  
+    <div class="md-source__icon">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
+    burningmyself.github.io
+  </div>
+</a>
+          </div>
+        </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+      <main class="md-main" role="main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="__drawer">
+    <a href="https://burningmyself.gitee.io" title="BurningMyself" class="md-nav__button md-logo">
+      
+        <i class="md-icon"></i>
+      
+    </a>
+    BurningMyself
+  </label>
+  
+    <div class="md-nav__source">
+      
+
+
+  
+
+<a href="https://github.com/burningmyself/burningmyself.github.io/" title="前往 Github 仓库" class="md-source" data-md-source="github">
+  
+    <div class="md-source__icon">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
+    burningmyself.github.io
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../.." title="介绍" class="md-nav__link">
+      介绍
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2">
+    
+    <label class="md-nav__link" for="nav-2">
+      技术博文
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-2">
+        技术博文
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-1" type="checkbox" id="nav-2-1">
+    
+    <label class="md-nav__link" for="nav-2-1">
+      .NET
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-2-1">
+        .NET
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../net/c_sharp/" title="C#新特性语法" class="md-nav__link">
+      C#新特性语法
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../net/c_docker/" title=".Net Core Docker 部署" class="md-nav__link">
+      .Net Core Docker 部署
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../net/c_sqlserver_nginx/" title="Docker 容器化部署 ASP.NET Core" class="md-nav__link">
+      Docker 容器化部署 ASP.NET Core
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../net/c_core_safety/" title="让你的ASP.NET Core应用程序更安全" class="md-nav__link">
+      让你的ASP.NET Core应用程序更安全
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../net/c_core_study_route/" title="ASP.NET Core开发者指南" class="md-nav__link">
+      ASP.NET Core开发者指南
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-2" type="checkbox" id="nav-2-2">
+    
+    <label class="md-nav__link" for="nav-2-2">
+      Java
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-2-2">
+        Java
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../java/feature/" title="Java特性" class="md-nav__link">
+      Java特性
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../java/load-class/" title="Java类加载" class="md-nav__link">
+      Java类加载
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../java/orm/" title="Orm的优缺点" class="md-nav__link">
+      Orm的优缺点
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../java/bio-nio/" title="BIO与NIO" class="md-nav__link">
+      BIO与NIO
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../java/rocketmq/rmq-1/" title="RocketMq下载与安装" class="md-nav__link">
+      RocketMq下载与安装
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../java/springAnnotation/" title="Spring常用注解" class="md-nav__link">
+      Spring常用注解
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../java/javavm/" title="Java 虚拟机" class="md-nav__link">
+      Java 虚拟机
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../java/springdesign/" title="Spring 常用设计" class="md-nav__link">
+      Spring 常用设计
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../java/spring-cloud/" title="Spring Cloud" class="md-nav__link">
+      Spring Cloud
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../java/java-simple/" title="Java simple" class="md-nav__link">
+      Java simple
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../java/java-validator/" title="Java Validator" class="md-nav__link">
+      Java Validator
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../java/java-string/" title="Java String" class="md-nav__link">
+      Java String
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../java/java-utils/" title="Java Utils" class="md-nav__link">
+      Java Utils
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-3" type="checkbox" id="nav-2-3">
+    
+    <label class="md-nav__link" for="nav-2-3">
+      Python
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-2-3">
+        Python
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../python/feature/" title="Python特性" class="md-nav__link">
+      Python特性
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../python/str_joint/" title="Python字符拼接" class="md-nav__link">
+      Python字符拼接
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../python/syntax_rule/" title="Python语法技巧" class="md-nav__link">
+      Python语法技巧
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../python/fabric/" title="远程部署神器 Fabric" class="md-nav__link">
+      远程部署神器 Fabric
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-4" type="checkbox" id="nav-2-4">
+    
+    <label class="md-nav__link" for="nav-2-4">
+      PHP
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-2-4">
+        PHP
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../php/kj/" title="框架" class="md-nav__link">
+      框架
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-5" type="checkbox" id="nav-2-5">
+    
+    <label class="md-nav__link" for="nav-2-5">
+      Web
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-2-5">
+        Web
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../web/es6/" title="es6语法" class="md-nav__link">
+      es6语法
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../web/ali_js_style/" title="阿里js样式规范" class="md-nav__link">
+      阿里js样式规范
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../web/node.js/" title="node.js文档" class="md-nav__link">
+      node.js文档
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../web/react/" title="React 开发者指南" class="md-nav__link">
+      React 开发者指南
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../dart/syntax/" title="Dart语法学习" class="md-nav__link">
+      Dart语法学习
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../web/react_interview/" title="React 面试" class="md-nav__link">
+      React 面试
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../web/js_tool_method/" title="js 工具函数" class="md-nav__link">
+      js 工具函数
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../web/vue_cp_react/" title="vue与react比较" class="md-nav__link">
+      vue与react比较
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../web/javascript/" title="JavaScript 基础" class="md-nav__link">
+      JavaScript 基础
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-6" type="checkbox" id="nav-2-6">
+    
+    <label class="md-nav__link" for="nav-2-6">
+      SQL
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-2-6">
+        SQL
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../sql/mysql_yh/" title="MySQL优化" class="md-nav__link">
+      MySQL优化
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../sql/mysql_yh17/" title="MySQL优化" class="md-nav__link">
+      MySQL优化
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../sql/mysql_log/" title="MySQL日志" class="md-nav__link">
+      MySQL日志
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../sql/mysql_index/" title="MySQL索引" class="md-nav__link">
+      MySQL索引
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../sql/mysql_pxc/" title="MySQL PXC集群" class="md-nav__link">
+      MySQL PXC集群
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../sql/mysql_use/" title="MySQL 数据库应用" class="md-nav__link">
+      MySQL 数据库应用
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../sql/mysql_backups/" title="MySql 备份" class="md-nav__link">
+      MySql 备份
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../sql/sql_server_master/" title="Sql Server 主从备份" class="md-nav__link">
+      Sql Server 主从备份
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../sql/data_split/" title="数据库之互联网常用分库分表方案" class="md-nav__link">
+      数据库之互联网常用分库分表方案
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../sql/mybatis/" title="Mybatis使用心德" class="md-nav__link">
+      Mybatis使用心德
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-7" type="checkbox" id="nav-2-7">
+    
+    <label class="md-nav__link" for="nav-2-7">
+      Linux
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-2-7">
+        Linux
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../linux/often/" title="常用命令" class="md-nav__link">
+      常用命令
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../linux/ope/" title="实用的Linux 命令" class="md-nav__link">
+      实用的Linux 命令
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-8" type="checkbox" id="nav-2-8">
+    
+    <label class="md-nav__link" for="nav-2-8">
+      Docker
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-2-8">
+        Docker
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../docker/docker/" title="Docker全科" class="md-nav__link">
+      Docker全科
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../docker/docker-compose/" title="docker和docker-compose配置常用环境" class="md-nav__link">
+      docker和docker-compose配置常用环境
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../docker/docker-jenkins/" title="Docker部署Jenkins" class="md-nav__link">
+      Docker部署Jenkins
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-9" type="checkbox" id="nav-2-9">
+    
+    <label class="md-nav__link" for="nav-2-9">
+      Tool
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-2-9">
+        Tool
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tool/git/" title="Git" class="md-nav__link">
+      Git
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tool/gitquestion/" title="Git问题处理" class="md-nav__link">
+      Git问题处理
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tool/gitflow/" title="GitFlow" class="md-nav__link">
+      GitFlow
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tool/gitbook/" title="GitBook" class="md-nav__link">
+      GitBook
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tool/gitcmr/" title="Git提交日志规范" class="md-nav__link">
+      Git提交日志规范
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tool/markdown/" title="Markdown" class="md-nav__link">
+      Markdown
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tool/cicd/" title="CI/CD" class="md-nav__link">
+      CI/CD
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tool/mkdocs/" title="mkdocs简单使用" class="md-nav__link">
+      mkdocs简单使用
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tool/gitstudy/" title="Git的黑魔法" class="md-nav__link">
+      Git的黑魔法
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tool/minio/" title="MinIO 搭建使用" class="md-nav__link">
+      MinIO 搭建使用
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3" checked>
+    
+    <label class="md-nav__link" for="nav-3">
+      微服务
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-3">
+        微服务
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../fbs-lock/" title="分布式锁" class="md-nav__link">
+      分布式锁
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../design/" title="微服务设计" class="md-nav__link">
+      微服务设计
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../distrimsg/" title="分布式系统与消息的投递" class="md-nav__link">
+      分布式系统与消息的投递
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../ddd/" title="基于DDD的微服务设计和开发实战" class="md-nav__link">
+      基于DDD的微服务设计和开发实战
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Kafka架构原理
+      </label>
+    
+    <a href="./" title="Kafka架构原理" class="md-nav__link md-nav__link--active">
+      Kafka架构原理
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">目录</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    定义
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    消息队列
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    发布/订阅模式
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    架构
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    工作流程
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    存储机制
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    生产者
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    分区策略
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    数据可靠性保证
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exactly_once" class="md-nav__link">
+    Exactly Once 语义
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    消费者
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    消费方式
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    分区分配策略
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#offset" class="md-nav__link">
+    Offset 的维护
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    总结
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../redis-cluster/" title="Redis Cluster原理" class="md-nav__link">
+      Redis Cluster原理
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../spring-cloud-micro/" title="分布式架构" class="md-nav__link">
+      分布式架构
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4">
+    
+    <label class="md-nav__link" for="nav-4">
+      经验分析
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-4">
+        经验分析
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../exp/devops/" title="DevOps" class="md-nav__link">
+      DevOps
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../exp/micro-service/" title="Micro-Service" class="md-nav__link">
+      Micro-Service
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../exp/raft-gossip/" title="Raft算法和Gossip协议" class="md-nav__link">
+      Raft算法和Gossip协议
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../exp/cl/" title="集群和负载均衡" class="md-nav__link">
+      集群和负载均衡
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../exp/ai/" title="人工智能" class="md-nav__link">
+      人工智能
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../exp/code-principle/" title="代码原则" class="md-nav__link">
+      代码原则
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../exp/techbig/" title="如何成为技术大牛" class="md-nav__link">
+      如何成为技术大牛
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../exp/learnweetout/" title="程序员如何技术成长" class="md-nav__link">
+      程序员如何技术成长
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../exp/pt/" title="产品与技术" class="md-nav__link">
+      产品与技术
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../exp/four_deep_learning/" title="深度学习框架" class="md-nav__link">
+      深度学习框架
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../exp/tl/" title="在阿里做了5年技术Leader，我总结出这些套路！" class="md-nav__link">
+      在阿里做了5年技术Leader，我总结出这些套路！
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../exp/cto/" title="CTO 技能图谱" class="md-nav__link">
+      CTO 技能图谱
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5">
+    
+    <label class="md-nav__link" for="nav-5">
+      医学
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-5">
+        医学
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../doctor/ae/" title="脑炎" class="md-nav__link">
+      脑炎
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6" type="checkbox" id="nav-6">
+    
+    <label class="md-nav__link" for="nav-6">
+      构架
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-6">
+        构架
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../framework/split/" title="构架拆分" class="md-nav__link">
+      构架拆分
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../framework/fgb/" title="分布式、高并发、多线程" class="md-nav__link">
+      分布式、高并发、多线程
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../framework/agility/" title="如何理解敏捷开发" class="md-nav__link">
+      如何理解敏捷开发
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../framework/fwork/" title="走向架构师必备的技能" class="md-nav__link">
+      走向架构师必备的技能
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../framework/data-middle/" title="数据中台的思考与总结" class="md-nav__link">
+      数据中台的思考与总结
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7" type="checkbox" id="nav-7">
+    
+    <label class="md-nav__link" for="nav-7">
+      情感
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-7">
+        情感
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/eq/" title="情商" class="md-nav__link">
+      情商
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/workheard/" title="工作心得" class="md-nav__link">
+      工作心得
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/lookbook/" title="看书" class="md-nav__link">
+      看书
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/fmf/" title="4种男朋友" class="md-nav__link">
+      4种男朋友
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/notheart/" title="不上心" class="md-nav__link">
+      不上心
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/selfdiscipline/" title="自律" class="md-nav__link">
+      自律
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/notlike/" title="喜欢与不喜欢" class="md-nav__link">
+      喜欢与不喜欢
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/latemarry/" title="晚婚" class="md-nav__link">
+      晚婚
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/understand/" title="追女生要明白这些事" class="md-nav__link">
+      追女生要明白这些事
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/backup/" title="备胎" class="md-nav__link">
+      备胎
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/chase/" title="为什么追不到她" class="md-nav__link">
+      为什么追不到她
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/livefail/" title="为什么活着失败" class="md-nav__link">
+      为什么活着失败
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/emotion/" title="情绪管理" class="md-nav__link">
+      情绪管理
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/abolish/" title="废掉的三个迹象" class="md-nav__link">
+      废掉的三个迹象
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/uptime/" title="余生，好好珍惜" class="md-nav__link">
+      余生，好好珍惜
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/losecome/" title="所有的失去，都会以另一种方式归来" class="md-nav__link">
+      所有的失去，都会以另一种方式归来
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/threeheart/" title="人生有这三种好心态" class="md-nav__link">
+      人生有这三种好心态
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/onelike/" title="一个感情真相" class="md-nav__link">
+      一个感情真相
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/notruth/" title="情商与道理" class="md-nav__link">
+      情商与道理
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/smf/" title="六种男人远离" class="md-nav__link">
+      六种男人远离
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/select/" title="决定接下来人生归属的，不是努力，而是选择" class="md-nav__link">
+      决定接下来人生归属的，不是努力，而是选择
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/nolike/" title="被你拉黑的那个人，你一定很喜欢吧" class="md-nav__link">
+      被你拉黑的那个人，你一定很喜欢吧
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/onepath/" title="余生，学会一个人走，不管有没有人陪" class="md-nav__link">
+      余生，学会一个人走，不管有没有人陪
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/twopath/" title="往后余生还很精彩，别被熬夜拖垮了" class="md-nav__link">
+      往后余生还很精彩，别被熬夜拖垮了
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/lifetime/" title="心态好的人，一辈子都好" class="md-nav__link">
+      心态好的人，一辈子都好
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/hearttoheart/" title="将心比心，方得人心" class="md-nav__link">
+      将心比心，方得人心
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/ttt/" title="别睡太晚，别爱太满，别要太多" class="md-nav__link">
+      别睡太晚，别爱太满，别要太多
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/profess/" title="表白" class="md-nav__link">
+      表白
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">目录</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    定义
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    消息队列
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    发布/订阅模式
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    架构
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    工作流程
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    存储机制
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    生产者
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    分区策略
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    数据可靠性保证
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exactly_once" class="md-nav__link">
+    Exactly Once 语义
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    消费者
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    消费方式
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    分区分配策略
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#offset" class="md-nav__link">
+    Offset 的维护
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    总结
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/burningmyself/burningmyself.github.io/edit/master/docs/micro/kafka.md" title="编辑此页" class="md-icon md-content__icon">&#xE3C9;</a>
+                
+                
+                <h1 id="kafka">Kafka架构原理<a class="headerlink" href="#kafka" title="Permanent link">&para;</a></h1>
+<blockquote>
+<p>最终大家会掌握 Kafka 中最重要的概念，分别是 Broker、Producer、Consumer、Consumer Group、Topic、Partition、Replica、Leader、Follower，这是学会和理解 Kafka 的基础和必备内容。</p>
+</blockquote>
+<h2 id="_1">定义<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<p>Kafka 是一个分布式的基于发布/订阅模式的消息队列（Message Queue），主要应用与大数据实时处理领域。</p>
+<h3 id="_2">消息队列<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
+<p>Kafka 本质上是一个 MQ（Message Queue），使用消息队列的好处？（面试会问）</p>
+<ul>
+<li>解耦：允许我们独立的扩展或修改队列两边的处理过程。</li>
+<li>可恢复性：即使一个处理消息的进程挂掉，加入队列中的消息仍然可以在系统恢复后被处理。</li>
+<li>缓冲：有助于解决生产消息和消费消息的处理速度不一致的情况。</li>
+<li>灵活性&amp;峰值处理能力：不会因为突发的超负荷的请求而完全崩溃，消息队列能够使关键组件顶住突发的访问压力。</li>
+<li>异步通信：消息队列允许用户把消息放入队列但不立即处理它。</li>
+</ul>
+<h3 id="_3">发布/订阅模式<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
+<p><img alt="kafka" src="../../img/kafka-1.png" /></p>
+<p>一对多，生产者将消息发布到 Topic 中，有多个消费者订阅该主题，发布到 Topic 的消息会被所有订阅者消费，被消费的数据不会立即从 Topic 清除。</p>
+<h2 id="_4">架构<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
+<p><img alt="kafka" src="../../img/kafka-2.png" /></p>
+<p>Kafka 存储的消息来自任意多被称为 Producer 生产者的进程。数据从而可以被发布到不同的 Topic 主题下的不同 Partition 分区。</p>
+<p>在一个分区内，这些消息被索引并连同时间戳存储在一起。其它被称为 Consumer 消费者的进程可以从分区订阅消息。</p>
+<p>Kafka 运行在一个由一台或多台服务器组成的集群上，并且分区可以跨集群结点分布。</p>
+<p>下面给出 Kafka 一些重要概念，让大家对 Kafka 有个整体的认识和感知，后面还会详细的解析每一个概念的作用以及更深入的原理：</p>
+<ul>
+<li>Producer： 消息生产者，向 Kafka Broker 发消息的客户端。</li>
+<li>Consumer：消息消费者，从 Kafka Broker 取消息的客户端。</li>
+<li>Consumer Group：消费者组（CG），消费者组内每个消费者负责消费不同分区的数据，提高消费能力。一个分区只能由组内一个消费者消费，消费者组之间互不影响。所有的消费者都属于某个消费者组，即消费者组是逻辑上的一个订阅者。</li>
+<li>Broker：一台 Kafka 机器就是一个 Broker。一个集群由多个 Broker 组成。一个 Broker 可以容纳多个 Topic。</li>
+<li>Topic：可以理解为一个队列，Topic 将消息分类，生产者和消费者面向的是同一个 Topic。</li>
+<li>Partition：为了实现扩展性，提高并发能力，一个非常大的 Topic 可以分布到多个 Broker （即服务器）上，一个 Topic 可以分为多个 Partition，每个 Partition 是一个 有序的队列。</li>
+<li>Replica：副本，为实现备份的功能，保证集群中的某个节点发生故障时，该节点上的 Partition 数据不丢失，且 Kafka 仍然能够继续工作，Kafka 提供了副本机制，一个 Topic 的每个分区都有若干个副本，一个 Leader 和若干个 Follower。</li>
+<li>Leader：每个分区多个副本的“主”副本，生产者发送数据的对象，以及消费者消费数据的对象，都是 Leader。</li>
+<li>Follower：每个分区多个副本的“从”副本，实时从 Leader 中同步数据，保持和 Leader 数据的同步。Leader 发生故障时，某个 Follower 还会成为新的 Leader。</li>
+<li>Offset：消费者消费的位置信息，监控数据消费到什么位置，当消费者挂掉再重新恢复的时候，可以从消费位置继续消费。</li>
+<li>Zookeeper：Kafka 集群能够正常工作，需要依赖于 Zookeeper，Zookeeper 帮助 Kafka 存储和管理集群信息。</li>
+</ul>
+<h2 id="_5">工作流程<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
+<p>Kafka集群将 Record 流存储在称为 Topic 的类别中，每个记录由一个键、一个值和一个时间戳组成。</p>
+<p><img alt="kafka" src="../../img/kafka-3.png" /></p>
+<blockquote>
+<p>Kafka 是一个分布式流平台，这到底是什么意思？</p>
+</blockquote>
+<ul>
+<li>发布和订阅记录流，类似于消息队列或企业消息传递系统。</li>
+<li>以容错的持久方式存储记录流。</li>
+<li>处理记录流。</li>
+</ul>
+<p>Kafka 中消息是以 Topic 进行分类的，生产者生产消息，消费者消费消息，面向的都是同一个 Topic。</p>
+<p>Topic 是逻辑上的概念，而 Partition 是物理上的概念，每个 Partition 对应于一个 log 文件，该 log 文件中存储的就是 Producer 生产的数据。</p>
+<p>Producer 生产的数据会不断追加到该 log 文件末端，且每条数据都有自己的 Offset。</p>
+<p>消费者组中的每个消费者，都会实时记录自己消费到了哪个 Offset，以便出错恢复时，从上次的位置继续消费。</p>
+<h2 id="_6">存储机制<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
+<p><img alt="kafka" src="../../img/kafka-4.png" /></p>
+<p>由于生产者生产的消息会不断追加到 log 文件末尾，为防止 log 文件过大导致数据定位效率低下，Kafka 采取了分片和索引机制。</p>
+<p>它将每个 Partition 分为多个 Segment，每个 Segment 对应两个文件：“.index” 索引文件和 “.log” 数据文件。</p>
+<p>这些文件位于同一文件下，该文件夹的命名规则为：topic 名-分区号。例如，first 这个 topic 有三分分区，则其对应的文件夹为 first-0，first-1，first-2。</p>
+<p><div class="codehilite"><pre><span></span><span class="err">#</span> <span class="n">ls</span> <span class="o">/</span><span class="n">root</span><span class="o">/</span><span class="n">data</span><span class="o">/</span><span class="n">kafka</span><span class="o">/</span><span class="n">first</span><span class="o">-</span><span class="mi">0</span>        
+<span class="mf">00000000000000009014.</span><span class="n">index</span>    
+<span class="mf">00000000000000009014.</span><span class="n">log</span>
+<span class="mf">00000000000000009014.</span><span class="n">timeindex</span>
+<span class="mf">00000000000000009014.</span><span class="n">snapshot</span>   
+<span class="n">leader</span><span class="o">-</span><span class="n">epoch</span><span class="o">-</span><span class="n">checkpoint</span>
+</pre></div>
+index 和 log 文件以当前 Segment 的第一条消息的 Offset 命名。下图为 index 文件和 log 文件的结构示意图：</p>
+<p><img alt="kafka" src="../../img/kafka-5.png" /></p>
+<p>“.index” 文件存储大量的索引信息，“.log” 文件存储大量的数据，索引文件中的元数据指向对应数据文件中 Message 的物理偏移量。</p>
+<h2 id="_7">生产者<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h2>
+<h3 id="_8">分区策略<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>分区原因：</p>
+</blockquote>
+<ul>
+<li>方便在集群中扩展，每个 Partition 可以通过调整以适应它所在的机器，而一个 Topic 又可以有多个 Partition 组成，因此可以以 Partition 为单位读写了。</li>
+<li>可以提高并发，因此可以以 Partition 为单位读写了。</li>
+</ul>
+<p>分区原则：我们需要将 Producer 发送的数据封装成一个 ProducerRecord 对象。</p>
+<blockquote>
+<p>该对象需要指定一些参数：</p>
+</blockquote>
+<ul>
+<li>topic：string 类型，NotNull。</li>
+<li>partition：int 类型，可选。</li>
+<li>timestamp：long 类型，可选。</li>
+<li>key：string 类型，可选。</li>
+<li>value：string 类型，可选。</li>
+<li>headers：array 类型，Nullable。</li>
+</ul>
+<p>①指明 Partition 的情况下，直接将给定的 Value 作为 Partition 的值。</p>
+<p>②没有指明 Partition 但有 Key 的情况下，将 Key 的 Hash 值与分区数取余得到 Partition 值。</p>
+<p>③既没有 Partition 有没有 Key 的情况下，第一次调用时随机生成一个整数（后面每次调用都在这个整数上自增），将这个值与可用的分区数取余，得到 Partition 值，也就是常说的 Round-Robin 轮询算法。</p>
+<h3 id="_9">数据可靠性保证<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h3>
+<p>为保证 Producer 发送的数据，能可靠地发送到指定的 Topic，Topic 的每个 Partition 收到 Producer 发送的数据后，都需要向 Producer 发送 ACK（ACKnowledge 确认收到）。</p>
+<p>如果 Producer 收到 ACK，就会进行下一轮的发送，否则重新发送数据。</p>
+<p><img alt="kafka" src="../../img/kafka-6.png" /></p>
+<p>①副本数据同步策略</p>
+<p>何时发送 ACK？确保有 Follower 与 Leader 同步完成，Leader 再发送 ACK，这样才能保证 Leader 挂掉之后，能在 Follower 中选举出新的 Leader 而不丢数据。</p>
+<p>多少个 Follower 同步完成后发送 ACK？全部 Follower 同步完成，再发送 ACK。</p>
+<p><img alt="kafka" src="../../img/kafka-7.png" /></p>
+<p>②ISR</p>
+<p>采用第二种方案，所有 Follower 完成同步，Producer 才能继续发送数据，设想有一个 Follower 因为某种原因出现故障，那 Leader 就要一直等到它完成同步。</p>
+<p>这个问题怎么解决？Leader维护了一个动态的 in-sync replica set（ISR）：和 Leader 保持同步的 Follower 集合。</p>
+<p>当 ISR 集合中的 Follower 完成数据的同步之后，Leader 就会给 Follower 发送 ACK。</p>
+<p>如果 Follower 长时间未向 Leader 同步数据，则该 Follower 将被踢出 ISR 集合，该时间阈值由 replica.lag.time.max.ms 参数设定。Leader 发生故障后，就会从 ISR 中选举出新的 Leader。</p>
+<p>③ACK 应答机制</p>
+<p>对于某些不太重要的数据，对数据的可靠性要求不是很高，能够容忍数据的少量丢失，所以没必要等 ISR 中的 Follower 全部接受成功。</p>
+<p>所以 Kafka 为用户提供了三种可靠性级别，用户根据可靠性和延迟的要求进行权衡，选择以下的配置。</p>
+<p><img alt="kafka" src="../../img/kafka-8.png" /></p>
+<p>Ack 参数配置：
+  * 0：Producer 不等待 Broker 的 ACK，这提供了最低延迟，Broker 一收到数据还没有写入磁盘就已经返回，当 Broker 故障时有可能丢失数据。
+  * 1：Producer 等待 Broker 的 ACK，Partition 的 Leader 落盘成功后返回 ACK，如果在 Follower 同步成功之前 Leader 故障，那么将会丢失数据。
+  * -1（all）：Producer 等待 Broker 的 ACK，Partition 的 Leader 和 Follower 全部落盘成功后才返回 ACK。但是在 Broker 发送 ACK 时，Leader 发生故障，则会造成数据重复。</p>
+<p>④故障处理细节  </p>
+<p><img alt="kafka" src="../../img/kafka-9.png" /></p>
+<p>LEO：每个副本最大的 Offset。HW：消费者能见到的最大的 Offset，ISR 队列中最小的 LEO。</p>
+<p><strong>Follower 故障</strong>：Follower 发生故障后会被临时踢出 ISR 集合，待该 Follower 恢复后，Follower 会 读取本地磁盘记录的上次的 HW，并将 log 文件高于 HW 的部分截取掉，从 HW 开始向 Leader 进行同步数据操作。</p>
+<p>等该 Follower 的 LEO 大于等于该 Partition 的 HW，即 Follower 追上 Leader 后，就可以重新加入 ISR 了。</p>
+<p><strong>Leader 故障</strong>：Leader 发生故障后，会从 ISR 中选出一个新的 Leader，之后，为保证多个副本之间的数据一致性，其余的 Follower 会先将各自的 log 文件高于 HW 的部分截掉，然后从新的 Leader 同步数据。</p>
+<p>注意：这只能保证副本之间的数据一致性，并不能保证数据不丢失或者不重复。</p>
+<h3 id="exactly_once">Exactly Once 语义<a class="headerlink" href="#exactly_once" title="Permanent link">&para;</a></h3>
+<p>将服务器的 ACK 级别设置为 -1，可以保证 Producer 到 Server 之间不会丢失数据，即 At Least Once 语义。</p>
+<p>相对的，将服务器 ACK 级别设置为 0，可以保证生产者每条消息只会被发送一次，即 At Most Once 语义。</p>
+<p>At Least Once 可以保证数据不丢失，但是不能保证数据不重复；相对的，At Most Once 可以保证数据不重复，但是不能保证数据不丢失。</p>
+<p>但是，对于一些非常重要的信息，比如交易数据，下游数据消费者要求数据既不重复也不丢失，即 Exactly Once 语义。</p>
+<p>0.11 版本的 Kafka，引入了幂等性：Producer 不论向 Server 发送多少重复数据，Server 端都只会持久化一条。</p>
+<p>即：</p>
+<div class="codehilite"><pre><span></span>At Least Once + 幂等性 = Exactly Once   
+</pre></div>
+
+<p>要启用幂等性，只需要将 Producer 的参数中 enable.idompotence 设置为 true 即可。</p>
+<p>开启幂等性的 Producer 在初始化时会被分配一个 PID，发往同一 Partition 的消息会附带 Sequence Number。</p>
+<p>而 Borker 端会对 <PID,Partition,SeqNumber> 做缓存，当具有相同主键的消息提交时，Broker 只会持久化一条。</p>
+<p>但是 PID 重启后就会变化，同时不同的 Partition 也具有不同主键，所以幂等性无法保证跨分区会话的 Exactly Once。</p>
+<h2 id="_10">消费者<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h2>
+<h3 id="_11">消费方式<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h3>
+<p>Consumer 采用 Pull（拉取）模式从 Broker 中读取数据。</p>
+<p>Consumer 采用 Push（推送）模式，Broker 给 Consumer 推送消息的速率是由 Broker 决定的，很难适应消费速率不同的消费者。</p>
+<p>它的目标是尽可能以最快速度传递消息，但是这样很容易造成 Consumer 来不及处理消息，典型的表现就是拒绝服务以及网络拥塞。</p>
+<p>而 Pull 模式则可以根据 Consumer 的消费能力以适当的速率消费消息。Pull 模式不足之处是，如果 Kafka 没有数据，消费者可能会陷入循环中，一直返回空数据。</p>
+<p>因为消费者从 Broker 主动拉取数据，需要维护一个长轮询，针对这一点， Kafka 的消费者在消费数据时会传入一个时长参数 timeout。</p>
+<p>如果当前没有数据可供消费，Consumer 会等待一段时间之后再返回，这段时长即为 timeout。</p>
+<h3 id="_12">分区分配策略<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h3>
+<p>一个 Consumer Group 中有多个 Consumer，一个 Topic 有多个 Partition，所以必然会涉及到 Partition 的分配问题，即确定哪个 Partition 由哪个 Consumer 来消费。</p>
+<p>Kafka 有两种分配策略，一个是 RoundRobin，一个是 Range，默认为Range，当消费者组内消费者发生变化时，会触发分区分配策略（方法重新分配）。</p>
+<p>①RoundRobin</p>
+<p><img alt="kafka" src="../../img/kafka-10.png" /></p>
+<p>RoundRobin 轮询方式将分区所有作为一个整体进行 Hash 排序，消费者组内分配分区个数最大差别为 1，是按照组来分的，可以解决多个消费者消费数据不均衡的问题。</p>
+<p>但是，当消费者组内订阅不同主题时，可能造成消费混乱，如下图所示，Consumer0 订阅主题 A，Consumer1 订阅主题 B。</p>
+<p><img alt="kafka" src="../../img/kafka-11.png" /></p>
+<p>将 A、B 主题的分区排序后分配给消费者组，TopicB 分区中的数据可能分配到 Consumer0 中。</p>
+<p>②Range</p>
+<p><img alt="kafka" src="../../img/kafka-12.png" /></p>
+<p>Range 方式是按照主题来分的，不会产生轮询方式的消费混乱问题。</p>
+<p>但是，如下图所示，Consumer0、Consumer1 同时订阅了主题 A 和 B，可能造成消息分配不对等问题，当消费者组内订阅的主题越多，分区分配可能越不均衡。</p>
+<p><img alt="kafka" src="../../img/kafka-13.png" /></p>
+<h3 id="offset">Offset 的维护<a class="headerlink" href="#offset" title="Permanent link">&para;</a></h3>
+<p>由于 Consumer 在消费过程中可能会出现断电宕机等故障，Consumer 恢复后，需要从故障前的位置继续消费。</p>
+<p>所以 Consumer 需要实时记录自己消费到了哪个 Offset，以便故障恢复后继续消费。</p>
+<p>Kafka 0.9 版本之前，Consumer 默认将 Offset 保存在 Zookeeper 中，从 0.9 版本开始，Consumer 默认将 Offset 保存在 Kafka 一个内置的 Topic 中，该 Topic 为 __consumer_offsets。</p>
+<h2 id="_13">总结<a class="headerlink" href="#_13" title="Permanent link">&para;</a></h2>
+<p>上面和大家一起深入探讨了 Kafka 的架构，比较偏重理论和基础，这是掌握 Kafka 的必要内容，接下来我会以代码和实例的方式，更新 Kafka 有关 API 以及事务、拦截器、监控等高级篇，让大家彻底理解并且会用 Kafka。</p>
+                
+                  
+                
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="../ddd/" title="基于DDD的微服务设计和开发实战" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  上一页
+                </span>
+                基于DDD的微服务设计和开发实战
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="../redis-cluster/" title="Redis Cluster原理" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  下一页
+                </span>
+                Redis Cluster原理
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+          <div class="md-footer-copyright__highlight">
+            BurningMyself 蜀ICP备15033200号-1
+          </div>
+        
+        powered by
+        <a href="https://www.mkdocs.org">MkDocs</a>
+        and
+        <a href="https://squidfunk.github.io/mkdocs-material/">
+          Material for MkDocs</a>
+      </div>
+      
+  <div class="md-footer-social">
+    <link rel="stylesheet" href="../../assets/fonts/font-awesome.css">
+    
+      <a href="https://github.com/burningmyself" class="md-footer-social__link fa fa-github"></a>
+    
+      <a href="https://gitee.com/burningmyself" class="md-footer-social__link fa fa-google"></a>
+    
+  </div>
+
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../assets/javascripts/application.808e90bb.js"></script>
+      
+        
+        
+          
+          <script src="../../assets/javascripts/lunr/lunr.stemmer.support.js"></script>
+          
+            
+              
+              
+            
+          
+            
+          
+            
+              
+                <script src="../../assets/javascripts/lunr/tinyseg.js"></script>
+              
+              
+                <script src="../../assets/javascripts/lunr/lunr.ja.js"></script>
+              
+            
+          
+          
+            <script src="../../assets/javascripts/lunr/lunr.multi.js"></script>
+          
+        
+      
+      <script>app.initialize({version:"1.0.4",url:{base:"../.."}})</script>
+      
+        <script src="../../js/extra.js"></script>
+      
+        <script src="../../js/baidu-tongji.js"></script>
+      
+    
+  </body>
+</html>

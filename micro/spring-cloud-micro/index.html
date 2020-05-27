@@ -1,0 +1,2670 @@
+
+
+
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+        <meta name="description" content=".net,java,php,python,docker,web">
+      
+      
+        <link rel="canonical" href="https://burningmyself.gitee.io/micro/spring-cloud-micro/">
+      
+      
+        <meta name="author" content="BurningMyself">
+      
+      
+        <meta name="lang:clipboard.copy" content="复制">
+      
+        <meta name="lang:clipboard.copied" content="已复制">
+      
+        <meta name="lang:search.language" content="zh,en,ja">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="没有找到符合条件的结果">
+      
+        <meta name="lang:search.result.one" content="找到 1 个符合条件的结果">
+      
+        <meta name="lang:search.result.other" content="# 个符合条件的结果">
+      
+        <meta name="lang:search.tokenizer" content="[\ s \-\ .. +">
+      
+      <link rel="shortcut icon" href="../../favicon.ico">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.6.0">
+    
+    
+      
+        <title>分布式架构 - BurningMyself</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/application.1b62728e.css">
+      
+      
+    
+    
+      <script src="../../assets/javascripts/modernizr.268332fc.js"></script>
+    
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
+      
+    
+    <link rel="stylesheet" href="../../assets/fonts/material-icons.css">
+    
+    
+    
+      
+        
+<script>
+  window.ga = window.ga || function() {
+    (ga.q = ga.q || []).push(arguments)
+  }
+  ga.l = +new Date
+  /* Setup integration and send page view */
+  ga("create", "UA-155084439-1", "burningmyself.gitee.io")
+  ga("set", "anonymizeIp", true)
+  ga("send", "pageview")
+  /* Register handler to log search on blur */
+  document.addEventListener("DOMContentLoaded", () => {
+    if (document.forms.search) {
+      var query = document.forms.search.query
+      query.addEventListener("blur", function() {
+        if (this.value) {
+          var path = document.location.pathname;
+          ga("send", "pageview", path + "?q=" + this.value)
+        }
+      })
+    }
+  })
+</script>
+<script async src="https://www.google-analytics.com/analytics.js"></script>
+      
+    
+    
+  </head>
+  
+    <body dir="ltr">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+          <svg xmlns="http://www.w3.org/2000/svg" width="416" height="448" viewBox="0 0 416 448" id="__github"><path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19T128 352t-18.125-8.5-10.75-19T96 304t3.125-20.5 10.75-19T128 256t18.125 8.5 10.75 19T160 304zm160 0q0 10-3.125 20.5t-10.75 19T288 352t-18.125-8.5-10.75-19T256 304t3.125-20.5 10.75-19T288 256t18.125 8.5 10.75 19T320 304zm40 0q0-30-17.25-51T296 232q-10.25 0-48.75 5.25Q229.5 240 208 240t-39.25-2.75Q130.75 232 120 232q-29.5 0-46.75 21T56 304q0 22 8 38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0 37.25-1.75t35-7.375 30.5-15 20.25-25.75T360 304zm56-44q0 51.75-15.25 82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5T212 416q-19.5 0-35.5-.75t-36.875-3.125-38.125-7.5-34.25-12.875T37 371.5t-21.5-28.75Q0 312 0 260q0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25 30.875Q171.5 96 212 96q37 0 70 8 26.25-20.5 46.75-30.25T376 64q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34 99.5z"/></svg>
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+    
+      <a href="#springcloud" tabindex="1" class="md-skip">
+        跳转至
+      </a>
+    
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="https://burningmyself.gitee.io" title="BurningMyself" class="md-header-nav__button md-logo">
+          
+            <i class="md-icon"></i>
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          
+            <span class="md-header-nav__topic">
+              BurningMyself
+            </span>
+            <span class="md-header-nav__topic">
+              
+                分布式架构
+              
+            </span>
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
+          
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="__search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            键入以开始搜索
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+        
+      </div>
+      
+        <div class="md-flex__cell md-flex__cell--shrink">
+          <div class="md-header-nav__source">
+            
+
+
+  
+
+<a href="https://github.com/burningmyself/burningmyself.github.io/" title="前往 Github 仓库" class="md-source" data-md-source="github">
+  
+    <div class="md-source__icon">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
+    burningmyself.github.io
+  </div>
+</a>
+          </div>
+        </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+      <main class="md-main" role="main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="__drawer">
+    <a href="https://burningmyself.gitee.io" title="BurningMyself" class="md-nav__button md-logo">
+      
+        <i class="md-icon"></i>
+      
+    </a>
+    BurningMyself
+  </label>
+  
+    <div class="md-nav__source">
+      
+
+
+  
+
+<a href="https://github.com/burningmyself/burningmyself.github.io/" title="前往 Github 仓库" class="md-source" data-md-source="github">
+  
+    <div class="md-source__icon">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
+    burningmyself.github.io
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../.." title="介绍" class="md-nav__link">
+      介绍
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2">
+    
+    <label class="md-nav__link" for="nav-2">
+      技术博文
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-2">
+        技术博文
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-1" type="checkbox" id="nav-2-1">
+    
+    <label class="md-nav__link" for="nav-2-1">
+      .NET
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-2-1">
+        .NET
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../net/c_sharp/" title="C#新特性语法" class="md-nav__link">
+      C#新特性语法
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../net/c_docker/" title=".Net Core Docker 部署" class="md-nav__link">
+      .Net Core Docker 部署
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../net/c_sqlserver_nginx/" title="Docker 容器化部署 ASP.NET Core" class="md-nav__link">
+      Docker 容器化部署 ASP.NET Core
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../net/c_core_safety/" title="让你的ASP.NET Core应用程序更安全" class="md-nav__link">
+      让你的ASP.NET Core应用程序更安全
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../net/c_core_study_route/" title="ASP.NET Core开发者指南" class="md-nav__link">
+      ASP.NET Core开发者指南
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-2" type="checkbox" id="nav-2-2">
+    
+    <label class="md-nav__link" for="nav-2-2">
+      Java
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-2-2">
+        Java
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../java/feature/" title="Java特性" class="md-nav__link">
+      Java特性
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../java/load-class/" title="Java类加载" class="md-nav__link">
+      Java类加载
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../java/orm/" title="Orm的优缺点" class="md-nav__link">
+      Orm的优缺点
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../java/bio-nio/" title="BIO与NIO" class="md-nav__link">
+      BIO与NIO
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../java/rocketmq/rmq-1/" title="RocketMq下载与安装" class="md-nav__link">
+      RocketMq下载与安装
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../java/springAnnotation/" title="Spring常用注解" class="md-nav__link">
+      Spring常用注解
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../java/javavm/" title="Java 虚拟机" class="md-nav__link">
+      Java 虚拟机
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../java/springdesign/" title="Spring 常用设计" class="md-nav__link">
+      Spring 常用设计
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../java/spring-cloud/" title="Spring Cloud" class="md-nav__link">
+      Spring Cloud
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../java/java-simple/" title="Java simple" class="md-nav__link">
+      Java simple
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../java/java-validator/" title="Java Validator" class="md-nav__link">
+      Java Validator
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../java/java-string/" title="Java String" class="md-nav__link">
+      Java String
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../java/java-utils/" title="Java Utils" class="md-nav__link">
+      Java Utils
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-3" type="checkbox" id="nav-2-3">
+    
+    <label class="md-nav__link" for="nav-2-3">
+      Python
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-2-3">
+        Python
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../python/feature/" title="Python特性" class="md-nav__link">
+      Python特性
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../python/str_joint/" title="Python字符拼接" class="md-nav__link">
+      Python字符拼接
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../python/syntax_rule/" title="Python语法技巧" class="md-nav__link">
+      Python语法技巧
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../python/fabric/" title="远程部署神器 Fabric" class="md-nav__link">
+      远程部署神器 Fabric
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-4" type="checkbox" id="nav-2-4">
+    
+    <label class="md-nav__link" for="nav-2-4">
+      PHP
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-2-4">
+        PHP
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../php/kj/" title="框架" class="md-nav__link">
+      框架
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-5" type="checkbox" id="nav-2-5">
+    
+    <label class="md-nav__link" for="nav-2-5">
+      Web
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-2-5">
+        Web
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../web/es6/" title="es6语法" class="md-nav__link">
+      es6语法
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../web/ali_js_style/" title="阿里js样式规范" class="md-nav__link">
+      阿里js样式规范
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../web/node.js/" title="node.js文档" class="md-nav__link">
+      node.js文档
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../web/react/" title="React 开发者指南" class="md-nav__link">
+      React 开发者指南
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../dart/syntax/" title="Dart语法学习" class="md-nav__link">
+      Dart语法学习
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../web/react_interview/" title="React 面试" class="md-nav__link">
+      React 面试
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../web/js_tool_method/" title="js 工具函数" class="md-nav__link">
+      js 工具函数
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../web/vue_cp_react/" title="vue与react比较" class="md-nav__link">
+      vue与react比较
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../web/javascript/" title="JavaScript 基础" class="md-nav__link">
+      JavaScript 基础
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-6" type="checkbox" id="nav-2-6">
+    
+    <label class="md-nav__link" for="nav-2-6">
+      SQL
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-2-6">
+        SQL
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../sql/mysql_yh/" title="MySQL优化" class="md-nav__link">
+      MySQL优化
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../sql/mysql_yh17/" title="MySQL优化" class="md-nav__link">
+      MySQL优化
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../sql/mysql_log/" title="MySQL日志" class="md-nav__link">
+      MySQL日志
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../sql/mysql_index/" title="MySQL索引" class="md-nav__link">
+      MySQL索引
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../sql/mysql_pxc/" title="MySQL PXC集群" class="md-nav__link">
+      MySQL PXC集群
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../sql/mysql_use/" title="MySQL 数据库应用" class="md-nav__link">
+      MySQL 数据库应用
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../sql/mysql_backups/" title="MySql 备份" class="md-nav__link">
+      MySql 备份
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../sql/sql_server_master/" title="Sql Server 主从备份" class="md-nav__link">
+      Sql Server 主从备份
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../sql/data_split/" title="数据库之互联网常用分库分表方案" class="md-nav__link">
+      数据库之互联网常用分库分表方案
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../sql/mybatis/" title="Mybatis使用心德" class="md-nav__link">
+      Mybatis使用心德
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-7" type="checkbox" id="nav-2-7">
+    
+    <label class="md-nav__link" for="nav-2-7">
+      Linux
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-2-7">
+        Linux
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../linux/often/" title="常用命令" class="md-nav__link">
+      常用命令
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../linux/ope/" title="实用的Linux 命令" class="md-nav__link">
+      实用的Linux 命令
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-8" type="checkbox" id="nav-2-8">
+    
+    <label class="md-nav__link" for="nav-2-8">
+      Docker
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-2-8">
+        Docker
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../docker/docker/" title="Docker全科" class="md-nav__link">
+      Docker全科
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../docker/docker-compose/" title="docker和docker-compose配置常用环境" class="md-nav__link">
+      docker和docker-compose配置常用环境
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../docker/docker-jenkins/" title="Docker部署Jenkins" class="md-nav__link">
+      Docker部署Jenkins
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-9" type="checkbox" id="nav-2-9">
+    
+    <label class="md-nav__link" for="nav-2-9">
+      Tool
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-2-9">
+        Tool
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tool/git/" title="Git" class="md-nav__link">
+      Git
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tool/gitquestion/" title="Git问题处理" class="md-nav__link">
+      Git问题处理
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tool/gitflow/" title="GitFlow" class="md-nav__link">
+      GitFlow
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tool/gitbook/" title="GitBook" class="md-nav__link">
+      GitBook
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tool/gitcmr/" title="Git提交日志规范" class="md-nav__link">
+      Git提交日志规范
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tool/markdown/" title="Markdown" class="md-nav__link">
+      Markdown
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tool/cicd/" title="CI/CD" class="md-nav__link">
+      CI/CD
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tool/mkdocs/" title="mkdocs简单使用" class="md-nav__link">
+      mkdocs简单使用
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tool/gitstudy/" title="Git的黑魔法" class="md-nav__link">
+      Git的黑魔法
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tool/minio/" title="MinIO 搭建使用" class="md-nav__link">
+      MinIO 搭建使用
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3" checked>
+    
+    <label class="md-nav__link" for="nav-3">
+      微服务
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-3">
+        微服务
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../fbs-lock/" title="分布式锁" class="md-nav__link">
+      分布式锁
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../design/" title="微服务设计" class="md-nav__link">
+      微服务设计
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../distrimsg/" title="分布式系统与消息的投递" class="md-nav__link">
+      分布式系统与消息的投递
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../ddd/" title="基于DDD的微服务设计和开发实战" class="md-nav__link">
+      基于DDD的微服务设计和开发实战
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../kafka/" title="Kafka架构原理" class="md-nav__link">
+      Kafka架构原理
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../redis-cluster/" title="Redis Cluster原理" class="md-nav__link">
+      Redis Cluster原理
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        分布式架构
+      </label>
+    
+    <a href="./" title="分布式架构" class="md-nav__link md-nav__link--active">
+      分布式架构
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">目录</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    为什么要使用分布式架构
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    分布式基础组件
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#eureka" class="md-nav__link">
+    Eureka
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#spring_cloud_config" class="md-nav__link">
+    Spring Cloud Config
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#netflix_zuul" class="md-nav__link">
+    Netflix Zuul（网关）
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#spring_cloud_bus" class="md-nav__link">
+    Spring Cloud Bus
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#feign" class="md-nav__link">
+    Feign
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#netflix_hystrix" class="md-nav__link">
+    Netflix Hystrix（熔断）
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mq" class="md-nav__link">
+    MQ（消息中间件）
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    分布式事务
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#mq_1" class="md-nav__link">
+    MQ 确保一致性
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#seata" class="md-nav__link">
+    Seata（分布式事务）
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    完整的分布式架构
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    总结
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    单体服务与分布式服务区别
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    什么时候使用分布式/集群？
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    使用分布式注意事项
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    关于组件停更消息
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4">
+    
+    <label class="md-nav__link" for="nav-4">
+      经验分析
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-4">
+        经验分析
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../exp/devops/" title="DevOps" class="md-nav__link">
+      DevOps
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../exp/micro-service/" title="Micro-Service" class="md-nav__link">
+      Micro-Service
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../exp/raft-gossip/" title="Raft算法和Gossip协议" class="md-nav__link">
+      Raft算法和Gossip协议
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../exp/cl/" title="集群和负载均衡" class="md-nav__link">
+      集群和负载均衡
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../exp/ai/" title="人工智能" class="md-nav__link">
+      人工智能
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../exp/code-principle/" title="代码原则" class="md-nav__link">
+      代码原则
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../exp/techbig/" title="如何成为技术大牛" class="md-nav__link">
+      如何成为技术大牛
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../exp/learnweetout/" title="程序员如何技术成长" class="md-nav__link">
+      程序员如何技术成长
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../exp/pt/" title="产品与技术" class="md-nav__link">
+      产品与技术
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../exp/four_deep_learning/" title="深度学习框架" class="md-nav__link">
+      深度学习框架
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../exp/tl/" title="在阿里做了5年技术Leader，我总结出这些套路！" class="md-nav__link">
+      在阿里做了5年技术Leader，我总结出这些套路！
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../exp/cto/" title="CTO 技能图谱" class="md-nav__link">
+      CTO 技能图谱
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5">
+    
+    <label class="md-nav__link" for="nav-5">
+      医学
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-5">
+        医学
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../doctor/ae/" title="脑炎" class="md-nav__link">
+      脑炎
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6" type="checkbox" id="nav-6">
+    
+    <label class="md-nav__link" for="nav-6">
+      构架
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-6">
+        构架
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../framework/split/" title="构架拆分" class="md-nav__link">
+      构架拆分
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../framework/fgb/" title="分布式、高并发、多线程" class="md-nav__link">
+      分布式、高并发、多线程
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../framework/agility/" title="如何理解敏捷开发" class="md-nav__link">
+      如何理解敏捷开发
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../framework/fwork/" title="走向架构师必备的技能" class="md-nav__link">
+      走向架构师必备的技能
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../framework/data-middle/" title="数据中台的思考与总结" class="md-nav__link">
+      数据中台的思考与总结
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7" type="checkbox" id="nav-7">
+    
+    <label class="md-nav__link" for="nav-7">
+      情感
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-7">
+        情感
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/eq/" title="情商" class="md-nav__link">
+      情商
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/workheard/" title="工作心得" class="md-nav__link">
+      工作心得
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/lookbook/" title="看书" class="md-nav__link">
+      看书
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/fmf/" title="4种男朋友" class="md-nav__link">
+      4种男朋友
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/notheart/" title="不上心" class="md-nav__link">
+      不上心
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/selfdiscipline/" title="自律" class="md-nav__link">
+      自律
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/notlike/" title="喜欢与不喜欢" class="md-nav__link">
+      喜欢与不喜欢
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/latemarry/" title="晚婚" class="md-nav__link">
+      晚婚
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/understand/" title="追女生要明白这些事" class="md-nav__link">
+      追女生要明白这些事
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/backup/" title="备胎" class="md-nav__link">
+      备胎
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/chase/" title="为什么追不到她" class="md-nav__link">
+      为什么追不到她
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/livefail/" title="为什么活着失败" class="md-nav__link">
+      为什么活着失败
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/emotion/" title="情绪管理" class="md-nav__link">
+      情绪管理
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/abolish/" title="废掉的三个迹象" class="md-nav__link">
+      废掉的三个迹象
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/uptime/" title="余生，好好珍惜" class="md-nav__link">
+      余生，好好珍惜
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/losecome/" title="所有的失去，都会以另一种方式归来" class="md-nav__link">
+      所有的失去，都会以另一种方式归来
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/threeheart/" title="人生有这三种好心态" class="md-nav__link">
+      人生有这三种好心态
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/onelike/" title="一个感情真相" class="md-nav__link">
+      一个感情真相
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/notruth/" title="情商与道理" class="md-nav__link">
+      情商与道理
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/smf/" title="六种男人远离" class="md-nav__link">
+      六种男人远离
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/select/" title="决定接下来人生归属的，不是努力，而是选择" class="md-nav__link">
+      决定接下来人生归属的，不是努力，而是选择
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/nolike/" title="被你拉黑的那个人，你一定很喜欢吧" class="md-nav__link">
+      被你拉黑的那个人，你一定很喜欢吧
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/onepath/" title="余生，学会一个人走，不管有没有人陪" class="md-nav__link">
+      余生，学会一个人走，不管有没有人陪
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/twopath/" title="往后余生还很精彩，别被熬夜拖垮了" class="md-nav__link">
+      往后余生还很精彩，别被熬夜拖垮了
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/lifetime/" title="心态好的人，一辈子都好" class="md-nav__link">
+      心态好的人，一辈子都好
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/hearttoheart/" title="将心比心，方得人心" class="md-nav__link">
+      将心比心，方得人心
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/ttt/" title="别睡太晚，别爱太满，别要太多" class="md-nav__link">
+      别睡太晚，别爱太满，别要太多
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../emotion/profess/" title="表白" class="md-nav__link">
+      表白
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">目录</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    为什么要使用分布式架构
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    分布式基础组件
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#eureka" class="md-nav__link">
+    Eureka
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#spring_cloud_config" class="md-nav__link">
+    Spring Cloud Config
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#netflix_zuul" class="md-nav__link">
+    Netflix Zuul（网关）
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#spring_cloud_bus" class="md-nav__link">
+    Spring Cloud Bus
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#feign" class="md-nav__link">
+    Feign
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#netflix_hystrix" class="md-nav__link">
+    Netflix Hystrix（熔断）
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mq" class="md-nav__link">
+    MQ（消息中间件）
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    分布式事务
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#mq_1" class="md-nav__link">
+    MQ 确保一致性
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#seata" class="md-nav__link">
+    Seata（分布式事务）
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    完整的分布式架构
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    总结
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    单体服务与分布式服务区别
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    什么时候使用分布式/集群？
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    使用分布式注意事项
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    关于组件停更消息
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/burningmyself/burningmyself.github.io/edit/master/docs/micro/spring-cloud-micro.md" title="编辑此页" class="md-icon md-content__icon">&#xE3C9;</a>
+                
+                
+                <h1 id="springcloud">基于SpringCloud分布式架构<a class="headerlink" href="#springcloud" title="Permanent link">&para;</a></h1>
+<h2 id="_1">为什么要使用分布式架构<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Spring Cloud 专注于提供良好的开箱即用经验的典型用例和可扩展性机制覆盖</li>
+<li>分布式/版本化配置</li>
+<li>服务注册和发现</li>
+<li>路由</li>
+<li>Service-to-Service 调用</li>
+<li>负载均衡</li>
+<li>断路器</li>
+<li>分布式消息传递</li>
+</ul>
+<p>这是分布式的优点，这样看起来可能比较抽象，举个例子来说，对于单体服务来说，如果我想更新订单中的某个功能，我是不是需要重启整个服务。</p>
+<p>这个时候就会导致整个项目都处于不可用状态，或者在处理订单的时候由于程序代码写的有问题，导致死锁了，这个时候也会导致整个服务处于宕机专改，容错率很差。</p>
+<p>但是分布式不同，如上图所示，订单服务、售后服务、用户服务都是独立的服务，如果需要更新订单服务或者订单服务发生死锁，受影响的只会是订单服务，售后服务与用户服务还是可以正常工作的，这就是分布式相对单体来说最大的优势之一。</p>
+<h2 id="_2">分布式基础组件<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<p><strong>Spring Cloud Config</strong>：配置管理工具包，让你可以把配置放到远程服务器，集中化管理集群配置，目前支持本地存储、Git 以及 Subversion。</p>
+<p><strong>Spring Cloud Bus</strong>：事件、消息总线，用于在集群（例如，配置变化事件）中传播状态变化，可与 Spring Cloud Config 联合实现热部署。</p>
+<p><strong>Eureka</strong>：云端服务发现，一个基于 REST 的服务，用于定位服务，以实现云端中间层服务发现和故障转移。</p>
+<p><strong>Hystrix</strong>：熔断器，容错管理工具，旨在通过熔断机制控制服务和第三方库的节点,从而对延迟和故障提供更强大的容错能力。</p>
+<p><strong>Zuul</strong>：Zuul 是在云平台上提供动态路由,监控,弹性,安全等边缘服务的框架。Zuul 相当于是设备和 Netflix 流应用的 Web 网站后端所有请求的前门。</p>
+<p><strong>Archaius</strong>：配置管理 API，包含一系列配置管理 API，提供动态类型化属性、线程安全配置操作、轮询框架、回调机制等功能。</p>
+<p><strong>Consul</strong>：封装了 Consul 操作，Consul 是一个服务发现与配置工具，与 Docker 容器可以无缝集成。</p>
+<p><strong>Spring Cloud for Cloud Foundry</strong>：通过 Oauth2 协议绑定服务到 CloudFoundry，CloudFoundry 是 VMware 推出的开源 PaaS 云平台。</p>
+<p><strong>Spring Cloud Sleuth</strong>：日志收集工具包，封装了 Dapper 和 log-based 追踪以及 Zipkin 和 HTrace 操作，为 Spring Cloud 应用实现了一种分布式追踪解决方案。</p>
+<p><strong>Spring Cloud Data Flow</strong>：大数据操作工具，作为 Spring XD 的替代产品，它是一个混合计算模型，结合了流数据与批量数据的处理方式。</p>
+<p><strong>Spring Cloud Security</strong>：基于 Spring Security 的安全工具包，为你的应用程序添加安全控制。</p>
+<p><strong>Spring Cloud Zookeeper</strong>：操作 Zookeeper 的工具包，用于使用 Zookeeper 方式的服务发现和配置管理。</p>
+<p><strong>Spring Cloud Stream</strong>：数据流操作开发包，封装了与 Redis、Rabbit、Kafka 等发送接收消息。</p>
+<p><strong>Spring Cloud CLI</strong>：基于 Spring Boot CLI，可以让你以命令行方式快速建立云组件。</p>
+<p><strong>Ribbon</strong>：提供云端负载均衡，有多种负载均衡策略可供选择，可配合服务发现和断路器使用。</p>
+<p><strong>Turbine</strong>：Turbine 是聚合服务器发送事件流数据的一个工具，用来监控集群下 Hystrix 的 Metrics 情况。</p>
+<p><strong>Feign</strong>：Feign 是一种声明式、模板化的 HTTP 客户端。</p>
+<p><strong>Spring Cloud Task</strong>：提供云端计划任务管理、任务调度。</p>
+<p><strong>Spring Cloud Connectors</strong>：便于云端应用程序在各种 PaaS 平台连接到后端，如：数据库和消息代理服务。</p>
+<p><strong>Spring Cloud Cluster</strong>：提供 Leadership 选举，如：Zookeeper，Redis，Hazelcast，Consul 等常见状态模式的抽象和实现。</p>
+<p><strong>Spring Cloud Starters</strong>：Spring Boot 式的启动项目，为 Spring Cloud 提供开箱即用的依赖管理。</p>
+<blockquote>
+<p>我们常用的组件：</p>
+</blockquote>
+<ul>
+<li>Spring Cloud Config</li>
+<li>Spring Cloud Bus</li>
+<li>Hystrix</li>
+<li>Eureka</li>
+<li>Zuul</li>
+<li>Ribbon</li>
+<li>Feign</li>
+</ul>
+<h3 id="eureka">Eureka<a class="headerlink" href="#eureka" title="Permanent link">&para;</a></h3>
+<p>Eureka 属于 Spring Cloud Netflix 下的组件之一，主要负责服务的注册与发现，何为注册与发现？</p>
+<p>在刚刚我们分析的分布式中存在这一个问题，那就是订单服务与用户服务被独立了，那么他们怎么进行通信呢？比如在订单服务中获取用户的基础信息，这个时候我们需要怎么办？</p>
+<p>如果按照上面的架构图，直接去数据库获取就可以了，因为服务虽然独立了，但是数据库还是共享的，所以直接查询数据库就能得到结果，如果我们将数据库也拆分了呢？这个时候我们该怎么办呢？</p>
+<p>有人想到了，服务调用，服务调用是不是需要 IP 和端口才可以，那问题来了，对于订单服务来说，我怎么知道用户服务的 IP 和端口呢？在订单服务中写死吗？如果用户服务的端口发生改变了呢？</p>
+<p>这个时候 Eureka 就出来了，他就是为了解决服务的通信问题，每个服务都可以将自己的信息注册到 Eureka 中，比如 IP、端口、服务名等信息，这个时候如果订单服务想要获取用户服务的信息，只需要去 Eureka 中获取即可。</p>
+<p>请看下图：</p>
+<p><img alt="spring-cloud-micro" src="../../img/spring-cloud-micro-1.png" /></p>
+<p>这就是 Eureka 的主要功能，也是我们使用中的最值得注意的，他让服务之间的通信变得更加的简单灵活。</p>
+<h3 id="spring_cloud_config">Spring Cloud Config<a class="headerlink" href="#spring_cloud_config" title="Permanent link">&para;</a></h3>
+<p>Spring Cloud Config 为分布式系统中的外部配置提供服务器和客户端支持。使用 Config Server，您可以在所有环境中管理应用程序的外部属性。</p>
+<p>客户端和服务器上的概念映射与 Spring Environment 和 PropertySource 抽象相同，因此它们与 Spring 应用程序非常契合，但可以与任何以任何语言运行的应用程序一起使用。</p>
+<p>随着应用程序通过从开发人员到测试和生产的部署流程，您可以管理这些环境之间的配置，并确定应用程序具有迁移时需要运行的一切。</p>
+<p>服务器存储后端的默认实现使用 Git，因此它轻松支持标签版本的配置环境，以及可以访问用于管理内容的各种工具。可以轻松添加替代实现，并使用 Spring 配置将其插入。</p>
+<p>简单点来说集中来管理每个服务的配置文件，将配置文件与服务分离，这么多的目的是什么？</p>
+<p>举个简单的栗子，我们配置文件中肯定会存在数据库的连接信息，Redis 的连接信息，我们的环境是多样的，有开发环境、测试环境、预发布环境、生产环境。</p>
+<p>每个环境对应的连接信息肯定是不相同的，难道每次发布的时候都要去修改一下服务中的配置文件？</p>
+<p>我能不能将这些变动较大的配置集中管理，不同环境的管理者分别对他们进行修改，就不需要再服务中做改动了，Config 就做到了。</p>
+<p><img alt="spring-cloud-micro" src="../../img/spring-cloud-micro-2.png" /></p>
+<p>这就是 Config 的大致架构，所有的配置文件都集中交给 Config 管理，拿 Config 怎么管理这些配置文件呢？</p>
+<p>你可以将每个环境的配置文件存放再一个位置，比如 Lgitlab、SVN、本地等等，Config 会根据根据你设置的位置读取配置文件进行管理，然后其他服务启动的时候直接到 Config 配置中心获取对应的配置文件即可。</p>
+<p>这样开发人员只需要关注 -dev 的配置文件，测试人员只需要关注 -test 的配置文件，完全和服务解耦，你值得拥有。</p>
+<h3 id="netflix_zuul">Netflix Zuul（网关）<a class="headerlink" href="#netflix_zuul" title="Permanent link">&para;</a></h3>
+<p>路由在微服务体系结构的一个组成部分。例如，/可以映射到您的 Web 应用程序，/api/users 映射到用户服务，并将 /api/shop 映射到商店服务。Zuul 是 Netflix 的基于 JVM 的路由器和服务器端负载均衡器。</p>
+<blockquote>
+<p>Netflix 使用 Zuul 进行以下操作：</p>
+</blockquote>
+<ul>
+<li>认证 -洞察</li>
+<li>压力测试</li>
+<li>金丝雀测试</li>
+<li>动态路由</li>
+<li>服务迁移</li>
+<li>负载脱落</li>
+<li>安全</li>
+<li>静态响应处理</li>
+<li>主动/主动流量管理</li>
+</ul>
+<p>我们在日常开发过程中并不会使用那么多，基本上就是认证、动态路由、安全等等，我画了一张关于网关的架构图，请看：</p>
+<p><img alt="spring-cloud-micro" src="../../img/spring-cloud-micro-3.png" /></p>
+<p>注意：Nginx 只能为我们做反向代理，不能做到权限认证，网关不但可以做到代理，也能做到权限认证、甚至还能做限流，所以我们要做分布式项目，少了他可不行。</p>
+<h3 id="spring_cloud_bus">Spring Cloud Bus<a class="headerlink" href="#spring_cloud_bus" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span>application.yml
+spring:
+  datasource:
+    username: root
+    password: 123456
+    url: jdbc:mysql://localhost:3306/test
+    driver-class-name: com.mysql.cj.jdbc.Driver
+</pre></div>
+
+<p>比如上面这行配置大家都应该很熟悉，这是数据库的连接信息，如果它发生改变了怎么办呢？</p>
+<p>我们都知道，服务启动的时候会去 Config 配置中心拉取配置信息，但是启动完成之后修改了配置文件我们应该怎么办呢，重启服务器吗？</p>
+<p>我们可以通过 Spring Cloud Bus 来解决这个问题，Spring Cloud Bus 将轻量级消息代理链接到分布式系统的节点。然后可以将其用于广播状态更改（例如，配置更改）或其他管理指令。</p>
+<p>我们可以通过 Spring Cloud Bus 来解决这个问题，Spring Cloud Bus 将轻量级消息代理链接到分布式系统的节点。然后可以将其用于广播状态更改（例如，配置更改）或其他管理指令。</p>
+<p>这个需要我们有一点的 MQ 基础，不管是 RabbitMQ 还是 Kafka，都可以。</p>
+<p>Bus 的基本原理就是：配置文件发生改变时，Config 会发出一个 MQ，告诉服务，配置文件发生改变了，并且还发出了改变的哪些信息，这个时候服务只需要根据 MQ 的信息做实时修改即可。</p>
+<p>这是一个很简单的原理，理解起来可能也不会怎么难，画个图来理解一下：</p>
+<p><img alt="spring-cloud-micro" src="../../img/spring-cloud-micro-4.png" /></p>
+<p>大致流程就是这样，核心就是通过 MQ 机制实现不重启服务也能做到配置文件的改动，这方便了运维工程师，不用每次修改配置文件的时候都要去重启一遍服务的烦恼。</p>
+<h3 id="feign">Feign<a class="headerlink" href="#feign" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>Feign 是一个声明式的 Web 服务客户端。这使得 Web 服务客户端的写入更加方便 要使用 Feign 创建一个界面并对其进行注释。</p>
+</blockquote>
+<p>它具有可插入注释支持，包括 Feign 注释和 JAX-RS 注释。Feign 还支持可插拔编码器和解码器。</p>
+<p>Spring Cloud 增加了对 Spring MVC 注释的支持，并使用 Spring Web 中默认使用的 HttpMessageConverters。</p>
+<p>Spring Cloud 集成 Ribbon 和 Eureka 以在使用 Feign 时提供负载均衡的 HTTP 客户端。</p>
+<p><img alt="spring-cloud-micro" src="../../img/spring-cloud-micro-5.png" /></p>
+<p>Feign 基于 Rest 风格，简单易懂，他的底层是对 HttpClient 进行了一层封装，使用十分方便。</p>
+<h3 id="netflix_hystrix">Netflix Hystrix（熔断）<a class="headerlink" href="#netflix_hystrix" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>Hystrix 支持回退的概念：当电路断开或出现错误时执行的默认代码路径。要为给定的 @FeignClient 启用回退，请将 Fallback 属性设置为实现回退的类名。</p>
+</blockquote>
+<p>我们可以改造一下刚刚的调用架构：</p>
+<p><img alt="spring-cloud-micro" src="../../img/spring-cloud-micro-6.png" /></p>
+<p>在这里我部署了一台备用服务器，当用户服务宕机了之后，订单服务进行远程调用的时候可以进入备用服务，这样就不会导致系统崩溃。</p>
+<h3 id="mq">MQ（消息中间件）<a class="headerlink" href="#mq" title="Permanent link">&para;</a></h3>
+<p>我现在这里有一个需求，修改密码，修改密码需要发送短信验证码，发送短信在短信服务中，修改密码在用户服务中，这个时候就会出现服务调用。</p>
+<p>而且我们知道，发送短信一般都是调用第三方的接口，那比如阿里的，既然牵扯到调用，那么就会存在很多不确定因素，比如网络问题。</p>
+<p>假如，用户再点击发送短信验证码到时候用户服务调用短信服务，但是在短信服务中执行调用阿里的接口花费了很长的时间。</p>
+<p>这个时候就会导致用户服务调短信服务超时，会返回给用户失败，但是，短信最后又发出去了，这种问题怎么解决呢？</p>
+<p>我们可以通过消息中间件来实现，使用异步讲给用户的反馈和发送短信分离，只要用户点了发送短信，直接返回成功，然后再启动发送验证码，60 秒重发一下，就算发送失败，用户还可以选择重新发送。</p>
+<p>MQ 不但可以解耦服务，它还可以用来削峰，提高系统的性能，是一个不错的选择。</p>
+<p><img alt="spring-cloud-micro" src="../../img/spring-cloud-micro-7.png" /></p>
+<h3 id="_3">分布式事务<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
+<p>既然我们使用了分布式架构，那么有一点是我们必须要注意的，那就是事务问题。</p>
+<p>如果一个服务的修改依赖另外一个服务的操作，这个时候如果操作不慎，就会导致可怕的后果。</p>
+<p>举个例子，两个服务：钱包服务（用于充值提现）、交易钱包服务（用于交易），我现在想从钱包服务中转 1000 元到交易钱包服务中，我们应该如何保证他们数据的一致性呢？</p>
+<p>我这里有两种方案，第一种是通过 MQ 来保证一致性，另外一种就是通过分布式事务来确保一致性。</p>
+<h4 id="mq_1">MQ 确保一致性<a class="headerlink" href="#mq_1" title="Permanent link">&para;</a></h4>
+<ul>
+<li>生成一个订单表，记录着转入转出的状态。</li>
+<li>向 MQ 发送一条确认消息。</li>
+<li>开启本地事务，执行转出操操作，并且提交事务。</li>
+</ul>
+<p>交易钱包服务：接收 MQ 的消息，进行转入操作（此操作需要 Ack 确认机制的支持）。</p>
+<p>系统中会一直定时扫描订单中状态，没有成功的就做补偿机制或者重试机制，这个不是唯一要求。</p>
+<p><img alt="spring-cloud-micro" src="../../img/spring-cloud-micro-8.png" /></p>
+<p>以上就是 MQ 确保分布式事务的大致思路，不是唯一，仅供参考。</p>
+<h4 id="seata">Seata（分布式事务）<a class="headerlink" href="#seata" title="Permanent link">&para;</a></h4>
+<p>Seata 有三个基本组成部分：</p>
+<ul>
+<li><strong>事务协调器（TC）</strong>：维护全局事务和分支事务的状态，驱动全局提交或回滚。</li>
+<li><strong>事务管理器 TM</strong>：定义全局事务的范围：开始全局事务，提交或回滚全局事务。</li>
+<li><strong>资源管理器（RM）</strong>：管理分支事务正在处理的资源，与 TC 进行对话以注册分支事务并报告分支事务的状态，并驱动分支事务的提交或回滚。</li>
+</ul>
+<p><img alt="spring-cloud-micro" src="../../img/spring-cloud-micro-9.png" /></p>
+<p>Seata 管理的分布式事务的典型生命周期：</p>
+<ul>
+<li>TM 要求 TC 开始一项新的全球交易。TC 生成代表全局事务的 XID。</li>
+<li>XID 通过微服务的调用链传播。</li>
+<li>RM 将本地事务注册为 XID 到 TC 的相应全局事务的分支。</li>
+<li>TM 要求 TC 提交或回滚 XID 的相应全局事务。</li>
+<li>TC 驱动 XID 对应的全局事务下的所有分支事务以完成分支提交或回滚。</li>
+</ul>
+<h2 id="_4">完整的分布式架构<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
+<p>完整的分布式架构如下图：</p>
+<p><img alt="spring-cloud-micro" src="../../img/spring-cloud-micro-10.png" /></p>
+<p>这就是一套分布式基本的架构，请求从浏览器发出，经过 Nginx 反向代理到 Zuul 网关。</p>
+<p>网关经过权限校验、然后分别转发到对应的服务中，每个服务都有自己独立的数据库，如果需要跨库查询的时候就需要用到分布式的远程调用（Feign）。</p>
+<p>虽然这里我将服务拆分了，但是有一点需要注意的是网关，网关承载着所有的请求，如果请求过大会发生什么呢？</p>
+<p>服务宕机，所以一般情况下，网关都是集群部署，不止网关可以集群，其他的服务都可以做集群配置，比如：注册中心、Redis、MQ 等等都可以。</p>
+<p>那我们将这个流程图再改良一下：</p>
+<p><img alt="spring-cloud-micro" src="../../img/spring-cloud-micro-11.png" /></p>
+<p>现在这套架构就是比较程数的一套了，不管是性能还是稳定能，都是杠杠的，技术选择性的会也开得差不多了，最后技术总监做了一个总结。</p>
+<h2 id="_5">总结<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
+<h3 id="_6">单体服务与分布式服务区别<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>区别</th>
+<th>传统单体架构</th>
+<th>分布式服务架构</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>新功能开发</td>
+<td>需要时间</td>
+<td>容易开发和实现</td>
+</tr>
+<tr>
+<td>部署</td>
+<td>不经常且容易部署</td>
+<td>经常发布，部署复杂</td>
+</tr>
+<tr>
+<td>隔离性</td>
+<td>故障影响范围大</td>
+<td>故障影响范围小</td>
+</tr>
+<tr>
+<td>架构设计</td>
+<td>难度小</td>
+<td>难度级数增大</td>
+</tr>
+<tr>
+<td>系统性能</td>
+<td>响应时间快，吞吐量小</td>
+<td>响应时间慢，吞吐量大</td>
+</tr>
+<tr>
+<td>系统运维</td>
+<td>运维简单</td>
+<td>运维复杂</td>
+</tr>
+<tr>
+<td>新手上手</td>
+<td>学习曲线大(业务逻辑)</td>
+<td>学习曲线大(构架逻辑)</td>
+</tr>
+<tr>
+<td>技术</td>
+<td>技术单一且封闭</td>
+<td>技术多样且开放</td>
+</tr>
+<tr>
+<td>测试和查错</td>
+<td>简单</td>
+<td>复杂</td>
+</tr>
+<tr>
+<td>系统扩展性</td>
+<td>扩展性差</td>
+<td>扩展性很好</td>
+</tr>
+<tr>
+<td>系统管理</td>
+<td>重点在于开放成本</td>
+<td>重点在于服务治理和调度</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_7">什么时候使用分布式/集群？<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
+<p>总结如下几点：</p>
+<ul>
+<li>单机无法支持的时候。</li>
+<li>想要更好的隔离性（功能与功能）。</li>
+<li>想要更好用户体验的时候。</li>
+<li>想要更好的扩展性。</li>
+<li>想要更快的响应，更搞得吞吐量。</li>
+</ul>
+<h3 id="_8">使用分布式注意事项<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
+<p>虽然现在分布式技术已经十分成熟，但是里面的坑不是一点两点，比如：==如何保证分布式事务的一致性、如何保证服务调用的幂等性、如何保证消息的幂等性、如何设置熔断（服务的降级），如何保证服务的健壮性等等，==这些都是一直需要关注的问题，只有解决了这些问题，你的分布式架构才能真正的立于不败之地。</p>
+<h3 id="_9">关于组件停更消息<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h3>
+<p>目前注册中心 Eureka、网关 Zuul，Feign 都相继停更了，停更不代表不能使用，只是除了 Bug 可能不会主动修复，所以这个时候我们可能就需要选择另外的组件了。</p>
+<p>注册中心可以使用 Consul、Nacos，Zookeeper，网关则可以通过 Gateway 替换，OpenFeign 替换 Fiegn。</p>
+<p>所以也没必要听到组件停更的消息就担心 Cloud 会不会凉，放心，它至少最近几年是不会凉的。</p>
+                
+                  
+                
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="../redis-cluster/" title="Redis Cluster原理" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  上一页
+                </span>
+                Redis Cluster原理
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="../../exp/devops/" title="DevOps" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  下一页
+                </span>
+                DevOps
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+          <div class="md-footer-copyright__highlight">
+            BurningMyself 蜀ICP备15033200号-1
+          </div>
+        
+        powered by
+        <a href="https://www.mkdocs.org">MkDocs</a>
+        and
+        <a href="https://squidfunk.github.io/mkdocs-material/">
+          Material for MkDocs</a>
+      </div>
+      
+  <div class="md-footer-social">
+    <link rel="stylesheet" href="../../assets/fonts/font-awesome.css">
+    
+      <a href="https://github.com/burningmyself" class="md-footer-social__link fa fa-github"></a>
+    
+      <a href="https://gitee.com/burningmyself" class="md-footer-social__link fa fa-google"></a>
+    
+  </div>
+
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../assets/javascripts/application.808e90bb.js"></script>
+      
+        
+        
+          
+          <script src="../../assets/javascripts/lunr/lunr.stemmer.support.js"></script>
+          
+            
+              
+              
+            
+          
+            
+          
+            
+              
+                <script src="../../assets/javascripts/lunr/tinyseg.js"></script>
+              
+              
+                <script src="../../assets/javascripts/lunr/lunr.ja.js"></script>
+              
+            
+          
+          
+            <script src="../../assets/javascripts/lunr/lunr.multi.js"></script>
+          
+        
+      
+      <script>app.initialize({version:"1.0.4",url:{base:"../.."}})</script>
+      
+        <script src="../../js/extra.js"></script>
+      
+        <script src="../../js/baidu-tongji.js"></script>
+      
+    
+  </body>
+</html>
