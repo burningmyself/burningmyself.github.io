@@ -63,7 +63,7 @@
 * * [Redis Cluster原理](docs/micro/redis-cluster.md)
 * * [分布式架构](docs/micro/spring-cloud-micro.md)
 * [.NET]
-* * [C#语法新特性](docs/net/c_sharp.md)
+* * [C#新特性语法](docs/net/c_sharp.md)
 * * [.Net Core Docker 部署](docs/net/c_docker.md)
 * * [Docker容器化部署ASP.NET Core](docs/net/c_sqlserver_nginx.md)
 * * [让你的ASP.NET Core应用程序更安全](docs/net/c_core_safety.md)
