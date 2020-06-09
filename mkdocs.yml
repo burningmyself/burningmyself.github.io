@@ -94,6 +94,7 @@ nav:
         - mkdocs简单使用: tool/mkdocs.md
         - Git的黑魔法: tool/gitstudy.md
         - MinIO 搭建使用: tool/minio.md
+        - Cat分布式监控: tool/cat-monitoring.md
   - 微服务:  
         - 分布式锁: micro/fbs-lock.md
         - 微服务设计: micro/design.md
