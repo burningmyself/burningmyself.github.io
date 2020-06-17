@@ -83,6 +83,7 @@ nav:
         - Docker全科: docker/docker.md
         - docker和docker-compose配置常用环境: docker/docker-compose.md   
         - Docker部署Jenkins: docker/docker-jenkins.md 
+        - Docker部署Phabricator: docker/docker-phabricator.md
     - Tool: 
         - Git: tool/git.md
         - Git问题处理: tool/gitquestion.md

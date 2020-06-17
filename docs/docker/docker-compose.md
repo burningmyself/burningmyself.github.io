@@ -224,6 +224,24 @@ docker run -p 8001:8000 -p 9001:9000 --name portainer \ # run 运行容器 -p �
 -d portainer/portainer portainer # -d 后台运行
 ```
 
+### 拉取Phabricator镜像
+
+``` shell
+docker pull redpointgames/phabricator # 拉取Phabricator镜像
+docker run \
+    --rm -p 80:80 -p 443:443 -p 2222:22 \
+    --env PHABRICATOR_HOST=localhost \
+    --env MYSQL_HOST=localhost \
+    --env MYSQL_USER=root \
+    --env MYSQL_PASS=root \
+    --env PHABRICATOR_REPOSITORY_PATH=/repos \
+    -v /data/phabricator/repos:/repos \
+    --name phabricator \
+    -d redpointgames/phabricator  
+```
+[redpointgames/phabricator go to github](https://github.com/RedpointGames/phabricator)
+[bitnami-docker-phabricator go to github](https://github.com/bitnami/bitnami-docker-phabricator)
+
 ### Docker 开启远程API
 
 * 用vi编辑器修改docker.service文件

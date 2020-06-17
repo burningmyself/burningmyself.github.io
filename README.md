@@ -23,6 +23,7 @@
 * * [Docker介绍使用](docs/docker/docker.md)
 * * [docker和docker-compose配置常用环境](docs/docker/docker-compose.md)
 * * [Docker部署Jenkins](docs/docker/docker-jenkins.md)
+* * [Docker部署Phabricator](docs/docker/docker-phabricator.md)
 * [经验]
 * * [集群和负载均衡](docs/exp/cl.md)
 * * [DevOps是什么](docs/exp/devops.md)  
