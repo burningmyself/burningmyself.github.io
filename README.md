@@ -89,6 +89,7 @@
 * * [Mybatis使用心德](docs/sql/mybatis.md)
 * [TOOL]
 * * [Git命令](docs/tool/git.md)
+* * [Git命令动画展示](docs/tool/gitusual.md)
 * * [GitBook](docs/tool/gitbook.md)
 * * [GitFlow](docs/tool/gitflow.md)
 * * [Git问题处理](docs/tool/gitquestion.md)

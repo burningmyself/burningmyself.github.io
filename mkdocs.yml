@@ -86,6 +86,7 @@ nav:
         - Docker部署Phabricator: docker/docker-phabricator.md
     - Tool: 
         - Git: tool/git.md
+        - Git动画展示: tool/gitusual.md
         - Git问题处理: tool/gitquestion.md
         - GitFlow: tool/gitflow.md
         - GitBook: tool/gitbook.md
