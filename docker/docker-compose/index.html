@@ -1119,6 +1119,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#phabricator" class="md-nav__link">
+    拉取Phabricator镜像
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#docker_api" class="md-nav__link">
     Docker 开启远程API
   </a>
@@ -1208,6 +1215,18 @@
   </li>
 
         
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../docker-phabricator/" title="Docker部署Phabricator" class="md-nav__link">
+      Docker部署Phabricator
+    </a>
+  </li>
+
+        
       </ul>
     </nav>
   </li>
@@ -1240,6 +1259,18 @@
   <li class="md-nav__item">
     <a href="../../tool/git/" title="Git" class="md-nav__link">
       Git
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tool/gitusual/" title="Git动画展示" class="md-nav__link">
+      Git动画展示
     </a>
   </li>
 
@@ -2248,6 +2279,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#phabricator" class="md-nav__link">
+    拉取Phabricator镜像
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#docker_api" class="md-nav__link">
     Docker 开启远程API
   </a>
@@ -2530,6 +2568,21 @@ docker run -p <span class="m">8001</span>:8000 -p <span class="m">9001</span>:90
 -d portainer/portainer portainer <span class="c1"># -d 后台运行</span>
 </pre></div>
 
+<h3 id="phabricator">拉取Phabricator镜像<a class="headerlink" href="#phabricator" title="Permanent link">&para;</a></h3>
+<p><div class="codehilite"><pre><span></span>docker pull redpointgames/phabricator <span class="c1"># 拉取Phabricator镜像</span>
+docker run <span class="se">\</span>
+    --rm -p <span class="m">80</span>:80 -p <span class="m">443</span>:443 -p <span class="m">2222</span>:22 <span class="se">\</span>
+    --env <span class="nv">PHABRICATOR_HOST</span><span class="o">=</span>localhost <span class="se">\</span>
+    --env <span class="nv">MYSQL_HOST</span><span class="o">=</span>localhost <span class="se">\</span>
+    --env <span class="nv">MYSQL_USER</span><span class="o">=</span>root <span class="se">\</span>
+    --env <span class="nv">MYSQL_PASS</span><span class="o">=</span>root <span class="se">\</span>
+    --env <span class="nv">PHABRICATOR_REPOSITORY_PATH</span><span class="o">=</span>/repos <span class="se">\</span>
+    -v /data/phabricator/repos:/repos <span class="se">\</span>
+    --name phabricator <span class="se">\</span>
+    -d redpointgames/phabricator  
+</pre></div>
+<a href="https://github.com/RedpointGames/phabricator">redpointgames/phabricator go to github</a>
+<a href="https://github.com/bitnami/bitnami-docker-phabricator">bitnami-docker-phabricator go to github</a></p>
 <h3 id="docker_api">Docker 开启远程API<a class="headerlink" href="#docker_api" title="Permanent link">&para;</a></h3>
 <ul>
 <li>用vi编辑器修改docker.service文件
