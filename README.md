@@ -83,7 +83,7 @@
 * * [MySQL 索引](docs/sql/mysql_index.md)
 * * [MySQL PXC集群](docs/sql/mysql_pxc.md)
 * * [MySQL MySQL数据库应用](docs/sql/mysql_use.md)
-* * [MySql 备份](docs/sql/mysql_backs.md)
+* * [MySql 备份](docs/sql/mysql_backups.md)
 * * [Sql Server 主从备份](docs/sql/sql_server_master.md)
 * * [数据库之互联网常用分库分表方案](docs/sql/data_split.md)
 * * [Mybatis使用心德](docs/sql/mybatis.md)
