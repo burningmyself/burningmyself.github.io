@@ -6,7 +6,16 @@
 如果大家觉得那里写的不合适的可以给我提 Issue
 
 [Github](https://github.com/burningmyself)
+
 [Gitee](https://gitee.com/yangfubing)
+
+
+![GitHub issues](https://img.shields.io/github/issues/burningmyself/micro)
+![GitHub forks](https://img.shields.io/github/forks/burningmyself/micro)
+![GitHub stars](https://img.shields.io/github/stars/burningmyself/micro)
+![GitHub license](https://img.shields.io/github/license/burningmyself/micro)
+![Twitter](https://img.shields.io/twitter/url?url=https%3A%2F%2Fgithub.com%2Fburningmyself%2Fmicro)
+
 
 ## 捐赠
 
