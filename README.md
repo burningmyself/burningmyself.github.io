@@ -126,8 +126,9 @@
 * * [走向架构师必备的技能](docs/framework/fwork.md)
 * * [数据中台的思考与总结](docs/framework/data-middle.md)
 * * [必学的 10 大算法](docs/framework/algorithm-ten.md)
-* [医学]
-* * [脑炎](docs/doctor/ae.md)
+* [云架构]
+* * [云原生](docs/cloud/native.md)
+* * [虚拟化技术](docs/cloud/virtual.md)
 * [情感]
 * * [情商](docs/emotion/eq.md)
 * * [工作心得](docs/emotion/workheard.md)

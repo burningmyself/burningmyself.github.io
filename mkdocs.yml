@@ -3,7 +3,7 @@ site_description: .net,java,php,python,docker,web
 site_author: BurningMyself
 site_url: https://burningmyself.github.io
 # site_favicon: favicon.ico
-copyright: BurningMyself 蜀ICP备15033200号-1
+copyright: BurningMyself<a href='https://beian.miit.gov.cn/' target='_blank'>  蜀ICP备15033200号-1</a>
 google_analytics: ['UA-155084439-1', 'burningmyself.gitee.io']
 site_url: https://burningmyself.gitee.io
 repo_name: 'burningmyself.github.io'
@@ -118,8 +118,9 @@ nav:
     - 深度学习框架: exp/four_deep_learning.md
     - 在阿里做了5年技术Leader，我总结出这些套路！: exp/tl.md
     - CTO 技能图谱 : exp/cto.md
-  - 医学:
-    - 脑炎: doctor/ae.md
+  - 云架构:
+    - 云原生: cloud/native.md
+    - 虚拟化技术: cloud/virtual.md
   - 构架:
     - 构架拆分: framework/split.md 
     - 分布式、高并发、多线程: framework/fgb.md 
@@ -193,23 +194,15 @@ markdown_extensions:
 extra_javascript:
   - 'js/extra.js'
   - 'js/baidu-tongji.js'
-#   - 'https://www.googletagmanager.com/gtag/js?id=UA-155084439-1'
-#   - 'https://www.googletagmanager.com/gtag/js?id=UA-155132293-1'
-#   - 'js/google.js'
-#   - 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML'
-
+  - 'https://www.googletagmanager.com/gtag/js?id=UA-155084439-1'
+  - 'https://www.googletagmanager.com/gtag/js?id=UA-155132293-1'
+  - 'js/google.js'
+  - 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML'
 
 extra:
-    # disqus: "disqus"
-    version: 1.0  
-    search:
-        language: 'zh,en,ja'
-        tokenizer: '[\ s \-\ .. +'
-    palette:
-        primary: 'Blue Grey'
-        accent: 'Pink'  
-    social:
-    - type: 'github'
-      link: 'https://github.com/burningmyself'
-    - type: 'google'
-      link: 'https://gitee.com/burningmyself'
+  social:
+    - icon: fontawesome/brands/github 
+      link: https://github.com/burningmyself
+    - icon: fontawesome/brands/google 
+      link: https://gitee.com/burningmyself
+
