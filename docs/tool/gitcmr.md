@@ -1,45 +1,82 @@
 # Git提交日志规范
 
-### 1 介绍
-Git进行commit时都需要提交说明（commit message）：
-``` shell
-Git commit -m 'hello world'
+在软件开发流程中，git或者其他的版本控制工具已经成为必不可少的一部分。Git每次提交代码都需要写commit message，否则不允许提交，一般来说commit message应该清晰明了,说明本次提交的目的，这对于之后bug定位，问题的分析都有很大的帮助。但是在日常开发中，大家的commit message都千奇百怪，fix issue，fix bug等等笼统不清晰的git message充斥在git history中，这就导致后续维护人员无法快速定位问题，有时甚至自己提交的代码都不知道是为什么，所以我们就需要一个规范来统一和管理commit message。
+
+## 规范梳理
+
+目前比较知名的规范是Angular的commit message规范 ,同时也有很多相对应的IDE插件，比如Intellij IDEA的Git Commit Template 来帮助实现规范。现在以Angular的规范为基础介绍一套较为通用的git commit message规范。
+
+
+### Commit Message Format
 ```
--m参数就是用来指定commit message的
-
-commit message应该清晰明了，说明本次提交的目的。
-
-### 2 Commit message的格式
-Commit message应该包括三个部分：Header/Body/Footer。其中，Header是必需的，Body和Footer可以省略。
-``` javascript
-<type>(<scope>): <subject>
-// 空一行
+<header>
+<BLANK LINE>
 <body>
-// 空一行
+<BLANK LINE>
 <footer>
 ```
-不管是哪一个部分，任何一行都不得超过72个字符（或100个字符）。这是为了避免自动换行影响美观。
 
-#### 2.1 Header
-只有一行，包含三个字段，type（必须）、scope（可选）和subject（必须）
+每一个commit message都应该包含header，body和footer。其中footer可以省略，但是header和body都不能为空。
 
-* type用于说明commit的类别，只允许使用一下7个标识：
- 1. feat：新功能（feature）
- 2. fix：修补bug
- 3. docs：文档（documentation）
- 4. style：格式（不影响代码运行的改动）
- 5. refactor：重构（即不是新增功能，也不是修改bug的代码变动）
- 6. test：增加测试
- 7. chore：构建过程或辅助工具的变动
-* scope用于说明commit影响的范围，比如数据层、控制层、视图层等，是项目不同而不同
+### Header
 
-* subject是commit的简短描述，不超过50字符
+Header分为三个部分type, scope, summary，其中type和summary为必填项，scope可以省略，格式如下:
 
-例如fix: array parsing issue when multiple spaces were contained in string.
-* 义动词开头，使用第一人称现在时（change，而不是changed）
-* 第一个字母小写
-* 结尾不加句号(.)
-#### 2.2 Body
+```
+<type>(<scope>): <summary>
+```
+
+* Type:
+
+  用于说明git commit的类别，只允许使用下面的标识。
+
+* + feat: 新功能（feature）。
+
+* + fix: 修复bug，可以是QA发现的BUG，也可以是研发自己发现的BUG。
+
+* + docs: 文档（documentation）。
+
+* + style: 格式（不影响代码运行的变动）。
+
+* + refactor: 重构（即不是新增功能，也不是修改bug的代码变动）。
+
+* + perf: 优化相关，比如提升性能、体验。
+
+* + test: 增加测试。
+
+* + chore: 构建过程或辅助工具的变动。
+
+* + revert: 回滚到上一个版本。
+
+* Scope
+
+  Scope用于说明 commit 影响的范围，比如Controller、DAO、View等等，视项目不同而不同。例如在Angular中可以是:
+
+* + animations
+* + bazel
+* + benchpress
+* + common
+* + compiler
+* + compiler-cli
+* + core
+* + elements
+
+等等，如果其中包含了多个scope，可以用逗'*'隔'。
+
+* Summary
+
+  Summary是对commit的一个简短的描述，一般Git Commit Head总共不超过50个字符，所以summary必须精简。对于英文的commit summary，第一，要使用第一人称，现在时，比如change，不是changed也不是changes，第二，首字母无需大写，第三，句尾不要标点符号。中文除了时态，其他也一样。
+
+根据上述规范git commit message header可以如下:
+
+```
+fix(Controller): request url map typo
+```
+
+### Body
+
+和Header中的summary一样。同时需要解释提交的动机，为什么需要更改，可以和之前的行为进行比较，来说明改动的影响等等。
+
 是对本次commit的详细描述，可以分成多行：
 
 ```
@@ -55,36 +92,34 @@ Further paragraphs come after blank lines.
 1. 使用第一人称现在时 
 2. 说明代码变动的动机，以及与以前行为的对比
 
-#### 2.3 Footer
-只是用与两种情况
+### Footer
 
-* 不兼容变动
-如果当前代码与上一个版本不兼容，则Footer部分以BREAKING CHANGE开头，后面是变动的描述以及变动理由和迁移方法
-``` css
-BREAKING CHANGE: isolate scope bindings definition has changed.
-
-    To migrate the code follow the example below:
-
-    Before:
-
-    scope: {
-      myAttr: 'attribute',
-    }
-
-    After:
-
-    scope: {
-      myAttr: '@',
-    }
-    The removed `inject` wasn't generaly useful for directives so there should be no code using it.
+Footer适用于当提交的改动包含了不可兼容变化或者弃用的变化，Footer部分以BREAKING CHANGE开头，后面是对变动的描述、以及变动理由和迁移方法，同时可以把相关Github issue，JIRA ticket或者其他文档链接填入其中。例子如下:
+```
+BREAKING CHANGE: <breaking change summary>
+<BLANK LINE>
+<breaking change description + migration instructions>
+<BLANK LINE>
+<BLANK LINE>
+Fixes #<issue number>
+```
+```
+DEPRECATED: <what is deprecated>
+<BLANK LINE>
+<deprecation description + recommended update path>
+<BLANK LINE>
+<BLANK LINE>
+Closes #<pr number>
 ```
 
 * 关闭Issue
-如果当前commit针对某个issue，那么可以在Footer部分关闭这个issue
-```
-Closes #123, #245, #992
-```
-#### 2.4 Revert
+  如果当前commit针对某个issue，那么可以在Footer部分关闭这个issue
+  ```
+  Closes #123, #245, #992
+  ```
+
+### Revert
+
 有一种特殊情况，如果当前commit用于撤销以前的commit，则必须以revert:开头，后面跟着被撤销的Commit的Header
 ```shell
 revert: feat(pencil): add 'graphiteWidth' option
@@ -92,6 +127,22 @@ revert: feat(pencil): add 'graphiteWidth' option
 This reverts commit 667ecc1654a317a13331b17617d973392f415f02.
 ```
 Body部分的格式是固定的，必须写成·This reverts commit ·
+
+### Commit message的使用
+
+* 提供更多的Git History信息
+
+    当浏览Github Commit History页面时，只要看首行就可以知道某次的commit的目的，如果没有GUI工具，使用命令行工具使用 git log <last tag> HEAD --pretty=format:%s 也能很方便清晰的浏览每次改动的信息。
+
+* 快速查找Commit信息
+
+    用命令行工具，可以很方便的查找出，或者过滤出相关的commit
+
+    git log <last release> HEAD --grep perf
+
+    例如上面的命令，就可以迅速的查处所有perf，性能修改相关的commit。
+
+
 
 ### Commitizen
 一个撰写合格的Commit message的工具
