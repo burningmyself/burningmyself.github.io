@@ -129,6 +129,10 @@
 * [云架构]
 * * [云原生](docs/cloud/native.md)
 * * [虚拟化技术](docs/cloud/virtual.md)
+* * [云计算](docs/cloud/compute.md)
+* * [应用部署容器化演进](docs/cloud/apprelease.md)
+* * [容器技术所涉及Linux内核关键技术](docs/cloud/containerlinux.md)
+* * [容器管理工具 Docker生态架构及部署](docs/cloud/docker_native.md)
 * [情感]
 * * [情商](docs/emotion/eq.md)
 * * [工作心得](docs/emotion/workheard.md)

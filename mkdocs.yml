@@ -121,6 +121,10 @@ nav:
   - 云架构:
     - 云原生: cloud/native.md
     - 虚拟化技术: cloud/virtual.md
+    - 云计算: cloud/compute.md
+    - 应用部署容器化演进: cloud/apprelease.md
+    - 容器技术所涉及Linux内核关键技术: cloud/containerlinux.md
+    - 容器管理工具 Docker生态架构及部署: cloud/docker_native.md
   - 构架:
     - 构架拆分: framework/split.md 
     - 分布式、高并发、多线程: framework/fgb.md 
