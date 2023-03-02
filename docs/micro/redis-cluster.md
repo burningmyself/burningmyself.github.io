@@ -86,7 +86,7 @@ Gossip 协议的结构如图 3 所示，有其中 type 定义了消息的类型�
 
 那么对外来说，一个 Redis 客户端如何通过分布式节点获取缓存数据，就是分布式缓存路由要解决的问题了。
 
-上文提到了 Gossip 协议会将每个节点管理的槽信息发送给其他节点，其中用到了 unsigned char myslots[CLUSTER_SLOTS/8] 这样一个数组存放每个节点的槽信息。
+上文提到了 Gossip 协议会将每个节点管理的槽信息发送给其他节点，其中用到了 unsigned char myslots9{LUSTER_SLOTS/8} 这样一个数组存放每个节点的槽信息。
 
 myslots 属性是一个二进制位数组（bit array），其中 CLUSTER_SLOTS 为 16384。
 
