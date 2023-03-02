@@ -799,6 +799,10 @@ AMD CPU:  AMD -V
 
 ### 5.3.3  Linux主机安装
 
+```
+virt-manager
+```
+
 ![1545964085410](../img/virtual/1545964085410.png)
 
 
