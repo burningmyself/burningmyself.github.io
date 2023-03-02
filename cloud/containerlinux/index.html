@@ -1,0 +1,2915 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content=".net,java,php,python,docker,web">
+      
+      
+        <meta name="author" content="BurningMyself">
+      
+      
+        <link rel="canonical" href="https://burningmyself.gitee.io/cloud/containerlinux/">
+      
+      
+        <link rel="prev" href="../apprelease/">
+      
+      
+        <link rel="next" href="../docker_native/">
+      
+      <link rel="icon" href="../../favicon.ico">
+      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.0.15">
+    
+    
+      
+        <title>容器技术所涉及Linux内核关键技术 - BurningMyself</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.113286f1.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.a0c5b2b5.min.css">
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="" data-md-color-accent="">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#linux" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../.." title="BurningMyself" class="md-header__button md-logo" aria-label="BurningMyself" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            BurningMyself
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              容器技术所涉及Linux内核关键技术
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/burningmyself/burningmyself.github.io" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    burningmyself.github.io
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="BurningMyself" class="md-nav__button md-logo" aria-label="BurningMyself" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    BurningMyself
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/burningmyself/burningmyself.github.io" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    burningmyself.github.io
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        介绍
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+          技术博文
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          技术博文
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="0">
+          .NET
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_1_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2_1">
+          <span class="md-nav__icon md-icon"></span>
+          .NET
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../net/c_sharp/" class="md-nav__link">
+        C#新特性语法
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../net/c_docker/" class="md-nav__link">
+        .Net Core Docker 部署
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../net/c_sqlserver_nginx/" class="md-nav__link">
+        Docker 容器化部署 ASP.NET Core
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../net/c_core_safety/" class="md-nav__link">
+        让你的ASP.NET Core应用程序更安全
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../net/c_core_study_route/" class="md-nav__link">
+        ASP.NET Core开发者指南
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+          Java
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2_2">
+          <span class="md-nav__icon md-icon"></span>
+          Java
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../java/feature/" class="md-nav__link">
+        Java特性
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../java/load-class/" class="md-nav__link">
+        Java类加载
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../java/orm/" class="md-nav__link">
+        Orm的优缺点
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../java/bio-nio/" class="md-nav__link">
+        BIO与NIO
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../java/rocketmq/rmq-1/" class="md-nav__link">
+        RocketMq下载与安装
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../java/springAnnotation/" class="md-nav__link">
+        Spring常用注解
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../java/javavm/" class="md-nav__link">
+        Java 虚拟机
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../java/springdesign/" class="md-nav__link">
+        Spring 常用设计
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../java/spring-cloud/" class="md-nav__link">
+        Spring Cloud
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../java/java-simple/" class="md-nav__link">
+        Java simple
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../java/java-validator/" class="md-nav__link">
+        Java Validator
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../java/java-string/" class="md-nav__link">
+        Java String
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../java/java-utils/" class="md-nav__link">
+        Java Utils
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+          Python
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2_3">
+          <span class="md-nav__icon md-icon"></span>
+          Python
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../python/feature/" class="md-nav__link">
+        Python特性
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../python/str_joint/" class="md-nav__link">
+        Python字符拼接
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../python/syntax_rule/" class="md-nav__link">
+        Python语法技巧
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../python/fabric/" class="md-nav__link">
+        远程部署神器 Fabric
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_4" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_4" id="__nav_2_4_label" tabindex="0">
+          PHP
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_4_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2_4">
+          <span class="md-nav__icon md-icon"></span>
+          PHP
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../php/kj/" class="md-nav__link">
+        框架
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_5" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_5" id="__nav_2_5_label" tabindex="0">
+          Web
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_5_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2_5">
+          <span class="md-nav__icon md-icon"></span>
+          Web
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../web/es6/" class="md-nav__link">
+        es6语法
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../web/ali_js_style/" class="md-nav__link">
+        阿里js样式规范
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../web/node.js/" class="md-nav__link">
+        node.js文档
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../web/react/" class="md-nav__link">
+        React 开发者指南
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../dart/syntax/" class="md-nav__link">
+        Dart语法学习
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../web/react_interview/" class="md-nav__link">
+        React 面试
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../web/js_tool_method/" class="md-nav__link">
+        js 工具函数
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../web/vue_cp_react/" class="md-nav__link">
+        vue与react比较
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../web/javascript/" class="md-nav__link">
+        JavaScript 基础
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_6" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_6" id="__nav_2_6_label" tabindex="0">
+          SQL
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_6_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2_6">
+          <span class="md-nav__icon md-icon"></span>
+          SQL
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sql/mysql_yh/" class="md-nav__link">
+        MySQL优化
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sql/mysql_yh17/" class="md-nav__link">
+        MySQL优化
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sql/mysql_log/" class="md-nav__link">
+        MySQL日志
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sql/mysql_index/" class="md-nav__link">
+        MySQL索引
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sql/mysql_pxc/" class="md-nav__link">
+        MySQL PXC集群
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sql/mysql_use/" class="md-nav__link">
+        MySQL 数据库应用
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sql/mysql_backups/" class="md-nav__link">
+        MySql 备份
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sql/sql_server_master/" class="md-nav__link">
+        Sql Server 主从备份
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sql/data_split/" class="md-nav__link">
+        数据库之互联网常用分库分表方案
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sql/mybatis/" class="md-nav__link">
+        Mybatis使用心德
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_7" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_7" id="__nav_2_7_label" tabindex="0">
+          Linux
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_7_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2_7">
+          <span class="md-nav__icon md-icon"></span>
+          Linux
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linux/often/" class="md-nav__link">
+        常用命令
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linux/ope/" class="md-nav__link">
+        实用的Linux 命令
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_8" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_8" id="__nav_2_8_label" tabindex="0">
+          Docker
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_8_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2_8">
+          <span class="md-nav__icon md-icon"></span>
+          Docker
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docker/docker/" class="md-nav__link">
+        Docker全科
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docker/docker-compose/" class="md-nav__link">
+        docker和docker-compose配置常用环境
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docker/docker-jenkins/" class="md-nav__link">
+        Docker部署Jenkins
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docker/docker-phabricator/" class="md-nav__link">
+        Docker部署Phabricator
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_9" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_9" id="__nav_2_9_label" tabindex="0">
+          Tool
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_9_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2_9">
+          <span class="md-nav__icon md-icon"></span>
+          Tool
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tool/git/" class="md-nav__link">
+        Git
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tool/gitusual/" class="md-nav__link">
+        Git动画展示
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tool/gitquestion/" class="md-nav__link">
+        Git问题处理
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tool/gitflow/" class="md-nav__link">
+        GitFlow
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tool/gitbook/" class="md-nav__link">
+        GitBook
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tool/gitcmr/" class="md-nav__link">
+        Git提交日志规范
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tool/markdown/" class="md-nav__link">
+        Markdown
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tool/cicd/" class="md-nav__link">
+        CI/CD
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tool/mkdocs/" class="md-nav__link">
+        mkdocs简单使用
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tool/gitstudy/" class="md-nav__link">
+        Git的黑魔法
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tool/minio/" class="md-nav__link">
+        MinIO 搭建使用
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tool/cat-monitoring/" class="md-nav__link">
+        Cat分布式监控
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+          微服务
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          微服务
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../micro/fbs-lock/" class="md-nav__link">
+        分布式锁
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../micro/design/" class="md-nav__link">
+        微服务设计
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../micro/distrimsg/" class="md-nav__link">
+        分布式系统与消息的投递
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../micro/ddd/" class="md-nav__link">
+        基于DDD的微服务设计和开发实战
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../micro/kafka/" class="md-nav__link">
+        Kafka架构原理
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../micro/redis-cluster/" class="md-nav__link">
+        Redis Cluster原理
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../micro/spring-cloud-micro/" class="md-nav__link">
+        分布式架构
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+          经验分析
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          经验分析
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../exp/devops/" class="md-nav__link">
+        DevOps
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../exp/micro-service/" class="md-nav__link">
+        Micro-Service
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../exp/raft-gossip/" class="md-nav__link">
+        Raft算法和Gossip协议
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../exp/cl/" class="md-nav__link">
+        集群和负载均衡
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../exp/ai/" class="md-nav__link">
+        人工智能
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../exp/code-principle/" class="md-nav__link">
+        代码原则
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../exp/techbig/" class="md-nav__link">
+        如何成为技术大牛
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../exp/learnweetout/" class="md-nav__link">
+        程序员如何技术成长
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../exp/pt/" class="md-nav__link">
+        产品与技术
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../exp/four_deep_learning/" class="md-nav__link">
+        深度学习框架
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../exp/tl/" class="md-nav__link">
+        在阿里做了5年技术Leader，我总结出这些套路！
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../exp/cto/" class="md-nav__link">
+        CTO 技能图谱
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+          云架构
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          云架构
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../native/" class="md-nav__link">
+        云原生
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../virtual/" class="md-nav__link">
+        虚拟化技术
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../compute/" class="md-nav__link">
+        云计算
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../apprelease/" class="md-nav__link">
+        应用部署容器化演进
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        容器技术所涉及Linux内核关键技术
+      </a>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../docker_native/" class="md-nav__link">
+        容器管理工具 Docker生态架构及部署
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+          构架
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_6">
+          <span class="md-nav__icon md-icon"></span>
+          构架
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../framework/split/" class="md-nav__link">
+        构架拆分
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../framework/fgb/" class="md-nav__link">
+        分布式、高并发、多线程
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../framework/agility/" class="md-nav__link">
+        如何理解敏捷开发
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../framework/fwork/" class="md-nav__link">
+        走向架构师必备的技能
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../framework/data-middle/" class="md-nav__link">
+        数据中台的思考与总结
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../framework/algorithm-ten/" class="md-nav__link">
+        必学的 10 大算法
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+          情感
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_7">
+          <span class="md-nav__icon md-icon"></span>
+          情感
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../emotion/eq/" class="md-nav__link">
+        情商
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../emotion/workheard/" class="md-nav__link">
+        工作心得
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../emotion/lookbook/" class="md-nav__link">
+        看书
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../emotion/fmf/" class="md-nav__link">
+        4种男朋友
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../emotion/notheart/" class="md-nav__link">
+        不上心
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../emotion/selfdiscipline/" class="md-nav__link">
+        自律
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../emotion/notlike/" class="md-nav__link">
+        喜欢与不喜欢
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../emotion/latemarry/" class="md-nav__link">
+        晚婚
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../emotion/understand/" class="md-nav__link">
+        追女生要明白这些事
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../emotion/backup/" class="md-nav__link">
+        备胎
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../emotion/chase/" class="md-nav__link">
+        为什么追不到她
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../emotion/livefail/" class="md-nav__link">
+        为什么活着失败
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../emotion/emotion/" class="md-nav__link">
+        情绪管理
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../emotion/abolish/" class="md-nav__link">
+        废掉的三个迹象
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../emotion/uptime/" class="md-nav__link">
+        余生，好好珍惜
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../emotion/losecome/" class="md-nav__link">
+        所有的失去，都会以另一种方式归来
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../emotion/threeheart/" class="md-nav__link">
+        人生有这三种好心态
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../emotion/onelike/" class="md-nav__link">
+        一个感情真相
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../emotion/notruth/" class="md-nav__link">
+        情商与道理
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../emotion/smf/" class="md-nav__link">
+        六种男人远离
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../emotion/select/" class="md-nav__link">
+        决定接下来人生归属的，不是努力，而是选择
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../emotion/nolike/" class="md-nav__link">
+        被你拉黑的那个人，你一定很喜欢吧
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../emotion/onepath/" class="md-nav__link">
+        余生，学会一个人走，不管有没有人陪
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../emotion/twopath/" class="md-nav__link">
+        往后余生还很精彩，别被熬夜拖垮了
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../emotion/lifetime/" class="md-nav__link">
+        心态好的人，一辈子都好
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../emotion/hearttoheart/" class="md-nav__link">
+        将心比心，方得人心
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../emotion/ttt/" class="md-nav__link">
+        别睡太晚，别爱太满，别要太多
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../emotion/profess/" class="md-nav__link">
+        表白
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+  
+
+
+<h1 id="linux">容器技术所涉及Linux内核关键技术<a class="headerlink" href="#linux" title="Permanent link">&para;</a></h1>
+<h1 id="_1">一、容器技术前世今生<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
+<h2 id="11_1979_chroot">1.1 1979年 — chroot<a class="headerlink" href="#11_1979_chroot" title="Permanent link">&para;</a></h2>
+<ul>
+<li>容器技术的概念可以追溯到1979年的UNIX chroot。</li>
+<li>它是一套“UNIX操作系统”系统，旨在将其root目录及其它子目录变更至文件系统内的新位置，且只接受特定进程的访问。</li>
+<li>这项功能的设计目的在于为每个进程提供一套隔离化磁盘空间。</li>
+<li>1982年其被添加至BSD当中。</li>
+</ul>
+<h2 id="12_2000_freebsd_jails">1.2 2000年 — FreeBSD Jails<a class="headerlink" href="#12_2000_freebsd_jails" title="Permanent link">&para;</a></h2>
+<ul>
+<li>FreeBSD Jails是由Derrick T. Woolworth于2000年在FreeBSD研发协会中构建而成的早期容器技术之一。</li>
+<li>这是一套“操作系统”系统，与chroot的定位类似，不过其中包含有其它进程沙箱机制以对文件系统、用户及网络等资源进行隔离。</li>
+<li>通过这种方式，它能够为每个Jail、定制化软件安装包乃至配置方案等提供一个对应的IP地址。</li>
+</ul>
+<h2 id="13_2001_linux_vserver">1.3 2001年 — Linux VServer<a class="headerlink" href="#13_2001_linux_vserver" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Linux VServer属于另一种jail机制，其能够被用于保护计算机系统之上各分区资源的安全(包括文件系统、CPU时间、网络地址以及内存等)。</li>
+<li>每个分区被称为一套安全背景(security context)，而其中的虚拟化系统则被称为一套虚拟私有服务器。</li>
+</ul>
+<h2 id="14_2004_solaris">1.4 2004年 — Solaris容器<a class="headerlink" href="#14_2004_solaris" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Solaris容器诞生之时面向x86与SPARC系统架构，其最初亮相于2004年2月的Solaris 10 Build 51 beta当中，随后于2005年正式登陆Solaris 10的完整版本。</li>
+<li>Solaris容器相当于将系统资源控制与由分区提供的边界加以结合。各分区立足于单一操作系统实例之内以完全隔离的虚拟服务器形式运行。</li>
+</ul>
+<h2 id="15_2005_openvz">1.5 2005年 — OpenVZ<a class="headerlink" href="#15_2005_openvz" title="Permanent link">&para;</a></h2>
+<ul>
+<li>OpenVZ与Solaris容器非常相似，且使用安装有补丁的Linux内核以实现虚拟化、隔离能力、资源管理以及检查点交付。</li>
+<li>每套OpenVZ容器拥有一套隔离化文件系统、用户与用户群组、一套进程树、网络、设备以及IPC对象。</li>
+</ul>
+<h2 id="16_2006_process">1.6 2006年 — Process容器<a class="headerlink" href="#16_2006_process" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Process容器于2006年由谷歌公司推出，旨在对一整套进程集合中的资源使用量(包括CPU、内存、磁盘I/O以及网络等等)加以限制、分配与隔离。</li>
+<li>此后其被更名为Control Groups(即控制组)，从而避免其中的“容器”字眼与Linux内核2.6.24中的另一术语出现冲突。这表明了谷歌公司率先重视容器技术的敏锐眼光以及为其做出的突出贡献。</li>
+</ul>
+<h2 id="17_2007_control_groups">1.7 2007年 — Control Groups<a class="headerlink" href="#17_2007_control_groups" title="Permanent link">&para;</a></h2>
+<p>Control Groups也就是谷歌实现的cgroups，其于2007年被添加至Linux内核当中。</p>
+<h2 id="18_2008_lxc">1.8 2008年 — LXC<a class="headerlink" href="#18_2008_lxc" title="Permanent link">&para;</a></h2>
+<ul>
+<li>LXC指代的是Linux Containers</li>
+<li>是第一套完整的Linux容器管理实现方案。</li>
+<li>其功能通过cgroups以及Linux namespaces实现。</li>
+<li>LXC通过liblxc库进行交付，并提供可与Python3、Python2、Lua、Go、Ruby以及Haskell等语言相对接的API。</li>
+<li>相较于其它容器技术，LXC能够在无需任何额外补丁的前提下运行在原版Linux内核之上。</li>
+</ul>
+<h2 id="19_2011_warden">1.9 2011年 — Warden<a class="headerlink" href="#19_2011_warden" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Warden由CloudFoundry公司于2011年所建立，其利用LXC作为初始阶段，随后又将其替换为自家实现方案。</li>
+<li>与LXC不同，Warden并不会与Linux紧密耦合。相反，其能够运行在任意能够提供多种隔离环境方式的操作系统之上。Warden以后台进程方式运行并提供API以实现容器管理。</li>
+</ul>
+<h2 id="110_2013_lmctfy">1.10 2013年 — LMCTFY<a class="headerlink" href="#110_2013_lmctfy" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Lmctfy代表的是“Let Me Contain That For You(帮你实现容器化)”。它其实属于谷歌容器技术堆栈的开源版本，负责提供Linux应用程序容器。谷歌公司在该项目的起步阶段宣称其能够提供值得信赖的性能表现、高资源利用率、共享资源机制、充裕的发展空间以及趋近于零的额外资源消耗。</li>
+<li>2013年10月lmctfy的首个版本正式推出，谷歌公司在2015年决定将lmctfy的核心概念与抽象机制转化为libcontainer。在失去了主干之后，如今lmctfy已经失去一切积极的发展势头。</li>
+</ul>
+<p>Libcontainer项目最初由Docker公司建立，如今已经被归入开放容器基金会的管辖范畴。</p>
+<h2 id="111_2013-docker">1.11 2013年-Docker<a class="headerlink" href="#111_2013-docker" title="Permanent link">&para;</a></h2>
+<ul>
+<li>在2013年Docker刚发布的时候，它是一款基于LXC的开源容器管理引擎。</li>
+<li>把LXC复杂的容器创建与使用方式简化为Docker自己的一套命令体系。</li>
+<li>随着Docker的不断发展，它开始有了更为远大的目标，那就是反向定义容器的实现标准，将底层实现都抽象化到Libcontainer的接口。这就意味着，底层容器的实现方式变成了一种可变的方案，无论是使用namespace、cgroups技术抑或是使用systemd等其他方案，只要实现了Libcontainer定义的一组接口，Docker都可以运行。这也为Docker实现全面的跨平台带来了可能。</li>
+</ul>
+<h1 id="namespace">二、NameSpace<a class="headerlink" href="#namespace" title="Permanent link">&para;</a></h1>
+<h2 id="21_namespace">2.1 NameSpace介绍<a class="headerlink" href="#21_namespace" title="Permanent link">&para;</a></h2>
+<ul>
+<li>
+<p>很多编程语言都包含了命名空间的概念，我们可以认为命名空间是一种封装，封装本身实际上实现了代码的隔离</p>
+</li>
+<li>
+<p>在操作系统中命名空间命名空间提供的是系统资源的隔离，其中系统资源包括了：进程、网络、文件系统......</p>
+</li>
+<li>
+<p>实际上linux系统实现命名空间主要目的之一就是为了实现轻量级虚拟化服务，也就是我们说的容器，在同一个命名空间下的进程可以感知彼此的变化，而对其他命名空间的进程一无所知，这样就可以让容器中的进程产生一个错觉，仿佛它自己置身于一个独立的系统环境当中，以此达到独立和隔离的目的。</p>
+</li>
+</ul>
+<h2 id="22_linuxnamespace">2.2 Linux系统中NameSpace分类<a class="headerlink" href="#22_linuxnamespace" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th align="center">命名空间</th>
+<th align="center">描述</th>
+<th align="center">作用</th>
+<th align="center">备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">进程命名空间</td>
+<td align="center">隔离进程ID</td>
+<td align="center">Linux通过命名空间管理进程号，同一个进程，在不同的命名空间进程号不同</td>
+<td align="center">进程命名空间是一个父子结构，子空间对于父空间可见</td>
+</tr>
+<tr>
+<td align="center">网络命名空间</td>
+<td align="center">隔离网络设备、协议栈、端口等</td>
+<td align="center">通过网络命名空间，实现网络隔离</td>
+<td align="center">docker采用虚拟网络设备，将不同命名空间的网络设备连接到一起</td>
+</tr>
+<tr>
+<td align="center">IPC命名空间</td>
+<td align="center">隔离进程间通信</td>
+<td align="center">进程间交互方法</td>
+<td align="center">PID命名空间和IPC命名空间可以组合起来用，同一个IPC名字空间内的进程可以彼此看见，允许进行交互，不同空间进程无法交互</td>
+</tr>
+<tr>
+<td align="center">挂载命名空间</td>
+<td align="center">隔离挂载点</td>
+<td align="center">隔离文件目录</td>
+<td align="center">进程运行时可以将挂载点与系统分离，使用这个功能时，我们可以达到 chroot 的功能，而在安全性方面比 chroot 更高</td>
+</tr>
+<tr>
+<td align="center">UTS命名空间</td>
+<td align="center">隔离Hostname和NIS域名</td>
+<td align="center">让容器拥有独立的主机名和域名，从而让容器看起来像个独立的主机</td>
+<td align="center">目的是独立出主机名和网络信息服务（NIS）</td>
+</tr>
+<tr>
+<td align="center">用户命名空间</td>
+<td align="center">隔离用户和group ID</td>
+<td align="center">每个容器内上的用户跟宿主主机上不在一个命名空间</td>
+<td align="center">同进程 ID 一样，用户 ID 和组 ID 在命名空间内外是不一样的，并且在不同命名空间内可以存在相同的 ID</td>
+</tr>
+</tbody>
+</table>
+<h2 id="23_namespace">2.3 NameSpace应用案例<a class="headerlink" href="#23_namespace" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p>以net namespace为例</p>
+</blockquote>
+<ul>
+<li>在 Linux 中，网络命名空间可以被认为是隔离的拥有单独网络栈（网卡、路由转发表、iptables）的环境。网络命名空间经常用来隔离网络设备和服务，只有拥有同样网络命名空间的设备，才能看到彼此。</li>
+<li>从逻辑上说，网络命名空间是网络栈的副本，拥有自己的网络设备、路由选择表、邻接表、Netfilter表、网络套接字、网络procfs条目、网络sysfs条目和其他网络资源。</li>
+<li>从系统的角度来看，当通过clone()系统调用创建新进程时，传递标志CLONE_NEWNET将在新进程中创建一个全新的网络命名空间。</li>
+<li>从用户的角度来看，我们只需使用工具ip（package is iproute2）来创建一个新的持久网络命名空间。</li>
+</ul>
+<p><img alt="image-20220111132707215" src="../../img/containerlinux/image-20220111132707215.png" /></p>
+<h3 id="231_net">2.3.1 创建net命名空间<a class="headerlink" href="#231_net" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="n">创建名称为msb的网络命名空间</span>
+<span class="c"># ip netns add msb</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">查看已创建的网络命名空间</span>
+<span class="c"># ip netns ls</span>
+<span class="n">msb</span>
+</code></pre></div>
+<h3 id="232_net">2.3.2 删除net命名空间<a class="headerlink" href="#232_net" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="n">删除已创建的网络命名空间</span>
+<span class="c"># ip netns delete msb</span>
+</code></pre></div>
+<h3 id="233_net">2.3.3 在net命名空间中执行命令<a class="headerlink" href="#233_net" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="n">在网络命名空间中执行bash命令</span><span class="err">，</span><span class="n">如果想退出</span><span class="err">，</span><span class="n">需要使用exit</span>
+<span class="c"># ip netns exec msb bash</span>
+</code></pre></div>
+<h3 id="234_net">2.3.4 在net命令空间中执行查看网络连接(网卡)命令<a class="headerlink" href="#234_net" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="n">在网络命名空间中查看网络命名空间中的网卡信息</span>
+<span class="c"># ip link</span>
+<span class="n">1</span><span class="p">:</span> <span class="n">lo</span><span class="p">:</span> <span class="p">&lt;</span><span class="n">LOOPBACK</span><span class="p">&gt;</span> <span class="n">mtu</span> <span class="n">65536</span> <span class="n">qdisc</span> <span class="n">noop</span> <span class="n">state</span> <span class="n">DOWN</span> <span class="n">mode</span> <span class="k">DEFAULT</span> <span class="nb">group </span><span class="k">default</span> <span class="n">qlen</span> <span class="n">1000</span>
+    <span class="n">link</span><span class="p">/</span><span class="n">loopback</span> <span class="n">00</span><span class="p">:</span><span class="n">00</span><span class="p">:</span><span class="n">00</span><span class="p">:</span><span class="n">00</span><span class="p">:</span><span class="n">00</span><span class="p">:</span><span class="n">00</span> <span class="n">brd</span> <span class="n">00</span><span class="p">:</span><span class="n">00</span><span class="p">:</span><span class="n">00</span><span class="p">:</span><span class="n">00</span><span class="p">:</span><span class="n">00</span><span class="p">:</span><span class="n">00</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">在Linux主机系统中查看</span>
+<span class="c"># ip netns exec msb ip link list</span>
+<span class="n">1</span><span class="p">:</span> <span class="n">lo</span><span class="p">:</span> <span class="p">&lt;</span><span class="n">LOOPBACK</span><span class="p">&gt;</span> <span class="n">mtu</span> <span class="n">65536</span> <span class="n">qdisc</span> <span class="n">noop</span> <span class="n">state</span> <span class="n">DOWN</span> <span class="n">mode</span> <span class="k">DEFAULT</span> <span class="nb">group </span><span class="k">default</span> <span class="n">qlen</span> <span class="n">1000</span>
+    <span class="n">link</span><span class="p">/</span><span class="n">loopback</span> <span class="n">00</span><span class="p">:</span><span class="n">00</span><span class="p">:</span><span class="n">00</span><span class="p">:</span><span class="n">00</span><span class="p">:</span><span class="n">00</span><span class="p">:</span><span class="n">00</span> <span class="n">brd</span> <span class="n">00</span><span class="p">:</span><span class="n">00</span><span class="p">:</span><span class="n">00</span><span class="p">:</span><span class="n">00</span><span class="p">:</span><span class="n">00</span><span class="p">:</span><span class="n">00</span>
+</code></pre></div>
+<h3 id="235_net">2.3.5 退出当前的net命名空间<a class="headerlink" href="#235_net" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="n">退出已进入的网络命名空间</span>
+<span class="c"># exit</span>
+<span class="n">exit</span>
+</code></pre></div>
+<h3 id="236_net">2.3.6 在net命名空间中执行多条命令<a class="headerlink" href="#236_net" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="n">在网络命名空间中查看路由表</span>
+<span class="c"># route -n</span>
+<span class="n">Kernel</span> <span class="n">IP</span> <span class="n">routing</span> <span class="n">table</span>
+<span class="n">Destination</span>     <span class="n">Gateway</span>         <span class="n">Genmask</span>         <span class="n">Flags</span> <span class="n">Metric</span> <span class="k">Ref</span>    <span class="n">Use</span> <span class="n">Iface</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">在网络命名空间中查看防火墙规则</span>
+<span class="c"># iptables -t nat -nL</span>
+<span class="n">Chain</span> <span class="n">PREROUTING</span> <span class="p">(</span><span class="n">policy</span> <span class="n">ACCEPT</span><span class="p">)</span>
+<span class="n">target</span>     <span class="n">prot</span> <span class="n">opt</span> <span class="n">source</span>               <span class="n">destination</span>         
+
+<span class="n">Chain</span> <span class="n">INPUT</span> <span class="p">(</span><span class="n">policy</span> <span class="n">ACCEPT</span><span class="p">)</span>
+<span class="n">target</span>     <span class="n">prot</span> <span class="n">opt</span> <span class="n">source</span>               <span class="n">destination</span>         
+
+<span class="n">Chain</span> <span class="n">OUTPUT</span> <span class="p">(</span><span class="n">policy</span> <span class="n">ACCEPT</span><span class="p">)</span>
+<span class="n">target</span>     <span class="n">prot</span> <span class="n">opt</span> <span class="n">source</span>               <span class="n">destination</span>         
+
+<span class="n">Chain</span> <span class="n">POSTROUTING</span> <span class="p">(</span><span class="n">policy</span> <span class="n">ACCEPT</span><span class="p">)</span>
+<span class="n">target</span>     <span class="n">prot</span> <span class="n">opt</span> <span class="n">source</span>               <span class="n">destination</span>
+</code></pre></div>
+<h3 id="237">2.3.7 创建虚拟网卡<a class="headerlink" href="#237" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>同时创建一对虚拟网卡</p>
+</blockquote>
+<div class="highlight"><pre><span></span><code><span class="n">创建虚拟网卡对</span>
+<span class="c"># ip link add veth0 type veth peer name veth1</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">在物理机上查看</span>
+<span class="c"># ip a s</span>
+<span class="p">......</span>
+<span class="n">10</span><span class="p">:</span> <span class="n">veth1</span><span class="nv">@veth0</span><span class="p">:</span> <span class="p">&lt;</span><span class="n">BROADCAST</span><span class="p">,</span><span class="n">MULTICAST</span><span class="p">,</span><span class="n">M-DOWN</span><span class="p">&gt;</span> <span class="n">mtu</span> <span class="n">1500</span> <span class="n">qdisc</span> <span class="n">noop</span> <span class="n">state</span> <span class="n">DOWN</span> <span class="nb">group </span><span class="k">default</span> <span class="n">qlen</span> <span class="n">1000</span>
+    <span class="n">link</span><span class="p">/</span><span class="n">ether</span> <span class="n">de</span><span class="p">:</span><span class="n">44</span><span class="p">:</span><span class="n">f8</span><span class="p">:</span><span class="n">b7</span><span class="p">:</span><span class="n">12</span><span class="p">:</span><span class="n">65</span> <span class="n">brd</span> <span class="n">ff</span><span class="p">:</span><span class="n">ff</span><span class="p">:</span><span class="n">ff</span><span class="p">:</span><span class="n">ff</span><span class="p">:</span><span class="n">ff</span><span class="p">:</span><span class="n">ff</span>
+<span class="n">11</span><span class="p">:</span> <span class="n">veth0</span><span class="nv">@veth1</span><span class="p">:</span> <span class="p">&lt;</span><span class="n">BROADCAST</span><span class="p">,</span><span class="n">MULTICAST</span><span class="p">,</span><span class="n">M-DOWN</span><span class="p">&gt;</span> <span class="n">mtu</span> <span class="n">1500</span> <span class="n">qdisc</span> <span class="n">noop</span> <span class="n">state</span> <span class="n">DOWN</span> <span class="nb">group </span><span class="k">default</span> <span class="n">qlen</span> <span class="n">1000</span>
+    <span class="n">link</span><span class="p">/</span><span class="n">ether</span> <span class="n">46</span><span class="p">:</span><span class="n">5e</span><span class="p">:</span><span class="n">89</span><span class="p">:</span><span class="n">8c</span><span class="p">:</span><span class="n">cb</span><span class="p">:</span><span class="n">b3</span> <span class="n">brd</span> <span class="n">ff</span><span class="p">:</span><span class="n">ff</span><span class="p">:</span><span class="n">ff</span><span class="p">:</span><span class="n">ff</span><span class="p">:</span><span class="n">ff</span><span class="p">:</span><span class="n">ff</span>
+</code></pre></div>
+<h3 id="238">2.3.8 迁移虚拟网卡到命名空间中<a class="headerlink" href="#238" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>这两个网卡还都属于“default”或“global”命名空间，和物理网卡一样。把其中一个网卡转移到命名空间msb中。</p>
+</blockquote>
+<div class="highlight"><pre><span></span><code><span class="n">把创建的veth1网卡添加到msb网络命名空间中</span>
+<span class="c"># ip link set veth1 netns msb</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">在Linux系统命令行查看网络命名空间中的网络</span>
+<span class="c"># ip netns exec msb ip link</span>
+<span class="n">1</span><span class="p">:</span> <span class="n">lo</span><span class="p">:</span> <span class="p">&lt;</span><span class="n">LOOPBACK</span><span class="p">&gt;</span> <span class="n">mtu</span> <span class="n">65536</span> <span class="n">qdisc</span> <span class="n">noop</span> <span class="n">state</span> <span class="n">DOWN</span> <span class="n">mode</span> <span class="k">DEFAULT</span> <span class="nb">group </span><span class="k">default</span> <span class="n">qlen</span> <span class="n">1000</span>
+    <span class="n">link</span><span class="p">/</span><span class="n">loopback</span> <span class="n">00</span><span class="p">:</span><span class="n">00</span><span class="p">:</span><span class="n">00</span><span class="p">:</span><span class="n">00</span><span class="p">:</span><span class="n">00</span><span class="p">:</span><span class="n">00</span> <span class="n">brd</span> <span class="n">00</span><span class="p">:</span><span class="n">00</span><span class="p">:</span><span class="n">00</span><span class="p">:</span><span class="n">00</span><span class="p">:</span><span class="n">00</span><span class="p">:</span><span class="n">00</span>
+<span class="n">10</span><span class="p">:</span> <span class="n">veth1</span><span class="nv">@if11</span><span class="p">:</span> <span class="p">&lt;</span><span class="n">BROADCAST</span><span class="p">,</span><span class="n">MULTICAST</span><span class="p">&gt;</span> <span class="n">mtu</span> <span class="n">1500</span> <span class="n">qdisc</span> <span class="n">noop</span> <span class="n">state</span> <span class="n">DOWN</span> <span class="n">mode</span> <span class="k">DEFAULT</span> <span class="nb">group </span><span class="k">default</span> <span class="n">qlen</span> <span class="n">1000</span>
+    <span class="n">link</span><span class="p">/</span><span class="n">ether</span> <span class="n">de</span><span class="p">:</span><span class="n">44</span><span class="p">:</span><span class="n">f8</span><span class="p">:</span><span class="n">b7</span><span class="p">:</span><span class="n">12</span><span class="p">:</span><span class="n">65</span> <span class="n">brd</span> <span class="n">ff</span><span class="p">:</span><span class="n">ff</span><span class="p">:</span><span class="n">ff</span><span class="p">:</span><span class="n">ff</span><span class="p">:</span><span class="n">ff</span><span class="p">:</span><span class="n">ff</span> <span class="n">link-netnsid</span> <span class="n">0</span>
+</code></pre></div>
+<h3 id="239">2.3.9 命名空间中迁出虚拟网卡<a class="headerlink" href="#239" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="n">在Linux系统命令行把虚拟网卡veth1从网络命名空间删除</span>
+<span class="c"># ip netns exec msb ip link delete veth1</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">在Linux系统命令行查看结果</span>
+<span class="c"># ip netns exec msb ip link</span>
+<span class="n">1</span><span class="p">:</span> <span class="n">lo</span><span class="p">:</span> <span class="p">&lt;</span><span class="n">LOOPBACK</span><span class="p">&gt;</span> <span class="n">mtu</span> <span class="n">65536</span> <span class="n">qdisc</span> <span class="n">noop</span> <span class="n">state</span> <span class="n">DOWN</span> <span class="n">mode</span> <span class="k">DEFAULT</span> <span class="nb">group </span><span class="k">default</span> <span class="n">qlen</span> <span class="n">1000</span>
+    <span class="n">link</span><span class="p">/</span><span class="n">loopback</span> <span class="n">00</span><span class="p">:</span><span class="n">00</span><span class="p">:</span><span class="n">00</span><span class="p">:</span><span class="n">00</span><span class="p">:</span><span class="n">00</span><span class="p">:</span><span class="n">00</span> <span class="n">brd</span> <span class="n">00</span><span class="p">:</span><span class="n">00</span><span class="p">:</span><span class="n">00</span><span class="p">:</span><span class="n">00</span><span class="p">:</span><span class="n">00</span><span class="p">:</span><span class="n">00</span>
+</code></pre></div>
+<h3 id="2310_ip">2.3.10 配置虚拟网卡IP地址<a class="headerlink" href="#2310_ip" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="n">再次创建虚拟网卡</span><span class="err">，</span><span class="n">添加到msb网络命名空间</span><span class="err">，</span><span class="n">并设置IP地址</span>
+<span class="c"># ip link add veth0 type veth peer name veth1</span>
+<span class="c"># ip link set veth1 netns msb</span>
+<span class="c"># ip netns exec msb ip addr add 192.168.50.2/24 dev veth1</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">在Linux系统命令行查看网络状态</span>
+<span class="c"># ip netns exec msb ip addr</span>
+<span class="n">1</span><span class="p">:</span> <span class="n">lo</span><span class="p">:</span> <span class="p">&lt;</span><span class="n">LOOPBACK</span><span class="p">&gt;</span> <span class="n">mtu</span> <span class="n">65536</span> <span class="n">qdisc</span> <span class="n">noop</span> <span class="n">state</span> <span class="n">DOWN</span> <span class="nb">group </span><span class="k">default</span> <span class="n">qlen</span> <span class="n">1000</span>
+    <span class="n">link</span><span class="p">/</span><span class="n">loopback</span> <span class="n">00</span><span class="p">:</span><span class="n">00</span><span class="p">:</span><span class="n">00</span><span class="p">:</span><span class="n">00</span><span class="p">:</span><span class="n">00</span><span class="p">:</span><span class="n">00</span> <span class="n">brd</span> <span class="n">00</span><span class="p">:</span><span class="n">00</span><span class="p">:</span><span class="n">00</span><span class="p">:</span><span class="n">00</span><span class="p">:</span><span class="n">00</span><span class="p">:</span><span class="n">00</span>
+<span class="n">12</span><span class="p">:</span> <span class="n">veth1</span><span class="nv">@if13</span><span class="p">:</span> <span class="p">&lt;</span><span class="n">BROADCAST</span><span class="p">,</span><span class="n">MULTICAST</span><span class="p">&gt;</span> <span class="n">mtu</span> <span class="n">1500</span> <span class="n">qdisc</span> <span class="n">noop</span> <span class="n">state</span> <span class="n">DOWN</span> <span class="nb">group </span><span class="k">default</span> <span class="n">qlen</span> <span class="n">1000</span>
+    <span class="n">link</span><span class="p">/</span><span class="n">ether</span> <span class="n">fe</span><span class="p">:</span><span class="n">20</span><span class="p">:</span><span class="n">ac</span><span class="p">:</span><span class="n">a8</span><span class="p">:</span><span class="n">13</span><span class="p">:</span><span class="n">4c</span> <span class="n">brd</span> <span class="n">ff</span><span class="p">:</span><span class="n">ff</span><span class="p">:</span><span class="n">ff</span><span class="p">:</span><span class="n">ff</span><span class="p">:</span><span class="n">ff</span><span class="p">:</span><span class="n">ff</span> <span class="n">link-netnsid</span> <span class="n">0</span>
+    <span class="n">inet</span> <span class="n">192</span><span class="p">.</span><span class="n">168</span><span class="p">.</span><span class="n">50</span><span class="p">.</span><span class="n">2</span><span class="p">/</span><span class="n">24</span> <span class="n">scope</span> <span class="n">global</span> <span class="n">veth1</span>
+       <span class="n">valid_lft</span> <span class="n">forever</span> <span class="n">preferred_lft</span> <span class="n">forever</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">启动虚拟网卡</span><span class="p">,</span><span class="n">veth1与lo全部要启动</span>
+<span class="c"># ip netns exec msb ip link set veth1 up</span>
+
+<span class="c"># ip netns exec msb ip link set lo up</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">为物理机veth0添加IP地址</span>
+
+<span class="c"># ip a s</span>
+<span class="p">......</span>
+<span class="n">15</span><span class="p">:</span> <span class="n">veth0</span><span class="nv">@if14</span><span class="p">:</span> <span class="p">&lt;</span><span class="n">BROADCAST</span><span class="p">,</span><span class="n">MULTICAST</span><span class="p">&gt;</span> <span class="n">mtu</span> <span class="n">1500</span> <span class="n">qdisc</span> <span class="n">noop</span> <span class="n">state</span> <span class="n">DOWN</span> <span class="nb">group </span><span class="n">defau</span>
+<span class="n">lt</span> <span class="n">qlen</span> <span class="n">1000</span>
+    <span class="n">link</span><span class="p">/</span><span class="n">ether</span> <span class="n">2e</span><span class="p">:</span><span class="n">b4</span><span class="p">:</span><span class="n">40</span><span class="p">:</span><span class="n">c8</span><span class="p">:</span><span class="n">73</span><span class="p">:</span><span class="n">dc</span> <span class="n">brd</span> <span class="n">ff</span><span class="p">:</span><span class="n">ff</span><span class="p">:</span><span class="n">ff</span><span class="p">:</span><span class="n">ff</span><span class="p">:</span><span class="n">ff</span><span class="p">:</span><span class="n">ff</span> <span class="n">link-netnsid</span> <span class="n">0</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c"># ip addr add 192.168.50.3/24 dev veth0</span>
+
+<span class="c"># ip a s veth0</span>
+<span class="n">15</span><span class="p">:</span> <span class="n">veth0</span><span class="nv">@if14</span><span class="p">:</span> <span class="p">&lt;</span><span class="n">BROADCAST</span><span class="p">,</span><span class="n">MULTICAST</span><span class="p">&gt;</span> <span class="n">mtu</span> <span class="n">1500</span> <span class="n">qdisc</span> <span class="n">noop</span> <span class="n">state</span> <span class="n">DOWN</span> <span class="nb">group </span><span class="k">default</span> <span class="n">qlen</span> <span class="n">1000</span>
+    <span class="n">link</span><span class="p">/</span><span class="n">ether</span> <span class="n">2e</span><span class="p">:</span><span class="n">b4</span><span class="p">:</span><span class="n">40</span><span class="p">:</span><span class="n">c8</span><span class="p">:</span><span class="n">73</span><span class="p">:</span><span class="n">dc</span> <span class="n">brd</span> <span class="n">ff</span><span class="p">:</span><span class="n">ff</span><span class="p">:</span><span class="n">ff</span><span class="p">:</span><span class="n">ff</span><span class="p">:</span><span class="n">ff</span><span class="p">:</span><span class="n">ff</span> <span class="n">link-netnsid</span> <span class="n">0</span>
+    <span class="n">inet</span> <span class="n">192</span><span class="p">.</span><span class="n">168</span><span class="p">.</span><span class="n">50</span><span class="p">.</span><span class="n">3</span><span class="p">/</span><span class="n">24</span> <span class="n">scope</span> <span class="n">global</span> <span class="n">veth0</span>
+       <span class="n">valid_lft</span> <span class="n">forever</span> <span class="n">preferred_lft</span> <span class="n">forever</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c"># ip link set veth0 up</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">在宿主机上ping</span> <span class="n">msb中的veth1</span>
+<span class="c"># ping 192.168.50.2</span>
+<span class="n">PING</span> <span class="n">192</span><span class="p">.</span><span class="n">168</span><span class="p">.</span><span class="n">50</span><span class="p">.</span><span class="n">2</span> <span class="p">(</span><span class="n">192</span><span class="p">.</span><span class="n">168</span><span class="p">.</span><span class="n">50</span><span class="p">.</span><span class="n">2</span><span class="p">)</span> <span class="n">56</span><span class="p">(</span><span class="n">84</span><span class="p">)</span> <span class="n">bytes</span> <span class="n">of</span> <span class="n">data</span><span class="p">.</span>
+<span class="n">64</span> <span class="n">bytes</span> <span class="n">from</span> <span class="n">192</span><span class="p">.</span><span class="n">168</span><span class="p">.</span><span class="n">50</span><span class="p">.</span><span class="n">2</span><span class="p">:</span> <span class="n">icmp_seq</span><span class="p">=</span><span class="n">1</span> <span class="n">ttl</span><span class="p">=</span><span class="n">64</span> <span class="n">time</span><span class="p">=</span><span class="n">0</span><span class="p">.</span><span class="n">102</span> <span class="n">ms</span>
+<span class="n">64</span> <span class="n">bytes</span> <span class="n">from</span> <span class="n">192</span><span class="p">.</span><span class="n">168</span><span class="p">.</span><span class="n">50</span><span class="p">.</span><span class="n">2</span><span class="p">:</span> <span class="n">icmp_seq</span><span class="p">=</span><span class="n">2</span> <span class="n">ttl</span><span class="p">=</span><span class="n">64</span> <span class="n">time</span><span class="p">=</span><span class="n">0</span><span class="p">.</span><span class="n">068</span> <span class="n">ms</span>
+<span class="n">64</span> <span class="n">bytes</span> <span class="n">from</span> <span class="n">192</span><span class="p">.</span><span class="n">168</span><span class="p">.</span><span class="n">50</span><span class="p">.</span><span class="n">2</span><span class="p">:</span> <span class="n">icmp_seq</span><span class="p">=</span><span class="n">3</span> <span class="n">ttl</span><span class="p">=</span><span class="n">64</span> <span class="n">time</span><span class="p">=</span><span class="n">0</span><span class="p">.</span><span class="n">068</span> <span class="n">ms</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">在msb中的veth1</span> <span class="n">ping</span> <span class="n">宿主机上veth0</span>
+<span class="c"># ip netns exec msb ping 192.168.50.3</span>
+<span class="n">PING</span> <span class="n">192</span><span class="p">.</span><span class="n">168</span><span class="p">.</span><span class="n">50</span><span class="p">.</span><span class="n">3</span> <span class="p">(</span><span class="n">192</span><span class="p">.</span><span class="n">168</span><span class="p">.</span><span class="n">50</span><span class="p">.</span><span class="n">3</span><span class="p">)</span> <span class="n">56</span><span class="p">(</span><span class="n">84</span><span class="p">)</span> <span class="n">bytes</span> <span class="n">of</span> <span class="n">data</span><span class="p">.</span>
+<span class="n">64</span> <span class="n">bytes</span> <span class="n">from</span> <span class="n">192</span><span class="p">.</span><span class="n">168</span><span class="p">.</span><span class="n">50</span><span class="p">.</span><span class="n">3</span><span class="p">:</span> <span class="n">icmp_seq</span><span class="p">=</span><span class="n">1</span> <span class="n">ttl</span><span class="p">=</span><span class="n">64</span> <span class="n">time</span><span class="p">=</span><span class="n">0</span><span class="p">.</span><span class="n">053</span> <span class="n">ms</span>
+<span class="n">64</span> <span class="n">bytes</span> <span class="n">from</span> <span class="n">192</span><span class="p">.</span><span class="n">168</span><span class="p">.</span><span class="n">50</span><span class="p">.</span><span class="n">3</span><span class="p">:</span> <span class="n">icmp_seq</span><span class="p">=</span><span class="n">2</span> <span class="n">ttl</span><span class="p">=</span><span class="n">64</span> <span class="n">time</span><span class="p">=</span><span class="n">0</span><span class="p">.</span><span class="n">031</span> <span class="n">ms</span>
+<span class="n">64</span> <span class="n">bytes</span> <span class="n">from</span> <span class="n">192</span><span class="p">.</span><span class="n">168</span><span class="p">.</span><span class="n">50</span><span class="p">.</span><span class="n">3</span><span class="p">:</span> <span class="n">icmp_seq</span><span class="p">=</span><span class="n">3</span> <span class="n">ttl</span><span class="p">=</span><span class="n">64</span> <span class="n">time</span><span class="p">=</span><span class="n">0</span><span class="p">.</span><span class="n">029</span> <span class="n">ms</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">如果需要访问本机的其它网段</span><span class="err">，</span><span class="n">可手动添加如下默认路由条目</span><span class="err">。</span>
+<span class="c"># ip netns exec msb ip route add default via 192.168.50.3</span>
+</code></pre></div>
+<blockquote>
+<p>关于如何ping通外网主机，可设置路由转发完成。</p>
+</blockquote>
+<h1 id="cgroups">三、CGroups<a class="headerlink" href="#cgroups" title="Permanent link">&para;</a></h1>
+<h2 id="31_cgroups">3.1 CGroups介绍<a class="headerlink" href="#31_cgroups" title="Permanent link">&para;</a></h2>
+<ul>
+<li>
+<p>Control groups(cgroups) 控制组</p>
+</li>
+<li>
+<p>linux内核提供的可以限制、记录、隔离进程组所使用的物理资源的机制。为容器而生，没有cgroups就没有今天的容器技术。</p>
+</li>
+</ul>
+<p><img alt="image-20220112182824405" src="../../img/containerlinux/image-20220112182824405.png" /></p>
+<h2 id="32_cgroups">3.2 CGroups功能<a class="headerlink" href="#32_cgroups" title="Permanent link">&para;</a></h2>
+<ul>
+<li>资源限制（Resource Limitation）：cgroups 可以对进程组使用的资源总额进行限制。如设定应用运行时使用内存的上限，一旦超过这个配额就发出 OOM（Out of Memory）。</li>
+<li>优先级分配（Prioritization）：通过分配的 CPU 时间片数量及硬盘 IO 带宽大小，实际上就相当于控制了进程运行的优先级。</li>
+<li>资源统计（Accounting）： cgroups 可以统计系统的资源使用量，如 CPU 使用时长、内存用量等等，这个功能非常适用于计费。</li>
+<li>进程控制（Control）：cgroups 可以对进程组执行挂起、恢复等操作。</li>
+</ul>
+<h2 id="33_cgroups">3.3 CGroups应用案例<a class="headerlink" href="#33_cgroups" title="Permanent link">&para;</a></h2>
+<h3 id="331">3.3.1 安装及开启服务<a class="headerlink" href="#331" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="o">[</span>root@localhost<span class="w"> </span>~<span class="o">]</span><span class="c1"># yum -y install libcgroup</span>
+<span class="o">[</span>root@localhost<span class="w"> </span>~<span class="o">]</span><span class="c1"># systemctl start cgconfig.service    </span>
+<span class="o">[</span>root@localhost<span class="w"> </span>~<span class="o">]</span><span class="c1"># systemctl enable cgconfig.service</span>
+</code></pre></div>
+<h3 id="332_cpu">3.3.2 限制进程使用CPU<a class="headerlink" href="#332_cpu" title="Permanent link">&para;</a></h3>
+<h4 id="3321_cpu_shares">3.3.2.1 查看cpu shares<a class="headerlink" href="#3321_cpu_shares" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="n">查看资源限制子系统</span>
+<span class="p">[</span><span class="n">root</span><span class="nv">@localhost</span> <span class="p">~]</span><span class="c"># lssubsys</span>
+<span class="n">cpuset</span>
+<span class="n">cpu</span><span class="p">,</span><span class="n">cpuacct</span>
+<span class="n">memory</span>
+<span class="n">devices</span>
+<span class="n">freezer</span>
+<span class="n">net_cls</span><span class="p">,</span><span class="n">net_prio</span>
+<span class="n">blkio</span>
+<span class="n">perf_event</span>
+<span class="n">hugetlb</span>
+<span class="n">pids</span>
+
+<span class="n">查看子系统配置文件所在位置</span>
+<span class="p">[</span><span class="n">root</span><span class="nv">@localhost</span> <span class="p">~]</span><span class="c"># ls /sys/fs/cgroup/</span>
+<span class="n">blkio</span>  <span class="n">cpuacct</span>      <span class="n">cpuset</span>   <span class="n">freezer</span>  <span class="n">memory</span>   <span class="n">net_cls</span><span class="p">,</span><span class="n">net_prio</span>  <span class="n">perf_event</span>  <span class="n">systemd</span>
+<span class="n">cpu</span>    <span class="n">cpu</span><span class="p">,</span><span class="n">cpuacct</span>  <span class="n">devices</span>  <span class="n">hugetlb</span>  <span class="n">net_cls</span>  <span class="n">net_prio</span>          <span class="n">pids</span>
+<span class="p">[</span><span class="n">root</span><span class="nv">@localhost</span> <span class="p">~]</span><span class="c"># ls /sys/fs/cgroup/cpu</span>
+<span class="n">cgroup</span><span class="p">.</span><span class="n">clone_children</span>  <span class="n">cpuacct</span><span class="p">.</span><span class="n">stat</span>          <span class="n">cpu</span><span class="p">.</span><span class="n">cfs_quota_us</span>   <span class="n">cpu</span><span class="p">.</span><span class="n">stat</span>
+<span class="n">cgroup</span><span class="p">.</span><span class="n">event_control</span>   <span class="n">cpuacct</span><span class="p">.</span><span class="n">usage</span>         <span class="n">cpu</span><span class="p">.</span><span class="n">rt_period_us</span>   <span class="n">notify_on_release</span>
+<span class="n">cgroup</span><span class="p">.</span><span class="n">procs</span>           <span class="n">cpuacct</span><span class="p">.</span><span class="n">usage_percpu</span>  <span class="n">cpu</span><span class="p">.</span><span class="n">rt_runtime_us</span>  <span class="n">release_agent</span>
+<span class="n">cgroup</span><span class="p">.</span><span class="n">sane_behavior</span>   <span class="n">cpu</span><span class="p">.</span><span class="n">cfs_period_us</span>     <span class="n">cpu</span><span class="p">.</span><span class="n">shares</span>         <span class="n">tasks</span>
+
+<span class="n">查看CPU时间分片</span><span class="err">，</span><span class="n">用于保证分组所得到的CPU分片总量</span><span class="err">。</span>
+<span class="p">[</span><span class="n">root</span><span class="nv">@localhost</span> <span class="p">~]</span><span class="c"># cat /sys/fs/cgroup/cpu/cpu.shares</span>
+<span class="n">1024</span>
+</code></pre></div>
+<h4 id="3322_cpu2group">3.3.2.2 使用CPU子系统创建2个group分组<a class="headerlink" href="#3322_cpu2group" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="o">[</span>root@localhost<span class="w"> </span>~<span class="o">]</span><span class="c1"># vim /etc/cgconfig.conf</span>
+group<span class="w"> </span>lesscpu<span class="w"> </span><span class="o">{</span>
+<span class="w">    </span>cpu<span class="o">{</span>
+<span class="w">        </span>cpu.shares<span class="o">=</span><span class="m">200</span><span class="p">;</span>
+<span class="w">    </span><span class="o">}</span><span class="w">   </span>
+<span class="o">}</span>
+group<span class="w"> </span>morecpu<span class="w"> </span><span class="o">{</span>
+<span class="w">    </span>cpu<span class="o">{</span>
+<span class="w">        </span>cpu.shares<span class="o">=</span><span class="m">800</span><span class="p">;</span>
+<span class="w">    </span><span class="o">}</span><span class="w">   </span>
+<span class="o">}</span>
+
+<span class="o">[</span>root@localhost<span class="w"> </span>~<span class="o">]</span><span class="c1"># systemctl restart cgconfig</span>
+</code></pre></div>
+<p>准备一个脚本</p>
+<div class="highlight"><pre><span></span><code><span class="c">#!/bin/bash</span>
+
+<span class="n">a</span><span class="p">=</span><span class="n">1</span>
+<span class="k">while</span> <span class="n">true</span>
+<span class="k">do</span>
+
+        <span class="n">a</span><span class="p">=$[</span><span class="nv">$a</span><span class="p">+</span><span class="n">1</span><span class="p">]</span>
+<span class="n">done</span>
+</code></pre></div>
+<p>将将要运行的应用程序分配到指定分组(<strong>请使用单CPU机器,三个终端验证</strong>)</p>
+<div class="highlight"><pre><span></span><code>终端1#<span class="w"> </span>cgexec<span class="w"> </span>-g<span class="w"> </span>cpu:lesscpu<span class="w"> </span>sh<span class="w"> </span>/tmp/1.sh
+
+终端2#<span class="w"> </span>cgexec<span class="w"> </span>-g<span class="w"> </span>cpu:morecpu<span class="w"> </span>sh<span class="w"> </span>/tmp/1.sh
+
+终端3#<span class="w"> </span>top
+</code></pre></div>
+<p><strong>PS: 如果主机有多CPU，为了验证效果，可以进行如下操作</strong></p>
+<div class="highlight"><pre><span></span><code><span class="c1"># lscpu</span>
+<span class="c1"># echo 0 &gt; /sys/devices/system/cpu/cpu0/online</span>
+<span class="c1"># echo 1 &gt; /sys/devices/system/cpu/cpu1/online</span>
+</code></pre></div>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      BurningMyself<a href='https://beian.miit.gov.cn/' target='_blank'>  蜀ICP备15033200号-1</a>
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        <div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/burningmyself" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://gitee.com/burningmyself" target="_blank" rel="noopener" title="gitee.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 488 512"><!--! Font Awesome Free 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M488 261.8C488 403.3 391.1 504 248 504 110.8 504 0 393.2 0 256S110.8 8 248 8c66.8 0 123 24.5 166.3 64.9l-67.5 64.9C258.5 52.6 94.3 116.6 94.3 256c0 86.5 69.1 156.6 153.7 156.6 98.2 0 135-70.4 140.8-106.9H248v-85.3h236.1c2.3 12.7 3.9 24.9 3.9 41.4z"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.2a6f1dda.min.js"></script>
+      
+        <script src="../../js/extra.js"></script>
+      
+        <script src="../../js/baidu-tongji.js"></script>
+      
+        <script src="https://www.googletagmanager.com/gtag/js?id=UA-155084439-1"></script>
+      
+        <script src="https://www.googletagmanager.com/gtag/js?id=UA-155132293-1"></script>
+      
+        <script src="../../js/google.js"></script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+      
+    
+  </body>
+</html>
