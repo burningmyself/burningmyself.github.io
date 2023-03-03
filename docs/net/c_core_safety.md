@@ -88,7 +88,7 @@ public void Configure(IApplicationBuilder app, IHostingEnvironment env)
 ### 让HTTP Header更加安全
 
 通过https://securityheaders.com/来检查HTTP Header是不是安全，例如下面的扫描结果：
-![safety](./../img/c_core_safety1.png)
+![safety](./../img/net/c_core_safety1.png)
 
 NWebsec是一个用来做安全相关的ASP.NET Core类库，针对ASP.NET Core中HTTP Header相关的修复，可以添加下面的Nuget包：
 

@@ -26,10 +26,10 @@ Docker与传统虚拟机差异
 
 传统虚拟化方式
 
-![传统虚拟化方式](./../img/docker1.png "传统虚拟化方式")
+![传统虚拟化方式](./../img/docker/docker1.png "传统虚拟化方式")
 Docker虚拟化方式
 
-![Docker虚拟化方式](./../img/docker2.png "Docker虚拟化方式")
+![Docker虚拟化方式](./../img/docker/docker2.png "Docker虚拟化方式")
 
 传统虚拟化是在硬件层面实现虚拟化，需要有额外的虚拟机管理应用和虚拟机操作系统层，而Docker容器是在操作系统层面实现虚拟化，直接复用本地主机操作系统，更加轻量级。
 
@@ -184,7 +184,7 @@ RUN rpm -ivh /usr/local/jdk/jdk-8u171-linux-x64.rpm
 ```
 
 运行结果如下：
-![运行结果如下：](./../img/docker3.png "运行结果如下：")
+![运行结果如下：](./../img/docker/docker3.png "运行结果如下：")
 docker images可以看到新生成的centos/jdk镜像
 
 ## 容器操作指令

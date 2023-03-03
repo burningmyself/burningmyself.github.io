@@ -8,7 +8,7 @@
 
 此部分用于测试索引创建的pay_user表的结构如下：
 
-![index](./../img/mysql-index-1.png)
+![index](./../img/mysql/mysql-index-1.png)
 
 ### 1、什么是索引
 
@@ -21,7 +21,7 @@
 
 可以使用SHOW INDEX FROM table_name;查看索引详情：
 
-![index](./../img/mysql-index-2.png)
+![index](./../img/mysql/mysql-index-2.png)
 
 * 主键索引 PRIMARY KEY
 
@@ -33,11 +33,11 @@
 
 可以通过ALTER TABLE table_name ADD UNIQUE [alias] (column);创建唯一索引：
 
-![index](./../img/mysql-index-3.png)
+![index](./../img/mysql/mysql-index-3.png)
 
 可以通过ALTER TABLE table_name ADD UNIQUE [alias] (column1,column2);创建唯一组合索引：
 
-![index](./../img/mysql-index-4.png)
+![index](./../img/mysql/mysql-index-4.png)
 
 * 普通索引 INDEX
 
@@ -45,14 +45,14 @@
 
 可以通过ALTER TABLE table_name ADD INDEX index_name (column);创建普通索引：
 
-![index](./../img/mysql-index-5.png)
+![index](./../img/mysql/mysql-index-5.png)
 
 * 组合索引 INDEX
 即一个索引包含多个列，多用于避免回表查询。
 
 可以通过ALTER TABLE table_name ADD INDEX index_name(column1,column2, column3);创建组合索引：
 
-![index](./../img/mysql-index-6.png)
+![index](./../img/mysql/mysql-index-6.png)
 
 全文索引 FULLTEXT
 
@@ -60,7 +60,7 @@
 
 可以通过ALTER TABLE table_name ADD FULLTEXT (column);创建全文索引：
 
-![index](./../img/mysql-index-7.png)
+![index](./../img/mysql/mysql-index-7.png)
 
 索引一经创建不能修改，如果要修改索引，只能删除重建。可以使用DROP INDEX index_name ON table_name;删除索引。
 
@@ -77,7 +77,7 @@
 
 此部分用于测试的user表结构：
 
-![index](./../img/mysql-index-8.png)
+![index](./../img/mysql/mysql-index-8.png)
 
 ### 1、索引相关的重要概念
 * 基数
@@ -85,13 +85,13 @@
 
 SELECT COUNT(DISTINCT UserName),COUNT(DISTINCT LoginPassWord) FROM pay_user;
 
-![index](./../img/mysql-index-9.png)
+![index](./../img/mysql/mysql-index-9.png)
 
 pay_user表的总行数是5，UserName列的基数是10，说明LoginPassWord列里面有大量重复值，UserName列的基数等于总行数，说明UserName列没有重复值，相当于主键。
 
 返回数据的比例：
 pay_user表中共有5条数据：
-![index](./../img/mysql-index-11.png)
+![index](./../img/mysql/mysql-index-11.png)
 
 
 基数越大命中索引命中越高，一半取表数据30%一下走索引
@@ -108,7 +108,7 @@ EXPLAIN命令结果中的Using Index意味着不会回表，通过索引就可�
 
 我们可以通过SHOW STATUS LIKE 'Handler_read%';查看索引的使用情况：
 
-![index](./../img/mysql-index-12.png)
+![index](./../img/mysql/mysql-index-12.png)
 
 * Handler_read_key：如果索引正在工作，Handler_read_key的值将很高。
 * Handler_read_rnd_next：数据文件中读取下一行的请求数，如果正在进行大量的表扫描，值将较高，则说明索引利用不理想。
@@ -187,13 +187,13 @@ EXPLAIN SELECT * FROM user WHERE name='1';--使用索引
 
 第一部分开头我们简单提到，索引是存储引擎快速找到记录的一种数据结构。进一步说，在数据库系统里，这种数据结构要满足特定查找算法，即这些数据结构以某种方式引用（指向）数据，这样就可以在这些数据结构上实现高级查找算法。
 
-![index](./../img/mysql-index-13.png)
+![index](./../img/mysql/mysql-index-13.png)
 
 ### 1、B-Tree
 
 B-Tree是一种平衡的多路查找(又称排序)树，在文件系统中和数据库系统中有所应用，主要用作文件的索引。其中的B就表示平衡(Balance) 。
 
-![index](./../img/mysql-index-14.png)
+![index](./../img/mysql/mysql-index-14.png)
 
 ### B-Tree的特性
 
@@ -201,19 +201,19 @@ B-Tree是一种平衡的多路查找(又称排序)树，在文件系统中和数
 
 d为大于1的一个正整数，称为B-Tree的度：
 
-![index](./../img/mysql-index-15.png)
+![index](./../img/mysql/mysql-index-15.png)
 
 h为一个正整数，称为B-Tree的高度：
 
-![index](./../img/mysql-index-16.png)
+![index](./../img/mysql/mysql-index-16.png)
 
 key和指针互相间隔，节点两端是指针：
 
-![index](./../img/mysql-index-17.png)
+![index](./../img/mysql/mysql-index-17.png)
 
 一个节点中的key从左到右非递减排列：
 
-![index](./../img/mysql-index-18.png)
+![index](./../img/mysql/mysql-index-18.png)
 
 所有节点组成树结构。
 

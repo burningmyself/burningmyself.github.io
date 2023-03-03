@@ -25,7 +25,7 @@ docker run -p 8080:8080 -p 50000:50000 --name jenkins \
 ### Jenkins的配置
 * 运行成功后访问该地址登录Jenkins，第一次登录需要输入管理员密码：http://localhost:8080/
 
-![jenkins](./../img/jenkins-1.png)
+![jenkins](../img/docker/jenkins-1.png)
 
 * 使用管理员密码进行登录，可以使用以下命令从容器启动日志中获取管理密码：
 
@@ -33,27 +33,27 @@ docker run -p 8080:8080 -p 50000:50000 --name jenkins \
 docker logs jenkins
 ```
 
-![jenkins](./../img/jenkins-2.png)
+![jenkins](../img/docker/jenkins-2.png)
 
 * 选择安装插件方式，这里我们直接安装推荐的插件：
 
-![jenkins](./../img/jenkins-3.png)
+![jenkins](../img/docker/jenkins-3.png)
 
 * 进入插件安装界面，联网等待插件安装：
 
-![jenkins](./../img/jenkins-4.png)
+![jenkins](../img/docker/jenkins-4.png)
 
 * 安装完成后，创建管理员账号：
 
-![jenkins](./../img/jenkins-5.png)
+![jenkins](../img/docker/jenkins-5.png)
 
 * 进行实例配置，配置Jenkins的URL：
 
-![jenkins](./../img/jenkins-6.png)
+![jenkins](../img/docker/jenkins-6.png)
 
 * 点击系统管理->插件管理，进行一些自定义的插件安装：
 
-![jenkins](./../img/jenkins-7.png)
+![jenkins](../img/docker/jenkins-7.png)
 
 * 确保以下插件被正确安装：
   1. 根据角色管理权限的插件：Role-based Authorization Strategy
@@ -61,15 +61,15 @@ docker logs jenkins
 
 * 通过系统管理->全局工具配置来进行全局工具的配置，比如maven的配置：
 
-![jenkins](./../img/jenkins-8.png)
+![jenkins](../img/docker/jenkins-8.png)
 
 * 新增maven的安装配置：
 
-![jenkins](./../img/jenkins-9.png)
+![jenkins](../img/docker/jenkins-9.png)
 
 * 在系统管理->系统配置中添加全局ssh的配置，这样Jenkins使用ssh就可以执行远程的linux脚本了：
 
-![jenkins](./../img/jenkins-10.png)
+![jenkins](../img/docker/jenkins-10.png)
 
 ## 角色权限管理
 
@@ -77,16 +77,16 @@ docker logs jenkins
 
 * 在系统管理->全局安全配置中启用基于角色的权限管理：
 
-![jenkins](./../img/jenkins-11.png)
+![jenkins](../img/docker/jenkins-11.png)
 
 * 进入系统管理->Manage and Assign Roles界面：
 
-![jenkins](./../img/jenkins-12.png)
+![jenkins](../img/docker/jenkins-12.png)
 
 * 添加角色与权限的关系：
 
-![jenkins](./../img/jenkins-13.png)
+![jenkins](../img/docker/jenkins-13.png)
 
 * 给用户分配角色：
 
-![jenkins](./../img/jenkins-14.png)
+![jenkins](../img/docker/jenkins-14.png)

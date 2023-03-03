@@ -56,7 +56,7 @@ sudo yum install docker-ce docker-ce-cli containerd.io
 ```
 当我们安装好 Docker 之后，我们就可以使用 docker 命令验证我们是否在机器上成功安装了 Docker，同时，也可以使用 docker --version 命令查看我们安装的 Docker CE 版本。
 
-![cmn](./../img/c_sqlserver_nginx1.png)
+![cmn](./../img/net/c_sqlserver_nginx1.png)
 
 #### 1.3、设置开机自启
 
@@ -78,7 +78,7 @@ sudo systemctl status docker
 
 　　docker run 命令，它会在我们的本地镜像库中先寻找这个镜像，然后运行。如果在本地没有找到的话，则会自动使用 docker pull 从 Docker Hub 中寻找，能找到的话，则会自动下载到本地，然后运行，找不到的话，这条命令也就运行失败了。
 
-![cmn](./../img/c_sqlserver_nginx2.png)
+![cmn](./../img/net/c_sqlserver_nginx2.png)
 
 #### 1.5、安装 Docker Compose
 
@@ -100,16 +100,16 @@ docker-compose --version
 
 　　当我们在服务器上安装好 docker 和 docker compose 之后，就可以开始构建我们的程序镜像了。首先我们需要对我们的运行程序添加对于 Docker 的支持。你可以自己手动在 MVC 项目中添加 Dockerfile 文件，或是通过右键添加 Docker 支持。
 
-![cmn](./../img/c_sqlserver_nginx4.png)
+![cmn](./../img/net/c_sqlserver_nginx4.png)
 
 Dockerfile 就像一个执行的清单，它告诉 Docker，我们这个镜像在构建和运行时需要按照什么样的命令运行。打开 VS 为我们自动创建的 Dockerfile，可以看到清晰的分成了四块的内容。
 
-![cmn](./../img/c_sqlserver_nginx5.png)
+![cmn](./../img/net/c_sqlserver_nginx5.png)
 
 我们知道，.NET Core 程序的运行需要依赖于 .NET Core Runtime（CoreCLR），因此，为了使我们的程序可以运行起来，我们需要从 hub 中拉取 runtime ，并在 此基础上构建我们的应用镜像。同时，为了避免因为基础的环境的不同造成对程序的影响，这里的 Runtime 需要同程序开发时的 .NET Core SDK 版本保持一致，所以这里我使用的是 .NET Core 3.0 Runtime。
 
 　　一个镜像中包含了应用程序及其所有的依赖，与虚拟机不同的是，容器中的每个镜像最终是共享了宿主机的操作系统资源，容器作为用户空间中的独立进程运行在主机操作系统上。
-![cmn](./../img/c_sqlserver_nginx6.png)
+![cmn](./../img/net/c_sqlserver_nginx6.png)
 
 PS:图片版权归属于微软的技术文档，如有侵权，请联系我删除，源文件地址：什么是 Docker？
 
@@ -161,7 +161,7 @@ ENTRYPOINT ["dotnet", "Base.IdentityServer.dll"]
 
 　　为了确保 Dockerfile 与发布后的文件处于同一路径下，这里我们需要使用 VS 修改 Dockerfile 的属性值，确保会复制到输出的目录下，这里选择如果较新则复制即可。
 
-![cmn](./../img/c_sqlserver_nginx7.png)
+![cmn](./../img/net/c_sqlserver_nginx7.png)
 
 #### 3、编写 docker-compose.yml
 
@@ -169,7 +169,7 @@ ENTRYPOINT ["dotnet", "Base.IdentityServer.dll"]
 
 　　右键选中 MVC 项目，添加一个 docker-compose.yml 文件，同样的，需要修改该文件的属性，以便于该文件可以复制到输出目录下。注意，这里的文件名和上文的 Dockerfile 都是特定的，你不能做任何的修改。如果你的电脑上已经安装了 Docker for Windows，你也可以使用 VS，右键添加，选中容器业务流程协调程序支持自动对 docker compose 进行配置。
 
-![cmn](./../img/c_sqlserver_nginx8.png)
+![cmn](./../img/net/c_sqlserver_nginx8.png)
 
 在 yml 文件中，我定义了三个镜像：AdminApiGateway.Host、Base.IdentityServer、Base.HttpApi.Host。三个镜像的定义中有许多相同的地方，都设置了自动重启（restart），以及都处于同一个桥接网络下（psu-net）从而达到镜像间的通信。
 

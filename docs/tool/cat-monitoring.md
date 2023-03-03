@@ -33,7 +33,7 @@ Cat 可以出故障后提供秒级别的异常告警机制，不用再等用户�
 
 在 Cat 后台的首页，会展示各个系统的运行情况，如果有异常，则会大片飘红，非常明显。最直接的方式还是直接查看 Problem 报表，这里会为我们展示直接的异常信息，快速定位问题。
 
-![cat](../img/cat-1.png)
+![cat](../img/tool/cat-1.png)
 
 **场景三:** 用户反馈订单列表要 10 几秒才展示，用户反馈下单一直在转圈圈
 
@@ -71,7 +71,7 @@ public void shopService() {
 
 业务中需要埋点也可以使用 Cat 的 Transaction，比如下单，支付等核心功能，通常我们对 URL 进行埋点就可以了，也就包含了具体的业务流程。
 
-![cat](../img/cat-2.png)
+![cat](../img/tool/cat-2.png)
 
 
 **Event 报表** 适用于监控一段代码运行次数，比如记录程序中一个事件记录了多少次，错误了多少次。Event 报表的整体结构与 Transaction 报表几乎一样，只缺少响应时间的统计。
@@ -81,19 +81,19 @@ public void shopService() {
 Cat.logEvent("Func", "Func1");
 ```
 
-![cat](../img/cat-3.png)
+![cat](../img/tool/cat-3.png)
 
 **Problem 报表** Problem 记录整个项目在运行过程中出现的问题，包括一些异常、错误、访问较长的行为。
 
 如果有人反馈你的接口报 500 错误了，你进 Cat 后就直接可以去 Problem 报表了，错误信息就在 Problem 中。
 
-![cat](../img/cat-4.png)
+![cat](../img/tool/cat-4.png)
 
 Problem 报表不需要手动埋点，我们只需要在项目中集成日志的 LogAppender 就可以将所有 error 异常记录，下面的段落中会讲解如何整合 LogAppender。
 
 **Heartbeat 报表** Heartbeat 报表是 CAT 客户端，以一分钟为周期，定期向服务端汇报当前运行时候的一些状态。
 
-![cat](../img/cat-5.png)
+![cat](../img/tool/cat-5.png)
 
 系统指标有系统的负载信息，内存使用情况，磁盘使用情况等。
 
@@ -103,7 +103,7 @@ JVM 指标有 GC 相关信息，线程相关信息。
 
 这个报表我也没怎么用过，用的多的还是前面几个。
 
-![cat](../img/cat-6.png)
+![cat](../img/tool/cat-6.png)
 
 ## Cat 在 Kitty Cloud 中的应用
 
@@ -159,11 +159,11 @@ kitty-spring-cloud-starter-web 在 spring-boot-starter-web 的基础上进行了
 
 启动项目，然后访问你的 REST API。可以在 Cat 的控制台看到 URL 的监控信息。
 
-![cat](../img/cat-7.png)
+![cat](../img/tool/cat-7.png)
 
 点击 URL 进去可以看到具体的 URL 信息。
 
-![cat](../img/cat-8.png)
+![cat](../img/tool/cat-8.png)
 
 **Mybatis 埋点**
 
@@ -182,15 +182,15 @@ Kitty 中 Mybatis 是用的 Mybatis Plus, 主要是对数据库相关操作的 S
 
 只要涉及到数据库的操作，都会在 Cat 中进行数据的展示。
 
-![cat](../img/cat-9.png)
+![cat](../img/tool/cat-9.png)
 
 点击 SQL 进去还可以看到是哪个 Mapper 的操作。
 
-![cat](../img/cat-10.png)
+![cat](../img/tool/cat-10.png)
 
 再进一步就可以看到具体的 SQL 语句和消耗的时间。
 
-![cat](../img/cat-11.png)
+![cat](../img/tool/cat-11.png)
 
 有了这些数据，后端研发同学就可以对相关的 SQL 进行优化了。
 
@@ -217,11 +217,11 @@ stringRedisTemplate.opsForValue().set("name", "yinjihuan");
 
 Cat 中可以看到 Redis 信息。
 
-![cat](../img/cat-12.png)
+![cat](../img/tool/cat-12.png)
 
 点击 Redis 进去可以看到有哪些命令。
 
-![cat](../img/cat-13.png)
+![cat](../img/tool/cat-13.png)
 
 **MongoDB 埋点** Kitty 中对 Spring Data Mongodb 做了封装，只对 MongoTemplate 做了埋点。使用时需要依赖 kitty-spring-cloud-starter-mongodb。
 
@@ -235,15 +235,15 @@ Cat 中可以看到 Redis 信息。
 
 在发生 Mongo 的操作后，Cat 上就可以看到相关的数据了。
 
-![cat](../img/cat-14.png)
+![cat](../img/tool/cat-14.png)
 
 点进去就可以看到是 MongoTemplate 的哪个方法发生了调用。
 
-![cat](../img/cat-15.png)
+![cat](../img/tool/cat-15.png)
 
 再进一步就可以看到具体的 Mongo 参数和消耗的时间。
 
-![cat](../img/cat-16.png)
+![cat](../img/tool/cat-16.png)
 
 还有 Dubbo, Feign，Jetcache，ElasticSearch 等框架的埋点就不细讲了，感兴趣的可以移步 Github 查看代码。
 
@@ -379,7 +379,7 @@ Cat 也可以构建远程消息树，可以看到请求经过了哪些服务，�
 
 下图请求从网关进行请求转发到 articles 上面，然后 articles 里面调用了 users 的接口。
 
-![cat](../img/cat-17.png)
+![cat](../img/tool/cat-17.png)
 
 **Cat 跟 Skywalking 哪个好用?**
 

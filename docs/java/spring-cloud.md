@@ -48,7 +48,7 @@ Spring Cloud 的版本号并不是我们通常见的数字版本号，而是一�
 
 那么现在，我们的模式就是这样的了。
 
-![spring-cloud](../img/spring-cloud-1.png)
+![spring-cloud](../img/java/spring-cloud-1.png)
 
 但是，这个时候还会出现一些问题。
 
@@ -60,7 +60,7 @@ Spring Cloud 的版本号并不是我们通常见的数字版本号，而是一�
 
 针对上面的问题我们来重新构建一下上面的模式图
 
-![spring-cloud](../img/spring-cloud-2.png)
+![spring-cloud](../img/java/spring-cloud-2.png)
 
 
 好了，举完这个例子我们就可以来看关于 Eureka 的一些基础概念了，你会发现这东西理解起来怎么这么简单。
@@ -80,7 +80,7 @@ Spring Cloud 的版本号并不是我们通常见的数字版本号，而是一�
 
 回到上节的服务注册调用示意图，服务提供者和服务的消费者，本质上也是 Eureka Client 角色。整体上可以分为两个主体：Eureka Server 和 Eureka Client。
 
-![spring-cloud](../img/spring-cloud-3.png)
+![spring-cloud](../img/java/spring-cloud-3.png)
 
 #### Eureka Server：注册中心服务端
 
@@ -160,7 +160,7 @@ Eureka Server 在运行期间会去统计心跳失败比例在 15 分钟之内�
 
 ##### Eureka Server 触发自我保护机制后，页面会出现提示：
 
-![spring-cloud](../img/spring-cloud-4.png)
+![spring-cloud](../img/java/spring-cloud-4.png)
 
 #### Eureka Server 进入自我保护机制，会出现以下几种情况：
 
@@ -182,7 +182,7 @@ eureka.server.enable-self-preservation=true
 
 再来看看 Eureka 集群的工作原理。我们假设有三台 Eureka Server 组成的集群，第一台 Eureka Server 在北京机房，另外两台 Eureka Server 在深圳和西安机房。这样三台 Eureka Server 就组建成了一个跨区域的高可用集群，只要三个地方的任意一个机房不出现问题，都不会影响整个架构的稳定性。
 
-![spring-cloud](../img/spring-cloud-5.png)
+![spring-cloud](../img/java/spring-cloud-5.png)
 
 从图中可以看出 Eureka Server 集群相互之间通过 Replicate 来同步数据，相互之间不区分主节点和从节点，所有的节点都是平等的。在这种架构中，节点通过彼此互相注册来提高可用性，每个节点需要添加一个或多个有效的 serviceUrl 指向其他节点。
 
@@ -266,13 +266,13 @@ Ribbon  是 Netflix 公司的一个开源的负载均衡 项目，是一个客�
 
 我们再举个例子，比如我们设计了一个秒杀系统，但是为了整个系统的 高可用 ，我们需要将这个系统做一个集群，而这个时候我们消费者就可以拥有多个秒杀系统的调用途径了，如下图。
 
-![spring-cloud](../img/spring-cloud-6.png)
+![spring-cloud](../img/java/spring-cloud-6.png)
 
 如果这个时候我们没有进行一些 均衡操作 ，如果我们对 秒杀系统1 进行大量的调用，而另外两个基本不请求，就会导致 秒杀系统1 崩溃，而另外两个就变成了傀儡，那么我们为什么还要做集群，我们高可用体现的意义又在哪呢？
 
 所以 Ribbon 出现了，注意我们上面加粗的几个字——运行在消费者端。指的是，Ribbon 是运行在消费者端的负载均衡器，如下图。
 
-![spring-cloud](../img/spring-cloud-7.png)
+![spring-cloud](../img/java/spring-cloud-7.png)
 
 其工作原理就是 Consumer 端获取到了所有的服务列表之后，在其内部使用负载均衡算法，进行对多个系统的调用。
 
@@ -282,10 +282,10 @@ Ribbon  是 Netflix 公司的一个开源的负载均衡 项目，是一个客�
 
 何为集中式呢？简单理解就是 将所有请求都集中起来，然后再进行负载均衡。如下图。
 
-![spring-cloud](../img/spring-cloud-8.png)
+![spring-cloud](../img/java/spring-cloud-8.png)
 
 我们可以看到 Nginx 是接收了所有的请求进行负载均衡的，而对于 Ribbon 来说它是在消费者端进行的负载均衡。如下图。
-![spring-cloud](../img/spring-cloud-9.png)
+![spring-cloud](../img/java/spring-cloud-9.png)
 
 >请注意 Request 的位置，在 Nginx 中请求是先进入负载均衡器，而在 Ribbon 中是先在客户端进行负载均衡才进行请求的。
 
@@ -365,13 +365,13 @@ public class TestController
 
 那么什么是 熔断和降级 呢？再举个🌰，此时我们整个微服务系统是这样的。服务A调用了服务B，服务B再调用了服务C，但是因为某些原因，服务C顶不住了，这个时候大量请求会在服务C阻塞。
 
-![spring-cloud-10](../img/spring-cloud-10.png)
+![spring-cloud-10](../img/java/spring-cloud-10.png)
 
 服务C阻塞了还好，毕竟只是一个系统崩溃了。但是请注意这个时候因为服务C不能返回响应，那么服务B调用服务C的的请求就会阻塞，同理服务B阻塞了，那么服务A也会阻塞崩溃。
 
 >请注意，为什么阻塞会崩溃。因为这些请求会消耗占用系统的线程、IO 等资源，消耗完你这个系统服务器不就崩了么。
 
-![spring-cloud-10](../img/spring-cloud-11.png)
+![spring-cloud-10](../img/java/spring-cloud-11.png)
 
 这就叫 服务雪崩。妈耶，上面两个 熔断 和 降级 你都没给我解释清楚，你现在又给我扯什么 服务雪崩 ？😵😵😵
 
@@ -429,7 +429,7 @@ public News getHystrixNews(@PathVariable("id") int id){
 
 大家对网关应该很熟吧，简单来讲网关是系统唯一对外的入口，介于客户端与服务器端之间，用于对请求进行鉴权、限流、 路由、监控等功能。
 
-![spring-cloud](../img/spring-cloud-12.png)
+![spring-cloud](../img/java/spring-cloud-12.png)
 
 没错，网关有的功能，Zuul 基本都有。而 Zuul 中最关键的就是 路由和过滤器 了，在官方文档中 Zuul 的标题就是
 
@@ -443,7 +443,7 @@ public News getHystrixNews(@PathVariable("id") int id){
 
 >请不要因为我这么好就给我点赞 👍 。疯狂暗示。
 
-![spring-cloud](../img/spring-cloud-13.png)
+![spring-cloud](../img/java/spring-cloud-13.png)
 
 比如这个时候我们已经向 Eureka Server 注册了两个 Consumer 、三个 Provicer ，这个时候我们再加个 Zuul 网关应该变成这样子了。
 
@@ -537,7 +537,7 @@ zuul:
 在给你们看代码之前我先给你们解释一下关于过滤器的一些注意点。
 
 
-![spring-cloud](../img/spring-cloud-14.png)
+![spring-cloud](../img/java/spring-cloud-14.png)
 
 过滤器类型：Pre、Routing、Post。前置Pre就是在请求之前进行过滤，Routing路由过滤器就是我们上面所讲的路由策略，而Post后置过滤器就是在 Response 之前进行过滤的过滤器。你可以观察上图结合着理解，并且下面我会给出相应的注释。
 
@@ -625,7 +625,7 @@ public class AccessLogFilter extends ZuulFilter {
 当然不仅仅是令牌桶限流方式，Zuul 只要是限流的活它都能干，这里我只是简单举个🌰。
 
 
-![spring-cloud](../img/spring-cloud-15.png)
+![spring-cloud](../img/java/spring-cloud-15.png)
 
 我先来解释一下什么是 令牌桶限流 吧。
 
@@ -700,7 +700,7 @@ Zuul 的过滤器的功能肯定不止上面我所实现的两种，它还可以
 
 你想一下，我们的应用是不是只有启动的时候才会进行配置文件的加载，那么我们的 Spring Cloud Config 就暴露出一个接口给启动应用来获取它所想要的配置文件，应用获取到配置文件然后再进行它的初始化工作。就如下图。
 
-![spring-cloud](../img/spring-cloud-16.png)
+![spring-cloud](../img/java/spring-cloud-16.png)
 
 
 当然这里你肯定还会有一个疑问，如果我在应用运行时去更改远程配置仓库(Git)中的对应配置文件，那么依赖于这个配置文件的已启动的应用会不会进行其相应配置的更改呢？
@@ -726,7 +726,7 @@ Zuul 的过滤器的功能肯定不止上面我所实现的两种，它还可以
 
 而拥有了 Spring Cloud Bus 之后，我们只需要创建一个简单的请求，并且加上 @ResfreshScope 注解就能进行配置的动态修改了，下面我画了张图供你理解。
 
-![spring-cloud](../img/spring-cloud-17.png)
+![spring-cloud](../img/java/spring-cloud-17.png)
 
 ##  总结
 
@@ -742,4 +742,4 @@ Zuul 的过滤器的功能肯定不止上面我所实现的两种，它还可以
 
 如果你能这个时候能看懂下面那张图，也就说明了你已经对 Spring Cloud 微服务有了一定的架构认识。
 
-![spring-cloud](../img/spring-cloud-18.png)
+![spring-cloud](../img/java/spring-cloud-18.png)

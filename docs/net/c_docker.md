@@ -30,7 +30,7 @@ https://cr.console.aliyun.com/
 
 打开控制面板 - 程序和功能 - 启用或关闭Windows功能，勾选Hyper-V，然后点击确定即可，如图：
 
-![cdoecker](./../img/c_docker1.png)
+![cdoecker](./../img/net/c_docker1.png)
 
 #### 2、下载并安装Docker
 
@@ -40,23 +40,23 @@ https://cr.console.aliyun.com/
 
 通过命令查看Docker版本号：
 
-![cdoecker](./../img/c_docker2.png)
+![cdoecker](./../img/net/c_docker2.png)
 
 #### 3、修改镜像地址
 
 由于Docker官方镜像会非常慢，我是修改的阿里云的镜像
 
-![cdoecker](./../img/c_docker3.png)
+![cdoecker](./../img/net/c_docker3.png)
 
 #### 4、测试
 
 万能的HelloWorld，通过PowerShell运行 Docker run hello-world
 
-![cdoecker](./../img/c_docker4.png)
+![cdoecker](./../img/net/c_docker4.png)
 
 docker ps -a //查看运行的容器
 
-![cdoecker](./../img/c_docker5.png)
+![cdoecker](./../img/net/c_docker5.png)
 
 以上就是整个Windows中安装Docker环境的过程
 
@@ -74,7 +74,7 @@ ubuntu的远程是通过putty，具体怎么用可以百度
 
 #### 1、创建Dockerfile、发布应用程序
 
-![cdoecker](./../img/c_docker6.png)
+![cdoecker](./../img/net/c_docker6.png)
 
 这是我的工程目录，构建镜像是通过Dockerfile来构建的。
 
@@ -91,15 +91,15 @@ ENTRYPOINT ["dotnet", "ZY.Gateway.dll"] //启动容器内的服务
 //这里相当于构建镜像的命令，是逐行执行
 ```
 需要设置Dockerfile的编译为输出到发布目录
-![cdoecker](./../img/c_docker7.png)
+![cdoecker](./../img/net/c_docker7.png)
 
 以上都设置好以后，通过VS发布程序
 
-![cdoecker](./../img/c_docker8.png)
+![cdoecker](./../img/net/c_docker8.png)
 
 发布成功后，在工程目录的bin/release目录下找到我们的发布后的文件
 
-![cdoecker](./../img/c_docker9.png)
+![cdoecker](./../img/net/c_docker9.png)
 
 其他服务的发布跟以上发布类似
 
@@ -107,7 +107,7 @@ ENTRYPOINT ["dotnet", "ZY.Gateway.dll"] //启动容器内的服务
 
 通过WinScp工具进行上传，将三个服务都上传到服务器，WinScp怎么用，可以百度一下
 
-![cdoecker](./../img/c_docker10.png)
+![cdoecker](./../img/net/c_docker10.png)
 
 #### 3、构建镜像
 
@@ -122,11 +122,11 @@ docker build -t testserver
 -t //镜像名称
 -f //dockerfile文件路径
 ```
-![cdoecker](./../img/c_docker11.png)
+![cdoecker](./../img/net/c_docker11.png)
 
 docker images //查看镜像
 
-![cdoecker](./../img/c_docker12.png)
+![cdoecker](./../img/net/c_docker12.png)
 
 #### 4、运行容器
 
@@ -145,23 +145,23 @@ docker run -d -p 7000:80
 
 通过命令查看容器运行情况
 docker ps -a
-![cdoecker](./../img/c_docker13.png)
+![cdoecker](./../img/net/c_docker13.png)
 
 在配置网关服务的时候会涉及到容器与容器之间的网络访问，Docker在安装的时候会创建一个172.17.0.1的IP网关，可以通过172.17.0.1来做端口的转发。
 
 通过命令可以查看docker0的网关
 
-![cdoecker](./../img/c_docker14.png)
+![cdoecker](./../img/net/c_docker14.png)
 
 Api网关的路由转发配置
 
-![cdoecker](./../img/c_docker15.png)
+![cdoecker](./../img/net/c_docker15.png)
 
 #### 5、调用服务
 
 通过Postman来调用通过Docker运行的服务，通过API网关访问认证服务获取Token
 
-![cdoecker](./../img/c_docker16.png)
+![cdoecker](./../img/net/c_docker16.png)
 
 
 ### 总结

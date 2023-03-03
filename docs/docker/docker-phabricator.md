@@ -33,24 +33,24 @@ cmkmxlgplozydhie
 
 ## 页面引导
 1. 创建账号
-![pha](../img/pha-1.jpg)
+![pha](../img/docker/pha-1.jpg)
 2. 九项需要配置处理
-![pha](../img/pha-2.jpg)
+![pha](../img/docker/pha-2.jpg)
 3. 配置身份验证提供程序
-![pha](../img/pha-3.jpg)
-![pha](../img/pha-4.jpg)
-![pha](../img/pha-5.jpg)
-![pha](../img/pha-6.jpg)
-![pha](../img/pha-7.jpg)
-![pha](../img/pha-8.jpg)
+![pha](../img/docker/pha-3.jpg)
+![pha](../img/docker/pha-4.jpg)
+![pha](../img/docker/pha-5.jpg)
+![pha](../img/docker/pha-6.jpg)
+![pha](../img/docker/pha-7.jpg)
+![pha](../img/docker/pha-8.jpg)
 ```shell
 docker exec -it phabricator bash
 cd phabricator
 ./bin/auth lock #锁定身份验证提供者配置
 ```
-![pha](../img/pha-9.jpg)
+![pha](../img/docker/pha-9.jpg)
 4. 配置Email
-![pha](../img/pha-10.jpg)
+![pha](../img/docker/pha-10.jpg)
 ``` shell
 vi cluster.mailers
 ```
