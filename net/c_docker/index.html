@@ -2077,8 +2077,8 @@
   
   
     <li class="md-nav__item">
-      <a href="../../cloud/compute/" class="md-nav__link">
-        云计算
+      <a href="../../cloud/docker_date/" class="md-nav__link">
+        Docker容器数据持久化存储机制
       </a>
     </li>
   
@@ -2091,8 +2091,8 @@
   
   
     <li class="md-nav__item">
-      <a href="../../cloud/compute/" class="md-nav__link">
-        云计算
+      <a href="../../cloud/docker_compose/" class="md-nav__link">
+        Docker容器服务编排利器Docker Compose应用实战
       </a>
     </li>
   
@@ -2105,8 +2105,8 @@
   
   
     <li class="md-nav__item">
-      <a href="../../cloud/compute/" class="md-nav__link">
-        云计算
+      <a href="../../cloud/docker_swarm/" class="md-nav__link">
+        Docker主机集群化方案 Docker Swarm
       </a>
     </li>
   
@@ -2119,8 +2119,8 @@
   
   
     <li class="md-nav__item">
-      <a href="../../cloud/compute/" class="md-nav__link">
-        云计算
+      <a href="../../cloud/docker_devops/" class="md-nav__link">
+        基于Docker容器DevOps应用方案 企业业务代码发布系统
       </a>
     </li>
   
@@ -2941,20 +2941,20 @@
 <h3 id="windowsdocker">二、Windows系统中Docker的安装<a class="headerlink" href="#windowsdocker" title="Permanent link">&para;</a></h3>
 <h4 id="1hyper-v">1、启用Hyper-V<a class="headerlink" href="#1hyper-v" title="Permanent link">&para;</a></h4>
 <p>打开控制面板 - 程序和功能 - 启用或关闭Windows功能，勾选Hyper-V，然后点击确定即可，如图：</p>
-<p><img alt="cdoecker" src="../../img/c_docker1.png" /></p>
+<p><img alt="cdoecker" src="../../img/net/c_docker1.png" /></p>
 <h4 id="2docker">2、下载并安装Docker<a class="headerlink" href="#2docker" title="Permanent link">&para;</a></h4>
 <p>下载地址：<a href="https://hub.docker.com/editions/community/docker-ce-desktop-windows">https://hub.docker.com/editions/community/docker-ce-desktop-windows</a>，需要注册一个Docker账号才能下载</p>
 <p>下载完成后直接安装</p>
 <p>通过命令查看Docker版本号：</p>
-<p><img alt="cdoecker" src="../../img/c_docker2.png" /></p>
+<p><img alt="cdoecker" src="../../img/net/c_docker2.png" /></p>
 <h4 id="3">3、修改镜像地址<a class="headerlink" href="#3" title="Permanent link">&para;</a></h4>
 <p>由于Docker官方镜像会非常慢，我是修改的阿里云的镜像</p>
-<p><img alt="cdoecker" src="../../img/c_docker3.png" /></p>
+<p><img alt="cdoecker" src="../../img/net/c_docker3.png" /></p>
 <h4 id="4">4、测试<a class="headerlink" href="#4" title="Permanent link">&para;</a></h4>
 <p>万能的HelloWorld，通过PowerShell运行 Docker run hello-world</p>
-<p><img alt="cdoecker" src="../../img/c_docker4.png" /></p>
+<p><img alt="cdoecker" src="../../img/net/c_docker4.png" /></p>
 <p>docker ps -a //查看运行的容器</p>
-<p><img alt="cdoecker" src="../../img/c_docker5.png" /></p>
+<p><img alt="cdoecker" src="../../img/net/c_docker5.png" /></p>
 <p>以上就是整个Windows中安装Docker环境的过程</p>
 <h3 id="ubuntudocker">三、ubuntu中安装Docker环境<a class="headerlink" href="#ubuntudocker" title="Permanent link">&para;</a></h3>
 <p>我是在AWS申请了一台免费的服务器，是用的ubuntu系统。如果需要申请AWS的服务器，可以通过AWS官网注册账号进行申请，需要填写信用卡账号，<a href="https://portal.aws.amazon.com/billing/signup#/start">https://portal.aws.amazon.com/billing/signup#/start</a> </p>
@@ -2963,7 +2963,7 @@
 <p>ubuntu的远程是通过putty，具体怎么用可以百度</p>
 <h3 id="_1">四、发布并部署服务<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h3>
 <h4 id="1dockerfile">1、创建Dockerfile、发布应用程序<a class="headerlink" href="#1dockerfile" title="Permanent link">&para;</a></h4>
-<p><img alt="cdoecker" src="../../img/c_docker6.png" /></p>
+<p><img alt="cdoecker" src="../../img/net/c_docker6.png" /></p>
 <p>这是我的工程目录，构建镜像是通过Dockerfile来构建的。</p>
 <p>VS2017 是支持自动构建Dockerfile文件，工程右键-添加-Docker支持</p>
 <p>下面是我的Dockerfile的内容：
@@ -2976,15 +2976,15 @@
 <span class="c1">//这里相当于构建镜像的命令，是逐行执行</span>
 </code></pre></div>
 需要设置Dockerfile的编译为输出到发布目录
-<img alt="cdoecker" src="../../img/c_docker7.png" /></p>
+<img alt="cdoecker" src="../../img/net/c_docker7.png" /></p>
 <p>以上都设置好以后，通过VS发布程序</p>
-<p><img alt="cdoecker" src="../../img/c_docker8.png" /></p>
+<p><img alt="cdoecker" src="../../img/net/c_docker8.png" /></p>
 <p>发布成功后，在工程目录的bin/release目录下找到我们的发布后的文件</p>
-<p><img alt="cdoecker" src="../../img/c_docker9.png" /></p>
+<p><img alt="cdoecker" src="../../img/net/c_docker9.png" /></p>
 <p>其他服务的发布跟以上发布类似</p>
 <h4 id="2ubuntu">2、上传到ubuntu中<a class="headerlink" href="#2ubuntu" title="Permanent link">&para;</a></h4>
 <p>通过WinScp工具进行上传，将三个服务都上传到服务器，WinScp怎么用，可以百度一下</p>
-<p><img alt="cdoecker" src="../../img/c_docker10.png" /></p>
+<p><img alt="cdoecker" src="../../img/net/c_docker10.png" /></p>
 <h4 id="3_1">3、构建镜像<a class="headerlink" href="#3_1" title="Permanent link">&para;</a></h4>
 <p><div class="highlight"><pre><span></span><code><span class="n">docker</span><span class="w"> </span><span class="n">build</span><span class="w"> </span><span class="o">-</span><span class="n">t</span><span class="w"> </span><span class="n">apigateway</span><span class="w"> </span><span class="p">.</span><span class="w">   </span><span class="c1">//构建网关镜像 </span>
 <span class="n">docker</span><span class="w"> </span><span class="n">build</span><span class="w"> </span><span class="o">-</span><span class="n">t</span><span class="w"> </span><span class="n">identityserver</span><span class="w"> </span>
@@ -2996,9 +2996,9 @@
 <span class="o">-</span><span class="n">t</span><span class="w"> </span><span class="c1">//镜像名称</span>
 <span class="o">-</span><span class="n">f</span><span class="w"> </span><span class="c1">//dockerfile文件路径</span>
 </code></pre></div>
-<img alt="cdoecker" src="../../img/c_docker11.png" /></p>
+<img alt="cdoecker" src="../../img/net/c_docker11.png" /></p>
 <p>docker images //查看镜像</p>
-<p><img alt="cdoecker" src="../../img/c_docker12.png" /></p>
+<p><img alt="cdoecker" src="../../img/net/c_docker12.png" /></p>
 <h4 id="4_1">4、运行容器<a class="headerlink" href="#4_1" title="Permanent link">&para;</a></h4>
 <p>镜像已经在前面构建完成，这一步会根据构建的镜像来运行容器，将我们的服务跑起来</p>
 <div class="highlight"><pre><span></span><code><span class="n">docker</span><span class="w"> </span><span class="n">run</span><span class="w"> </span><span class="o">-</span><span class="n">d</span><span class="w"> </span><span class="o">-</span><span class="n">p</span><span class="w"> </span><span class="m">5000</span><span class="p">:</span><span class="m">80</span><span class="w"> </span>
@@ -3012,15 +3012,15 @@
 </code></pre></div>
 <p>通过命令查看容器运行情况
 docker ps -a
-<img alt="cdoecker" src="../../img/c_docker13.png" /></p>
+<img alt="cdoecker" src="../../img/net/c_docker13.png" /></p>
 <p>在配置网关服务的时候会涉及到容器与容器之间的网络访问，Docker在安装的时候会创建一个172.17.0.1的IP网关，可以通过172.17.0.1来做端口的转发。</p>
 <p>通过命令可以查看docker0的网关</p>
-<p><img alt="cdoecker" src="../../img/c_docker14.png" /></p>
+<p><img alt="cdoecker" src="../../img/net/c_docker14.png" /></p>
 <p>Api网关的路由转发配置</p>
-<p><img alt="cdoecker" src="../../img/c_docker15.png" /></p>
+<p><img alt="cdoecker" src="../../img/net/c_docker15.png" /></p>
 <h4 id="5">5、调用服务<a class="headerlink" href="#5" title="Permanent link">&para;</a></h4>
 <p>通过Postman来调用通过Docker运行的服务，通过API网关访问认证服务获取Token</p>
-<p><img alt="cdoecker" src="../../img/c_docker16.png" /></p>
+<p><img alt="cdoecker" src="../../img/net/c_docker16.png" /></p>
 <h3 id="_2">总结<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
 <p>整个Docker的安装，服务的发布，镜像的打包，容器的运行就全部完成。</p>
 <p>整个过程不是一气呵成的，踩了不少坑，在踩坑的过程中也学到和理解了很多东西。</p>

@@ -2050,8 +2050,8 @@
   
   
     <li class="md-nav__item">
-      <a href="../../cloud/compute/" class="md-nav__link">
-        云计算
+      <a href="../../cloud/docker_date/" class="md-nav__link">
+        Docker容器数据持久化存储机制
       </a>
     </li>
   
@@ -2064,8 +2064,8 @@
   
   
     <li class="md-nav__item">
-      <a href="../../cloud/compute/" class="md-nav__link">
-        云计算
+      <a href="../../cloud/docker_compose/" class="md-nav__link">
+        Docker容器服务编排利器Docker Compose应用实战
       </a>
     </li>
   
@@ -2078,8 +2078,8 @@
   
   
     <li class="md-nav__item">
-      <a href="../../cloud/compute/" class="md-nav__link">
-        云计算
+      <a href="../../cloud/docker_swarm/" class="md-nav__link">
+        Docker主机集群化方案 Docker Swarm
       </a>
     </li>
   
@@ -2092,8 +2092,8 @@
   
   
     <li class="md-nav__item">
-      <a href="../../cloud/compute/" class="md-nav__link">
-        云计算
+      <a href="../../cloud/docker_devops/" class="md-nav__link">
+        基于Docker容器DevOps应用方案 企业业务代码发布系统
       </a>
     </li>
   
@@ -2901,7 +2901,7 @@
 <div class="highlight"><pre><span></span><code>sudo yum install docker-ce docker-ce-cli containerd.io
 </code></pre></div>
 当我们安装好 Docker 之后，我们就可以使用 docker 命令验证我们是否在机器上成功安装了 Docker，同时，也可以使用 docker --version 命令查看我们安装的 Docker CE 版本。</p>
-<p><img alt="cmn" src="../../img/c_sqlserver_nginx1.png" /></p>
+<p><img alt="cmn" src="../../img/net/c_sqlserver_nginx1.png" /></p>
 <h4 id="13">1.3、设置开机自启<a class="headerlink" href="#13" title="Permanent link">&para;</a></h4>
 <p>当 Docker 已经在我们的机器上安装完成后，我们就可以将 Docker 设置成机器的自启服务，这样，如果出现服务器重启的情况下，我们的 Docker 也可以随服务器的重启自动启动 Docker 服务。</p>
 <p>启动 Docker 服务并允许开机自启
@@ -2914,7 +2914,7 @@
 <p>就像我们在学习一门新的语言时，运行的第一句代码，几乎都是打印出 Hello World，而在 Docker Hub 中，也有这么一个镜像，在无数的 Docker 教程中，安装完 Docker 后，第一件事就是拉取这个镜像文件，“告诉” Docker，我来了。</p>
 <p>Docker Hub 是存放镜像的仓库，里面包含了许多的镜像文件，因为服务器在国外的原因，下载的速度可能不理想，像国内的阿里云、腾讯云也有提供对于 Docker 镜像的加速器服务，你可以按需使用，当然，你也可以创建属于你的私有镜像仓库。</p>
 <p>docker run 命令，它会在我们的本地镜像库中先寻找这个镜像，然后运行。如果在本地没有找到的话，则会自动使用 docker pull 从 Docker Hub 中寻找，能找到的话，则会自动下载到本地，然后运行，找不到的话，这条命令也就运行失败了。</p>
-<p><img alt="cmn" src="../../img/c_sqlserver_nginx2.png" /></p>
+<p><img alt="cmn" src="../../img/net/c_sqlserver_nginx2.png" /></p>
 <h4 id="15_docker_compose">1.5、安装 Docker Compose<a class="headerlink" href="#15_docker_compose" title="Permanent link">&para;</a></h4>
 <p>在实际的项目开发中，我们可能会有多个应用镜像，例如在本篇文章的示例中，为了在 Docker 中运行我们的程序，我们需要三个镜像：应用程序自身镜像、sqlserver Server 镜像、以及 Nginx 镜像，为了将我们的程序启动起来，我们需要手敲各个容器的启动参数，环境变量，容器命名，指定不同容器的链接参数等等一系列的操作，又多又烦，可能某一步操作失败后程序就无法正常运行。而当我们使用了 Docker Compose 之后，我们就可以把这些命令一次性写在 docker-compose.yml 配置文件中，以后每次启动我们的应用程序时，只需要通过 docker compose 命令就可以自动帮我们完成这些操作。</p>
 <p>从 github 下载 docker compose 二进制文件
@@ -2928,12 +2928,12 @@
 </code></pre></div></p>
 <h4 id="2">2、构建程序镜像<a class="headerlink" href="#2" title="Permanent link">&para;</a></h4>
 <p>当我们在服务器上安装好 docker 和 docker compose 之后，就可以开始构建我们的程序镜像了。首先我们需要对我们的运行程序添加对于 Docker 的支持。你可以自己手动在 MVC 项目中添加 Dockerfile 文件，或是通过右键添加 Docker 支持。</p>
-<p><img alt="cmn" src="../../img/c_sqlserver_nginx4.png" /></p>
+<p><img alt="cmn" src="../../img/net/c_sqlserver_nginx4.png" /></p>
 <p>Dockerfile 就像一个执行的清单，它告诉 Docker，我们这个镜像在构建和运行时需要按照什么样的命令运行。打开 VS 为我们自动创建的 Dockerfile，可以看到清晰的分成了四块的内容。</p>
-<p><img alt="cmn" src="../../img/c_sqlserver_nginx5.png" /></p>
+<p><img alt="cmn" src="../../img/net/c_sqlserver_nginx5.png" /></p>
 <p>我们知道，.NET Core 程序的运行需要依赖于 .NET Core Runtime（CoreCLR），因此，为了使我们的程序可以运行起来，我们需要从 hub 中拉取 runtime ，并在 此基础上构建我们的应用镜像。同时，为了避免因为基础的环境的不同造成对程序的影响，这里的 Runtime 需要同程序开发时的 .NET Core SDK 版本保持一致，所以这里我使用的是 .NET Core 3.0 Runtime。</p>
 <p>一个镜像中包含了应用程序及其所有的依赖，与虚拟机不同的是，容器中的每个镜像最终是共享了宿主机的操作系统资源，容器作为用户空间中的独立进程运行在主机操作系统上。
-<img alt="cmn" src="../../img/c_sqlserver_nginx6.png" /></p>
+<img alt="cmn" src="../../img/net/c_sqlserver_nginx6.png" /></p>
 <p>PS:图片版权归属于微软的技术文档，如有侵权，请联系我删除，源文件地址：什么是 Docker？</p>
 <p>镜像可以看成一个个小型的“虚拟主机”，这里我们在镜像中创建了一个 /app 路径作为我们程序在镜像中的工作目录，同时，将 80,443 端口暴露给 Docker，从而可以使我们在镜像外面通过端口访问到当前镜像中的运行的程序。
 <div class="highlight"><pre><span></span><code>FROM  mcr.microsoft.com/dotnet/core/aspnet:3.0-buster-slim AS base
@@ -2971,11 +2971,11 @@ ENTRYPOINT [&quot;dotnet&quot;, &quot;Base.IdentityServer.dll&quot;]
 </code></pre></div>
 　　在修改后的 Dockerfile 中，可以看到，我们删去了 build 和 release 的过程，选择直接将我们 Dockerfile 路径下的文件拷贝到镜像中的 /app 路径下，然后直接执行 dotnet 命令，运行我们的程序。</p>
 <p>为了确保 Dockerfile 与发布后的文件处于同一路径下，这里我们需要使用 VS 修改 Dockerfile 的属性值，确保会复制到输出的目录下，这里选择如果较新则复制即可。</p>
-<p><img alt="cmn" src="../../img/c_sqlserver_nginx7.png" /></p>
+<p><img alt="cmn" src="../../img/net/c_sqlserver_nginx7.png" /></p>
 <h4 id="3_docker-composeyml">3、编写 docker-compose.yml<a class="headerlink" href="#3_docker-composeyml" title="Permanent link">&para;</a></h4>
 <p>当我们构建好应用的镜像，对于 Nginx 和 sqlserver 我们完全可以从 hub 中拉取下来，再执行一些配置即可。所以，我们现在就可以编写 docker compose 文件，来定义我们的应用镜像运行时需要包含的依赖以及每个镜像的启动顺序。</p>
 <p>右键选中 MVC 项目，添加一个 docker-compose.yml 文件，同样的，需要修改该文件的属性，以便于该文件可以复制到输出目录下。注意，这里的文件名和上文的 Dockerfile 都是特定的，你不能做任何的修改。如果你的电脑上已经安装了 Docker for Windows，你也可以使用 VS，右键添加，选中容器业务流程协调程序支持自动对 docker compose 进行配置。</p>
-<p><img alt="cmn" src="../../img/c_sqlserver_nginx8.png" /></p>
+<p><img alt="cmn" src="../../img/net/c_sqlserver_nginx8.png" /></p>
 <p>在 yml 文件中，我定义了三个镜像：AdminApiGateway.Host、Base.IdentityServer、Base.HttpApi.Host。三个镜像的定义中有许多相同的地方，都设置了自动重启（restart），以及都处于同一个桥接网络下（psu-net）从而达到镜像间的通信。</p>
 <p>sqlserver 是 SqlServer 的镜像，我们通过环境变量 SA_PASSWORD 设置了 SqlServer 的数据库连接密码，并通过挂载卷的方式将镜像中的数据库文件持久化到我们的服务器本地路径中。同时，将镜像的 1433 端口映射到服务器的 1433 端口上。</p>
 <p>AdminApiGateway.Host 则是我们的程序后台网关镜像，采用位于 /data/dotnet/AdminApiGateway/ 路径下的 Dockerfile 文件进行构建的，因为主程序的运行需要依赖于数据库，所以这里采用 depends_on 属性，使我们的应用镜像依赖于 sqlserver 镜像，即，在 sqlserver 启动后才会启动应用镜像。</p>

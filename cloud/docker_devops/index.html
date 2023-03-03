@@ -1,0 +1,3624 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content=".net,java,php,python,docker,web">
+      
+      
+        <meta name="author" content="BurningMyself">
+      
+      
+        <link rel="canonical" href="https://burningmyself.gitee.io/cloud/docker_devops/">
+      
+      
+        <link rel="prev" href="../docker_swarm/">
+      
+      
+        <link rel="next" href="../compute/">
+      
+      <link rel="icon" href="../../favicon.ico">
+      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.0.15">
+    
+    
+      
+        <title>基于Docker容器DevOps应用方案 企业业务代码发布系统 - BurningMyself</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.113286f1.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.a0c5b2b5.min.css">
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="" data-md-color-accent="">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#dockerdevops" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../.." title="BurningMyself" class="md-header__button md-logo" aria-label="BurningMyself" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            BurningMyself
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              基于Docker容器DevOps应用方案 企业业务代码发布系统
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/burningmyself/burningmyself.github.io" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    burningmyself.github.io
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="BurningMyself" class="md-nav__button md-logo" aria-label="BurningMyself" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    BurningMyself
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/burningmyself/burningmyself.github.io" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    burningmyself.github.io
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        介绍
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+          技术博文
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          技术博文
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="0">
+          .NET
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_1_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2_1">
+          <span class="md-nav__icon md-icon"></span>
+          .NET
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../net/c_sharp/" class="md-nav__link">
+        C#新特性语法
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../net/c_docker/" class="md-nav__link">
+        .Net Core Docker 部署
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../net/c_sqlserver_nginx/" class="md-nav__link">
+        Docker 容器化部署 ASP.NET Core
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../net/c_core_safety/" class="md-nav__link">
+        让你的ASP.NET Core应用程序更安全
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../net/c_core_study_route/" class="md-nav__link">
+        ASP.NET Core开发者指南
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+          Java
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2_2">
+          <span class="md-nav__icon md-icon"></span>
+          Java
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../java/feature/" class="md-nav__link">
+        Java特性
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../java/load-class/" class="md-nav__link">
+        Java类加载
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../java/orm/" class="md-nav__link">
+        Orm的优缺点
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../java/bio-nio/" class="md-nav__link">
+        BIO与NIO
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../java/rocketmq/rmq-1/" class="md-nav__link">
+        RocketMq下载与安装
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../java/springAnnotation/" class="md-nav__link">
+        Spring常用注解
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../java/javavm/" class="md-nav__link">
+        Java 虚拟机
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../java/springdesign/" class="md-nav__link">
+        Spring 常用设计
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../java/spring-cloud/" class="md-nav__link">
+        Spring Cloud
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../java/java-simple/" class="md-nav__link">
+        Java simple
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../java/java-validator/" class="md-nav__link">
+        Java Validator
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../java/java-string/" class="md-nav__link">
+        Java String
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../java/java-utils/" class="md-nav__link">
+        Java Utils
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+          Python
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2_3">
+          <span class="md-nav__icon md-icon"></span>
+          Python
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../python/feature/" class="md-nav__link">
+        Python特性
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../python/str_joint/" class="md-nav__link">
+        Python字符拼接
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../python/syntax_rule/" class="md-nav__link">
+        Python语法技巧
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../python/fabric/" class="md-nav__link">
+        远程部署神器 Fabric
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_4" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_4" id="__nav_2_4_label" tabindex="0">
+          PHP
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_4_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2_4">
+          <span class="md-nav__icon md-icon"></span>
+          PHP
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../php/kj/" class="md-nav__link">
+        框架
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_5" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_5" id="__nav_2_5_label" tabindex="0">
+          Web
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_5_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2_5">
+          <span class="md-nav__icon md-icon"></span>
+          Web
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../web/es6/" class="md-nav__link">
+        es6语法
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../web/ali_js_style/" class="md-nav__link">
+        阿里js样式规范
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../web/node.js/" class="md-nav__link">
+        node.js文档
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../web/react/" class="md-nav__link">
+        React 开发者指南
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../dart/syntax/" class="md-nav__link">
+        Dart语法学习
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../web/react_interview/" class="md-nav__link">
+        React 面试
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../web/js_tool_method/" class="md-nav__link">
+        js 工具函数
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../web/vue_cp_react/" class="md-nav__link">
+        vue与react比较
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../web/javascript/" class="md-nav__link">
+        JavaScript 基础
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_6" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_6" id="__nav_2_6_label" tabindex="0">
+          SQL
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_6_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2_6">
+          <span class="md-nav__icon md-icon"></span>
+          SQL
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sql/mysql_yh/" class="md-nav__link">
+        MySQL优化
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sql/mysql_yh17/" class="md-nav__link">
+        MySQL优化
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sql/mysql_log/" class="md-nav__link">
+        MySQL日志
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sql/mysql_index/" class="md-nav__link">
+        MySQL索引
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sql/mysql_pxc/" class="md-nav__link">
+        MySQL PXC集群
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sql/mysql_use/" class="md-nav__link">
+        MySQL 数据库应用
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sql/mysql_backups/" class="md-nav__link">
+        MySql 备份
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sql/sql_server_master/" class="md-nav__link">
+        Sql Server 主从备份
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sql/data_split/" class="md-nav__link">
+        数据库之互联网常用分库分表方案
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sql/mybatis/" class="md-nav__link">
+        Mybatis使用心德
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_7" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_7" id="__nav_2_7_label" tabindex="0">
+          Linux
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_7_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2_7">
+          <span class="md-nav__icon md-icon"></span>
+          Linux
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linux/often/" class="md-nav__link">
+        常用命令
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linux/ope/" class="md-nav__link">
+        实用的Linux 命令
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_8" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_8" id="__nav_2_8_label" tabindex="0">
+          Docker
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_8_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2_8">
+          <span class="md-nav__icon md-icon"></span>
+          Docker
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docker/docker/" class="md-nav__link">
+        Docker全科
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docker/docker-compose/" class="md-nav__link">
+        docker和docker-compose配置常用环境
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docker/docker-jenkins/" class="md-nav__link">
+        Docker部署Jenkins
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docker/docker-phabricator/" class="md-nav__link">
+        Docker部署Phabricator
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_9" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_9" id="__nav_2_9_label" tabindex="0">
+          Tool
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_9_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2_9">
+          <span class="md-nav__icon md-icon"></span>
+          Tool
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tool/git/" class="md-nav__link">
+        Git
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tool/gitusual/" class="md-nav__link">
+        Git动画展示
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tool/gitquestion/" class="md-nav__link">
+        Git问题处理
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tool/gitflow/" class="md-nav__link">
+        GitFlow
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tool/gitbook/" class="md-nav__link">
+        GitBook
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tool/gitcmr/" class="md-nav__link">
+        Git提交日志规范
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tool/markdown/" class="md-nav__link">
+        Markdown
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tool/cicd/" class="md-nav__link">
+        CI/CD
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tool/mkdocs/" class="md-nav__link">
+        mkdocs简单使用
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tool/gitstudy/" class="md-nav__link">
+        Git的黑魔法
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tool/minio/" class="md-nav__link">
+        MinIO 搭建使用
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tool/cat-monitoring/" class="md-nav__link">
+        Cat分布式监控
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+          微服务
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          微服务
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../micro/fbs-lock/" class="md-nav__link">
+        分布式锁
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../micro/design/" class="md-nav__link">
+        微服务设计
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../micro/distrimsg/" class="md-nav__link">
+        分布式系统与消息的投递
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../micro/ddd/" class="md-nav__link">
+        基于DDD的微服务设计和开发实战
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../micro/kafka/" class="md-nav__link">
+        Kafka架构原理
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../micro/redis-cluster/" class="md-nav__link">
+        Redis Cluster原理
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../micro/spring-cloud-micro/" class="md-nav__link">
+        分布式架构
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+          经验分析
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          经验分析
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../exp/devops/" class="md-nav__link">
+        DevOps
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../exp/micro-service/" class="md-nav__link">
+        Micro-Service
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../exp/raft-gossip/" class="md-nav__link">
+        Raft算法和Gossip协议
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../exp/cl/" class="md-nav__link">
+        集群和负载均衡
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../exp/ai/" class="md-nav__link">
+        人工智能
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../exp/code-principle/" class="md-nav__link">
+        代码原则
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../exp/techbig/" class="md-nav__link">
+        如何成为技术大牛
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../exp/learnweetout/" class="md-nav__link">
+        程序员如何技术成长
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../exp/pt/" class="md-nav__link">
+        产品与技术
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../exp/four_deep_learning/" class="md-nav__link">
+        深度学习框架
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../exp/tl/" class="md-nav__link">
+        在阿里做了5年技术Leader，我总结出这些套路！
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../exp/cto/" class="md-nav__link">
+        CTO 技能图谱
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+          云架构
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          云架构
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../native/" class="md-nav__link">
+        云原生
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../virtual/" class="md-nav__link">
+        虚拟化技术
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../compute/" class="md-nav__link">
+        云计算
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../apprelease/" class="md-nav__link">
+        应用部署容器化演进
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../containerlinux/" class="md-nav__link">
+        容器技术所涉及Linux内核关键技术
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../docker_native/" class="md-nav__link">
+        容器管理工具Docker生态架构及部署
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../docker_nginx/" class="md-nav__link">
+        使用容器运行Nginx应用及Docker命令
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../docker_image/" class="md-nav__link">
+        Docker容器镜像
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../docker_image_fast/" class="md-nav__link">
+        Docker容器镜像加速器及本地容器镜像仓库
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../docker_container_enterprice/" class="md-nav__link">
+        Docker容器化部署企业级应用集群
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../docker_file/" class="md-nav__link">
+        Dockerfile精讲及新型容器镜像构建技术
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../docker_date/" class="md-nav__link">
+        Docker容器数据持久化存储机制
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../docker_compose/" class="md-nav__link">
+        Docker容器服务编排利器Docker Compose应用实战
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../docker_swarm/" class="md-nav__link">
+        Docker主机集群化方案 Docker Swarm
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        基于Docker容器DevOps应用方案 企业业务代码发布系统
+      </a>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../compute/" class="md-nav__link">
+        云计算
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../compute/" class="md-nav__link">
+        云计算
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../compute/" class="md-nav__link">
+        云计算
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../compute/" class="md-nav__link">
+        云计算
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../compute/" class="md-nav__link">
+        云计算
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../compute/" class="md-nav__link">
+        云计算
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+          构架
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_6">
+          <span class="md-nav__icon md-icon"></span>
+          构架
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../framework/split/" class="md-nav__link">
+        构架拆分
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../framework/fgb/" class="md-nav__link">
+        分布式、高并发、多线程
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../framework/agility/" class="md-nav__link">
+        如何理解敏捷开发
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../framework/fwork/" class="md-nav__link">
+        走向架构师必备的技能
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../framework/data-middle/" class="md-nav__link">
+        数据中台的思考与总结
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../framework/algorithm-ten/" class="md-nav__link">
+        必学的 10 大算法
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+          情感
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_7">
+          <span class="md-nav__icon md-icon"></span>
+          情感
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../emotion/eq/" class="md-nav__link">
+        情商
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../emotion/workheard/" class="md-nav__link">
+        工作心得
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../emotion/lookbook/" class="md-nav__link">
+        看书
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../emotion/fmf/" class="md-nav__link">
+        4种男朋友
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../emotion/notheart/" class="md-nav__link">
+        不上心
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../emotion/selfdiscipline/" class="md-nav__link">
+        自律
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../emotion/notlike/" class="md-nav__link">
+        喜欢与不喜欢
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../emotion/latemarry/" class="md-nav__link">
+        晚婚
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../emotion/understand/" class="md-nav__link">
+        追女生要明白这些事
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../emotion/backup/" class="md-nav__link">
+        备胎
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../emotion/chase/" class="md-nav__link">
+        为什么追不到她
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../emotion/livefail/" class="md-nav__link">
+        为什么活着失败
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../emotion/emotion/" class="md-nav__link">
+        情绪管理
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../emotion/abolish/" class="md-nav__link">
+        废掉的三个迹象
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../emotion/uptime/" class="md-nav__link">
+        余生，好好珍惜
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../emotion/losecome/" class="md-nav__link">
+        所有的失去，都会以另一种方式归来
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../emotion/threeheart/" class="md-nav__link">
+        人生有这三种好心态
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../emotion/onelike/" class="md-nav__link">
+        一个感情真相
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../emotion/notruth/" class="md-nav__link">
+        情商与道理
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../emotion/smf/" class="md-nav__link">
+        六种男人远离
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../emotion/select/" class="md-nav__link">
+        决定接下来人生归属的，不是努力，而是选择
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../emotion/nolike/" class="md-nav__link">
+        被你拉黑的那个人，你一定很喜欢吧
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../emotion/onepath/" class="md-nav__link">
+        余生，学会一个人走，不管有没有人陪
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../emotion/twopath/" class="md-nav__link">
+        往后余生还很精彩，别被熬夜拖垮了
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../emotion/lifetime/" class="md-nav__link">
+        心态好的人，一辈子都好
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../emotion/hearttoheart/" class="md-nav__link">
+        将心比心，方得人心
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../emotion/ttt/" class="md-nav__link">
+        别睡太晚，别爱太满，别要太多
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../emotion/profess/" class="md-nav__link">
+        表白
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+  
+
+
+<h1 id="dockerdevops">基于Docker容器DevOps应用方案 企业业务代码发布系统<a class="headerlink" href="#dockerdevops" title="Permanent link">&para;</a></h1>
+<h1 id="_1">一、企业业务代码发布方式<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
+<h2 id="11">1.1 传统方式<a class="headerlink" href="#11" title="Permanent link">&para;</a></h2>
+<ul>
+<li>以物理机或虚拟机为颗粒度部署</li>
+<li>部署环境比较复杂，需要有先进的自动化运维手段</li>
+<li>出现问题后重新部署成本大，一般采用集群方式部署</li>
+<li>部署后以静态方式展现</li>
+</ul>
+<h2 id="12">1.2 容器化方式<a class="headerlink" href="#12" title="Permanent link">&para;</a></h2>
+<ul>
+<li>以容器为颗粒度部署</li>
+<li>部署方式简单，启动速度快</li>
+<li>一次构建可到处运行</li>
+<li>出现故障后，可随时恢复</li>
+<li>可同时部署多套环境（测试、预发布、生产环境等）</li>
+</ul>
+<h1 id="_2">二、企业业务代码发布逻辑图<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h1>
+<p><img src="../img/docker_devops/image-20220223152003734.png" alt="image-20220223152003734" style="zoom:200%;" /></p>
+<h1 id="_3">三、企业业务代码发布工具及流程图<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h1>
+<h2 id="31">3.1 工具<a class="headerlink" href="#31" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>序号</th>
+<th>工具</th>
+<th>工具用途</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>git</td>
+<td>用于提交业务代码或克隆业务代码仓库</td>
+</tr>
+<tr>
+<td>2</td>
+<td>gitlab</td>
+<td>用于存储业务代码</td>
+</tr>
+<tr>
+<td>3</td>
+<td>jenkins</td>
+<td>用于利用插件完成业务代码编译、构建、推送至Harbor容器镜像仓库及项目部署</td>
+</tr>
+<tr>
+<td>4</td>
+<td>tomcat</td>
+<td>用于运行JAVA业务代码</td>
+</tr>
+<tr>
+<td>5</td>
+<td>maven</td>
+<td>用于编译业务代码</td>
+</tr>
+<tr>
+<td>6</td>
+<td>harbor</td>
+<td>用于存储业务代码构建的容器镜像存储</td>
+</tr>
+<tr>
+<td>7</td>
+<td>docker</td>
+<td>用于构建容器镜像，部署项目</td>
+</tr>
+</tbody>
+</table>
+<h2 id="32">3.2 流程图<a class="headerlink" href="#32" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p>本次部署Java代码包。</p>
+</blockquote>
+<p><img src="../img/docker_devops/image-20220223163453076.png" alt="image-20220223163453076" style="zoom:200%;" /></p>
+<h1 id="_4">四、企业业务代码发布系统环境部署<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h1>
+<h2 id="41">4.1 主机规划<a class="headerlink" href="#41" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>序号</th>
+<th>主机名</th>
+<th>主机IP</th>
+<th>主机功能</th>
+<th>软件</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>dev</td>
+<td>192.168.10.20</td>
+<td>开发者 项目代码 solo</td>
+<td>git</td>
+</tr>
+<tr>
+<td>2</td>
+<td>gitlab-server</td>
+<td>192.168.10.21</td>
+<td>代码仓库</td>
+<td>gitlab-ce</td>
+</tr>
+<tr>
+<td>3</td>
+<td>jenkins-server</td>
+<td>192.168.10.22</td>
+<td>编译代码、打包镜像、项目发布</td>
+<td>jenkins、docker、git</td>
+</tr>
+<tr>
+<td>4</td>
+<td>harbor-server</td>
+<td>192.168.10.23</td>
+<td>存储容器镜像</td>
+<td>harbor、docker</td>
+</tr>
+<tr>
+<td>5</td>
+<td>web-server</td>
+<td>192.168.10.24</td>
+<td>运行容器，项目上线</td>
+<td>docker</td>
+</tr>
+</tbody>
+</table>
+<h2 id="42">4.2 主机准备<a class="headerlink" href="#42" title="Permanent link">&para;</a></h2>
+<h3 id="421">4.2.1 主机名配置<a class="headerlink" href="#421" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c"># hostnamectl set-hostname xxx</span>
+</code></pre></div>
+<blockquote>
+<p>根据主机规划实施配置</p>
+</blockquote>
+<h3 id="422_ip">4.2.2 主机IP地址配置<a class="headerlink" href="#422_ip" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c"># vim /etc/sysconfig/network-scripts/ifcfg-ens33</span>
+<span class="c"># cat /etc/sysconfig/network-scripts/ifcfg-ens33</span>
+<span class="n">TYPE</span><span class="p">=</span><span class="s2">&quot;Ethernet&quot;</span>
+<span class="n">PROXY_METHOD</span><span class="p">=</span><span class="s2">&quot;none&quot;</span>
+<span class="n">BROWSER_ONLY</span><span class="p">=</span><span class="s2">&quot;no&quot;</span>
+<span class="n">BOOTPROTO</span><span class="p">=</span><span class="s2">&quot;none&quot;</span> <span class="n">配置为静态IP</span>
+<span class="n">DEFROUTE</span><span class="p">=</span><span class="s2">&quot;yes&quot;</span>
+<span class="n">IPV4_FAILURE_FATAL</span><span class="p">=</span><span class="s2">&quot;no&quot;</span>
+<span class="n">IPV6INIT</span><span class="p">=</span><span class="s2">&quot;yes&quot;</span>
+<span class="n">IPV6_AUTOCONF</span><span class="p">=</span><span class="s2">&quot;yes&quot;</span>
+<span class="n">IPV6_DEFROUTE</span><span class="p">=</span><span class="s2">&quot;yes&quot;</span>
+<span class="n">IPV6_FAILURE_FATAL</span><span class="p">=</span><span class="s2">&quot;no&quot;</span>
+<span class="n">IPV6_ADDR_GEN_MODE</span><span class="p">=</span><span class="s2">&quot;stable-privacy&quot;</span>
+<span class="n">NAME</span><span class="p">=</span><span class="s2">&quot;ens33&quot;</span>
+<span class="n">UUID</span><span class="p">=</span><span class="s2">&quot;ec87533a-8151-4aa0-9d0f-1e970affcdc6&quot;</span>
+<span class="n">DEVICE</span><span class="p">=</span><span class="s2">&quot;ens33&quot;</span>
+<span class="n">ONBOOT</span><span class="p">=</span><span class="s2">&quot;yes&quot;</span>
+<span class="n">IPADDR</span><span class="p">=</span><span class="s2">&quot;192.168.10.2x&quot;</span>  <span class="n">把2x替换为对应的IP地址</span>
+<span class="n">PREFIX</span><span class="p">=</span><span class="s2">&quot;24&quot;</span>
+<span class="n">GATEWAY</span><span class="p">=</span><span class="s2">&quot;192.168.10.2&quot;</span>
+<span class="n">DNS1</span><span class="p">=</span><span class="s2">&quot;119.29.29.29&quot;</span>
+</code></pre></div>
+<h3 id="423_ip">4.2.3 主机名与IP地址解析配置<a class="headerlink" href="#423_ip" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c"># vim /etc/hosts</span>
+<span class="c"># cat /etc/hosts</span>
+<span class="n">127</span><span class="p">.</span><span class="n">0</span><span class="p">.</span><span class="n">0</span><span class="p">.</span><span class="n">1</span>   <span class="n">localhost</span> <span class="n">localhost</span><span class="p">.</span><span class="n">localdomain</span> <span class="n">localhost4</span> <span class="n">localhost4</span><span class="p">.</span><span class="n">localdomain4</span>
+<span class="p">::</span><span class="n">1</span>         <span class="n">localhost</span> <span class="n">localhost</span><span class="p">.</span><span class="n">localdomain</span> <span class="n">localhost6</span> <span class="n">localhost6</span><span class="p">.</span><span class="n">localdomain6</span>
+<span class="n">192</span><span class="p">.</span><span class="n">168</span><span class="p">.</span><span class="n">10</span><span class="p">.</span><span class="n">20</span> <span class="n">dev</span>
+<span class="n">192</span><span class="p">.</span><span class="n">168</span><span class="p">.</span><span class="n">10</span><span class="p">.</span><span class="n">21</span> <span class="n">gitlab-server</span>
+<span class="n">192</span><span class="p">.</span><span class="n">168</span><span class="p">.</span><span class="n">10</span><span class="p">.</span><span class="n">22</span> <span class="n">jenkins-server</span>
+<span class="n">192</span><span class="p">.</span><span class="n">168</span><span class="p">.</span><span class="n">10</span><span class="p">.</span><span class="n">23</span> <span class="n">harobr-server</span>
+<span class="n">192</span><span class="p">.</span><span class="n">168</span><span class="p">.</span><span class="n">10</span><span class="p">.</span><span class="n">24</span> <span class="n">web-server</span>
+</code></pre></div>
+<h3 id="424">4.2.4 主机安全设置<a class="headerlink" href="#424" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c"># systemctl stop firewalld;systemctl disable firewalld</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c"># firewall-cmd --state</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c"># sestatus</span>
+</code></pre></div>
+<h3 id="425">4.2.5 主机时间同步<a class="headerlink" href="#425" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c"># crontab -e</span>
+
+<span class="c"># crotab -l</span>
+<span class="n">0</span> <span class="p">*/</span><span class="n">1</span> <span class="p">*</span> <span class="p">*</span> <span class="p">*</span> <span class="n">ntpdate</span> <span class="n">time1</span><span class="p">.</span><span class="n">aliyun</span><span class="p">.</span><span class="n">com</span>
+</code></pre></div>
+<h2 id="43">4.3 主机中工具安装<a class="headerlink" href="#43" title="Permanent link">&para;</a></h2>
+<h3 id="431_dev">4.3.1 dev主机<a class="headerlink" href="#431_dev" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>下载项目及上传代码至代码仓库</p>
+</blockquote>
+<div class="highlight"><pre><span></span><code><span class="c"># yum -y install git</span>
+</code></pre></div>
+<h3 id="432_gitlab-server">4.3.2 gitlab-server主机<a class="headerlink" href="#432_gitlab-server" title="Permanent link">&para;</a></h3>
+<h4 id="4321_yum">4.3.2.1 获取YUM源<a class="headerlink" href="#4321_yum" title="Permanent link">&para;</a></h4>
+<p><img alt="image-20220224134917428" src="../../img/docker_devops/image-20220224134917428.png" /></p>
+<p><img alt="image-20220224134941802" src="../../img/docker_devops/image-20220224134941802.png" /></p>
+<p><img alt="image-20220224135000130" src="../../img/docker_devops/image-20220224135000130.png" /></p>
+<p><img alt="image-20220224135021076" src="../../img/docker_devops/image-20220224135021076.png" /></p>
+<div class="highlight"><pre><span></span><code><span class="c"># cat /etc/yum.repos.d/gitlab.repo</span>
+<span class="no">[gitlab]</span>
+<span class="n">name</span><span class="p">=</span><span class="n">gitlab-ce</span>
+<span class="n">baseurl</span><span class="p">=</span><span class="n">https</span><span class="p">://</span><span class="n">mirrors</span><span class="p">.</span><span class="n">tuna</span><span class="p">.</span><span class="n">tsinghua</span><span class="p">.</span><span class="n">edu</span><span class="p">.</span><span class="n">cn</span><span class="p">/</span><span class="n">gitlab-ce</span><span class="p">/</span><span class="n">yum</span><span class="p">/</span><span class="n">el7</span>
+<span class="n">enabled</span><span class="p">=</span><span class="n">1</span>
+<span class="n">gpgcheck</span><span class="p">=</span><span class="n">0</span>
+</code></pre></div>
+<h4 id="4322_gitlab-ce">4.3.2.2 gitlab-ce安装<a class="headerlink" href="#4322_gitlab-ce" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="c"># yum -y install gitlab-ce</span>
+</code></pre></div>
+<h4 id="4323_gitlab-ce">4.3.2.3 gitlab-ce配置<a class="headerlink" href="#4323_gitlab-ce" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="c"># vim /etc/gitlab/gitlab.rb</span>
+<span class="n">32</span> <span class="n">external_url</span> <span class="s1">&#39;http://192.168.10.21&#39;</span>
+</code></pre></div>
+<h4 id="4324_gitlab-ce">4.3.2.4 启动gitlab-ce<a class="headerlink" href="#4324_gitlab-ce" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="c"># gitlab-ctl reconfigure</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c"># gitlab-ctl status</span>
+</code></pre></div>
+<h4 id="4325_gitlab-ce">4.3.2.5 访问gitlab-ce<a class="headerlink" href="#4325_gitlab-ce" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="c"># cat /etc/gitlab/initial_root_password</span>
+<span class="p">......</span>
+
+<span class="n">Password</span><span class="p">:</span> <span class="n">znS4Bqlp0cfYUKg2dHzFiNCAN0GnhtnD4ENjEtEXMVE</span><span class="p">=</span>
+</code></pre></div>
+<p><img alt="image-20220224140418176" src="../../img/docker_devops/image-20220224140418176.png" /></p>
+<p><img alt="image-20220224140436172" src="../../img/docker_devops/image-20220224140436172.png" /></p>
+<h3 id="433_jenkins-server">4.3.3 jenkins-server主机<a class="headerlink" href="#433_jenkins-server" title="Permanent link">&para;</a></h3>
+<h4 id="4331_jdk">4.3.3.1 jdk安装<a class="headerlink" href="#4331_jdk" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="c"># ls</span>
+ <span class="n">jdk</span><span class="p">-</span><span class="n">8u191-linux-x64</span><span class="p">.</span><span class="n">tar</span><span class="p">.</span><span class="n">gz</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c"># mv jdk1.8.0_191 /usr/local/jdk</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c"># vim /etc/profile</span>
+<span class="c"># cat /etc/profile</span>
+<span class="p">......</span>
+<span class="n">export</span> <span class="n">JAVA_HOME</span><span class="p">=/</span><span class="n">usr</span><span class="p">/</span><span class="n">local</span><span class="p">/</span><span class="n">jdk</span>
+<span class="n">export</span> <span class="n">PATH</span><span class="p">=${</span><span class="n">JAVA_HOME</span><span class="p">}/</span><span class="n">bin</span><span class="p">:</span><span class="nv">$PATH</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c"># source /etc/profile</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c"># java -version</span>
+<span class="n">java</span> <span class="n">version</span> <span class="s2">&quot;1.8.0_191&quot;</span>
+<span class="n">Java</span><span class="p">(</span><span class="n">TM</span><span class="p">)</span> <span class="n">SE</span> <span class="n">Runtime</span> <span class="n">Environment</span> <span class="p">(</span><span class="n">build</span> <span class="n">1</span><span class="p">.</span><span class="n">8</span><span class="p">.</span><span class="n">0_191-b12</span><span class="p">)</span>
+<span class="n">Java</span> <span class="n">HotSpot</span><span class="p">(</span><span class="n">TM</span><span class="p">)</span> <span class="n">64-Bit</span> <span class="n">Server</span> <span class="n">VM</span> <span class="p">(</span><span class="n">build</span> <span class="n">25</span><span class="p">.</span><span class="n">191-b12</span><span class="p">,</span> <span class="n">mixed</span> <span class="n">mode</span><span class="p">)</span>
+</code></pre></div>
+<h4 id="4332_jenkins">4.3.3.2 jenkins安装<a class="headerlink" href="#4332_jenkins" title="Permanent link">&para;</a></h4>
+<h5 id="43321">4.3.3.2.1 安装<a class="headerlink" href="#43321" title="Permanent link">&para;</a></h5>
+<p><img alt="image-20220224141530225" src="../../img/docker_devops/image-20220224141530225.png" /></p>
+<p><img alt="image-20220224141610569" src="../../img/docker_devops/image-20220224141610569.png" /></p>
+<p><img alt="image-20220224141720927" src="../../img/docker_devops/image-20220224141720927.png" /></p>
+<div class="highlight"><pre><span></span><code><span class="c">#  wget -O /etc/yum.repos.d/jenkins.repo https://pkg.jenkins.io/redhat-stable/jenkins.repo</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c"># rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io.key</span>
+</code></pre></div>
+<p><img alt="image-20220224142031988" src="../../img/docker_devops/image-20220224142031988.png" /></p>
+<div class="highlight"><pre><span></span><code><span class="c"># wget -O /etc/yum.repos.d/epel.repo http://mirrors.aliyun.com/repo/epel-7.repo</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c"># yum -y install jenkins</span>
+</code></pre></div>
+<h5 id="43322_jenkins">4.3.3.2.2 jenkins配置<a class="headerlink" href="#43322_jenkins" title="Permanent link">&para;</a></h5>
+<div class="highlight"><pre><span></span><code><span class="c"># vim /etc/init.d/jenkins</span>
+<span class="n">在81行下面添加如下内容</span><span class="err">：</span>
+ <span class="n">82</span> <span class="p">/</span><span class="n">usr</span><span class="p">/</span><span class="n">local</span><span class="p">/</span><span class="n">jdk</span><span class="p">/</span><span class="n">bin</span><span class="p">/</span><span class="n">java</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c"># vim /etc/sysconfig/jenkins</span>
+<span class="n">在19行双引号中添加jdk中java命令路径</span>
+ <span class="n">19</span> <span class="n">JENKINS_JAVA_CMD</span><span class="p">=</span><span class="s2">&quot;/usr/local/jdk/bin/java&quot;</span>
+</code></pre></div>
+<h5 id="43323_jenkins">4.3.3.2.3 jenkins启动<a class="headerlink" href="#43323_jenkins" title="Permanent link">&para;</a></h5>
+<div class="highlight"><pre><span></span><code><span class="c"># chkconfig --list</span>
+
+<span class="n">注</span><span class="err">：</span><span class="n">该输出结果只显示</span> <span class="n">SysV</span> <span class="n">服务</span><span class="err">，</span><span class="n">并不包含</span>
+<span class="n">原生</span> <span class="n">systemd</span> <span class="n">服务</span><span class="err">。</span><span class="n">SysV</span> <span class="n">配置数据</span>
+<span class="n">可能被原生</span> <span class="n">systemd</span> <span class="n">配置覆盖</span><span class="err">。</span>
+
+      <span class="n">要列出</span> <span class="n">systemd</span> <span class="n">服务</span><span class="err">，</span><span class="n">请执行</span> <span class="s1">&#39;systemctl list-unit-files&#39;</span><span class="err">。</span>
+      <span class="n">查看在具体</span> <span class="n">target</span> <span class="n">启用的服务请执行</span>
+      <span class="s1">&#39;systemctl list-dependencies [target]&#39;</span><span class="err">。</span>
+
+<span class="n">jenkins</span>         <span class="n">0</span><span class="p">:</span><span class="n">关</span>    <span class="n">1</span><span class="p">:</span><span class="n">关</span>    <span class="n">2</span><span class="p">:</span><span class="n">开</span>    <span class="n">3</span><span class="p">:</span><span class="n">开</span>    <span class="n">4</span><span class="p">:</span><span class="n">开</span>    <span class="n">5</span><span class="p">:</span><span class="n">开</span>    <span class="n">6</span><span class="p">:</span><span class="n">关</span>
+<span class="n">netconsole</span>      <span class="n">0</span><span class="p">:</span><span class="n">关</span>    <span class="n">1</span><span class="p">:</span><span class="n">关</span>    <span class="n">2</span><span class="p">:</span><span class="n">关</span>    <span class="n">3</span><span class="p">:</span><span class="n">关</span>    <span class="n">4</span><span class="p">:</span><span class="n">关</span>    <span class="n">5</span><span class="p">:</span><span class="n">关</span>    <span class="n">6</span><span class="p">:</span><span class="n">关</span>
+<span class="n">network</span>         <span class="n">0</span><span class="p">:</span><span class="n">关</span>    <span class="n">1</span><span class="p">:</span><span class="n">关</span>    <span class="n">2</span><span class="p">:</span><span class="n">开</span>    <span class="n">3</span><span class="p">:</span><span class="n">开</span>    <span class="n">4</span><span class="p">:</span><span class="n">开</span>    <span class="n">5</span><span class="p">:</span><span class="n">开</span>    <span class="n">6</span><span class="p">:</span><span class="n">关</span>
+<span class="c"># chkconfig jenkins on</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c"># systemctl start jenkins</span>
+</code></pre></div>
+<h5 id="43324_jenkins">4.3.3.2.4 jenkins访问<a class="headerlink" href="#43324_jenkins" title="Permanent link">&para;</a></h5>
+<div class="highlight"><pre><span></span><code><span class="c"># cat /var/lib/jenkins/secrets/initialAdminPassword</span>
+<span class="n">3363d658a1a5481bbe51a1ece1eb08ab</span>
+</code></pre></div>
+<p><img alt="image-20220224142955854" src="../../img/docker_devops/image-20220224142955854.png" /></p>
+<h5 id="43325_jenkins">4.3.3.2.5 jenkins初始化配置<a class="headerlink" href="#43325_jenkins" title="Permanent link">&para;</a></h5>
+<p><img alt="image-20220224173833454" src="../../img/docker_devops/image-20220224173833454.png" /></p>
+<p><img alt="image-20220224174018298" src="../../img/docker_devops/image-20220224174018298.png" /></p>
+<p><img alt="image-20220224174041874" src="../../img/docker_devops/image-20220224174041874.png" /></p>
+<p><img alt="image-20220224174442874" src="../../img/docker_devops/image-20220224174442874.png" /></p>
+<p><img alt="image-20220224174507233" src="../../img/docker_devops/image-20220224174507233.png" /></p>
+<p><img alt="image-20220224174541367" src="../../img/docker_devops/image-20220224174541367.png" /></p>
+<p><img alt="image-20220224174601389" src="../../img/docker_devops/image-20220224174601389.png" /></p>
+<h4 id="4333_git">4.3.3.3 git安装<a class="headerlink" href="#4333_git" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="c"># yum -y install git</span>
+</code></pre></div>
+<h4 id="4334_maven">4.3.3.4 maven安装<a class="headerlink" href="#4334_maven" title="Permanent link">&para;</a></h4>
+<h5 id="43341_maven">4.3.3.4.1 获取maven安装包<a class="headerlink" href="#43341_maven" title="Permanent link">&para;</a></h5>
+<p><img alt="image-20220224174735575" src="../../img/docker_devops/image-20220224174735575.png" /></p>
+<p><img alt="image-20220224174855779" src="../../img/docker_devops/image-20220224174855779.png" /></p>
+<div class="highlight"><pre><span></span><code><span class="c"># wget https://dlcdn.apache.org/maven/maven-3/3.8.4/binaries/apache-maven-3.8.4-bin.tar.gz</span>
+</code></pre></div>
+<h5 id="43342_maven">4.3.3.4.2 maven安装<a class="headerlink" href="#43342_maven" title="Permanent link">&para;</a></h5>
+<div class="highlight"><pre><span></span><code><span class="c"># ls</span>
+<span class="n">apache-maven</span><span class="p">-</span><span class="n">3</span><span class="p">.</span><span class="n">8</span><span class="p">.</span><span class="n">4-bin</span><span class="p">.</span><span class="n">tar</span><span class="p">.</span><span class="n">gz</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c"># tar xf apache-maven-3.8.4-bin.tar.gz</span>
+<span class="c"># ls</span>
+<span class="n">apache-maven</span><span class="p">-</span><span class="n">3</span><span class="p">.</span><span class="n">8</span><span class="p">.</span><span class="n">4</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c"># mv apache-maven-3.8.4 /usr/local/mvn</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c"># vim /etc/profile</span>
+<span class="p">......</span>
+<span class="n">export</span> <span class="n">JAVA_HOME</span><span class="p">=/</span><span class="n">usr</span><span class="p">/</span><span class="n">local</span><span class="p">/</span><span class="n">jdk</span>
+<span class="n">export</span> <span class="n">MAVEN_HOME</span><span class="p">=/</span><span class="n">usr</span><span class="p">/</span><span class="n">local</span><span class="p">/</span><span class="n">mvn</span>
+<span class="n">export</span> <span class="n">PATH</span><span class="p">=${</span><span class="n">JAVA_HOME</span><span class="p">}/</span><span class="n">bin</span><span class="p">:${</span><span class="n">MAVEN_HOME</span><span class="p">}/</span><span class="n">bin</span><span class="p">:</span><span class="nv">$PATH</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c"># source /etc/profile</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c"># mvn -v</span>
+<span class="n">Apache</span> <span class="n">Maven</span> <span class="n">3</span><span class="p">.</span><span class="n">8</span><span class="p">.</span><span class="n">4</span> <span class="p">(</span><span class="n">9b656c72d54e5bacbed989b64718c159fe39b537</span><span class="p">)</span>
+<span class="n">Maven</span> <span class="n">home</span><span class="p">:</span> <span class="p">/</span><span class="n">usr</span><span class="p">/</span><span class="n">local</span><span class="p">/</span><span class="n">mvn</span>
+<span class="n">Java</span> <span class="n">version</span><span class="p">:</span> <span class="n">1</span><span class="p">.</span><span class="n">8</span><span class="p">.</span><span class="n">0_191</span><span class="p">,</span> <span class="n">vendor</span><span class="p">:</span> <span class="n">Oracle</span> <span class="n">Corporation</span><span class="p">,</span> <span class="n">runtime</span><span class="p">:</span> <span class="p">/</span><span class="n">usr</span><span class="p">/</span><span class="n">local</span><span class="p">/</span><span class="n">jdk</span><span class="p">/</span><span class="n">jre</span>
+<span class="k">Default</span> <span class="n">locale</span><span class="p">:</span> <span class="n">zh_CN</span><span class="p">,</span> <span class="n">platform</span> <span class="n">encoding</span><span class="p">:</span> <span class="n">UTF</span><span class="p">-</span><span class="n">8</span>
+<span class="n">OS</span> <span class="n">name</span><span class="p">:</span> <span class="s2">&quot;linux&quot;</span><span class="p">,</span> <span class="n">version</span><span class="p">:</span> <span class="s2">&quot;3.10.0-1160.49.1.el7.x86_64&quot;</span><span class="p">,</span> <span class="n">arch</span><span class="p">:</span> <span class="s2">&quot;amd64&quot;</span><span class="p">,</span> <span class="n">family</span><span class="p">:</span> <span class="s2">&quot;unix&quot;</span>
+</code></pre></div>
+<h4 id="4335_docker">4.3.3.5 docker安装<a class="headerlink" href="#4335_docker" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="c"># wget -O /etc/yum.repos.d/docker-ce.repo https://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c"># yum -y install docker-ce</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c"># systemctl enable docker</span>
+<span class="c"># systemctl start docker</span>
+</code></pre></div>
+<h3 id="434_harbor-server">4.3.4 harbor-server主机<a class="headerlink" href="#434_harbor-server" title="Permanent link">&para;</a></h3>
+<h4 id="4341_docker">4.3.4.1 docker安装<a class="headerlink" href="#4341_docker" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="c"># wget -O /etc/yum.repos.d/docker-ce.repo https://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c"># yum -y install docker-ce</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c"># systemctl enable docker</span>
+<span class="c"># systemctl start docker</span>
+</code></pre></div>
+<h4 id="4342_docker-compose">4.3.4.2 docker-compose安装<a class="headerlink" href="#4342_docker-compose" title="Permanent link">&para;</a></h4>
+<h5 id="43421_docker-compose">4.3.4.2.1 获取docker-compose文件<a class="headerlink" href="#43421_docker-compose" title="Permanent link">&para;</a></h5>
+<p><img alt="image-20220224180711917" src="../../img/docker_devops/image-20220224180711917.png" /></p>
+<p><img alt="image-20220224180732745" src="../../img/docker_devops/image-20220224180732745.png" /></p>
+<p><img alt="image-20220224180754614" src="../../img/docker_devops/image-20220224180754614.png" /></p>
+<p><img alt="image-20220224180842212" src="../../img/docker_devops/image-20220224180842212.png" /></p>
+<div class="highlight"><pre><span></span><code><span class="c"># wget https://github.com/docker/compose/releases/download/v2.2.3/docker-compose-linux-x86_64</span>
+</code></pre></div>
+<h5 id="43422_docker-compose">4.3.4.2.2 docker-compose安装及测试<a class="headerlink" href="#43422_docker-compose" title="Permanent link">&para;</a></h5>
+<div class="highlight"><pre><span></span><code><span class="c"># ls</span>
+<span class="n">docker-compose-linux-x86_64</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c"># chmod +x docker-compose-linux-x86_64</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c"># mv docker-compose-linux-x86_64 /usr/bin/docker-compose</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c"># docker-compose version</span>
+<span class="n">Docker</span> <span class="n">Compose</span> <span class="n">version</span> <span class="n">v2</span><span class="p">.</span><span class="n">2</span><span class="p">.</span><span class="n">3</span>
+</code></pre></div>
+<h4 id="4343_harbor">4.3.4.3 harbor部署<a class="headerlink" href="#4343_harbor" title="Permanent link">&para;</a></h4>
+<h5 id="43431_harbor">4.3.4.3.1 harbor部署文件获取<a class="headerlink" href="#43431_harbor" title="Permanent link">&para;</a></h5>
+<p><img alt="image-20220224181602622" src="../../img/docker_devops/image-20220224181602622.png" /></p>
+<p><img alt="image-20220224181626286" src="../../img/docker_devops/image-20220224181626286.png" /></p>
+<p><img alt="image-20220224181656604" src="../../img/docker_devops/image-20220224181656604.png" /></p>
+<p><img alt="image-20220224181746808" src="../../img/docker_devops/image-20220224181746808.png" /></p>
+<p><img alt="image-20220224181829179" src="../../img/docker_devops/image-20220224181829179.png" /></p>
+<div class="highlight"><pre><span></span><code><span class="c"># wget https://github.com/goharbor/harbor/releases/download/v2.4.1/harbor-offline-installer-v2.4.1.tgz</span>
+</code></pre></div>
+<h5 id="43432_harbor">4.3.4.3.2 harbor部署<a class="headerlink" href="#43432_harbor" title="Permanent link">&para;</a></h5>
+<div class="highlight"><pre><span></span><code><span class="c"># ls</span>
+<span class="n">harbor-offline-installer-v2</span><span class="p">.</span><span class="n">4</span><span class="p">.</span><span class="n">1</span><span class="p">.</span><span class="n">tgz</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c"># tar xf harbor-offline-installer-v2.4.1.tgz -C /home</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c"># cd /home</span>
+<span class="c"># ls</span>
+<span class="n">harbor</span>
+<span class="p">[</span><span class="n">root</span><span class="nv">@harbor</span><span class="n">-server</span> <span class="n">home</span><span class="p">]</span><span class="c"># cd harbor/</span>
+<span class="p">[</span><span class="n">root</span><span class="nv">@harbor</span><span class="n">-server</span> <span class="n">harbor</span><span class="p">]</span><span class="c"># ls</span>
+<span class="n">common</span><span class="p">.</span><span class="n">sh</span>  <span class="n">harbor</span><span class="p">.</span><span class="n">v2</span><span class="p">.</span><span class="n">4</span><span class="p">.</span><span class="n">1</span><span class="p">.</span><span class="n">tar</span><span class="p">.</span><span class="n">gz</span>  <span class="n">harbor</span><span class="p">.</span><span class="n">yml</span><span class="p">.</span><span class="n">tmpl</span>  <span class="n">install</span><span class="p">.</span><span class="n">sh</span>  <span class="n">LICENSE</span>  <span class="n">prepare</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c"># mv harbor.yml.tmpl harbor.yml</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="p">[</span><span class="n">root</span><span class="nv">@harbor</span><span class="n">-server</span> <span class="n">harbor</span><span class="p">]</span><span class="c"># vim harbor.yml</span>
+<span class="p">[</span><span class="n">root</span><span class="nv">@harbor</span><span class="n">-server</span> <span class="n">harbor</span><span class="p">]</span><span class="c"># cat harbor.yml</span>
+<span class="c"># Configuration file of Harbor</span>
+
+<span class="c"># The IP address or hostname to access admin UI and registry service.</span>
+<span class="c"># DO NOT use localhost or 127.0.0.1, because Harbor needs to be accessed by external clients.</span>
+<span class="n">hostname</span><span class="p">:</span> <span class="n">192</span><span class="p">.</span><span class="n">168</span><span class="p">.</span><span class="n">10</span><span class="p">.</span><span class="n">23</span> <span class="n">修改</span>
+
+<span class="c"># http related config</span>
+<span class="n">http</span><span class="p">:</span>
+  <span class="c"># port for http, default is 80. If https enabled, this port will redirect to https port</span>
+  <span class="n">port</span><span class="p">:</span> <span class="n">80</span>
+
+<span class="c"># https related config</span>
+<span class="c">#https: 注释</span>
+  <span class="c"># https port for harbor, default is 443</span>
+<span class="c">#  port: 443 注释</span>
+  <span class="c"># The path of cert and key files for nginx</span>
+<span class="c">#  certificate: /your/certificate/path 注释</span>
+<span class="c">#  private_key: /your/private/key/path 注释</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="p">[</span><span class="n">root</span><span class="nv">@harbor</span><span class="n">-server</span> <span class="n">harbor</span><span class="p">]</span><span class="c"># ./prepare</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="p">[</span><span class="n">root</span><span class="nv">@harbor</span><span class="n">-server</span> <span class="n">harbor</span><span class="p">]</span><span class="c"># ./install.sh</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="p">[</span><span class="n">root</span><span class="nv">@harbor</span><span class="n">-server</span> <span class="n">harbor</span><span class="p">]</span><span class="c"># docker ps</span>
+<span class="n">CONTAINER</span> <span class="n">ID</span>   <span class="n">IMAGE</span>                                <span class="n">COMMAND</span>                  <span class="n">CREATED</span>              <span class="n">STATUS</span>                        <span class="n">PORTS</span>                                   <span class="n">NAMES</span>
+<span class="n">12605eae32bb</span>   <span class="n">goharbor</span><span class="p">/</span><span class="n">harbor-jobservice</span><span class="p">:</span><span class="n">v2</span><span class="p">.</span><span class="n">4</span><span class="p">.</span><span class="n">1</span>    <span class="s2">&quot;/harbor/entrypoint.…&quot;</span>   <span class="n">About</span> <span class="n">a</span> <span class="n">minute</span> <span class="n">ago</span>   <span class="n">Up</span> <span class="n">About</span> <span class="n">a</span> <span class="n">minute</span> <span class="p">(</span><span class="n">healthy</span><span class="p">)</span>                                           <span class="n">harbor-jobservice</span>
+<span class="n">85849b46d56d</span>   <span class="n">goharbor</span><span class="p">/</span><span class="n">nginx-photon</span><span class="p">:</span><span class="n">v2</span><span class="p">.</span><span class="n">4</span><span class="p">.</span><span class="n">1</span>         <span class="s2">&quot;nginx -g &#39;daemon of…&quot;</span>   <span class="n">About</span> <span class="n">a</span> <span class="n">minute</span> <span class="n">ago</span>   <span class="n">Up</span> <span class="n">About</span> <span class="n">a</span> <span class="n">minute</span> <span class="p">(</span><span class="n">healthy</span><span class="p">)</span>   <span class="n">0</span><span class="p">.</span><span class="n">0</span><span class="p">.</span><span class="n">0</span><span class="p">.</span><span class="n">0</span><span class="p">:</span><span class="n">80</span><span class="p">-&gt;</span><span class="n">8080</span><span class="p">/</span><span class="n">tcp</span><span class="p">,</span> <span class="p">:::</span><span class="n">80</span><span class="p">-&gt;</span><span class="n">8080</span><span class="p">/</span><span class="n">tcp</span>   <span class="n">nginx</span>
+<span class="n">6a18e370354f</span>   <span class="n">goharbor</span><span class="p">/</span><span class="n">harbor-core</span><span class="p">:</span><span class="n">v2</span><span class="p">.</span><span class="n">4</span><span class="p">.</span><span class="n">1</span>          <span class="s2">&quot;/harbor/entrypoint.…&quot;</span>   <span class="n">About</span> <span class="n">a</span> <span class="n">minute</span> <span class="n">ago</span>   <span class="n">Up</span> <span class="n">About</span> <span class="n">a</span> <span class="n">minute</span> <span class="p">(</span><span class="n">healthy</span><span class="p">)</span>                                           <span class="n">harbor-core</span>
+<span class="n">d115229ef49d</span>   <span class="n">goharbor</span><span class="p">/</span><span class="n">harbor-portal</span><span class="p">:</span><span class="n">v2</span><span class="p">.</span><span class="n">4</span><span class="p">.</span><span class="n">1</span>        <span class="s2">&quot;nginx -g &#39;daemon of…&quot;</span>   <span class="n">About</span> <span class="n">a</span> <span class="n">minute</span> <span class="n">ago</span>   <span class="n">Up</span> <span class="n">About</span> <span class="n">a</span> <span class="n">minute</span> <span class="p">(</span><span class="n">healthy</span><span class="p">)</span>                                           <span class="n">harbor-portal</span>
+<span class="n">f5436556dd32</span>   <span class="n">goharbor</span><span class="p">/</span><span class="n">harbor-db</span><span class="p">:</span><span class="n">v2</span><span class="p">.</span><span class="n">4</span><span class="p">.</span><span class="n">1</span>            <span class="s2">&quot;/docker-entrypoint.…&quot;</span>   <span class="n">About</span> <span class="n">a</span> <span class="n">minute</span> <span class="n">ago</span>   <span class="n">Up</span> <span class="n">About</span> <span class="n">a</span> <span class="n">minute</span> <span class="p">(</span><span class="n">healthy</span><span class="p">)</span>                                           <span class="n">harbor-db</span>
+<span class="n">7fb8c4945abe</span>   <span class="n">goharbor</span><span class="p">/</span><span class="n">harbor-registryctl</span><span class="p">:</span><span class="n">v2</span><span class="p">.</span><span class="n">4</span><span class="p">.</span><span class="n">1</span>   <span class="s2">&quot;/home/harbor/start.…&quot;</span>   <span class="n">About</span> <span class="n">a</span> <span class="n">minute</span> <span class="n">ago</span>   <span class="n">Up</span> <span class="n">About</span> <span class="n">a</span> <span class="n">minute</span> <span class="p">(</span><span class="n">healthy</span><span class="p">)</span>                                           <span class="n">registryctl</span>
+<span class="n">d073e5da1399</span>   <span class="n">goharbor</span><span class="p">/</span><span class="n">redis-photon</span><span class="p">:</span><span class="n">v2</span><span class="p">.</span><span class="n">4</span><span class="p">.</span><span class="n">1</span>         <span class="s2">&quot;redis-server /etc/r…&quot;</span>   <span class="n">About</span> <span class="n">a</span> <span class="n">minute</span> <span class="n">ago</span>   <span class="n">Up</span> <span class="n">About</span> <span class="n">a</span> <span class="n">minute</span> <span class="p">(</span><span class="n">healthy</span><span class="p">)</span>                                           <span class="n">redis</span>
+<span class="n">7c09362c986b</span>   <span class="n">goharbor</span><span class="p">/</span><span class="n">registry-photon</span><span class="p">:</span><span class="n">v2</span><span class="p">.</span><span class="n">4</span><span class="p">.</span><span class="n">1</span>      <span class="s2">&quot;/home/harbor/entryp…&quot;</span>   <span class="n">About</span> <span class="n">a</span> <span class="n">minute</span> <span class="n">ago</span>   <span class="n">Up</span> <span class="n">About</span> <span class="n">a</span> <span class="n">minute</span> <span class="p">(</span><span class="n">healthy</span><span class="p">)</span>                                           <span class="n">registry</span>
+<span class="n">55d7f39909e3</span>   <span class="n">goharbor</span><span class="p">/</span><span class="n">harbor-log</span><span class="p">:</span><span class="n">v2</span><span class="p">.</span><span class="n">4</span><span class="p">.</span><span class="n">1</span>           <span class="s2">&quot;/bin/sh -c /usr/loc…&quot;</span>   <span class="n">About</span> <span class="n">a</span> <span class="n">minute</span> <span class="n">ago</span>   <span class="n">Up</span> <span class="n">About</span> <span class="n">a</span> <span class="n">minute</span> <span class="p">(</span><span class="n">healthy</span><span class="p">)</span>   <span class="n">127</span><span class="p">.</span><span class="n">0</span><span class="p">.</span><span class="n">0</span><span class="p">.</span><span class="n">1</span><span class="p">:</span><span class="n">1514</span><span class="p">-&gt;</span><span class="n">10514</span><span class="p">/</span><span class="n">tcp</span>               <span class="n">harbor-log</span>
+</code></pre></div>
+<h3 id="435_web-server">4.3.5 web-server<a class="headerlink" href="#435_web-server" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>docker安装</p>
+</blockquote>
+<div class="highlight"><pre><span></span><code><span class="c"># wget -O /etc/yum.repos.d/docker-ce.repo https://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c"># yum -y install docker-ce</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c"># systemctl enable docker</span>
+<span class="c"># systemctl start docker</span>
+</code></pre></div>
+<h2 id="44">4.4 工具集成配置<a class="headerlink" href="#44" title="Permanent link">&para;</a></h2>
+<h3 id="441_dockerharbor">4.4.1 配置docker主机使用harbor<a class="headerlink" href="#441_dockerharbor" title="Permanent link">&para;</a></h3>
+<h4 id="4411_jenkins-server">4.4.1.1 jenkins-server<a class="headerlink" href="#4411_jenkins-server" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="p">[</span><span class="n">root</span><span class="nv">@jenkins</span><span class="n">-server</span> <span class="p">~]</span><span class="c"># vim /etc/docker/daemon.json</span>
+<span class="p">[</span><span class="n">root</span><span class="nv">@jenkins</span><span class="n">-server</span> <span class="p">~]</span><span class="c"># cat /etc/docker/daemon.json</span>
+<span class="p">{</span>
+        <span class="s2">&quot;insecure-registries&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;http://192.168.10.23&quot;</span><span class="p">]</span>
+<span class="p">}</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="p">[</span><span class="n">root</span><span class="nv">@jenkins</span><span class="n">-server</span> <span class="p">~]</span><span class="c"># systemctl restart docker</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="p">[</span><span class="n">root</span><span class="nv">@jenkins</span><span class="n">-server</span> <span class="p">~]</span><span class="c"># docker login 192.168.10.23</span>
+<span class="n">Username</span><span class="p">:</span> <span class="n">admin</span>
+<span class="n">Password</span><span class="p">:</span>
+<span class="n">WARNING</span><span class="p">!</span> <span class="n">Your</span> <span class="n">password</span> <span class="n">will</span> <span class="n">be</span> <span class="n">stored</span> <span class="n">unencrypted</span> <span class="k">in</span> <span class="p">/</span><span class="n">root</span><span class="p">/.</span><span class="n">docker</span><span class="p">/</span><span class="n">config</span><span class="p">.</span><span class="n">json</span><span class="p">.</span>
+<span class="n">Configure</span> <span class="n">a</span> <span class="n">credential</span> <span class="n">helper</span> <span class="n">to</span> <span class="n">remove</span> <span class="n">this</span> <span class="n">warning</span><span class="p">.</span> <span class="n">See</span>
+<span class="n">https</span><span class="p">://</span><span class="n">docs</span><span class="p">.</span><span class="n">docker</span><span class="p">.</span><span class="n">com</span><span class="p">/</span><span class="n">engine</span><span class="p">/</span><span class="n">reference</span><span class="p">/</span><span class="n">commandline</span><span class="p">/</span><span class="n">login</span><span class="p">/</span><span class="c">#credentials-store</span>
+
+<span class="n">Login</span> <span class="n">Succeeded</span>
+</code></pre></div>
+<h4 id="4412_harbor-server">4.4.1.2 harbor-server<a class="headerlink" href="#4412_harbor-server" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="p">[</span><span class="n">root</span><span class="nv">@harbor</span><span class="n">-server</span> <span class="n">harbor</span><span class="p">]</span><span class="c"># vim /etc/docker/daemon.json</span>
+<span class="p">[</span><span class="n">root</span><span class="nv">@harbor</span><span class="n">-server</span> <span class="n">harbor</span><span class="p">]</span><span class="c"># cat /etc/docker/daemon.json</span>
+<span class="p">{</span>
+        <span class="s2">&quot;insecure-registries&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;http://192.168.10.23&quot;</span><span class="p">]</span>
+<span class="p">}</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="p">[</span><span class="n">root</span><span class="nv">@harbor</span><span class="n">-server</span> <span class="n">harbor</span><span class="p">]</span><span class="c"># docker-compose down</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="p">[</span><span class="n">root</span><span class="nv">@harbor</span><span class="n">-server</span> <span class="n">harbor</span><span class="p">]</span><span class="c"># systemctl restart docker</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="p">[</span><span class="n">root</span><span class="nv">@harbor</span><span class="n">-server</span> <span class="n">harbor</span><span class="p">]</span><span class="c"># docker-compose up -d</span>
+</code></pre></div>
+<h4 id="4413_web-server">4.4.1.3 web-server<a class="headerlink" href="#4413_web-server" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="p">[</span><span class="n">root</span><span class="nv">@web</span><span class="n">-server</span> <span class="p">~]</span><span class="c"># vim /etc/docker/daemon.json</span>
+<span class="p">[</span><span class="n">root</span><span class="nv">@web</span><span class="n">-server</span> <span class="p">~]</span><span class="c"># cat /etc/docker/daemon.json</span>
+<span class="p">{</span>
+        <span class="s2">&quot;insecure-registries&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;http://192.168.10.23&quot;</span><span class="p">]</span>
+<span class="p">}</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="p">[</span><span class="n">root</span><span class="nv">@web</span><span class="n">-server</span> <span class="p">~]</span><span class="c"># systemctl restart docker</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="p">[</span><span class="n">root</span><span class="nv">@web</span><span class="n">-server</span> <span class="p">~]</span><span class="c"># docker login 192.168.10.23</span>
+<span class="n">Username</span><span class="p">:</span> <span class="n">admin</span>
+<span class="n">Password</span><span class="p">:</span>
+<span class="n">WARNING</span><span class="p">!</span> <span class="n">Your</span> <span class="n">password</span> <span class="n">will</span> <span class="n">be</span> <span class="n">stored</span> <span class="n">unencrypted</span> <span class="k">in</span> <span class="p">/</span><span class="n">root</span><span class="p">/.</span><span class="n">docker</span><span class="p">/</span><span class="n">config</span><span class="p">.</span><span class="n">json</span><span class="p">.</span>
+<span class="n">Configure</span> <span class="n">a</span> <span class="n">credential</span> <span class="n">helper</span> <span class="n">to</span> <span class="n">remove</span> <span class="n">this</span> <span class="n">warning</span><span class="p">.</span> <span class="n">See</span>
+<span class="n">https</span><span class="p">://</span><span class="n">docs</span><span class="p">.</span><span class="n">docker</span><span class="p">.</span><span class="n">com</span><span class="p">/</span><span class="n">engine</span><span class="p">/</span><span class="n">reference</span><span class="p">/</span><span class="n">commandline</span><span class="p">/</span><span class="n">login</span><span class="p">/</span><span class="c">#credentials-store</span>
+
+<span class="n">Login</span> <span class="n">Succeeded</span>
+</code></pre></div>
+<h3 id="442_jenkinsdocker">4.4.2 配置jenkins使用docker<a class="headerlink" href="#442_jenkinsdocker" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>在jenkins-server主机上配置</p>
+</blockquote>
+<div class="highlight"><pre><span></span><code><span class="n">验证系统中是否有jenkins用户</span>
+<span class="p">[</span><span class="n">root</span><span class="nv">@jenkins</span><span class="n">-server</span> <span class="p">~]</span><span class="c"># grep jenkins /etc/passwd</span>
+<span class="n">jenkins</span><span class="p">:</span><span class="n">x</span><span class="p">:</span><span class="n">997</span><span class="p">:</span><span class="n">995</span><span class="p">:</span><span class="n">Jenkins</span> <span class="n">Automation</span> <span class="n">Server</span><span class="p">:/</span><span class="n">var</span><span class="p">/</span><span class="n">lib</span><span class="p">/</span><span class="n">jenkins</span><span class="p">:/</span><span class="n">bin</span><span class="p">/</span><span class="n">false</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">验证系统中是否有docker用户及用户组</span>
+<span class="p">[</span><span class="n">root</span><span class="nv">@jenkins</span><span class="n">-server</span> <span class="p">~]</span><span class="c"># grep docker /etc/group</span>
+<span class="n">docker</span><span class="p">:</span><span class="n">x</span><span class="p">:</span><span class="n">993</span><span class="p">:</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">添加jenkins用户到docker用户组</span>
+<span class="p">[</span><span class="n">root</span><span class="nv">@jenkins</span><span class="n">-server</span> <span class="p">~]</span><span class="c"># usermod -G docker jenkins</span>
+<span class="p">[</span><span class="n">root</span><span class="nv">@jenkins</span><span class="n">-server</span> <span class="p">~]</span><span class="c"># grep docker /etc/group</span>
+<span class="n">docker</span><span class="p">:</span><span class="n">x</span><span class="p">:</span><span class="n">993</span><span class="p">:</span><span class="n">jenkins</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">重启jenkins服务</span>
+<span class="p">[</span><span class="n">root</span><span class="nv">@jenkins</span><span class="n">-server</span> <span class="p">~]</span><span class="c"># systemctl restart jenkins</span>
+</code></pre></div>
+<h3 id="443">4.4.3 密钥配置<a class="headerlink" href="#443" title="Permanent link">&para;</a></h3>
+<h4 id="4431_devgitlab-ce">4.4.3.1 dev主机至gitlab-ce<a class="headerlink" href="#4431_devgitlab-ce" title="Permanent link">&para;</a></h4>
+<h5 id="44311_dev">4.4.3.1.1 dev主机生成密钥对<a class="headerlink" href="#44311_dev" title="Permanent link">&para;</a></h5>
+<div class="highlight"><pre><span></span><code><span class="p">[</span><span class="n">root</span><span class="nv">@dev</span> <span class="p">~]</span><span class="c"># ssh-keygen</span>
+</code></pre></div>
+<h5 id="44312_gitlab-ce">4.4.3.1.2 添加公钥至gitlab-ce<a class="headerlink" href="#44312_gitlab-ce" title="Permanent link">&para;</a></h5>
+<div class="highlight"><pre><span></span><code><span class="p">[</span><span class="n">root</span><span class="nv">@dev</span> <span class="p">~]</span><span class="c"># cat /root/.ssh/id_rsa.pub</span>
+<span class="n">ssh-rsa</span> <span class="n">AAAAB3NzaC1yc2EAAAADAQABAAABAQCy2PdvT9qX55CLZzzaaEf06x8gl3yHGfdJSmAp9L1Fdtcbd3yz3U0lgdOwWpB8fQ</span><span class="p">/</span><span class="n">A3HoUUTWCb1iC5WJBOvqkoD8rJ2xC3HJ62zjOjmqcn2fEs09CzJj3bCfahuqPzaPkIOoH42</span><span class="p">/</span><span class="n">Y2QdImQ7xZOqqjS7aIc5T2FjDLG3bMhaYFyvx18b1qiPACuh67iniPQnL667MFZ</span><span class="p">/</span><span class="n">0QGGVnQKwxop</span><span class="p">+</span><span class="n">SezhP9QqV1bvPk94eTdkERIBiY1CNcNmVryk6PzSKY8gfW</span><span class="p">++</span><span class="n">3TGN9F</span><span class="p">+</span><span class="n">knhMXcswFOu6FzqxcA3G</span><span class="p">+</span><span class="n">hYg</span><span class="p">+</span><span class="n">Io2HJaDrsfHGZ6CP5T9QiOlIWlNxz05BOK3OFQ5BPeomA</span><span class="p">+</span><span class="n">jv</span> <span class="n">root</span><span class="nv">@dev</span>
+</code></pre></div>
+<p><img alt="image-20220224210606310" src="../../img/docker_devops/image-20220224210606310.png" /></p>
+<p><img alt="image-20220224210748207" src="../../img/docker_devops/image-20220224210748207.png" /></p>
+<p><img alt="image-20220224210823231" src="../../img/docker_devops/image-20220224210823231.png" /></p>
+<h4 id="4432_jenkins-servergitlab-ce">4.4.3.2 jenkins-server主机至gitlab-ce<a class="headerlink" href="#4432_jenkins-servergitlab-ce" title="Permanent link">&para;</a></h4>
+<h5 id="44321_jenkins-server">4.4.3.2.1 在jenkins-server生成密钥对<a class="headerlink" href="#44321_jenkins-server" title="Permanent link">&para;</a></h5>
+<div class="highlight"><pre><span></span><code><span class="p">[</span><span class="n">root</span><span class="nv">@jenkins</span><span class="n">-server</span> <span class="p">~]</span><span class="c"># ssh-keygen</span>
+</code></pre></div>
+<h5 id="44322_gitlab-ce">4.4.3.2.2 添加公钥至gitlab-ce<a class="headerlink" href="#44322_gitlab-ce" title="Permanent link">&para;</a></h5>
+<div class="highlight"><pre><span></span><code><span class="p">[</span><span class="n">root</span><span class="nv">@jenkins</span><span class="n">-server</span> <span class="p">~]</span><span class="c"># cat /root/.ssh/id_rsa.pub</span>
+<span class="n">ssh-rsa</span> <span class="n">AAAAB3NzaC1yc2EAAAADAQABAAABAQCyg3WaEm5yH9yva8Jm5wfTPwN3ROGMNPpAex8zYj</span><span class="p">+</span><span class="n">M1GesoMtE6gkiKHWydAJBiLuu</span><span class="p">/</span><span class="n">1fBx6HlgzzxghVj9oK4DmTRZQh2IZY4</span><span class="p">+</span><span class="n">zZIGBRaDBuBO1f7</span><span class="p">+</span><span class="n">SdVE</span><span class="p">/</span><span class="n">jZoLd1a</span><span class="p">+</span><span class="n">yZ3FQmy37AlXUcIKxbrDBtefvJ31faziWyZKvT4BGFJCznRU6AOxOg1pe4bWbWI</span><span class="p">+</span><span class="n">dGnMIIq7IhtK</span><span class="p">+</span><span class="n">6tY</span><span class="p">/</span><span class="n">w3OlF7xcWmrJP1oucpq33BYOrnRCL9EO5Zp2jcejDeG5UvXONG7CggT7FDhjwcCRZvX</span><span class="p">+</span><span class="n">AutDGAtgBckNXZjV9SDKWgDifCSDtDfV4Be4zb8b3hxtSMsbEY8YHxsThsmHrUkbz</span> <span class="n">root</span><span class="nv">@jenkins</span><span class="n">-server</span>
+</code></pre></div>
+<p><img alt="image-20220224211329307" src="../../img/docker_devops/image-20220224211329307.png" /></p>
+<h4 id="4433_jenkins-sever">4.4.3.3 配置jenkins-sever主机的私钥到凭据列表<a class="headerlink" href="#4433_jenkins-sever" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="p">[</span><span class="n">root</span><span class="nv">@jenkins</span><span class="n">-server</span> <span class="p">~]</span><span class="c"># cat /root/.ssh/id_rsa</span>
+<span class="p">----</span><span class="n">-BEGIN</span> <span class="n">RSA</span> <span class="n">PRIVATE</span> <span class="n">KEY</span><span class="p">-----</span>
+<span class="n">MIIEogIBAAKCAQEAsoN1mhJuch</span><span class="p">/</span><span class="n">cr2vCZucH0z8Dd0ThjDT6QHsfM2I</span><span class="p">/</span><span class="n">jNRnrKDL</span>
+<span class="n">ROoJIih1snQCQYi7rv9Xwceh5YM88YIVY</span><span class="p">/</span><span class="n">aCuA5k0WUIdiGWOPs2SBgUWgwbgTtX</span>
+<span class="p">+/</span><span class="n">knVRP42aC3dWvsmdxUJst</span><span class="p">+</span><span class="n">wJV1HCCsW6wwbXn7yd9X2s4lsmSr0</span><span class="p">+</span><span class="n">ARhSQs50VO</span>
+<span class="n">gDsToNaXuG1m1iPnRpzCCKuyIbSvurWP8NzpRe8XFpqyT9aLnKat9wWDq50Qi</span><span class="p">/</span><span class="nb">RD</span>
+<span class="n">uWado3How3huVL1zjRuwoIE</span><span class="p">+</span><span class="n">xQ4Y8HAkWb1</span><span class="p">/</span><span class="n">gLrQxgLYAXJDV2Y1fUgyloA4nwkg</span>
+<span class="n">7Q31eAXuM2</span><span class="p">/</span><span class="n">G94cbUjLGxGPGB8bE4bJh61JG8wIDAQABAoIBAEOwy6BPyuelo1Y1</span>
+<span class="n">g3LnujTlWRgZ23kCAb7</span><span class="p">/</span><span class="n">sPYYFEb</span><span class="p">/</span><span class="n">qAxysIGCSVJVi0PO76gQBDM4iftmCsLv</span><span class="p">/+</span><span class="n">UI</span>
+<span class="n">UbolGK5Ybuxj5lB9LeyPfaba0qTOoINhkFxwvvRo7V0Ar3BsKzywqoxHb9nxEoZG</span>
+<span class="n">8XSVl4t7zPlgonzK3MqHmAxwk9QrIB</span><span class="p">/</span><span class="n">rnjolHGN6HvfK2Cwq5WN1crspwQ</span><span class="p">+</span><span class="n">XDbRS</span>
+<span class="n">J5qoAtv6PJzrU6QhJl</span><span class="p">/</span><span class="n">zSMCb0MytlIhZi</span><span class="p">+</span><span class="n">V</span><span class="p">+</span><span class="n">1yY</span><span class="p">/</span><span class="n">QhAYrWJgWypEwGlAXlVC90r4</span>
+<span class="n">twX1W</span><span class="p">/</span><span class="n">sl63xzFF396WjM1478yqpttvID06dKTC9T3y</span><span class="p">/</span><span class="n">k8lLmRNXwqmTCIm7C</span><span class="p">/</span><span class="n">jxP</span>
+<span class="n">9wjXJUECgYEA4r1N4AML7JpvE7hBRkreSdIIwoppRkBwl6gt</span><span class="p">/</span><span class="n">AJj8yt2ydQ8PY4P</span>
+<span class="n">X3s5ZkCfPzHX2XsVUUcQpsBFcU2PyG29</span><span class="p">+</span><span class="n">qzt3XOmlGYgJG11xPQbwi95</span><span class="p">/</span><span class="n">u9VSd5u</span>
+<span class="n">AuaNNa2YPw2teuM0hKVAl5knfy0</span><span class="p">+</span><span class="n">YHcOCdU14gHCCWsD4uOz5Zg9jVMCgYEAyYzv</span>
+<span class="n">SBvCqbZ4d5agTn</span><span class="p">+</span><span class="n">ZiOkmgKVT4UVnmZPivFXnCWiIbX2fi3ok7jU1hZAs6lf6VlTU</span>
+<span class="n">EPV8T1LwjO9yhFmicepzSl9lJCMbMXHt20OsqN0oUQFpoTQ07pbBE2K8c1IuQUEi</span>
+<span class="n">B2SoLHqv7Ym9jHQqvT3DVhTiC</span><span class="p">+</span><span class="n">H2LwsgVRvvi</span><span class="p">+</span><span class="n">ECgYAxaID0xJUvnMOBr5ABykTA</span>
+<span class="n">H1WrVs</span><span class="p">/</span><span class="n">z8AzY71v942N2VM1Q07</span><span class="p">/</span><span class="n">AxhkRfF</span><span class="p">+</span><span class="n">YqZJKCgl4KbsOeAbn31QCiZ1AVrGk</span>
+<span class="n">U1SOAiqVgd</span><span class="p">+</span><span class="n">VMIkOPwdhfEkARZT3QNIGLcktnkNj0g4wjhwen4gAwO37Z5eFG8xi</span>
+<span class="n">ViSkuC9ZMAmrwmSsLk2TYwKBgHQh0tYXuMiVLUCq99</span><span class="p">+</span><span class="n">DQnJS9S53FKfel900Cxc9</span>
+<span class="n">4AvZwZJlKgLx9EmVOyukcVzuKH6KDk9fQ6tpPNXYOoHsK9</span><span class="p">+</span><span class="n">7mYanBN4XpFmPLeCD</span>
+<span class="n">U</span><span class="p">/</span><span class="n">9QvyQ9ziFmtYEsOD</span><span class="p">/</span><span class="n">1SmSgW6qZ3wOnigdnAeu6zA8b</span><span class="p">+</span><span class="n">GxmJCF7kuwJ3RIqNQ0V</span>
+<span class="n">NafBAoGAXyynoTT2zugFq8jYRubxkMk7NdnTRAnGh</span><span class="p">+</span><span class="n">mlyrGGMsNLmPvfAw</span><span class="p">+</span><span class="n">6yKph</span>
+<span class="n">1fVHKXHtSrgtK0CVOIcmaH3r</span><span class="p">+</span><span class="n">LfG4Mfrjlq</span><span class="p">+</span><span class="n">8qiKcepBFvO9cZLNKn11vqQtzs7m</span>
+<span class="n">y</span><span class="p">+</span><span class="n">ydl4xTcCPoAMDsVeamJ3fv</span><span class="p">+</span><span class="n">9nyXe5KqYtw</span><span class="p">+</span><span class="n">BJMjpP</span><span class="p">+</span><span class="n">PnNN2YQ</span><span class="p">=</span>
+<span class="p">----</span><span class="n">-END</span> <span class="n">RSA</span> <span class="n">PRIVATE</span> <span class="n">KEY</span><span class="p">-----</span>
+</code></pre></div>
+<p><img alt="image-20220224212308684" src="../../img/docker_devops/image-20220224212308684.png" /></p>
+<p><img alt="image-20220224212411414" src="../../img/docker_devops/image-20220224212411414.png" /></p>
+<p><img alt="image-20220224212543257" src="../../img/docker_devops/image-20220224212543257.png" /></p>
+<p><img alt="image-20220224212622017" src="../../img/docker_devops/image-20220224212622017.png" /></p>
+<p><img alt="image-20220224212928853" src="../../img/docker_devops/image-20220224212928853.png" /></p>
+<p><img alt="image-20220224213022249" src="../../img/docker_devops/image-20220224213022249.png" /></p>
+<h2 id="45_jenkins">4.5 jenkins插件安装<a class="headerlink" href="#45_jenkins" title="Permanent link">&para;</a></h2>
+<h3 id="451_maven_integration">4.5.1 maven integration<a class="headerlink" href="#451_maven_integration" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>用于编译JAVA项目</p>
+</blockquote>
+<p><img alt="image-20220224214012429" src="../../img/docker_devops/image-20220224214012429.png" /></p>
+<p><img alt="image-20220224214041517" src="../../img/docker_devops/image-20220224214041517.png" /></p>
+<p><img alt="image-20220224214133277" src="../../img/docker_devops/image-20220224214133277.png" /></p>
+<p><img alt="image-20220224214217988" src="../../img/docker_devops/image-20220224214217988.png" /></p>
+<h3 id="452_git_parameter">4.5.2 git parameter<a class="headerlink" href="#452_git_parameter" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>用于基于git版本提交进行参数构建项目</p>
+</blockquote>
+<p><img alt="image-20220224214317316" src="../../img/docker_devops/image-20220224214317316.png" /></p>
+<p><img alt="image-20220224214329349" src="../../img/docker_devops/image-20220224214329349.png" /></p>
+<h3 id="453_gitlab">4.5.3 gitlab<a class="headerlink" href="#453_gitlab" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>用于jenkins-server拉取项目</p>
+</blockquote>
+<p><img alt="image-20220224214412283" src="../../img/docker_devops/image-20220224214412283.png" /></p>
+<p><img alt="image-20220224214442366" src="../../img/docker_devops/image-20220224214442366.png" /></p>
+<h3 id="454_generic_webhook_trigger">4.5.4 Generic Webhook Trigger<a class="headerlink" href="#454_generic_webhook_trigger" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>用于项目自动化构建</p>
+</blockquote>
+<p><img alt="image-20220224214812077" src="../../img/docker_devops/image-20220224214812077.png" /></p>
+<p><img alt="image-20220224214922182" src="../../img/docker_devops/image-20220224214922182.png" /></p>
+<h3 id="455_ssh">4.5.5 ssh<a class="headerlink" href="#455_ssh" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>用于jenkins-server对web-server实施项目部署</p>
+</blockquote>
+<p><img alt="image-20220224215008239" src="../../img/docker_devops/image-20220224215008239.png" /></p>
+<p><img alt="image-20220224215019932" src="../../img/docker_devops/image-20220224215019932.png" /></p>
+<h2 id="46_jenkins">4.6 jenkins全局工具配置<a class="headerlink" href="#46_jenkins" title="Permanent link">&para;</a></h2>
+<p><img alt="image-20220224215857618" src="../../img/docker_devops/image-20220224215857618.png" /></p>
+<h3 id="461_jdk">4.6.1 JDK配置<a class="headerlink" href="#461_jdk" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="p">[</span><span class="n">root</span><span class="nv">@jenkins</span><span class="n">-server</span> <span class="p">~]</span><span class="c"># java -version</span>
+<span class="n">java</span> <span class="n">version</span> <span class="s2">&quot;1.8.0_191&quot;</span>
+<span class="n">Java</span><span class="p">(</span><span class="n">TM</span><span class="p">)</span> <span class="n">SE</span> <span class="n">Runtime</span> <span class="n">Environment</span> <span class="p">(</span><span class="n">build</span> <span class="n">1</span><span class="p">.</span><span class="n">8</span><span class="p">.</span><span class="n">0_191-b12</span><span class="p">)</span>
+<span class="n">Java</span> <span class="n">HotSpot</span><span class="p">(</span><span class="n">TM</span><span class="p">)</span> <span class="n">64-Bit</span> <span class="n">Server</span> <span class="n">VM</span> <span class="p">(</span><span class="n">build</span> <span class="n">25</span><span class="p">.</span><span class="n">191-b12</span><span class="p">,</span> <span class="n">mixed</span> <span class="n">mode</span><span class="p">)</span>
+<span class="p">[</span><span class="n">root</span><span class="nv">@jenkins</span><span class="n">-server</span> <span class="p">~]</span><span class="c"># echo $JAVA_HOME</span>
+<span class="p">/</span><span class="n">usr</span><span class="p">/</span><span class="n">local</span><span class="p">/</span><span class="n">jdk</span>
+</code></pre></div>
+<p><img alt="image-20220224220023637" src="../../img/docker_devops/image-20220224220023637.png" /></p>
+<p><img alt="image-20220224220323445" src="../../img/docker_devops/image-20220224220323445.png" /></p>
+<h3 id="462_git">4.6.2 Git配置<a class="headerlink" href="#462_git" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="p">[</span><span class="n">root</span><span class="nv">@jenkins</span><span class="n">-server</span> <span class="p">~]</span><span class="c"># git version</span>
+<span class="n">git</span> <span class="n">version</span> <span class="n">1</span><span class="p">.</span><span class="n">8</span><span class="p">.</span><span class="n">3</span><span class="p">.</span><span class="n">1</span>
+</code></pre></div>
+<p><img alt="image-20220224220502686" src="../../img/docker_devops/image-20220224220502686.png" /></p>
+<h3 id="463_maven">4.6.3 Maven配置<a class="headerlink" href="#463_maven" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="p">[</span><span class="n">root</span><span class="nv">@jenkins</span><span class="n">-server</span> <span class="p">~]</span><span class="c"># mvn --version</span>
+<span class="n">Apache</span> <span class="n">Maven</span> <span class="n">3</span><span class="p">.</span><span class="n">8</span><span class="p">.</span><span class="n">4</span> <span class="p">(</span><span class="n">9b656c72d54e5bacbed989b64718c159fe39b537</span><span class="p">)</span>
+<span class="n">Maven</span> <span class="n">home</span><span class="p">:</span> <span class="p">/</span><span class="n">usr</span><span class="p">/</span><span class="n">local</span><span class="p">/</span><span class="n">mvn</span>
+<span class="n">Java</span> <span class="n">version</span><span class="p">:</span> <span class="n">1</span><span class="p">.</span><span class="n">8</span><span class="p">.</span><span class="n">0_191</span><span class="p">,</span> <span class="n">vendor</span><span class="p">:</span> <span class="n">Oracle</span> <span class="n">Corporation</span><span class="p">,</span> <span class="n">runtime</span><span class="p">:</span> <span class="p">/</span><span class="n">usr</span><span class="p">/</span><span class="n">local</span><span class="p">/</span><span class="n">jdk</span><span class="p">/</span><span class="n">jre</span>
+<span class="k">Default</span> <span class="n">locale</span><span class="p">:</span> <span class="n">zh_CN</span><span class="p">,</span> <span class="n">platform</span> <span class="n">encoding</span><span class="p">:</span> <span class="n">UTF</span><span class="p">-</span><span class="n">8</span>
+<span class="n">OS</span> <span class="n">name</span><span class="p">:</span> <span class="s2">&quot;linux&quot;</span><span class="p">,</span> <span class="n">version</span><span class="p">:</span> <span class="s2">&quot;3.10.0-1160.49.1.el7.x86_64&quot;</span><span class="p">,</span> <span class="n">arch</span><span class="p">:</span> <span class="s2">&quot;amd64&quot;</span><span class="p">,</span> <span class="n">family</span><span class="p">:</span> <span class="s2">&quot;unix&quot;</span>
+<span class="p">[</span><span class="n">root</span><span class="nv">@jenkins</span><span class="n">-server</span> <span class="p">~]</span><span class="c"># echo $MAVEN_HOME</span>
+<span class="p">/</span><span class="n">usr</span><span class="p">/</span><span class="n">local</span><span class="p">/</span><span class="n">mvn</span>
+</code></pre></div>
+<p><img alt="image-20220224220529911" src="../../img/docker_devops/image-20220224220529911.png" /></p>
+<p><img alt="image-20220224220733835" src="../../img/docker_devops/image-20220224220733835.png" /></p>
+<h2 id="47_jenkins">4.7 jenkins系统配置<a class="headerlink" href="#47_jenkins" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p>主要配置jenkins-server通过ssh协议连接web-server</p>
+</blockquote>
+<h3 id="471_jenkins-serverweb-server">4.7.1 添加jenkins-server访问web-server凭据<a class="headerlink" href="#471_jenkins-serverweb-server" title="Permanent link">&para;</a></h3>
+<p><img alt="image-20220224221320500" src="../../img/docker_devops/image-20220224221320500.png" /></p>
+<p><img alt="image-20220224221347030" src="../../img/docker_devops/image-20220224221347030.png" /></p>
+<p><img alt="image-20220224221416358" src="../../img/docker_devops/image-20220224221416358.png" /></p>
+<p><img alt="image-20220224221609980" src="../../img/docker_devops/image-20220224221609980.png" /></p>
+<p><img alt="image-20220224221643648" src="../../img/docker_devops/image-20220224221643648.png" /></p>
+<h3 id="472_ssh">4.7.2 配置ssh协议连接主机<a class="headerlink" href="#472_ssh" title="Permanent link">&para;</a></h3>
+<p><img alt="image-20220224221754566" src="../../img/docker_devops/image-20220224221754566.png" /></p>
+<p><img alt="image-20220224221832480" src="../../img/docker_devops/image-20220224221832480.png" /></p>
+<p><img alt="image-20220224221901770" src="../../img/docker_devops/image-20220224221901770.png" /></p>
+<p><img alt="image-20220224222146699" src="../../img/docker_devops/image-20220224222146699.png" /></p>
+<h1 id="_5">五、企业业务代码项目发布<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h1>
+<h2 id="51_mariadb">5.1 数据库管理系统部署 mariadb及创建项目数据库<a class="headerlink" href="#51_mariadb" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><span class="p">[</span><span class="n">root</span><span class="nv">@web</span><span class="n">-server</span> <span class="p">~]</span><span class="c"># yum -y install mariadb mariadb-server</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="p">[</span><span class="n">root</span><span class="nv">@web</span><span class="n">-server</span> <span class="p">~]</span><span class="c"># systemctl enable mariadb</span>
+<span class="p">[</span><span class="n">root</span><span class="nv">@web</span><span class="n">-server</span> <span class="p">~]</span><span class="c"># systemctl start mariadb</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="p">[</span><span class="n">root</span><span class="nv">@web</span><span class="n">-server</span> <span class="p">~]</span><span class="c"># mysqladmin -uroot password &#39;abc123&#39;</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="p">[</span><span class="n">root</span><span class="nv">@web</span><span class="n">-server</span> <span class="p">~]</span><span class="c"># mysql -uroot -pabc123</span>
+<span class="n">Welcome</span> <span class="n">to</span> <span class="n">the</span> <span class="n">MariaDB</span> <span class="n">monitor</span><span class="p">.</span>  <span class="n">Commands</span> <span class="k">end</span> <span class="n">with</span> <span class="p">;</span> <span class="n">or</span> <span class="p">\</span><span class="n">g</span><span class="p">.</span>
+<span class="n">Your</span> <span class="n">MariaDB</span> <span class="n">connection</span> <span class="n">id</span> <span class="n">is</span> <span class="n">3</span>
+<span class="n">Server</span> <span class="n">version</span><span class="p">:</span> <span class="n">5</span><span class="p">.</span><span class="n">5</span><span class="p">.</span><span class="n">68-MariaDB</span> <span class="n">MariaDB</span> <span class="n">Server</span>
+
+<span class="n">Copyright</span> <span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="n">2000</span><span class="p">,</span> <span class="n">2018</span><span class="p">,</span> <span class="n">Oracle</span><span class="p">,</span> <span class="n">MariaDB</span> <span class="n">Corporation</span> <span class="n">Ab</span> <span class="n">and</span> <span class="n">others</span><span class="p">.</span>
+
+<span class="nb">Type </span><span class="s1">&#39;help;&#39;</span> <span class="n">or</span> <span class="s1">&#39;\h&#39;</span> <span class="k">for</span> <span class="n">help</span><span class="p">.</span> <span class="nb">Type </span><span class="s1">&#39;\c&#39;</span> <span class="n">to</span> <span class="nb">clear </span><span class="n">the</span> <span class="n">current</span> <span class="n">input</span> <span class="n">statement</span><span class="p">.</span>
+
+<span class="n">MariaDB</span> <span class="p">[(</span><span class="n">none</span><span class="p">)]&gt;</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">MariaDB</span> <span class="p">[(</span><span class="n">none</span><span class="p">)]&gt;</span> <span class="n">create</span> <span class="n">database</span> <span class="k">if</span> <span class="n">not</span> <span class="n">exists</span> <span class="n">solo</span> <span class="k">default</span> <span class="n">charset</span> <span class="n">utf8</span> <span class="n">collate</span> <span class="n">utf8_general_ci</span><span class="p">;</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">MariaDB</span> <span class="p">[(</span><span class="n">none</span><span class="p">)]&gt;</span> <span class="n">grant</span> <span class="n">all</span> <span class="n">on</span> <span class="n">solo</span><span class="p">.*</span> <span class="n">to</span> <span class="s1">&#39;root&#39;</span><span class="p">@</span><span class="s1">&#39;%&#39;</span> <span class="n">identified</span> <span class="n">by</span> <span class="s2">&quot;123456&quot;</span><span class="p">;</span>
+<span class="n">Query</span> <span class="n">OK</span><span class="p">,</span> <span class="n">0</span> <span class="n">rows</span> <span class="n">affected</span> <span class="p">(</span><span class="n">0</span><span class="p">.</span><span class="n">00</span> <span class="n">sec</span><span class="p">)</span>
+
+<span class="n">MariaDB</span> <span class="p">[(</span><span class="n">none</span><span class="p">)]&gt;</span> <span class="n">grant</span> <span class="n">all</span> <span class="n">on</span> <span class="n">solo</span><span class="p">.*</span> <span class="n">to</span> <span class="s1">&#39;root&#39;</span><span class="p">@</span><span class="s1">&#39;localhost&#39;</span> <span class="n">identified</span> <span class="n">by</span> <span class="s2">&quot;123456&quot;</span><span class="p">;</span>
+<span class="n">Query</span> <span class="n">OK</span><span class="p">,</span> <span class="n">0</span> <span class="n">rows</span> <span class="n">affected</span> <span class="p">(</span><span class="n">0</span><span class="p">.</span><span class="n">00</span> <span class="n">sec</span><span class="p">)</span>
+</code></pre></div>
+<h2 id="52">5.2 项目代码获取<a class="headerlink" href="#52" title="Permanent link">&para;</a></h2>
+<p><img alt="image-20220224223418318" src="../../img/docker_devops/image-20220224223418318.png" /></p>
+<div class="highlight"><pre><span></span><code><span class="c"># git clone --recurse-submodules https://gitee.com/dl88250/solo.git</span>
+</code></pre></div>
+<h2 id="53">5.3 项目代码修改<a class="headerlink" href="#53" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><span class="p">[</span><span class="n">root</span><span class="nv">@dev</span> <span class="p">~]</span><span class="c"># ls</span>
+<span class="n">solo</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="p">[</span><span class="n">root</span><span class="nv">@dev</span> <span class="p">~]</span><span class="c"># vim solo/src/main/resources/local.properties</span>
+<span class="p">[</span><span class="n">root</span><span class="nv">@dev</span> <span class="p">~]</span><span class="c"># cat solo/src/main/resources/local.properties</span>
+<span class="c">#</span>
+<span class="c"># Solo - A small and beautiful blogging system written in Java.</span>
+<span class="c"># Copyright (c) 2010-present, b3log.org</span>
+<span class="c">#</span>
+<span class="c"># Solo is licensed under Mulan PSL v2.</span>
+<span class="c"># You can use this software according to the terms and conditions of the Mulan PSL v2.</span>
+<span class="c"># You may obtain a copy of Mulan PSL v2 at:</span>
+<span class="c">#         http://license.coscl.org.cn/MulanPSL2</span>
+<span class="c"># THIS SOFTWARE IS PROVIDED ON AN &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OF ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO NON-INFRINGEMENT, MERCHANTABILITY OR FIT FOR A PARTICULAR PURPOSE.</span>
+<span class="c"># See the Mulan PSL v2 for more details.</span>
+<span class="c">#</span>
+
+<span class="c">#</span>
+<span class="c"># Description: Solo local environment configurations.</span>
+<span class="c"># Version: 1.1.3.15, Mar 17, 2019</span>
+<span class="c"># Author: Liang Ding</span>
+<span class="c">#</span>
+
+<span class="c">#### MySQL runtime ####</span>
+<span class="n">runtimeDatabase</span><span class="p">=</span><span class="n">MYSQL</span>
+<span class="n">jdbc</span><span class="p">.</span><span class="n">username</span><span class="p">=</span><span class="n">root</span>
+<span class="n">jdbc</span><span class="p">.</span><span class="n">password</span><span class="p">=</span><span class="n">123456</span>
+<span class="n">jdbc</span><span class="p">.</span><span class="n">driver</span><span class="p">=</span><span class="n">com</span><span class="p">.</span><span class="n">mysql</span><span class="p">.</span><span class="n">cj</span><span class="p">.</span><span class="n">jdbc</span><span class="p">.</span><span class="n">Driver</span>
+<span class="n">jdbc</span><span class="p">.</span><span class="n">URL</span><span class="p">=</span><span class="n">jdbc</span><span class="p">:</span><span class="n">mysql</span><span class="p">://</span><span class="n">192</span><span class="p">.</span><span class="n">168</span><span class="p">.</span><span class="n">10</span><span class="p">.</span><span class="n">24</span><span class="p">:</span><span class="n">3306</span><span class="p">/</span><span class="n">solo</span><span class="k">?</span><span class="n">useUnicode</span><span class="p">=</span><span class="n">yes</span><span class="p">&amp;</span><span class="n">characterEncoding</span><span class="p">=</span><span class="n">UTF</span><span class="p">-</span><span class="n">8</span><span class="p">&amp;</span><span class="n">useSSL</span><span class="p">=</span><span class="n">false</span><span class="p">&amp;</span><span class="n">serverTimezone</span><span class="p">=</span><span class="n">UTC</span><span class="p">&amp;</span><span class="n">allowPublicKeyRetrieval</span><span class="p">=</span><span class="n">true</span>
+
+<span class="c">#### H2 runtime ####</span>
+<span class="c">#runtimeDatabase=H2</span>
+<span class="c">#jdbc.username=root</span>
+<span class="c">#jdbc.password=</span>
+<span class="c">#jdbc.driver=org.h2.Driver</span>
+<span class="c">#jdbc.URL=jdbc:h2:~/solo_h2/db;MODE=MYSQL</span>
+
+<span class="c"># The minConnCnt MUST larger or equal to 3</span>
+<span class="n">jdbc</span><span class="p">.</span><span class="n">minConnCnt</span><span class="p">=</span><span class="n">5</span>
+<span class="n">jdbc</span><span class="p">.</span><span class="n">maxConnCnt</span><span class="p">=</span><span class="n">10</span>
+
+<span class="c"># The specific table name prefix</span>
+<span class="n">jdbc</span><span class="p">.</span><span class="n">tablePrefix</span><span class="p">=</span><span class="n">b3_solo</span>
+</code></pre></div>
+<h2 id="54_gitlab">5.4 项目代码上传到gitlab<a class="headerlink" href="#54_gitlab" title="Permanent link">&para;</a></h2>
+<p><img alt="image-20220224223855433" src="../../img/docker_devops/image-20220224223855433.png" /></p>
+<p><img alt="image-20220224223917897" src="../../img/docker_devops/image-20220224223917897.png" /></p>
+<p><img alt="image-20220224224014013" src="../../img/docker_devops/image-20220224224014013.png" /></p>
+<div class="highlight"><pre><span></span><code><span class="c"># git config --global user.name &quot;dev&quot;</span>
+<span class="c"># git config --global user.email &quot;dev@kubemsb.com&quot;</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="p">[</span><span class="n">root</span><span class="nv">@dev</span> <span class="n">solo</span><span class="p">]</span><span class="c"># git remote remove origin</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="p">[</span><span class="n">root</span><span class="nv">@dev</span> <span class="n">solo</span><span class="p">]</span><span class="c"># git remote add origin git@192.168.10.21:root/solo.git</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="p">[</span><span class="n">root</span><span class="nv">@dev</span> <span class="n">solo</span><span class="p">]</span><span class="c"># git add -A .</span>
+<span class="p">[</span><span class="n">root</span><span class="nv">@dev</span> <span class="n">solo</span><span class="p">]</span><span class="c"># git commit -m &quot;new&quot;</span>
+<span class="no">[master 3e39b0a]</span> <span class="n">new</span>
+ <span class="n">1</span> <span class="n">file</span> <span class="n">changed</span><span class="p">,</span> <span class="n">1</span> <span class="n">insertion</span><span class="p">(+),</span> <span class="n">1</span> <span class="n">deletion</span><span class="p">(-)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="p">[</span><span class="n">root</span><span class="nv">@dev</span> <span class="n">solo</span><span class="p">]</span><span class="c"># git tag 1.0.0</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="p">[</span><span class="n">root</span><span class="nv">@dev</span> <span class="n">solo</span><span class="p">]</span><span class="c"># git push origin 1.0.0</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="p">[</span><span class="n">root</span><span class="nv">@dev</span> <span class="n">solo</span><span class="p">]</span><span class="c"># git push -u origin --all</span>
+</code></pre></div>
+<p><img alt="image-20220224225051498" src="../../img/docker_devops/image-20220224225051498.png" /></p>
+<h2 id="55">5.5 构建项目运行基础应用容器镜像<a class="headerlink" href="#55" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p>在harbor-server主机上操作</p>
+</blockquote>
+<h3 id="551">5.5.1 创建项目目录<a class="headerlink" href="#551" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="p">[</span><span class="n">root</span><span class="nv">@harbor</span><span class="n">-server</span> <span class="p">~]</span><span class="c"># mkdir tomcatdir</span>
+<span class="p">[</span><span class="n">root</span><span class="nv">@harbor</span><span class="n">-server</span> <span class="p">~]</span><span class="c"># cd tomcatdir</span>
+</code></pre></div>
+<h3 id="552_dockerfile">5.5.2 生成Dockerfile文件<a class="headerlink" href="#552_dockerfile" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="p">[</span><span class="n">root</span><span class="nv">@harbor</span><span class="n">-server</span> <span class="n">tomcatdir</span><span class="p">]</span><span class="c"># echo &quot;tomcat is running&quot; &gt;&gt; index.html</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="p">[</span><span class="n">root</span><span class="nv">@harbor</span><span class="n">-server</span> <span class="n">tomcatdir</span><span class="p">]</span><span class="c"># vim Dockerfile</span>
+<span class="p">[</span><span class="n">root</span><span class="nv">@harbor</span><span class="n">-server</span> <span class="n">tomcatdir</span><span class="p">]</span><span class="c"># cat Dockerfile</span>
+<span class="n">FROM</span> <span class="n">centos</span><span class="p">:</span><span class="n">centos7</span>
+
+<span class="n">MAINTAINER</span> <span class="s2">&quot;www.kubemsb.com&quot;</span>
+
+<span class="n">ENV</span> <span class="n">VERSION</span><span class="p">=</span><span class="n">8</span><span class="p">.</span><span class="n">5</span><span class="p">.</span><span class="n">75</span>
+<span class="n">ENV</span> <span class="n">JAVA_HOME</span><span class="p">=/</span><span class="n">usr</span><span class="p">/</span><span class="n">local</span><span class="p">/</span><span class="n">jdk</span>
+<span class="n">ENV</span> <span class="n">TOMCAT_HOME</span><span class="p">=/</span><span class="n">usr</span><span class="p">/</span><span class="n">local</span><span class="p">/</span><span class="n">tomcat</span>
+
+<span class="n">RUN</span> <span class="n">yum</span> <span class="n">-y</span> <span class="n">install</span> <span class="nb">wget</span>
+
+<span class="n">RUN</span> <span class="nb">wget </span><span class="n">https</span><span class="p">://</span><span class="n">dlcdn</span><span class="p">.</span><span class="n">apache</span><span class="p">.</span><span class="n">org</span><span class="p">/</span><span class="n">tomcat</span><span class="p">/</span><span class="n">tomcat</span><span class="p">-</span><span class="n">8</span><span class="p">/</span><span class="n">v</span><span class="p">${</span><span class="n">VERSION</span><span class="p">}/</span><span class="n">bin</span><span class="p">/</span><span class="n">apache-tomcat</span><span class="p">-${</span><span class="n">VERSION</span><span class="p">}.</span><span class="n">tar</span><span class="p">.</span><span class="n">gz</span> <span class="p">-</span><span class="n">-no-check-certificate</span>
+
+<span class="n">RUN</span> <span class="n">tar</span> <span class="n">xf</span> <span class="n">apache-tomcat</span><span class="p">-${</span><span class="n">VERSION</span><span class="p">}.</span><span class="n">tar</span><span class="p">.</span><span class="n">gz</span>
+
+<span class="n">RUN</span> <span class="nb">mv </span><span class="n">apache-tomcat</span><span class="p">-${</span><span class="n">VERSION</span><span class="p">}</span> <span class="p">/</span><span class="n">usr</span><span class="p">/</span><span class="n">local</span><span class="p">/</span><span class="n">tomcat</span>
+
+<span class="n">RUN</span> <span class="nb">rm </span><span class="n">-rf</span> <span class="n">apache-tomcat</span><span class="p">-${</span><span class="n">VERSION</span><span class="p">}.</span><span class="n">tar</span><span class="p">.</span><span class="n">gz</span> <span class="p">/</span><span class="n">usr</span><span class="p">/</span><span class="n">local</span><span class="p">/</span><span class="n">tomcat</span><span class="p">/</span><span class="n">webapps</span><span class="p">/*</span>
+
+<span class="n">RUN</span> <span class="n">mkdir</span> <span class="p">/</span><span class="n">usr</span><span class="p">/</span><span class="n">local</span><span class="p">/</span><span class="n">tomcat</span><span class="p">/</span><span class="n">webapps</span><span class="p">/</span><span class="n">ROOT</span>
+
+<span class="n">ADD</span> <span class="p">./</span><span class="n">index</span><span class="p">.</span><span class="n">html</span> <span class="p">/</span><span class="n">usr</span><span class="p">/</span><span class="n">local</span><span class="p">/</span><span class="n">tomcat</span><span class="p">/</span><span class="n">webapps</span><span class="p">/</span><span class="n">ROOT</span><span class="p">/</span>
+
+<span class="n">ADD</span> <span class="p">./</span><span class="n">jdk</span> <span class="p">/</span><span class="n">usr</span><span class="p">/</span><span class="n">local</span><span class="p">/</span><span class="n">jdk</span>
+
+
+<span class="n">RUN</span> <span class="nb">echo </span><span class="s2">&quot;export TOMCAT_HOME=/usr/local/tomcat&quot;</span> <span class="p">&gt;&gt;</span> <span class="p">/</span><span class="n">etc</span><span class="p">/</span><span class="n">profile</span>
+
+<span class="n">RUN</span> <span class="nb">echo </span><span class="s2">&quot;export JAVA_HOME=/usr/local/jdk&quot;</span> <span class="p">&gt;&gt;</span> <span class="p">/</span><span class="n">etc</span><span class="p">/</span><span class="n">profile</span>
+
+<span class="n">RUN</span> <span class="nb">echo </span><span class="s2">&quot;export PATH=${TOMCAT_HOME}/bin:${JAVA_HOME}/bin:$PATH&quot;</span> <span class="p">&gt;&gt;</span> <span class="p">/</span><span class="n">etc</span><span class="p">/</span><span class="n">profile</span>
+
+<span class="n">RUN</span> <span class="nb">echo </span><span class="s2">&quot;export CLASSPATH=.:${JAVA_HOME}/lib/dt.jar:${JAVA_HOME}/lib/tools.jar&quot;</span> <span class="p">&gt;&gt;</span> <span class="p">/</span><span class="n">etc</span><span class="p">/</span><span class="n">profile</span>
+
+
+<span class="n">RUN</span> <span class="n">source</span> <span class="p">/</span><span class="n">etc</span><span class="p">/</span><span class="n">profile</span>
+
+<span class="n">EXPOSE</span> <span class="n">8080</span>
+
+<span class="n">CMD</span> <span class="p">[</span><span class="s2">&quot;/usr/local/tomcat/bin/catalina.sh&quot;</span><span class="p">,</span><span class="s2">&quot;run&quot;</span><span class="p">]</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="p">[</span><span class="n">root</span><span class="nv">@harbor</span><span class="n">-server</span> <span class="n">tomcatdir</span><span class="p">]</span><span class="c"># ls</span>
+<span class="n">Dockerfile</span>  <span class="n">index</span><span class="p">.</span><span class="n">html</span>  <span class="n">jdk</span>
+</code></pre></div>
+<h3 id="553_docker_build">5.5.3 使用docker build构建容器镜像<a class="headerlink" href="#553_docker_build" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="p">[</span><span class="n">root</span><span class="nv">@harbor</span><span class="n">-server</span> <span class="n">tomcatdir</span><span class="p">]</span><span class="c"># docker build -t 192.168.10.23/library/tomcat:8575 .</span>
+</code></pre></div>
+<h3 id="554_harbor">5.5.4 推送容器镜像至harbor容器镜像仓库<a class="headerlink" href="#554_harbor" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="p">[</span><span class="n">root</span><span class="nv">@harbor</span><span class="n">-server</span> <span class="n">tomcatdir</span><span class="p">]</span><span class="c"># docker images</span>
+<span class="n">REPOSITORY</span>                      <span class="n">TAG</span>       <span class="n">IMAGE</span> <span class="n">ID</span>       <span class="n">CREATED</span>              <span class="n">SIZE</span>
+<span class="n">192</span><span class="p">.</span><span class="n">168</span><span class="p">.</span><span class="n">10</span><span class="p">.</span><span class="n">23</span><span class="p">/</span><span class="n">library</span><span class="p">/</span><span class="n">tomcat</span>    <span class="n">8575</span>      <span class="n">01c433f8562d</span>   <span class="n">About</span> <span class="n">a</span> <span class="n">minute</span> <span class="n">ago</span>   <span class="n">796MB</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="p">[</span><span class="n">root</span><span class="nv">@harbor</span><span class="n">-server</span> <span class="n">tomcatdir</span><span class="p">]</span><span class="c"># docker login 192.168.10.23</span>
+<span class="n">Username</span><span class="p">:</span> <span class="n">admin</span>
+<span class="n">Password</span><span class="p">:</span>
+<span class="n">WARNING</span><span class="p">!</span> <span class="n">Your</span> <span class="n">password</span> <span class="n">will</span> <span class="n">be</span> <span class="n">stored</span> <span class="n">unencrypted</span> <span class="k">in</span> <span class="p">/</span><span class="n">root</span><span class="p">/.</span><span class="n">docker</span><span class="p">/</span><span class="n">config</span><span class="p">.</span><span class="n">json</span><span class="p">.</span>
+<span class="n">Configure</span> <span class="n">a</span> <span class="n">credential</span> <span class="n">helper</span> <span class="n">to</span> <span class="n">remove</span> <span class="n">this</span> <span class="n">warning</span><span class="p">.</span> <span class="n">See</span>
+<span class="n">https</span><span class="p">://</span><span class="n">docs</span><span class="p">.</span><span class="n">docker</span><span class="p">.</span><span class="n">com</span><span class="p">/</span><span class="n">engine</span><span class="p">/</span><span class="n">reference</span><span class="p">/</span><span class="n">commandline</span><span class="p">/</span><span class="n">login</span><span class="p">/</span><span class="c">#credentials-store</span>
+
+<span class="n">Login</span> <span class="n">Succeeded</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="p">[</span><span class="n">root</span><span class="nv">@harbor</span><span class="n">-server</span> <span class="n">tomcatdir</span><span class="p">]</span><span class="c"># docker push 192.168.10.23/library/tomcat:8575</span>
+</code></pre></div>
+<p><img alt="image-20220224231004637" src="../../img/docker_devops/image-20220224231004637.png" /></p>
+<h3 id="555">5.5.5 验证容器镜像可用性<a class="headerlink" href="#555" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="p">[</span><span class="n">root</span><span class="nv">@harbor</span><span class="n">-server</span> <span class="p">~]</span><span class="c"># docker run -d 192.168.10.23/library/tomcat:8575</span>
+<span class="n">d5443961ca65311ca0d68d53d44be997f5d6fde2d78772173ac6927112f34579</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="p">[</span><span class="n">root</span><span class="nv">@harbor</span><span class="n">-server</span> <span class="p">~]</span><span class="c"># docker ps</span>
+<span class="n">CONTAINER</span> <span class="n">ID</span>   <span class="n">IMAGE</span>                                <span class="n">COMMAND</span>                  <span class="n">CREATED</span>         <span class="n">STATUS</span>                 <span class="n">PORTS</span>                                   <span class="n">NAMES</span>
+<span class="n">d5443961ca65</span>   <span class="n">192</span><span class="p">.</span><span class="n">168</span><span class="p">.</span><span class="n">10</span><span class="p">.</span><span class="n">23</span><span class="p">/</span><span class="n">library</span><span class="p">/</span><span class="n">tomcat</span><span class="p">:</span><span class="n">8575</span>    <span class="s2">&quot;/usr/local/tomcat/b…&quot;</span>   <span class="n">3</span> <span class="n">seconds</span> <span class="n">ago</span>   <span class="n">Up</span> <span class="n">2</span> <span class="n">seconds</span>           <span class="n">8080</span><span class="p">/</span><span class="n">tcp</span>                                <span class="n">nifty_tesla</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="p">[</span><span class="n">root</span><span class="nv">@harbor</span><span class="n">-server</span> <span class="p">~]</span><span class="c"># docker inspect d544</span>
+
+<span class="n">获得</span><span class="err">：</span><span class="n">172</span><span class="p">.</span><span class="n">17</span><span class="p">.</span><span class="n">0</span><span class="p">.</span><span class="n">2</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="p">[</span><span class="n">root</span><span class="nv">@harbor</span><span class="n">-server</span> <span class="p">~]</span><span class="c"># curl http://172.17.0.2:8080</span>
+<span class="n">tomcat</span> <span class="n">is</span> <span class="n">running</span>
+</code></pre></div>
+<h2 id="56">5.6 项目构建及发布<a class="headerlink" href="#56" title="Permanent link">&para;</a></h2>
+<h3 id="561">5.6.1 项目构建及发布步骤<a class="headerlink" href="#561" title="Permanent link">&para;</a></h3>
+<p>第一步：jenkins获取项目代码</p>
+<p>第二步：jenkins对项目代码编译，由maven完成</p>
+<p>第三步：jenkins使用docker对编译完成的项目代码进行打包，打包成容器应用镜像</p>
+<p>第四步：jenkins把打包的容器应用镜像上传到harbor</p>
+<p>第五步：jenkins通过ssh插件完成对web-server进行运行容器应用镜像的操作</p>
+<h3 id="562">5.6.2 创建项目任务<a class="headerlink" href="#562" title="Permanent link">&para;</a></h3>
+<p><img alt="image-20220224231659567" src="../../img/docker_devops/image-20220224231659567.png" /></p>
+<p><img alt="image-20220224231808502" src="../../img/docker_devops/image-20220224231808502.png" /></p>
+<p><img alt="image-20220224233231807" src="../../img/docker_devops/image-20220224233231807.png" /></p>
+<p><img alt="image-20220224233433469" src="../../img/docker_devops/image-20220224233433469.png" /></p>
+<p><img alt="image-20220225014415364" src="../../img/docker_devops/image-20220225014415364.png" /></p>
+<p><img alt="image-20220225014449916" src="../../img/docker_devops/image-20220225014449916.png" /></p>
+<p><img alt="image-20220225014608778" src="../../img/docker_devops/image-20220225014608778.png" /></p>
+<p><img alt="image-20220225014711014" src="../../img/docker_devops/image-20220225014711014.png" /></p>
+<div class="highlight"><pre><span></span><code><span class="n">Dockerfile</span><span class="err">：</span>
+<span class="n">REPOSITORY</span><span class="p">=</span><span class="n">192</span><span class="p">.</span><span class="n">168</span><span class="p">.</span><span class="n">10</span><span class="p">.</span><span class="n">23</span><span class="p">/</span><span class="n">library</span><span class="p">/</span><span class="n">solo</span><span class="p">:${</span><span class="n">Tag</span><span class="p">}</span>
+<span class="c"># 构建镜像</span>
+<span class="nb">cat </span><span class="p">&gt;</span> <span class="n">Dockerfile</span> <span class="p">&lt;&lt;</span> <span class="n">EOF</span>
+<span class="n">FROM</span> <span class="n">192</span><span class="p">.</span><span class="n">168</span><span class="p">.</span><span class="n">10</span><span class="p">.</span><span class="n">23</span><span class="p">/</span><span class="n">library</span><span class="p">/</span><span class="n">tomcat</span><span class="p">:</span><span class="n">8575</span>
+<span class="n">RUN</span> <span class="nb">rm </span><span class="n">-rf</span> <span class="p">/</span><span class="n">usr</span><span class="p">/</span><span class="n">local</span><span class="p">/</span><span class="n">tomcat</span><span class="p">/</span><span class="n">webapps</span><span class="p">/</span><span class="n">ROOT</span>
+<span class="nb">COPY </span><span class="n">target</span><span class="p">/*.</span><span class="n">war</span> <span class="p">/</span><span class="n">usr</span><span class="p">/</span><span class="n">local</span><span class="p">/</span><span class="n">tomcat</span><span class="p">/</span><span class="n">webapps</span><span class="p">/</span><span class="n">ROOT</span><span class="p">.</span><span class="n">war</span>
+<span class="n">CMD</span> <span class="p">[</span><span class="s2">&quot;/usr/local/tomcat/bin/catalina.sh&quot;</span><span class="p">,</span> <span class="s2">&quot;run&quot;</span><span class="p">]</span>
+<span class="n">EOF</span>
+<span class="n">docker</span> <span class="n">build</span> <span class="n">-t</span> <span class="nv">$REPOSITORY</span> <span class="p">.</span>
+
+<span class="c"># 上传镜像</span>
+<span class="n">docker</span> <span class="n">login</span> <span class="n">192</span><span class="p">.</span><span class="n">168</span><span class="p">.</span><span class="n">10</span><span class="p">.</span><span class="n">23</span> <span class="n">-u</span> <span class="n">admin</span> <span class="n">-p</span> <span class="n">Harbor12345</span>
+<span class="n">docker</span> <span class="n">push</span> <span class="nv">$REPOSITORY</span>
+<span class="n">docker</span> <span class="n">logout</span> <span class="n">192</span><span class="p">.</span><span class="n">168</span><span class="p">.</span><span class="n">10</span><span class="p">.</span><span class="n">23</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">shell</span> <span class="n">script</span><span class="p">:</span>
+<span class="n">REPOSITORY</span><span class="p">=</span><span class="n">192</span><span class="p">.</span><span class="n">168</span><span class="p">.</span><span class="n">10</span><span class="p">.</span><span class="n">23</span><span class="p">/</span><span class="n">library</span><span class="p">/</span><span class="n">solo</span><span class="p">:${</span><span class="n">Tag</span><span class="p">}</span>
+<span class="c"># 部署</span>
+<span class="n">docker</span> <span class="nb">rm </span><span class="o">-f</span> <span class="n">blog-solo</span> <span class="p">|</span><span class="n">true</span>
+<span class="n">docker</span> <span class="n">image</span> <span class="nb">rm </span><span class="nv">$REPOSITORY</span> <span class="p">|</span><span class="n">true</span>
+<span class="n">docker</span> <span class="n">container</span> <span class="n">run</span> <span class="n">-d</span> <span class="p">-</span><span class="n">-name</span> <span class="n">blog-solo</span> <span class="n">-p</span> <span class="n">80</span><span class="p">:</span><span class="n">8080</span> <span class="nv">$REPOSITORY</span>
+</code></pre></div>
+<p><img alt="image-20220225014217956" src="../../img/docker_devops/image-20220225014217956.png" /></p>
+<p><img alt="image-20220225014302077" src="../../img/docker_devops/image-20220225014302077.png" /></p>
+<p><img alt="image-20220225014131634" src="../../img/docker_devops/image-20220225014131634.png" /></p>
+<p><img alt="image-20220225014949917" src="../../img/docker_devops/image-20220225014949917.png" /></p>
+<p><img alt="image-20220225013841677" src="../../img/docker_devops/image-20220225013841677.png" /></p>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      BurningMyself<a href='https://beian.miit.gov.cn/' target='_blank'>  蜀ICP备15033200号-1</a>
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        <div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/burningmyself" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://gitee.com/burningmyself" target="_blank" rel="noopener" title="gitee.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 488 512"><!--! Font Awesome Free 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M488 261.8C488 403.3 391.1 504 248 504 110.8 504 0 393.2 0 256S110.8 8 248 8c66.8 0 123 24.5 166.3 64.9l-67.5 64.9C258.5 52.6 94.3 116.6 94.3 256c0 86.5 69.1 156.6 153.7 156.6 98.2 0 135-70.4 140.8-106.9H248v-85.3h236.1c2.3 12.7 3.9 24.9 3.9 41.4z"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.2a6f1dda.min.js"></script>
+      
+        <script src="../../js/extra.js"></script>
+      
+        <script src="../../js/baidu-tongji.js"></script>
+      
+        <script src="https://www.googletagmanager.com/gtag/js?id=UA-155084439-1"></script>
+      
+        <script src="https://www.googletagmanager.com/gtag/js?id=UA-155132293-1"></script>
+      
+        <script src="../../js/google.js"></script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+      
+    
+  </body>
+</html>

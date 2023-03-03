@@ -2198,8 +2198,8 @@
   
   
     <li class="md-nav__item">
-      <a href="../../cloud/compute/" class="md-nav__link">
-        云计算
+      <a href="../../cloud/docker_date/" class="md-nav__link">
+        Docker容器数据持久化存储机制
       </a>
     </li>
   
@@ -2212,8 +2212,8 @@
   
   
     <li class="md-nav__item">
-      <a href="../../cloud/compute/" class="md-nav__link">
-        云计算
+      <a href="../../cloud/docker_compose/" class="md-nav__link">
+        Docker容器服务编排利器Docker Compose应用实战
       </a>
     </li>
   
@@ -2226,8 +2226,8 @@
   
   
     <li class="md-nav__item">
-      <a href="../../cloud/compute/" class="md-nav__link">
-        云计算
+      <a href="../../cloud/docker_swarm/" class="md-nav__link">
+        Docker主机集群化方案 Docker Swarm
       </a>
     </li>
   
@@ -2240,8 +2240,8 @@
   
   
     <li class="md-nav__item">
-      <a href="../../cloud/compute/" class="md-nav__link">
-        云计算
+      <a href="../../cloud/docker_devops/" class="md-nav__link">
+        基于Docker容器DevOps应用方案 企业业务代码发布系统
       </a>
     </li>
   
@@ -3207,13 +3207,13 @@
 <p>但是如果只是租客和房东之间进行寻找的话，他们的效率是很低的，房东找不到租客赚不到钱，租客找不到房东住不了房。所以，后来房东肯定就想到了广播自己的房源信息(比如在街边贴贴小广告)，这样对于房东来说已经完成他的任务(将房源公布出去)，但是有两个问题就出现了。第一、其他不是租客的都能收到这种租房消息，这在现实世界没什么，但是在计算机的世界中就会出现资源消耗的问题了。第二、租客这样还是很难找到你，试想一下我需要租房，我还需要东一个西一个地去找街边小广告，麻不麻烦？</p>
 <p>那怎么办呢？我们当然不会那么傻乎乎的，第一时间就是去找 中介 呀，它为我们提供了统一房源的地方，我们消费者只需要跑到它那里去找就行了。而对于房东来说，他们也只需要把房源在中介那里发布就行了。</p>
 <p>那么现在，我们的模式就是这样的了。</p>
-<p><img alt="spring-cloud" src="../../img/spring-cloud-1.png" /></p>
+<p><img alt="spring-cloud" src="../../img/java/spring-cloud-1.png" /></p>
 <p>但是，这个时候还会出现一些问题。</p>
 <p>1.房东注册之后如果不想卖房子了怎么办？我们是不是需要让房东定期续约？如果房东不进行续约是不是要将他们从中介那里的注册列表中移除。</p>
 <p>2.租客是不是也要进行注册呢？不然合同乙方怎么来呢？</p>
 <p>3.中介可不可以做连锁店呢？如果这一个店因为某些不可抗力因素而无法使用，那么我们是否可以换一个连锁店呢？</p>
 <p>针对上面的问题我们来重新构建一下上面的模式图</p>
-<p><img alt="spring-cloud" src="../../img/spring-cloud-2.png" /></p>
+<p><img alt="spring-cloud" src="../../img/java/spring-cloud-2.png" /></p>
 <p>好了，举完这个例子我们就可以来看关于 Eureka 的一些基础概念了，你会发现这东西理解起来怎么这么简单。</p>
 <p>服务发现：其实就是一个“中介”，整个过程中有三个角色：服务提供者(出租房子的)、服务消费者(租客)、服务中介(房屋中介)。</p>
 <p>服务提供者：就是提供一些自己能够执行的一些服务给外界。</p>
@@ -3225,7 +3225,7 @@
 </blockquote>
 <h3 id="eureka_1">Eureka 核心概念<a class="headerlink" href="#eureka_1" title="Permanent link">&para;</a></h3>
 <p>回到上节的服务注册调用示意图，服务提供者和服务的消费者，本质上也是 Eureka Client 角色。整体上可以分为两个主体：Eureka Server 和 Eureka Client。</p>
-<p><img alt="spring-cloud" src="../../img/spring-cloud-3.png" /></p>
+<p><img alt="spring-cloud" src="../../img/java/spring-cloud-3.png" /></p>
 <h4 id="eureka_server">Eureka Server：注册中心服务端<a class="headerlink" href="#eureka_server" title="Permanent link">&para;</a></h4>
 <p>注册中心服务端主要对外提供了三个功能：</p>
 <ul>
@@ -3293,7 +3293,7 @@ eureka.client.registry-fetch-interval-seconds=30
 <p>固定时间内大量实例被注销，可能会严重威胁整个微服务架构的可用性。为了解决这个问题，Eureka 开发了自我保护机制，那么什么是自我保护机制呢？</p>
 <p>Eureka Server 在运行期间会去统计心跳失败比例在 15 分钟之内是否低于 85%，如果低于 85%，Eureka Server 即会进入自我保护机制。</p>
 <h5 id="eureka_server_1">Eureka Server 触发自我保护机制后，页面会出现提示：<a class="headerlink" href="#eureka_server_1" title="Permanent link">&para;</a></h5>
-<p><img alt="spring-cloud" src="../../img/spring-cloud-4.png" /></p>
+<p><img alt="spring-cloud" src="../../img/java/spring-cloud-4.png" /></p>
 <h4 id="eureka_server_2">Eureka Server 进入自我保护机制，会出现以下几种情况：<a class="headerlink" href="#eureka_server_2" title="Permanent link">&para;</a></h4>
 <p>(1 Eureka 不再从注册列表中移除因为长时间没收到心跳而应该过期的服务
 (2 Eureka 仍然能够接受新服务的注册和查询请求，但是不会被同步到其它节点上(即保证当前节点依然可用)
@@ -3307,7 +3307,7 @@ eureka.client.registry-fetch-interval-seconds=30
 </code></pre></div>
 <h4 id="eureka_2">Eureka 集群原理<a class="headerlink" href="#eureka_2" title="Permanent link">&para;</a></h4>
 <p>再来看看 Eureka 集群的工作原理。我们假设有三台 Eureka Server 组成的集群，第一台 Eureka Server 在北京机房，另外两台 Eureka Server 在深圳和西安机房。这样三台 Eureka Server 就组建成了一个跨区域的高可用集群，只要三个地方的任意一个机房不出现问题，都不会影响整个架构的稳定性。</p>
-<p><img alt="spring-cloud" src="../../img/spring-cloud-5.png" /></p>
+<p><img alt="spring-cloud" src="../../img/java/spring-cloud-5.png" /></p>
 <p>从图中可以看出 Eureka Server 集群相互之间通过 Replicate 来同步数据，相互之间不区分主节点和从节点，所有的节点都是平等的。在这种架构中，节点通过彼此互相注册来提高可用性，每个节点需要添加一个或多个有效的 serviceUrl 指向其他节点。</p>
 <p>如果某台 Eureka Server 宕机，Eureka Client 的请求会自动切换到新的 Eureka Server 节点。当宕机的服务器重新恢复后，Eureka 会再次将其纳入到服务器集群管理之中。当节点开始接受客户端请求时，所有的操作都会进行节点间复制，将请求复制到其它 Eureka Server 当前所知的所有节点中。</p>
 <p>另外 Eureka Server 的同步遵循着一个非常简单的原则：只要有一条边将节点连接，就可以进行信息传播与同步。所以，如果存在多个节点，只需要将节点之间两两连接起来形成通路，那么其它注册中心都可以共享信息。每个 Eureka Server 同时也是 Eureka Client，多个 Eureka Server 之间通过 P2P 的方式完成服务注册表的同步。</p>
@@ -3355,17 +3355,17 @@ zone：可以简单理解为 region 内的具体机房，比如说 region 划分
 <p>为什么需要 Ribbon？</p>
 <p>Ribbon  是 Netflix 公司的一个开源的负载均衡 项目，是一个客户端/进程内负载均衡器，运行在消费者端</p>
 <p>我们再举个例子，比如我们设计了一个秒杀系统，但是为了整个系统的 高可用 ，我们需要将这个系统做一个集群，而这个时候我们消费者就可以拥有多个秒杀系统的调用途径了，如下图。</p>
-<p><img alt="spring-cloud" src="../../img/spring-cloud-6.png" /></p>
+<p><img alt="spring-cloud" src="../../img/java/spring-cloud-6.png" /></p>
 <p>如果这个时候我们没有进行一些 均衡操作 ，如果我们对 秒杀系统1 进行大量的调用，而另外两个基本不请求，就会导致 秒杀系统1 崩溃，而另外两个就变成了傀儡，那么我们为什么还要做集群，我们高可用体现的意义又在哪呢？</p>
 <p>所以 Ribbon 出现了，注意我们上面加粗的几个字——运行在消费者端。指的是，Ribbon 是运行在消费者端的负载均衡器，如下图。</p>
-<p><img alt="spring-cloud" src="../../img/spring-cloud-7.png" /></p>
+<p><img alt="spring-cloud" src="../../img/java/spring-cloud-7.png" /></p>
 <p>其工作原理就是 Consumer 端获取到了所有的服务列表之后，在其内部使用负载均衡算法，进行对多个系统的调用。</p>
 <h4 id="nginx_ribbon">Nginx 和 Ribbon 的对比<a class="headerlink" href="#nginx_ribbon" title="Permanent link">&para;</a></h4>
 <p>提到 负载均衡 就不得不提到大名鼎鼎的 Nignx 了，而和 Ribbon 不同的是，它是一种集中式的负载均衡器。</p>
 <p>何为集中式呢？简单理解就是 将所有请求都集中起来，然后再进行负载均衡。如下图。</p>
-<p><img alt="spring-cloud" src="../../img/spring-cloud-8.png" /></p>
+<p><img alt="spring-cloud" src="../../img/java/spring-cloud-8.png" /></p>
 <p>我们可以看到 Nginx 是接收了所有的请求进行负载均衡的，而对于 Ribbon 来说它是在消费者端进行的负载均衡。如下图。
-<img alt="spring-cloud" src="../../img/spring-cloud-9.png" /></p>
+<img alt="spring-cloud" src="../../img/java/spring-cloud-9.png" /></p>
 <blockquote>
 <p>请注意 Request 的位置，在 Nginx 中请求是先进入负载均衡器，而在 Ribbon 中是先在客户端进行负载均衡才进行请求的。</p>
 </blockquote>
@@ -3427,12 +3427,12 @@ RetryRule: 重试策略。先按照 RoundRobinRule 策略获取 provider，若�
 </blockquote>
 <p>总体来说 Hystrix 就是一个能进行 熔断 和 降级 的库，通过使用它能提高整个系统的弹性。</p>
 <p>那么什么是 熔断和降级 呢？再举个🌰，此时我们整个微服务系统是这样的。服务A调用了服务B，服务B再调用了服务C，但是因为某些原因，服务C顶不住了，这个时候大量请求会在服务C阻塞。</p>
-<p><img alt="spring-cloud-10" src="../../img/spring-cloud-10.png" /></p>
+<p><img alt="spring-cloud-10" src="../../img/java/spring-cloud-10.png" /></p>
 <p>服务C阻塞了还好，毕竟只是一个系统崩溃了。但是请注意这个时候因为服务C不能返回响应，那么服务B调用服务C的的请求就会阻塞，同理服务B阻塞了，那么服务A也会阻塞崩溃。</p>
 <blockquote>
 <p>请注意，为什么阻塞会崩溃。因为这些请求会消耗占用系统的线程、IO 等资源，消耗完你这个系统服务器不就崩了么。</p>
 </blockquote>
-<p><img alt="spring-cloud-10" src="../../img/spring-cloud-11.png" /></p>
+<p><img alt="spring-cloud-10" src="../../img/java/spring-cloud-11.png" /></p>
 <p>这就叫 服务雪崩。妈耶，上面两个 熔断 和 降级 你都没给我解释清楚，你现在又给我扯什么 服务雪崩 ？😵😵😵</p>
 <p>别急，听我慢慢道来。</p>
 <p>不听我也得讲下去！</p>
@@ -3472,7 +3472,7 @@ RetryRule: 重试策略。先按照 RoundRobinRule 策略获取 provider，若�
 <p>如果学过前端的肯定都知道 Router 吧，比如 Flutter 中的路由，Vue，React中的路由，用了 Zuul 你会发现在路由功能方面和前端配置路由基本是一个理。😁 我偶尔撸撸 Flutter。</p>
 </blockquote>
 <p>大家对网关应该很熟吧，简单来讲网关是系统唯一对外的入口，介于客户端与服务器端之间，用于对请求进行鉴权、限流、 路由、监控等功能。</p>
-<p><img alt="spring-cloud" src="../../img/spring-cloud-12.png" /></p>
+<p><img alt="spring-cloud" src="../../img/java/spring-cloud-12.png" /></p>
 <p>没错，网关有的功能，Zuul 基本都有。而 Zuul 中最关键的就是 路由和过滤器 了，在官方文档中 Zuul 的标题就是</p>
 <blockquote>
 <p>Router and Filter : Zuul</p>
@@ -3485,7 +3485,7 @@ RetryRule: 重试策略。先按照 RoundRobinRule 策略获取 provider，若�
 <blockquote>
 <p>请不要因为我这么好就给我点赞 👍 。疯狂暗示。</p>
 </blockquote>
-<p><img alt="spring-cloud" src="../../img/spring-cloud-13.png" /></p>
+<p><img alt="spring-cloud" src="../../img/java/spring-cloud-13.png" /></p>
 <p>比如这个时候我们已经向 Eureka Server 注册了两个 Consumer 、三个 Provicer ，这个时候我们再加个 Zuul 网关应该变成这样子了。</p>
 <p>emmm，信息量有点大，我来解释一下。关于前面的知识我就不解释了😐 。</p>
 <p>首先，Zuul 需要向 Eureka 进行注册，注册有啥好处呢？</p>
@@ -3555,7 +3555,7 @@ eureka:
 </ul>
 <p>要实现自己定义的 Filter 我们只需要继承 ZuulFilter 然后将这个过滤器类以 @Component 注解加入 Spring 容器中就行了。</p>
 <p>在给你们看代码之前我先给你们解释一下关于过滤器的一些注意点。</p>
-<p><img alt="spring-cloud" src="../../img/spring-cloud-14.png" /></p>
+<p><img alt="spring-cloud" src="../../img/java/spring-cloud-14.png" /></p>
 <p>过滤器类型：Pre、Routing、Post。前置Pre就是在请求之前进行过滤，Routing路由过滤器就是我们上面所讲的路由策略，而Post后置过滤器就是在 Response 之前进行过滤的过滤器。你可以观察上图结合着理解，并且下面我会给出相应的注释。</p>
 <div class="highlight"><pre><span></span><code><span class="c1">// 加入Spring容器</span>
 <span class="nd">@Component</span>
@@ -3630,7 +3630,7 @@ eureka:
 <li>令牌桶限流</li>
 </ul>
 <p>当然不仅仅是令牌桶限流方式，Zuul 只要是限流的活它都能干，这里我只是简单举个🌰。</p>
-<p><img alt="spring-cloud" src="../../img/spring-cloud-15.png" /></p>
+<p><img alt="spring-cloud" src="../../img/java/spring-cloud-15.png" /></p>
 <p>我先来解释一下什么是 令牌桶限流 吧。</p>
 <p>首先我们会有个桶，如果里面没有满那么就会以一定 固定的速率 会往里面放令牌，一个请求过来首先要从桶中获取令牌，如果没有获取到，那么这个请求就拒绝，如果获取到那么就放行。关注公众号Java面试那些事儿，回复关键字面试，获取最新得面试资料。很简单吧，啊哈哈、</p>
 <p>下面我们就通过 Zuul 的前置过滤器来实现一下令牌桶限流。</p>
@@ -3691,7 +3691,7 @@ eureka:
 </blockquote>
 <p>简单来说，Spring Cloud Config 就是能将各个 应用/系统/模块 的配置文件存放到 统一的地方然后进行管理(Git 或者 SVN)。</p>
 <p>你想一下，我们的应用是不是只有启动的时候才会进行配置文件的加载，那么我们的 Spring Cloud Config 就暴露出一个接口给启动应用来获取它所想要的配置文件，应用获取到配置文件然后再进行它的初始化工作。就如下图。</p>
-<p><img alt="spring-cloud" src="../../img/spring-cloud-16.png" /></p>
+<p><img alt="spring-cloud" src="../../img/java/spring-cloud-16.png" /></p>
 <p>当然这里你肯定还会有一个疑问，如果我在应用运行时去更改远程配置仓库(Git)中的对应配置文件，那么依赖于这个配置文件的已启动的应用会不会进行其相应配置的更改呢？</p>
 <p>答案是不会的。</p>
 <p>什么？那怎么进行动态修改配置文件呢？这不是出现了 配置漂移 吗？你个渣男🤬，你又骗我！</p>
@@ -3705,7 +3705,7 @@ eureka:
 </blockquote>
 <p>你可以简单理解为 Spring Cloud Bus 的作用就是管理和广播分布式系统中的消息，也就是消息引擎系统中的广播模式。关注公众号Java面试那些事儿，回复关键字面试，获取最新得面试资料。当然作为 消息总线 的 Spring Cloud Bus 可以做很多事而不仅仅是客户端的配置刷新功能。</p>
 <p>而拥有了 Spring Cloud Bus 之后，我们只需要创建一个简单的请求，并且加上 @ResfreshScope 注解就能进行配置的动态修改了，下面我画了张图供你理解。</p>
-<p><img alt="spring-cloud" src="../../img/spring-cloud-17.png" /></p>
+<p><img alt="spring-cloud" src="../../img/java/spring-cloud-17.png" /></p>
 <h2 id="_3">总结<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
 <p>这篇文章中我带大家初步了解了 Spring Cloud 的各个组件，他们有</p>
 <ul>
@@ -3718,7 +3718,7 @@ eureka:
 <li>Bus 消息总线</li>
 </ul>
 <p>如果你能这个时候能看懂下面那张图，也就说明了你已经对 Spring Cloud 微服务有了一定的架构认识。</p>
-<p><img alt="spring-cloud" src="../../img/spring-cloud-18.png" /></p>
+<p><img alt="spring-cloud" src="../../img/java/spring-cloud-18.png" /></p>
 
 
 

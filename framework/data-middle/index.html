@@ -1929,8 +1929,8 @@
   
   
     <li class="md-nav__item">
-      <a href="../../cloud/compute/" class="md-nav__link">
-        云计算
+      <a href="../../cloud/docker_date/" class="md-nav__link">
+        Docker容器数据持久化存储机制
       </a>
     </li>
   
@@ -1943,8 +1943,8 @@
   
   
     <li class="md-nav__item">
-      <a href="../../cloud/compute/" class="md-nav__link">
-        云计算
+      <a href="../../cloud/docker_compose/" class="md-nav__link">
+        Docker容器服务编排利器Docker Compose应用实战
       </a>
     </li>
   
@@ -1957,8 +1957,8 @@
   
   
     <li class="md-nav__item">
-      <a href="../../cloud/compute/" class="md-nav__link">
-        云计算
+      <a href="../../cloud/docker_swarm/" class="md-nav__link">
+        Docker主机集群化方案 Docker Swarm
       </a>
     </li>
   
@@ -1971,8 +1971,8 @@
   
   
     <li class="md-nav__item">
-      <a href="../../cloud/compute/" class="md-nav__link">
-        云计算
+      <a href="../../cloud/docker_devops/" class="md-nav__link">
+        基于Docker容器DevOps应用方案 企业业务代码发布系统
       </a>
     </li>
   
@@ -3375,7 +3375,7 @@
 
 <h1 id="_1">数据中台的思考与总结<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
 <h2 id="_2">数据中台<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
-<p><img alt="data-middle" src="../../img/data-middle-1.png" /></p>
+<p><img alt="data-middle" src="../../img/data-middle/data-middle-1.png" /></p>
 <h3 id="_3">数据汇聚<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
 <p>数据汇聚是数据中台必须提供的核心工具，把各种异构网络、异构数据源的数据方便地采集到数据中台中进行集中存储，为后续的加工建模做准备。数据汇聚方式一般有数据库同步、埋点、网络爬虫、消息队列等；从汇聚的时效性来分，有离线批量汇聚和实时采集。</p>
 <p>数据采集工具:</p>
@@ -3406,7 +3406,7 @@
 <li>推荐依赖
 随着业务的不断深入，数据开发人员需要开发的作业会不断累加。既能保证准确找到需要定位的上游作业，又能保证不会形成环路。</li>
 </ol>
-<p><img alt="data-middle" src="../../img/data-middle-2.png" /></p>
+<p><img alt="data-middle" src="../../img/data-middle/data-middle-2.png" /></p>
 <p>获取推荐依赖的核心原理在于上下游作业输入和输出的表级血缘依赖图；
 通过血缘分析当前作业的输入和输出，找到合适的上游作业；
 对合适的作业进行环路检测，剔除存在闭环的作业；
@@ -3446,27 +3446,27 @@
 <ul>
 <li>地产行业</li>
 </ul>
-<p><img alt="data-middle" src="../../img/data-middle-3.png" /></p>
+<p><img alt="data-middle" src="../../img/data-middle/data-middle-3.png" /></p>
 <ul>
 <li>证券行业</li>
 </ul>
-<p><img alt="data-middle" src="../../img/data-middle-4.png" /></p>
+<p><img alt="data-middle" src="../../img/data-middle/data-middle-4.png" /></p>
 <ul>
 <li>零售行业</li>
 </ul>
-<p><img alt="data-middle" src="../../img/data-middle-5.png" /></p>
+<p><img alt="data-middle" src="../../img/data-middle/data-middle-5.png" /></p>
 <ul>
 <li>制造行业</li>
 </ul>
-<p><img alt="data-middle" src="../../img/data-middle-6.png" /></p>
+<p><img alt="data-middle" src="../../img/data-middle/data-middle-6.png" /></p>
 <ul>
 <li>传媒行业</li>
 </ul>
-<p><img alt="data-middle" src="../../img/data-middle-7.png" /></p>
+<p><img alt="data-middle" src="../../img/data-middle/data-middle-7.png" /></p>
 <ul>
 <li>检务行业</li>
 </ul>
-<p><img alt="data-middle" src="../../img/data-middle-8.png" /></p>
+<p><img alt="data-middle" src="../../img/data-middle/data-middle-8.png" /></p>
 <ol>
 <li>贴源数据层ODS</li>
 </ol>
@@ -3491,7 +3491,7 @@
 <li>标签数据层TDM</li>
 </ol>
 <p>面向对象建模，对跨业务板块、跨数据域的特定对象数据进行整合，通过IDMapping把各个业务板块、各个业务过程中的同一对象的数据打通，形成对象的全域标签体系，方便深度分析、挖掘、应用。  </p>
-<p><img alt="data-middle" src="../../img/data-middle-9.png" /></p>
+<p><img alt="data-middle" src="../../img/data-middle/data-middle-9.png" /></p>
 <ol>
 <li>应用数据层ADS</li>
 </ol>
@@ -3532,21 +3532,21 @@
 <p><a href="https://www.infoq.cn/article/suning-big-data">苏宁大数据离线任务开发调度平台实践</a></p>
 <p><a href="https://www.infoq.cn/article/xTvBg1_9iUL0z5Pjf0Os">苏宁大数据离线任务开发调度平台实践：任务调度模块架构设计</a></p>
 <p>苏宁离线平台产品功能图：</p>
-<p><img alt="data-middle" src="../../img/data-middle-10.png" /></p>
+<p><img alt="data-middle" src="../../img/data-middle/data-middle-10.png" /></p>
 <p>苏宁调度模块功能图：</p>
-<p><img alt="data-middle" src="../../img/data-middle-11.png" /></p>
+<p><img alt="data-middle" src="../../img/data-middle/data-middle-11.png" /></p>
 <p>苏宁离线平台整体架构图：</p>
-<p><img alt="data-middle" src="../../img/data-middle-12.png" /></p>
+<p><img alt="data-middle" src="../../img/data-middle/data-middle-12.png" /></p>
 <p>跨任务流依赖的实现：
 FTP事件机制，即在 FTP 服务器上建立标识文件，一个事件对应一个标识文件地址，当 FTP 服务器上的标识文件生成的时候，我们认为业务系统已经完成作业，需要触发平台任务执行。</p>
 <p>“华佗”平台，实施任务诊断：</p>
-<p><img alt="data-middle" src="../../img/data-middle-13.png" /></p>
+<p><img alt="data-middle" src="../../img/data-middle/data-middle-13.png" /></p>
 <p>立即触发的任务，放入DelayQueue的队列头部
 周期调度的任务，使用Quartz
 依赖触发的任务，使用zk，各个子节点监听自己的父节点，所有父节点执行完毕则可触发执行</p>
 <h2 id="_18">实时平台<a class="headerlink" href="#_18" title="Permanent link">&para;</a></h2>
 <h3 id="_19">美团点评<a class="headerlink" href="#_19" title="Permanent link">&para;</a></h3>
-<p><img alt="data-middle" src="../../img/data-middle-14.png" /></p>
+<p><img alt="data-middle" src="../../img/data-middle/data-middle-14.png" /></p>
 <p>使用了Grafana，可以内嵌到自己的平台。</p>
 <h3 id="bilibili">bilibili<a class="headerlink" href="#bilibili" title="Permanent link">&para;</a></h3>
 <p>SQL化编程</p>
@@ -3555,7 +3555,7 @@ FTP事件机制，即在 FTP 服务器上建立标识文件，一个事件对应
 <p>实时平台由实时传输和实时计算两部分组成，平台底层统一管理元数据、血缘、权限以及作业运维等。实时传输主要负责将数据传入到大数据体系中。实时计算基于 BSQL 提供各种应用场景支持。</p>
 <p>如下图所示，实时传输有 APP 日志、数据库 Binlog、服务端日志或系统日志。bilibili 内部的 Lancer 系统解决数据落地到 Kafka 或 HDFS。计算体系主要围绕 Saber 构建一套 BSQL，底层基于 YARN 进行调度管理。</p>
 <p>上层核心基于 Flink 构建运行池。再向上一层满足多种维表场景，包括 MySQL、Redis、HBase。状态（State）部分在 RocksDB 基础上，还扩展了 MapDB、Redis。Flink 需要 IO 密集是很麻烦的问题，因为 Flink 的资源调度体系内有内存和 CPU，但 IO 单位未做统一管理。当某一个作业对 IO 有强烈的需求时，需要分配很多以 CPU 或内存为单位的资源，且未必能够很好的满足 IO 的扩展。所以本质上 bilibili 现阶段是将 IO 密集的资源的 State 转移到 Redis 上做缓解。数据经过 BSQL 计算完成之后传输到实时数仓，如 Kafka、HBase、ES 或 MySQL、TiDB。最终到 AI 或 BI、报表以及日志中心。</p>
-<p><img alt="data-middle" src="../../img/data-middle-15.png" /></p>
+<p><img alt="data-middle" src="../../img/data-middle/data-middle-15.png" /></p>
 <h4 id="_20">场景<a class="headerlink" href="#_20" title="Permanent link">&para;</a></h4>
 <ul>
 <li>AI工程方向，解决了广告、搜索、推荐的流式Joiner和维表Joiner</li>
@@ -3572,7 +3572,7 @@ FTP事件机制，即在 FTP 服务器上建立标识文件，一个事件对应
 <li>Kernel：事件具体逻辑的执行者，根据请求向集群发送指令(Shell 脚本方式)。</li>
 <li>Admin：事件执行结果的确认者，根据事件类型，获取事件的最终结果，保证结果的正确性。</li>
 </ul>
-<p><img alt="data-middle" src="../../img/data-middle-16.png" /></p>
+<p><img alt="data-middle" src="../../img/data-middle/data-middle-16.png" /></p>
 <p>以启动场景为例：</p>
 <p>首先，Server 会接收到来自用户的启动请求，之后会创建一个分布式锁，Admin 会监控这个锁。</p>
 <p>然后， Server 向 Kernel 提交任务，提交之后会立即返回，返回之后就会立即更新数据库中的状态，将状态更新为启动中，这样在页面上用户就能够看到任务是启动中的状态了。</p>
@@ -3581,24 +3581,24 @@ FTP事件机制，即在 FTP 服务器上建立标识文件，一个事件对应
 <p>Server、Kernel 和 Admin 这三个模块都是不可靠的，那么如何保证其稳定和高可用呢？Server 可以通过部署多个，水平扩展来实现，Kernel 则会由 Server 来进行监听，当发现 Kernel 挂了，可以由 Server 重新拉起或者重新创建。而 Admin 的高可用则是通过热备来实现的，如果主 Admin 挂掉了，可以马上迁移到备 Admin，备 Admin 可以迅速将元数据以及任务信息全部加载进来接替工作，进而实现高可用。</p>
 <h4 id="_23">平台任务状态管理<a class="headerlink" href="#_23" title="Permanent link">&para;</a></h4>
 <p>平台的任务状态主要由 Server 和 Admin 来控制。Server 主要控制初始状态的执行，Admin 则主要负责控制所有与 YARN 相关的状态交互。</p>
-<p><img alt="data-middle" src="../../img/data-middle-17.png" /></p>
+<p><img alt="data-middle" src="../../img/data-middle/data-middle-17.png" /></p>
 <h4 id="_24">任务调试<a class="headerlink" href="#_24" title="Permanent link">&para;</a></h4>
 <p>SQL 类型的任务支持调试功能，用户可以根据不同的 source 表和 dim 表，上传不同的 csv 文件作为输入数据，进行调试。调试执行由指定的 kernel 来完成，sloth-server 负责组装请求，调用 kernel，返回结果，搜集日志。</p>
-<p><img alt="data-middle" src="../../img/data-middle-18.png" /></p>
+<p><img alt="data-middle" src="../../img/data-middle/data-middle-18.png" /></p>
 <h4 id="_25">日志检索<a class="headerlink" href="#_25" title="Permanent link">&para;</a></h4>
 <p>在 YARN 集群的每个节点上面部署 Filebeat，通过 Filebeat 将节点上面的任务日志写入到 Kafka 消息队列中，然后通过 Logstash 进行解析处理，之后写入 ES 集群中。主要用于两个用途，一个是通过界面 Kibana 来提供给开发和运维人员使用，另外一个就是将运行时状态的任务日志直接在界面上展示供用户进行搜索和查看。</p>
-<p><img alt="data-middle" src="../../img/data-middle-19.png" /></p>
+<p><img alt="data-middle" src="../../img/data-middle/data-middle-19.png" /></p>
 <h4 id="_26">监控<a class="headerlink" href="#_26" title="Permanent link">&para;</a></h4>
 <p>在监控方面，使用的是 influxdb metric report 组件对于指标进行监控。时序数据库使用的是网易自研的 ntsdb 时序数据库，其能够支持动态扩展和高可用等功能。监控指标的使用方式有两种：
 一种是通过 Grafana 的界面来查看指标；
 另外一种是报警模块会从Ntsdb中获取相关指标数据并进行监控报警。</p>
-<p><img alt="data-middle" src="../../img/data-middle-20.png" /></p>
+<p><img alt="data-middle" src="../../img/data-middle/data-middle-20.png" /></p>
 <h4 id="_27">报警<a class="headerlink" href="#_27" title="Permanent link">&para;</a></h4>
 <p>Sloth 流计算平台支持常见的任务失败，数据滞留延迟，failover 报警，也支持用户自定义规则报警，包括对于输入 QPS、输出 QPS，户自定义延迟的监控等。以输入 QPS 为例，可以设置当连续几个周期内 QPS 低于某一值时就触发报警。此外，报警方式也支持多样化的工具，比如各种网易内部的聊天工具、邮件、电话以及短信等，对于任务调试阶段，为了避免被骚扰，可以设置任务报警抑制时间间隔。</p>
-<p><img alt="data-middle" src="../../img/data-middle-21.png" /></p>
+<p><img alt="data-middle" src="../../img/data-middle/data-middle-21.png" /></p>
 <h4 id="_28">实时数仓<a class="headerlink" href="#_28" title="Permanent link">&para;</a></h4>
 <p>目前网易很多产品已经开始实时数仓的建设了，但仍旧处于持续完善过程中。实时数仓的建设和离线数仓大致相同，只不过实时数仓是经过实时计算平台进行处理的。大致的过程就是首先收集日志、埋点数据等，将其写入到 Kafka 里面，经过实时计算平台进行处理，将 ODS 层中的明细数据抽取出来，在进行汇总以及维度关联等操作，将结果写入到 Redis，Kudu 等，再通过数据服务提供给前端的业务使用。x</p>
-<p><img alt="data-middle" src="../../img/data-middle-22.png" /></p>
+<p><img alt="data-middle" src="../../img/data-middle/data-middle-22.png" /></p>
 <h4 id="-">电商应用-数据分析<a class="headerlink" href="#-" title="Permanent link">&para;</a></h4>
 <p>实时活动分析、首页资源分析、流量漏斗以及实时毛利计算等。</p>
 <h4 id="-_1">电商应用-搜索推荐<a class="headerlink" href="#-_1" title="Permanent link">&para;</a></h4>
@@ -3631,7 +3631,7 @@ FTP事件机制，即在 FTP 服务器上建立标识文件，一个事件对应
 工具有datax/sqoop/kettle/informatica等等。
 ETL一般为最开始的部分，凌晨之后的时间点。a：避免集中式的对某个jdbc海量同步，影响业务(部分从库可能提供查询服务)、b：明确调度的时间，应尽可能的在某个时间段内完成(不能仅依靠调度，实现任务流的串行；为后期的大作业空间，占用等待的系统资源)</p>
 <h4 id="_31">分层<a class="headerlink" href="#_31" title="Permanent link">&para;</a></h4>
-<p><img alt="data-middle" src="../../img/data-middle-23.png" /></p>
+<p><img alt="data-middle" src="../../img/data-middle/data-middle-23.png" /></p>
 <ol>
 <li>
 <p>Stage缓冲层
@@ -3686,7 +3686,7 @@ dw：主题事实及业务宽表
 </tr>
 </tbody>
 </table>
-<p><img alt="data-middle" src="../../img/data-middle-24.png" /></p>
+<p><img alt="data-middle" src="../../img/data-middle/data-middle-24.png" /></p>
 <p>数据仓库的建设主要包括数据的采集、数据的处理、数据归档、数据应用四个方面。
 当前主要的应用场景包括报表展示、即席查询、BI展示、数据分析、数据挖掘、模型训练等方面。
 数据仓库的建设是面向主题的、集成性的、不可更新的、时许变化的。</p>
@@ -3713,7 +3713,7 @@ dw：主题事实及业务宽表
 </ul>
 <h2 id="_34">数据中台解决方案<a class="headerlink" href="#_34" title="Permanent link">&para;</a></h2>
 <h3 id="_35">零售行业<a class="headerlink" href="#_35" title="Permanent link">&para;</a></h3>
-<p><img alt="data-middle" src="../../img/data-middle-25.png" /></p>
+<p><img alt="data-middle" src="../../img/data-middle/data-middle-25.png" /></p>
 <div class="highlight"><pre><span></span><code><span class="n">RPS</span><span class="w"> </span><span class="p">(</span><span class="n">Revenue</span><span class="w"> </span><span class="n">Per</span><span class="w"> </span><span class="n">Search</span><span class="p">)</span><span class="o">:</span><span class="w"> </span><span class="n">每搜索产生的收入</span><span class="err">，</span><span class="n">衡量搜索结果变现能力指标</span>
 </code></pre></div>
 <p>ROI： 投资回报率（ROI）是指通过投资而应返回的价值，它涵盖了企业的获利目标。利润和投入的经营所必备的财产相关，因为管理人员必须通过投资和现有财产获得利润。又称会计收益率、投资利润率。</p>

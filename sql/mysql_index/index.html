@@ -2089,8 +2089,8 @@
   
   
     <li class="md-nav__item">
-      <a href="../../cloud/compute/" class="md-nav__link">
-        云计算
+      <a href="../../cloud/docker_date/" class="md-nav__link">
+        Docker容器数据持久化存储机制
       </a>
     </li>
   
@@ -2103,8 +2103,8 @@
   
   
     <li class="md-nav__item">
-      <a href="../../cloud/compute/" class="md-nav__link">
-        云计算
+      <a href="../../cloud/docker_compose/" class="md-nav__link">
+        Docker容器服务编排利器Docker Compose应用实战
       </a>
     </li>
   
@@ -2117,8 +2117,8 @@
   
   
     <li class="md-nav__item">
-      <a href="../../cloud/compute/" class="md-nav__link">
-        云计算
+      <a href="../../cloud/docker_swarm/" class="md-nav__link">
+        Docker主机集群化方案 Docker Swarm
       </a>
     </li>
   
@@ -2131,8 +2131,8 @@
   
   
     <li class="md-nav__item">
-      <a href="../../cloud/compute/" class="md-nav__link">
-        云计算
+      <a href="../../cloud/docker_devops/" class="md-nav__link">
+        基于Docker容器DevOps应用方案 企业业务代码发布系统
       </a>
     </li>
   
@@ -2947,14 +2947,14 @@
 <h2 id="mysql_1">一、MySQL——索引基础<a class="headerlink" href="#mysql_1" title="Permanent link">&para;</a></h2>
 <p>首先，我们将从索引基础开始介绍一下什么是索引，分析索引的几种类型，并探讨一下如何创建索引以及索引设计的基本原则。</p>
 <p>此部分用于测试索引创建的pay_user表的结构如下：</p>
-<p><img alt="index" src="../../img/mysql-index-1.png" /></p>
+<p><img alt="index" src="../../img/mysql/mysql-index-1.png" /></p>
 <h3 id="1">1、什么是索引<a class="headerlink" href="#1" title="Permanent link">&para;</a></h3>
 <p>“索引（在MySQL中也叫“键key”）是存储引擎快速找到记录的一种数据结构。”
 ——《高性能MySQL》</p>
 <p>我们需要知道索引其实是一种数据结构，其功能是帮助我们快速匹配查找到需要的数据行，是数据库性能优化最常用的工具之一。其作用相当于超市里的导购员、书本里的目录。</p>
 <h3 id="2">2、索引类型<a class="headerlink" href="#2" title="Permanent link">&para;</a></h3>
 <p>可以使用SHOW INDEX FROM table_name;查看索引详情：</p>
-<p><img alt="index" src="../../img/mysql-index-2.png" /></p>
+<p><img alt="index" src="../../img/mysql/mysql-index-2.png" /></p>
 <ul>
 <li>主键索引 PRIMARY KEY</li>
 </ul>
@@ -2964,25 +2964,25 @@
 </ul>
 <p>唯一索引列的值必须唯一，但允许有空值。如果是组合索引，则列值的组合必须唯一。</p>
 <p>可以通过ALTER TABLE table_name ADD UNIQUE [alias] (column);创建唯一索引：</p>
-<p><img alt="index" src="../../img/mysql-index-3.png" /></p>
+<p><img alt="index" src="../../img/mysql/mysql-index-3.png" /></p>
 <p>可以通过ALTER TABLE table_name ADD UNIQUE [alias] (column1,column2);创建唯一组合索引：</p>
-<p><img alt="index" src="../../img/mysql-index-4.png" /></p>
+<p><img alt="index" src="../../img/mysql/mysql-index-4.png" /></p>
 <ul>
 <li>普通索引 INDEX</li>
 </ul>
 <p>这是最基本的索引，它没有任何限制。</p>
 <p>可以通过ALTER TABLE table_name ADD INDEX index_name (column);创建普通索引：</p>
-<p><img alt="index" src="../../img/mysql-index-5.png" /></p>
+<p><img alt="index" src="../../img/mysql/mysql-index-5.png" /></p>
 <ul>
 <li>组合索引 INDEX
 即一个索引包含多个列，多用于避免回表查询。</li>
 </ul>
 <p>可以通过ALTER TABLE table_name ADD INDEX index_name(column1,column2, column3);创建组合索引：</p>
-<p><img alt="index" src="../../img/mysql-index-6.png" /></p>
+<p><img alt="index" src="../../img/mysql/mysql-index-6.png" /></p>
 <p>全文索引 FULLTEXT</p>
 <p>也称全文检索，是目前搜索引擎使用的一种关键技术。</p>
 <p>可以通过ALTER TABLE table_name ADD FULLTEXT (column);创建全文索引：</p>
-<p><img alt="index" src="../../img/mysql-index-7.png" /></p>
+<p><img alt="index" src="../../img/mysql/mysql-index-7.png" /></p>
 <p>索引一经创建不能修改，如果要修改索引，只能删除重建。可以使用DROP INDEX index_name ON table_name;删除索引。</p>
 <h3 id="3">3、索引设计的原则<a class="headerlink" href="#3" title="Permanent link">&para;</a></h3>
 <ol>
@@ -2994,18 +2994,18 @@
 <h2 id="mysql_2">二、MySQL——索引优化实战<a class="headerlink" href="#mysql_2" title="Permanent link">&para;</a></h2>
 <p>上面我们介绍了索引的基本内容，这部分我们介绍索引优化实战。在介绍索引优化实战之前，首先要介绍两个与索引相关的重要概念，这两个概念对于索引优化至关重要。</p>
 <p>此部分用于测试的user表结构：</p>
-<p><img alt="index" src="../../img/mysql-index-8.png" /></p>
+<p><img alt="index" src="../../img/mysql/mysql-index-8.png" /></p>
 <h3 id="1_1">1、索引相关的重要概念<a class="headerlink" href="#1_1" title="Permanent link">&para;</a></h3>
 <ul>
 <li>基数
 单个列唯一键（distict_keys）的数量叫做基数。</li>
 </ul>
 <p>SELECT COUNT(DISTINCT UserName),COUNT(DISTINCT LoginPassWord) FROM pay_user;</p>
-<p><img alt="index" src="../../img/mysql-index-9.png" /></p>
+<p><img alt="index" src="../../img/mysql/mysql-index-9.png" /></p>
 <p>pay_user表的总行数是5，UserName列的基数是10，说明LoginPassWord列里面有大量重复值，UserName列的基数等于总行数，说明UserName列没有重复值，相当于主键。</p>
 <p>返回数据的比例：
 pay_user表中共有5条数据：
-<img alt="index" src="../../img/mysql-index-11.png" /></p>
+<img alt="index" src="../../img/mysql/mysql-index-11.png" /></p>
 <p>基数越大命中索引命中越高，一半取表数据30%一下走索引</p>
 <ul>
 <li>回表</li>
@@ -3015,7 +3015,7 @@ pay_user表中共有5条数据：
 <h3 id="2_1">2、索引优化实战<a class="headerlink" href="#2_1" title="Permanent link">&para;</a></h3>
 <p>有些时候虽然数据库有索引，但是并不被优化器选择使用。</p>
 <p>我们可以通过SHOW STATUS LIKE 'Handler_read%';查看索引的使用情况：</p>
-<p><img alt="index" src="../../img/mysql-index-12.png" /></p>
+<p><img alt="index" src="../../img/mysql/mysql-index-12.png" /></p>
 <ul>
 <li>Handler_read_key：如果索引正在工作，Handler_read_key的值将很高。</li>
 <li>Handler_read_rnd_next：数据文件中读取下一行的请求数，如果正在进行大量的表扫描，值将较高，则说明索引利用不理想。</li>
@@ -3086,20 +3086,20 @@ EXPLAIN SELECT * FROM pay_user WHERE UserName=1;--未使用索引</li>
 <p>对于自己编写的SQL查询语句，要尽量使用EXPLAIN命令分析一下，做一个对SQL性能有追求的程序员。衡量一个程序员是否靠谱，SQL能力是一个重要的指标。作为后端程序员，深以为然。</p>
 <h2 id="_2">三、数据库索引背后的数据结构<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
 <p>第一部分开头我们简单提到，索引是存储引擎快速找到记录的一种数据结构。进一步说，在数据库系统里，这种数据结构要满足特定查找算法，即这些数据结构以某种方式引用（指向）数据，这样就可以在这些数据结构上实现高级查找算法。</p>
-<p><img alt="index" src="../../img/mysql-index-13.png" /></p>
+<p><img alt="index" src="../../img/mysql/mysql-index-13.png" /></p>
 <h3 id="1b-tree">1、B-Tree<a class="headerlink" href="#1b-tree" title="Permanent link">&para;</a></h3>
 <p>B-Tree是一种平衡的多路查找(又称排序)树，在文件系统中和数据库系统中有所应用，主要用作文件的索引。其中的B就表示平衡(Balance) 。</p>
-<p><img alt="index" src="../../img/mysql-index-14.png" /></p>
+<p><img alt="index" src="../../img/mysql/mysql-index-14.png" /></p>
 <h3 id="b-tree">B-Tree的特性<a class="headerlink" href="#b-tree" title="Permanent link">&para;</a></h3>
 <p>为了描述B-Tree，首先定义一条数据记录为一个二元组[key, data]，key为记录的键值，对于不同数据记录，key是互不相同的；data为数据记录除key外的数据。那么B-Tree是满足下列条件的数据结构：</p>
 <p>d为大于1的一个正整数，称为B-Tree的度：</p>
-<p><img alt="index" src="../../img/mysql-index-15.png" /></p>
+<p><img alt="index" src="../../img/mysql/mysql-index-15.png" /></p>
 <p>h为一个正整数，称为B-Tree的高度：</p>
-<p><img alt="index" src="../../img/mysql-index-16.png" /></p>
+<p><img alt="index" src="../../img/mysql/mysql-index-16.png" /></p>
 <p>key和指针互相间隔，节点两端是指针：</p>
-<p><img alt="index" src="../../img/mysql-index-17.png" /></p>
+<p><img alt="index" src="../../img/mysql/mysql-index-17.png" /></p>
 <p>一个节点中的key从左到右非递减排列：</p>
-<p><img alt="index" src="../../img/mysql-index-18.png" /></p>
+<p><img alt="index" src="../../img/mysql/mysql-index-18.png" /></p>
 <p>所有节点组成树结构。</p>
 <p>每个指针要么为null，要么指向另外一个节点；每个非叶子节点由n-1个key和n个指针组成，其中d&lt;=n&lt;=2d：</p>
 <p>每个叶子节点最少包含一个key和两个指针，最多包含2d-1个key和2d个指针，叶节点的指针均为null：</p>

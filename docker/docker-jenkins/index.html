@@ -2008,8 +2008,8 @@
   
   
     <li class="md-nav__item">
-      <a href="../../cloud/compute/" class="md-nav__link">
-        云计算
+      <a href="../../cloud/docker_date/" class="md-nav__link">
+        Docker容器数据持久化存储机制
       </a>
     </li>
   
@@ -2022,8 +2022,8 @@
   
   
     <li class="md-nav__item">
-      <a href="../../cloud/compute/" class="md-nav__link">
-        云计算
+      <a href="../../cloud/docker_compose/" class="md-nav__link">
+        Docker容器服务编排利器Docker Compose应用实战
       </a>
     </li>
   
@@ -2036,8 +2036,8 @@
   
   
     <li class="md-nav__item">
-      <a href="../../cloud/compute/" class="md-nav__link">
-        云计算
+      <a href="../../cloud/docker_swarm/" class="md-nav__link">
+        Docker主机集群化方案 Docker Swarm
       </a>
     </li>
   
@@ -2050,8 +2050,8 @@
   
   
     <li class="md-nav__item">
-      <a href="../../cloud/compute/" class="md-nav__link">
-        云计算
+      <a href="../../cloud/docker_devops/" class="md-nav__link">
+        基于Docker容器DevOps应用方案 企业业务代码发布系统
       </a>
     </li>
   
@@ -2802,33 +2802,33 @@
 <ul>
 <li>运行成功后访问该地址登录Jenkins，第一次登录需要输入管理员密码：<a href="http://localhost:8080/">http://localhost:8080/</a></li>
 </ul>
-<p><img alt="jenkins" src="../../img/jenkins-1.png" /></p>
+<p><img alt="jenkins" src="../../img/docker/jenkins-1.png" /></p>
 <ul>
 <li>使用管理员密码进行登录，可以使用以下命令从容器启动日志中获取管理密码：</li>
 </ul>
 <div class="highlight"><pre><span></span><code>docker<span class="w"> </span>logs<span class="w"> </span>jenkins
 </code></pre></div>
-<p><img alt="jenkins" src="../../img/jenkins-2.png" /></p>
+<p><img alt="jenkins" src="../../img/docker/jenkins-2.png" /></p>
 <ul>
 <li>选择安装插件方式，这里我们直接安装推荐的插件：</li>
 </ul>
-<p><img alt="jenkins" src="../../img/jenkins-3.png" /></p>
+<p><img alt="jenkins" src="../../img/docker/jenkins-3.png" /></p>
 <ul>
 <li>进入插件安装界面，联网等待插件安装：</li>
 </ul>
-<p><img alt="jenkins" src="../../img/jenkins-4.png" /></p>
+<p><img alt="jenkins" src="../../img/docker/jenkins-4.png" /></p>
 <ul>
 <li>安装完成后，创建管理员账号：</li>
 </ul>
-<p><img alt="jenkins" src="../../img/jenkins-5.png" /></p>
+<p><img alt="jenkins" src="../../img/docker/jenkins-5.png" /></p>
 <ul>
 <li>进行实例配置，配置Jenkins的URL：</li>
 </ul>
-<p><img alt="jenkins" src="../../img/jenkins-6.png" /></p>
+<p><img alt="jenkins" src="../../img/docker/jenkins-6.png" /></p>
 <ul>
 <li>点击系统管理-&gt;插件管理，进行一些自定义的插件安装：</li>
 </ul>
-<p><img alt="jenkins" src="../../img/jenkins-7.png" /></p>
+<p><img alt="jenkins" src="../../img/docker/jenkins-7.png" /></p>
 <ul>
 <li>确保以下插件被正确安装：</li>
 <li>根据角色管理权限的插件：Role-based Authorization Strategy</li>
@@ -2839,33 +2839,33 @@
 <p>通过系统管理-&gt;全局工具配置来进行全局工具的配置，比如maven的配置：</p>
 </li>
 </ul>
-<p><img alt="jenkins" src="../../img/jenkins-8.png" /></p>
+<p><img alt="jenkins" src="../../img/docker/jenkins-8.png" /></p>
 <ul>
 <li>新增maven的安装配置：</li>
 </ul>
-<p><img alt="jenkins" src="../../img/jenkins-9.png" /></p>
+<p><img alt="jenkins" src="../../img/docker/jenkins-9.png" /></p>
 <ul>
 <li>在系统管理-&gt;系统配置中添加全局ssh的配置，这样Jenkins使用ssh就可以执行远程的linux脚本了：</li>
 </ul>
-<p><img alt="jenkins" src="../../img/jenkins-10.png" /></p>
+<p><img alt="jenkins" src="../../img/docker/jenkins-10.png" /></p>
 <h2 id="_1">角色权限管理<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
 <p>我们可以使用Jenkins的角色管理插件来管理Jenkins的用户，比如我们可以给管理员赋予所有权限，运维人员赋予执行任务的相关权限，其他人员只赋予查看权限。</p>
 <ul>
 <li>在系统管理-&gt;全局安全配置中启用基于角色的权限管理：</li>
 </ul>
-<p><img alt="jenkins" src="../../img/jenkins-11.png" /></p>
+<p><img alt="jenkins" src="../../img/docker/jenkins-11.png" /></p>
 <ul>
 <li>进入系统管理-&gt;Manage and Assign Roles界面：</li>
 </ul>
-<p><img alt="jenkins" src="../../img/jenkins-12.png" /></p>
+<p><img alt="jenkins" src="../../img/docker/jenkins-12.png" /></p>
 <ul>
 <li>添加角色与权限的关系：</li>
 </ul>
-<p><img alt="jenkins" src="../../img/jenkins-13.png" /></p>
+<p><img alt="jenkins" src="../../img/docker/jenkins-13.png" /></p>
 <ul>
 <li>给用户分配角色：</li>
 </ul>
-<p><img alt="jenkins" src="../../img/jenkins-14.png" /></p>
+<p><img alt="jenkins" src="../../img/docker/jenkins-14.png" /></p>
 
 
 

@@ -2016,8 +2016,8 @@
   
   
     <li class="md-nav__item">
-      <a href="../../cloud/compute/" class="md-nav__link">
-        云计算
+      <a href="../../cloud/docker_date/" class="md-nav__link">
+        Docker容器数据持久化存储机制
       </a>
     </li>
   
@@ -2030,8 +2030,8 @@
   
   
     <li class="md-nav__item">
-      <a href="../../cloud/compute/" class="md-nav__link">
-        云计算
+      <a href="../../cloud/docker_compose/" class="md-nav__link">
+        Docker容器服务编排利器Docker Compose应用实战
       </a>
     </li>
   
@@ -2044,8 +2044,8 @@
   
   
     <li class="md-nav__item">
-      <a href="../../cloud/compute/" class="md-nav__link">
-        云计算
+      <a href="../../cloud/docker_swarm/" class="md-nav__link">
+        Docker主机集群化方案 Docker Swarm
       </a>
     </li>
   
@@ -2058,8 +2058,8 @@
   
   
     <li class="md-nav__item">
-      <a href="../../cloud/compute/" class="md-nav__link">
-        云计算
+      <a href="../../cloud/docker_devops/" class="md-nav__link">
+        基于Docker容器DevOps应用方案 企业业务代码发布系统
       </a>
     </li>
   
@@ -2817,7 +2817,7 @@
 <p><strong>场景二:</strong> 出故障后如何快速定位问题</p>
 <p>一般传统的方式当出现问题后，我们就会去服务器上看看服务是否还存活。如果存活就会看看日志是否有异常信息。</p>
 <p>在 Cat 后台的首页，会展示各个系统的运行情况，如果有异常，则会大片飘红，非常明显。最直接的方式还是直接查看 Problem 报表，这里会为我们展示直接的异常信息，快速定位问题。</p>
-<p><img alt="cat" src="../../img/cat-1.png" /></p>
+<p><img alt="cat" src="../../img/tool/cat-1.png" /></p>
 <p><strong>场景三:</strong> 用户反馈订单列表要 10 几秒才展示，用户反馈下单一直在转圈圈</p>
 <p>场景三属于优化相关，对于研发来说，优化是一个长期的过程，没有最好只有更好。优化除了需要有对应的方案，最重要的是要对症下药。</p>
 <p>所谓的对症下药也就是在优化之前，你得先知道哪里比较慢。RPC 调用慢？数据库查询慢？缓存更新慢?</p>
@@ -2844,23 +2844,23 @@
 </code></pre></div>
 <p>可以在基础框架中对 Rpc, 数据库等框架进行埋点，这样就可以通过 Cat 来监控这些组件了。</p>
 <p>业务中需要埋点也可以使用 Cat 的 Transaction，比如下单，支付等核心功能，通常我们对 URL 进行埋点就可以了，也就包含了具体的业务流程。</p>
-<p><img alt="cat" src="../../img/cat-2.png" /></p>
+<p><img alt="cat" src="../../img/tool/cat-2.png" /></p>
 <p><strong>Event 报表</strong> 适用于监控一段代码运行次数，比如记录程序中一个事件记录了多少次，错误了多少次。Event 报表的整体结构与 Transaction 报表几乎一样，只缺少响应时间的统计。</p>
 <p>埋点方式：
 <div class="highlight"><pre><span></span><code><span class="n">Cat</span><span class="p">.</span><span class="na">logEvent</span><span class="p">(</span><span class="s">&quot;Func&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Func1&quot;</span><span class="p">);</span>
 </code></pre></div></p>
-<p><img alt="cat" src="../../img/cat-3.png" /></p>
+<p><img alt="cat" src="../../img/tool/cat-3.png" /></p>
 <p><strong>Problem 报表</strong> Problem 记录整个项目在运行过程中出现的问题，包括一些异常、错误、访问较长的行为。</p>
 <p>如果有人反馈你的接口报 500 错误了，你进 Cat 后就直接可以去 Problem 报表了，错误信息就在 Problem 中。</p>
-<p><img alt="cat" src="../../img/cat-4.png" /></p>
+<p><img alt="cat" src="../../img/tool/cat-4.png" /></p>
 <p>Problem 报表不需要手动埋点，我们只需要在项目中集成日志的 LogAppender 就可以将所有 error 异常记录，下面的段落中会讲解如何整合 LogAppender。</p>
 <p><strong>Heartbeat 报表</strong> Heartbeat 报表是 CAT 客户端，以一分钟为周期，定期向服务端汇报当前运行时候的一些状态。</p>
-<p><img alt="cat" src="../../img/cat-5.png" /></p>
+<p><img alt="cat" src="../../img/tool/cat-5.png" /></p>
 <p>系统指标有系统的负载信息，内存使用情况，磁盘使用情况等。</p>
 <p>JVM 指标有 GC 相关信息，线程相关信息。</p>
 <p><strong>Business 报表</strong> Business 报表对应着业务指标，比如订单指标。与 Transaction、Event、Problem 不同，Business 更偏向于宏观上的指标，另外三者偏向于微观代码的执行情况。</p>
 <p>这个报表我也没怎么用过，用的多的还是前面几个。</p>
-<p><img alt="cat" src="../../img/cat-6.png" /></p>
+<p><img alt="cat" src="../../img/tool/cat-6.png" /></p>
 <h2 id="cat_kitty_cloud">Cat 在 Kitty Cloud 中的应用<a class="headerlink" href="#cat_kitty_cloud" title="Permanent link">&para;</a></h2>
 <blockquote>
 <p>Kitty Cloud 的基础组件是 Kitty，Kitty 里面对需要的一些框架都进行了一层包装，比如扩展，增加 Cat 埋点之类的功能。</p>
@@ -2897,9 +2897,9 @@
 &lt;/dependency&gt;
 </code></pre></div>
 <p>启动项目，然后访问你的 REST API。可以在 Cat 的控制台看到 URL 的监控信息。</p>
-<p><img alt="cat" src="../../img/cat-7.png" /></p>
+<p><img alt="cat" src="../../img/tool/cat-7.png" /></p>
 <p>点击 URL 进去可以看到具体的 URL 信息。</p>
-<p><img alt="cat" src="../../img/cat-8.png" /></p>
+<p><img alt="cat" src="../../img/tool/cat-8.png" /></p>
 <p><strong>Mybatis 埋点</strong></p>
 <p>Kitty 中 Mybatis 是用的 Mybatis Plus, 主要是对数据库相关操作的 SQL 进行了 Cat 埋点，可以很方便的查看 SQL 的耗时情况。</p>
 <p>依赖 kitty-spring-cloud-starter-mybatis：</p>
@@ -2911,11 +2911,11 @@
 </code></pre></div>
 <a href="https://mp.baomidou.com">其他的使用方式还是跟 Mybatis Plus 一样，具体参考 Mybatis Plus 文档</a></p>
 <p>只要涉及到数据库的操作，都会在 Cat 中进行数据的展示。</p>
-<p><img alt="cat" src="../../img/cat-9.png" /></p>
+<p><img alt="cat" src="../../img/tool/cat-9.png" /></p>
 <p>点击 SQL 进去还可以看到是哪个 Mapper 的操作。</p>
-<p><img alt="cat" src="../../img/cat-10.png" /></p>
+<p><img alt="cat" src="../../img/tool/cat-10.png" /></p>
 <p>再进一步就可以看到具体的 SQL 语句和消耗的时间。</p>
-<p><img alt="cat" src="../../img/cat-11.png" /></p>
+<p><img alt="cat" src="../../img/tool/cat-11.png" /></p>
 <p>有了这些数据，后端研发同学就可以对相关的 SQL 进行优化了。</p>
 <p>**Redis 埋点**如果需要使用 Spring Data Redis 的话，直接集成 kitty-spring-cloud-starter-redis 就可以，kitty-spring-cloud-starter-redis 中对 Redis 的命令进行了埋点，可以在 Cat 上直观的查看对应的命令和消耗的时间。</p>
 <p>添加对应的 Maven 依赖：</p>
@@ -2932,9 +2932,9 @@
 <span class="n">stringRedisTemplate</span><span class="p">.</span><span class="na">opsForValue</span><span class="p">().</span><span class="na">set</span><span class="p">(</span><span class="s">&quot;name&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;yinjihuan&quot;</span><span class="p">);</span>
 </code></pre></div>
 <p>Cat 中可以看到 Redis 信息。</p>
-<p><img alt="cat" src="../../img/cat-12.png" /></p>
+<p><img alt="cat" src="../../img/tool/cat-12.png" /></p>
 <p>点击 Redis 进去可以看到有哪些命令。</p>
-<p><img alt="cat" src="../../img/cat-13.png" /></p>
+<p><img alt="cat" src="../../img/tool/cat-13.png" /></p>
 <p><strong>MongoDB 埋点</strong> Kitty 中对 Spring Data Mongodb 做了封装，只对 MongoTemplate 做了埋点。使用时需要依赖 kitty-spring-cloud-starter-mongodb。</p>
 <div class="highlight"><pre><span></span><code>&lt;dependency&gt;
     &lt;groupId&gt;com.cxytiandi&lt;/groupId&gt;
@@ -2943,11 +2943,11 @@
 &lt;/dependency&gt;
 </code></pre></div>
 <p>在发生 Mongo 的操作后，Cat 上就可以看到相关的数据了。</p>
-<p><img alt="cat" src="../../img/cat-14.png" /></p>
+<p><img alt="cat" src="../../img/tool/cat-14.png" /></p>
 <p>点进去就可以看到是 MongoTemplate 的哪个方法发生了调用。</p>
-<p><img alt="cat" src="../../img/cat-15.png" /></p>
+<p><img alt="cat" src="../../img/tool/cat-15.png" /></p>
 <p>再进一步就可以看到具体的 Mongo 参数和消耗的时间。</p>
-<p><img alt="cat" src="../../img/cat-16.png" /></p>
+<p><img alt="cat" src="../../img/tool/cat-16.png" /></p>
 <p>还有 Dubbo, Feign，Jetcache，ElasticSearch 等框架的埋点就不细讲了，感兴趣的可以移步 Github 查看代码。</p>
 <h2 id="cat_5">Cat 使用小技巧<a class="headerlink" href="#cat_5" title="Permanent link">&para;</a></h2>
 <p>**埋点工具类**如果要对业务方法进行监控，我们一般会用 Transaction 功能，将业务逻辑包含在 Transaction 里面，就能监控这个业务的耗时信息。</p>
@@ -3055,7 +3055,7 @@
 <p>但是如果在 Mvc，远程调用等这些框架中做好了数据的无缝传输，Cat 也可以充当一个链路跟踪的系统，基本的场景足够了。</p>
 <p>Cat 也可以构建远程消息树，可以看到请求经过了哪些服务，每个服务的耗时等信息。只不过服务之间的依赖关系图在 Cat 中没有。</p>
 <p>下图请求从网关进行请求转发到 articles 上面，然后 articles 里面调用了 users 的接口。</p>
-<p><img alt="cat" src="../../img/cat-17.png" /></p>
+<p><img alt="cat" src="../../img/tool/cat-17.png" /></p>
 <p><strong>Cat 跟 Skywalking 哪个好用?</strong></p>
 <p>Skywalking 也是一款非常优秀的 APM 框架，我还没用过，不过看过一些文档，功能点挺全的 ，界面也挺好看。最大的优势是不用像 Cat 一样需要埋点，使用字节码增强的方式来对应用进行监控。</p>
 <p>之所以列出这个小标题是因为如果大家还没有用的话肯定会纠结要选择落地哪个去做监控。我个人认为这两个都可以，可以自己先弄个简单的版本体验体验，结合你想要的功能点来评估落地哪个。</p>

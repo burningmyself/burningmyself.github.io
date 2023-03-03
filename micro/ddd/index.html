@@ -2348,8 +2348,8 @@
   
   
     <li class="md-nav__item">
-      <a href="../../cloud/compute/" class="md-nav__link">
-        云计算
+      <a href="../../cloud/docker_date/" class="md-nav__link">
+        Docker容器数据持久化存储机制
       </a>
     </li>
   
@@ -2362,8 +2362,8 @@
   
   
     <li class="md-nav__item">
-      <a href="../../cloud/compute/" class="md-nav__link">
-        云计算
+      <a href="../../cloud/docker_compose/" class="md-nav__link">
+        Docker容器服务编排利器Docker Compose应用实战
       </a>
     </li>
   
@@ -2376,8 +2376,8 @@
   
   
     <li class="md-nav__item">
-      <a href="../../cloud/compute/" class="md-nav__link">
-        云计算
+      <a href="../../cloud/docker_swarm/" class="md-nav__link">
+        Docker主机集群化方案 Docker Swarm
       </a>
     </li>
   
@@ -2390,8 +2390,8 @@
   
   
     <li class="md-nav__item">
-      <a href="../../cloud/compute/" class="md-nav__link">
-        云计算
+      <a href="../../cloud/docker_devops/" class="md-nav__link">
+        基于Docker容器DevOps应用方案 企业业务代码发布系统
       </a>
     </li>
   
@@ -3471,7 +3471,7 @@
 <p>本文适用于按照 DDD 设计方法进行微服务设计和开发的项目及相关人员。</p>
 <h2 id="ddd_1">DDD 分层架构视图<a class="headerlink" href="#ddd_1" title="Permanent link">&para;</a></h2>
 <p>DDD 分层架构包括：展现层、应用层、领域层和基础层。</p>
-<p><img alt="" src="../../img/ddd1.png" /></p>
+<p><img alt="" src="../../img/micro/ddd1.png" /></p>
 <p>DDD 分层架构各层职能如下：</p>
 <ul>
 <li>展现层<br />
@@ -3486,7 +3486,7 @@
 <h2 id="_3">服务视图<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
 <p>微服务内的服务视图  </p>
 <p>微服务内有 Facade 接口、应用服务、领域服务和基础服务，各层服务协同配合，为外部提供服务。</p>
-<p><img alt="" src="../../img/ddd2.png" /></p>
+<p><img alt="" src="../../img/micro/ddd2.png" /></p>
 <h3 id="1">1、接口服务<a class="headerlink" href="#1" title="Permanent link">&para;</a></h3>
 <p>接口服务位于用户接口层，用于处理用户发送的 Restful 请求和解析用户输入的配置文件等，并将信息传递给应用层。</p>
 <h3 id="2">2、应用服务<a class="headerlink" href="#2" title="Permanent link">&para;</a></h3>
@@ -3509,14 +3509,14 @@
 <p>跨微服务数据处理时，对实时性要求高的场景，可选择直接调用应用服务的方式（新增和修改类型操作需关注事务一致性）。对实时性要求不高的场景，可选择异步化的领域事件驱动机制（最终数据一致性）。</p>
 <h2 id="_5">数据视图<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
 <p>DDD 分层架构中数据对象转换的过程如下图。</p>
-<p><img alt="" src="../../img/ddd3.png" /></p>
+<p><img alt="" src="../../img/micro/ddd3.png" /></p>
 <p>数据视图应用服务通过数据传输对象（DTO）完成外部数据交换。领域层通过领域对象（DO）作为领域实体和值对象的数据和行为载体。基础层利用持久化对象（PO）完成数据库的交换。
 DTO 与 VO 通过 Restful 协议实现 JSON 格式和对象转换。
 前端应用与应用层之间 DTO 与 DO 的转换发生在用户接口层。如微服务内应用服务需调用外部微服务的应用服务，则 DTO 的组装和 DTO 与 DO 的转换发生在应用层。
 领域层 DO 与 PO 的转换发生在基础层。</p>
 <h2 id="_6">领域事件和事件总线<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
 <p>领域事件是领域模型中非常重要的部分，用来表示领域中发生的事件。一个领域事件将导致进一步的业务操作，有助于形成完整的业务闭环。领域事件主要用于解耦微服务，各个微服务之间不再是强一致性，而是基于事件的最终一致性。</p>
-<p><img alt="" src="../../img/ddd4.png" /></p>
+<p><img alt="" src="../../img/micro/ddd4.png" /></p>
 <h3 id="_7">微服务内的领域事件<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
 <p>微服务内的领域事件可以通过事件总线或利用应用服务实现不同聚合之间的业务协同。当微服务内发生领域事件时，由于大部分事件的集成发生在同一个线程内，不一定需要引入消息中间件。但一个事件如果同时更新多个聚合数据，按照 DDD“一个事务只更新一个聚合根”的原则，可以考虑引入消息中间件，通过异步化的方式，对微服务内不同的聚合根采用不同的事务。</p>
 <h3 id="_8">微服务之间的领域事件<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
@@ -3578,7 +3578,7 @@ DTO 与 VO 通过 Restful 协议实现 JSON 格式和对象转换。
 <h3 id="_14">领域对象及服务矩阵样例说明<a class="headerlink" href="#_14" title="Permanent link">&para;</a></h3>
 <p>领域对象及服务矩阵主要用来记录事件风暴和微服务设计过程中产出的领域对象属性，如：各领域对象在 DDD 分层架构中的位置、属性、依赖关系以及与代码对象的映射关系等。通过建立领域对象与代码对象的映射关系，可指导软件开发人员准确无误的按照设计文档完成微服务开发。
 以下为领域对象及服务矩阵样例（部分数据，仅供参考）。</p>
-<p><img alt="" src="../../img/ddd5.png" /></p>
+<p><img alt="" src="../../img/micro/ddd5.png" /></p>
 <p>各栏说明如下：
 * 层：</p>
 <p>定义领域对象位于 DDD 分层架构中的哪一层。如：接口层、应用层、领域层以及基础层等。</p>
@@ -3609,7 +3609,7 @@ DTO 与 VO 通过 Restful 协议实现 JSON 格式和对象转换。
 <p>微服务代码模型最终结果来源于领域对象及服务矩阵。在代码模型设计时须建立领域对象和代码对象的一一映射，保证业务模型与代码模型的一致性，即使不熟悉业务的开发人员或者不熟悉代码的业务人员也可以很快定位到代码位置。</p>
 <h3 id="_16">微服务代码总目录<a class="headerlink" href="#_16" title="Permanent link">&para;</a></h3>
 <p>基于 DDD 的代码模型包括 interfaces、application、domain 和 infrastructure 四个目录。</p>
-<p><img alt="" src="../../img/ddd6.png" /></p>
+<p><img alt="" src="../../img/micro/ddd6.png" /></p>
 <ul>
 <li>Interfaces（用户接口层）：</li>
 </ul>
@@ -3628,7 +3628,7 @@ DTO 与 VO 通过 Restful 协议实现 JSON 格式和对象转换。
 <p>本目录存放基础层代码，为其它各层提供通用技术能力、三方软件包、配置和基础资源服务等。</p>
 <h3 id="_17">用户接口层代码模型<a class="headerlink" href="#_17" title="Permanent link">&para;</a></h3>
 <p>用户接口层代码模型目录包括：assembler、dto 和 facade。</p>
-<p><img alt="" src="../../img/ddd7.png" /></p>
+<p><img alt="" src="../../img/micro/ddd7.png" /></p>
 <ul>
 <li>
 <p>Assembler：实现 DTO 与领域对象之间的相互转换和数据交换。理论上 Assembler 总是与 DTO 一同被使用。</p>
@@ -3642,7 +3642,7 @@ DTO 与 VO 通过 Restful 协议实现 JSON 格式和对象转换。
 </ul>
 <h3 id="_18">应用层代码模型<a class="headerlink" href="#_18" title="Permanent link">&para;</a></h3>
 <p>应用层代码模型目录包括：event 和 service。</p>
-<p><img alt="" src="../../img/ddd8.png" /></p>
+<p><img alt="" src="../../img/micro/ddd8.png" /></p>
 <ul>
 <li>
 <p>Event（事件）：事件目录包括两个子目录：publish 和 subscribe。publish 目录主要存放微服务内领域事件发布相关代码。subscribe 目录主要存放微服务内聚合之间或外部微服务领域事件订阅处理相关代码。为了实现领域事件的统一管理，微服务内所有领域事件（包括应用层和领域层事件）的发布和订阅处理都统一放在应用层。</p>
@@ -3653,7 +3653,7 @@ DTO 与 VO 通过 Restful 协议实现 JSON 格式和对象转换。
 </ul>
 <h3 id="_19">领域层代码模型<a class="headerlink" href="#_19" title="Permanent link">&para;</a></h3>
 <p>微服务领域层包括一个或多个聚合代码包。标准的聚合代码模型包括：entity、repository 和 service 三个子目录。</p>
-<p><img alt="" src="../../img/ddd9.png" /></p>
+<p><img alt="" src="../../img/micro/ddd9.png" /></p>
 <ul>
 <li>Aggregate（聚合）：聚合代码包的根目录，实际项目中以实际业务属性的名称来命名。聚合定义了领域对象之间的关系和边界，实现领域模型的内聚。</li>
 <li>Entity（实体）：存放实体（含聚合根、实体和值对象）相关代码。同一实体所有相关的代码（含对同一实体类多个对象操作的方法，如对多个对象的 count 等）都放在一个实体类中。</li>
@@ -3663,14 +3663,14 @@ DTO 与 VO 通过 Restful 协议实现 JSON 格式和对象转换。
 </ul>
 <h3 id="_20">基础层代码模型<a class="headerlink" href="#_20" title="Permanent link">&para;</a></h3>
 <p>基础层代码模型包括：config 和 util 两个子目录。</p>
-<p><img alt="" src="../../img/ddd10.png" /></p>
+<p><img alt="" src="../../img/micro/ddd10.png" /></p>
 <ul>
 <li>Config：主要存放配置相关代码。</li>
 <li>Util：主要存放平台、开发框架、消息、数据库、缓存、文件、总线、网关、第三方类库、通用算法等基础代码，可为不同的资源类别建立不同的子目录。</li>
 </ul>
 <h3 id="_21">微服务总目录结构<a class="headerlink" href="#_21" title="Permanent link">&para;</a></h3>
 <p>微服务总目录结构如下：</p>
-<p><img alt="" src="../../img/ddd11.png" /></p>
+<p><img alt="" src="../../img/micro/ddd11.png" /></p>
 <h3 id="_22">微服务设计原则<a class="headerlink" href="#_22" title="Permanent link">&para;</a></h3>
 <p>微服务设计原则中如高内聚低耦合、复用、单一职责等原则在此就不赘述了，这里主要强调以下几条：</p>
 <ul>
@@ -3734,7 +3734,7 @@ DTO 与 VO 通过 Restful 协议实现 JSON 格式和对象转换。
 <ul>
 <li>1、场景分析：场景分析是一个发散的过程。根据不同角色的旅程和场景分析，尽可能全面的梳理从前端操作到后端业务逻辑发生的所有操作、命令、领域事件以及外部依赖关系等信息（如下图），如：请假人员会执行创建请假信息操作命令，审批人员会执行审批操作，请假审批通过后会产生领域事件，通知邮件系统反馈请假人员结果，并将请假数据发送到考勤以便核销等。在记录这些领域对象的同时，我们也会标记各对象在 DDD 中的层和对象类型等属性，如：应用服务、领域服务、事件和命令等类型。</li>
 </ul>
-<p><img alt="" src="../../img/ddd12.png" /></p>
+<p><img alt="" src="../../img/micro/ddd12.png" /></p>
 <ul>
 <li>
 <p>2、领域建模：领域建模是一个收敛的过程。这个收敛过程分三步：第一步根据场景分析中的操作集合定义领域实体；第二步根据领域实体业务关联性，定义聚合；第三步根据业务及语义边界等因素，定义限界上下文。</p>
@@ -3755,16 +3755,16 @@ DTO 与 VO 通过 Restful 协议实现 JSON 格式和对象转换。
 <p>将事件风暴中产出的领域对象按照各自所在的微服务进行分类，定义每个领域对象在微服务中的层、领域类型和依赖的领域对象等。</p>
 <p>这个步骤最关键的工作是确定实体、方法、服务等领域对象在微服务分层架构中的位置以及各对象之间的依赖关系，形成服务矩阵（如下表）。这个过程也将在事件风暴数据的基础上，进一步细化领域对象以及它们之间关系，并补充事件风暴中可能遗漏的细节。</p>
 <p>确定完各领域对象的属性后，按照代码模型设计各个领域对象在代码模型中的代码对象（包括代码对象所在的：包名、类名和方法名），建立领域对象与代码对象的一一映射关系。根据这种映射关系，相关人员可快速定位到业务逻辑所在的代码位置。</p>
-<p><img alt="" src="../../img/ddd13.png" /></p>
+<p><img alt="" src="../../img/micro/ddd13.png" /></p>
 <h4 id="_31">步骤三：领域模型及服务架构<a class="headerlink" href="#_31" title="Permanent link">&para;</a></h4>
 <p>根据领域模型中领域对象属性以及服务矩阵，画出领域对象及服务架构视图（如下图）。这个视图可以作为标准的 DDD 分层领域服务架构视图模型，应用在不同的领域模型中。这个模型可以清晰的体现微服务内实体、聚合之间的关系，各层服务之间的依赖关系以及应用层服务组合和编排的关系，微服务之间的服务调用以及事件驱动的前后处理逻辑关系。
 在这个阶段，前端的设计也可以同步进行，在这里我们用到了微前端的设计理念，为请假和考勤微服务分别设计了请假和考勤微前端，基于微前端和微服务，形成从前端到后端的业务逻辑自包含组件。两个微前端之上有一个集成主页面，可根据页面流动态加载请假和考勤的微前端页面。</p>
-<p><img alt="" src="../../img/ddd14.png" /></p>
+<p><img alt="" src="../../img/micro/ddd14.png" /></p>
 <h4 id="_32">步骤四：代码模型设计<a class="headerlink" href="#_32" title="Permanent link">&para;</a></h4>
 <p>根据 DDD 的代码结构模型和各领域对象在所在的包、类和方法，定义出请假微服务的代码结构模型。应用层代码结构包括：应用服务以及事件发布相关代码（如下图）。</p>
-<p><img alt="" src="../../img/ddd15.png" /></p>
+<p><img alt="" src="../../img/micro/ddd15.png" /></p>
 <p>领域层代码结构包括一个或多个聚合的实体类以及领域服务相关代码（如下图）。在本项目中请假微服务领域层包含了请假和人员两个聚合。</p>
-<p><img alt="" src="../../img/ddd16.png" /></p>
+<p><img alt="" src="../../img/micro/ddd16.png" /></p>
 <p>领域模型中的一个聚合对应一个聚合代码包，如：人员和请假领域逻辑代码都放在各自的聚合代码包中，如随着业务发展，人员管理功能需要从请假微服务中拆分出来，我们只需要将人员聚合代码包稍加改造并独立部署即可快速发布为人员管理微服务。</p>
 <h4 id="_33">步骤五：详细设计<a class="headerlink" href="#_33" title="Permanent link">&para;</a></h4>
 <p>在完成领域模型和代码模型设计后，我们就可以开始详细设计了，详细设计主要结合具体的业务功能来开展，主要工作包括：系统界面、数据库表以及字段、服务参数规约及功能等。</p>

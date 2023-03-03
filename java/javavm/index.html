@@ -2480,8 +2480,8 @@
   
   
     <li class="md-nav__item">
-      <a href="../../cloud/compute/" class="md-nav__link">
-        云计算
+      <a href="../../cloud/docker_date/" class="md-nav__link">
+        Docker容器数据持久化存储机制
       </a>
     </li>
   
@@ -2494,8 +2494,8 @@
   
   
     <li class="md-nav__item">
-      <a href="../../cloud/compute/" class="md-nav__link">
-        云计算
+      <a href="../../cloud/docker_compose/" class="md-nav__link">
+        Docker容器服务编排利器Docker Compose应用实战
       </a>
     </li>
   
@@ -2508,8 +2508,8 @@
   
   
     <li class="md-nav__item">
-      <a href="../../cloud/compute/" class="md-nav__link">
-        云计算
+      <a href="../../cloud/docker_swarm/" class="md-nav__link">
+        Docker主机集群化方案 Docker Swarm
       </a>
     </li>
   
@@ -2522,8 +2522,8 @@
   
   
     <li class="md-nav__item">
-      <a href="../../cloud/compute/" class="md-nav__link">
-        云计算
+      <a href="../../cloud/docker_devops/" class="md-nav__link">
+        基于Docker容器DevOps应用方案 企业业务代码发布系统
       </a>
     </li>
   
@@ -3785,7 +3785,7 @@ Java<span class="o">(</span>TM<span class="o">)</span><span class="w"> </span>SE
 Java<span class="w"> </span>HotSpot<span class="o">(</span>TM<span class="o">)</span><span class="w"> </span><span class="m">64</span>-Bit<span class="w"> </span>Server<span class="w"> </span>VM<span class="w"> </span><span class="o">(</span>build<span class="w"> </span><span class="m">25</span>.171-b11,<span class="w"> </span>mixed<span class="w"> </span>mode<span class="o">)</span><span class="w"> </span><span class="c1"># 使用的是HotSpot虚拟机，默认为服务端模式</span>
 </code></pre></div>
 <h2 id="java_1">二、Java 内存区域<a class="headerlink" href="#java_1" title="Permanent link">&para;</a></h2>
-<div align="center"> <img src="./../img/javavm1.png"/> </div>
+<div align="center"> <img src="./../img/java/javavm1.png"/> </div>
 
 <h3 id="21">2.1 程序计数器<a class="headerlink" href="#21" title="Permanent link">&para;</a></h3>
 <p>程序计数器（Program Counter Register）是一块较小的内存空间，它可以看做是当前线程所执行的字节码的行号指示器。字节码解释器通过改变程序计数器的值来选取下一条需要执行的字节码指令，分支、循环、跳转、异常处理、线程恢复等基础功能都需要该计数器来完成。每条线程都拥有一个独立的程序计数器，各条线程之间的计数器互不影响，独立存储。</p>
@@ -3812,7 +3812,7 @@ Java<span class="w"> </span>HotSpot<span class="o">(</span>TM<span class="o">)</
 <ul>
 <li><strong>指针碰撞</strong>：假设 Java 堆中内存是绝对规整的，所有使用的内存放在一边，所有未被使用的内存放在另外一边，中间以指针作为分界点指示器。此时内存分配只是将指针向空闲方向偏移出对象大小的空间即可，这种方式被称为指针碰撞。</li>
 </ul>
-<div align="center"> <img src="./../img/javavm2.png"/> </div>
+<div align="center"> <img src="./../img/java/javavm2.png"/> </div>
 
 <ul>
 <li><strong>空闲列表</strong>：如果 Java 堆不是规整的，此时虚拟机需要维护一个列表，记录哪些内存块是可用的，哪些是不可用的。在进行内存分配时，只需要从该列表中选取出一块足够的内存空间划分给对象实例即可。</li>
@@ -3848,10 +3848,10 @@ Java<span class="w"> </span>HotSpot<span class="o">(</span>TM<span class="o">)</
 <li><strong>指针访问</strong>：<code>reference</code> 中存储的直接就是对象地址，而对象的类型数据则由上文介绍的对象头中的类型指针来指定。</li>
 </ul>
 <p>通过句柄访问对象：</p>
-<div align="center"> <img src="./../img/javavm3.png"/> </div>
+<div align="center"> <img src="./../img/java/javavm3.png"/> </div>
 
 <p>通过直接指针访问对象：</p>
-<div align="center"> <img src="./../img/javavm4.png"/> </div>
+<div align="center"> <img src="./../img/java/javavm4.png"/> </div>
 
 <p>句柄访问的优点在于对象移动时（垃圾收集时移动对象是非常普遍的行为）只需要改变句柄中实例数据的指针，而  <code>reference</code>  本生并不需要修改；指针访问则反之，由于其 <code>reference</code> 中存储的直接就是对象地址，所以当对象移动时， <code>reference</code> 需要被修改。但针对只需要访问对象本身的场景，指针访问则可以减少一次定位开销。由于对象访问是一项非常频繁的操作，所以这类减少的效果会非常显著，基于这个原因，HotSpot 主要使用的是指针访问的方式。</p>
 <h2 id="_3">四、垃圾收集算法<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
@@ -3869,7 +3869,7 @@ Java<span class="w"> </span>HotSpot<span class="o">(</span>TM<span class="o">)</
 <p>如上所示，此时两个对象已经不能再被访问，但其互相持有对对方的引用，如果采用引用计数法，则两个对象都无法被回收。</p>
 <h4 id="2">2. 可达性分析<a class="headerlink" href="#2" title="Permanent link">&para;</a></h4>
 <p>上面的代码在大多数虚拟机中都能被正确的回收，因为大多数主流的虚拟机都是采用的可达性分析方法来判断对象是否死亡。可达性分析是通过一系列被称为 <code>GC Roots</code> 的根对象作为起始节点集，从这些节点开始，根据引用关系向下搜索，搜索过程所走过的路径被称为引用链（Reference Chain），如果某个对象到 <code>GC Roots</code> 间没有任何引用链相连，这代表 <code>GC Roots</code> 到该对象不可达， 此时证明此该对象不可能再被使用。</p>
-<div align="center"> <img src="./../img/javavm5.png"/> </div>
+<div align="center"> <img src="./../img/java/javavm5.png"/> </div>
 
 <p>在 Java 语言中，固定可作为 <code>GC Roots</code> 的对象包括以下几种：</p>
 <ul>
@@ -3918,7 +3918,7 @@ Java<span class="w"> </span>HotSpot<span class="o">(</span>TM<span class="o">)</
 </ul>
 <h4 id="3_-">3. 标记-清除算法<a class="headerlink" href="#3_-" title="Permanent link">&para;</a></h4>
 <p>它是最基础的垃圾收集算法，收集过程分为两个阶段：首先标记出所有需要回收的对象，在标记完成后，统一回收掉所有被标记的对象；也可以反过来，标记存活对象，统一回收所有未被标记的对象。</p>
-<div align="center"> <img src="./../img/javavm6.png"/> </div>
+<div align="center"> <img src="./../img/java/javavm6.png"/> </div>
 
 <p>它主要有以下两个缺点：</p>
 <ul>
@@ -3931,12 +3931,12 @@ Java<span class="w"> </span>HotSpot<span class="o">(</span>TM<span class="o">)</
 <li>如果内存中多数对象都是存活的，这种算法将产生大量的复制开销；</li>
 <li>浪费内存空间，内存空间变为了原有的一半。</li>
 </ul>
-<div align="center"> <img src="./../img/javavm7.png"/> </div>
+<div align="center"> <img src="./../img/java/javavm7.png"/> </div>
 
 <p>基于新生代 “朝生夕灭” 的特点，大多数虚拟机都不会按照 1:1 的比例来进行内存划分，例如 HotSpot 虚拟机会将内存空间划分为一块较大的 <code>Eden</code> 和 两块较小的 <code>Survivor</code> 空间，它们之间的比例是 8:1:1 。 每次分配时只会使用 <code>Eden</code> 和其中的一块 <code>Survivor</code> ，发生垃圾回收时，只需要将存活的对象一次性复制到另外一块 <code>Survivor</code> 上，这样只有 10% 的内存空间会被浪费掉。当 <code>Survivor</code> 空间不足以容纳一次 <code>Minor GC</code> 时，此时由其他内存区域（通常是老年代）来进行分配担保。 </p>
 <h4 id="5_-">5. 标记-整理算法<a class="headerlink" href="#5_-" title="Permanent link">&para;</a></h4>
 <p>标记-整理算法是在标记完成后，让所有存活对象都向内存的一端移动，然后直接清理掉边界以外的内存。其优点在于可以避免内存空间碎片化的问题，也可以充分利用内存空间；其缺点在于根据所使用的收集器的不同，在移动存活对象时可能要全程暂停用户程序：</p>
-<div align="center"> <img src="./../img/javavm8.png"/> </div>
+<div align="center"> <img src="./../img/java/javavm8.png"/> </div>
 
 <h2 id="_4">五、经典垃圾收集器<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
 <p>并行与并发是并发编程中的专有名词，在谈论垃圾收集器的上下文语境中，它们的含义如下：</p>
@@ -3949,18 +3949,18 @@ Java<span class="w"> </span>HotSpot<span class="o">(</span>TM<span class="o">)</
 </li>
 </ul>
 <p>HotSpot 虚拟机中一共存在七款经典的垃圾收集器：</p>
-<div align="center"> <img src="./../img/javavm9.png"/> </div>
+<div align="center"> <img src="./../img/java/javavm9.png"/> </div>
 
 <blockquote>
 <p>注：收集器之间存在连线，则代表它们可以搭配使用。</p>
 </blockquote>
 <h3 id="51_serial">5.1 Serial 收集器<a class="headerlink" href="#51_serial" title="Permanent link">&para;</a></h3>
 <p>Serial 收集器是最基础、历史最悠久的收集器，它是一个单线程收集器，在进行垃圾回收时，必须暂停其他所有的工作线程，直到收集结束，这是其主要缺点。它的优点在于单线程避免了多线程复杂的上下文切换，因此在单线程环境下收集效率非常高，由于这个优点，迄今为止，其仍然是 HotSpot 虚拟机在客户端模式下默认的新生代收集器：</p>
-<div align="center"> <img src="./../img/javavm10.png"/> </div>
+<div align="center"> <img src="./../img/java/javavm10.png"/> </div>
 
 <h3 id="52_parnew">5.2 ParNew 收集器<a class="headerlink" href="#52_parnew" title="Permanent link">&para;</a></h3>
 <p>他是 Serial 收集器的多线程版本，可以使用多条线程进行垃圾回收：</p>
-<div align="center"> <img src="./../img/javavm11.png"/> </div>
+<div align="center"> <img src="./../img/java/javavm11.png"/> </div>
 
 <h3 id="53_parallel_scavenge">5.3 Parallel Scavenge 收集器<a class="headerlink" href="#53_parallel_scavenge" title="Permanent link">&para;</a></h3>
 <p>Parallel Scavenge 也是新生代收集器，基于 标记-复制 算法进行实现，它的目标是达到一个可控的吞吐量。这里的吞吐量指的是处理器运行用户代码的时间与处理器总消耗时间的比值：
@@ -3974,11 +3974,11 @@ Parallel Scavenge 收集器提供两个参数用于精确控制吞吐量：</p>
 </ul>
 <h3 id="54_serial_old">5.4 Serial Old 收集器<a class="headerlink" href="#54_serial_old" title="Permanent link">&para;</a></h3>
 <p>从名字也可以看出来，它是 Serial 收集器的老年代版本，同样是一个单线程收集器，采用 标记-整理 算法，主要用于给客户端模式下的 HotSpot 虚拟机使用：</p>
-<div align="center"> <img src="./../img/javavm12.png"/> </div>
+<div align="center"> <img src="./../img/java/javavm12.png"/> </div>
 
 <h3 id="55_paralled_old">5.5 Paralled Old 收集器<a class="headerlink" href="#55_paralled_old" title="Permanent link">&para;</a></h3>
 <p>Paralled Old 是 Parallel Scavenge 收集器的老年代版本，支持多线程并发收集，采用 标记-整理 算法实现：</p>
-<div align="center"> <img src="./../img/javavm13.png"/> </div>
+<div align="center"> <img src="./../img/java/javavm13.png"/> </div>
 
 <h3 id="56_cms">5.6 CMS 收集器<a class="headerlink" href="#56_cms" title="Permanent link">&para;</a></h3>
 <p>CMS（Concurrent Mark Sweep）收集器是一种以获取最短回收停顿时间为目标的收集器，基于 标记-清除 算法实现，整个收集过程分为以下四个阶段：</p>
@@ -3988,7 +3988,7 @@ Parallel Scavenge 收集器提供两个参数用于精确控制吞吐量：</p>
 <li><strong>重新标记 (remark)</strong>：采用增量更新算法，对并发标记阶段因为用户线程运行而产生变动的那部分对象进行重新标记，耗时比初始标记稍长且需要暂停用户线程；</li>
 <li><strong>并发清除 (inital sweep)</strong>：并发清除掉已经死亡的对象，耗时长但不需要暂停用户线程。</li>
 </ol>
-<div align="center"> <img src="./../img/javavm14.png"/> </div>
+<div align="center"> <img src="./../img/java/javavm14.png"/> </div>
 
 <p>其优点在于耗时长的 并发标记 和 并发清除 阶段都不需要暂停用户线程，因此其停顿时间较短，其主要缺点如下：</p>
 <ul>
@@ -3998,7 +3998,7 @@ Parallel Scavenge 收集器提供两个参数用于精确控制吞吐量：</p>
 </ul>
 <h3 id="57_garbage_first">5.7 Garbage First 收集器<a class="headerlink" href="#57_garbage_first" title="Permanent link">&para;</a></h3>
 <p>Garbage First（简称 G1）是一款面向服务端的垃圾收集器，也是 JDK 9 服务端模式下默认的垃圾收集器，它的诞生具有里程碑式的意义。G1 虽然也遵循分代收集理论，但不再以固定大小和固定数量来划分分代区域，而是把连续的 Java 堆划分为多个大小相等的独立区域（Region）。每一个 Region 都可以根据不同的需求来扮演新生代的 <code>Eden</code> 空间、<code>Survivor</code> 空间或者老年代空间，收集器会根据其扮演角色的不同而采用不同的收集策略。</p>
-<div align="center"> <img src="./../img/javavm15.png"/> </div>
+<div align="center"> <img src="./../img/java/javavm15.png"/> </div>
 
 <p>上面还有一些 Region 使用 H 进行标注，它代表 Humongous，表示这些 Region 用于存储大对象（humongous object，H-obj），即大小大于等于 region 一半的对象。G1 收集器的运行大致可以分为以下四个步骤：</p>
 <ol>
@@ -4007,7 +4007,7 @@ Parallel Scavenge 收集器提供两个参数用于精确控制吞吐量：</p>
 <li><strong>最终标记 (Final Marking)</strong>：对用户线程做一个短暂的暂停，用于处理并发阶段结束后仍遗留下来的少量的 STAB 记录。虽然并发标记阶段会处理 SATB 记录，但由于处理时用户线程依然是运行中的，因此依然会有少量的变动，所以需要最终标记来处理；</li>
 <li><strong>筛选回收 (Live Data Counting and Evacuation)</strong>：负责更新 Regin 统计数据，按照各个 Regin 的回收价值和成本进行排序，在根据用户期望的停顿时间进行来指定回收计划，可以选择任意多个 Regin 构成回收集。然后将回收集中 Regin 的存活对象复制到空的 Regin 中，再清理掉整个旧的 Regin 。此时因为涉及到存活对象的移动，所以需要暂停用户线程，并由多个收集线程并行执行。</li>
 </ol>
-<div align="center"> <img src="./../img/javavm16.png"/> </div>
+<div align="center"> <img src="./../img/java/javavm16.png"/> </div>
 
 <h3 id="58">5.8 内存分配原则<a class="headerlink" href="#58" title="Permanent link">&para;</a></h3>
 <h4 id="1_eden">1. 对象优先在 Eden 分配<a class="headerlink" href="#1_eden" title="Permanent link">&para;</a></h4>
@@ -4024,7 +4024,7 @@ Parallel Scavenge 收集器提供两个参数用于精确控制吞吐量：</p>
 <p>Java 虚拟机把描述类的数据从 Class 文件加载到内存，并对数据进行校验、转换解析和初始化，最终形成可以被虚拟机直接使用的 Java 类型，这个过程被称为虚拟机的类加载机制。</p>
 <h3 id="61">6.1 类加载时机<a class="headerlink" href="#61" title="Permanent link">&para;</a></h3>
 <p>一个类型从被加载到虚拟机内存中开始，到卸载出内存为止，它的整个生命周期将会经历加载、验证、准备、卸载、解析、初始化、使用、卸载七个阶段，其中验证、准备、解析三个部分统称为连接：</p>
-<div align="center"> <img src="./../img/javavm17.png"/> </div>
+<div align="center"> <img src="./../img/java/javavm17.png"/> </div>
 
 <p>《Java 虚拟机规范》严格规定了有且只有六种情况必须立即对类进行初始化：</p>
 <ol>
@@ -4089,7 +4089,7 @@ Parallel Scavenge 收集器提供两个参数用于精确控制吞吐量：</p>
 <li><strong>应用程序类加载器 (Application Class Loader)</strong>：负责加载用户类路径（ClassPath）上的所有的类库。</li>
 </ul>
 <p>JDK 9 之前的 Java 应用都是由这三种类加载器相互配合来完成加载：</p>
-<div align="center"> <img src="./../img/javavm18.png"/> </div>
+<div align="center"> <img src="./../img/java/javavm18.png"/> </div>
 
 <p>上图所示的各种类加载器之间的层次关系被称为类加载器的 “双亲委派模型”，“双亲委派模型” 要求除了顶层的启动类加载器外，其余的类加载器都应该有自己的父类加载器，需要注意的是这里的加载器之间的父子关系一般不是以继承关系来实现的，而是使用组合关系来复用父类加载器的代码。</p>
 <p>双亲委派模型的工作过程如下：如果一个类加载器收到了类加载的请求，它首先不会自己去尝试加载这个类，而是把这个请求委派给父类加载器去完成，每一个层次的类加载器都是如此，因此所有的加载请求最终都应该传送到最顶层的启动类加载器，只有当父加载器反馈自己无法完成这个加载请求（它的搜索范围中没有找到所需的类）时，子加载器才会尝试自己去完成加载。基于双亲委派模型可以保证程序中的类在各种类加载器环境中都是同一个类，否则就有可能出现一个程序中存在两个不同的 <code>java.lang.Object</code> 的情况。</p>
@@ -4100,7 +4100,7 @@ Parallel Scavenge 收集器提供两个参数用于精确控制吞吐量：</p>
 <li>当平台及应用程序类加载器收到类加载请求时，要首先判断该类是否能够归属到某一个系统模块中，如果可以找到这样的归属关系，就要优先委派给负责那个模块的加载器完成加载；</li>
 <li>启动类加载器、平台类加载器、应用程序类加载器全部继承自 <code>java.internal.loader.BuiltinClassLoader</code> ，BuiltinClassLoader 中实现了新的模块化架构下类如何从模块中加载的逻辑，以及模块中资源可访问性的处理。</li>
 </ul>
-<div align="center"> <img src="./../img/javavm19.png"/> </div>
+<div align="center"> <img src="./../img/java/javavm19.png"/> </div>
 
 <h2 id="_6">七、程序编译<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
 <h3 id="71">7.1 编译器分类<a class="headerlink" href="#71" title="Permanent link">&para;</a></h3>
@@ -4127,7 +4127,7 @@ Parallel Scavenge 收集器提供两个参数用于精确控制吞吐量：</p>
 <li><strong>第 4 层</strong>：使用服务端编译器将字节码编译为本地代码，其耗时更长，并且会根据性能监控信息进行一些不可靠的激进优化。</li>
 </ul>
 <p>以上层次并不是固定不变的，根据不同的运行参数和版本，虚拟机可以调整分层的数量。各层次编译之间的交互转换关系如下图所示：</p>
-<div align="center"> <img width="600px" src="./../img/javavm20.png"/> </div>
+<div align="center"> <img width="600px" src="./../img/java/javavm20.png"/> </div>
 
 <p>实施分层编译后，解释器、客户端编译器和服务端编译器就会同时工作，可以用客户端编译器获取更高的编译速度、用服务端编译器来获取更好的编译质量。</p>
 <h3 id="74">7.4 热点探测<a class="headerlink" href="#74" title="Permanent link">&para;</a></h3>
