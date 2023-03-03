@@ -1,0 +1,3486 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content=".net,java,php,python,docker,web">
+      
+      
+        <meta name="author" content="BurningMyself">
+      
+      
+        <link rel="canonical" href="https://burningmyself.gitee.io/cloud/docker_file/">
+      
+      
+        <link rel="prev" href="../docker_container_enterprice/">
+      
+      
+        <link rel="next" href="../compute/">
+      
+      <link rel="icon" href="../../favicon.ico">
+      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.0.15">
+    
+    
+      
+        <title>Dockerfile精讲及新型容器镜像构建技术 - BurningMyself</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.113286f1.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.a0c5b2b5.min.css">
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="" data-md-color-accent="">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#dockerfile" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../.." title="BurningMyself" class="md-header__button md-logo" aria-label="BurningMyself" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            BurningMyself
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Dockerfile精讲及新型容器镜像构建技术
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/burningmyself/burningmyself.github.io" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    burningmyself.github.io
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="BurningMyself" class="md-nav__button md-logo" aria-label="BurningMyself" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    BurningMyself
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/burningmyself/burningmyself.github.io" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    burningmyself.github.io
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        介绍
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+          技术博文
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          技术博文
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="0">
+          .NET
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_1_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2_1">
+          <span class="md-nav__icon md-icon"></span>
+          .NET
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../net/c_sharp/" class="md-nav__link">
+        C#新特性语法
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../net/c_docker/" class="md-nav__link">
+        .Net Core Docker 部署
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../net/c_sqlserver_nginx/" class="md-nav__link">
+        Docker 容器化部署 ASP.NET Core
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../net/c_core_safety/" class="md-nav__link">
+        让你的ASP.NET Core应用程序更安全
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../net/c_core_study_route/" class="md-nav__link">
+        ASP.NET Core开发者指南
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+          Java
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2_2">
+          <span class="md-nav__icon md-icon"></span>
+          Java
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../java/feature/" class="md-nav__link">
+        Java特性
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../java/load-class/" class="md-nav__link">
+        Java类加载
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../java/orm/" class="md-nav__link">
+        Orm的优缺点
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../java/bio-nio/" class="md-nav__link">
+        BIO与NIO
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../java/rocketmq/rmq-1/" class="md-nav__link">
+        RocketMq下载与安装
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../java/springAnnotation/" class="md-nav__link">
+        Spring常用注解
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../java/javavm/" class="md-nav__link">
+        Java 虚拟机
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../java/springdesign/" class="md-nav__link">
+        Spring 常用设计
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../java/spring-cloud/" class="md-nav__link">
+        Spring Cloud
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../java/java-simple/" class="md-nav__link">
+        Java simple
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../java/java-validator/" class="md-nav__link">
+        Java Validator
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../java/java-string/" class="md-nav__link">
+        Java String
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../java/java-utils/" class="md-nav__link">
+        Java Utils
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+          Python
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2_3">
+          <span class="md-nav__icon md-icon"></span>
+          Python
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../python/feature/" class="md-nav__link">
+        Python特性
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../python/str_joint/" class="md-nav__link">
+        Python字符拼接
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../python/syntax_rule/" class="md-nav__link">
+        Python语法技巧
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../python/fabric/" class="md-nav__link">
+        远程部署神器 Fabric
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_4" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_4" id="__nav_2_4_label" tabindex="0">
+          PHP
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_4_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2_4">
+          <span class="md-nav__icon md-icon"></span>
+          PHP
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../php/kj/" class="md-nav__link">
+        框架
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_5" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_5" id="__nav_2_5_label" tabindex="0">
+          Web
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_5_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2_5">
+          <span class="md-nav__icon md-icon"></span>
+          Web
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../web/es6/" class="md-nav__link">
+        es6语法
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../web/ali_js_style/" class="md-nav__link">
+        阿里js样式规范
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../web/node.js/" class="md-nav__link">
+        node.js文档
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../web/react/" class="md-nav__link">
+        React 开发者指南
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../dart/syntax/" class="md-nav__link">
+        Dart语法学习
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../web/react_interview/" class="md-nav__link">
+        React 面试
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../web/js_tool_method/" class="md-nav__link">
+        js 工具函数
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../web/vue_cp_react/" class="md-nav__link">
+        vue与react比较
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../web/javascript/" class="md-nav__link">
+        JavaScript 基础
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_6" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_6" id="__nav_2_6_label" tabindex="0">
+          SQL
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_6_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2_6">
+          <span class="md-nav__icon md-icon"></span>
+          SQL
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sql/mysql_yh/" class="md-nav__link">
+        MySQL优化
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sql/mysql_yh17/" class="md-nav__link">
+        MySQL优化
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sql/mysql_log/" class="md-nav__link">
+        MySQL日志
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sql/mysql_index/" class="md-nav__link">
+        MySQL索引
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sql/mysql_pxc/" class="md-nav__link">
+        MySQL PXC集群
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sql/mysql_use/" class="md-nav__link">
+        MySQL 数据库应用
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sql/mysql_backups/" class="md-nav__link">
+        MySql 备份
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sql/sql_server_master/" class="md-nav__link">
+        Sql Server 主从备份
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sql/data_split/" class="md-nav__link">
+        数据库之互联网常用分库分表方案
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sql/mybatis/" class="md-nav__link">
+        Mybatis使用心德
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_7" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_7" id="__nav_2_7_label" tabindex="0">
+          Linux
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_7_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2_7">
+          <span class="md-nav__icon md-icon"></span>
+          Linux
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linux/often/" class="md-nav__link">
+        常用命令
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linux/ope/" class="md-nav__link">
+        实用的Linux 命令
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_8" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_8" id="__nav_2_8_label" tabindex="0">
+          Docker
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_8_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2_8">
+          <span class="md-nav__icon md-icon"></span>
+          Docker
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docker/docker/" class="md-nav__link">
+        Docker全科
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docker/docker-compose/" class="md-nav__link">
+        docker和docker-compose配置常用环境
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docker/docker-jenkins/" class="md-nav__link">
+        Docker部署Jenkins
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docker/docker-phabricator/" class="md-nav__link">
+        Docker部署Phabricator
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_9" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_9" id="__nav_2_9_label" tabindex="0">
+          Tool
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_9_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2_9">
+          <span class="md-nav__icon md-icon"></span>
+          Tool
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tool/git/" class="md-nav__link">
+        Git
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tool/gitusual/" class="md-nav__link">
+        Git动画展示
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tool/gitquestion/" class="md-nav__link">
+        Git问题处理
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tool/gitflow/" class="md-nav__link">
+        GitFlow
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tool/gitbook/" class="md-nav__link">
+        GitBook
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tool/gitcmr/" class="md-nav__link">
+        Git提交日志规范
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tool/markdown/" class="md-nav__link">
+        Markdown
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tool/cicd/" class="md-nav__link">
+        CI/CD
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tool/mkdocs/" class="md-nav__link">
+        mkdocs简单使用
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tool/gitstudy/" class="md-nav__link">
+        Git的黑魔法
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tool/minio/" class="md-nav__link">
+        MinIO 搭建使用
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tool/cat-monitoring/" class="md-nav__link">
+        Cat分布式监控
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+          微服务
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          微服务
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../micro/fbs-lock/" class="md-nav__link">
+        分布式锁
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../micro/design/" class="md-nav__link">
+        微服务设计
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../micro/distrimsg/" class="md-nav__link">
+        分布式系统与消息的投递
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../micro/ddd/" class="md-nav__link">
+        基于DDD的微服务设计和开发实战
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../micro/kafka/" class="md-nav__link">
+        Kafka架构原理
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../micro/redis-cluster/" class="md-nav__link">
+        Redis Cluster原理
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../micro/spring-cloud-micro/" class="md-nav__link">
+        分布式架构
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+          经验分析
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          经验分析
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../exp/devops/" class="md-nav__link">
+        DevOps
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../exp/micro-service/" class="md-nav__link">
+        Micro-Service
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../exp/raft-gossip/" class="md-nav__link">
+        Raft算法和Gossip协议
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../exp/cl/" class="md-nav__link">
+        集群和负载均衡
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../exp/ai/" class="md-nav__link">
+        人工智能
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../exp/code-principle/" class="md-nav__link">
+        代码原则
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../exp/techbig/" class="md-nav__link">
+        如何成为技术大牛
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../exp/learnweetout/" class="md-nav__link">
+        程序员如何技术成长
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../exp/pt/" class="md-nav__link">
+        产品与技术
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../exp/four_deep_learning/" class="md-nav__link">
+        深度学习框架
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../exp/tl/" class="md-nav__link">
+        在阿里做了5年技术Leader，我总结出这些套路！
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../exp/cto/" class="md-nav__link">
+        CTO 技能图谱
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+          云架构
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          云架构
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../native/" class="md-nav__link">
+        云原生
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../virtual/" class="md-nav__link">
+        虚拟化技术
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../compute/" class="md-nav__link">
+        云计算
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../apprelease/" class="md-nav__link">
+        应用部署容器化演进
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../containerlinux/" class="md-nav__link">
+        容器技术所涉及Linux内核关键技术
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../docker_native/" class="md-nav__link">
+        容器管理工具Docker生态架构及部署
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../docker_nginx/" class="md-nav__link">
+        使用容器运行Nginx应用及Docker命令
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../docker_image/" class="md-nav__link">
+        Docker容器镜像
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../docker_image_fast/" class="md-nav__link">
+        Docker容器镜像加速器及本地容器镜像仓库
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../docker_container_enterprice/" class="md-nav__link">
+        Docker容器化部署企业级应用集群
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Dockerfile精讲及新型容器镜像构建技术
+      </a>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../compute/" class="md-nav__link">
+        云计算
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../compute/" class="md-nav__link">
+        云计算
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../compute/" class="md-nav__link">
+        云计算
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../compute/" class="md-nav__link">
+        云计算
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../compute/" class="md-nav__link">
+        云计算
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../compute/" class="md-nav__link">
+        云计算
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../compute/" class="md-nav__link">
+        云计算
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../compute/" class="md-nav__link">
+        云计算
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../compute/" class="md-nav__link">
+        云计算
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../compute/" class="md-nav__link">
+        云计算
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+          构架
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_6">
+          <span class="md-nav__icon md-icon"></span>
+          构架
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../framework/split/" class="md-nav__link">
+        构架拆分
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../framework/fgb/" class="md-nav__link">
+        分布式、高并发、多线程
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../framework/agility/" class="md-nav__link">
+        如何理解敏捷开发
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../framework/fwork/" class="md-nav__link">
+        走向架构师必备的技能
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../framework/data-middle/" class="md-nav__link">
+        数据中台的思考与总结
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../framework/algorithm-ten/" class="md-nav__link">
+        必学的 10 大算法
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+          情感
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_7">
+          <span class="md-nav__icon md-icon"></span>
+          情感
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../emotion/eq/" class="md-nav__link">
+        情商
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../emotion/workheard/" class="md-nav__link">
+        工作心得
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../emotion/lookbook/" class="md-nav__link">
+        看书
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../emotion/fmf/" class="md-nav__link">
+        4种男朋友
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../emotion/notheart/" class="md-nav__link">
+        不上心
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../emotion/selfdiscipline/" class="md-nav__link">
+        自律
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../emotion/notlike/" class="md-nav__link">
+        喜欢与不喜欢
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../emotion/latemarry/" class="md-nav__link">
+        晚婚
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../emotion/understand/" class="md-nav__link">
+        追女生要明白这些事
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../emotion/backup/" class="md-nav__link">
+        备胎
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../emotion/chase/" class="md-nav__link">
+        为什么追不到她
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../emotion/livefail/" class="md-nav__link">
+        为什么活着失败
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../emotion/emotion/" class="md-nav__link">
+        情绪管理
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../emotion/abolish/" class="md-nav__link">
+        废掉的三个迹象
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../emotion/uptime/" class="md-nav__link">
+        余生，好好珍惜
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../emotion/losecome/" class="md-nav__link">
+        所有的失去，都会以另一种方式归来
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../emotion/threeheart/" class="md-nav__link">
+        人生有这三种好心态
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../emotion/onelike/" class="md-nav__link">
+        一个感情真相
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../emotion/notruth/" class="md-nav__link">
+        情商与道理
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../emotion/smf/" class="md-nav__link">
+        六种男人远离
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../emotion/select/" class="md-nav__link">
+        决定接下来人生归属的，不是努力，而是选择
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../emotion/nolike/" class="md-nav__link">
+        被你拉黑的那个人，你一定很喜欢吧
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../emotion/onepath/" class="md-nav__link">
+        余生，学会一个人走，不管有没有人陪
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../emotion/twopath/" class="md-nav__link">
+        往后余生还很精彩，别被熬夜拖垮了
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../emotion/lifetime/" class="md-nav__link">
+        心态好的人，一辈子都好
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../emotion/hearttoheart/" class="md-nav__link">
+        将心比心，方得人心
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../emotion/ttt/" class="md-nav__link">
+        别睡太晚，别爱太满，别要太多
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../emotion/profess/" class="md-nav__link">
+        表白
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+  
+
+
+<h1 id="dockerfile">Dockerfile精讲及新型容器镜像构建技术<a class="headerlink" href="#dockerfile" title="Permanent link">&para;</a></h1>
+<h1 id="_1">一、容器与容器镜像之间的关系<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
+<p>说到Docker管理的容器不得不说容器镜像，主要因为容器镜像是容器模板，通过容器镜像我们才能快速创建容器。</p>
+<p>如下图所示：</p>
+<p><img alt="img" src="../../img/docker_file/clip_image002.jpg" /></p>
+<blockquote>
+<p>Docker Daemon通过容器镜像创建容器。</p>
+</blockquote>
+<h1 id="_2">二、容器镜像分类<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h1>
+<ul>
+<li>操作系统类</li>
+<li>CentOS</li>
+<li>Ubuntu</li>
+<li>在dockerhub下载或自行制作</li>
+<li>应用类</li>
+<li>Tomcat</li>
+<li>Nginx</li>
+<li>MySQL</li>
+<li>Redis</li>
+</ul>
+<h1 id="_3">三、容器镜像获取的方法<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h1>
+<p>主要有以下几种：</p>
+<p>1、在DockerHub直接下载</p>
+<p>2、把操作系统中文件系统打包为容器镜像</p>
+<p>3、把正在运行的容器打包为容器镜像，即docker commit</p>
+<p>4、通过Dockerfile实现容器镜像的自定义及生成</p>
+<h1 id="_4">四、容器镜像获取方法演示<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h1>
+<h2 id="41_dockerhub">4.1 在DockerHub直接下载<a class="headerlink" href="#41_dockerhub" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><span class="c"># docker pull centos:latest</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c"># docker pull nginx:latest</span>
+</code></pre></div>
+<h2 id="42">4.2 把操作系统中文件系统打包为容器镜像<a class="headerlink" href="#42" title="Permanent link">&para;</a></h2>
+<h3 id="421">4.2.1 安装一个最化的操作系统<a class="headerlink" href="#421" title="Permanent link">&para;</a></h3>
+<p><img alt="image-20220210123047484" src="../../img/docker_file/image-20220210123047484.png" /></p>
+<h3 id="422">4.2.2 把操作系统中文件系统进行打包<a class="headerlink" href="#422" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c"># tar --numeric-owner --exclude=/proc --exclude=/sys -cvf centos7u6.tar /</span>
+</code></pre></div>
+<h3 id="423">4.2.3 把打包后文件加载至本地文件系统生成本地容器镜像<a class="headerlink" href="#423" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c"># ls</span>
+<span class="n">centos7u6</span><span class="p">.</span><span class="n">tar</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c"># docker import centos7u6.tar centos7u6:v1</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c"># docker images</span>
+<span class="n">REPOSITORY</span>   <span class="n">TAG</span>       <span class="n">IMAGE</span> <span class="n">ID</span>       <span class="n">CREATED</span>         <span class="n">SIZE</span>
+<span class="n">centos7u6</span>    <span class="n">v1</span>        <span class="n">130cb005b2dc</span>   <span class="n">7</span> <span class="n">seconds</span> <span class="n">ago</span>   <span class="n">1</span><span class="p">.</span><span class="n">09GB</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c"># docker run -it centos7u6:v1 bash</span>
+<span class="p">[</span><span class="n">root</span><span class="nv">@50f24f688b4d</span> <span class="p">/]</span><span class="c"># ip a s</span>
+<span class="n">1</span><span class="p">:</span> <span class="n">lo</span><span class="p">:</span> <span class="p">&lt;</span><span class="n">LOOPBACK</span><span class="p">,</span><span class="n">UP</span><span class="p">,</span><span class="n">LOWER_UP</span><span class="p">&gt;</span> <span class="n">mtu</span> <span class="n">65536</span> <span class="n">qdisc</span> <span class="n">noqueue</span> <span class="n">state</span> <span class="n">UNKNOWN</span> <span class="nb">group </span><span class="k">default</span> <span class="n">qlen</span> <span class="n">1000</span>
+    <span class="n">link</span><span class="p">/</span><span class="n">loopback</span> <span class="n">00</span><span class="p">:</span><span class="n">00</span><span class="p">:</span><span class="n">00</span><span class="p">:</span><span class="n">00</span><span class="p">:</span><span class="n">00</span><span class="p">:</span><span class="n">00</span> <span class="n">brd</span> <span class="n">00</span><span class="p">:</span><span class="n">00</span><span class="p">:</span><span class="n">00</span><span class="p">:</span><span class="n">00</span><span class="p">:</span><span class="n">00</span><span class="p">:</span><span class="n">00</span>
+    <span class="n">inet</span> <span class="n">127</span><span class="p">.</span><span class="n">0</span><span class="p">.</span><span class="n">0</span><span class="p">.</span><span class="n">1</span><span class="p">/</span><span class="n">8</span> <span class="n">scope</span> <span class="n">host</span> <span class="n">lo</span>
+       <span class="n">valid_lft</span> <span class="n">forever</span> <span class="n">preferred_lft</span> <span class="n">forever</span>
+<span class="n">7</span><span class="p">:</span> <span class="n">eth0</span><span class="nv">@if8</span><span class="p">:</span> <span class="p">&lt;</span><span class="n">BROADCAST</span><span class="p">,</span><span class="n">MULTICAST</span><span class="p">,</span><span class="n">UP</span><span class="p">,</span><span class="n">LOWER_UP</span><span class="p">&gt;</span> <span class="n">mtu</span> <span class="n">1500</span> <span class="n">qdisc</span> <span class="n">noqueue</span> <span class="n">state</span> <span class="n">UP</span> <span class="nb">group </span><span class="k">default</span>
+    <span class="n">link</span><span class="p">/</span><span class="n">ether</span> <span class="n">02</span><span class="p">:</span><span class="n">42</span><span class="p">:</span><span class="n">ac</span><span class="p">:</span><span class="n">11</span><span class="p">:</span><span class="n">00</span><span class="p">:</span><span class="n">02</span> <span class="n">brd</span> <span class="n">ff</span><span class="p">:</span><span class="n">ff</span><span class="p">:</span><span class="n">ff</span><span class="p">:</span><span class="n">ff</span><span class="p">:</span><span class="n">ff</span><span class="p">:</span><span class="n">ff</span> <span class="n">link-netnsid</span> <span class="n">0</span>
+    <span class="n">inet</span> <span class="n">172</span><span class="p">.</span><span class="n">17</span><span class="p">.</span><span class="n">0</span><span class="p">.</span><span class="n">2</span><span class="p">/</span><span class="n">16</span> <span class="n">brd</span> <span class="n">172</span><span class="p">.</span><span class="n">17</span><span class="p">.</span><span class="n">255</span><span class="p">.</span><span class="n">255</span> <span class="n">scope</span> <span class="n">global</span> <span class="n">eth0</span>
+       <span class="n">valid_lft</span> <span class="n">forever</span> <span class="n">preferred_lft</span> <span class="n">forever</span>
+</code></pre></div>
+<h2 id="43">4.3 把正在运行的容器打包为容器镜像<a class="headerlink" href="#43" title="Permanent link">&para;</a></h2>
+<h3 id="431">4.3.1 运行一个容器<a class="headerlink" href="#431" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c"># docker run -it centos7u6:v1 bash</span>
+</code></pre></div>
+<h3 id="432">4.3.2 在容器中安装应用<a class="headerlink" href="#432" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="p">[</span><span class="n">root</span><span class="nv">@064aace45718</span> <span class="p">/]</span><span class="c"># yum -y install httpd</span>
+</code></pre></div>
+<h3 id="433">4.3.3 把正在运行的容器打包为容器镜像<a class="headerlink" href="#433" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="p">[</span><span class="n">root</span><span class="nv">@064aace45718</span> <span class="p">/]</span><span class="c"># ctrl + p +q</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c"># docker commit 064aace45718 centos7u6-httpd:v1</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c"># docker images</span>
+<span class="n">REPOSITORY</span>        <span class="n">TAG</span>       <span class="n">IMAGE</span> <span class="n">ID</span>       <span class="n">CREATED</span>         <span class="n">SIZE</span>
+<span class="n">centos7u6-httpd</span>   <span class="n">v1</span>        <span class="n">30ec9d728880</span>   <span class="n">6</span> <span class="n">seconds</span> <span class="n">ago</span>   <span class="n">1</span><span class="p">.</span><span class="n">29GB</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c"># docker run -it centos7u6-httpd:v1 bash</span>
+<span class="p">[</span><span class="n">root</span><span class="nv">@01a1373b4a3f</span> <span class="p">/]</span><span class="c"># rpm -qa | grep httpd</span>
+<span class="n">httpd-tools</span><span class="p">-</span><span class="n">2</span><span class="p">.</span><span class="n">4</span><span class="p">.</span><span class="n">6</span><span class="p">-</span><span class="n">97</span><span class="p">.</span><span class="n">el7</span><span class="p">.</span><span class="n">centos</span><span class="p">.</span><span class="n">4</span><span class="p">.</span><span class="n">x86_64</span>
+<span class="n">httpd</span><span class="p">-</span><span class="n">2</span><span class="p">.</span><span class="n">4</span><span class="p">.</span><span class="n">6</span><span class="p">-</span><span class="n">97</span><span class="p">.</span><span class="n">el7</span><span class="p">.</span><span class="n">centos</span><span class="p">.</span><span class="n">4</span><span class="p">.</span><span class="n">x86_64</span>
+</code></pre></div>
+<h2 id="44_dockerfile">4.4 通过Dockerfile实现容器镜像的自定义及生成<a class="headerlink" href="#44_dockerfile" title="Permanent link">&para;</a></h2>
+<h3 id="441_dockerfile">4.4.1 Dockerfile介绍<a class="headerlink" href="#441_dockerfile" title="Permanent link">&para;</a></h3>
+<p>Dockerfile是一种能够被Docker程序解释的剧本。Dockerfile由一条一条的指令组成，并且有自己的书写格式和支持的命令。当我们需要在容器镜像中指定自己额外的需求时，只需在Dockerfile上添加或修改指令，然后通过docker build生成我们自定义的容器镜像（image）。</p>
+<p><img alt="image-20220210123047484" src="../../img/docker_file/clip_image002-1644469873598.jpg" /></p>
+<h3 id="442_dockerfile">4.4.2 Dockerfile指令<a class="headerlink" href="#442_dockerfile" title="Permanent link">&para;</a></h3>
+<ul>
+<li>构建类指令</li>
+<li>用于构建image</li>
+<li>
+<p>其指定的操作不会在运行image的容器上执行（FROM、MAINTAINER、RUN、ENV、ADD、COPY）</p>
+</li>
+<li>
+<p>设置类指令</p>
+</li>
+<li>用于设置image的属性</li>
+<li>
+<p>其指定的操作将在运行image的容器中执行（CMD、ENTRYPOINT、USER 、EXPOSE、VOLUME、WORKDIR、ONBUILD）</p>
+</li>
+<li>
+<p>指令说明</p>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>指令</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>FROM</td>
+<td>构建新镜像基于的基础镜像</td>
+</tr>
+<tr>
+<td>LABEL</td>
+<td>标签</td>
+</tr>
+<tr>
+<td>RUN</td>
+<td>构建镜像时运行的Shell命令</td>
+</tr>
+<tr>
+<td>COPY</td>
+<td>拷贝文件或目录到镜像中</td>
+</tr>
+<tr>
+<td>ADD</td>
+<td>解压压缩包并拷贝</td>
+</tr>
+<tr>
+<td>ENV</td>
+<td>设置环境变量</td>
+</tr>
+<tr>
+<td>USER</td>
+<td>为RUN、CMD和ENTRYPOINT执行命令指定运行用户</td>
+</tr>
+<tr>
+<td>EXPOSE</td>
+<td>声明容器运行的服务端口</td>
+</tr>
+<tr>
+<td>WORKDIR</td>
+<td>为RUN、CMD、ENTRYPOINT、COPY和ADD设置工作目录</td>
+</tr>
+<tr>
+<td>CMD</td>
+<td>运行容器时默认执行，如果有多个CMD指令，最后一个生效</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>指令详细解释</li>
+</ul>
+<p>通过<code>man docker_file</code>可以查看到详细的说明,这里简单的翻译并列出常用的指令</p>
+<p>1, <strong>FROM</strong></p>
+<p>FROM指令用于指定其后构建新镜像所使用的基础镜像。</p>
+<p>FROM指令必是Dockerfile文件中的首条命令。</p>
+<p>FROM指令指定的基础image可以是官方远程仓库中的，也可以位于本地仓库，优先本地仓库。</p>
+<div class="highlight"><pre><span></span><code><span class="n">格式</span><span class="p">:</span><span class="n">FROM</span> <span class="p">&lt;</span><span class="n">image</span><span class="p">&gt;:&lt;</span><span class="n">tag</span><span class="p">&gt;</span>
+<span class="n">例</span><span class="p">:</span><span class="n">FROM</span> <span class="n">centos</span><span class="p">:</span><span class="n">latest</span>
+</code></pre></div>
+<p>2, <strong>RUN</strong></p>
+<p>RUN指令用于在**构建**镜像中执行命令，有以下两种格式:</p>
+<ul>
+<li>shell格式</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="n">格式</span><span class="p">:</span><span class="n">RUN</span> <span class="p">&lt;</span><span class="n">命令</span><span class="p">&gt;</span>
+<span class="n">例</span><span class="p">:</span><span class="n">RUN</span> <span class="nb">echo </span><span class="s1">&#39;kubemsb&#39;</span> <span class="p">&gt;</span> <span class="p">/</span><span class="n">var</span><span class="p">/</span><span class="n">www</span><span class="p">/</span><span class="n">html</span><span class="p">/</span><span class="n">index</span><span class="p">.</span><span class="n">html</span>
+</code></pre></div>
+<ul>
+<li>exec格式</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="n">格式</span><span class="p">:</span><span class="n">RUN</span> <span class="p">[</span><span class="s2">&quot;可执行文件&quot;</span><span class="p">,</span> <span class="s2">&quot;参数1&quot;</span><span class="p">,</span> <span class="s2">&quot;参数2&quot;</span><span class="p">]</span>
+<span class="n">例</span><span class="p">:</span><span class="n">RUN</span> <span class="p">[</span><span class="s2">&quot;/bin/bash&quot;</span><span class="p">,</span> <span class="s2">&quot;-c&quot;</span><span class="p">,</span> <span class="s2">&quot;echo kubemsb &gt; /var/www/html/index.html&quot;</span><span class="p">]</span>
+</code></pre></div>
+<p><strong>注意:</strong> 按优化的角度来讲:当有多条要执行的命令,不要使用多条RUN,尽量使用&amp;&amp;符号与\符号连接成一行。因为多条RUN命令会让镜像建立多层(总之就是会变得臃肿了<img alt="😃" class="emojione" src="https://cdnjs.cloudflare.com/ajax/libs/emojione/2.2.7/assets/png/1f603.png" title=":smiley:" />)。</p>
+<div class="highlight"><pre><span></span><code><span class="n">RUN</span> <span class="n">yum</span> <span class="n">install</span> <span class="n">httpd</span> <span class="n">httpd-devel</span> <span class="n">-y</span>
+<span class="n">RUN</span> <span class="nb">echo </span><span class="n">test</span> <span class="p">&gt;</span> <span class="p">/</span><span class="n">var</span><span class="p">/</span><span class="n">www</span><span class="p">/</span><span class="n">html</span><span class="p">/</span><span class="n">index</span><span class="p">.</span><span class="n">html</span>
+<span class="n">可以改成</span>
+<span class="n">RUN</span> <span class="n">yum</span> <span class="n">install</span> <span class="n">httpd</span> <span class="n">httpd-devel</span> <span class="n">-y</span> <span class="p">&amp;&amp;</span> <span class="nb">echo </span><span class="n">test</span> <span class="p">&gt;</span> <span class="p">/</span><span class="n">var</span><span class="p">/</span><span class="n">www</span><span class="p">/</span><span class="n">html</span><span class="p">/</span><span class="n">index</span><span class="p">.</span><span class="n">html</span>
+<span class="n">或者改成</span>
+<span class="n">RUN</span> <span class="n">yum</span> <span class="n">install</span> <span class="n">httpd</span> <span class="n">httpd-devel</span> <span class="n">-y</span>  <span class="p">\</span>
+    <span class="p">&amp;&amp;</span> <span class="nb">echo </span><span class="n">test</span> <span class="p">&gt;</span> <span class="p">/</span><span class="n">var</span><span class="p">/</span><span class="n">www</span><span class="p">/</span><span class="n">html</span><span class="p">/</span><span class="n">index</span><span class="p">.</span><span class="n">html</span>
+</code></pre></div>
+<p>3, <strong>CMD</strong></p>
+<p>CMD不同于RUN,CMD用于指定在容器启动时所要执行的命令,而RUN用于指定镜像构建时所要执行的命令。</p>
+<div class="highlight"><pre><span></span><code><span class="n">格式有三种</span><span class="p">:</span>
+<span class="n">CMD</span> <span class="p">[</span><span class="s2">&quot;executable&quot;</span><span class="p">,</span><span class="s2">&quot;param1&quot;</span><span class="p">,</span><span class="s2">&quot;param2&quot;</span><span class="p">]</span>
+<span class="n">CMD</span> <span class="p">[</span><span class="s2">&quot;param1&quot;</span><span class="p">,</span><span class="s2">&quot;param2&quot;</span><span class="p">]</span>
+<span class="n">CMD</span> <span class="n">command</span> <span class="n">param1</span> <span class="n">param2</span>
+</code></pre></div>
+<p>每个Dockerfile只能有一条CMD命令。如果指定了多条命令，只有最后一条会被执行。</p>
+<p>如果用户启动容器时候指定了运行的命令，则会覆盖掉CMD指定的命令。</p>
+<div class="highlight"><pre><span></span><code><span class="n">什么是启动容器时指定运行的命令</span><span class="p">?</span>
+<span class="c"># docker run -d -p 80:80 镜像名 运行的命令</span>
+</code></pre></div>
+<p>4, <strong>EXPOSE</strong></p>
+<p>EXPOSE指令用于指定容器在运行时监听的端口</p>
+<div class="highlight"><pre><span></span><code><span class="n">格式</span><span class="p">:</span><span class="n">EXPOSE</span> <span class="p">&lt;</span><span class="n">port</span><span class="p">&gt;</span> <span class="p">[&lt;</span><span class="n">port</span><span class="p">&gt;...]</span>
+<span class="n">例</span><span class="p">:</span><span class="n">EXPOSE</span> <span class="n">80</span> <span class="n">3306</span> <span class="n">8080</span>
+</code></pre></div>
+<p>上述运行的端口还需要使用docker run运行容器时通过-p参数映射到宿主机的端口.</p>
+<p>5, <strong>ENV</strong></p>
+<p>ENV指令用于指定一个环境变量.</p>
+<div class="highlight"><pre><span></span><code><span class="n">格式</span><span class="p">:</span><span class="n">ENV</span> <span class="p">&lt;</span><span class="n">key</span><span class="p">&gt;</span> <span class="p">&lt;</span><span class="n">value</span><span class="p">&gt;</span> <span class="n">或者</span> <span class="n">ENV</span> <span class="p">&lt;</span><span class="n">key</span><span class="p">&gt;=&lt;</span><span class="n">value</span><span class="p">&gt;</span>
+<span class="n">例</span><span class="p">:</span><span class="n">ENV</span> <span class="n">JAVA_HOME</span> <span class="p">/</span><span class="n">usr</span><span class="p">/</span><span class="n">local</span><span class="p">/</span><span class="n">jdkxxxx</span><span class="p">/</span>
+</code></pre></div>
+<p>6, <strong>ADD</strong></p>
+<p>ADD指令用于把宿主机上的文件拷贝到镜像中</p>
+<div class="highlight"><pre><span></span><code><span class="n">格式</span><span class="p">:</span><span class="n">ADD</span> <span class="p">&lt;</span><span class="n">src</span><span class="p">&gt;</span> <span class="p">&lt;</span><span class="n">dest</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="n">src</span><span class="p">&gt;</span><span class="n">可以是一个本地文件或本地压缩文件</span><span class="err">，</span><span class="n">还可以是一个url</span><span class="p">,</span>
+<span class="n">如果把</span><span class="p">&lt;</span><span class="n">src</span><span class="p">&gt;</span><span class="n">写成一个url</span><span class="err">，</span><span class="n">那么ADD就类似于wget命令</span>
+<span class="p">&lt;</span><span class="n">dest</span><span class="p">&gt;</span><span class="n">路径的填写可以是容器内的绝对路径</span><span class="err">，</span><span class="n">也可以是相对于工作目录的相对路径</span>
+</code></pre></div>
+<p>7, <strong>COPY</strong></p>
+<p>COPY指令与ADD指令类似,但COPY的源文件只能是本地文件</p>
+<div class="highlight"><pre><span></span><code><span class="n">格式</span><span class="p">:</span><span class="nb">COPY </span><span class="p">&lt;</span><span class="n">src</span><span class="p">&gt;</span> <span class="p">&lt;</span><span class="n">dest</span><span class="p">&gt;</span>
+</code></pre></div>
+<p>8, <strong>ENTRYPOINT</strong></p>
+<p>ENTRYPOINT与CMD非常类似</p>
+<p>相同点：
+一个Dockerfile只写一条，如果写了多条，那么只有最后一条生效
+都是容器启动时才运行</p>
+<p>不同点：
+如果用户启动容器时候指定了运行的命令，ENTRYPOINT不会被运行的命令覆盖，而CMD则会被覆盖</p>
+<div class="highlight"><pre><span></span><code><span class="n">格式有两种</span><span class="p">:</span>
+<span class="n">ENTRYPOINT</span> <span class="p">[</span><span class="s2">&quot;executable&quot;</span><span class="p">,</span> <span class="s2">&quot;param1&quot;</span><span class="p">,</span> <span class="s2">&quot;param2&quot;</span><span class="p">]</span>
+<span class="n">ENTRYPOINT</span> <span class="n">command</span> <span class="n">param1</span> <span class="n">param2</span>
+</code></pre></div>
+<p>9,  <strong>VOLUME</strong></p>
+<p>VOLUME指令用于把宿主机里的目录与容器里的目录映射. </p>
+<p>只指定挂载点,docker宿主机映射的目录为自动生成的。</p>
+<div class="highlight"><pre><span></span><code><span class="n">格式</span><span class="p">:</span><span class="n">VOLUME</span> <span class="p">[</span><span class="s2">&quot;&lt;mountpoint&gt;&quot;</span><span class="p">]</span>
+</code></pre></div>
+<p>10, <strong>USER</strong></p>
+<p>USER指令设置启动容器的用户(像hadoop需要hadoop用户操作，oracle需要oracle用户操作),可以是用户名或UID</p>
+<div class="highlight"><pre><span></span><code><span class="n">USER</span> <span class="n">daemon</span>
+<span class="n">USER</span> <span class="n">1001</span>
+</code></pre></div>
+<p><strong>注意</strong>：如果设置了容器以daemon用户去运行，那么RUN,CMD和ENTRYPOINT都会以这个用户去运行
+镜像构建完成后，通过docker run运行容器时，可以通过-u参数来覆盖所指定的用户</p>
+<p>11, <strong>WORKDIR</strong></p>
+<p>WORKDIR指令设置工作目录,类似于cd命令。不建议使用<code>RUN cd /root</code> ,建议使用WORKDIR</p>
+<div class="highlight"><pre><span></span><code><span class="n">WORKDIR</span> <span class="p">/</span><span class="n">root</span>
+</code></pre></div>
+<h3 id="443_dockerfile">4.4.3 Dockerfile基本构成<a class="headerlink" href="#443_dockerfile" title="Permanent link">&para;</a></h3>
+<ul>
+<li>
+<p>基础镜像信息</p>
+</li>
+<li>
+<p>维护者信息</p>
+</li>
+<li>
+<p>镜像操作指令</p>
+</li>
+<li>
+<p>容器启动时执行指令</p>
+</li>
+</ul>
+<h3 id="444_dockerfile">4.4.4 Dockerfile生成容器镜像方法<a class="headerlink" href="#444_dockerfile" title="Permanent link">&para;</a></h3>
+<p><img alt="image-20220210132232826" src="../../img/docker_file/image-20220210132232826.png" /></p>
+<h3 id="445_dockerfile">4.4.5 Dockerfile生成容器镜像案例<a class="headerlink" href="#445_dockerfile" title="Permanent link">&para;</a></h3>
+<h4 id="4450_dockerfile">4.4.5.0 使用Dockerfile生成容器镜像步骤<a class="headerlink" href="#4450_dockerfile" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="n">第一步</span><span class="err">：</span><span class="n">创建一个文件夹</span><span class="err">（</span><span class="n">目录</span><span class="err">）</span>
+
+<span class="n">第二步</span><span class="err">：</span><span class="n">在文件夹</span><span class="err">（</span><span class="n">目录</span><span class="err">）</span><span class="n">中创建Dockerfile文件</span><span class="p">(</span><span class="n">并编写</span><span class="p">)</span><span class="n">及其它文件</span>
+
+<span class="n">第三步</span><span class="err">：</span><span class="n">使用</span><span class="p">`</span><span class="n">docker</span> <span class="n">build</span><span class="p">`</span><span class="n">命令构建镜像</span>
+
+<span class="n">第四步</span><span class="err">：</span><span class="n">使用构建的镜像启动容器</span>
+</code></pre></div>
+<h4 id="4451_dockerfilenginx">4.4.5.1 使用Dockerfile生成Nginx容器镜像<a class="headerlink" href="#4451_dockerfilenginx" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="p">[</span><span class="n">root</span><span class="nv">@localhost</span> <span class="p">~]</span><span class="c"># mkdir nginxroot</span>
+<span class="p">[</span><span class="n">root</span><span class="nv">@localhost</span> <span class="p">~]</span><span class="c"># cd nginxroot</span>
+<span class="p">[</span><span class="n">root</span><span class="nv">@localhost</span> <span class="n">nginxroot</span><span class="p">]</span><span class="c">#</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="p">[</span><span class="n">root</span><span class="nv">@localhost</span> <span class="n">nginxroot</span><span class="p">]</span><span class="c"># echo &quot;nginx&#39;s running&quot; &gt;&gt; index.html</span>
+<span class="p">[</span><span class="n">root</span><span class="nv">@localhost</span> <span class="n">nginxroot</span><span class="p">]</span><span class="c"># ls</span>
+<span class="n">index</span><span class="p">.</span><span class="n">html</span>
+<span class="p">[</span><span class="n">root</span><span class="nv">@localhost</span> <span class="n">nginxroot</span><span class="p">]</span><span class="c"># cat index.html</span>
+<span class="n">nginx</span><span class="err">&#39;</span><span class="n">s</span> <span class="n">running</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="p">[</span><span class="n">root</span><span class="nv">@localhost</span> <span class="n">nginxroot</span><span class="p">]</span><span class="c"># vim Dockerfile</span>
+<span class="p">[</span><span class="n">root</span><span class="nv">@localhost</span> <span class="n">nginxroot</span><span class="p">]</span><span class="c"># cat Dockerfile</span>
+<span class="n">FROM</span> <span class="n">centos</span><span class="p">:</span><span class="n">centos7</span>
+
+<span class="n">MAINTAINER</span> <span class="s2">&quot;www.kubemsb.com&quot;</span>
+
+<span class="n">RUN</span> <span class="n">yum</span> <span class="n">-y</span> <span class="n">install</span> <span class="nb">wget</span>
+
+<span class="n">RUN</span> <span class="nb">wget </span><span class="n">-O</span> <span class="p">/</span><span class="n">etc</span><span class="p">/</span><span class="n">yum</span><span class="p">.</span><span class="n">repos</span><span class="p">.</span><span class="n">d</span><span class="p">/</span><span class="n">epel</span><span class="p">.</span><span class="n">repo</span> <span class="n">http</span><span class="p">://</span><span class="n">mirrors</span><span class="p">.</span><span class="n">aliyun</span><span class="p">.</span><span class="n">com</span><span class="p">/</span><span class="n">repo</span><span class="p">/</span><span class="n">epel</span><span class="p">-</span><span class="n">7</span><span class="p">.</span><span class="n">repo</span>
+
+<span class="n">RUN</span> <span class="n">yum</span> <span class="n">-y</span> <span class="n">install</span> <span class="n">nginx</span>
+
+<span class="n">ADD</span> <span class="n">index</span><span class="p">.</span><span class="n">html</span> <span class="p">/</span><span class="n">usr</span><span class="p">/</span><span class="n">share</span><span class="p">/</span><span class="n">nginx</span><span class="p">/</span><span class="n">html</span><span class="p">/</span>
+
+<span class="n">RUN</span> <span class="nb">echo </span><span class="s2">&quot;daemon off;&quot;</span> <span class="p">&gt;&gt;</span> <span class="p">/</span><span class="n">etc</span><span class="p">/</span><span class="n">nginx</span><span class="p">/</span><span class="n">nginx</span><span class="p">.</span><span class="n">conf</span>
+
+<span class="n">EXPOSE</span> <span class="n">80</span>
+
+<span class="n">CMD</span> <span class="p">/</span><span class="n">usr</span><span class="p">/</span><span class="n">sbin</span><span class="p">/</span><span class="n">nginx</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="p">[</span><span class="n">root</span><span class="nv">@localhost</span> <span class="n">nginxroot</span><span class="p">]</span><span class="c"># docker build -t centos7-nginx:v1 .</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">输出</span><span class="err">：</span>
+<span class="n">Sending</span> <span class="n">build</span> <span class="n">context</span> <span class="n">to</span> <span class="n">Docker</span> <span class="n">daemon</span>  <span class="n">3</span><span class="p">.</span><span class="n">072kB</span>
+<span class="n">第一步</span><span class="err">：</span><span class="n">下载基础镜像</span>
+<span class="n">Step</span> <span class="n">1</span><span class="p">/</span><span class="n">9</span> <span class="p">:</span> <span class="n">FROM</span> <span class="n">centos</span><span class="p">:</span><span class="n">centos7</span>
+ <span class="p">---&gt;</span> <span class="n">eeb6ee3f44bd</span>
+<span class="n">第二步</span><span class="err">：</span><span class="n">维护者信息</span>
+<span class="n">Step</span> <span class="n">2</span><span class="p">/</span><span class="n">9</span> <span class="p">:</span> <span class="n">MAINTAINER</span> <span class="s2">&quot;www.kubemsb.com&quot;</span>
+ <span class="p">---&gt;</span> <span class="n">Using</span> <span class="n">cache</span>
+ <span class="p">---&gt;</span> <span class="n">f978e524772c</span>
+
+<span class="n">第三步</span><span class="err">：</span><span class="n">安装wget</span>
+<span class="n">Step</span> <span class="n">3</span><span class="p">/</span><span class="n">9</span> <span class="p">:</span> <span class="n">RUN</span> <span class="n">yum</span> <span class="n">-y</span> <span class="n">install</span> <span class="nb">wget</span>
+ <span class="p">---&gt;</span> <span class="n">Running</span> <span class="k">in</span> <span class="n">4e0fc3854088</span>
+<span class="n">Loaded</span> <span class="n">plugins</span><span class="p">:</span> <span class="n">fastestmirror</span><span class="p">,</span> <span class="n">ovl</span>
+<span class="n">Determining</span> <span class="n">fastest</span> <span class="n">mirrors</span>
+ <span class="p">*</span> <span class="n">base</span><span class="p">:</span> <span class="n">mirrors</span><span class="p">.</span><span class="n">huaweicloud</span><span class="p">.</span><span class="n">com</span>
+ <span class="p">*</span> <span class="n">extras</span><span class="p">:</span> <span class="n">mirrors</span><span class="p">.</span><span class="n">tuna</span><span class="p">.</span><span class="n">tsinghua</span><span class="p">.</span><span class="n">edu</span><span class="p">.</span><span class="n">cn</span>
+ <span class="p">*</span> <span class="n">updates</span><span class="p">:</span> <span class="n">mirrors</span><span class="p">.</span><span class="n">tuna</span><span class="p">.</span><span class="n">tsinghua</span><span class="p">.</span><span class="n">edu</span><span class="p">.</span><span class="n">cn</span>
+<span class="n">Resolving</span> <span class="n">Dependencies</span>
+<span class="p">--&gt;</span> <span class="n">Running</span> <span class="n">transaction</span> <span class="n">check</span>
+<span class="p">---&gt;</span> <span class="n">Package</span> <span class="n">wget</span><span class="p">.</span><span class="n">x86_64</span> <span class="n">0</span><span class="p">:</span><span class="n">1</span><span class="p">.</span><span class="n">14</span><span class="p">-</span><span class="n">18</span><span class="p">.</span><span class="n">el7_6</span><span class="p">.</span><span class="n">1</span> <span class="n">will</span> <span class="n">be</span> <span class="n">installed</span>
+<span class="p">--&gt;</span> <span class="n">Finished</span> <span class="n">Dependency</span> <span class="n">Resolution</span>
+
+<span class="n">Dependencies</span> <span class="n">Resolved</span>
+
+<span class="p">================================================================================</span>
+ <span class="n">Package</span>        <span class="n">Arch</span>             <span class="n">Version</span>                   <span class="n">Repository</span>      <span class="n">Size</span>
+<span class="p">================================================================================</span>
+<span class="n">Installing</span><span class="p">:</span>
+ <span class="nb">wget </span>          <span class="n">x86_64</span>           <span class="n">1</span><span class="p">.</span><span class="n">14</span><span class="p">-</span><span class="n">18</span><span class="p">.</span><span class="n">el7_6</span><span class="p">.</span><span class="n">1</span>           <span class="n">base</span>           <span class="n">547</span> <span class="n">k</span>
+
+<span class="n">Transaction</span> <span class="n">Summary</span>
+<span class="p">================================================================================</span>
+<span class="n">Install</span>  <span class="n">1</span> <span class="n">Package</span>
+
+<span class="n">Total</span> <span class="n">download</span> <span class="n">size</span><span class="p">:</span> <span class="n">547</span> <span class="n">k</span>
+<span class="n">Installed</span> <span class="n">size</span><span class="p">:</span> <span class="n">2</span><span class="p">.</span><span class="n">0</span> <span class="n">M</span>
+<span class="n">Downloading</span> <span class="n">packages</span><span class="p">:</span>
+<span class="n">warning</span><span class="p">:</span> <span class="p">/</span><span class="n">var</span><span class="p">/</span><span class="n">cache</span><span class="p">/</span><span class="n">yum</span><span class="p">/</span><span class="n">x86_64</span><span class="p">/</span><span class="n">7</span><span class="p">/</span><span class="n">base</span><span class="p">/</span><span class="n">packages</span><span class="p">/</span><span class="n">wget</span><span class="p">-</span><span class="n">1</span><span class="p">.</span><span class="n">14</span><span class="p">-</span><span class="n">18</span><span class="p">.</span><span class="n">el7_6</span><span class="p">.</span><span class="n">1</span><span class="p">.</span><span class="n">x86_64</span><span class="p">.</span><span class="n">rpm</span><span class="p">:</span> <span class="n">Header</span> <span class="n">V3</span> <span class="n">RSA</span><span class="p">/</span><span class="n">SHA256</span> <span class="n">Signature</span><span class="p">,</span> <span class="n">key</span> <span class="n">ID</span> <span class="n">f4a80eb5</span><span class="p">:</span> <span class="n">NOKEY</span>
+<span class="n">Public</span> <span class="n">key</span> <span class="k">for</span> <span class="n">wget</span><span class="p">-</span><span class="n">1</span><span class="p">.</span><span class="n">14</span><span class="p">-</span><span class="n">18</span><span class="p">.</span><span class="n">el7_6</span><span class="p">.</span><span class="n">1</span><span class="p">.</span><span class="n">x86_64</span><span class="p">.</span><span class="n">rpm</span> <span class="n">is</span> <span class="n">not</span> <span class="n">installed</span>
+<span class="n">Retrieving</span> <span class="n">key</span> <span class="n">from</span> <span class="n">file</span><span class="p">:///</span><span class="n">etc</span><span class="p">/</span><span class="n">pki</span><span class="p">/</span><span class="n">rpm-gpg</span><span class="p">/</span><span class="n">RPM-GPG-KEY-CentOS</span><span class="p">-</span><span class="n">7</span>
+<span class="n">Importing</span> <span class="n">GPG</span> <span class="n">key</span> <span class="n">0xF4A80EB5</span><span class="p">:</span>
+ <span class="n">Userid</span>     <span class="p">:</span> <span class="s2">&quot;CentOS-7 Key (CentOS 7 Official Signing Key) &lt;security@centos.org&gt;&quot;</span>
+ <span class="n">Fingerprint</span><span class="p">:</span> <span class="n">6341</span> <span class="n">ab27</span> <span class="n">53d7</span> <span class="n">8a78</span> <span class="n">a7c2</span> <span class="n">7bb1</span> <span class="n">24c6</span> <span class="n">a8a7</span> <span class="n">f4a8</span> <span class="n">0eb5</span>
+ <span class="n">Package</span>    <span class="p">:</span> <span class="n">centos-release</span><span class="p">-</span><span class="n">7</span><span class="p">-</span><span class="n">9</span><span class="p">.</span><span class="n">2009</span><span class="p">.</span><span class="n">0</span><span class="p">.</span><span class="n">el7</span><span class="p">.</span><span class="n">centos</span><span class="p">.</span><span class="n">x86_64</span> <span class="p">(</span><span class="nv">@CentOS</span><span class="p">)</span>
+ <span class="n">From</span>       <span class="p">:</span> <span class="p">/</span><span class="n">etc</span><span class="p">/</span><span class="n">pki</span><span class="p">/</span><span class="n">rpm-gpg</span><span class="p">/</span><span class="n">RPM-GPG-KEY-CentOS</span><span class="p">-</span><span class="n">7</span>
+<span class="n">Running</span> <span class="n">transaction</span> <span class="n">check</span>
+<span class="n">Running</span> <span class="n">transaction</span> <span class="n">test</span>
+<span class="n">Transaction</span> <span class="n">test</span> <span class="n">succeeded</span>
+<span class="n">Running</span> <span class="n">transaction</span>
+  <span class="n">Installing</span> <span class="p">:</span> <span class="n">wget</span><span class="p">-</span><span class="n">1</span><span class="p">.</span><span class="n">14</span><span class="p">-</span><span class="n">18</span><span class="p">.</span><span class="n">el7_6</span><span class="p">.</span><span class="n">1</span><span class="p">.</span><span class="n">x86_64</span>                                  <span class="n">1</span><span class="p">/</span><span class="n">1</span>
+<span class="nb">install-info</span><span class="p">:</span> <span class="n">No</span> <span class="n">such</span> <span class="n">file</span> <span class="n">or</span> <span class="n">directory</span> <span class="k">for</span> <span class="p">/</span><span class="n">usr</span><span class="p">/</span><span class="n">share</span><span class="p">/</span><span class="n">info</span><span class="p">/</span><span class="n">wget</span><span class="p">.</span><span class="n">info</span><span class="p">.</span><span class="n">gz</span>
+  <span class="n">Verifying</span>  <span class="p">:</span> <span class="n">wget</span><span class="p">-</span><span class="n">1</span><span class="p">.</span><span class="n">14</span><span class="p">-</span><span class="n">18</span><span class="p">.</span><span class="n">el7_6</span><span class="p">.</span><span class="n">1</span><span class="p">.</span><span class="n">x86_64</span>                                  <span class="n">1</span><span class="p">/</span><span class="n">1</span>
+
+<span class="n">Installed</span><span class="p">:</span>
+  <span class="n">wget</span><span class="p">.</span><span class="n">x86_64</span> <span class="n">0</span><span class="p">:</span><span class="n">1</span><span class="p">.</span><span class="n">14</span><span class="p">-</span><span class="n">18</span><span class="p">.</span><span class="n">el7_6</span><span class="p">.</span><span class="n">1</span>
+
+<span class="n">Complete</span><span class="p">!</span>
+<span class="n">Removing</span> <span class="n">intermediate</span> <span class="n">container</span> <span class="n">4e0fc3854088</span>
+ <span class="p">---&gt;</span> <span class="n">369e33a2152a</span>
+
+<span class="n">第四步</span><span class="err">：</span><span class="n">使用wget下载YUM源</span>
+<span class="n">Step</span> <span class="n">4</span><span class="p">/</span><span class="n">9</span> <span class="p">:</span> <span class="n">RUN</span> <span class="nb">wget </span><span class="n">-O</span> <span class="p">/</span><span class="n">etc</span><span class="p">/</span><span class="n">yum</span><span class="p">.</span><span class="n">repos</span><span class="p">.</span><span class="n">d</span><span class="p">/</span><span class="n">epel</span><span class="p">.</span><span class="n">repo</span> <span class="n">http</span><span class="p">://</span><span class="n">mirrors</span><span class="p">.</span><span class="n">aliyun</span><span class="p">.</span><span class="n">com</span><span class="p">/</span><span class="n">repo</span><span class="p">/</span><span class="n">epel</span><span class="p">-</span><span class="n">7</span><span class="p">.</span><span class="n">repo</span>
+ <span class="p">---&gt;</span> <span class="n">Running</span> <span class="k">in</span> <span class="n">4bdfc0a1c844</span>
+<span class="p">--</span><span class="n">2022</span><span class="p">-</span><span class="n">02</span><span class="p">-</span><span class="n">10</span> <span class="n">06</span><span class="p">:</span><span class="n">18</span><span class="p">:</span><span class="n">07</span><span class="p">--</span>  <span class="n">http</span><span class="p">://</span><span class="n">mirrors</span><span class="p">.</span><span class="n">aliyun</span><span class="p">.</span><span class="n">com</span><span class="p">/</span><span class="n">repo</span><span class="p">/</span><span class="n">epel</span><span class="p">-</span><span class="n">7</span><span class="p">.</span><span class="n">repo</span>
+<span class="n">Resolving</span> <span class="n">mirrors</span><span class="p">.</span><span class="n">aliyun</span><span class="p">.</span><span class="n">com</span> <span class="p">(</span><span class="n">mirrors</span><span class="p">.</span><span class="n">aliyun</span><span class="p">.</span><span class="n">com</span><span class="p">)...</span> <span class="n">221</span><span class="p">.</span><span class="n">195</span><span class="p">.</span><span class="n">209</span><span class="p">.</span><span class="n">65</span><span class="p">,</span> <span class="n">221</span><span class="p">.</span><span class="n">195</span><span class="p">.</span><span class="n">209</span><span class="p">.</span><span class="n">64</span><span class="p">,</span> <span class="n">221</span><span class="p">.</span><span class="n">195</span><span class="p">.</span><span class="n">209</span><span class="p">.</span><span class="n">70</span><span class="p">,</span> <span class="p">...</span>
+<span class="n">Connecting</span> <span class="n">to</span> <span class="n">mirrors</span><span class="p">.</span><span class="n">aliyun</span><span class="p">.</span><span class="n">com</span> <span class="p">(</span><span class="n">mirrors</span><span class="p">.</span><span class="n">aliyun</span><span class="p">.</span><span class="n">com</span><span class="p">)|</span><span class="n">221</span><span class="p">.</span><span class="n">195</span><span class="p">.</span><span class="n">209</span><span class="p">.</span><span class="n">65</span><span class="p">|:</span><span class="n">80</span><span class="p">...</span> <span class="n">connected</span><span class="p">.</span>
+<span class="n">HTTP</span> <span class="n">request</span> <span class="n">sent</span><span class="p">,</span> <span class="n">awaiting</span> <span class="n">response</span><span class="p">...</span> <span class="n">200</span> <span class="n">OK</span>
+<span class="n">Length</span><span class="p">:</span> <span class="n">664</span> <span class="p">[</span><span class="n">application</span><span class="p">/</span><span class="n">octet-stream</span><span class="p">]</span>
+<span class="n">Saving</span> <span class="n">to</span><span class="p">:</span> <span class="s1">&#39;/etc/yum.repos.d/epel.repo&#39;</span>
+
+     <span class="n">0K</span>                                                       <span class="n">100</span><span class="p">%</span>  <span class="n">158M</span><span class="p">=</span><span class="n">0s</span>
+
+<span class="n">2022</span><span class="p">-</span><span class="n">02</span><span class="p">-</span><span class="n">10</span> <span class="n">06</span><span class="p">:</span><span class="n">18</span><span class="p">:</span><span class="n">07</span> <span class="p">(</span><span class="n">158</span> <span class="n">MB</span><span class="p">/</span><span class="n">s</span><span class="p">)</span> <span class="p">-</span> <span class="s1">&#39;/etc/yum.repos.d/epel.repo&#39;</span> <span class="n">saved</span> <span class="p">[</span><span class="n">664</span><span class="p">/</span><span class="n">664</span><span class="p">]</span>
+
+<span class="n">Removing</span> <span class="n">intermediate</span> <span class="n">container</span> <span class="n">4bdfc0a1c844</span>
+ <span class="p">---&gt;</span> <span class="n">1d73faa62447</span>
+
+<span class="n">第五步</span><span class="err">：</span><span class="n">安装Nginx</span>
+<span class="n">Step</span> <span class="n">5</span><span class="p">/</span><span class="n">9</span> <span class="p">:</span> <span class="n">RUN</span> <span class="n">yum</span> <span class="n">-y</span> <span class="n">install</span> <span class="n">nginx</span>
+ <span class="p">---&gt;</span> <span class="n">Running</span> <span class="k">in</span> <span class="n">51b50c2ce841</span>
+<span class="n">Loaded</span> <span class="n">plugins</span><span class="p">:</span> <span class="n">fastestmirror</span><span class="p">,</span> <span class="n">ovl</span>
+<span class="n">Loading</span> <span class="n">mirror</span> <span class="n">speeds</span> <span class="n">from</span> <span class="n">cached</span> <span class="n">hostfile</span>
+ <span class="p">*</span> <span class="n">base</span><span class="p">:</span> <span class="n">mirrors</span><span class="p">.</span><span class="n">huaweicloud</span><span class="p">.</span><span class="n">com</span>
+ <span class="p">*</span> <span class="n">extras</span><span class="p">:</span> <span class="n">mirrors</span><span class="p">.</span><span class="n">tuna</span><span class="p">.</span><span class="n">tsinghua</span><span class="p">.</span><span class="n">edu</span><span class="p">.</span><span class="n">cn</span>
+ <span class="p">*</span> <span class="n">updates</span><span class="p">:</span> <span class="n">mirrors</span><span class="p">.</span><span class="n">tuna</span><span class="p">.</span><span class="n">tsinghua</span><span class="p">.</span><span class="n">edu</span><span class="p">.</span><span class="n">cn</span>
+<span class="n">Resolving</span> <span class="n">Dependencies</span>
+<span class="p">--&gt;</span> <span class="n">Running</span> <span class="n">transaction</span> <span class="n">check</span>
+<span class="p">---&gt;</span> <span class="n">Package</span> <span class="n">nginx</span><span class="p">.</span><span class="n">x86_64</span> <span class="n">1</span><span class="p">:</span><span class="n">1</span><span class="p">.</span><span class="n">20</span><span class="p">.</span><span class="n">1</span><span class="p">-</span><span class="n">9</span><span class="p">.</span><span class="n">el7</span> <span class="n">will</span> <span class="n">be</span> <span class="n">installed</span>
+<span class="p">--&gt;</span> <span class="n">Processing</span> <span class="n">Dependency</span><span class="p">:</span> <span class="n">nginx-filesystem</span> <span class="p">=</span> <span class="n">1</span><span class="p">:</span><span class="n">1</span><span class="p">.</span><span class="n">20</span><span class="p">.</span><span class="n">1</span><span class="p">-</span><span class="n">9</span><span class="p">.</span><span class="n">el7</span> <span class="k">for</span> <span class="n">package</span><span class="p">:</span> <span class="n">1</span><span class="p">:</span><span class="n">nginx</span><span class="p">-</span><span class="n">1</span><span class="p">.</span><span class="n">20</span><span class="p">.</span><span class="n">1</span><span class="p">-</span><span class="n">9</span><span class="p">.</span><span class="n">el7</span><span class="p">.</span><span class="n">x86_64</span>
+<span class="p">--&gt;</span> <span class="n">Processing</span> <span class="n">Dependency</span><span class="p">:</span> <span class="n">libcrypto</span><span class="p">.</span><span class="n">so</span><span class="p">.</span><span class="n">1</span><span class="p">.</span><span class="n">1</span><span class="p">(</span><span class="n">OPENSSL_1_1_0</span><span class="p">)(</span><span class="n">64bit</span><span class="p">)</span> <span class="k">for</span> <span class="n">package</span><span class="p">:</span> <span class="n">1</span><span class="p">:</span><span class="n">nginx</span><span class="p">-</span><span class="n">1</span><span class="p">.</span><span class="n">20</span><span class="p">.</span><span class="n">1</span><span class="p">-</span><span class="n">9</span><span class="p">.</span><span class="n">el7</span><span class="p">.</span><span class="n">x86_64</span>
+<span class="p">--&gt;</span> <span class="n">Processing</span> <span class="n">Dependency</span><span class="p">:</span> <span class="n">libssl</span><span class="p">.</span><span class="n">so</span><span class="p">.</span><span class="n">1</span><span class="p">.</span><span class="n">1</span><span class="p">(</span><span class="n">OPENSSL_1_1_0</span><span class="p">)(</span><span class="n">64bit</span><span class="p">)</span> <span class="k">for</span> <span class="n">package</span><span class="p">:</span> <span class="n">1</span><span class="p">:</span><span class="n">nginx</span><span class="p">-</span><span class="n">1</span><span class="p">.</span><span class="n">20</span><span class="p">.</span><span class="n">1</span><span class="p">-</span><span class="n">9</span><span class="p">.</span><span class="n">el7</span><span class="p">.</span><span class="n">x86_64</span>
+<span class="p">--&gt;</span> <span class="n">Processing</span> <span class="n">Dependency</span><span class="p">:</span> <span class="n">libssl</span><span class="p">.</span><span class="n">so</span><span class="p">.</span><span class="n">1</span><span class="p">.</span><span class="n">1</span><span class="p">(</span><span class="n">OPENSSL_1_1_1</span><span class="p">)(</span><span class="n">64bit</span><span class="p">)</span> <span class="k">for</span> <span class="n">package</span><span class="p">:</span> <span class="n">1</span><span class="p">:</span><span class="n">nginx</span><span class="p">-</span><span class="n">1</span><span class="p">.</span><span class="n">20</span><span class="p">.</span><span class="n">1</span><span class="p">-</span><span class="n">9</span><span class="p">.</span><span class="n">el7</span><span class="p">.</span><span class="n">x86_64</span>
+<span class="p">--&gt;</span> <span class="n">Processing</span> <span class="n">Dependency</span><span class="p">:</span> <span class="n">nginx-filesystem</span> <span class="k">for</span> <span class="n">package</span><span class="p">:</span> <span class="n">1</span><span class="p">:</span><span class="n">nginx</span><span class="p">-</span><span class="n">1</span><span class="p">.</span><span class="n">20</span><span class="p">.</span><span class="n">1</span><span class="p">-</span><span class="n">9</span><span class="p">.</span><span class="n">el7</span><span class="p">.</span><span class="n">x86_64</span>
+<span class="p">--&gt;</span> <span class="n">Processing</span> <span class="n">Dependency</span><span class="p">:</span> <span class="n">openssl</span> <span class="k">for</span> <span class="n">package</span><span class="p">:</span> <span class="n">1</span><span class="p">:</span><span class="n">nginx</span><span class="p">-</span><span class="n">1</span><span class="p">.</span><span class="n">20</span><span class="p">.</span><span class="n">1</span><span class="p">-</span><span class="n">9</span><span class="p">.</span><span class="n">el7</span><span class="p">.</span><span class="n">x86_64</span>
+<span class="p">--&gt;</span> <span class="n">Processing</span> <span class="n">Dependency</span><span class="p">:</span> <span class="n">redhat-indexhtml</span> <span class="k">for</span> <span class="n">package</span><span class="p">:</span> <span class="n">1</span><span class="p">:</span><span class="n">nginx</span><span class="p">-</span><span class="n">1</span><span class="p">.</span><span class="n">20</span><span class="p">.</span><span class="n">1</span><span class="p">-</span><span class="n">9</span><span class="p">.</span><span class="n">el7</span><span class="p">.</span><span class="n">x86_64</span>
+<span class="p">--&gt;</span> <span class="n">Processing</span> <span class="n">Dependency</span><span class="p">:</span> <span class="n">system-logos</span> <span class="k">for</span> <span class="n">package</span><span class="p">:</span> <span class="n">1</span><span class="p">:</span><span class="n">nginx</span><span class="p">-</span><span class="n">1</span><span class="p">.</span><span class="n">20</span><span class="p">.</span><span class="n">1</span><span class="p">-</span><span class="n">9</span><span class="p">.</span><span class="n">el7</span><span class="p">.</span><span class="n">x86_64</span>
+<span class="p">--&gt;</span> <span class="n">Processing</span> <span class="n">Dependency</span><span class="p">:</span> <span class="n">libcrypto</span><span class="p">.</span><span class="n">so</span><span class="p">.</span><span class="n">1</span><span class="p">.</span><span class="n">1</span><span class="p">()(</span><span class="n">64bit</span><span class="p">)</span> <span class="k">for</span> <span class="n">package</span><span class="p">:</span> <span class="n">1</span><span class="p">:</span><span class="n">nginx</span><span class="p">-</span><span class="n">1</span><span class="p">.</span><span class="n">20</span><span class="p">.</span><span class="n">1</span><span class="p">-</span><span class="n">9</span><span class="p">.</span><span class="n">el7</span><span class="p">.</span><span class="n">x86_64</span>
+<span class="p">--&gt;</span> <span class="n">Processing</span> <span class="n">Dependency</span><span class="p">:</span> <span class="n">libprofiler</span><span class="p">.</span><span class="n">so</span><span class="p">.</span><span class="n">0</span><span class="p">()(</span><span class="n">64bit</span><span class="p">)</span> <span class="k">for</span> <span class="n">package</span><span class="p">:</span> <span class="n">1</span><span class="p">:</span><span class="n">nginx</span><span class="p">-</span><span class="n">1</span><span class="p">.</span><span class="n">20</span><span class="p">.</span><span class="n">1</span><span class="p">-</span><span class="n">9</span><span class="p">.</span><span class="n">el7</span><span class="p">.</span><span class="n">x86_64</span>
+<span class="p">--&gt;</span> <span class="n">Processing</span> <span class="n">Dependency</span><span class="p">:</span> <span class="n">libssl</span><span class="p">.</span><span class="n">so</span><span class="p">.</span><span class="n">1</span><span class="p">.</span><span class="n">1</span><span class="p">()(</span><span class="n">64bit</span><span class="p">)</span> <span class="k">for</span> <span class="n">package</span><span class="p">:</span> <span class="n">1</span><span class="p">:</span><span class="n">nginx</span><span class="p">-</span><span class="n">1</span><span class="p">.</span><span class="n">20</span><span class="p">.</span><span class="n">1</span><span class="p">-</span><span class="n">9</span><span class="p">.</span><span class="n">el7</span><span class="p">.</span><span class="n">x86_64</span>
+<span class="p">--&gt;</span> <span class="n">Running</span> <span class="n">transaction</span> <span class="n">check</span>
+<span class="p">---&gt;</span> <span class="n">Package</span> <span class="n">centos-indexhtml</span><span class="p">.</span><span class="n">noarch</span> <span class="n">0</span><span class="p">:</span><span class="n">7</span><span class="p">-</span><span class="n">9</span><span class="p">.</span><span class="n">el7</span><span class="p">.</span><span class="n">centos</span> <span class="n">will</span> <span class="n">be</span> <span class="n">installed</span>
+<span class="p">---&gt;</span> <span class="n">Package</span> <span class="n">centos-logos</span><span class="p">.</span><span class="n">noarch</span> <span class="n">0</span><span class="p">:</span><span class="n">70</span><span class="p">.</span><span class="n">0</span><span class="p">.</span><span class="n">6</span><span class="p">-</span><span class="n">3</span><span class="p">.</span><span class="n">el7</span><span class="p">.</span><span class="n">centos</span> <span class="n">will</span> <span class="n">be</span> <span class="n">installed</span>
+<span class="p">---&gt;</span> <span class="n">Package</span> <span class="n">gperftools-libs</span><span class="p">.</span><span class="n">x86_64</span> <span class="n">0</span><span class="p">:</span><span class="n">2</span><span class="p">.</span><span class="n">6</span><span class="p">.</span><span class="n">1</span><span class="p">-</span><span class="n">1</span><span class="p">.</span><span class="n">el7</span> <span class="n">will</span> <span class="n">be</span> <span class="n">installed</span>
+<span class="p">---&gt;</span> <span class="n">Package</span> <span class="n">nginx-filesystem</span><span class="p">.</span><span class="n">noarch</span> <span class="n">1</span><span class="p">:</span><span class="n">1</span><span class="p">.</span><span class="n">20</span><span class="p">.</span><span class="n">1</span><span class="p">-</span><span class="n">9</span><span class="p">.</span><span class="n">el7</span> <span class="n">will</span> <span class="n">be</span> <span class="n">installed</span>
+<span class="p">---&gt;</span> <span class="n">Package</span> <span class="n">openssl</span><span class="p">.</span><span class="n">x86_64</span> <span class="n">1</span><span class="p">:</span><span class="n">1</span><span class="p">.</span><span class="n">0</span><span class="p">.</span><span class="n">2k</span><span class="p">-</span><span class="n">24</span><span class="p">.</span><span class="n">el7_9</span> <span class="n">will</span> <span class="n">be</span> <span class="n">installed</span>
+<span class="p">--&gt;</span> <span class="n">Processing</span> <span class="n">Dependency</span><span class="p">:</span> <span class="n">openssl-libs</span><span class="p">(</span><span class="n">x86</span><span class="p">-</span><span class="n">64</span><span class="p">)</span> <span class="p">=</span> <span class="n">1</span><span class="p">:</span><span class="n">1</span><span class="p">.</span><span class="n">0</span><span class="p">.</span><span class="n">2k</span><span class="p">-</span><span class="n">24</span><span class="p">.</span><span class="n">el7_9</span> <span class="k">for</span> <span class="n">package</span><span class="p">:</span> <span class="n">1</span><span class="p">:</span><span class="n">openssl</span><span class="p">-</span><span class="n">1</span><span class="p">.</span><span class="n">0</span><span class="p">.</span><span class="n">2k</span><span class="p">-</span><span class="n">24</span><span class="p">.</span><span class="n">el7_9</span><span class="p">.</span><span class="n">x86_64</span>
+<span class="p">--&gt;</span> <span class="n">Processing</span> <span class="n">Dependency</span><span class="p">:</span> <span class="n">make</span> <span class="k">for</span> <span class="n">package</span><span class="p">:</span> <span class="n">1</span><span class="p">:</span><span class="n">openssl</span><span class="p">-</span><span class="n">1</span><span class="p">.</span><span class="n">0</span><span class="p">.</span><span class="n">2k</span><span class="p">-</span><span class="n">24</span><span class="p">.</span><span class="n">el7_9</span><span class="p">.</span><span class="n">x86_64</span>
+<span class="p">---&gt;</span> <span class="n">Package</span> <span class="n">openssl11-libs</span><span class="p">.</span><span class="n">x86_64</span> <span class="n">1</span><span class="p">:</span><span class="n">1</span><span class="p">.</span><span class="n">1</span><span class="p">.</span><span class="n">1k</span><span class="p">-</span><span class="n">2</span><span class="p">.</span><span class="n">el7</span> <span class="n">will</span> <span class="n">be</span> <span class="n">installed</span>
+<span class="p">--&gt;</span> <span class="n">Running</span> <span class="n">transaction</span> <span class="n">check</span>
+<span class="p">---&gt;</span> <span class="n">Package</span> <span class="n">make</span><span class="p">.</span><span class="n">x86_64</span> <span class="n">1</span><span class="p">:</span><span class="n">3</span><span class="p">.</span><span class="n">82</span><span class="p">-</span><span class="n">24</span><span class="p">.</span><span class="n">el7</span> <span class="n">will</span> <span class="n">be</span> <span class="n">installed</span>
+<span class="p">---&gt;</span> <span class="n">Package</span> <span class="n">openssl-libs</span><span class="p">.</span><span class="n">x86_64</span> <span class="n">1</span><span class="p">:</span><span class="n">1</span><span class="p">.</span><span class="n">0</span><span class="p">.</span><span class="n">2k</span><span class="p">-</span><span class="n">19</span><span class="p">.</span><span class="n">el7</span> <span class="n">will</span> <span class="n">be</span> <span class="n">updated</span>
+<span class="p">---&gt;</span> <span class="n">Package</span> <span class="n">openssl-libs</span><span class="p">.</span><span class="n">x86_64</span> <span class="n">1</span><span class="p">:</span><span class="n">1</span><span class="p">.</span><span class="n">0</span><span class="p">.</span><span class="n">2k</span><span class="p">-</span><span class="n">24</span><span class="p">.</span><span class="n">el7_9</span> <span class="n">will</span> <span class="n">be</span> <span class="n">an</span> <span class="n">update</span>
+<span class="p">--&gt;</span> <span class="n">Finished</span> <span class="n">Dependency</span> <span class="n">Resolution</span>
+
+<span class="n">Dependencies</span> <span class="n">Resolved</span>
+
+<span class="p">================================================================================</span>
+ <span class="n">Package</span>               <span class="n">Arch</span>        <span class="n">Version</span>                   <span class="n">Repository</span>    <span class="n">Size</span>
+<span class="p">================================================================================</span>
+<span class="n">Installing</span><span class="p">:</span>
+ <span class="n">nginx</span>                 <span class="n">x86_64</span>      <span class="n">1</span><span class="p">:</span><span class="n">1</span><span class="p">.</span><span class="n">20</span><span class="p">.</span><span class="n">1</span><span class="p">-</span><span class="n">9</span><span class="p">.</span><span class="n">el7</span>            <span class="n">epel</span>         <span class="n">587</span> <span class="n">k</span>
+<span class="n">Installing</span> <span class="k">for</span> <span class="n">dependencies</span><span class="p">:</span>
+ <span class="n">centos-indexhtml</span>      <span class="n">noarch</span>      <span class="n">7</span><span class="p">-</span><span class="n">9</span><span class="p">.</span><span class="n">el7</span><span class="p">.</span><span class="n">centos</span>            <span class="n">base</span>          <span class="n">92</span> <span class="n">k</span>
+ <span class="n">centos-logos</span>          <span class="n">noarch</span>      <span class="n">70</span><span class="p">.</span><span class="n">0</span><span class="p">.</span><span class="n">6</span><span class="p">-</span><span class="n">3</span><span class="p">.</span><span class="n">el7</span><span class="p">.</span><span class="n">centos</span>       <span class="n">base</span>          <span class="n">21</span> <span class="n">M</span>
+ <span class="n">gperftools-libs</span>       <span class="n">x86_64</span>      <span class="n">2</span><span class="p">.</span><span class="n">6</span><span class="p">.</span><span class="n">1</span><span class="p">-</span><span class="n">1</span><span class="p">.</span><span class="n">el7</span>               <span class="n">base</span>         <span class="n">272</span> <span class="n">k</span>
+ <span class="n">make</span>                  <span class="n">x86_64</span>      <span class="n">1</span><span class="p">:</span><span class="n">3</span><span class="p">.</span><span class="n">82</span><span class="p">-</span><span class="n">24</span><span class="p">.</span><span class="n">el7</span>             <span class="n">base</span>         <span class="n">421</span> <span class="n">k</span>
+ <span class="n">nginx-filesystem</span>      <span class="n">noarch</span>      <span class="n">1</span><span class="p">:</span><span class="n">1</span><span class="p">.</span><span class="n">20</span><span class="p">.</span><span class="n">1</span><span class="p">-</span><span class="n">9</span><span class="p">.</span><span class="n">el7</span>            <span class="n">epel</span>          <span class="n">24</span> <span class="n">k</span>
+ <span class="n">openssl</span>               <span class="n">x86_64</span>      <span class="n">1</span><span class="p">:</span><span class="n">1</span><span class="p">.</span><span class="n">0</span><span class="p">.</span><span class="n">2k</span><span class="p">-</span><span class="n">24</span><span class="p">.</span><span class="n">el7_9</span>         <span class="n">updates</span>      <span class="n">494</span> <span class="n">k</span>
+ <span class="n">openssl11-libs</span>        <span class="n">x86_64</span>      <span class="n">1</span><span class="p">:</span><span class="n">1</span><span class="p">.</span><span class="n">1</span><span class="p">.</span><span class="n">1k</span><span class="p">-</span><span class="n">2</span><span class="p">.</span><span class="n">el7</span>            <span class="n">epel</span>         <span class="n">1</span><span class="p">.</span><span class="n">5</span> <span class="n">M</span>
+<span class="n">Updating</span> <span class="k">for</span> <span class="n">dependencies</span><span class="p">:</span>
+ <span class="n">openssl-libs</span>          <span class="n">x86_64</span>      <span class="n">1</span><span class="p">:</span><span class="n">1</span><span class="p">.</span><span class="n">0</span><span class="p">.</span><span class="n">2k</span><span class="p">-</span><span class="n">24</span><span class="p">.</span><span class="n">el7_9</span>         <span class="n">updates</span>      <span class="n">1</span><span class="p">.</span><span class="n">2</span> <span class="n">M</span>
+
+<span class="n">Transaction</span> <span class="n">Summary</span>
+<span class="p">================================================================================</span>
+<span class="n">Install</span>  <span class="n">1</span> <span class="n">Package</span>  <span class="p">(+</span><span class="n">7</span> <span class="n">Dependent</span> <span class="n">packages</span><span class="p">)</span>
+<span class="n">Upgrade</span>             <span class="p">(</span> <span class="n">1</span> <span class="n">Dependent</span> <span class="n">package</span><span class="p">)</span>
+
+<span class="n">Total</span> <span class="n">download</span> <span class="n">size</span><span class="p">:</span> <span class="n">26</span> <span class="n">M</span>
+<span class="n">Downloading</span> <span class="n">packages</span><span class="p">:</span>
+<span class="n">Delta</span> <span class="n">RPMs</span> <span class="n">disabled</span> <span class="n">because</span> <span class="p">/</span><span class="n">usr</span><span class="p">/</span><span class="n">bin</span><span class="p">/</span><span class="n">applydeltarpm</span> <span class="n">not</span> <span class="n">installed</span><span class="p">.</span>
+<span class="p">--------------------------------------------------------------------------------</span>
+<span class="n">Total</span>                                              <span class="n">3</span><span class="p">.</span><span class="n">1</span> <span class="n">MB</span><span class="p">/</span><span class="n">s</span> <span class="p">|</span>  <span class="n">26</span> <span class="n">MB</span>  <span class="n">00</span><span class="p">:</span><span class="n">08</span>
+<span class="n">Running</span> <span class="n">transaction</span> <span class="n">check</span>
+<span class="n">Running</span> <span class="n">transaction</span> <span class="n">test</span>
+<span class="n">Transaction</span> <span class="n">test</span> <span class="n">succeeded</span>
+<span class="n">Running</span> <span class="n">transaction</span>
+  <span class="n">Installing</span> <span class="p">:</span> <span class="n">centos-logos</span><span class="p">-</span><span class="n">70</span><span class="p">.</span><span class="n">0</span><span class="p">.</span><span class="n">6</span><span class="p">-</span><span class="n">3</span><span class="p">.</span><span class="n">el7</span><span class="p">.</span><span class="n">centos</span><span class="p">.</span><span class="n">noarch</span>                     <span class="n">1</span><span class="p">/</span><span class="n">10</span>
+  <span class="n">Installing</span> <span class="p">:</span> <span class="n">centos-indexhtml</span><span class="p">-</span><span class="n">7</span><span class="p">-</span><span class="n">9</span><span class="p">.</span><span class="n">el7</span><span class="p">.</span><span class="n">centos</span><span class="p">.</span><span class="n">noarch</span>                      <span class="n">2</span><span class="p">/</span><span class="n">10</span>
+  <span class="n">Installing</span> <span class="p">:</span> <span class="n">1</span><span class="p">:</span><span class="n">make</span><span class="p">-</span><span class="n">3</span><span class="p">.</span><span class="n">82</span><span class="p">-</span><span class="n">24</span><span class="p">.</span><span class="n">el7</span><span class="p">.</span><span class="n">x86_64</span>                                   <span class="n">3</span><span class="p">/</span><span class="n">10</span>
+  <span class="n">Installing</span> <span class="p">:</span> <span class="n">gperftools-libs</span><span class="p">-</span><span class="n">2</span><span class="p">.</span><span class="n">6</span><span class="p">.</span><span class="n">1</span><span class="p">-</span><span class="n">1</span><span class="p">.</span><span class="n">el7</span><span class="p">.</span><span class="n">x86_64</span>                          <span class="n">4</span><span class="p">/</span><span class="n">10</span>
+  <span class="n">Installing</span> <span class="p">:</span> <span class="n">1</span><span class="p">:</span><span class="n">openssl11-libs</span><span class="p">-</span><span class="n">1</span><span class="p">.</span><span class="n">1</span><span class="p">.</span><span class="n">1k</span><span class="p">-</span><span class="n">2</span><span class="p">.</span><span class="n">el7</span><span class="p">.</span><span class="n">x86_64</span>                        <span class="n">5</span><span class="p">/</span><span class="n">10</span>
+  <span class="n">Updating</span>   <span class="p">:</span> <span class="n">1</span><span class="p">:</span><span class="n">openssl-libs</span><span class="p">-</span><span class="n">1</span><span class="p">.</span><span class="n">0</span><span class="p">.</span><span class="n">2k</span><span class="p">-</span><span class="n">24</span><span class="p">.</span><span class="n">el7_9</span><span class="p">.</span><span class="n">x86_64</span>                       <span class="n">6</span><span class="p">/</span><span class="n">10</span>
+  <span class="n">Installing</span> <span class="p">:</span> <span class="n">1</span><span class="p">:</span><span class="n">openssl</span><span class="p">-</span><span class="n">1</span><span class="p">.</span><span class="n">0</span><span class="p">.</span><span class="n">2k</span><span class="p">-</span><span class="n">24</span><span class="p">.</span><span class="n">el7_9</span><span class="p">.</span><span class="n">x86_64</span>                            <span class="n">7</span><span class="p">/</span><span class="n">10</span>
+  <span class="n">Installing</span> <span class="p">:</span> <span class="n">1</span><span class="p">:</span><span class="n">nginx-filesystem</span><span class="p">-</span><span class="n">1</span><span class="p">.</span><span class="n">20</span><span class="p">.</span><span class="n">1</span><span class="p">-</span><span class="n">9</span><span class="p">.</span><span class="n">el7</span><span class="p">.</span><span class="n">noarch</span>                      <span class="n">8</span><span class="p">/</span><span class="n">10</span>
+  <span class="n">Installing</span> <span class="p">:</span> <span class="n">1</span><span class="p">:</span><span class="n">nginx</span><span class="p">-</span><span class="n">1</span><span class="p">.</span><span class="n">20</span><span class="p">.</span><span class="n">1</span><span class="p">-</span><span class="n">9</span><span class="p">.</span><span class="n">el7</span><span class="p">.</span><span class="n">x86_64</span>                                 <span class="n">9</span><span class="p">/</span><span class="n">10</span>
+  <span class="n">Cleanup</span>    <span class="p">:</span> <span class="n">1</span><span class="p">:</span><span class="n">openssl-libs</span><span class="p">-</span><span class="n">1</span><span class="p">.</span><span class="n">0</span><span class="p">.</span><span class="n">2k</span><span class="p">-</span><span class="n">19</span><span class="p">.</span><span class="n">el7</span><span class="p">.</span><span class="n">x86_64</span>                        <span class="n">10</span><span class="p">/</span><span class="n">10</span>
+  <span class="n">Verifying</span>  <span class="p">:</span> <span class="n">1</span><span class="p">:</span><span class="n">nginx-filesystem</span><span class="p">-</span><span class="n">1</span><span class="p">.</span><span class="n">20</span><span class="p">.</span><span class="n">1</span><span class="p">-</span><span class="n">9</span><span class="p">.</span><span class="n">el7</span><span class="p">.</span><span class="n">noarch</span>                      <span class="n">1</span><span class="p">/</span><span class="n">10</span>
+  <span class="n">Verifying</span>  <span class="p">:</span> <span class="n">1</span><span class="p">:</span><span class="n">nginx</span><span class="p">-</span><span class="n">1</span><span class="p">.</span><span class="n">20</span><span class="p">.</span><span class="n">1</span><span class="p">-</span><span class="n">9</span><span class="p">.</span><span class="n">el7</span><span class="p">.</span><span class="n">x86_64</span>                                 <span class="n">2</span><span class="p">/</span><span class="n">10</span>
+  <span class="n">Verifying</span>  <span class="p">:</span> <span class="n">1</span><span class="p">:</span><span class="n">openssl-libs</span><span class="p">-</span><span class="n">1</span><span class="p">.</span><span class="n">0</span><span class="p">.</span><span class="n">2k</span><span class="p">-</span><span class="n">24</span><span class="p">.</span><span class="n">el7_9</span><span class="p">.</span><span class="n">x86_64</span>                       <span class="n">3</span><span class="p">/</span><span class="n">10</span>
+  <span class="n">Verifying</span>  <span class="p">:</span> <span class="n">1</span><span class="p">:</span><span class="n">openssl11-libs</span><span class="p">-</span><span class="n">1</span><span class="p">.</span><span class="n">1</span><span class="p">.</span><span class="n">1k</span><span class="p">-</span><span class="n">2</span><span class="p">.</span><span class="n">el7</span><span class="p">.</span><span class="n">x86_64</span>                        <span class="n">4</span><span class="p">/</span><span class="n">10</span>
+  <span class="n">Verifying</span>  <span class="p">:</span> <span class="n">gperftools-libs</span><span class="p">-</span><span class="n">2</span><span class="p">.</span><span class="n">6</span><span class="p">.</span><span class="n">1</span><span class="p">-</span><span class="n">1</span><span class="p">.</span><span class="n">el7</span><span class="p">.</span><span class="n">x86_64</span>                          <span class="n">5</span><span class="p">/</span><span class="n">10</span>
+  <span class="n">Verifying</span>  <span class="p">:</span> <span class="n">1</span><span class="p">:</span><span class="n">make</span><span class="p">-</span><span class="n">3</span><span class="p">.</span><span class="n">82</span><span class="p">-</span><span class="n">24</span><span class="p">.</span><span class="n">el7</span><span class="p">.</span><span class="n">x86_64</span>                                   <span class="n">6</span><span class="p">/</span><span class="n">10</span>
+  <span class="n">Verifying</span>  <span class="p">:</span> <span class="n">1</span><span class="p">:</span><span class="n">openssl</span><span class="p">-</span><span class="n">1</span><span class="p">.</span><span class="n">0</span><span class="p">.</span><span class="n">2k</span><span class="p">-</span><span class="n">24</span><span class="p">.</span><span class="n">el7_9</span><span class="p">.</span><span class="n">x86_64</span>                            <span class="n">7</span><span class="p">/</span><span class="n">10</span>
+  <span class="n">Verifying</span>  <span class="p">:</span> <span class="n">centos-indexhtml</span><span class="p">-</span><span class="n">7</span><span class="p">-</span><span class="n">9</span><span class="p">.</span><span class="n">el7</span><span class="p">.</span><span class="n">centos</span><span class="p">.</span><span class="n">noarch</span>                      <span class="n">8</span><span class="p">/</span><span class="n">10</span>
+  <span class="n">Verifying</span>  <span class="p">:</span> <span class="n">centos-logos</span><span class="p">-</span><span class="n">70</span><span class="p">.</span><span class="n">0</span><span class="p">.</span><span class="n">6</span><span class="p">-</span><span class="n">3</span><span class="p">.</span><span class="n">el7</span><span class="p">.</span><span class="n">centos</span><span class="p">.</span><span class="n">noarch</span>                     <span class="n">9</span><span class="p">/</span><span class="n">10</span>
+  <span class="n">Verifying</span>  <span class="p">:</span> <span class="n">1</span><span class="p">:</span><span class="n">openssl-libs</span><span class="p">-</span><span class="n">1</span><span class="p">.</span><span class="n">0</span><span class="p">.</span><span class="n">2k</span><span class="p">-</span><span class="n">19</span><span class="p">.</span><span class="n">el7</span><span class="p">.</span><span class="n">x86_64</span>                        <span class="n">10</span><span class="p">/</span><span class="n">10</span>
+
+<span class="n">Installed</span><span class="p">:</span>
+  <span class="n">nginx</span><span class="p">.</span><span class="n">x86_64</span> <span class="n">1</span><span class="p">:</span><span class="n">1</span><span class="p">.</span><span class="n">20</span><span class="p">.</span><span class="n">1</span><span class="p">-</span><span class="n">9</span><span class="p">.</span><span class="n">el7</span>
+
+<span class="n">Dependency</span> <span class="n">Installed</span><span class="p">:</span>
+  <span class="n">centos-indexhtml</span><span class="p">.</span><span class="n">noarch</span> <span class="n">0</span><span class="p">:</span><span class="n">7</span><span class="p">-</span><span class="n">9</span><span class="p">.</span><span class="n">el7</span><span class="p">.</span><span class="n">centos</span>
+  <span class="n">centos-logos</span><span class="p">.</span><span class="n">noarch</span> <span class="n">0</span><span class="p">:</span><span class="n">70</span><span class="p">.</span><span class="n">0</span><span class="p">.</span><span class="n">6</span><span class="p">-</span><span class="n">3</span><span class="p">.</span><span class="n">el7</span><span class="p">.</span><span class="n">centos</span>
+  <span class="n">gperftools-libs</span><span class="p">.</span><span class="n">x86_64</span> <span class="n">0</span><span class="p">:</span><span class="n">2</span><span class="p">.</span><span class="n">6</span><span class="p">.</span><span class="n">1</span><span class="p">-</span><span class="n">1</span><span class="p">.</span><span class="n">el7</span>
+  <span class="n">make</span><span class="p">.</span><span class="n">x86_64</span> <span class="n">1</span><span class="p">:</span><span class="n">3</span><span class="p">.</span><span class="n">82</span><span class="p">-</span><span class="n">24</span><span class="p">.</span><span class="n">el7</span>
+  <span class="n">nginx-filesystem</span><span class="p">.</span><span class="n">noarch</span> <span class="n">1</span><span class="p">:</span><span class="n">1</span><span class="p">.</span><span class="n">20</span><span class="p">.</span><span class="n">1</span><span class="p">-</span><span class="n">9</span><span class="p">.</span><span class="n">el7</span>
+  <span class="n">openssl</span><span class="p">.</span><span class="n">x86_64</span> <span class="n">1</span><span class="p">:</span><span class="n">1</span><span class="p">.</span><span class="n">0</span><span class="p">.</span><span class="n">2k</span><span class="p">-</span><span class="n">24</span><span class="p">.</span><span class="n">el7_9</span>
+  <span class="n">openssl11-libs</span><span class="p">.</span><span class="n">x86_64</span> <span class="n">1</span><span class="p">:</span><span class="n">1</span><span class="p">.</span><span class="n">1</span><span class="p">.</span><span class="n">1k</span><span class="p">-</span><span class="n">2</span><span class="p">.</span><span class="n">el7</span>
+
+<span class="n">Dependency</span> <span class="n">Updated</span><span class="p">:</span>
+  <span class="n">openssl-libs</span><span class="p">.</span><span class="n">x86_64</span> <span class="n">1</span><span class="p">:</span><span class="n">1</span><span class="p">.</span><span class="n">0</span><span class="p">.</span><span class="n">2k</span><span class="p">-</span><span class="n">24</span><span class="p">.</span><span class="n">el7_9</span>
+
+<span class="n">Complete</span><span class="p">!</span>
+<span class="n">Removing</span> <span class="n">intermediate</span> <span class="n">container</span> <span class="n">51b50c2ce841</span>
+ <span class="p">---&gt;</span> <span class="n">88a7d7a2c522</span>
+
+<span class="n">第六步</span><span class="err">：</span><span class="n">添加文件至容器</span>
+<span class="n">Step</span> <span class="n">6</span><span class="p">/</span><span class="n">9</span> <span class="p">:</span> <span class="n">ADD</span> <span class="n">index</span><span class="p">.</span><span class="n">html</span> <span class="p">/</span><span class="n">usr</span><span class="p">/</span><span class="n">share</span><span class="p">/</span><span class="n">nginx</span><span class="p">/</span><span class="n">html</span><span class="p">/</span>
+ <span class="p">---&gt;</span> <span class="n">a2226a4d6720</span>
+<span class="n">第七步</span><span class="err">：</span><span class="n">设置nginx服务运行方式</span>
+<span class="n">Step</span> <span class="n">7</span><span class="p">/</span><span class="n">9</span> <span class="p">:</span> <span class="n">RUN</span> <span class="nb">echo </span><span class="s2">&quot;daemon off;&quot;</span> <span class="p">&gt;&gt;</span> <span class="p">/</span><span class="n">etc</span><span class="p">/</span><span class="n">nginx</span><span class="p">/</span><span class="n">nginx</span><span class="p">.</span><span class="n">conf</span>
+ <span class="p">---&gt;</span> <span class="n">Running</span> <span class="k">in</span> <span class="n">01d623937807</span>
+<span class="n">Removing</span> <span class="n">intermediate</span> <span class="n">container</span> <span class="n">01d623937807</span>
+ <span class="p">---&gt;</span> <span class="n">53fddea5b491</span>
+
+<span class="n">第八步</span><span class="err">：</span><span class="n">暴露端口</span>
+<span class="n">Step</span> <span class="n">8</span><span class="p">/</span><span class="n">9</span> <span class="p">:</span> <span class="n">EXPOSE</span> <span class="n">80</span>
+ <span class="p">---&gt;</span> <span class="n">Running</span> <span class="k">in</span> <span class="n">9b73fcf7ee1b</span>
+<span class="n">Removing</span> <span class="n">intermediate</span> <span class="n">container</span> <span class="n">9b73fcf7ee1b</span>
+ <span class="p">---&gt;</span> <span class="n">903377216b23</span>
+<span class="n">第九步</span><span class="err">：</span><span class="n">运行命令</span><span class="err">，</span><span class="n">执行nginx二进制文件</span>
+<span class="n">Step</span> <span class="n">9</span><span class="p">/</span><span class="n">9</span> <span class="p">:</span> <span class="n">CMD</span> <span class="p">/</span><span class="n">usr</span><span class="p">/</span><span class="n">sbin</span><span class="p">/</span><span class="n">nginx</span>
+ <span class="p">---&gt;</span> <span class="n">Running</span> <span class="k">in</span> <span class="n">58037652952c</span>
+<span class="n">Removing</span> <span class="n">intermediate</span> <span class="n">container</span> <span class="n">58037652952c</span>
+ <span class="p">---&gt;</span> <span class="n">944d27b80f1f</span>
+
+<span class="n">生成镜像</span><span class="err">，</span><span class="n">并为镜像打标记</span><span class="err">：</span>
+<span class="n">Successfully</span> <span class="n">built</span> <span class="n">944d27b80f1f</span>
+<span class="n">Successfully</span> <span class="n">tagged</span> <span class="n">centos7-nginx</span><span class="p">:</span><span class="n">v1</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="p">[</span><span class="n">root</span><span class="nv">@localhost</span> <span class="n">nginxroot</span><span class="p">]</span><span class="c"># docker images</span>
+<span class="n">REPOSITORY</span>        <span class="n">TAG</span>       <span class="n">IMAGE</span> <span class="n">ID</span>       <span class="n">CREATED</span>             <span class="n">SIZE</span>
+<span class="n">centos7-nginx</span>     <span class="n">v1</span>        <span class="n">944d27b80f1f</span>   <span class="n">3</span> <span class="n">minutes</span> <span class="n">ago</span>       <span class="n">587MB</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="p">[</span><span class="n">root</span><span class="nv">@localhost</span> <span class="p">~]</span><span class="c"># docker run -d -p 8081:80 centos7-nginx:v1</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="p">[</span><span class="n">root</span><span class="nv">@localhost</span> <span class="p">~]</span><span class="c"># curl http://localhost:8081</span>
+<span class="n">nginx</span><span class="err">&#39;</span><span class="n">s</span> <span class="n">running</span>
+</code></pre></div>
+<h4 id="4452_dockerfiletomcat">4.4.5.2 使用Dockerfile生成Tomcat容器镜像<a class="headerlink" href="#4452_dockerfiletomcat" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="p">[</span><span class="n">root</span><span class="nv">@localhost</span> <span class="p">~]</span><span class="c"># mkdir tomcatdir</span>
+<span class="p">[</span><span class="n">root</span><span class="nv">@localhost</span> <span class="p">~]</span><span class="c"># cd tomcatdir/</span>
+<span class="p">[</span><span class="n">root</span><span class="nv">@localhost</span> <span class="n">tomcatdir</span><span class="p">]</span><span class="c">#</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="p">[</span><span class="n">root</span><span class="nv">@localhost</span> <span class="n">tomcatdir</span><span class="p">]</span><span class="c"># echo &quot;tomcat is running&quot; &gt;&gt; index.html</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="p">[</span><span class="n">root</span><span class="nv">@localhost</span> <span class="n">tomcatdir</span><span class="p">]</span><span class="c"># ls</span>
+<span class="n">Dockerfile</span>  <span class="n">jdk</span> <span class="n">index</span><span class="p">.</span><span class="n">html</span>
+<span class="n">jdk为目录</span>
+<span class="n">index</span><span class="p">.</span><span class="n">html</span> <span class="n">网站首页</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="p">[</span><span class="n">root</span><span class="nv">@localhost</span> <span class="n">tomcatdir</span><span class="p">]</span><span class="c"># vim Dockerfile</span>
+<span class="p">[</span><span class="n">root</span><span class="nv">@localhost</span> <span class="n">tomcatdir</span><span class="p">]</span><span class="c"># cat Dockerfile</span>
+<span class="n">FROM</span> <span class="n">centos</span><span class="p">:</span><span class="n">centos7</span>
+
+<span class="n">MAINTAINER</span> <span class="s2">&quot;www.kubemsb.com&quot;</span>
+
+<span class="n">ENV</span> <span class="n">VERSION</span><span class="p">=</span><span class="n">8</span><span class="p">.</span><span class="n">5</span><span class="p">.</span><span class="n">75</span>
+<span class="n">ENV</span> <span class="n">JAVA_HOME</span><span class="p">=/</span><span class="n">usr</span><span class="p">/</span><span class="n">local</span><span class="p">/</span><span class="n">jdk</span>
+<span class="n">ENV</span> <span class="n">TOMCAT_HOME</span><span class="p">=/</span><span class="n">usr</span><span class="p">/</span><span class="n">local</span><span class="p">/</span><span class="n">tomcat</span>
+
+<span class="n">RUN</span> <span class="n">yum</span> <span class="n">-y</span> <span class="n">install</span> <span class="nb">wget</span>
+
+<span class="n">RUN</span> <span class="nb">wget </span><span class="n">https</span><span class="p">://</span><span class="n">dlcdn</span><span class="p">.</span><span class="n">apache</span><span class="p">.</span><span class="n">org</span><span class="p">/</span><span class="n">tomcat</span><span class="p">/</span><span class="n">tomcat</span><span class="p">-</span><span class="n">8</span><span class="p">/</span><span class="n">v</span><span class="p">${</span><span class="n">VERSION</span><span class="p">}/</span><span class="n">bin</span><span class="p">/</span><span class="n">apache-tomcat</span><span class="p">-${</span><span class="n">VERSION</span><span class="p">}.</span><span class="n">tar</span><span class="p">.</span><span class="n">gz</span>
+
+<span class="n">RUN</span> <span class="n">tar</span> <span class="n">xf</span> <span class="n">apache-tomcat</span><span class="p">-${</span><span class="n">VERSION</span><span class="p">}.</span><span class="n">tar</span><span class="p">.</span><span class="n">gz</span>
+
+<span class="n">RUN</span> <span class="nb">mv </span><span class="n">apache-tomcat</span><span class="p">-${</span><span class="n">VERSION</span><span class="p">}</span> <span class="p">/</span><span class="n">usr</span><span class="p">/</span><span class="n">local</span><span class="p">/</span><span class="n">tomcat</span>
+
+<span class="n">RUN</span> <span class="nb">rm </span><span class="n">-rf</span> <span class="n">apache-tomcat</span><span class="p">-${</span><span class="n">VERSION</span><span class="p">}.</span><span class="n">tar</span><span class="p">.</span><span class="n">gz</span> <span class="p">/</span><span class="n">usr</span><span class="p">/</span><span class="n">local</span><span class="p">/</span><span class="n">tomcat</span><span class="p">/</span><span class="n">webapps</span><span class="p">/*</span>
+
+<span class="n">RUN</span> <span class="n">mkdir</span> <span class="p">/</span><span class="n">usr</span><span class="p">/</span><span class="n">local</span><span class="p">/</span><span class="n">tomcat</span><span class="p">/</span><span class="n">webapps</span><span class="p">/</span><span class="n">ROOT</span>
+
+<span class="n">ADD</span> <span class="p">./</span><span class="n">index</span><span class="p">.</span><span class="n">html</span> <span class="p">/</span><span class="n">usr</span><span class="p">/</span><span class="n">local</span><span class="p">/</span><span class="n">tomcat</span><span class="p">/</span><span class="n">webapps</span><span class="p">/</span><span class="n">ROOT</span><span class="p">/</span>
+
+<span class="n">ADD</span> <span class="p">./</span><span class="n">jdk</span> <span class="p">/</span><span class="n">usr</span><span class="p">/</span><span class="n">local</span><span class="p">/</span><span class="n">jdk</span>
+
+
+<span class="n">RUN</span> <span class="nb">echo </span><span class="s2">&quot;export TOMCAT_HOME=/usr/local/tomcat&quot;</span> <span class="p">&gt;&gt;</span> <span class="p">/</span><span class="n">etc</span><span class="p">/</span><span class="n">profile</span>
+
+<span class="n">RUN</span> <span class="nb">echo </span><span class="s2">&quot;export JAVA_HOME=/usr/local/jdk&quot;</span> <span class="p">&gt;&gt;</span> <span class="p">/</span><span class="n">etc</span><span class="p">/</span><span class="n">profile</span>
+
+<span class="n">RUN</span> <span class="nb">echo </span><span class="s2">&quot;export PATH=${TOMCAT_HOME}/bin:${JAVA_HOME}/bin:$PATH&quot;</span> <span class="p">&gt;&gt;</span> <span class="p">/</span><span class="n">etc</span><span class="p">/</span><span class="n">profile</span>
+
+<span class="n">RUN</span> <span class="nb">echo </span><span class="s2">&quot;export CLASSPATH=.:${JAVA_HOME}/lib/dt.jar:${JAVA_HOME}/lib/tools.jar&quot;</span> <span class="p">&gt;&gt;</span> <span class="p">/</span><span class="n">etc</span><span class="p">/</span><span class="n">profile</span>
+
+
+<span class="n">RUN</span> <span class="n">source</span> <span class="p">/</span><span class="n">etc</span><span class="p">/</span><span class="n">profile</span>
+
+<span class="n">EXPOSE</span> <span class="n">8080</span>
+
+<span class="n">CMD</span> <span class="p">[</span><span class="s2">&quot;/usr/local/tomcat/bin/catalina.sh&quot;</span><span class="p">,</span><span class="s2">&quot;run&quot;</span><span class="p">]</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="p">[</span><span class="n">root</span><span class="nv">@localhost</span> <span class="n">tomcatdir</span><span class="p">]</span><span class="c"># docker build -t centos-tomcat:v1 .                           </span>
+
+<span class="n">Sending</span> <span class="n">build</span> <span class="n">context</span> <span class="n">to</span> <span class="n">Docker</span> <span class="n">daemon</span>  <span class="n">398</span><span class="p">.</span><span class="n">9MB</span>
+<span class="n">Step</span> <span class="n">1</span><span class="p">/</span><span class="n">20</span> <span class="p">:</span> <span class="n">FROM</span> <span class="n">centos</span><span class="p">:</span><span class="n">centos7</span>
+ <span class="p">---&gt;</span> <span class="n">eeb6ee3f44bd</span>
+<span class="n">Step</span> <span class="n">2</span><span class="p">/</span><span class="n">20</span> <span class="p">:</span> <span class="n">MAINTAINER</span> <span class="s2">&quot;www.kubemsb.com&quot;</span>
+ <span class="p">---&gt;</span> <span class="n">Using</span> <span class="n">cache</span>
+ <span class="p">---&gt;</span> <span class="n">f978e524772c</span>
+<span class="n">Step</span> <span class="n">3</span><span class="p">/</span><span class="n">20</span> <span class="p">:</span> <span class="n">ENV</span> <span class="n">VERSION</span><span class="p">=</span><span class="n">8</span><span class="p">.</span><span class="n">5</span><span class="p">.</span><span class="n">75</span>
+ <span class="p">---&gt;</span> <span class="n">Using</span> <span class="n">cache</span>
+ <span class="p">---&gt;</span> <span class="n">792767bbdb22</span>
+<span class="n">Step</span> <span class="n">4</span><span class="p">/</span><span class="n">20</span> <span class="p">:</span> <span class="n">ENV</span> <span class="n">JAVA_HOME</span><span class="p">=/</span><span class="n">usr</span><span class="p">/</span><span class="n">local</span><span class="p">/</span><span class="n">jdk</span>
+ <span class="p">---&gt;</span> <span class="n">Using</span> <span class="n">cache</span>
+ <span class="p">---&gt;</span> <span class="n">6eb3855650f0</span>
+<span class="n">Step</span> <span class="n">5</span><span class="p">/</span><span class="n">20</span> <span class="p">:</span> <span class="n">ENV</span> <span class="n">TOMCAT_HOME</span><span class="p">=/</span><span class="n">usr</span><span class="p">/</span><span class="n">local</span><span class="p">/</span><span class="n">tomcat</span>
+ <span class="p">---&gt;</span> <span class="n">Using</span> <span class="n">cache</span>
+ <span class="p">---&gt;</span> <span class="n">e38bdbbfd19d</span>
+<span class="n">Step</span> <span class="n">6</span><span class="p">/</span><span class="n">20</span> <span class="p">:</span> <span class="n">RUN</span> <span class="n">yum</span> <span class="n">-y</span> <span class="n">install</span> <span class="nb">wget</span>
+ <span class="p">---&gt;</span> <span class="n">Using</span> <span class="n">cache</span>
+ <span class="p">---&gt;</span> <span class="n">4c6aafa6d8ba</span>
+<span class="n">Step</span> <span class="n">7</span><span class="p">/</span><span class="n">20</span> <span class="p">:</span> <span class="n">RUN</span> <span class="nb">wget </span><span class="n">http</span><span class="p">://</span><span class="n">dlcdn</span><span class="p">.</span><span class="n">apache</span><span class="p">.</span><span class="n">org</span><span class="p">/</span><span class="n">tomcat</span><span class="p">/</span><span class="n">tomcat</span><span class="p">-</span><span class="n">8</span><span class="p">/</span><span class="n">v</span><span class="p">${</span><span class="n">VERSION</span><span class="p">}/</span><span class="n">bin</span><span class="p">/</span><span class="n">apache-tomcat</span><span class="p">-${</span><span class="n">VERSION</span><span class="p">}.</span><span class="n">tar</span><span class="p">.</span><span class="n">gz</span>
+ <span class="p">---&gt;</span> <span class="n">Using</span> <span class="n">cache</span>
+ <span class="p">---&gt;</span> <span class="n">9bdb6f636a5f</span>
+<span class="n">Step</span> <span class="n">8</span><span class="p">/</span><span class="n">20</span> <span class="p">:</span> <span class="n">RUN</span> <span class="n">tar</span> <span class="n">xf</span> <span class="n">apache-tomcat</span><span class="p">-${</span><span class="n">VERSION</span><span class="p">}.</span><span class="n">tar</span><span class="p">.</span><span class="n">gz</span>
+ <span class="p">---&gt;</span> <span class="n">Using</span> <span class="n">cache</span>
+ <span class="p">---&gt;</span> <span class="n">6abe5cb0ef26</span>
+<span class="n">Step</span> <span class="n">9</span><span class="p">/</span><span class="n">20</span> <span class="p">:</span> <span class="n">RUN</span> <span class="nb">mv </span><span class="n">apache-tomcat</span><span class="p">-${</span><span class="n">VERSION</span><span class="p">}</span> <span class="p">/</span><span class="n">usr</span><span class="p">/</span><span class="n">local</span><span class="p">/</span><span class="n">tomcat</span>
+ <span class="p">---&gt;</span> <span class="n">Using</span> <span class="n">cache</span>
+ <span class="p">---&gt;</span> <span class="n">b3907af15c22</span>
+<span class="n">Step</span> <span class="n">10</span><span class="p">/</span><span class="n">20</span> <span class="p">:</span> <span class="n">RUN</span> <span class="nb">rm </span><span class="n">-rf</span> <span class="n">apache-tomcat</span><span class="p">-${</span><span class="n">VERSION</span><span class="p">}.</span><span class="n">tar</span><span class="p">.</span><span class="n">gz</span> <span class="p">/</span><span class="n">usr</span><span class="p">/</span><span class="n">local</span><span class="p">/</span><span class="n">tomcat</span><span class="p">/</span><span class="n">webapps</span><span class="p">/*</span>
+ <span class="p">---&gt;</span> <span class="n">Using</span> <span class="n">cache</span>
+ <span class="p">---&gt;</span> <span class="n">b775439344e3</span>
+<span class="n">Step</span> <span class="n">11</span><span class="p">/</span><span class="n">20</span> <span class="p">:</span> <span class="n">RUN</span> <span class="n">mkdir</span> <span class="p">/</span><span class="n">usr</span><span class="p">/</span><span class="n">local</span><span class="p">/</span><span class="n">tomcat</span><span class="p">/</span><span class="n">webapps</span><span class="p">/</span><span class="n">ROOT</span>
+ <span class="p">---&gt;</span> <span class="n">Using</span> <span class="n">cache</span>
+ <span class="p">---&gt;</span> <span class="n">149ad46776eb</span>
+<span class="n">Step</span> <span class="n">12</span><span class="p">/</span><span class="n">20</span> <span class="p">:</span> <span class="n">ADD</span> <span class="p">./</span><span class="n">index</span><span class="p">.</span><span class="n">html</span> <span class="p">/</span><span class="n">usr</span><span class="p">/</span><span class="n">local</span><span class="p">/</span><span class="n">tomcat</span><span class="p">/</span><span class="n">webapps</span><span class="p">/</span><span class="n">ROOT</span><span class="p">/</span>
+ <span class="p">---&gt;</span> <span class="n">064579c39a46</span>
+<span class="n">Step</span> <span class="n">13</span><span class="p">/</span><span class="n">20</span> <span class="p">:</span> <span class="n">ADD</span> <span class="p">./</span><span class="n">jdk</span> <span class="p">/</span><span class="n">usr</span><span class="p">/</span><span class="n">local</span><span class="p">/</span><span class="n">jdk</span>
+ <span class="p">---&gt;</span> <span class="n">477fd38dfbcf</span>
+<span class="n">Step</span> <span class="n">14</span><span class="p">/</span><span class="n">20</span> <span class="p">:</span> <span class="n">RUN</span> <span class="nb">echo </span><span class="s2">&quot;export TOMCAT_HOME=/usr/local/tomcat&quot;</span> <span class="p">&gt;&gt;</span> <span class="p">/</span><span class="n">etc</span><span class="p">/</span><span class="n">profile</span>
+ <span class="p">---&gt;</span> <span class="n">Running</span> <span class="k">in</span> <span class="n">3fc9bc5e8ba5</span>
+<span class="n">Removing</span> <span class="n">intermediate</span> <span class="n">container</span> <span class="n">3fc9bc5e8ba5</span>
+ <span class="p">---&gt;</span> <span class="n">3c43bccd5779</span>
+<span class="n">Step</span> <span class="n">15</span><span class="p">/</span><span class="n">20</span> <span class="p">:</span> <span class="n">RUN</span> <span class="nb">echo </span><span class="s2">&quot;export JAVA_HOME=/usr/local/jdk&quot;</span> <span class="p">&gt;&gt;</span> <span class="p">/</span><span class="n">etc</span><span class="p">/</span><span class="n">profile</span>
+ <span class="p">---&gt;</span> <span class="n">Running</span> <span class="k">in</span> <span class="n">80f8150f0e80</span>
+<span class="n">Removing</span> <span class="n">intermediate</span> <span class="n">container</span> <span class="n">80f8150f0e80</span>
+ <span class="p">---&gt;</span> <span class="n">e01307ccb02a</span>
+<span class="n">Step</span> <span class="n">16</span><span class="p">/</span><span class="n">20</span> <span class="p">:</span> <span class="n">RUN</span> <span class="nb">echo </span><span class="s2">&quot;export PATH=${TOMCAT_HOME}/bin:${JAVA_HOME}/bin:$PATH&quot;</span> <span class="p">&gt;&gt;</span> <span class="p">/</span><span class="n">etc</span><span class="p">/</span><span class="n">profile</span>
+ <span class="p">---&gt;</span> <span class="n">Running</span> <span class="k">in</span> <span class="n">92a6a4fd1cbc</span>
+<span class="n">Removing</span> <span class="n">intermediate</span> <span class="n">container</span> <span class="n">92a6a4fd1cbc</span>
+ <span class="p">---&gt;</span> <span class="n">1d26f53b7095</span>
+<span class="n">Step</span> <span class="n">17</span><span class="p">/</span><span class="n">20</span> <span class="p">:</span> <span class="n">RUN</span> <span class="nb">echo </span><span class="s2">&quot;export CLASSPATH=.:${JAVA_HOME}/lib/dt.jar:${JAVA_HOME}/lib/tools.jar&quot;</span> <span class="p">&gt;&gt;</span> <span class="p">/</span><span class="n">etc</span><span class="p">/</span><span class="n">profile</span>
+ <span class="p">---&gt;</span> <span class="n">Running</span> <span class="k">in</span> <span class="n">fb5ee1710c36</span>
+<span class="n">Removing</span> <span class="n">intermediate</span> <span class="n">container</span> <span class="n">fb5ee1710c36</span>
+ <span class="p">---&gt;</span> <span class="n">d2eaff35dce3</span>
+<span class="n">Step</span> <span class="n">18</span><span class="p">/</span><span class="n">20</span> <span class="p">:</span> <span class="n">RUN</span> <span class="n">source</span> <span class="p">/</span><span class="n">etc</span><span class="p">/</span><span class="n">profile</span>
+ <span class="p">---&gt;</span> <span class="n">Running</span> <span class="k">in</span> <span class="n">0422af810b35</span>
+<span class="n">Removing</span> <span class="n">intermediate</span> <span class="n">container</span> <span class="n">0422af810b35</span>
+ <span class="p">---&gt;</span> <span class="n">fc6d285288ca</span>
+<span class="n">Step</span> <span class="n">19</span><span class="p">/</span><span class="n">20</span> <span class="p">:</span> <span class="n">EXPOSE</span> <span class="n">8080</span>
+ <span class="p">---&gt;</span> <span class="n">Running</span> <span class="k">in</span> <span class="n">eeb64d4f9e94</span>
+<span class="n">Removing</span> <span class="n">intermediate</span> <span class="n">container</span> <span class="n">eeb64d4f9e94</span>
+ <span class="p">---&gt;</span> <span class="n">05ec1c6d06cf</span>
+<span class="n">Step</span> <span class="n">20</span><span class="p">/</span><span class="n">20</span> <span class="p">:</span> <span class="n">CMD</span> <span class="p">[</span><span class="s2">&quot;/usr/local/tomcat/bin/catalina.sh&quot;</span><span class="p">,</span><span class="s2">&quot;run&quot;</span><span class="p">]</span>
+ <span class="p">---&gt;</span> <span class="n">Running</span> <span class="k">in</span> <span class="n">66b7851e2772</span>
+<span class="n">Removing</span> <span class="n">intermediate</span> <span class="n">container</span> <span class="n">66b7851e2772</span>
+ <span class="p">---&gt;</span> <span class="n">ad338289055c</span>
+<span class="n">Successfully</span> <span class="n">built</span> <span class="n">ad338289055c</span>
+<span class="n">Successfully</span> <span class="n">tagged</span> <span class="n">centos-tomcat</span><span class="p">:</span><span class="n">v1</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c"># docker images</span>
+<span class="n">REPOSITORY</span>        <span class="n">TAG</span>       <span class="n">IMAGE</span> <span class="n">ID</span>       <span class="n">CREATED</span>          <span class="n">SIZE</span>
+<span class="n">centos-tomcat</span>     <span class="n">v1</span>        <span class="n">ad338289055c</span>   <span class="n">6</span> <span class="n">minutes</span> <span class="n">ago</span>    <span class="n">797MB</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c"># docker run -d -p 8082:8080 centos-tomcat:v1</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c"># curl http://localhost:8082</span>
+<span class="n">tomcat</span> <span class="n">is</span> <span class="n">running</span>
+</code></pre></div>
+<h3 id="446_dockerfile">4.4.6 使用Dockerfile生成容器镜像优化<a class="headerlink" href="#446_dockerfile" title="Permanent link">&para;</a></h3>
+<h4 id="4461">4.4.6.1 减少镜像分层<a class="headerlink" href="#4461" title="Permanent link">&para;</a></h4>
+<p>Dockerfile中包含多种指令，如果涉及到部署最多使用的算是RUN命令了，使用RUN命令时，不建议每次安装都使用一条单独的RUN命令，可以把能够合并安装指令合并为一条，这样就可以减少镜像分层。</p>
+<div class="highlight"><pre><span></span><code><span class="n">FROM</span> <span class="n">centos</span><span class="p">:</span><span class="n">latest</span>
+<span class="n">MAINTAINER</span> <span class="n">www</span><span class="p">.</span><span class="n">kubemsb</span><span class="p">.</span><span class="n">com</span>
+<span class="n">RUN</span> <span class="n">yum</span> <span class="n">install</span> <span class="n">epel-release</span> <span class="n">-y</span> 
+<span class="n">RUN</span> <span class="n">yum</span> <span class="n">install</span> <span class="n">-y</span> <span class="n">gcc</span> <span class="n">gcc-c</span><span class="p">++</span> <span class="n">make</span> <span class="n">-y</span>
+<span class="n">RUN</span> <span class="nb">wget </span><span class="n">http</span><span class="p">://</span><span class="n">docs</span><span class="p">.</span><span class="n">php</span><span class="p">.</span><span class="n">net</span><span class="p">/</span><span class="n">distributions</span><span class="p">/</span><span class="n">php</span><span class="p">-</span><span class="n">5</span><span class="p">.</span><span class="n">6</span><span class="p">.</span><span class="n">36</span><span class="p">.</span><span class="n">tar</span><span class="p">.</span><span class="n">gz</span>
+<span class="n">RUN</span> <span class="n">tar</span> <span class="n">zxf</span> <span class="n">php</span><span class="p">-</span><span class="n">5</span><span class="p">.</span><span class="n">6</span><span class="p">.</span><span class="n">36</span><span class="p">.</span><span class="n">tar</span><span class="p">.</span><span class="n">gz</span>
+<span class="n">RUN</span> <span class="nb">cd </span><span class="n">php</span><span class="p">-</span><span class="n">5</span><span class="p">.</span><span class="n">6</span><span class="p">.</span><span class="n">36</span>
+<span class="n">RUN</span> <span class="p">./</span><span class="n">configure</span> <span class="p">-</span><span class="n">-prefix</span><span class="p">=/</span><span class="n">usr</span><span class="p">/</span><span class="n">local</span><span class="p">/</span><span class="n">php</span> 
+<span class="n">RUN</span> <span class="n">make</span> <span class="n">-j</span> <span class="n">4</span> 
+<span class="n">RUN</span> <span class="n">make</span> <span class="n">install</span>
+<span class="n">EXPOSE</span> <span class="n">9000</span>
+<span class="n">CMD</span> <span class="p">[</span><span class="s2">&quot;php-fpm&quot;</span><span class="p">]</span>
+</code></pre></div>
+<p><strong>优化内容如下：</strong></p>
+<div class="highlight"><pre><span></span><code><span class="n">FROM</span> <span class="n">centos</span><span class="p">:</span><span class="n">latest</span>
+<span class="n">MAINTAINER</span> <span class="n">www</span><span class="p">.</span><span class="n">kubemsb</span><span class="p">.</span><span class="n">com</span>
+<span class="n">RUN</span> <span class="n">yum</span> <span class="n">install</span> <span class="n">epel-release</span> <span class="n">-y</span> <span class="p">&amp;&amp;</span> <span class="p">\</span>
+    <span class="n">yum</span> <span class="n">install</span> <span class="n">-y</span> <span class="n">gcc</span> <span class="n">gcc-c</span><span class="p">++</span> <span class="n">make</span>
+
+<span class="n">RUN</span> <span class="nb">wget </span><span class="n">http</span><span class="p">://</span><span class="n">docs</span><span class="p">.</span><span class="n">php</span><span class="p">.</span><span class="n">net</span><span class="p">/</span><span class="n">distributions</span><span class="p">/</span><span class="n">php</span><span class="p">-</span><span class="n">5</span><span class="p">.</span><span class="n">6</span><span class="p">.</span><span class="n">36</span><span class="p">.</span><span class="n">tar</span><span class="p">.</span><span class="n">gz</span> <span class="p">&amp;&amp;</span> <span class="p">\</span>
+    <span class="n">tar</span> <span class="n">zxf</span> <span class="n">php</span><span class="p">-</span><span class="n">5</span><span class="p">.</span><span class="n">6</span><span class="p">.</span><span class="n">36</span><span class="p">.</span><span class="n">tar</span><span class="p">.</span><span class="n">gz</span> <span class="p">&amp;&amp;</span> <span class="p">\</span>
+    <span class="nb">cd </span><span class="n">php</span><span class="p">-</span><span class="n">5</span><span class="p">.</span><span class="n">6</span><span class="p">.</span><span class="n">36</span> <span class="p">&amp;&amp;</span> <span class="p">\</span>
+    <span class="p">./</span><span class="n">configure</span> <span class="p">-</span><span class="n">-prefix</span><span class="p">=/</span><span class="n">usr</span><span class="p">/</span><span class="n">local</span><span class="p">/</span><span class="n">php</span> <span class="p">&amp;&amp;</span> <span class="p">\</span>
+    <span class="n">make</span> <span class="n">-j</span> <span class="n">4</span> <span class="p">&amp;&amp;</span> <span class="n">make</span> <span class="n">install</span>
+<span class="n">EXPOSE</span> <span class="n">9000</span>
+<span class="n">CMD</span> <span class="p">[</span><span class="s2">&quot;php-fpm&quot;</span><span class="p">]</span>
+</code></pre></div>
+<h4 id="4462">4.4.6.2 清理无用数据<a class="headerlink" href="#4462" title="Permanent link">&para;</a></h4>
+<ul>
+<li>一次RUN形成新的一层，如果没有在同一层删除，无论文件是否最后删除，都会带到下一层，所以要在每一层清理对应的残留数据，减小镜像大小。</li>
+<li>把生成容器镜像过程中部署的应用软件包做删除处理</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="n">FROM</span> <span class="n">centos</span><span class="p">:</span><span class="n">latest</span>
+<span class="n">MAINTAINER</span> <span class="n">www</span><span class="p">.</span><span class="n">kubemsb</span><span class="p">.</span><span class="n">com</span>
+<span class="n">RUN</span> <span class="n">yum</span> <span class="n">install</span> <span class="n">epel-release</span> <span class="n">-y</span> <span class="p">&amp;&amp;</span> <span class="p">\</span>
+    <span class="n">yum</span> <span class="n">install</span> <span class="n">-y</span> <span class="n">gcc</span> <span class="n">gcc-c</span><span class="p">++</span> <span class="n">make</span> <span class="n">gd-devel</span> <span class="n">libxml2-devel</span> <span class="p">\</span>
+    <span class="n">libcurl-devel</span> <span class="n">libjpeg-devel</span> <span class="n">libpng-devel</span> <span class="n">openssl-devel</span> <span class="p">\</span>
+    <span class="n">libmcrypt-devel</span> <span class="n">libxslt-devel</span> <span class="n">libtidy-devel</span> <span class="n">autoconf</span> <span class="p">\</span>
+    <span class="n">iproute</span> <span class="n">net-tools</span> <span class="n">telnet</span> <span class="nb">wget curl </span><span class="p">&amp;&amp;</span> <span class="p">\</span>
+    <span class="n">yum</span> <span class="n">clean</span> <span class="n">all</span> <span class="p">&amp;&amp;</span> <span class="p">\</span>
+    <span class="nb">rm </span><span class="n">-rf</span> <span class="p">/</span><span class="n">var</span><span class="p">/</span><span class="n">cache</span><span class="p">/</span><span class="n">yum</span><span class="p">/*</span>
+
+<span class="n">RUN</span> <span class="nb">wget </span><span class="n">http</span><span class="p">://</span><span class="n">docs</span><span class="p">.</span><span class="n">php</span><span class="p">.</span><span class="n">net</span><span class="p">/</span><span class="n">distributions</span><span class="p">/</span><span class="n">php</span><span class="p">-</span><span class="n">5</span><span class="p">.</span><span class="n">6</span><span class="p">.</span><span class="n">36</span><span class="p">.</span><span class="n">tar</span><span class="p">.</span><span class="n">gz</span> <span class="p">&amp;&amp;</span> <span class="p">\</span>
+    <span class="n">tar</span> <span class="n">zxf</span> <span class="n">php</span><span class="p">-</span><span class="n">5</span><span class="p">.</span><span class="n">6</span><span class="p">.</span><span class="n">36</span><span class="p">.</span><span class="n">tar</span><span class="p">.</span><span class="n">gz</span> <span class="p">&amp;&amp;</span> <span class="p">\</span>
+    <span class="nb">cd </span><span class="n">php</span><span class="p">-</span><span class="n">5</span><span class="p">.</span><span class="n">6</span><span class="p">.</span><span class="n">36</span> <span class="p">&amp;&amp;</span> <span class="p">\</span>
+    <span class="p">./</span><span class="n">configure</span> <span class="p">-</span><span class="n">-prefix</span><span class="p">=/</span><span class="n">usr</span><span class="p">/</span><span class="n">local</span><span class="p">/</span><span class="n">php</span> <span class="p">\</span>
+    <span class="n">make</span> <span class="n">-j</span> <span class="n">4</span> <span class="p">&amp;&amp;</span> <span class="n">make</span> <span class="n">install</span> <span class="p">&amp;&amp;</span> <span class="p">\</span>
+    <span class="nb">cd </span><span class="p">/</span> <span class="p">&amp;&amp;</span> <span class="nb">rm </span><span class="n">-rf</span> <span class="n">php</span><span class="p">*</span>
+</code></pre></div>
+<h4 id="4463">4.4.6.3 多阶段构建镜像<a class="headerlink" href="#4463" title="Permanent link">&para;</a></h4>
+<p>项目容器镜像有两种，一种直接把项目代码复制到容器镜像中，下次使用容器镜像时即可直接启动；另一种把需要对项目源码进行编译，再复制到容器镜像中使用。</p>
+<p>不论是哪种方法都会让制作镜像复杂了些，并也会让容器镜像比较大，建议采用分阶段构建镜像的方法实现。</p>
+<div class="highlight"><pre><span></span><code><span class="p">$</span> <span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">://</span><span class="n">github</span><span class="p">.</span><span class="n">com</span><span class="p">/</span><span class="n">kubemsb</span><span class="p">/</span><span class="n">tomcat-java-demo</span>
+<span class="p">$</span> <span class="nb">cd </span><span class="n">tomcat-java-demo</span>
+<span class="p">$</span> <span class="n">vi</span> <span class="n">Dockerfile</span>
+<span class="n">FROM</span> <span class="n">maven</span> <span class="n">AS</span> <span class="n">build</span>
+<span class="n">ADD</span> <span class="p">./</span><span class="n">pom</span><span class="p">.</span><span class="n">xml</span> <span class="n">pom</span><span class="p">.</span><span class="n">xml</span>
+<span class="n">ADD</span> <span class="p">./</span><span class="n">src</span> <span class="n">src</span><span class="p">/</span>
+<span class="n">RUN</span> <span class="n">mvn</span> <span class="n">clean</span> <span class="n">package</span>
+
+<span class="n">FROM</span> <span class="n">kubemsb</span><span class="p">/</span><span class="n">tomcat</span>
+<span class="n">RUN</span> <span class="nb">rm </span><span class="n">-rf</span> <span class="p">/</span><span class="n">usr</span><span class="p">/</span><span class="n">local</span><span class="p">/</span><span class="n">tomcat</span><span class="p">/</span><span class="n">webapps</span><span class="p">/</span><span class="n">ROOT</span>
+<span class="nb">COPY </span><span class="p">-</span><span class="n">-from</span><span class="p">=</span><span class="n">build</span> <span class="n">target</span><span class="p">/*.</span><span class="n">war</span> <span class="p">/</span><span class="n">usr</span><span class="p">/</span><span class="n">local</span><span class="p">/</span><span class="n">tomcat</span><span class="p">/</span><span class="n">webapps</span><span class="p">/</span><span class="n">ROOT</span><span class="p">.</span><span class="n">war</span>
+
+<span class="p">$</span> <span class="n">docker</span> <span class="n">build</span> <span class="n">-t</span> <span class="n">demo</span><span class="p">:</span><span class="n">v1</span> <span class="p">.</span>
+<span class="p">$</span> <span class="n">docker</span> <span class="n">container</span> <span class="n">run</span> <span class="n">-d</span> <span class="n">-v</span> <span class="n">demo</span><span class="p">:</span><span class="n">v1</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">第一个</span> <span class="n">FROM</span> <span class="n">后边多了个</span> <span class="n">AS</span> <span class="n">关键字</span><span class="err">，</span><span class="n">可以给这个阶段起个名字</span>
+<span class="n">第二个</span> <span class="n">FROM</span> <span class="n">使用上面构建的</span> <span class="n">Tomcat</span> <span class="n">镜像</span><span class="err">，</span><span class="nb">COPY </span><span class="n">关键字增加了</span> <span class="err">—</span><span class="n">from</span> <span class="n">参数</span><span class="err">，</span><span class="n">用于拷贝某个阶段的文件到当前阶段</span><span class="err">。</span>
+</code></pre></div>
+<h1 id="buildpacks">五、新型容器镜像构建技术 BuildPacks<a class="headerlink" href="#buildpacks" title="Permanent link">&para;</a></h1>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      BurningMyself<a href='https://beian.miit.gov.cn/' target='_blank'>  蜀ICP备15033200号-1</a>
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        <div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/burningmyself" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://gitee.com/burningmyself" target="_blank" rel="noopener" title="gitee.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 488 512"><!--! Font Awesome Free 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M488 261.8C488 403.3 391.1 504 248 504 110.8 504 0 393.2 0 256S110.8 8 248 8c66.8 0 123 24.5 166.3 64.9l-67.5 64.9C258.5 52.6 94.3 116.6 94.3 256c0 86.5 69.1 156.6 153.7 156.6 98.2 0 135-70.4 140.8-106.9H248v-85.3h236.1c2.3 12.7 3.9 24.9 3.9 41.4z"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.2a6f1dda.min.js"></script>
+      
+        <script src="../../js/extra.js"></script>
+      
+        <script src="../../js/baidu-tongji.js"></script>
+      
+        <script src="https://www.googletagmanager.com/gtag/js?id=UA-155084439-1"></script>
+      
+        <script src="https://www.googletagmanager.com/gtag/js?id=UA-155132293-1"></script>
+      
+        <script src="../../js/google.js"></script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+      
+    
+  </body>
+</html>

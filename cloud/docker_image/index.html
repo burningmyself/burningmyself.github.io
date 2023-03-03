@@ -1,0 +1,3183 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content=".net,java,php,python,docker,web">
+      
+      
+        <meta name="author" content="BurningMyself">
+      
+      
+        <link rel="canonical" href="https://burningmyself.gitee.io/cloud/docker_image/">
+      
+      
+        <link rel="prev" href="../docker_nginx/">
+      
+      
+        <link rel="next" href="../docker_image_fast/">
+      
+      <link rel="icon" href="../../favicon.ico">
+      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.0.15">
+    
+    
+      
+        <title>Docker容器镜像 - BurningMyself</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.113286f1.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.a0c5b2b5.min.css">
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="" data-md-color-accent="">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#docker" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../.." title="BurningMyself" class="md-header__button md-logo" aria-label="BurningMyself" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            BurningMyself
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Docker容器镜像
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/burningmyself/burningmyself.github.io" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    burningmyself.github.io
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="BurningMyself" class="md-nav__button md-logo" aria-label="BurningMyself" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    BurningMyself
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/burningmyself/burningmyself.github.io" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    burningmyself.github.io
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        介绍
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+          技术博文
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          技术博文
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="0">
+          .NET
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_1_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2_1">
+          <span class="md-nav__icon md-icon"></span>
+          .NET
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../net/c_sharp/" class="md-nav__link">
+        C#新特性语法
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../net/c_docker/" class="md-nav__link">
+        .Net Core Docker 部署
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../net/c_sqlserver_nginx/" class="md-nav__link">
+        Docker 容器化部署 ASP.NET Core
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../net/c_core_safety/" class="md-nav__link">
+        让你的ASP.NET Core应用程序更安全
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../net/c_core_study_route/" class="md-nav__link">
+        ASP.NET Core开发者指南
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+          Java
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2_2">
+          <span class="md-nav__icon md-icon"></span>
+          Java
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../java/feature/" class="md-nav__link">
+        Java特性
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../java/load-class/" class="md-nav__link">
+        Java类加载
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../java/orm/" class="md-nav__link">
+        Orm的优缺点
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../java/bio-nio/" class="md-nav__link">
+        BIO与NIO
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../java/rocketmq/rmq-1/" class="md-nav__link">
+        RocketMq下载与安装
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../java/springAnnotation/" class="md-nav__link">
+        Spring常用注解
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../java/javavm/" class="md-nav__link">
+        Java 虚拟机
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../java/springdesign/" class="md-nav__link">
+        Spring 常用设计
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../java/spring-cloud/" class="md-nav__link">
+        Spring Cloud
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../java/java-simple/" class="md-nav__link">
+        Java simple
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../java/java-validator/" class="md-nav__link">
+        Java Validator
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../java/java-string/" class="md-nav__link">
+        Java String
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../java/java-utils/" class="md-nav__link">
+        Java Utils
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+          Python
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2_3">
+          <span class="md-nav__icon md-icon"></span>
+          Python
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../python/feature/" class="md-nav__link">
+        Python特性
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../python/str_joint/" class="md-nav__link">
+        Python字符拼接
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../python/syntax_rule/" class="md-nav__link">
+        Python语法技巧
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../python/fabric/" class="md-nav__link">
+        远程部署神器 Fabric
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_4" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_4" id="__nav_2_4_label" tabindex="0">
+          PHP
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_4_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2_4">
+          <span class="md-nav__icon md-icon"></span>
+          PHP
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../php/kj/" class="md-nav__link">
+        框架
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_5" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_5" id="__nav_2_5_label" tabindex="0">
+          Web
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_5_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2_5">
+          <span class="md-nav__icon md-icon"></span>
+          Web
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../web/es6/" class="md-nav__link">
+        es6语法
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../web/ali_js_style/" class="md-nav__link">
+        阿里js样式规范
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../web/node.js/" class="md-nav__link">
+        node.js文档
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../web/react/" class="md-nav__link">
+        React 开发者指南
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../dart/syntax/" class="md-nav__link">
+        Dart语法学习
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../web/react_interview/" class="md-nav__link">
+        React 面试
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../web/js_tool_method/" class="md-nav__link">
+        js 工具函数
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../web/vue_cp_react/" class="md-nav__link">
+        vue与react比较
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../web/javascript/" class="md-nav__link">
+        JavaScript 基础
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_6" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_6" id="__nav_2_6_label" tabindex="0">
+          SQL
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_6_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2_6">
+          <span class="md-nav__icon md-icon"></span>
+          SQL
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sql/mysql_yh/" class="md-nav__link">
+        MySQL优化
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sql/mysql_yh17/" class="md-nav__link">
+        MySQL优化
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sql/mysql_log/" class="md-nav__link">
+        MySQL日志
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sql/mysql_index/" class="md-nav__link">
+        MySQL索引
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sql/mysql_pxc/" class="md-nav__link">
+        MySQL PXC集群
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sql/mysql_use/" class="md-nav__link">
+        MySQL 数据库应用
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sql/mysql_backups/" class="md-nav__link">
+        MySql 备份
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sql/sql_server_master/" class="md-nav__link">
+        Sql Server 主从备份
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sql/data_split/" class="md-nav__link">
+        数据库之互联网常用分库分表方案
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sql/mybatis/" class="md-nav__link">
+        Mybatis使用心德
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_7" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_7" id="__nav_2_7_label" tabindex="0">
+          Linux
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_7_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2_7">
+          <span class="md-nav__icon md-icon"></span>
+          Linux
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linux/often/" class="md-nav__link">
+        常用命令
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linux/ope/" class="md-nav__link">
+        实用的Linux 命令
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_8" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_8" id="__nav_2_8_label" tabindex="0">
+          Docker
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_8_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2_8">
+          <span class="md-nav__icon md-icon"></span>
+          Docker
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docker/docker/" class="md-nav__link">
+        Docker全科
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docker/docker-compose/" class="md-nav__link">
+        docker和docker-compose配置常用环境
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docker/docker-jenkins/" class="md-nav__link">
+        Docker部署Jenkins
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docker/docker-phabricator/" class="md-nav__link">
+        Docker部署Phabricator
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_9" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_9" id="__nav_2_9_label" tabindex="0">
+          Tool
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_9_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2_9">
+          <span class="md-nav__icon md-icon"></span>
+          Tool
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tool/git/" class="md-nav__link">
+        Git
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tool/gitusual/" class="md-nav__link">
+        Git动画展示
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tool/gitquestion/" class="md-nav__link">
+        Git问题处理
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tool/gitflow/" class="md-nav__link">
+        GitFlow
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tool/gitbook/" class="md-nav__link">
+        GitBook
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tool/gitcmr/" class="md-nav__link">
+        Git提交日志规范
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tool/markdown/" class="md-nav__link">
+        Markdown
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tool/cicd/" class="md-nav__link">
+        CI/CD
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tool/mkdocs/" class="md-nav__link">
+        mkdocs简单使用
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tool/gitstudy/" class="md-nav__link">
+        Git的黑魔法
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tool/minio/" class="md-nav__link">
+        MinIO 搭建使用
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tool/cat-monitoring/" class="md-nav__link">
+        Cat分布式监控
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+          微服务
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          微服务
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../micro/fbs-lock/" class="md-nav__link">
+        分布式锁
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../micro/design/" class="md-nav__link">
+        微服务设计
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../micro/distrimsg/" class="md-nav__link">
+        分布式系统与消息的投递
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../micro/ddd/" class="md-nav__link">
+        基于DDD的微服务设计和开发实战
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../micro/kafka/" class="md-nav__link">
+        Kafka架构原理
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../micro/redis-cluster/" class="md-nav__link">
+        Redis Cluster原理
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../micro/spring-cloud-micro/" class="md-nav__link">
+        分布式架构
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+          经验分析
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          经验分析
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../exp/devops/" class="md-nav__link">
+        DevOps
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../exp/micro-service/" class="md-nav__link">
+        Micro-Service
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../exp/raft-gossip/" class="md-nav__link">
+        Raft算法和Gossip协议
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../exp/cl/" class="md-nav__link">
+        集群和负载均衡
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../exp/ai/" class="md-nav__link">
+        人工智能
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../exp/code-principle/" class="md-nav__link">
+        代码原则
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../exp/techbig/" class="md-nav__link">
+        如何成为技术大牛
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../exp/learnweetout/" class="md-nav__link">
+        程序员如何技术成长
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../exp/pt/" class="md-nav__link">
+        产品与技术
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../exp/four_deep_learning/" class="md-nav__link">
+        深度学习框架
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../exp/tl/" class="md-nav__link">
+        在阿里做了5年技术Leader，我总结出这些套路！
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../exp/cto/" class="md-nav__link">
+        CTO 技能图谱
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+          云架构
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          云架构
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../native/" class="md-nav__link">
+        云原生
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../virtual/" class="md-nav__link">
+        虚拟化技术
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../compute/" class="md-nav__link">
+        云计算
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../apprelease/" class="md-nav__link">
+        应用部署容器化演进
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../containerlinux/" class="md-nav__link">
+        容器技术所涉及Linux内核关键技术
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../docker_native/" class="md-nav__link">
+        容器管理工具Docker生态架构及部署
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../docker_nginx/" class="md-nav__link">
+        使用容器运行Nginx应用及Docker命令
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Docker容器镜像
+      </a>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../docker_image_fast/" class="md-nav__link">
+        Docker容器镜像加速器及本地容器镜像仓库
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../docker_container_enterprice/" class="md-nav__link">
+        Docker容器化部署企业级应用集群
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../docker_file/" class="md-nav__link">
+        Dockerfile精讲及新型容器镜像构建技术
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../compute/" class="md-nav__link">
+        云计算
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../compute/" class="md-nav__link">
+        云计算
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../compute/" class="md-nav__link">
+        云计算
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../compute/" class="md-nav__link">
+        云计算
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../compute/" class="md-nav__link">
+        云计算
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../compute/" class="md-nav__link">
+        云计算
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../compute/" class="md-nav__link">
+        云计算
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../compute/" class="md-nav__link">
+        云计算
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../compute/" class="md-nav__link">
+        云计算
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../compute/" class="md-nav__link">
+        云计算
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+          构架
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_6">
+          <span class="md-nav__icon md-icon"></span>
+          构架
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../framework/split/" class="md-nav__link">
+        构架拆分
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../framework/fgb/" class="md-nav__link">
+        分布式、高并发、多线程
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../framework/agility/" class="md-nav__link">
+        如何理解敏捷开发
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../framework/fwork/" class="md-nav__link">
+        走向架构师必备的技能
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../framework/data-middle/" class="md-nav__link">
+        数据中台的思考与总结
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../framework/algorithm-ten/" class="md-nav__link">
+        必学的 10 大算法
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+          情感
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_7">
+          <span class="md-nav__icon md-icon"></span>
+          情感
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../emotion/eq/" class="md-nav__link">
+        情商
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../emotion/workheard/" class="md-nav__link">
+        工作心得
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../emotion/lookbook/" class="md-nav__link">
+        看书
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../emotion/fmf/" class="md-nav__link">
+        4种男朋友
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../emotion/notheart/" class="md-nav__link">
+        不上心
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../emotion/selfdiscipline/" class="md-nav__link">
+        自律
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../emotion/notlike/" class="md-nav__link">
+        喜欢与不喜欢
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../emotion/latemarry/" class="md-nav__link">
+        晚婚
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../emotion/understand/" class="md-nav__link">
+        追女生要明白这些事
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../emotion/backup/" class="md-nav__link">
+        备胎
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../emotion/chase/" class="md-nav__link">
+        为什么追不到她
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../emotion/livefail/" class="md-nav__link">
+        为什么活着失败
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../emotion/emotion/" class="md-nav__link">
+        情绪管理
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../emotion/abolish/" class="md-nav__link">
+        废掉的三个迹象
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../emotion/uptime/" class="md-nav__link">
+        余生，好好珍惜
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../emotion/losecome/" class="md-nav__link">
+        所有的失去，都会以另一种方式归来
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../emotion/threeheart/" class="md-nav__link">
+        人生有这三种好心态
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../emotion/onelike/" class="md-nav__link">
+        一个感情真相
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../emotion/notruth/" class="md-nav__link">
+        情商与道理
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../emotion/smf/" class="md-nav__link">
+        六种男人远离
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../emotion/select/" class="md-nav__link">
+        决定接下来人生归属的，不是努力，而是选择
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../emotion/nolike/" class="md-nav__link">
+        被你拉黑的那个人，你一定很喜欢吧
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../emotion/onepath/" class="md-nav__link">
+        余生，学会一个人走，不管有没有人陪
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../emotion/twopath/" class="md-nav__link">
+        往后余生还很精彩，别被熬夜拖垮了
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../emotion/lifetime/" class="md-nav__link">
+        心态好的人，一辈子都好
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../emotion/hearttoheart/" class="md-nav__link">
+        将心比心，方得人心
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../emotion/ttt/" class="md-nav__link">
+        别睡太晚，别爱太满，别要太多
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../emotion/profess/" class="md-nav__link">
+        表白
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+  
+
+
+<h1 id="docker">Docker容器镜像<a class="headerlink" href="#docker" title="Permanent link">&para;</a></h1>
+<h1 id="docker_1">一、Docker容器镜像操作<a class="headerlink" href="#docker_1" title="Permanent link">&para;</a></h1>
+<h2 id="21">2.1 查看本地容器镜像<a class="headerlink" href="#21" title="Permanent link">&para;</a></h2>
+<h3 id="211_docker_images">2.1.1 使用docker images命令查看<a class="headerlink" href="#211_docker_images" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c"># docker images</span>
+<span class="n">REPOSITORY</span>   <span class="n">TAG</span>       <span class="n">IMAGE</span> <span class="n">ID</span>       <span class="n">CREATED</span>        <span class="n">SIZE</span>
+<span class="n">bash</span>         <span class="n">latest</span>    <span class="n">5557e073f11c</span>   <span class="n">2</span> <span class="n">weeks</span> <span class="n">ago</span>    <span class="n">13MB</span>
+<span class="n">nginx</span>        <span class="n">latest</span>    <span class="n">605c77e624dd</span>   <span class="n">3</span> <span class="n">weeks</span> <span class="n">ago</span>    <span class="n">141MB</span>
+<span class="n">centos</span>       <span class="n">latest</span>    <span class="n">5d0da3dc9764</span>   <span class="n">4</span> <span class="n">months</span> <span class="n">ago</span>   <span class="n">231MB</span>
+</code></pre></div>
+<h3 id="212_docker_image">2.1.2 使用docker image命令查看<a class="headerlink" href="#212_docker_image" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c"># docker image list</span>
+<span class="n">REPOSITORY</span>   <span class="n">TAG</span>       <span class="n">IMAGE</span> <span class="n">ID</span>       <span class="n">CREATED</span>        <span class="n">SIZE</span>
+<span class="n">bash</span>         <span class="n">latest</span>    <span class="n">5557e073f11c</span>   <span class="n">2</span> <span class="n">weeks</span> <span class="n">ago</span>    <span class="n">13MB</span>
+<span class="n">nginx</span>        <span class="n">latest</span>    <span class="n">605c77e624dd</span>   <span class="n">3</span> <span class="n">weeks</span> <span class="n">ago</span>    <span class="n">141MB</span>
+<span class="n">centos</span>       <span class="n">latest</span>    <span class="n">5d0da3dc9764</span>   <span class="n">4</span> <span class="n">months</span> <span class="n">ago</span>   <span class="n">231MB</span>
+</code></pre></div>
+<h3 id="213_docker">2.1.3 查看docker容器镜像本地存储位置<a class="headerlink" href="#213_docker" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>考虑到docker容器镜像会占用本地存储空间，建议搭建其它存储系统挂载到本地以便解决占用大量本地存储的问题。</p>
+</blockquote>
+<div class="highlight"><pre><span></span><code><span class="c"># ls /var/lib/docker</span>
+<span class="n">buildkit</span>  <span class="n">containers</span>  <span class="n">image</span>  <span class="n">network</span>  <span class="n">overlay2</span>  <span class="n">plugins</span>  <span class="n">runtimes</span>  <span class="n">swarm</span>  <span class="n">tmp</span>  <span class="n">trust</span>  <span class="n">volumes</span>
+</code></pre></div>
+<h2 id="22_docker_hub">2.2 搜索Docker Hub容器镜像<a class="headerlink" href="#22_docker_hub" title="Permanent link">&para;</a></h2>
+<h3 id="221">2.2.1 命令行搜索<a class="headerlink" href="#221" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c"># docker search centos</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">输出</span>
+<span class="n">NAME</span>                              <span class="n">DESCRIPTION</span>                                     <span class="n">STARS</span>     <span class="n">OFFICIAL</span>   <span class="n">AUTOMATED</span>
+<span class="n">centos</span>                            <span class="n">The</span> <span class="n">official</span> <span class="n">build</span> <span class="n">of</span> <span class="n">CentOS</span><span class="p">.</span>                   <span class="n">6987</span>      <span class="no">[OK]</span>
+<span class="n">ansible</span><span class="p">/</span><span class="n">centos7-ansible</span>           <span class="n">Ansible</span> <span class="n">on</span> <span class="n">Centos7</span>                              <span class="n">135</span>                  <span class="no">[OK]</span>
+<span class="n">consol</span><span class="p">/</span><span class="n">centos-xfce-vnc</span>            <span class="n">Centos</span> <span class="n">container</span> <span class="n">with</span> <span class="s2">&quot;headless&quot;</span> <span class="n">VNC</span> <span class="n">session</span><span class="err">…</span>   <span class="n">135</span>                  <span class="no">[OK]</span>
+<span class="n">jdeathe</span><span class="p">/</span><span class="n">centos-ssh</span>                <span class="n">OpenSSH</span> <span class="p">/</span> <span class="n">Supervisor</span> <span class="p">/</span> <span class="n">EPEL</span><span class="p">/</span><span class="n">IUS</span><span class="p">/</span><span class="n">SCL</span> <span class="n">Repos</span> <span class="p">-</span> <span class="err">…</span>   <span class="n">121</span>                  <span class="no">[OK]</span>
+</code></pre></div>
+<h3 id="222_docker_hub_web">2.2.2 Docker Hub Web界面搜索<a class="headerlink" href="#222_docker_hub_web" title="Permanent link">&para;</a></h3>
+<p><img alt="image-20220124162022990" src="../../img/docker_image/image-20220124162022990.png" /></p>
+<p><img alt="image-20220124162116338" src="../../img/docker_image/image-20220124162116338.png" /></p>
+<p><img alt="image-20220124162200273" src="../../img/docker_image/image-20220124162200273.png" /></p>
+<p><img alt="image-20220124162312918" src="../../img/docker_image/image-20220124162312918.png" /></p>
+<h2 id="23_docker">2.3 Docker 容器镜像下载<a class="headerlink" href="#23_docker" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><span class="c"># docker pull centos</span>
+</code></pre></div>
+<h2 id="24_docker">2.4 Docker容器镜像删除方法<a class="headerlink" href="#24_docker" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><span class="c"># docker images</span>
+<span class="n">REPOSITORY</span>   <span class="n">TAG</span>       <span class="n">IMAGE</span> <span class="n">ID</span>       <span class="n">CREATED</span>        <span class="n">SIZE</span>
+<span class="n">bash</span>         <span class="n">latest</span>    <span class="n">5557e073f11c</span>   <span class="n">2</span> <span class="n">weeks</span> <span class="n">ago</span>    <span class="n">13MB</span>
+<span class="n">nginx</span>        <span class="n">latest</span>    <span class="n">605c77e624dd</span>   <span class="n">3</span> <span class="n">weeks</span> <span class="n">ago</span>    <span class="n">141MB</span>
+<span class="n">centos</span>       <span class="n">latest</span>    <span class="n">5d0da3dc9764</span>   <span class="n">4</span> <span class="n">months</span> <span class="n">ago</span>   <span class="n">231MB</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c"># docker rmi centos</span>
+<span class="n">Untagged</span><span class="p">:</span> <span class="n">centos</span><span class="p">:</span><span class="n">latest</span>
+<span class="n">Untagged</span><span class="p">:</span> <span class="n">centos</span><span class="nv">@sha256</span><span class="p">:</span><span class="n">a27fd8080b517143cbbbab9dfb7c8571c40d67d534bbdee55bd6c473f432b177</span>
+<span class="n">Deleted</span><span class="p">:</span> <span class="n">sha256</span><span class="p">:</span><span class="n">5d0da3dc976460b72c77d94c8a1ad043720b0416bfc16c52c45d4847e53fadb6</span>
+<span class="n">Deleted</span><span class="p">:</span> <span class="n">sha256</span><span class="p">:</span><span class="n">74ddd0ec08fa43d09f32636ba91a0a3053b02cb4627c35051aff89f853606b59</span>
+</code></pre></div>
+<p>或</p>
+<div class="highlight"><pre><span></span><code><span class="c"># docker images</span>
+<span class="n">REPOSITORY</span>   <span class="n">TAG</span>       <span class="n">IMAGE</span> <span class="n">ID</span>       <span class="n">CREATED</span>        <span class="n">SIZE</span>
+<span class="n">centos</span>       <span class="n">latest</span>    <span class="n">5d0da3dc9764</span>   <span class="n">4</span> <span class="n">months</span> <span class="n">ago</span>   <span class="n">231MB</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c"># docker rmi 5d0da3dc9764</span>
+</code></pre></div>
+<h1 id="docker_2">二、Docker容器镜像介绍<a class="headerlink" href="#docker_2" title="Permanent link">&para;</a></h1>
+<h2 id="21_docker_image">2.1 Docker Image<a class="headerlink" href="#21_docker_image" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Docker 镜像是只读的容器模板，是Docker容器基础</li>
+<li>为Docker容器提供了静态文件系统运行环境（rootfs）</li>
+<li>是容器的静止状态</li>
+<li>容器是镜像的运行状态</li>
+</ul>
+<h2 id="22">2.2 联合文件系统<a class="headerlink" href="#22" title="Permanent link">&para;</a></h2>
+<h3 id="221_1">2.2.1 联合文件系统定义<a class="headerlink" href="#221_1" title="Permanent link">&para;</a></h3>
+<ul>
+<li>联合文件系统(union filesystem)</li>
+<li>联合文件系统是实现联合挂载技术的文件系统</li>
+<li>联合挂载技术可以实现在一个挂载点同时挂载多个文件系统，将挂载点的原目录与被挂载内容进行整合，使得最终可见的文件系统包含整合之后的各层文件和目录</li>
+</ul>
+<h3 id="222">2.2.2 图解<a class="headerlink" href="#222" title="Permanent link">&para;</a></h3>
+<p><img alt="image-20220125080435098" src="../../img/docker_image/image-20220125080435098.png" /></p>
+<h2 id="23_docker_overlay2">2.3 Docker Overlay2<a class="headerlink" href="#23_docker_overlay2" title="Permanent link">&para;</a></h2>
+<p>容器文件系统有多种存储驱动实现方式：aufs，devicemapper，overlay，overlay2 等，本次以overlay2为例进行说明。</p>
+<h3 id="231">2.3.1 概念<a class="headerlink" href="#231" title="Permanent link">&para;</a></h3>
+<ul>
+<li>registry/repository： registry 是 repository 的集合，repository 是镜像的集合。</li>
+<li>image：image 是存储镜像相关的元数据，包括镜像的架构，镜像默认配置信息，镜像的容器配置信息等等。它是“逻辑”上的概念，并无物理上的镜像文件与之对应。</li>
+<li>layer：layer(镜像层) 组成了镜像，单个 layer 可以被多个镜像共享。</li>
+</ul>
+<p><img alt="image-20220125082226414" src="../../img/docker_image/image-20220125082226414.png" /></p>
+<h3 id="232_docker_host">2.3.2 查看Docker Host存储驱动方式<a class="headerlink" href="#232_docker_host" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c"># docker info | grep overlay</span>
+ <span class="n">Storage</span> <span class="n">Driver</span><span class="p">:</span> <span class="n">overlay2</span>
+</code></pre></div>
+<h3 id="233_images">2.3.3 了解images分层<a class="headerlink" href="#233_images" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c"># docker pull nginx</span>
+<span class="n">Using</span> <span class="k">default</span> <span class="n">tag</span><span class="p">:</span> <span class="n">latest</span>
+<span class="n">latest</span><span class="p">:</span> <span class="n">Pulling</span> <span class="n">from</span> <span class="n">library</span><span class="p">/</span><span class="n">nginx</span>
+<span class="n">a2abf6c4d29d</span><span class="p">:</span> <span class="n">Pull</span> <span class="n">complete</span>
+<span class="n">a9edb18cadd1</span><span class="p">:</span> <span class="n">Pull</span> <span class="n">complete</span>
+<span class="n">589b7251471a</span><span class="p">:</span> <span class="n">Pull</span> <span class="n">complete</span>
+<span class="n">186b1aaa4aa6</span><span class="p">:</span> <span class="n">Pull</span> <span class="n">complete</span>
+<span class="n">b4df32aa5a72</span><span class="p">:</span> <span class="n">Pull</span> <span class="n">complete</span>
+<span class="n">a0bcbecc962e</span><span class="p">:</span> <span class="n">Pull</span> <span class="n">complete</span>
+<span class="n">Digest</span><span class="p">:</span> <span class="n">sha256</span><span class="p">:</span><span class="n">0d17b565c37bcbd895e9d92315a05c1c3c9a29f762b011a10c54a66cd53c9b31</span>
+<span class="n">Status</span><span class="p">:</span> <span class="n">Downloaded</span> <span class="n">newer</span> <span class="n">image</span> <span class="k">for</span> <span class="n">nginx</span><span class="p">:</span><span class="n">latest</span>
+<span class="n">docker</span><span class="p">.</span><span class="n">io</span><span class="p">/</span><span class="n">library</span><span class="p">/</span><span class="n">nginx</span><span class="p">:</span><span class="n">latest</span>
+</code></pre></div>
+<p>可以看到上述下载的镜像分为6层，如何找到这6层存储在Docker Host哪个位置呢？</p>
+<p>首先查看nginx镜像</p>
+<div class="highlight"><pre><span></span><code><span class="c"># docker images</span>
+<span class="n">REPOSITORY</span>   <span class="n">TAG</span>       <span class="n">IMAGE</span> <span class="n">ID</span>       <span class="n">CREATED</span>        <span class="n">SIZE</span>
+<span class="n">nginx</span>        <span class="n">latest</span>    <span class="n">605c77e624dd</span>   <span class="n">3</span> <span class="n">weeks</span> <span class="n">ago</span>    <span class="n">141MB</span>
+</code></pre></div>
+<p>通过其Image ID 605c77e624dd 就可以找到存储位置</p>
+<div class="highlight"><pre><span></span><code><span class="c"># ls /var/lib/docker/image/overlay2/</span>
+<span class="n">distribution</span>  <span class="n">imagedb</span>  <span class="n">layerdb</span>  <span class="n">repositories</span><span class="p">.</span><span class="n">json</span>
+</code></pre></div>
+<p>这个目录是查找的入口，非常重要。它存储了镜像管理的元数据。</p>
+<ul>
+<li>repositories.json 记录了 repo 与镜像 ID 的映射关系</li>
+<li>imagedb 记录了镜像架构，操作系统，构建镜像的容器 ID 和配置以及 rootfs 等信息</li>
+<li>layerdb 记录了每层镜像层的元数据。</li>
+</ul>
+<p>通过短 ID 查找 repositories.json 文件，找到镜像 nginx 的长 ID，通过长 ID 在 imagedb 中找到该镜像的元数据：</p>
+<div class="highlight"><pre><span></span><code><span class="c"># cat /var/lib/docker/image/overlay2/repositories.json | grep 605c77e624dd</span>
+<span class="p">{</span><span class="s2">&quot;Repositories&quot;</span><span class="p">:</span><span class="s2">&quot;nginx&quot;</span><span class="p">:{</span><span class="s2">&quot;nginx:latest&quot;</span><span class="p">:</span><span class="s2">&quot;sha256:605c77e624ddb75e6110f997c58876baa13f8754486b461117934b24a9dc3a85&quot;</span><span class="p">,</span><span class="s2">&quot;nginx@sha256:0d17b565c37bcbd895e9d92315a05c1c3c9a29f762b011a10c54a66cd53c9b31&quot;</span><span class="p">:</span><span class="s2">&quot;sha256:605c77e624ddb75e6110f997c58876baa13f8754486b461117934b24a9dc3a85&quot;</span><span class="p">}}}}</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c"># cat /var/lib/docker/image/overlay2/imagedb/content/sha256/605c77e624ddb75e6110f997c58876baa13f8754486b461117934b24a9dc3a85</span>
+<span class="p">......</span>
+<span class="s2">&quot;os&quot;</span><span class="p">:</span><span class="s2">&quot;linux&quot;</span><span class="p">,</span><span class="s2">&quot;rootfs&quot;</span><span class="p">:{</span><span class="s2">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;layers&quot;</span><span class="p">,</span><span class="s2">&quot;diff_ids&quot;</span><span class="p">:[</span><span class="s2">&quot;sha256:2edcec3590a4ec7f40cf0743c15d78fb39d8326bc029073b41ef9727da6c851f&quot;</span><span class="p">,</span><span class="s2">&quot;sha256:e379e8aedd4d72bb4c529a4ca07a4e4d230b5a1d3f7a61bc80179e8f02421ad8&quot;</span><span class="p">,</span><span class="s2">&quot;sha256:b8d6e692a25e11b0d32c5c3dd544b71b1085ddc1fddad08e68cbd7fda7f70221&quot;</span><span class="p">,</span><span class="s2">&quot;sha256:f1db227348d0a5e0b99b15a096d930d1a69db7474a1847acbc31f05e4ef8df8c&quot;</span><span class="p">,</span><span class="s2">&quot;sha256:32ce5f6a5106cc637d09a98289782edf47c32cb082dc475dd47cbf19a4f866da&quot;</span><span class="p">,</span><span class="s2">&quot;sha256:d874fd2bc83bb3322b566df739681fbd2248c58d3369cb25908d68e7ed6040a6&quot;</span><span class="p">]}}</span>
+</code></pre></div>
+<p>这里仅保留我们想要的元数据 rootfs。在 rootfs 中看到 layers 有6层，这6层即对应镜像的6层镜像层。并且，自上而下分别映射到容器的底层到顶层。找到了镜像的6层，接下来的问题是每层的文件内容在哪里呢？</p>
+<p>layerdb 元数据会给我们想要的信息，通过底层 diff-id: 2edcec3590a4ec7f40cf0743c15d78fb39d8326bc029073b41ef9727da6c851f 我们查到最底层镜像层的 cache_id，通过 cache_id 即可查找到镜像层的文件内容：</p>
+<div class="highlight"><pre><span></span><code><span class="c"># ls /var/lib/docker/image/overlay2/layerdb/sha256/2edcec3590a4ec7f40cf0743c15d78fb39d8326bc029073b41ef9727da6c851f</span>
+<span class="n">cache-id</span>  <span class="nb">diff </span> <span class="n">size</span>  <span class="n">tar-split</span><span class="p">.</span><span class="n">json</span><span class="p">.</span><span class="n">gz</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c"># cat /var/lib/docker/image/overlay2/layerdb/sha256/2edcec3590a4ec7f40cf0743c15d78fb39d8326bc029073b41ef9727da6c851f/cache-id</span>
+<span class="n">85c4c5ecdac6c0d197f899dac227b9d493911a9a5820eac501bb5e9ae361f4c7</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c"># cat /var/lib/docker/image/overlay2/layerdb/sha256/2edcec3590a4ec7f40cf0743c15d78fb39d8326bc029073b41ef9727da6c851f/diff</span>
+<span class="n">sha256</span><span class="p">:</span><span class="n">2edcec3590a4ec7f40cf0743c15d78fb39d8326bc029073b41ef9727da6c851f</span>
+</code></pre></div>
+<p>使用 cacheID 查找文件内容</p>
+<div class="highlight"><pre><span></span><code><span class="c"># ls /var/lib/docker/overlay2/85c4c5ecdac6c0d197f899dac227b9d493911a9a5820eac501bb5e9ae361f4c7</span>
+<span class="n">committed</span>  <span class="nb">diff </span> <span class="n">link</span>
+<span class="c"># ls /var/lib/docker/overlay2/85c4c5ecdac6c0d197f899dac227b9d493911a9a5820eac501bb5e9ae361f4c7/diff</span>
+<span class="n">bin</span>   <span class="n">dev</span>  <span class="n">home</span>  <span class="n">lib64</span>  <span class="n">mnt</span>  <span class="n">proc</span>  <span class="n">run</span>   <span class="n">srv</span>  <span class="n">tmp</span>  <span class="n">var</span>
+<span class="n">boot</span>  <span class="n">etc</span>  <span class="n">lib</span>   <span class="n">media</span>  <span class="n">opt</span>  <span class="n">root</span>  <span class="n">sbin</span>  <span class="n">sys</span>  <span class="n">usr</span>
+</code></pre></div>
+<p>上示例中，镜像元数据和镜像层内容是分开存储的。因此通过 cache-id 我们需要到 /var/lib/docker/overlay2 目录下查看镜像层内容，它就存在 diff 目录下，其中 link 存储的是镜像层对应的短 ID，后面会看到它的用场。</p>
+<p>找到了镜像层的最底层，接着查找镜像层的“中间层”，发现在 layerdb 目录下没有 diff-id e379e8aedd4d72bb4c529a4ca07a4e4d230b5a1d3f7a61bc80179e8f02421ad8的镜像层：</p>
+<div class="highlight"><pre><span></span><code><span class="c"># ls /var/lib/docker/image/overlay2/layerdb/sha256/e379e8aedd4d72bb4c529a4ca07a4e4d230b5a1d3f7a61bc80179e8f02421ad8</span>
+<span class="n">ls</span><span class="p">:</span> <span class="n">无法访问</span><span class="p">/</span><span class="n">var</span><span class="p">/</span><span class="n">lib</span><span class="p">/</span><span class="n">docker</span><span class="p">/</span><span class="n">image</span><span class="p">/</span><span class="n">overlay2</span><span class="p">/</span><span class="n">layerdb</span><span class="p">/</span><span class="n">sha256</span><span class="p">/</span><span class="n">e379e8aedd4d72bb4c529a4ca07a4e4d230b5a1d3f7a61bc80179e8f02421ad8</span><span class="p">:</span> <span class="n">没有那个文件或目录</span>
+</code></pre></div>
+<p>这是因为 docker 引入了内容寻址机制，该机制会根据文件内容来索引镜像和镜像层。docker 利用 rootfs 中的 diff_id 计算出内容寻址的 chainID，通过 chainID 获取 layer 相关信息，最终索引到镜像层文件内容。</p>
+<p>对于最底层镜像层其 diff_id 即是 chainID。因此我们可以查找到它的文件内容。除最底层外，chainID 需通过公式 chainID(n) = SHA256(chain(n-1) diffID(n)) 计算得到，计算“中间层” chainID：</p>
+<div class="highlight"><pre><span></span><code><span class="c"># echo -n &quot;sha256:2edcec3590a4ec7f40cf0743c15d78fb39d8326bc029073b41ef9727da6c851f sha256:e379e8aedd4d72bb4c529a4ca07a4e4d230b5a1d3f7a61bc80179e8f02421ad8&quot; | sha256sum -</span>
+<span class="n">780238f18c540007376dd5e904f583896a69fe620876cabc06977a3af4ba4fb5</span>  <span class="p">-</span>
+</code></pre></div>
+<p>根据 “中间层” chainID 查找文件内容：</p>
+<div class="highlight"><pre><span></span><code><span class="c"># ls /var/lib/docker/image/overlay2/layerdb/sha256/780238f18c540007376dd5e904f583896a69fe620876cabc06977a3af4ba4fb5</span>
+<span class="n">cache-id</span>  <span class="nb">diff </span> <span class="n">parent</span>  <span class="n">size</span>  <span class="n">tar-split</span><span class="p">.</span><span class="n">json</span><span class="p">.</span><span class="n">gz</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c"># cat /var/lib/docker/image/overlay2/layerdb/sha256/780238f18c540007376dd5e904f583896a69fe620876cabc06977a3af4ba4fb5/cache-id</span>
+<span class="n">57e1f1b11e26f748161b7fccbf2ba6b24c2f98dc8a821729f0be215ad267498c</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c"># cat /var/lib/docker/image/overlay2/layerdb/sha256/780238f18c540007376dd5e904f583896a69fe620876cabc06977a3af4ba4fb5/diff</span>
+<span class="n">sha256</span><span class="p">:</span><span class="n">e379e8aedd4d72bb4c529a4ca07a4e4d230b5a1d3f7a61bc80179e8f02421ad8</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c"># cat /var/lib/docker/image/overlay2/layerdb/sha256/780238f18c540007376dd5e904f583896a69fe620876cabc06977a3af4ba4fb5/parent</span>
+<span class="n">sha256</span><span class="p">:</span><span class="n">2edcec3590a4ec7f40cf0743c15d78fb39d8326bc029073b41ef9727da6c851f</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">镜像层文件内容</span>
+<span class="c"># ls /var/lib/docker/overlay2/57e1f1b11e26f748161b7fccbf2ba6b24c2f98dc8a821729f0be215ad267498c</span>
+<span class="n">committed</span>  <span class="nb">diff </span> <span class="n">link</span>  <span class="n">lower</span>  <span class="n">work</span>
+<span class="c"># ls /var/lib/docker/overlay2/57e1f1b11e26f748161b7fccbf2ba6b24c2f98dc8a821729f0be215ad267498c/diff/</span>
+<span class="n">docker-entrypoint</span><span class="p">.</span><span class="n">d</span>  <span class="n">etc</span>  <span class="n">lib</span>  <span class="n">tmp</span>  <span class="n">usr</span>  <span class="n">var</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">镜像层文件内容短</span> <span class="n">ID</span>
+<span class="c"># cat /var/lib/docker/overlay2/57e1f1b11e26f748161b7fccbf2ba6b24c2f98dc8a821729f0be215ad267498c/link</span>
+<span class="n">24GM2IZVPTUROAG7AWJO5ZWE6B</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="err">“</span><span class="n">父</span><span class="err">”</span><span class="n">镜像层文件内容短</span> <span class="n">ID</span>
+<span class="c"># cat /var/lib/docker/overlay2/57e1f1b11e26f748161b7fccbf2ba6b24c2f98dc8a821729f0be215ad267498c/lower</span>
+<span class="n">l</span><span class="p">/</span><span class="n">SICZO4QNVZEVOIJ4HDXVDKNYA2</span>
+</code></pre></div>
+<p>找到最底层文件内容和“中间层”文件内容，再去找最顶层文件内容就变的不难了</p>
+<h2 id="24_docker_1">2.4 Docker容器与镜像<a class="headerlink" href="#24_docker_1" title="Permanent link">&para;</a></h2>
+<p>通过 docker run 命令启动一个镜像为 nginx的容器：</p>
+<div class="highlight"><pre><span></span><code><span class="c"># docker run -d nginx:latest</span>
+<span class="n">3272831107a3499afe8160b0cd423e2ac4223522f1995b7be3504a1d3d272878</span>
+<span class="c"># docker ps | grep nginx</span>
+<span class="n">3272831107a3</span>   <span class="n">nginx</span><span class="p">:</span><span class="n">latest</span>   <span class="s2">&quot;/docker-entrypoint.…&quot;</span>   <span class="n">11</span> <span class="n">seconds</span> <span class="n">ago</span>   <span class="n">Up</span> <span class="n">9</span> <span class="n">seconds</span>   <span class="n">80</span><span class="p">/</span><span class="n">tcp</span>    <span class="n">angry_beaver</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c"># mount | grep overlay</span>
+<span class="n">overlay</span> <span class="n">on</span> <span class="p">/</span><span class="n">var</span><span class="p">/</span><span class="n">lib</span><span class="p">/</span><span class="n">docker</span><span class="p">/</span><span class="n">overlay2</span><span class="p">/</span><span class="n">b3f5c8b42ac055c715216e376cfe44571f618a876f481533ec1434aa0bc4f8ed</span><span class="p">/</span><span class="n">merged</span> <span class="nb">type </span><span class="n">overlay</span> <span class="p">(</span><span class="n">rw</span><span class="p">,</span><span class="n">relatime</span><span class="p">,</span><span class="n">seclabel</span><span class="p">,</span><span class="n">lowerdir</span><span class="p">=/</span><span class="n">var</span><span class="p">/</span><span class="n">lib</span><span class="p">/</span><span class="n">docker</span><span class="p">/</span><span class="n">overlay2</span><span class="p">/</span><span class="n">l</span><span class="p">/</span><span class="n">MS2X66BYF6UZ7EKUWMZJKCF4HO</span><span class="p">:/</span><span class="n">var</span><span class="p">/</span><span class="n">lib</span><span class="p">/</span><span class="n">docker</span><span class="p">/</span><span class="n">overlay2</span><span class="p">/</span><span class="n">l</span><span class="p">/</span><span class="n">ODJROQUGY3WQMOGQ3BLYZGIAG4</span><span class="p">:/</span><span class="n">var</span><span class="p">/</span><span class="n">lib</span><span class="p">/</span><span class="n">docker</span><span class="p">/</span><span class="n">overlay2</span><span class="p">/</span><span class="n">l</span><span class="p">/</span><span class="n">Q5LOBFJRH5M7M5CMSWW5L4VYOY</span><span class="p">:/</span><span class="n">var</span><span class="p">/</span><span class="n">lib</span><span class="p">/</span><span class="n">docker</span><span class="p">/</span><span class="n">overlay2</span><span class="p">/</span><span class="n">l</span><span class="p">/</span><span class="n">ZR35FN2E3WEARZV4HLRU373FT7</span><span class="p">:/</span><span class="n">var</span><span class="p">/</span><span class="n">lib</span><span class="p">/</span><span class="n">docker</span><span class="p">/</span><span class="n">overlay2</span><span class="p">/</span><span class="n">l</span><span class="p">/</span><span class="n">NSM2PTAT6TIT2H6G3HFNGZJH5N</span><span class="p">:/</span><span class="n">var</span><span class="p">/</span><span class="n">lib</span><span class="p">/</span><span class="n">docker</span><span class="p">/</span><span class="n">overlay2</span><span class="p">/</span><span class="n">l</span><span class="p">/</span><span class="n">24GM2IZVPTUROAG7AWJO5ZWE6B</span><span class="p">:/</span><span class="n">var</span><span class="p">/</span><span class="n">lib</span><span class="p">/</span><span class="n">docker</span><span class="p">/</span><span class="n">overlay2</span><span class="p">/</span><span class="n">l</span><span class="p">/</span><span class="n">SICZO4QNVZEVOIJ4HDXVDKNYA2</span><span class="p">,</span><span class="n">upperdir</span><span class="p">=/</span><span class="n">var</span><span class="p">/</span><span class="n">lib</span><span class="p">/</span><span class="n">docker</span><span class="p">/</span><span class="n">overlay2</span><span class="p">/</span><span class="n">b3f5c8b42ac055c715216e376cfe44571f618a876f481533ec1434aa0bc4f8ed</span><span class="p">/</span><span class="n">diff</span><span class="p">,</span><span class="n">workdir</span><span class="p">=/</span><span class="n">var</span><span class="p">/</span><span class="n">lib</span><span class="p">/</span><span class="n">docker</span><span class="p">/</span><span class="n">overla</span> <span class="n">2</span><span class="p">/</span><span class="n">b3f5c8b42ac055c715216e376cfe44571f618a876f481533ec1434aa0bc4f8ed</span><span class="p">/</span><span class="n">work</span><span class="p">)</span>
+</code></pre></div>
+<p>可以看到，启动容器会 mount 一个 overlay 的联合文件系统到容器内。这个文件系统由三层组成：</p>
+<ul>
+<li>lowerdir：只读层，即为镜像的镜像层。</li>
+<li>upperdir：读写层，该层是容器的读写层，对容器的读写操作将反映在读写层。</li>
+<li>workdir： overlayfs 的内部层，用于实现从只读层到读写层的 copy_up 操作。</li>
+<li>merge：容器内作为同一视图联合挂载点的目录。</li>
+</ul>
+<p>这里需要着重介绍的是容器的 lowerdir 镜像只读层，查看只读层的短 ID：</p>
+<div class="highlight"><pre><span></span><code><span class="n">lowerdir</span><span class="p">=/</span><span class="n">var</span><span class="p">/</span><span class="n">lib</span><span class="p">/</span><span class="n">docker</span><span class="p">/</span><span class="n">overlay2</span><span class="p">/</span><span class="n">l</span><span class="p">/</span><span class="n">MS2X66BYF6UZ7EKUWMZJKCF4HO</span>
+<span class="p">/</span><span class="n">var</span><span class="p">/</span><span class="n">lib</span><span class="p">/</span><span class="n">docker</span><span class="p">/</span><span class="n">overlay2</span><span class="p">/</span><span class="n">l</span><span class="p">/</span><span class="n">ODJROQUGY3WQMOGQ3BLYZGIAG4</span>
+<span class="p">/</span><span class="n">var</span><span class="p">/</span><span class="n">lib</span><span class="p">/</span><span class="n">docker</span><span class="p">/</span><span class="n">overlay2</span><span class="p">/</span><span class="n">l</span><span class="p">/</span><span class="n">Q5LOBFJRH5M7M5CMSWW5L4VYOY</span>
+<span class="p">/</span><span class="n">var</span><span class="p">/</span><span class="n">lib</span><span class="p">/</span><span class="n">docker</span><span class="p">/</span><span class="n">overlay2</span><span class="p">/</span><span class="n">l</span><span class="p">/</span><span class="n">ZR35FN2E3WEARZV4HLRU373FT7</span>
+<span class="p">/</span><span class="n">var</span><span class="p">/</span><span class="n">lib</span><span class="p">/</span><span class="n">docker</span><span class="p">/</span><span class="n">overlay2</span><span class="p">/</span><span class="n">l</span><span class="p">/</span><span class="n">NSM2PTAT6TIT2H6G3HFNGZJH5N</span>
+<span class="p">/</span><span class="n">var</span><span class="p">/</span><span class="n">lib</span><span class="p">/</span><span class="n">docker</span><span class="p">/</span><span class="n">overlay2</span><span class="p">/</span><span class="n">l</span><span class="p">/</span><span class="n">24GM2IZVPTUROAG7AWJO5ZWE6B</span>
+<span class="p">/</span><span class="n">var</span><span class="p">/</span><span class="n">lib</span><span class="p">/</span><span class="n">docker</span><span class="p">/</span><span class="n">overlay2</span><span class="p">/</span><span class="n">l</span><span class="p">/</span><span class="n">SICZO4QNVZEVOIJ4HDXVDKNYA2</span>
+</code></pre></div>
+<p>镜像层只有6层这里的短 ID 却有7个？
+在 /var/lib/docker/overlay2/l 目录下我们找到了答案：</p>
+<div class="highlight"><pre><span></span><code><span class="c"># cd /var/lib/docker/overlay2/l</span>
+<span class="c"># pwd</span>
+<span class="p">/</span><span class="n">var</span><span class="p">/</span><span class="n">lib</span><span class="p">/</span><span class="n">docker</span><span class="p">/</span><span class="n">overlay2</span><span class="p">/</span><span class="n">l</span>
+<span class="c"># ls</span>
+<span class="n">24GM2IZVPTUROAG7AWJO5ZWE6B</span>  <span class="n">LZEAXJGRW6HKBBGGB2N4CWMSVJ</span>  <span class="n">R2XTGODAA67NQJM44MIKMDUF4W</span>
+<span class="n">5OI5WMJ2FP7QI7IFWDMHLBRDDN</span>  <span class="n">MS2X66BYF6UZ7EKUWMZJKCF4HO</span>  <span class="n">SICZO4QNVZEVOIJ4HDXVDKNYA2</span>
+<span class="n">644ISPHLTBSSC2KLP6BGHHHZPR</span>  <span class="n">NSM2PTAT6TIT2H6G3HFNGZJH5N</span>  <span class="n">ZR35FN2E3WEARZV4HLRU373FT7</span>
+<span class="n">6CQUILQSJNVTMFFV3ABCCOGOYG</span>  <span class="n">ODJROQUGY3WQMOGQ3BLYZGIAG4</span>
+<span class="n">BQENAYC44O2ZCZFT5URMH5OADK</span>  <span class="n">Q5LOBFJRH5M7M5CMSWW5L4VYOY</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c"># ls -l MS2X66BYF6UZ7EKUWMZJKCF4HO/</span>
+<span class="n">总用量</span> <span class="n">0</span>
+<span class="n">drwxr-xr-x</span><span class="p">.</span> <span class="n">4</span> <span class="n">root</span> <span class="n">root</span> <span class="n">43</span> <span class="n">1月</span>  <span class="n">25</span> <span class="n">01</span><span class="p">:</span><span class="n">27</span> <span class="n">dev</span>
+<span class="n">drwxr-xr-x</span><span class="p">.</span> <span class="n">2</span> <span class="n">root</span> <span class="n">root</span> <span class="n">66</span> <span class="n">1月</span>  <span class="n">25</span> <span class="n">01</span><span class="p">:</span><span class="n">27</span> <span class="n">etc</span>
+<span class="p">[</span><span class="n">root</span><span class="nv">@192</span> <span class="n">l</span><span class="p">]</span><span class="c"># ls -l ODJROQUGY3WQMOGQ3BLYZGIAG4/</span>
+<span class="n">总用量</span> <span class="n">0</span>
+<span class="n">drwxr-xr-x</span><span class="p">.</span> <span class="n">2</span> <span class="n">root</span> <span class="n">root</span> <span class="n">41</span> <span class="n">12月</span> <span class="n">30</span> <span class="n">03</span><span class="p">:</span><span class="n">28</span> <span class="n">docker-entrypoint</span><span class="p">.</span><span class="n">d</span>
+
+<span class="p">[</span><span class="n">root</span><span class="nv">@192</span> <span class="n">l</span><span class="p">]</span><span class="c"># ls -l Q5LOBFJRH5M7M5CMSWW5L4VYOY/</span>
+<span class="n">总用量</span> <span class="n">0</span>
+<span class="n">drwxr-xr-x</span><span class="p">.</span> <span class="n">2</span> <span class="n">root</span> <span class="n">root</span> <span class="n">41</span> <span class="n">12月</span> <span class="n">30</span> <span class="n">03</span><span class="p">:</span><span class="n">28</span> <span class="n">docker-entrypoint</span><span class="p">.</span><span class="n">d</span>
+<span class="p">[</span><span class="n">root</span><span class="nv">@192</span> <span class="n">l</span><span class="p">]</span><span class="c"># ls -l ZR35FN2E3WEARZV4HLRU373FT7/</span>
+<span class="n">总用量</span> <span class="n">0</span>
+<span class="n">drwxr-xr-x</span><span class="p">.</span> <span class="n">2</span> <span class="n">root</span> <span class="n">root</span> <span class="n">45</span> <span class="n">12月</span> <span class="n">30</span> <span class="n">03</span><span class="p">:</span><span class="n">28</span> <span class="n">docker-entrypoint</span><span class="p">.</span><span class="n">d</span>
+<span class="p">[</span><span class="n">root</span><span class="nv">@192</span> <span class="n">l</span><span class="p">]</span><span class="c"># ls -l NSM2PTAT6TIT2H6G3HFNGZJH5N/</span>
+<span class="n">总用量</span> <span class="n">4</span>
+<span class="n">-rwxrwxr-x</span><span class="p">.</span> <span class="n">1</span> <span class="n">root</span> <span class="n">root</span> <span class="n">1202</span> <span class="n">12月</span> <span class="n">30</span> <span class="n">03</span><span class="p">:</span><span class="n">28</span> <span class="n">docker-entrypoint</span><span class="p">.</span><span class="n">sh</span>
+<span class="p">[</span><span class="n">root</span><span class="nv">@192</span> <span class="n">l</span><span class="p">]</span><span class="c"># ls -l 24GM2IZVPTUROAG7AWJO5ZWE6B/</span>
+<span class="n">总用量</span> <span class="n">4</span>
+<span class="n">drwxr-xr-x</span><span class="p">.</span>  <span class="n">2</span> <span class="n">root</span> <span class="n">root</span>    <span class="n">6</span> <span class="n">12月</span> <span class="n">30</span> <span class="n">03</span><span class="p">:</span><span class="n">28</span> <span class="n">docker-entrypoint</span><span class="p">.</span><span class="n">d</span>
+<span class="n">drwxr-xr-x</span><span class="p">.</span> <span class="n">18</span> <span class="n">root</span> <span class="n">root</span> <span class="n">4096</span> <span class="n">12月</span> <span class="n">30</span> <span class="n">03</span><span class="p">:</span><span class="n">28</span> <span class="n">etc</span>
+<span class="n">drwxr-xr-x</span><span class="p">.</span>  <span class="n">4</span> <span class="n">root</span> <span class="n">root</span>   <span class="n">45</span> <span class="n">12月</span> <span class="n">20</span> <span class="n">08</span><span class="p">:</span><span class="n">00</span> <span class="n">lib</span>
+<span class="n">drwxrwxrwt</span><span class="p">.</span>  <span class="n">2</span> <span class="n">root</span> <span class="n">root</span>    <span class="n">6</span> <span class="n">12月</span> <span class="n">30</span> <span class="n">03</span><span class="p">:</span><span class="n">28</span> <span class="n">tmp</span>
+<span class="n">drwxr-xr-x</span><span class="p">.</span>  <span class="n">7</span> <span class="n">root</span> <span class="n">root</span>   <span class="n">66</span> <span class="n">12月</span> <span class="n">20</span> <span class="n">08</span><span class="p">:</span><span class="n">00</span> <span class="n">usr</span>
+<span class="n">drwxr-xr-x</span><span class="p">.</span>  <span class="n">5</span> <span class="n">root</span> <span class="n">root</span>   <span class="n">41</span> <span class="n">12月</span> <span class="n">20</span> <span class="n">08</span><span class="p">:</span><span class="n">00</span> <span class="n">var</span>
+<span class="p">[</span><span class="n">root</span><span class="nv">@192</span> <span class="n">l</span><span class="p">]</span><span class="c"># ls -l SICZO4QNVZEVOIJ4HDXVDKNYA2/</span>
+<span class="n">总用量</span> <span class="n">12</span>
+<span class="n">drwxr-xr-x</span><span class="p">.</span>  <span class="n">2</span> <span class="n">root</span> <span class="n">root</span> <span class="n">4096</span> <span class="n">12月</span> <span class="n">20</span> <span class="n">08</span><span class="p">:</span><span class="n">00</span> <span class="n">bin</span>
+<span class="n">drwxr-xr-x</span><span class="p">.</span>  <span class="n">2</span> <span class="n">root</span> <span class="n">root</span>    <span class="n">6</span> <span class="n">12月</span> <span class="n">12</span> <span class="n">01</span><span class="p">:</span><span class="n">25</span> <span class="n">boot</span>
+<span class="n">drwxr-xr-x</span><span class="p">.</span>  <span class="n">2</span> <span class="n">root</span> <span class="n">root</span>    <span class="n">6</span> <span class="n">12月</span> <span class="n">20</span> <span class="n">08</span><span class="p">:</span><span class="n">00</span> <span class="n">dev</span>
+<span class="n">drwxr-xr-x</span><span class="p">.</span> <span class="n">30</span> <span class="n">root</span> <span class="n">root</span> <span class="n">4096</span> <span class="n">12月</span> <span class="n">20</span> <span class="n">08</span><span class="p">:</span><span class="n">00</span> <span class="n">etc</span>
+<span class="n">drwxr-xr-x</span><span class="p">.</span>  <span class="n">2</span> <span class="n">root</span> <span class="n">root</span>    <span class="n">6</span> <span class="n">12月</span> <span class="n">12</span> <span class="n">01</span><span class="p">:</span><span class="n">25</span> <span class="n">home</span>
+<span class="n">drwxr-xr-x</span><span class="p">.</span>  <span class="n">8</span> <span class="n">root</span> <span class="n">root</span>   <span class="n">96</span> <span class="n">12月</span> <span class="n">20</span> <span class="n">08</span><span class="p">:</span><span class="n">00</span> <span class="n">lib</span>
+<span class="n">drwxr-xr-x</span><span class="p">.</span>  <span class="n">2</span> <span class="n">root</span> <span class="n">root</span>   <span class="n">34</span> <span class="n">12月</span> <span class="n">20</span> <span class="n">08</span><span class="p">:</span><span class="n">00</span> <span class="n">lib64</span>
+<span class="n">drwxr-xr-x</span><span class="p">.</span>  <span class="n">2</span> <span class="n">root</span> <span class="n">root</span>    <span class="n">6</span> <span class="n">12月</span> <span class="n">20</span> <span class="n">08</span><span class="p">:</span><span class="n">00</span> <span class="n">media</span>
+<span class="n">drwxr-xr-x</span><span class="p">.</span>  <span class="n">2</span> <span class="n">root</span> <span class="n">root</span>    <span class="n">6</span> <span class="n">12月</span> <span class="n">20</span> <span class="n">08</span><span class="p">:</span><span class="n">00</span> <span class="n">mnt</span>
+<span class="n">drwxr-xr-x</span><span class="p">.</span>  <span class="n">2</span> <span class="n">root</span> <span class="n">root</span>    <span class="n">6</span> <span class="n">12月</span> <span class="n">20</span> <span class="n">08</span><span class="p">:</span><span class="n">00</span> <span class="n">opt</span>
+<span class="n">drwxr-xr-x</span><span class="p">.</span>  <span class="n">2</span> <span class="n">root</span> <span class="n">root</span>    <span class="n">6</span> <span class="n">12月</span> <span class="n">12</span> <span class="n">01</span><span class="p">:</span><span class="n">25</span> <span class="n">proc</span>
+<span class="n">drwx</span><span class="p">------.</span>  <span class="n">2</span> <span class="n">root</span> <span class="n">root</span>   <span class="n">37</span> <span class="n">12月</span> <span class="n">20</span> <span class="n">08</span><span class="p">:</span><span class="n">00</span> <span class="n">root</span>
+<span class="n">drwxr-xr-x</span><span class="p">.</span>  <span class="n">3</span> <span class="n">root</span> <span class="n">root</span>   <span class="n">30</span> <span class="n">12月</span> <span class="n">20</span> <span class="n">08</span><span class="p">:</span><span class="n">00</span> <span class="n">run</span>
+<span class="n">drwxr-xr-x</span><span class="p">.</span>  <span class="n">2</span> <span class="n">root</span> <span class="n">root</span> <span class="n">4096</span> <span class="n">12月</span> <span class="n">20</span> <span class="n">08</span><span class="p">:</span><span class="n">00</span> <span class="n">sbin</span>
+<span class="n">drwxr-xr-x</span><span class="p">.</span>  <span class="n">2</span> <span class="n">root</span> <span class="n">root</span>    <span class="n">6</span> <span class="n">12月</span> <span class="n">20</span> <span class="n">08</span><span class="p">:</span><span class="n">00</span> <span class="n">srv</span>
+<span class="n">drwxr-xr-x</span><span class="p">.</span>  <span class="n">2</span> <span class="n">root</span> <span class="n">root</span>    <span class="n">6</span> <span class="n">12月</span> <span class="n">12</span> <span class="n">01</span><span class="p">:</span><span class="n">25</span> <span class="n">sys</span>
+<span class="n">drwxrwxrwt</span><span class="p">.</span>  <span class="n">2</span> <span class="n">root</span> <span class="n">root</span>    <span class="n">6</span> <span class="n">12月</span> <span class="n">20</span> <span class="n">08</span><span class="p">:</span><span class="n">00</span> <span class="n">tmp</span>
+<span class="n">drwxr-xr-x</span><span class="p">.</span> <span class="n">11</span> <span class="n">root</span> <span class="n">root</span>  <span class="n">120</span> <span class="n">12月</span> <span class="n">20</span> <span class="n">08</span><span class="p">:</span><span class="n">00</span> <span class="n">usr</span>
+<span class="n">drwxr-xr-x</span><span class="p">.</span> <span class="n">11</span> <span class="n">root</span> <span class="n">root</span>  <span class="n">139</span> <span class="n">12月</span> <span class="n">20</span> <span class="n">08</span><span class="p">:</span><span class="n">00</span> <span class="n">var</span>
+</code></pre></div>
+<p>镜像层ODJROQUGY3WQMOGQ3BLYZGIAG4/Q5LOBFJRH5M7M5CMSWW5L4VYOY/ZR35FN2E3WEARZV4HLRU373FT7/NSM2PTAT6TIT2H6G3HFNGZJH5N/24GM2IZVPTUROAG7AWJO5ZWE6B/SICZO4QNVZEVOIJ4HDXVDKNYA2 分别对应镜像的6层镜像层文件内容，它们分别映射到镜像层的 diff 目录。而 MS2X66BYF6UZ7EKUWMZJKCF4HO映射的是容器的初始化层 init，该层内容是和容器配置相关的文件内容，它是只读的。</p>
+<p>启动了容器，docker 将镜像的内容 mount 到容器中。那么，如果在容器内写文件会对镜像有什么影响呢？</p>
+<h2 id="25">2.5 容器内写文件<a class="headerlink" href="#25" title="Permanent link">&para;</a></h2>
+<p>不难理解，镜像层是只读的，在容器中写文件其实是将文件写入到 overlay 的可读写层。</p>
+<p>这里有几个 case 可以测试：</p>
+<ul>
+<li>读写层不存在该文件，只读层存在。</li>
+<li>读写层存在该文件，只读层不存在。</li>
+<li>读写层和只读层都不存在该文件。</li>
+</ul>
+<p>我们简单构建一种读写层和只读层都不存在的场景：</p>
+<div class="highlight"><pre><span></span><code><span class="c"># docker run -it centos:latest bash</span>
+<span class="p">[</span><span class="n">root</span><span class="nv">@355e99982248</span> <span class="p">/]</span><span class="c"># touch msb.txt</span>
+<span class="p">[</span><span class="n">root</span><span class="nv">@355e99982248</span> <span class="p">/]</span><span class="c"># ls</span>
+<span class="n">bin</span>  <span class="n">etc</span>   <span class="n">lib</span>    <span class="n">lost</span><span class="p">+</span><span class="n">found</span>  <span class="n">mnt</span>      <span class="n">opt</span>   <span class="n">root</span>  <span class="n">sbin</span>  <span class="n">sys</span>  <span class="n">usr</span>
+<span class="n">dev</span>  <span class="n">home</span>  <span class="n">lib64</span>  <span class="n">media</span>       <span class="n">msb</span><span class="p">.</span><span class="n">txt</span>  <span class="n">proc</span>  <span class="n">run</span>   <span class="n">srv</span>   <span class="n">tmp</span>  <span class="n">var</span>
+</code></pre></div>
+<p>查看读写层是否有该文件：</p>
+<div class="highlight"><pre><span></span><code><span class="n">查看镜像是否有变化</span>
+<span class="c"># docker images</span>
+<span class="n">REPOSITORY</span>   <span class="n">TAG</span>       <span class="n">IMAGE</span> <span class="n">ID</span>       <span class="n">CREATED</span>        <span class="n">SIZE</span>
+<span class="n">ubuntu</span>       <span class="n">latest</span>    <span class="n">d13c942271d6</span>   <span class="n">2</span> <span class="n">weeks</span> <span class="n">ago</span>    <span class="n">72</span><span class="p">.</span><span class="n">8MB</span>
+<span class="n">bash</span>         <span class="n">latest</span>    <span class="n">5557e073f11c</span>   <span class="n">2</span> <span class="n">weeks</span> <span class="n">ago</span>    <span class="n">13MB</span>
+<span class="n">nginx</span>        <span class="n">latest</span>    <span class="n">605c77e624dd</span>   <span class="n">3</span> <span class="n">weeks</span> <span class="n">ago</span>    <span class="n">141MB</span>
+<span class="n">centos</span>       <span class="n">latest</span>    <span class="n">5d0da3dc9764</span>   <span class="n">4</span> <span class="n">months</span> <span class="n">ago</span>   <span class="n">231MB</span>
+
+<span class="p">[</span><span class="n">root</span><span class="nv">@localhost</span> <span class="p">~]</span><span class="c"># cat /var/lib/docker/image/overlay2/repositories.json | grep 5d0da3dc9764</span>
+<span class="p">{</span><span class="s2">&quot;Repositories&quot;</span><span class="p">{</span><span class="s2">&quot;centos:latest&quot;</span><span class="p">:</span><span class="s2">&quot;sha256:5d0da3dc976460b72c77d94c8a1ad043720b0416bfc16c52c45d4847e53fadb6&quot;</span><span class="p">,</span><span class="s2">&quot;centos@sha256:a27fd8080b517143cbbbab9dfb7c8571c40d67d534bbdee55bd6c473f432b177&quot;</span><span class="p">:</span><span class="s2">&quot;sha256:5d0da3dc976460b72c77d94c8a1ad043720b0416bfc16c52c45d4847e53fadb6&quot;</span><span class="p">}}}</span>
+
+
+
+<span class="p">[</span><span class="n">root</span><span class="nv">@localhost</span> <span class="p">~]</span><span class="c"># cat /var/lib/docker/image/overlay2/imagedb/content/sha256/5d0da3dc976460b72c77d94c8a1ad043720b0416bfc16c52c45d4847e53fadb6</span>
+<span class="p">{</span><span class="s2">&quot;os&quot;</span><span class="p">:</span><span class="s2">&quot;linux&quot;</span><span class="p">,</span><span class="s2">&quot;rootfs&quot;</span><span class="p">:{</span><span class="s2">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;layers&quot;</span><span class="p">,</span><span class="s2">&quot;diff_ids&quot;</span><span class="p">:[</span><span class="s2">&quot;sha256:74ddd0ec08fa43d09f32636ba91a0a3053b02cb4627c35051aff89f853606b59&quot;</span><span class="p">]}}</span>
+
+
+<span class="p">[</span><span class="n">root</span><span class="nv">@localhost</span> <span class="p">~]</span><span class="c"># ls </span>
+<span class="p">/</span><span class="n">var</span><span class="p">/</span><span class="n">lib</span><span class="p">/</span><span class="n">docker</span><span class="p">/</span><span class="n">image</span><span class="p">/</span><span class="n">overlay2</span><span class="p">/</span><span class="n">layerdb</span><span class="p">/</span><span class="n">sha256</span><span class="p">/</span><span class="n">74ddd0ec08fa43d09f32636ba91a0a3053b02cb4627c35051aff89f853606b59</span><span class="p">:</span>
+<span class="n">cache-id</span>  <span class="nb">diff </span> <span class="n">size</span>  <span class="n">tar-split</span><span class="p">.</span><span class="n">json</span><span class="p">.</span><span class="n">gz</span>
+<span class="p">[</span><span class="n">root</span><span class="nv">@localhost</span> <span class="p">~]</span><span class="c"># cat /var/lib/docker/image/overlay2/layerdb/sha256/74ddd0ec08fa43d09f32636ba91a0a3053b02cb4627c35051aff89f853606b59/cache-id</span>
+<span class="n">b17bc5c5103514923a30983c48f909e06f366b7aa1e85f112b67abb3ef5cd0cb</span>
+
+<span class="p">[</span><span class="n">root</span><span class="nv">@localhost</span> <span class="p">~]</span><span class="c"># cat /var/lib/docker/image/overlay2/layerdb/sha256/74ddd0ec08fa43d09f32636ba91a0a3053b02cb4627c35051aff89f853606b59/diff</span>
+<span class="n">sha256</span><span class="p">:</span><span class="n">74ddd0ec08fa43d09f32636ba91a0a3053b02cb4627c35051aff89f853606b59</span>
+
+
+<span class="p">[</span><span class="n">root</span><span class="nv">@localhost</span> <span class="p">~]</span><span class="c"># ls /var/lib/docker/overlay2/b17bc5c5103514923a30983c48f909e06f366b7aa1e85f112b67abb3ef5cd0cb</span>
+<span class="n">committed</span>  <span class="nb">diff </span> <span class="n">link</span>
+<span class="p">[</span><span class="n">root</span><span class="nv">@localhost</span> <span class="p">~]</span><span class="c"># ls /var/lib/docker/overlay2/b17bc5c5103514923a30983c48f909e06f366b7aa1e85f112b67abb3ef5cd0cb/diff/</span>
+<span class="n">bin</span>  <span class="n">etc</span>   <span class="n">lib</span>    <span class="n">lost</span><span class="p">+</span><span class="n">found</span>  <span class="n">mnt</span>  <span class="n">proc</span>  <span class="n">run</span>   <span class="n">srv</span>  <span class="n">tmp</span>  <span class="n">var</span>
+<span class="n">dev</span>  <span class="n">home</span>  <span class="n">lib64</span>  <span class="n">media</span>       <span class="n">opt</span>  <span class="n">root</span>  <span class="n">sbin</span>  <span class="n">sys</span>  <span class="n">usr</span>
+
+
+<span class="n">查看容器是否有变化</span>
+<span class="p">[</span><span class="n">root</span><span class="nv">@localhost</span> <span class="p">~]</span><span class="c"># mount | grep overlay</span>
+<span class="nb">type </span><span class="n">overlay</span> <span class="p">(</span><span class="n">rw</span><span class="p">,</span><span class="n">relatime</span><span class="p">,</span><span class="n">seclabel</span><span class="p">,</span><span class="n">lowerdir</span><span class="p">=/</span><span class="n">var</span><span class="p">/</span><span class="n">lib</span><span class="p">/</span><span class="n">docker</span><span class="p">/</span><span class="n">overlay2</span><span class="p">/</span><span class="n">l</span><span class="p">/</span><span class="n">R2W2LEMDPRIUFYDVSLIQSCYTGX</span><span class="p">:/</span><span class="n">var</span><span class="p">/</span><span class="n">lib</span><span class="p">/</span><span class="n">docker</span><span class="p">/</span><span class="n">overlay2</span><span class="p">/</span><span class="n">l</span><span class="p">/</span><span class="n">R2XTGODAA67NQJM44MIKMDUF4W</span><span class="p">,</span><span class="n">upperdir</span><span class="p">=/</span><span class="n">var</span><span class="p">/</span><span class="n">lib</span><span class="p">/</span><span class="n">docker</span> <span class="n">overlay2</span><span class="p">/</span><span class="n">7f0b54c748171872ce564305e394547555cb1182abf802c2262384be3dc78a8f</span><span class="p">/</span><span class="n">diff</span><span class="p">,</span><span class="n">workdir</span><span class="p">=/</span><span class="n">var</span><span class="p">/</span><span class="n">lib</span><span class="p">/</span><span class="n">docker</span><span class="p">/</span><span class="n">overlay2</span><span class="p">/</span><span class="n">7f0b54c748171872ce564305e394547555cb1182abf802c2262384be3dc78a8f</span><span class="p">/</span><span class="n">work</span><span class="p">)</span>
+
+
+<span class="p">[</span><span class="n">root</span><span class="nv">@localhost</span> <span class="p">~]</span><span class="c"># ls -l /var/lib/docker/overlay2/l/</span>
+<span class="n">总用量</span> <span class="n">0</span>
+
+<span class="n">lrwxrwxrwx</span><span class="p">.</span> <span class="n">1</span> <span class="n">root</span> <span class="n">root</span> <span class="n">77</span> <span class="n">1月</span>  <span class="n">25</span> <span class="n">01</span><span class="p">:</span><span class="n">41</span> <span class="n">R2W2LEMDPRIUFYDVSLIQSCYTGX</span> <span class="p">-&gt;</span> <span class="p">../</span><span class="n">7f0b54c748171872ce564305e394547555cb1182abf802c2262384be3dc78a8f-init</span><span class="p">/</span><span class="nb">diff</span>
+<span class="n">lrwxrwxrwx</span><span class="p">.</span> <span class="n">1</span> <span class="n">root</span> <span class="n">root</span> <span class="n">72</span> <span class="n">1月</span>  <span class="n">25</span> <span class="n">00</span><span class="p">:</span><span class="n">29</span> <span class="n">R2XTGODAA67NQJM44MIKMDUF4W</span> <span class="p">-&gt;</span> <span class="p">../</span><span class="n">b17bc5c5103514923a30983c48f909e06f366b7aa1e85f112b67abb3ef5cd0cb</span><span class="p">/</span><span class="nb">diff</span>
+
+
+<span class="p">[</span><span class="n">root</span><span class="nv">@localhost</span> <span class="p">~]</span><span class="c"># ls /var/lib/docker/overlay2/7f0b54c748171872ce564305e394547555cb1182abf802c2262384be3dc78a8f/diff</span>
+<span class="n">msb</span><span class="p">.</span><span class="n">txt</span>
+
+
+<span class="p">[</span><span class="n">root</span><span class="nv">@localhost</span> <span class="p">~]</span><span class="c"># ls /var/lib/docker/overlay2/7f0b54c748171872ce564305e394547555cb1182abf802c2262384be3dc78a8f/merged/</span>
+<span class="n">bin</span>  <span class="n">etc</span>   <span class="n">lib</span>    <span class="n">lost</span><span class="p">+</span><span class="n">found</span>  <span class="n">mnt</span>      <span class="n">opt</span>   <span class="n">root</span>  <span class="n">sbin</span>  <span class="n">sys</span>  <span class="n">usr</span>
+<span class="n">dev</span>  <span class="n">home</span>  <span class="n">lib64</span>  <span class="n">media</span>       <span class="n">msb</span><span class="p">.</span><span class="n">txt</span>  <span class="n">proc</span>  <span class="n">run</span>   <span class="n">srv</span>   <span class="n">tmp</span>  <span class="n">var</span>
+</code></pre></div>
+<h1 id="docker_3">三、Docker容器镜像操作命令<a class="headerlink" href="#docker_3" title="Permanent link">&para;</a></h1>
+<h2 id="31_docker_commit">3.1  docker commit<a class="headerlink" href="#31_docker_commit" title="Permanent link">&para;</a></h2>
+<p>上节提到容器内写文件会反映在 overlay 的可读写层，那么读写层的文件内容可以做成镜像吗？</p>
+<p>可以。docker 通过 commit 和 build 操作实现镜像的构建。commit 将容器提交为一个镜像，build 在一个镜像的基础上构建镜像。</p>
+<p>使用 commit 将上节的容器提交为一个镜像：</p>
+<div class="highlight"><pre><span></span><code><span class="p">[</span><span class="n">root</span><span class="nv">@355e99982248</span> <span class="p">/]</span><span class="c">#   ctrl+p+q</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c"># docker ps</span>
+<span class="n">CONTAINER</span> <span class="n">ID</span>   <span class="n">IMAGE</span>           <span class="n">COMMAND</span>                  <span class="n">CREATED</span>          <span class="n">STATUS</span>          <span class="n">PORTS</span>     <span class="n">NAMES</span>
+<span class="n">355e99982248</span>   <span class="n">centos</span><span class="p">:</span><span class="n">latest</span>   <span class="s2">&quot;bash&quot;</span>                   <span class="n">21</span> <span class="n">minutes</span> <span class="n">ago</span>   <span class="n">Up</span> <span class="n">21</span> <span class="n">minutes</span>             <span class="n">fervent_perlman</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c"># docker commit 355e99982248</span>
+<span class="n">sha256</span><span class="p">:</span><span class="n">8965dcf23201ed42d4904e2f10854d301ad93b34bea73f384440692e006943de</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c"># docker images</span>
+<span class="n">REPOSITORY</span>   <span class="n">TAG</span>       <span class="n">IMAGE</span> <span class="n">ID</span>       <span class="n">CREATED</span>              <span class="n">SIZE</span>
+<span class="p">&lt;</span><span class="n">none</span><span class="p">&gt;</span>       <span class="p">&lt;</span><span class="n">none</span><span class="p">&gt;</span>    <span class="n">8965dcf23201</span>   <span class="n">About</span> <span class="n">a</span> <span class="n">minute</span> <span class="n">ago</span>   <span class="n">231MB</span>
+</code></pre></div>
+<p>image 短 ID 8965dcf23201 即为容器提交的镜像，查看镜像的 imagedb 元数据：</p>
+<div class="highlight"><pre><span></span><code><span class="c"># cat  /var/lib/docker/image/overlay2/imagedb/content/sha256/8965dcf23201ed42d4904e2f10854d301ad93b34bea73f384440692e006943de</span>
+<span class="p">......</span>
+<span class="s2">&quot;os&quot;</span><span class="p">:</span><span class="s2">&quot;linux&quot;</span><span class="p">,</span><span class="s2">&quot;rootfs&quot;</span><span class="p">:{</span><span class="s2">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;layers&quot;</span><span class="p">,</span><span class="s2">&quot;diff_ids&quot;</span><span class="p">:[</span><span class="s2">&quot;sha256:74ddd0ec08fa43d09f32636ba91a0a3053b02cb4627c35051aff89f853606b59&quot;</span><span class="p">,</span><span class="s2">&quot;sha256:551c3089b186b4027e949910981ff1ba54114610f2aab9359d28694c18b0203b&quot;</span><span class="p">]}}</span>
+</code></pre></div>
+<p>可以看到镜像层自上而下的前1个镜像层 diff_id 和 centos 镜像层 diff_id 是一样的，说明每层镜像层可以被多个镜像共享。而多出来的一层镜像层内容即是上节我们写入文件的内容：</p>
+<div class="highlight"><pre><span></span><code><span class="c"># echo -n &quot;sha256:74ddd0ec08fa43d09f32636ba91a0a3053b02cb4627c35051aff89f853606b59 sha256:551c3089b186b4027e949910981ff1ba54114610f2aab9359d28694c18b0203b&quot; | sha256sum -</span>
+<span class="n">92f7208b1cc0b5cc8fe214a4b0178aa4962b58af8ec535ee7211f335b1e0ed3b</span>  <span class="p">-</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c"># cd /var/lib/docker/image/overlay2/layerdb/sha256/92f7208b1cc0b5cc8fe214a4b0178aa4962b58af8ec535ee7211f335b1e0ed3b</span>
+<span class="p">[</span><span class="n">root</span><span class="nv">@192</span> <span class="n">92f7208b1cc0b5cc8fe214a4b0178aa4962b58af8ec535ee7211f335b1e0ed3b</span><span class="p">]</span><span class="c"># ls</span>
+<span class="n">cache-id</span>  <span class="nb">diff </span> <span class="n">parent</span>  <span class="n">size</span>  <span class="n">tar-split</span><span class="p">.</span><span class="n">json</span><span class="p">.</span><span class="n">gz</span>
+
+
+
+<span class="p">[</span><span class="n">root</span><span class="nv">@192</span> <span class="n">92f7208b1cc0b5cc8fe214a4b0178aa4962b58af8ec535ee7211f335b1e0ed3b</span><span class="p">]</span><span class="c"># cat cache-id</span>
+<span class="n">250dc0b4f2c5f27952241a55cd4c286bfaaf8af4b77c9d0a38976df4c147cb95</span>
+
+
+<span class="p">[</span><span class="n">root</span><span class="nv">@192</span> <span class="n">92f7208b1cc0b5cc8fe214a4b0178aa4962b58af8ec535ee7211f335b1e0ed3b</span><span class="p">]</span><span class="c"># ls /var/lib/docker/overlay2/250dc0b4f2c5f27952241a55cd4c286bfaaf8af4b77c9d0a38976df4c147cb95</span>
+<span class="nb">diff </span> <span class="n">link</span>  <span class="n">lower</span>  <span class="n">work</span>
+
+
+<span class="p">[</span><span class="n">root</span><span class="nv">@192</span> <span class="n">92f7208b1cc0b5cc8fe214a4b0178aa4962b58af8ec535ee7211f335b1e0ed3b</span><span class="p">]</span><span class="c"># ls /var/lib/docker/overlay2/250dc0b4f2c5f27952241a55cd4c286bfaaf8af4b77c9d0a38976df4c147cb95/diff</span>
+<span class="n">msb</span><span class="p">.</span><span class="n">txt</span>
+</code></pre></div>
+<h2 id="32_docker_save">3.2 docker save<a class="headerlink" href="#32_docker_save" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p>导出容器镜像，方便分享。</p>
+</blockquote>
+<div class="highlight"><pre><span></span><code><span class="c"># docker save -o centos.tar centos:latest  </span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c"># ls</span>
+
+<span class="n">centos</span><span class="p">.</span><span class="n">tar</span>  
+</code></pre></div>
+<h2 id="33_docker_load">3.3 docker load<a class="headerlink" href="#33_docker_load" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p>把他人分享的容器镜像导入到本地，这通常是容器镜像分发方式之一。</p>
+</blockquote>
+<div class="highlight"><pre><span></span><code><span class="c"># docker load -i centos.tar</span>
+</code></pre></div>
+<h2 id="34_docker_export">3.4 docker export<a class="headerlink" href="#34_docker_export" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p>把正在运行的容器导出</p>
+</blockquote>
+<div class="highlight"><pre><span></span><code><span class="c"># docker ps</span>
+<span class="n">CONTAINER</span> <span class="n">ID</span>   <span class="n">IMAGE</span>           <span class="n">COMMAND</span>                  <span class="n">CREATED</span>       <span class="n">STATUS</span>       <span class="n">PORTS</span>     <span class="n">NAMES</span>
+<span class="n">355e99982248</span>   <span class="n">centos</span><span class="p">:</span><span class="n">latest</span>   <span class="s2">&quot;bash&quot;</span>                   <span class="n">7</span> <span class="n">hours</span> <span class="n">ago</span>   <span class="n">Up</span> <span class="n">7</span> <span class="n">hours</span>             <span class="n">fervent_perlman</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c"># docker export -o centos7.tar 355e99982248</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c"># ls</span>
+<span class="n">centos7</span><span class="p">.</span><span class="n">tar</span>
+</code></pre></div>
+<h2 id="35_docker_import">3.5 docker import<a class="headerlink" href="#35_docker_import" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p>导入使用docker export导入的容器做为本地容器镜像。</p>
+</blockquote>
+<div class="highlight"><pre><span></span><code><span class="c"># ls</span>
+<span class="n">centos7</span><span class="p">.</span><span class="n">tar</span> 
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c"># docker import centos7.tar centos7:v1</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c"># docker images</span>
+<span class="n">REPOSITORY</span>   <span class="n">TAG</span>       <span class="n">IMAGE</span> <span class="n">ID</span>       <span class="n">CREATED</span>              <span class="n">SIZE</span>
+<span class="n">centos7</span>      <span class="n">v1</span>        <span class="n">3639f9a13231</span>   <span class="n">17</span> <span class="n">seconds</span> <span class="n">ago</span>       <span class="n">231MB</span>
+</code></pre></div>
+<p>通过docker save与docker load及docker export与docker import分享容器镜像都是非常麻烦的，有没有更方便的方式分享容器镜像呢？</p>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      BurningMyself<a href='https://beian.miit.gov.cn/' target='_blank'>  蜀ICP备15033200号-1</a>
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        <div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/burningmyself" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://gitee.com/burningmyself" target="_blank" rel="noopener" title="gitee.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 488 512"><!--! Font Awesome Free 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M488 261.8C488 403.3 391.1 504 248 504 110.8 504 0 393.2 0 256S110.8 8 248 8c66.8 0 123 24.5 166.3 64.9l-67.5 64.9C258.5 52.6 94.3 116.6 94.3 256c0 86.5 69.1 156.6 153.7 156.6 98.2 0 135-70.4 140.8-106.9H248v-85.3h236.1c2.3 12.7 3.9 24.9 3.9 41.4z"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.2a6f1dda.min.js"></script>
+      
+        <script src="../../js/extra.js"></script>
+      
+        <script src="../../js/baidu-tongji.js"></script>
+      
+        <script src="https://www.googletagmanager.com/gtag/js?id=UA-155084439-1"></script>
+      
+        <script src="https://www.googletagmanager.com/gtag/js?id=UA-155132293-1"></script>
+      
+        <script src="../../js/google.js"></script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+      
+    
+  </body>
+</html>
