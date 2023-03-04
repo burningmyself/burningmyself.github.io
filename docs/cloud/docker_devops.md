@@ -28,10 +28,7 @@
 # 二、企业业务代码发布逻辑图
 
 
-
-<img src="../img/docker_devops/image-20220223152003734.png" alt="image-20220223152003734" style="zoom:200%;" />
-
-
+![image-20220223152003734](../img/docker_devops/image-20220223152003734.png)
 
 
 
@@ -56,10 +53,7 @@
 > 本次部署Java代码包。
 
 
-
-<img src="../img/docker_devops/image-20220223163453076.png" alt="image-20220223163453076" style="zoom:200%;" />
-
-
+![image-20220223163453076](../img/docker_devops/image-20220223163453076.png)
 
 
 
