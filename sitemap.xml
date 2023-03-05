@@ -26,6 +26,11 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://burningmyself.gitee.io/cloud/docker_container/</loc>
+         <lastmod>2023-03-05</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://burningmyself.gitee.io/cloud/docker_container_enterprice/</loc>
          <lastmod>2023-03-05</lastmod>
          <changefreq>daily</changefreq>
@@ -72,6 +77,11 @@
     </url>
     <url>
          <loc>https://burningmyself.gitee.io/cloud/docker_swarm/</loc>
+         <lastmod>2023-03-05</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://burningmyself.gitee.io/cloud/kubenetes/</loc>
          <lastmod>2023-03-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
