@@ -1528,23 +1528,23 @@ go version go1.16.10 linux/amd64
 
 
 
-![image-20220507120653090](../img/kubernetes/image-20220507120653090.png)
+![image-20220507120653090](../img/kubenetes/image-20220507120653090.png)
 
 
 
-![image-20220507120725815](../img/kubernetes/image-20220507120725815.png)
-
-
-
-
-
-![image-20220507120808122](../img/kubernetes/image-20220507120808122.png)
+![image-20220507120725815](../img/kubenetes/image-20220507120725815.png)
 
 
 
 
 
-![image-20220507120849669](../img/kubernetes/image-20220507120849669.png)
+![image-20220507120808122](../img/kubenetes/image-20220507120808122.png)
+
+
+
+
+
+![image-20220507120849669](../img/kubenetes/image-20220507120849669.png)
 
 
 
@@ -1852,19 +1852,19 @@ config
 
 
 
-![image-20220119141547207](../img/kubernetes/image-20220119141547207.png)
+![image-20220119141547207](../img/kubenetes/image-20220119141547207.png)
 
 
 
-![image-20220119141645676](../img/kubernetes/image-20220119141645676.png)
+![image-20220119141645676](../img/kubenetes/image-20220119141645676.png)
 
 
 
-![image-20220119141734347](../img/kubernetes/image-20220119141734347.png)
+![image-20220119141734347](../img/kubenetes/image-20220119141734347.png)
 
 
 
-![image-20220119141830625](../img/kubernetes/image-20220119141830625.png)
+![image-20220119141830625](../img/kubenetes/image-20220119141830625.png)
 
 
 
@@ -1961,13 +1961,13 @@ kube-scheduler-k8s-master01            1/1     Running   0          12h
 
 #### 2.3.8.2  calico客户端安装
 
-![image-20220119144207789](../img/kubernetes/image-20220119144207789.png)
+![image-20220119144207789](../img/kubenetes/image-20220119144207789.png)
 
 
 
 
 
-![image-20220119144446449](../img/kubernetes/image-20220119144446449.png)
+![image-20220119144446449](../img/kubenetes/image-20220119144446449.png)
 
 
 
