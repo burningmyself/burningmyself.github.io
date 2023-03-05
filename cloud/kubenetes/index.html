@@ -3630,10 +3630,10 @@
 <span class="c"># mkdir -p ~/go/bin ~/go/src ~/go/pkg</span>
 </code></pre></div>
 <h4 id="2252_cri-dockerd_1">2.2.5.2 构建并安装cri-dockerd<a class="headerlink" href="#2252_cri-dockerd_1" title="Permanent link">&para;</a></h4>
-<p><img alt="image-20220507120653090" src="../img/kubernetes/image-20220507120653090.png" /></p>
-<p><img alt="image-20220507120725815" src="../img/kubernetes/image-20220507120725815.png" /></p>
-<p><img alt="image-20220507120808122" src="../img/kubernetes/image-20220507120808122.png" /></p>
-<p><img alt="image-20220507120849669" src="../img/kubernetes/image-20220507120849669.png" /></p>
+<p><img alt="image-20220507120653090" src="../../img/kubenetes/image-20220507120653090.png" /></p>
+<p><img alt="image-20220507120725815" src="../../img/kubenetes/image-20220507120725815.png" /></p>
+<p><img alt="image-20220507120808122" src="../../img/kubenetes/image-20220507120808122.png" /></p>
+<p><img alt="image-20220507120849669" src="../../img/kubenetes/image-20220507120849669.png" /></p>
 <div class="highlight"><pre><span></span><code><span class="n">克隆cri-dockerd源码</span>
 <span class="c"># git clone https://github.com/Mirantis/cri-dockerd.git</span>
 </code></pre></div>
@@ -3863,10 +3863,10 @@
 <p>安装参考网址：<a href="https://projectcalico.docs.tigera.io/about/about-calico">https://projectcalico.docs.tigera.io/about/about-calico</a></p>
 </blockquote>
 <h4 id="2381_calico_1">2.3.8.1  calico安装<a class="headerlink" href="#2381_calico_1" title="Permanent link">&para;</a></h4>
-<p><img alt="image-20220119141547207" src="../img/kubernetes/image-20220119141547207.png" /></p>
-<p><img alt="image-20220119141645676" src="../img/kubernetes/image-20220119141645676.png" /></p>
-<p><img alt="image-20220119141734347" src="../img/kubernetes/image-20220119141734347.png" /></p>
-<p><img alt="image-20220119141830625" src="../img/kubernetes/image-20220119141830625.png" /></p>
+<p><img alt="image-20220119141547207" src="../../img/kubenetes/image-20220119141547207.png" /></p>
+<p><img alt="image-20220119141645676" src="../../img/kubenetes/image-20220119141645676.png" /></p>
+<p><img alt="image-20220119141734347" src="../../img/kubenetes/image-20220119141734347.png" /></p>
+<p><img alt="image-20220119141830625" src="../../img/kubenetes/image-20220119141830625.png" /></p>
 <div class="highlight"><pre><span></span><code><span class="n">下载operator资源清单文件</span>
 <span class="p">[</span><span class="n">root</span><span class="nv">@k8s</span><span class="n">-master01</span> <span class="p">~]</span><span class="c"># wget https://docs.projectcalico.org/manifests/tigera-operator.yaml</span>
 </code></pre></div>
@@ -3918,8 +3918,8 @@
 <span class="n">kube-scheduler-k8s-master01</span>            <span class="n">1</span><span class="p">/</span><span class="n">1</span>     <span class="n">Running</span>   <span class="n">0</span>          <span class="n">12h</span>
 </code></pre></div>
 <h4 id="2382_calico_1">2.3.8.2  calico客户端安装<a class="headerlink" href="#2382_calico_1" title="Permanent link">&para;</a></h4>
-<p><img alt="image-20220119144207789" src="../img/kubernetes/image-20220119144207789.png" /></p>
-<p><img alt="image-20220119144446449" src="../img/kubernetes/image-20220119144446449.png" /></p>
+<p><img alt="image-20220119144207789" src="../../img/kubenetes/image-20220119144207789.png" /></p>
+<p><img alt="image-20220119144446449" src="../../img/kubenetes/image-20220119144446449.png" /></p>
 <div class="highlight"><pre><span></span><code><span class="n">下载二进制文件</span>
 <span class="c"># curl -L https://github.com/projectcalico/calico/releases/download/v3.21.4/calicoctl-linux-amd64 -o calicoctl</span>
 </code></pre></div>
