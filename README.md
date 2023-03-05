@@ -144,7 +144,7 @@
 * * [Docker主机集群化方案 Docker Swarm](docs/cloud/docker_swarm.md)
 * * [基于Docker容器DevOps应用方案 企业业务代码发布系统](docs/cloud/docker_devops.md)
 * * [轻量级或工业级容器管理工具](docs/cloud/docker_container.md)
-* * [云计算](docs/cloud/compute.md)
+* * [kubeadm极速部署Kubernetes](docs/cloud/kubenetes.md)
 * * [云计算](docs/cloud/compute.md)
 * * [云计算](docs/cloud/compute.md)
 * * [云计算](docs/cloud/compute.md)
