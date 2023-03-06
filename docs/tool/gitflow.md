@@ -73,7 +73,7 @@ git fetch -p
 ### Git工作流指南：Gitflow工作流
 在你开始阅读之前，请记住：流程应被视作为指导方针，而非“铁律”。我们只是想告诉你可能的做法。因此，如果有必要的话，你可以组合使用不同的流程
 
-![gitflow](./../img/git-workflows-gitflow.png)
+![gitflow](../img/gitflow/git-workflows-gitflow.png)
 
 Gitflow工作流定义了一个围绕项目发布的严格分支模型。虽然比功能分支工作流复杂几分，但提供了用于一个健壮的用于管理大型项目的框架。
 Gitflow工作流没有用超出功能分支工作流的概念和命令，而是为不同的分支分配一个很明确的角色，并定义分支之间如何和什么时候进行交互。除了使用功能分支，在做准备、维护和记录发布也使用各自的分支。当然你可以用上功能分支工作流所有的好处：Pull Requests、隔离实验性开发和更高效的协作。
@@ -86,19 +86,19 @@ Gitflow工作流仍然用中央仓库作为所有开发者的交互中心。和�
 
 相对使用仅有的一个master分支，Gitflow工作流使用2个分支来记录项目的历史。master分支存储了正式发布的历史，而develop分支作为功能的集成分支。这样也方便master分支上的所有提交分配一个版本号。
 
-![gitflow](./../img/git-workflow-release-cycle-1historical.png)
+![gitflow](../img/gitflow/git-workflow-release-cycle-1historical.png)
 剩下要说明的问题围绕着这2个分支的区别展开。
 #### 功能分支
 
 每个新功能位于一个自己的分支，这样可以push到中央仓库以备份和协作。但功能分支不是从master分支上拉出新分支，而是使用develop分支作为父分支。当新功能完成时，合并回develop分支。新功能提交应该从不直接与master分支交互。
 
-![gitflow](./../img/git-workflow-release-cycle-2feature.png)
+![gitflow](../img/gitflow/git-workflow-release-cycle-2feature.png)
 
 注意，从各种含义和目的上来看，功能分支加上develop分支就是功能分支工作流的用法。但Gitflow工作流没有在这里止步。
 
 #### 发布分支
 
-![gitflow](./../img/git-workflow-release-cycle-3release.png)
+![gitflow](../img/gitflow/git-workflow-release-cycle-3release.png)
 
 一旦develop分支上有了做一次发布（或者说快到了既定的发布日）的足够功能，就从develop分支上fork一个发布分支。新建的分支用于开始发布循环，所以从这个时间点开始之后新的功能不能再加到这个分支上 —— 这个分支只应该做Bug修复、文档生成和其它面向发布任务。一旦对外发布的工作都完成了，发布分支合并到master分支并分配一个版本号打好Tag。另外，这些从新建发布分支以来的做的修改要合并回develop分支。
 使用一个用于发布准备的专门分支，使得一个团队可以在完善当前的发布版本的同时，另一个团队可以继续开发下个版本的功能。
@@ -113,7 +113,7 @@ Gitflow工作流仍然用中央仓库作为所有开发者的交互中心。和�
 
 #### 维护分支
 
-![gitflow](./../img/git-workflow-release-cycle-4maintenance.png)
+![gitflow](../img/gitflow/git-workflow-release-cycle-4maintenance.png)
 
 维护分支或说是热修复（hotfix）分支用于生成快速给产品发布版本（production releases）打补丁，这是唯一可以直接从master分支fork出来的分支。修复完成，修改应该马上合并回master分支和develop分支（当前的发布分支），master分支应该用新的版本号打好Tag。
 为Bug修复使用专门分支，让团队可以处理掉问题而不用打断其它工作或是等待下一个发布循环。你可以把维护分支想成是一个直接在master分支上处理的临时发布。
@@ -124,7 +124,7 @@ Gitflow工作流仍然用中央仓库作为所有开发者的交互中心。和�
 
 ##### 创建开发分支
 
-![gitflow](./../img/git-workflow-release-cycle-5createdev.png)
+![gitflow](../img/gitflow/git-workflow-release-cycle-5createdev.png)
 
 第一步为master分支配套一个develop分支。简单来做可以本地创建一个空的develop分支，push到服务器上：
 ```
@@ -139,7 +139,7 @@ git checkout -b develop origin/develop
 现在每个开发都有了这些历史分支的本地拷贝。
 ##### 工程师A和工程师B开始开发新功能
 
-![gitflow](./../img/git-workflow-release-cycle-6maryjohnbeginnew.png)
+![gitflow](../img/gitflow/git-workflow-release-cycle-6maryjohnbeginnew.png)
 这个示例中，工程师A和工程师B开始各自的功能开发。他们需要为各自的功能创建相应的分支。新分支不是基于master分支，而是应该基于develop分支：
 ```
 git checkout -b some-feature develop
@@ -154,7 +154,7 @@ git commit
 
 ##### 工程师A完成功能开发
 
-![gitflow](./../img/git-workflow-release-cycle-7maryfinishes.png)
+![gitflow](../img/gitflow/git-workflow-release-cycle-7maryfinishes.png)
 添加了提交后，工程师A觉得她的功能OK了。如果团队使用Pull Requests，这时候可以发起一个用于合并到develop分支。否则她可以直接合并到她本地的develop分支后push到中央仓库：
 ```
 git pull origin develop
@@ -167,7 +167,7 @@ git branch -d some-feature
 
 ##### 工程师A开始准备发布
 
-![gitflow](./../img/git-workflow-release-cycle-8maryprepsrelease.png)
+![gitflow](../img/gitflow/git-workflow-release-cycle-8maryprepsrelease.png)
 
 这个时候工程师B正在实现他的功能，工程师A开始准备她的第一个项目正式发布。像功能开发一样，她用一个新的分支来做发布准备。这一步也确定了发布的版本号：
 ```
@@ -179,7 +179,7 @@ git checkout -b release-0.1 develop
 
 ##### 工程师A完成发布
 
-![gitflow](./../img/git-workflow-release-cycle-9maryfinishes.png)
+![gitflow](../img/gitflow/git-workflow-release-cycle-9maryfinishes.png)
 
 一旦准备好了对外发布，工程师A合并修改到master分支和develop分支上，删除发布分支。合并回develop分支很重要，因为在发布分支中已经提交的更新需要在后面的新功能中也要是可用的。另外，如果工程师A的团队要求Code Review，这是一个发起Pull Request的理想时机。
 
@@ -203,7 +203,7 @@ Git有提供各种勾子（hook），即仓库有事件发生时触发执行的�
 
 ##### 最终用户发现Bug
 
-![gitflow](./../img/git-workflow-gitflow-enduserbug.png)
+![gitflow](../img/gitflow/git-workflow-gitflow-enduserbug.png)
 
 对外发布后，工程师A回去和工程师B一起做下个发布的新功能开发，直到有最终用户开了一个Ticket抱怨当前版本的一个Bug。为了处理Bug，工程师A（或工程师B）从master分支上拉出了一个维护分支，提交修改以解决问题，然后直接合并回master分支：
 

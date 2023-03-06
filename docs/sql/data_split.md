@@ -19,7 +19,7 @@
 ## 二、分库分表
 
 ### 1、水平分库
-![](./../img/data_split.png)
+![](../img/data_split/data_split.png)
 
 1. 概念：以字段为依据，按照一定策略（hash、range等），将一个库中的数据拆分到多个库中。
 2. 结果：
@@ -30,7 +30,7 @@
 4. 分析：库多了，io和cpu的压力自然可以成倍缓解。
 
 ###2、水平分表
-![](./../img/data_split1.png)
+![](../img/data_split/data_split1.png)
 
 1. 概念：以字段为依据，按照一定策略（hash、range等），将一个表中的数据拆分到多个表中。
 2. 结果：
@@ -41,7 +41,7 @@
 4. 分析：表的数据量少了，单次SQL执行效率高，自然减轻了CPU的负担。
 
 ### 3、垂直分库
-![](./../img/data_split2.png)
+![](../img/data_split/data_split2.png)
 
 1. 概念：以表为依据，按照业务归属不同，将不同的表拆分到不同的库中。
 2. 结果：
@@ -52,7 +52,7 @@
 4. 分析：到这一步，基本上就可以服务化了。例如，随着业务的发展一些公用的配置表、字典表等越来越多，这时可以将这些表拆到单独的库中，甚至可以服务化。再有，随着业务的发展孵化出了一套业务模式，这时可以将相关的表拆到单独的库中，甚至可以服务化。
 
 ### 4、垂直分表
-![](./../img/data_split3.png)
+![](../img/data_split/data_split3.png)
 
 1. 概念：以字段为依据，按照字段的活跃性，将表中字段拆到不同的表（主表和扩展表）中。
 2. 结果：
@@ -79,22 +79,22 @@
 
 1. 端上除了partition key只有一个非partition key作为条件查询
     * 映射法
-    ![](./../img/data_split4.png)    
+    ![](../img/data_split/data_split4.png)    
     * 基因法
-    ![](./../img/data_split5.png)    
+    ![](../img/data_split/data_split5.png)    
 
 注：写入时，基因法生成user_id，如图。关于xbit基因，例如要分8张表，23=8，故x取3，即3bit基因。根据user_id查询时可直接取模路由到对应的分库或分表。根据user_name查询时，先通过user_name_code生成函数生成user_name_code再对其取模路由到对应的分库或分表。id生成常用snowflake算法。
 2. 端上除了partition key不止一个非partition key作为条件查询
     * 映射法
-    ![](./../img/data_split6.png) 
+    ![](../img/data_split/data_split6.png) 
     * 冗余法
-    ![](./../img/data_split7.png) 
+    ![](../img/data_split/data_split7.png) 
 注：按照order_id或buyer_id查询时路由到db_o_buyer库中，按照seller_id查询时路由到db_o_seller库中。感觉有点本末倒置！有其他好的办法吗？改变技术栈呢？    
 3. 后台除了partition key还有各种非partition key组合条件查询
     * NoSQL法
-    ![](./../img/data_split8.png) 
+    ![](../img/data_split/data_split8.png) 
     * 冗余法
-    ![](./../img/data_split9.png) 
+    ![](../img/data_split/data_split9.png) 
 
 ### 2、非partition key跨库跨表分页查询问题（水平分库分表，拆分策略为常用的hash法）
 
@@ -103,10 +103,10 @@
 ### 3、扩容问题（水平分库分表，拆分策略为常用的hash法）
 
 1. 水平扩容库（升级从库法）
-![](./../img/data_split10.png)
+![](../img/data_split/data_split10.png)
 注：扩容是成倍的。
 2. 水平扩容表（双写迁移法）
-![](./../img/data_split11.png)
+![](../img/data_split/data_split11.png)
 
 第一步：（同步双写）应用配置双写，部署；
 第二步：（同步双写）将老库中的老数据复制到新库中；
@@ -120,6 +120,3 @@
 1. 分库分表，首先得知道瓶颈在哪里，然后才能合理地拆分（分库还是分表？水平还是垂直？分几个？）。且不可为了分库分表而拆分。
 2. 选key很重要，既要考虑到拆分均匀，也要考虑到非partition key的查询。
 3. 只要能满足需求，拆分规则越简单越好。    
-## 七、分库分表示例
-
-[示例GitHub地址：](https://github.com/yangfubing/SpringBootLearn)https://github.com/yangfubing/SpringBootLearn

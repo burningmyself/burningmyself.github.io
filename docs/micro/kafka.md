@@ -18,13 +18,13 @@ Kafka 本质上是一个 MQ（Message Queue），使用消息队列的好处？�
 
 ### 发布/订阅模式
 
-![kafka](../img/kafka-1.png)
+![kafka](../img/micro_kafka/kafka-1.png)
 
 一对多，生产者将消息发布到 Topic 中，有多个消费者订阅该主题，发布到 Topic 的消息会被所有订阅者消费，被消费的数据不会立即从 Topic 清除。
 
 ## 架构
 
-![kafka](../img/kafka-2.png)
+![kafka](../img/micro_kafka/kafka-2.png)
 
 Kafka 存储的消息来自任意多被称为 Producer 生产者的进程。数据从而可以被发布到不同的 Topic 主题下的不同 Partition 分区。
 
@@ -52,7 +52,7 @@ Kafka 运行在一个由一台或多台服务器组成的集群上，并且分�
 Kafka集群将 Record 流存储在称为 Topic 的类别中，每个记录由一个键、一个值和一个时间戳组成。
 
 
-![kafka](../img/kafka-3.png)
+![kafka](../img/micro_kafka/kafka-3.png)
 
 > Kafka 是一个分布式流平台，这到底是什么意思？
   
@@ -70,7 +70,7 @@ Producer 生产的数据会不断追加到该 log 文件末端，且每条数据
 
 ## 存储机制
 
-![kafka](../img/kafka-4.png)
+![kafka](../img/micro_kafka/kafka-4.png)
 
 由于生产者生产的消息会不断追加到 log 文件末尾，为防止 log 文件过大导致数据定位效率低下，Kafka 采取了分片和索引机制。
 
@@ -88,7 +88,7 @@ leader-epoch-checkpoint
 ```
 index 和 log 文件以当前 Segment 的第一条消息的 Offset 命名。下图为 index 文件和 log 文件的结构示意图：
 
-![kafka](../img/kafka-5.png)
+![kafka](../img/micro_kafka/kafka-5.png)
 
 “.index” 文件存储大量的索引信息，“.log” 文件存储大量的数据，索引文件中的元数据指向对应数据文件中 Message 的物理偏移量。
 
@@ -124,7 +124,7 @@ index 和 log 文件以当前 Segment 的第一条消息的 Offset 命名。下�
 
 如果 Producer 收到 ACK，就会进行下一轮的发送，否则重新发送数据。
 
-![kafka](../img/kafka-6.png)
+![kafka](../img/micro_kafka/kafka-6.png)
 
 ①副本数据同步策略
 
@@ -132,7 +132,7 @@ index 和 log 文件以当前 Segment 的第一条消息的 Offset 命名。下�
 
 多少个 Follower 同步完成后发送 ACK？全部 Follower 同步完成，再发送 ACK。
 
-![kafka](../img/kafka-7.png)
+![kafka](../img/micro_kafka/kafka-7.png)
 
 ②ISR
 
@@ -150,7 +150,7 @@ index 和 log 文件以当前 Segment 的第一条消息的 Offset 命名。下�
 
 所以 Kafka 为用户提供了三种可靠性级别，用户根据可靠性和延迟的要求进行权衡，选择以下的配置。
 
-![kafka](../img/kafka-8.png)
+![kafka](../img/micro_kafka/kafka-8.png)
 
 Ack 参数配置：
   * 0：Producer 不等待 Broker 的 ACK，这提供了最低延迟，Broker 一收到数据还没有写入磁盘就已经返回，当 Broker 故障时有可能丢失数据。
@@ -159,7 +159,7 @@ Ack 参数配置：
 
 ④故障处理细节  
 
-![kafka](../img/kafka-9.png)
+![kafka](../img/micro_kafka/kafka-9.png)
 
 LEO：每个副本最大的 Offset。HW：消费者能见到的最大的 Offset，ISR 队列中最小的 LEO。
 
@@ -221,25 +221,25 @@ Kafka 有两种分配策略，一个是 RoundRobin，一个是 Range，默认为
 
 ①RoundRobin
 
-![kafka](../img/kafka-10.png)
+![kafka](../img/micro_kafka/kafka-10.png)
 
 RoundRobin 轮询方式将分区所有作为一个整体进行 Hash 排序，消费者组内分配分区个数最大差别为 1，是按照组来分的，可以解决多个消费者消费数据不均衡的问题。
 
 但是，当消费者组内订阅不同主题时，可能造成消费混乱，如下图所示，Consumer0 订阅主题 A，Consumer1 订阅主题 B。
 
-![kafka](../img/kafka-11.png)
+![kafka](../img/micro_kafka/kafka-11.png)
 
 将 A、B 主题的分区排序后分配给消费者组，TopicB 分区中的数据可能分配到 Consumer0 中。
 
 ②Range
 
-![kafka](../img/kafka-12.png)
+![kafka](../img/micro_kafka/kafka-12.png)
 
 Range 方式是按照主题来分的，不会产生轮询方式的消费混乱问题。
 
 但是，如下图所示，Consumer0、Consumer1 同时订阅了主题 A 和 B，可能造成消息分配不对等问题，当消费者组内订阅的主题越多，分区分配可能越不均衡。
 
-![kafka](../img/kafka-13.png)
+![kafka](../img/micro_kafka/kafka-13.png)
 
 ### Offset 的维护
 

@@ -85,7 +85,7 @@ Eureka 属于 Spring Cloud Netflix 下的组件之一，主要负责服务的注
 
 请看下图：
 
-![spring-cloud-micro](../img/spring-cloud-micro-1.png)
+![spring-cloud-micro](../img/spring_cloud_micro/spring-cloud-micro-1.png)
 
 这就是 Eureka 的主要功能，也是我们使用中的最值得注意的，他让服务之间的通信变得更加的简单灵活。
 
@@ -107,7 +107,7 @@ Spring Cloud Config 为分布式系统中的外部配置提供服务器和客户
 
 我能不能将这些变动较大的配置集中管理，不同环境的管理者分别对他们进行修改，就不需要再服务中做改动了，Config 就做到了。
 
-![spring-cloud-micro](../img/spring-cloud-micro-2.png)
+![spring-cloud-micro](../img/spring_cloud_micro/spring-cloud-micro-2.png)
 
 这就是 Config 的大致架构，所有的配置文件都集中交给 Config 管理，拿 Config 怎么管理这些配置文件呢？
 
@@ -133,7 +133,7 @@ Spring Cloud Config 为分布式系统中的外部配置提供服务器和客户
 
 我们在日常开发过程中并不会使用那么多，基本上就是认证、动态路由、安全等等，我画了一张关于网关的架构图，请看：
 
-![spring-cloud-micro](../img/spring-cloud-micro-3.png)
+![spring-cloud-micro](../img/spring_cloud_micro/spring-cloud-micro-3.png)
 
 注意：Nginx 只能为我们做反向代理，不能做到权限认证，网关不但可以做到代理，也能做到权限认证、甚至还能做限流，所以我们要做分布式项目，少了他可不行。
 
@@ -163,7 +163,7 @@ Bus 的基本原理就是：配置文件发生改变时，Config 会发出一个
 
 这是一个很简单的原理，理解起来可能也不会怎么难，画个图来理解一下：
 
-![spring-cloud-micro](../img/spring-cloud-micro-4.png)
+![spring-cloud-micro](../img/spring_cloud_micro/spring-cloud-micro-4.png)
 
 大致流程就是这样，核心就是通过 MQ 机制实现不重启服务也能做到配置文件的改动，这方便了运维工程师，不用每次修改配置文件的时候都要去重启一遍服务的烦恼。
 
@@ -176,7 +176,7 @@ Spring Cloud 增加了对 Spring MVC 注释的支持，并使用 Spring Web 中�
 
 Spring Cloud 集成 Ribbon 和 Eureka 以在使用 Feign 时提供负载均衡的 HTTP 客户端。
 
-![spring-cloud-micro](../img/spring-cloud-micro-5.png)
+![spring-cloud-micro](../img/spring_cloud_micro/spring-cloud-micro-5.png)
 
 Feign 基于 Rest 风格，简单易懂，他的底层是对 HttpClient 进行了一层封装，使用十分方便。
 
@@ -185,7 +185,7 @@ Feign 基于 Rest 风格，简单易懂，他的底层是对 HttpClient 进行�
 
 我们可以改造一下刚刚的调用架构：
 
-![spring-cloud-micro](../img/spring-cloud-micro-6.png)
+![spring-cloud-micro](../img/spring_cloud_micro/spring-cloud-micro-6.png)
 
 在这里我部署了一台备用服务器，当用户服务宕机了之后，订单服务进行远程调用的时候可以进入备用服务，这样就不会导致系统崩溃。
 
@@ -204,7 +204,7 @@ Feign 基于 Rest 风格，简单易懂，他的底层是对 HttpClient 进行�
 
 MQ 不但可以解耦服务，它还可以用来削峰，提高系统的性能，是一个不错的选择。
 
-![spring-cloud-micro](../img/spring-cloud-micro-7.png)
+![spring-cloud-micro](../img/spring_cloud_micro/spring-cloud-micro-7.png)
 
 ### 分布式事务
 
@@ -226,7 +226,7 @@ MQ 不但可以解耦服务，它还可以用来削峰，提高系统的性能�
 
 系统中会一直定时扫描订单中状态，没有成功的就做补偿机制或者重试机制，这个不是唯一要求。
 
-![spring-cloud-micro](../img/spring-cloud-micro-8.png)
+![spring-cloud-micro](../img/spring_cloud_micro/spring-cloud-micro-8.png)
 
 以上就是 MQ 确保分布式事务的大致思路，不是唯一，仅供参考。
 
@@ -238,7 +238,7 @@ Seata 有三个基本组成部分：
 * **事务管理器 TM**：定义全局事务的范围：开始全局事务，提交或回滚全局事务。
 * **资源管理器（RM）**：管理分支事务正在处理的资源，与 TC 进行对话以注册分支事务并报告分支事务的状态，并驱动分支事务的提交或回滚。
 
-![spring-cloud-micro](../img/spring-cloud-micro-9.png)
+![spring-cloud-micro](../img/spring_cloud_micro/spring-cloud-micro-9.png)
 
 Seata 管理的分布式事务的典型生命周期：
 
@@ -252,7 +252,7 @@ Seata 管理的分布式事务的典型生命周期：
 
 完整的分布式架构如下图：
 
-![spring-cloud-micro](../img/spring-cloud-micro-10.png)
+![spring-cloud-micro](../img/spring_cloud_micro/spring-cloud-micro-10.png)
 
 这就是一套分布式基本的架构，请求从浏览器发出，经过 Nginx 反向代理到 Zuul 网关。
 
@@ -264,7 +264,7 @@ Seata 管理的分布式事务的典型生命周期：
 
 那我们将这个流程图再改良一下：
 
-![spring-cloud-micro](../img/spring-cloud-micro-11.png)
+![spring-cloud-micro](../img/spring_cloud_micro/spring-cloud-micro-11.png)
 
 现在这套架构就是比较程数的一套了，不管是性能还是稳定能，都是杠杠的，技术选择性的会也开得差不多了，最后技术总监做了一个总结。
 
