@@ -21,66 +21,6 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://burningmyself.gitee.io/cloud/docker_compose/</loc>
-         <lastmod>2023-03-06</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://burningmyself.gitee.io/cloud/docker_container/</loc>
-         <lastmod>2023-03-06</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://burningmyself.gitee.io/cloud/docker_container_enterprice/</loc>
-         <lastmod>2023-03-06</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://burningmyself.gitee.io/cloud/docker_date/</loc>
-         <lastmod>2023-03-06</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://burningmyself.gitee.io/cloud/docker_devops/</loc>
-         <lastmod>2023-03-06</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://burningmyself.gitee.io/cloud/docker_file/</loc>
-         <lastmod>2023-03-06</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://burningmyself.gitee.io/cloud/docker_image/</loc>
-         <lastmod>2023-03-06</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://burningmyself.gitee.io/cloud/docker_image_fast/</loc>
-         <lastmod>2023-03-06</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://burningmyself.gitee.io/cloud/docker_native/</loc>
-         <lastmod>2023-03-06</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://burningmyself.gitee.io/cloud/docker_network/</loc>
-         <lastmod>2023-03-06</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://burningmyself.gitee.io/cloud/docker_nginx/</loc>
-         <lastmod>2023-03-06</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://burningmyself.gitee.io/cloud/docker_swarm/</loc>
-         <lastmod>2023-03-06</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
          <loc>https://burningmyself.gitee.io/cloud/kubenetes/</loc>
          <lastmod>2023-03-06</lastmod>
          <changefreq>daily</changefreq>
@@ -92,6 +32,66 @@
     </url>
     <url>
          <loc>https://burningmyself.gitee.io/cloud/virtual/</loc>
+         <lastmod>2023-03-06</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://burningmyself.gitee.io/cloud/docker/docker_compose/</loc>
+         <lastmod>2023-03-06</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://burningmyself.gitee.io/cloud/docker/docker_container/</loc>
+         <lastmod>2023-03-06</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://burningmyself.gitee.io/cloud/docker/docker_container_enterprice/</loc>
+         <lastmod>2023-03-06</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://burningmyself.gitee.io/cloud/docker/docker_date/</loc>
+         <lastmod>2023-03-06</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://burningmyself.gitee.io/cloud/docker/docker_devops/</loc>
+         <lastmod>2023-03-06</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://burningmyself.gitee.io/cloud/docker/docker_file/</loc>
+         <lastmod>2023-03-06</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://burningmyself.gitee.io/cloud/docker/docker_image/</loc>
+         <lastmod>2023-03-06</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://burningmyself.gitee.io/cloud/docker/docker_image_fast/</loc>
+         <lastmod>2023-03-06</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://burningmyself.gitee.io/cloud/docker/docker_native/</loc>
+         <lastmod>2023-03-06</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://burningmyself.gitee.io/cloud/docker/docker_network/</loc>
+         <lastmod>2023-03-06</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://burningmyself.gitee.io/cloud/docker/docker_nginx/</loc>
+         <lastmod>2023-03-06</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://burningmyself.gitee.io/cloud/docker/docker_swarm/</loc>
          <lastmod>2023-03-06</lastmod>
          <changefreq>daily</changefreq>
     </url>
