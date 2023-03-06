@@ -41,7 +41,7 @@
 
 
 
-![image-20220215214445753](../../../img/docker_compose/image-20220215214445753.png)
+![image-20220215214445753](../../img/docker_compose/image-20220215214445753.png)
 
 
 

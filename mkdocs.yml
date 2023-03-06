@@ -118,7 +118,7 @@ nav:
     - Kubernetes:
       - kubeadm极速部署Kubernetes: cloud/kubernetes.md
       - kubernetes介绍与集群架构: cloud/kubernetes/kubernetes_introduce.md
-      - 云计算: cloud/compute.md
+      - Kubernetes集群部署方式说明: cloud/kubernetes/kubernetes_way.md
       - 云计算: cloud/compute.md
       - 云计算: cloud/compute.md        
       - 云计算: cloud/compute.md

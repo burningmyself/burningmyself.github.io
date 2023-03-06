@@ -146,7 +146,7 @@
 * * [轻量级或工业级容器管理工具](docs/cloud/docker/docker_container.md)
 * * [kubeadm极速部署Kubernetes](docs/cloud/kubernetes.md)
 * * [kubernetes介绍与集群架构](docs/cloud/kubernetes/kubernetes_introduce.md)
-* * [云计算](docs/cloud/compute.md)
+* * [Kubernetes集群部署方式说明](docs/cloud/kubernetes/kubernetes_way.md)
 * * [云计算](docs/cloud/compute.md)
 * * [云计算](docs/cloud/compute.md)
 * * [云计算](docs/cloud/compute.md)
