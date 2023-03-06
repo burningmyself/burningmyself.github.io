@@ -56,7 +56,7 @@
 
 
 
-<img src="../img/kubernetes/kubernetes_introduce/1557045795562.png" alt="1557045795562" style="zoom:50%;" />
+<img src="../../img/kubernetes/kubernetes_introduce/1557045795562.png" alt="1557045795562" style="zoom:50%;" />
 
 
 
@@ -86,7 +86,7 @@
 
 
 
-![image-20220324160124674](../img/kubernetes/kubernetes_introduce/image-20220324160124674.png)
+![image-20220324160124674](../../img/kubernetes/kubernetes_introduce/image-20220324160124674.png)
 
 
 
@@ -106,7 +106,7 @@
 
 
 
-![1557046658333](../img/kubernetes/kubernetes_introduce/1557046658333.png)
+![1557046658333](../../img/kubernetes/kubernetes_introduce/1557046658333.png)
 
 
 
@@ -127,7 +127,7 @@
 
 https://kubernetes.io/
 
-![1557046832480](../img/kubernetes/kubernetes_introduce/1557046832480.png)
+![1557046832480](../../img/kubernetes/kubernetes_introduce/1557046832480.png)
 
 
 
@@ -135,7 +135,7 @@ https://kubernetes.io/zh/
 
 
 
-![image-20220324145026425](../img/kubernetes/kubernetes_introduce/image-20220324145026425.png)
+![image-20220324145026425](../../img/kubernetes/kubernetes_introduce/image-20220324145026425.png)
 
 
 
@@ -148,7 +148,7 @@ https://kubernetes.io/zh/
 
 
 
-![image-20220324145137982](../img/kubernetes/kubernetes_introduce/image-20220324145137982.png)
+![image-20220324145137982](../../img/kubernetes/kubernetes_introduce/image-20220324145137982.png)
 
 
 
@@ -187,11 +187,11 @@ https://kubernetes.io/zh/
 
 ## 3.2 Kubernetes架构图示图
 
-![1557048978763](../img/kubernetes/kubernetes_introduce/1557048978763.png)
+![1557048978763](../../img/kubernetes/kubernetes_introduce/1557048978763.png)
 
 
 
-![1604748712024](../img/kubernetes/kubernetes_introduce/2)
+![1604748712024](../../img/kubernetes/kubernetes_introduce/2.png)
 
 
 
@@ -252,7 +252,7 @@ Node组件包括：
 
 
 
-![1564397969713](../img/kubernetes/kubernetes_introduce/k8s架构图2.png)
+![1564397969713](../../img/kubernetes/kubernetes_introduce/k8s.png)
 
 
 

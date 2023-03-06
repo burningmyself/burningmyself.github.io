@@ -114,16 +114,16 @@ nav:
       - Docker容器服务编排利器Docker Compose应用实战: cloud/docker/docker_compose.md 
       - Docker主机集群化方案 Docker Swarm: cloud/docker/docker_swarm.md
       - 基于Docker容器DevOps应用方案 企业业务代码发布系统: cloud/docker/docker_devops.md
-      - 轻量级或工业级容器管理工具: cloud/docker/docker_container.md 
-    - kubeadm极速部署Kubernetes: cloud/kubernetes.md
-    -Kubernetes:
+      - 轻量级或工业级容器管理工具: cloud/docker/docker_container.md     
+    - Kubernetes:
+      - kubeadm极速部署Kubernetes: cloud/kubernetes.md
       - kubernetes介绍与集群架构: cloud/kubernetes/kubernetes_introduce.md
-    - 云计算: cloud/compute.md
-    - 云计算: cloud/compute.md
-    - 云计算: cloud/compute.md        
-    - 云计算: cloud/compute.md
-    - 云计算: cloud/compute.md
-    - 云计算: cloud/compute.md                  
+      - 云计算: cloud/compute.md
+      - 云计算: cloud/compute.md
+      - 云计算: cloud/compute.md        
+      - 云计算: cloud/compute.md
+      - 云计算: cloud/compute.md
+      - 云计算: cloud/compute.md                  
   - 微服务:  
       - 分布式锁: micro/fbs-lock.md
       - 微服务设计: micro/design.md
