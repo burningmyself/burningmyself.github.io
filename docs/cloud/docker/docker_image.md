@@ -72,21 +72,21 @@ jdeathe/centos-ssh                OpenSSH / Supervisor / EPEL/IUS/SCL Repos - â€
 
 
 
-![image-20220124162022990](../../../img/docker_image/image-20220124162022990.png)
+![image-20220124162022990](../../img/docker_image/image-20220124162022990.png)
 
 
 
 
 
-![image-20220124162116338](../../../img/docker_image/image-20220124162116338.png)
+![image-20220124162116338](../../img/docker_image/image-20220124162116338.png)
 
 
 
-![image-20220124162200273](../../../img/docker_image/image-20220124162200273.png)
+![image-20220124162200273](../../img/docker_image/image-20220124162200273.png)
 
 
 
-![image-20220124162312918](../../../img/docker_image/image-20220124162312918.png)
+![image-20220124162312918](../../img/docker_image/image-20220124162312918.png)
 
 
 
@@ -165,7 +165,7 @@ centos       latest    5d0da3dc9764   4 months ago   231MB
 
 
 
-![image-20220125080435098](../../../img/docker_image/image-20220125080435098.png)
+![image-20220125080435098](../../img/docker_image/image-20220125080435098.png)
 
 
 
@@ -183,7 +183,7 @@ centos       latest    5d0da3dc9764   4 months ago   231MB
 
 
 
-![image-20220125082226414](../../../img/docker_image/image-20220125082226414.png)
+![image-20220125082226414](../../img/docker_image/image-20220125082226414.png)
 
 
 
