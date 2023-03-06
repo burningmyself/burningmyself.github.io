@@ -101,6 +101,11 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://burningmyself.gitee.io/cloud/kubernetes/kubernetes_way/</loc>
+         <lastmod>2023-03-06</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://burningmyself.gitee.io/dart/syntax/</loc>
          <lastmod>2023-03-06</lastmod>
          <changefreq>daily</changefreq>
