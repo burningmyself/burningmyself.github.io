@@ -1,0 +1,3748 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content=".net,java,php,python,docker,web">
+      
+      
+        <meta name="author" content="BurningMyself">
+      
+      
+        <link rel="canonical" href="https://burningmyself.gitee.io/cloud/kubernetes/kubernetes_hight/">
+      
+      
+        <link rel="prev" href="../kubernetes_master/">
+      
+      
+        <link rel="next" href="../kubernetes_rke/">
+      
+      <link rel="icon" href="../../../favicon.ico">
+      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.0.15">
+    
+    
+      
+        <title>kubeadm部署高可用kubernetes集群 - BurningMyself</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.113286f1.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.a0c5b2b5.min.css">
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="" data-md-color-accent="">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#kubeadmkubernetes_121" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../../.." title="BurningMyself" class="md-header__button md-logo" aria-label="BurningMyself" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            BurningMyself
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              kubeadm部署高可用kubernetes集群
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/burningmyself/burningmyself.github.io" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    burningmyself.github.io
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="BurningMyself" class="md-nav__button md-logo" aria-label="BurningMyself" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    BurningMyself
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/burningmyself/burningmyself.github.io" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    burningmyself.github.io
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        介绍
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+          技术博文
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          技术博文
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="0">
+          .NET
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_1_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2_1">
+          <span class="md-nav__icon md-icon"></span>
+          .NET
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../net/c_sharp/" class="md-nav__link">
+        C#新特性语法
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../net/c_docker/" class="md-nav__link">
+        .Net Core Docker 部署
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../net/c_sqlserver_nginx/" class="md-nav__link">
+        Docker 容器化部署 ASP.NET Core
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../net/c_core_safety/" class="md-nav__link">
+        让你的ASP.NET Core应用程序更安全
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../net/c_core_study_route/" class="md-nav__link">
+        ASP.NET Core开发者指南
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+          Java
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2_2">
+          <span class="md-nav__icon md-icon"></span>
+          Java
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../java/feature/" class="md-nav__link">
+        Java特性
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../java/load-class/" class="md-nav__link">
+        Java类加载
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../java/orm/" class="md-nav__link">
+        Orm的优缺点
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../java/bio-nio/" class="md-nav__link">
+        BIO与NIO
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../java/rocketmq/rmq-1/" class="md-nav__link">
+        RocketMq下载与安装
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../java/springAnnotation/" class="md-nav__link">
+        Spring常用注解
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../java/javavm/" class="md-nav__link">
+        Java 虚拟机
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../java/springdesign/" class="md-nav__link">
+        Spring 常用设计
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../java/spring-cloud/" class="md-nav__link">
+        Spring Cloud
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../java/java-simple/" class="md-nav__link">
+        Java simple
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../java/java-validator/" class="md-nav__link">
+        Java Validator
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../java/java-string/" class="md-nav__link">
+        Java String
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../java/java-utils/" class="md-nav__link">
+        Java Utils
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+          Python
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2_3">
+          <span class="md-nav__icon md-icon"></span>
+          Python
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../python/feature/" class="md-nav__link">
+        Python特性
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../python/str_joint/" class="md-nav__link">
+        Python字符拼接
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../python/syntax_rule/" class="md-nav__link">
+        Python语法技巧
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../python/fabric/" class="md-nav__link">
+        远程部署神器 Fabric
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_4" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_4" id="__nav_2_4_label" tabindex="0">
+          PHP
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_4_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2_4">
+          <span class="md-nav__icon md-icon"></span>
+          PHP
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../php/kj/" class="md-nav__link">
+        框架
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_5" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_5" id="__nav_2_5_label" tabindex="0">
+          Web
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_5_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2_5">
+          <span class="md-nav__icon md-icon"></span>
+          Web
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../web/es6/" class="md-nav__link">
+        es6语法
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../web/ali_js_style/" class="md-nav__link">
+        阿里js样式规范
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../web/node.js/" class="md-nav__link">
+        node.js文档
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../web/react/" class="md-nav__link">
+        React 开发者指南
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../dart/syntax/" class="md-nav__link">
+        Dart语法学习
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../web/react_interview/" class="md-nav__link">
+        React 面试
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../web/js_tool_method/" class="md-nav__link">
+        js 工具函数
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../web/vue_cp_react/" class="md-nav__link">
+        vue与react比较
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../web/javascript/" class="md-nav__link">
+        JavaScript 基础
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_6" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_6" id="__nav_2_6_label" tabindex="0">
+          SQL
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_6_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2_6">
+          <span class="md-nav__icon md-icon"></span>
+          SQL
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../sql/mysql_yh/" class="md-nav__link">
+        MySQL优化
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../sql/mysql_yh17/" class="md-nav__link">
+        MySQL优化
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../sql/mysql_log/" class="md-nav__link">
+        MySQL日志
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../sql/mysql_index/" class="md-nav__link">
+        MySQL索引
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../sql/mysql_pxc/" class="md-nav__link">
+        MySQL PXC集群
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../sql/mysql_use/" class="md-nav__link">
+        MySQL 数据库应用
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../sql/mysql_backups/" class="md-nav__link">
+        MySql 备份
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../sql/sql_server_master/" class="md-nav__link">
+        Sql Server 主从备份
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../sql/data_split/" class="md-nav__link">
+        数据库之互联网常用分库分表方案
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../sql/mybatis/" class="md-nav__link">
+        Mybatis使用心德
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_7" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_7" id="__nav_2_7_label" tabindex="0">
+          Linux
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_7_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2_7">
+          <span class="md-nav__icon md-icon"></span>
+          Linux
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../linux/often/" class="md-nav__link">
+        常用命令
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../linux/ope/" class="md-nav__link">
+        实用的Linux 命令
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_8" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_8" id="__nav_2_8_label" tabindex="0">
+          Docker
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_8_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2_8">
+          <span class="md-nav__icon md-icon"></span>
+          Docker
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../docker/docker/" class="md-nav__link">
+        Docker全科
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../docker/docker-compose/" class="md-nav__link">
+        docker和docker-compose配置常用环境
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../docker/docker-jenkins/" class="md-nav__link">
+        Docker部署Jenkins
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../docker/docker-phabricator/" class="md-nav__link">
+        Docker部署Phabricator
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_9" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_9" id="__nav_2_9_label" tabindex="0">
+          Tool
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_9_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2_9">
+          <span class="md-nav__icon md-icon"></span>
+          Tool
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tool/git/" class="md-nav__link">
+        Git
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tool/gitusual/" class="md-nav__link">
+        Git动画展示
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tool/gitquestion/" class="md-nav__link">
+        Git问题处理
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tool/gitflow/" class="md-nav__link">
+        GitFlow
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tool/gitbook/" class="md-nav__link">
+        GitBook
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tool/gitcmr/" class="md-nav__link">
+        Git提交日志规范
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tool/markdown/" class="md-nav__link">
+        Markdown
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tool/cicd/" class="md-nav__link">
+        CI/CD
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tool/mkdocs/" class="md-nav__link">
+        mkdocs简单使用
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tool/gitstudy/" class="md-nav__link">
+        Git的黑魔法
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tool/minio/" class="md-nav__link">
+        MinIO 搭建使用
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tool/cat-monitoring/" class="md-nav__link">
+        Cat分布式监控
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+          云架构
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          云架构
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../native/" class="md-nav__link">
+        云原生
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../virtual/" class="md-nav__link">
+        虚拟化技术
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../compute/" class="md-nav__link">
+        云计算
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../apprelease/" class="md-nav__link">
+        应用部署容器化演进
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../containerlinux/" class="md-nav__link">
+        容器技术所涉及Linux内核关键技术
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_6" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3_6" id="__nav_3_6_label" tabindex="0">
+          Docker
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_6_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3_6">
+          <span class="md-nav__icon md-icon"></span>
+          Docker
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docker/docker_native/" class="md-nav__link">
+        容器管理工具Docker生态架构及部署
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docker/docker_nginx/" class="md-nav__link">
+        使用容器运行Nginx应用及Docker命令
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docker/docker_image/" class="md-nav__link">
+        Docker容器镜像
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docker/docker_image_fast/" class="md-nav__link">
+        Docker容器镜像加速器及本地容器镜像仓库
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docker/docker_container_enterprice/" class="md-nav__link">
+        Docker容器化部署企业级应用集群
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docker/docker_file/" class="md-nav__link">
+        Dockerfile精讲及新型容器镜像构建技术
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docker/docker_network/" class="md-nav__link">
+        Docker容器网络与通信原理深度解析
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docker/docker_date/" class="md-nav__link">
+        Docker容器数据持久化存储机制
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docker/docker_compose/" class="md-nav__link">
+        Docker容器服务编排利器Docker Compose应用实战
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docker/docker_swarm/" class="md-nav__link">
+        Docker主机集群化方案 Docker Swarm
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docker/docker_devops/" class="md-nav__link">
+        基于Docker容器DevOps应用方案 企业业务代码发布系统
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docker/docker_container/" class="md-nav__link">
+        轻量级或工业级容器管理工具
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_7" checked>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3_7" id="__nav_3_7_label" tabindex="0">
+          Kubernetes
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_7_label" aria-expanded="true">
+        <label class="md-nav__title" for="__nav_3_7">
+          <span class="md-nav__icon md-icon"></span>
+          Kubernetes
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        kubeadm极速部署Kubernetes
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubernetes_introduce/" class="md-nav__link">
+        kubernetes介绍与集群架构
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubernetes_way/" class="md-nav__link">
+        Kubernetes集群部署方式说明
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubernetes_master/" class="md-nav__link">
+        kubeadm部署单Master节点kubernetes集群
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        kubeadm部署高可用kubernetes集群
+      </a>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubernetes_rke/" class="md-nav__link">
+        使用RKE构建企业生产级Kubernetes集群
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubernetes_way/" class="md-nav__link">
+        云计算
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubernetes_way/" class="md-nav__link">
+        云计算
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+          微服务
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          微服务
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../micro/fbs-lock/" class="md-nav__link">
+        分布式锁
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../micro/design/" class="md-nav__link">
+        微服务设计
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../micro/distrimsg/" class="md-nav__link">
+        分布式系统与消息的投递
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../micro/ddd/" class="md-nav__link">
+        基于DDD的微服务设计和开发实战
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../micro/kafka/" class="md-nav__link">
+        Kafka架构原理
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../micro/redis_cluster/" class="md-nav__link">
+        Redis Cluster原理
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../micro/spring-cloud-micro/" class="md-nav__link">
+        分布式架构
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+          经验分析
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          经验分析
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../exp/devops/" class="md-nav__link">
+        DevOps
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../exp/micro-service/" class="md-nav__link">
+        Micro-Service
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../exp/raft-gossip/" class="md-nav__link">
+        Raft算法和Gossip协议
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../exp/cl/" class="md-nav__link">
+        集群和负载均衡
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../exp/ai/" class="md-nav__link">
+        人工智能
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../exp/code-principle/" class="md-nav__link">
+        代码原则
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../exp/techbig/" class="md-nav__link">
+        如何成为技术大牛
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../exp/learnweetout/" class="md-nav__link">
+        程序员如何技术成长
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../exp/pt/" class="md-nav__link">
+        产品与技术
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../exp/four_deep_learning/" class="md-nav__link">
+        深度学习框架
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../exp/tl/" class="md-nav__link">
+        在阿里做了5年技术Leader，我总结出这些套路！
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../exp/cto/" class="md-nav__link">
+        CTO 技能图谱
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+          构架
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_6">
+          <span class="md-nav__icon md-icon"></span>
+          构架
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../framework/split/" class="md-nav__link">
+        构架拆分
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../framework/fgb/" class="md-nav__link">
+        分布式、高并发、多线程
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../framework/agility/" class="md-nav__link">
+        如何理解敏捷开发
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../framework/fwork/" class="md-nav__link">
+        走向架构师必备的技能
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../framework/data_middle/" class="md-nav__link">
+        数据中台的思考与总结
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../framework/algorithm-ten/" class="md-nav__link">
+        必学的 10 大算法
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+          情感
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_7">
+          <span class="md-nav__icon md-icon"></span>
+          情感
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../emotion/eq/" class="md-nav__link">
+        情商
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../emotion/workheard/" class="md-nav__link">
+        工作心得
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../emotion/lookbook/" class="md-nav__link">
+        看书
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../emotion/selfdiscipline/" class="md-nav__link">
+        自律
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../emotion/livefail/" class="md-nav__link">
+        为什么活着失败
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../emotion/emotion/" class="md-nav__link">
+        情绪管理
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../emotion/losecome/" class="md-nav__link">
+        所有的失去，都会以另一种方式归来
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../emotion/threeheart/" class="md-nav__link">
+        人生有这三种好心态
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../emotion/onepath/" class="md-nav__link">
+        余生，学会一个人走，不管有没有人陪
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../emotion/twopath/" class="md-nav__link">
+        往后余生还很精彩，别被熬夜拖垮了
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../emotion/lifetime/" class="md-nav__link">
+        心态好的人，一辈子都好
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+  
+
+
+<h1 id="kubeadmkubernetes_121">kubeadm部署高可用kubernetes集群 1.21<a class="headerlink" href="#kubeadmkubernetes_121" title="Permanent link">&para;</a></h1>
+<p>​                      </p>
+<h1 id="kubernetes_121">一、kubernetes 1.21发布<a class="headerlink" href="#kubernetes_121" title="Permanent link">&para;</a></h1>
+<p><img alt="image-20220119160108054" src="../../../img/kubernetes/kubernetes_hight/image-20220119160108054.png" /></p>
+<h2 id="11">1.1 介绍<a class="headerlink" href="#11" title="Permanent link">&para;</a></h2>
+<p>2021年04月，Kubernetes 1.21正式与大家见面，这是我们 2021 年的第一个版本！这个版本包含 51 个增强功能：13 个增强功能升级为稳定版，16 个增强功能升级为 beta 版，20 个增强功能进入 alpha 版，还有 2 个功能已经弃用。</p>
+<h2 id="12">1.2 主要变化<a class="headerlink" href="#12" title="Permanent link">&para;</a></h2>
+<ul>
+<li>CronJobs 毕业到稳定！</li>
+</ul>
+<p>自 Kubernetes 1.8 以来，CronJobs一直是一个测试版功能！在 1.21 中，我们终于看到这个广泛使用的 API 毕业到稳定。</p>
+<p>CronJobs 用于执行定期计划的操作，如备份、报告生成等。每个任务都应该被配置为无限期地重复出现（例如：一天/一周/一个月）；你可以在该间隔内定义作业应该启动的时间点。</p>
+<ul>
+<li>不可变的 Secrets 和 ConfigMaps</li>
+</ul>
+<p>Immutable Secrets和ConfigMaps为这些资源类型添加了一个新字段，如果设置了该字段，将拒绝对这些对象的更改。默认情况下，Secrets 和 ConfigMaps 是可变的，这对能够使用更改的 pod 是有益的。如果将错误的配置推送给使用它们的 pod，可变的 Secrets 和 ConfigMaps 也会导致问题。</p>
+<p>通过将 Secrets 和 ConfigMaps 标记为不可变的，可以确保应用程序配置不会改变。如果你希望进行更改，则需要创建一个新的、唯一命名的 Secret 或 ConfigMap，并部署一个新的 pod 来消耗该资源。不可变资源也有伸缩性优势，因为控制器不需要轮询 API 服务器来观察变化。</p>
+<p>这个特性在 Kubernetes 1.21 中已经毕业到稳定。</p>
+<ul>
+<li>IPv4/IPv6 双栈支持</li>
+</ul>
+<p>IP 地址是一种可消耗的资源，集群操作人员和管理员需要确保它不会耗尽。特别是，公共 IPv4 地址现在非常稀少。双栈支持使原生 IPv6 路由到 pod 和服务，同时仍然允许你的集群在需要的地方使用 IPv4。双堆栈集群网络还改善了工作负载的可能伸缩限制。</p>
+<p>Kubernetes 的双栈支持意味着 pod、服务和节点可以获得 IPv4 地址和 IPv6 地址。在 Kubernetes 1.21 中，双栈网络已经从 alpha 升级到 beta，并且已经默认启用了。</p>
+<ul>
+<li>优雅的节点关闭</li>
+</ul>
+<p>在这个版本中，优雅的节点关闭也升级到测试版（现在将提供给更大的用户群）！这是一个非常有益的特性，它允许 kubelet 知道节点关闭，并优雅地终止调度到该节点的 pod。</p>
+<p>目前，当节点关闭时，pod 不会遵循预期的终止生命周期，也不会正常关闭。这可能会在许多不同的工作负载下带来问题。接下来，kubelet 将能够通过 systemd 检测到即将发生的系统关闭，然后通知正在运行的 pod，以便它们能够尽可能优雅地终止。</p>
+<ul>
+<li>PersistentVolume 健康监测器</li>
+</ul>
+<p>持久卷（Persistent Volumes，PV）通常用于应用程序中获取本地的、基于文件的存储。它们可以以许多不同的方式使用，并帮助用户迁移应用程序，而不需要重新编写存储后端。</p>
+<p>Kubernetes 1.21 有一个新的 alpha 特性，允许对 PV 进行监视，以了解卷的运行状况，并在卷变得不健康时相应地进行标记。工作负载将能够对运行状况状态作出反应，以保护数据不被从不健康的卷上写入或读取。</p>
+<ul>
+<li>减少 Kubernetes 的构建维护</li>
+</ul>
+<p>以前，Kubernetes 维护了多个构建系统。这常常成为新贡献者和当前贡献者的摩擦和复杂性的来源。</p>
+<p>在上一个发布周期中，为了简化构建过程和标准化原生的 Golang 构建工具，我们投入了大量的工作。这应该赋予更广泛的社区维护能力，并降低新贡献者进入的门槛。</p>
+<h2 id="13">1.3 重大变化<a class="headerlink" href="#13" title="Permanent link">&para;</a></h2>
+<ul>
+<li>弃用 PodSecurityPolicy</li>
+</ul>
+<p>在 Kubernetes 1.21 中，PodSecurityPolicy 已被弃用。与 Kubernetes 所有已弃用的特性一样，PodSecurityPolicy 将在更多版本中继续可用并提供完整的功能。先前处于测试阶段的 PodSecurityPolicy 计划在 Kubernetes 1.25 中删除。</p>
+<p>接下来是什么？我们正在开发一种新的内置机制来帮助限制 Pod 权限，暂定名为“PSP 替换策略”。我们的计划是让这个新机制覆盖关键的 PodSecurityPolicy 用例，并极大地改善使用体验和可维护性。</p>
+<ul>
+<li>弃用 TopologyKeys</li>
+</ul>
+<p>服务字段 topologyKeys 现在已弃用；所有使用该字段的组件特性以前都是 alpha 特性，现在也已弃用。我们用一种实现感知拓扑路由的方法替换了 topologyKeys，这种方法称为感知拓扑提示。支持拓扑的提示是 Kubernetes 1.21 中的一个 alpha 特性。你可以在拓扑感知提示中阅读关于替换特性的更多细节；相关的KEP解释了我们替换的背景。</p>
+<h1 id="kubernetes_1210">二、kubernetes 1.21.0 部署工具介绍<a class="headerlink" href="#kubernetes_1210" title="Permanent link">&para;</a></h1>
+<h2 id="what_is_kubeadm">What is Kubeadm ?<a class="headerlink" href="#what_is_kubeadm" title="Permanent link">&para;</a></h2>
+<p><code>Kubeadm is a tool built to provide best-practice "fast paths" for creating Kubernetes clusters. It performs the actions necessary to get a minimum viable, secure cluster up and running in a user friendly way. Kubeadm's scope is limited to the local node filesystem and the Kubernetes API, and it is intended to be a composable building block of higher level tools.</code></p>
+<p>Kubeadm是为创建Kubernetes集群提供最佳实践并能够“快速路径”构建kubernetes集群的工具。它能够帮助我们执行必要的操作，以获得最小可行的、安全的集群，并以用户友好的方式运行。</p>
+<h2 id="common_kubeadm_cmdlets">Common Kubeadm cmdlets<a class="headerlink" href="#common_kubeadm_cmdlets" title="Permanent link">&para;</a></h2>
+<ol>
+<li><strong>kubeadm init</strong> to bootstrap the initial Kubernetes control-plane node. <code>初始化</code></li>
+<li><strong>kubeadm join</strong> to bootstrap a Kubernetes worker node or an additional control plane node, and join it to the cluster. <code>添加工作节点到kubernetes集群</code></li>
+<li><strong>kubeadm upgrade</strong> to upgrade a Kubernetes cluster to a newer version. <code>更新kubernetes版本</code></li>
+<li><strong>kubeadm reset</strong> to revert any changes made to this host by kubeadm init or kubeadm join. <code>重置kubernetes集群</code></li>
+</ol>
+<h1 id="kubernetes_1211">三、kubernetes 1.21.0 部署环境准备<a class="headerlink" href="#kubernetes_1211" title="Permanent link">&para;</a></h1>
+<blockquote>
+<p>3主2从</p>
+</blockquote>
+<h2 id="31">3.1 主机操作系统说明<a class="headerlink" href="#31" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th align="center">序号</th>
+<th align="center">操作系统及版本</th>
+<th align="center">备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">1</td>
+<td align="center">CentOS7u6</td>
+<td align="center"></td>
+</tr>
+</tbody>
+</table>
+<h2 id="32">3.2 主机硬件配置说明<a class="headerlink" href="#32" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>需求</th>
+<th>CPU</th>
+<th>内存</th>
+<th>硬盘</th>
+<th>角色</th>
+<th>主机名</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>值</td>
+<td>4C</td>
+<td>8G</td>
+<td>100GB</td>
+<td>master</td>
+<td>master01</td>
+</tr>
+<tr>
+<td>值</td>
+<td>4C</td>
+<td>8G</td>
+<td>100GB</td>
+<td>master</td>
+<td>master02</td>
+</tr>
+<tr>
+<td>值</td>
+<td>4C</td>
+<td>8G</td>
+<td>100GB</td>
+<td>master</td>
+<td>master03</td>
+</tr>
+<tr>
+<td>值</td>
+<td>4C</td>
+<td>8G</td>
+<td>100GB</td>
+<td>worker(node)</td>
+<td>worker01</td>
+</tr>
+<tr>
+<td>值</td>
+<td>4C</td>
+<td>8G</td>
+<td>100GB</td>
+<td>worker(node)</td>
+<td>worker02</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>序号</th>
+<th>主机名</th>
+<th>IP地址</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>master01</td>
+<td>192.168.10.11</td>
+<td>master</td>
+</tr>
+<tr>
+<td>2</td>
+<td>master02</td>
+<td>192.168.10.12</td>
+<td>master</td>
+</tr>
+<tr>
+<td>3</td>
+<td>master03</td>
+<td>192.168.10.13</td>
+<td>master</td>
+</tr>
+<tr>
+<td>4</td>
+<td>worker01</td>
+<td>192.168.10.14</td>
+<td>node</td>
+</tr>
+<tr>
+<td>5</td>
+<td>worker02</td>
+<td>192.168.10.15</td>
+<td>node</td>
+</tr>
+<tr>
+<td>6</td>
+<td>master01</td>
+<td>192.168.10.100</td>
+<td>vip</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>序号</th>
+<th>主机名</th>
+<th>功能</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>master01</td>
+<td>haproxy、keepalived</td>
+<td>keepalived主节点</td>
+</tr>
+<tr>
+<td>2</td>
+<td>master02</td>
+<td>haproxy、keepalived</td>
+<td>keepalived从节点</td>
+</tr>
+</tbody>
+</table>
+<h2 id="33">3.3 主机配置<a class="headerlink" href="#33" title="Permanent link">&para;</a></h2>
+<h3 id="331">3.3.1 主机名配置<a class="headerlink" href="#331" title="Permanent link">&para;</a></h3>
+<p>由于本次使用5台主机完成kubernetes集群部署，其中3台为master节点,名称为master01、master02、master03;其中2台为worker节点，名称分别为：worker01及worker02</p>
+<div class="highlight"><pre><span></span><code><span class="n">master节点</span><span class="p">,</span><span class="n">名称为master01</span>
+<span class="c"># hostnamectl set-hostname master01</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">master节点</span><span class="p">,</span><span class="n">名称为master02</span>
+<span class="c"># hostnamectl set-hostname master02</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">master节点</span><span class="p">,</span><span class="n">名称为master03</span>
+<span class="c"># hostnamectl set-hostname master03</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">worker1节点</span><span class="p">,</span><span class="n">名称为worker01</span>
+<span class="c"># hostnamectl set-hostname worker01</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">worker2节点</span><span class="p">,</span><span class="n">名称为worker02</span>
+<span class="c"># hostnamectl set-hostname worker02</span>
+</code></pre></div>
+<h3 id="332_ip">3.3.2 主机IP地址配置<a class="headerlink" href="#332_ip" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="n">master01节点IP地址为</span><span class="err">：</span><span class="n">192</span><span class="p">.</span><span class="n">168</span><span class="p">.</span><span class="n">10</span><span class="p">.</span><span class="n">11</span><span class="p">/</span><span class="n">24</span>
+<span class="c"># vim /etc/sysconfig/network-scripts/ifcfg-ens33</span>
+<span class="n">TYPE</span><span class="p">=</span><span class="s2">&quot;Ethernet&quot;</span>
+<span class="n">PROXY_METHOD</span><span class="p">=</span><span class="s2">&quot;none&quot;</span>
+<span class="n">BROWSER_ONLY</span><span class="p">=</span><span class="s2">&quot;no&quot;</span>
+<span class="n">BOOTPROTO</span><span class="p">=</span><span class="s2">&quot;none&quot;</span>
+<span class="n">DEFROUTE</span><span class="p">=</span><span class="s2">&quot;yes&quot;</span>
+<span class="n">IPV4_FAILURE_FATAL</span><span class="p">=</span><span class="s2">&quot;no&quot;</span>
+<span class="n">IPV6INIT</span><span class="p">=</span><span class="s2">&quot;yes&quot;</span>
+<span class="n">IPV6_AUTOCONF</span><span class="p">=</span><span class="s2">&quot;yes&quot;</span>
+<span class="n">IPV6_DEFROUTE</span><span class="p">=</span><span class="s2">&quot;yes&quot;</span>
+<span class="n">IPV6_FAILURE_FATAL</span><span class="p">=</span><span class="s2">&quot;no&quot;</span>
+<span class="n">IPV6_ADDR_GEN_MODE</span><span class="p">=</span><span class="s2">&quot;stable-privacy&quot;</span>
+<span class="n">NAME</span><span class="p">=</span><span class="s2">&quot;ens33&quot;</span>
+<span class="n">DEVICE</span><span class="p">=</span><span class="s2">&quot;ens33&quot;</span>
+<span class="n">ONBOOT</span><span class="p">=</span><span class="s2">&quot;yes&quot;</span>
+<span class="n">IPADDR</span><span class="p">=</span><span class="s2">&quot;192.168.10.11&quot;</span>
+<span class="n">PREFIX</span><span class="p">=</span><span class="s2">&quot;24&quot;</span>
+<span class="n">GATEWAY</span><span class="p">=</span><span class="s2">&quot;192.168.10.2&quot;</span>
+<span class="n">DNS1</span><span class="p">=</span><span class="s2">&quot;119.29.29.29&quot;</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">master02节点IP地址为</span><span class="err">：</span><span class="n">192</span><span class="p">.</span><span class="n">168</span><span class="p">.</span><span class="n">10</span><span class="p">.</span><span class="n">12</span><span class="p">/</span><span class="n">24</span>
+<span class="c"># vim /etc/sysconfig/network-scripts/ifcfg-ens33</span>
+<span class="n">TYPE</span><span class="p">=</span><span class="s2">&quot;Ethernet&quot;</span>
+<span class="n">PROXY_METHOD</span><span class="p">=</span><span class="s2">&quot;none&quot;</span>
+<span class="n">BROWSER_ONLY</span><span class="p">=</span><span class="s2">&quot;no&quot;</span>
+<span class="n">BOOTPROTO</span><span class="p">=</span><span class="s2">&quot;none&quot;</span>
+<span class="n">DEFROUTE</span><span class="p">=</span><span class="s2">&quot;yes&quot;</span>
+<span class="n">IPV4_FAILURE_FATAL</span><span class="p">=</span><span class="s2">&quot;no&quot;</span>
+<span class="n">IPV6INIT</span><span class="p">=</span><span class="s2">&quot;yes&quot;</span>
+<span class="n">IPV6_AUTOCONF</span><span class="p">=</span><span class="s2">&quot;yes&quot;</span>
+<span class="n">IPV6_DEFROUTE</span><span class="p">=</span><span class="s2">&quot;yes&quot;</span>
+<span class="n">IPV6_FAILURE_FATAL</span><span class="p">=</span><span class="s2">&quot;no&quot;</span>
+<span class="n">IPV6_ADDR_GEN_MODE</span><span class="p">=</span><span class="s2">&quot;stable-privacy&quot;</span>
+<span class="n">NAME</span><span class="p">=</span><span class="s2">&quot;ens33&quot;</span>
+<span class="n">DEVICE</span><span class="p">=</span><span class="s2">&quot;ens33&quot;</span>
+<span class="n">ONBOOT</span><span class="p">=</span><span class="s2">&quot;yes&quot;</span>
+<span class="n">IPADDR</span><span class="p">=</span><span class="s2">&quot;192.168.10.12&quot;</span>
+<span class="n">PREFIX</span><span class="p">=</span><span class="s2">&quot;24&quot;</span>
+<span class="n">GATEWAY</span><span class="p">=</span><span class="s2">&quot;192.168.10.2&quot;</span>
+<span class="n">DNS1</span><span class="p">=</span><span class="s2">&quot;119.29.29.29&quot;</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">master03节点IP地址为</span><span class="err">：</span><span class="n">192</span><span class="p">.</span><span class="n">168</span><span class="p">.</span><span class="n">10</span><span class="p">.</span><span class="n">13</span><span class="p">/</span><span class="n">24</span>
+<span class="c"># vim /etc/sysconfig/network-scripts/ifcfg-ens33</span>
+<span class="n">TYPE</span><span class="p">=</span><span class="s2">&quot;Ethernet&quot;</span>
+<span class="n">PROXY_METHOD</span><span class="p">=</span><span class="s2">&quot;none&quot;</span>
+<span class="n">BROWSER_ONLY</span><span class="p">=</span><span class="s2">&quot;no&quot;</span>
+<span class="n">BOOTPROTO</span><span class="p">=</span><span class="s2">&quot;none&quot;</span>
+<span class="n">DEFROUTE</span><span class="p">=</span><span class="s2">&quot;yes&quot;</span>
+<span class="n">IPV4_FAILURE_FATAL</span><span class="p">=</span><span class="s2">&quot;no&quot;</span>
+<span class="n">IPV6INIT</span><span class="p">=</span><span class="s2">&quot;yes&quot;</span>
+<span class="n">IPV6_AUTOCONF</span><span class="p">=</span><span class="s2">&quot;yes&quot;</span>
+<span class="n">IPV6_DEFROUTE</span><span class="p">=</span><span class="s2">&quot;yes&quot;</span>
+<span class="n">IPV6_FAILURE_FATAL</span><span class="p">=</span><span class="s2">&quot;no&quot;</span>
+<span class="n">IPV6_ADDR_GEN_MODE</span><span class="p">=</span><span class="s2">&quot;stable-privacy&quot;</span>
+<span class="n">NAME</span><span class="p">=</span><span class="s2">&quot;ens33&quot;</span>
+<span class="n">DEVICE</span><span class="p">=</span><span class="s2">&quot;ens33&quot;</span>
+<span class="n">ONBOOT</span><span class="p">=</span><span class="s2">&quot;yes&quot;</span>
+<span class="n">IPADDR</span><span class="p">=</span><span class="s2">&quot;192.168.10.13&quot;</span>
+<span class="n">PREFIX</span><span class="p">=</span><span class="s2">&quot;24&quot;</span>
+<span class="n">GATEWAY</span><span class="p">=</span><span class="s2">&quot;192.168.10.2&quot;</span>
+<span class="n">DNS1</span><span class="p">=</span><span class="s2">&quot;119.29.29.29&quot;</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">worker01节点IP地址为</span><span class="err">：</span><span class="n">192</span><span class="p">.</span><span class="n">168</span><span class="p">.</span><span class="n">10</span><span class="p">.</span><span class="n">14</span><span class="p">/</span><span class="n">24</span>
+<span class="c"># vim /etc/sysconfig/network-scripts/ifcfg-ens33</span>
+<span class="n">TYPE</span><span class="p">=</span><span class="s2">&quot;Ethernet&quot;</span>
+<span class="n">PROXY_METHOD</span><span class="p">=</span><span class="s2">&quot;none&quot;</span>
+<span class="n">BROWSER_ONLY</span><span class="p">=</span><span class="s2">&quot;no&quot;</span>
+<span class="n">BOOTPROTO</span><span class="p">=</span><span class="s2">&quot;none&quot;</span>
+<span class="n">DEFROUTE</span><span class="p">=</span><span class="s2">&quot;yes&quot;</span>
+<span class="n">IPV4_FAILURE_FATAL</span><span class="p">=</span><span class="s2">&quot;no&quot;</span>
+<span class="n">IPV6INIT</span><span class="p">=</span><span class="s2">&quot;yes&quot;</span>
+<span class="n">IPV6_AUTOCONF</span><span class="p">=</span><span class="s2">&quot;yes&quot;</span>
+<span class="n">IPV6_DEFROUTE</span><span class="p">=</span><span class="s2">&quot;yes&quot;</span>
+<span class="n">IPV6_FAILURE_FATAL</span><span class="p">=</span><span class="s2">&quot;no&quot;</span>
+<span class="n">IPV6_ADDR_GEN_MODE</span><span class="p">=</span><span class="s2">&quot;stable-privacy&quot;</span>
+<span class="n">NAME</span><span class="p">=</span><span class="s2">&quot;ens33&quot;</span>
+<span class="n">DEVICE</span><span class="p">=</span><span class="s2">&quot;ens33&quot;</span>
+<span class="n">ONBOOT</span><span class="p">=</span><span class="s2">&quot;yes&quot;</span>
+<span class="n">IPADDR</span><span class="p">=</span><span class="s2">&quot;192.168.10.14&quot;</span>
+<span class="n">PREFIX</span><span class="p">=</span><span class="s2">&quot;24&quot;</span>
+<span class="n">GATEWAY</span><span class="p">=</span><span class="s2">&quot;192.168.10.2&quot;</span>
+<span class="n">DNS1</span><span class="p">=</span><span class="s2">&quot;119.29.29.29&quot;</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">worker02节点IP地址为</span><span class="err">：</span><span class="n">192</span><span class="p">.</span><span class="n">168</span><span class="p">.</span><span class="n">10</span><span class="p">.</span><span class="n">15</span><span class="p">/</span><span class="n">24</span>
+<span class="c"># vim /etc/sysconfig/network-scripts/ifcfg-ens33</span>
+<span class="n">TYPE</span><span class="p">=</span><span class="s2">&quot;Ethernet&quot;</span>
+<span class="n">PROXY_METHOD</span><span class="p">=</span><span class="s2">&quot;none&quot;</span>
+<span class="n">BROWSER_ONLY</span><span class="p">=</span><span class="s2">&quot;no&quot;</span>
+<span class="n">BOOTPROTO</span><span class="p">=</span><span class="s2">&quot;none&quot;</span>
+<span class="n">DEFROUTE</span><span class="p">=</span><span class="s2">&quot;yes&quot;</span>
+<span class="n">IPV4_FAILURE_FATAL</span><span class="p">=</span><span class="s2">&quot;no&quot;</span>
+<span class="n">IPV6INIT</span><span class="p">=</span><span class="s2">&quot;yes&quot;</span>
+<span class="n">IPV6_AUTOCONF</span><span class="p">=</span><span class="s2">&quot;yes&quot;</span>
+<span class="n">IPV6_DEFROUTE</span><span class="p">=</span><span class="s2">&quot;yes&quot;</span>
+<span class="n">IPV6_FAILURE_FATAL</span><span class="p">=</span><span class="s2">&quot;no&quot;</span>
+<span class="n">IPV6_ADDR_GEN_MODE</span><span class="p">=</span><span class="s2">&quot;stable-privacy&quot;</span>
+<span class="n">NAME</span><span class="p">=</span><span class="s2">&quot;ens33&quot;</span>
+<span class="n">DEVICE</span><span class="p">=</span><span class="s2">&quot;ens33&quot;</span>
+<span class="n">ONBOOT</span><span class="p">=</span><span class="s2">&quot;yes&quot;</span>
+<span class="n">IPADDR</span><span class="p">=</span><span class="s2">&quot;192.168.10.15&quot;</span>
+<span class="n">PREFIX</span><span class="p">=</span><span class="s2">&quot;24&quot;</span>
+<span class="n">GATEWAY</span><span class="p">=</span><span class="s2">&quot;192.168.10.2&quot;</span>
+<span class="n">DNS1</span><span class="p">=</span><span class="s2">&quot;119.29.29.29&quot;</span>
+</code></pre></div>
+<h3 id="333_ip">3.3.3 主机名与IP地址解析<a class="headerlink" href="#333_ip" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>所有集群主机均需要进行配置。</p>
+</blockquote>
+<div class="highlight"><pre><span></span><code><span class="c"># cat /etc/hosts</span>
+<span class="p">......</span>
+<span class="n">192</span><span class="p">.</span><span class="n">168</span><span class="p">.</span><span class="n">10</span><span class="p">.</span><span class="n">11</span> <span class="n">master01</span>
+<span class="n">192</span><span class="p">.</span><span class="n">168</span><span class="p">.</span><span class="n">10</span><span class="p">.</span><span class="n">12</span> <span class="n">master02</span>
+<span class="n">192</span><span class="p">.</span><span class="n">168</span><span class="p">.</span><span class="n">10</span><span class="p">.</span><span class="n">13</span> <span class="n">master03</span>
+<span class="n">192</span><span class="p">.</span><span class="n">168</span><span class="p">.</span><span class="n">10</span><span class="p">.</span><span class="n">14</span> <span class="n">worker01</span>
+<span class="n">192</span><span class="p">.</span><span class="n">168</span><span class="p">.</span><span class="n">10</span><span class="p">.</span><span class="n">15</span> <span class="n">worker02</span>
+</code></pre></div>
+<h3 id="334">3.3.4 防火墙配置<a class="headerlink" href="#334" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>所有主机均需要操作。</p>
+</blockquote>
+<div class="highlight"><pre><span></span><code><span class="n">关闭现有防火墙firewalld</span>
+<span class="c"># systemctl disable firewalld</span>
+<span class="c"># systemctl stop firewalld</span>
+<span class="c"># firewall-cmd --state</span>
+<span class="n">not</span> <span class="n">running</span>
+</code></pre></div>
+<h3 id="335_selinux">3.3.5 SELINUX配置<a class="headerlink" href="#335_selinux" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>所有主机均需要操作。修改SELinux配置需要重启操作系统。</p>
+</blockquote>
+<div class="highlight"><pre><span></span><code><span class="c"># sed -ri &#39;s/SELINUX=enforcing/SELINUX=disabled/&#39; /etc/selinux/config</span>
+</code></pre></div>
+<h3 id="336">3.3.6 时间同步配置<a class="headerlink" href="#336" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>所有主机均需要操作。最小化安装系统需要安装ntpdate软件。</p>
+</blockquote>
+<div class="highlight"><pre><span></span><code><span class="c"># crontab -l</span>
+<span class="n">0</span> <span class="p">*/</span><span class="n">1</span> <span class="p">*</span> <span class="p">*</span> <span class="p">*</span> <span class="p">/</span><span class="n">usr</span><span class="p">/</span><span class="n">sbin</span><span class="p">/</span><span class="n">ntpdate</span> <span class="n">time1</span><span class="p">.</span><span class="n">aliyun</span><span class="p">.</span><span class="n">com</span>
+</code></pre></div>
+<h3 id="337">3.3.7 多机互信<a class="headerlink" href="#337" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>在master节点上生成证书，复制到其它节点即可。复制完成后，可以相互测试登录。</p>
+</blockquote>
+<div class="highlight"><pre><span></span><code><span class="c"># ssh-keygen</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c"># cd /root/.ssh</span>
+<span class="p">[</span><span class="n">root</span><span class="nv">@master01</span> <span class="p">.</span><span class="n">ssh</span><span class="p">]</span><span class="c"># ls</span>
+<span class="n">id_rsa</span>  <span class="n">id_rsa</span><span class="p">.</span><span class="n">pub</span>  <span class="n">known_hosts</span>
+<span class="p">[</span><span class="n">root</span><span class="nv">@master01</span> <span class="p">.</span><span class="n">ssh</span><span class="p">]</span><span class="c"># cp id_rsa.pub authorized_keys</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c"># for i in 12 13 14 15; do scp -r /root/.ssh 192.168.10.$i:/root/; done</span>
+</code></pre></div>
+<h3 id="338">3.3.8 升级操作系统内核<a class="headerlink" href="#338" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>所有主机均需要操作。</p>
+</blockquote>
+<div class="highlight"><pre><span></span><code><span class="n">导入elrepo</span> <span class="n">gpg</span> <span class="n">key</span>
+<span class="c"># rpm --import https://www.elrepo.org/RPM-GPG-KEY-elrepo.org</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">安装elrepo</span> <span class="n">YUM源仓库</span>
+<span class="c"># yum -y install https://www.elrepo.org/elrepo-release-7.0-4.el7.elrepo.noarch.rpm</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">安装kernel-ml版本</span><span class="err">，</span><span class="n">ml为长期稳定版本</span><span class="err">，</span><span class="n">lt为长期维护版本</span>
+<span class="c"># yum --enablerepo=&quot;elrepo-kernel&quot; -y install kernel-ml.x86_64</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">设置grub2默认引导为0</span>
+<span class="c"># grub2-set-default 0</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">重新生成grub2引导文件</span>
+<span class="c"># grub2-mkconfig -o /boot/grub2/grub.cfg</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">更新后</span><span class="err">，</span><span class="n">需要重启</span><span class="err">，</span><span class="n">使用升级的内核生效</span><span class="err">。</span>
+<span class="c"># reboot</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">重启后</span><span class="err">，</span><span class="n">需要验证内核是否为更新对应的版本</span>
+<span class="c"># uname -r</span>
+</code></pre></div>
+<h3 id="339">3.3.9 配置内核转发及网桥过滤<a class="headerlink" href="#339" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>所有主机均需要操作。</p>
+</blockquote>
+<div class="highlight"><pre><span></span><code><span class="n">添加网桥过滤及内核转发配置文件</span>
+<span class="c"># cat /etc/sysctl.d/k8s.conf</span>
+<span class="n">net</span><span class="p">.</span><span class="n">bridge</span><span class="p">.</span><span class="n">bridge-nf-call-ip6tables</span> <span class="p">=</span> <span class="n">1</span>
+<span class="n">net</span><span class="p">.</span><span class="n">bridge</span><span class="p">.</span><span class="n">bridge-nf-call-iptables</span> <span class="p">=</span> <span class="n">1</span>
+<span class="n">net</span><span class="p">.</span><span class="n">ipv4</span><span class="p">.</span><span class="n">ip_forward</span> <span class="p">=</span> <span class="n">1</span>
+<span class="n">vm</span><span class="p">.</span><span class="n">swappiness</span> <span class="p">=</span> <span class="n">0</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">加载br_netfilter模块</span>
+<span class="c"># modprobe br_netfilter</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">查看是否加载</span>
+<span class="c"># lsmod | grep br_netfilter</span>
+<span class="n">br_netfilter</span>           <span class="n">22256</span>  <span class="n">0</span>
+<span class="n">bridge</span>                <span class="n">151336</span>  <span class="n">1</span> <span class="n">br_netfilter</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">加载网桥过滤及内核转发配置文件</span>
+<span class="c"># sysctl -p /etc/sysctl.d/k8s.conf</span>
+<span class="n">net</span><span class="p">.</span><span class="n">bridge</span><span class="p">.</span><span class="n">bridge-nf-call-ip6tables</span> <span class="p">=</span> <span class="n">1</span>
+<span class="n">net</span><span class="p">.</span><span class="n">bridge</span><span class="p">.</span><span class="n">bridge-nf-call-iptables</span> <span class="p">=</span> <span class="n">1</span>
+<span class="n">net</span><span class="p">.</span><span class="n">ipv4</span><span class="p">.</span><span class="n">ip_forward</span> <span class="p">=</span> <span class="n">1</span>
+<span class="n">vm</span><span class="p">.</span><span class="n">swappiness</span> <span class="p">=</span> <span class="n">0</span>
+</code></pre></div>
+<h3 id="3310_ipsetipvsadm">3.3.10 安装ipset及ipvsadm<a class="headerlink" href="#3310_ipsetipvsadm" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>所有主机均需要操作。主要用于实现service转发。</p>
+</blockquote>
+<div class="highlight"><pre><span></span><code><span class="n">安装ipset及ipvsadm</span>
+<span class="c"># yum -y install ipset ipvsadm</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">配置ipvsadm模块加载方式</span>
+<span class="n">添加需要加载的模块</span>
+<span class="c"># cat &gt; /etc/sysconfig/modules/ipvs.modules &lt;&lt;EOF</span>
+<span class="c">#!/bin/bash</span>
+<span class="n">modprobe</span> <span class="p">--</span> <span class="n">ip_vs</span>
+<span class="n">modprobe</span> <span class="p">--</span> <span class="n">ip_vs_rr</span>
+<span class="n">modprobe</span> <span class="p">--</span> <span class="n">ip_vs_wrr</span>
+<span class="n">modprobe</span> <span class="p">--</span> <span class="n">ip_vs_sh</span>
+<span class="n">modprobe</span> <span class="p">--</span> <span class="n">nf_conntrack</span>
+<span class="n">EOF</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">授权</span><span class="err">、</span><span class="n">运行</span><span class="err">、</span><span class="n">检查是否加载</span>
+<span class="c"># chmod 755 /etc/sysconfig/modules/ipvs.modules &amp;&amp; bash /etc/sysconfig/modules/ipvs.modules &amp;&amp; lsmod | grep -e ip_vs -e nf_conntrack</span>
+</code></pre></div>
+<h3 id="3311_swap">3.3.11 关闭SWAP分区<a class="headerlink" href="#3311_swap" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>修改完成后需要重启操作系统，如不重启，可临时关闭，命令为swapoff -a</p>
+</blockquote>
+<div class="highlight"><pre><span></span><code><span class="n">永远关闭swap分区</span><span class="err">，</span><span class="n">需要重启操作系统</span>
+<span class="c"># cat /etc/fstab</span>
+<span class="p">......</span>
+
+<span class="c"># /dev/mapper/centos-swap swap                    swap    defaults        0 0</span>
+
+<span class="n">在上一行中行首添加</span><span class="c">#</span>
+</code></pre></div>
+<h2 id="34_docker">3.4 Docker准备<a class="headerlink" href="#34_docker" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p>所有集群主机均需操作。</p>
+</blockquote>
+<h3 id="341_yum">3.4.1 获取YUM源<a class="headerlink" href="#341_yum" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>使用阿里云开源软件镜像站。</p>
+</blockquote>
+<div class="highlight"><pre><span></span><code><span class="c"># wget https://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo -O /etc/yum.repos.d/docker-ce.repo</span>
+</code></pre></div>
+<h3 id="342">3.4.2 查看可安装版本<a class="headerlink" href="#342" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c"># yum list docker-ce.x86_64 --showduplicates | sort -r</span>
+</code></pre></div>
+<h3 id="343">3.4.3 安装指定版本并设置启动及开机自启动<a class="headerlink" href="#343" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c"># yum -y install --setopt=obsoletes=0 docker-ce-20.10.9-3.el7</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c"># systemctl enable docker ; systemctl start docker</span>
+</code></pre></div>
+<h3 id="344_cgroup">3.4.4 修改cgroup方式<a class="headerlink" href="#344_cgroup" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="n">在</span><span class="p">/</span><span class="n">etc</span><span class="p">/</span><span class="n">docker</span><span class="p">/</span><span class="n">daemon</span><span class="p">.</span><span class="n">json添加如下内容</span>
+
+<span class="c"># cat /etc/docker/daemon.json</span>
+<span class="p">{</span>
+        <span class="s2">&quot;exec-opts&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;native.cgroupdriver=systemd&quot;</span><span class="p">]</span>
+<span class="p">}</span>
+</code></pre></div>
+<h3 id="345_docker">3.4.5 重启docker<a class="headerlink" href="#345_docker" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c"># systemctl restart docker</span>
+</code></pre></div>
+<h1 id="haproxykeepalived">四、HAProxy及Keepalived部署<a class="headerlink" href="#haproxykeepalived" title="Permanent link">&para;</a></h1>
+<h2 id="41_haproxykeepalived">4.1 HAProxy及keepalived安装<a class="headerlink" href="#41_haproxykeepalived" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><span class="p">[</span><span class="n">root</span><span class="nv">@master01</span> <span class="p">~]</span><span class="c"># yum -y install haproxy keepalived</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="p">[</span><span class="n">root</span><span class="nv">@master02</span> <span class="p">~]</span><span class="c"># yum -y install haproxy keepalived</span>
+</code></pre></div>
+<h2 id="42_haproxy">4.2 HAProxy配置及启动<a class="headerlink" href="#42_haproxy" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><span class="p">[</span><span class="n">root</span><span class="nv">@master01</span> <span class="p">~]</span><span class="c"># vim /etc/haproxy/haproxy.cfg</span>
+<span class="p">[</span><span class="n">root</span><span class="nv">@master01</span> <span class="p">~]</span><span class="c"># cat /etc/haproxy/haproxy.cfg</span>
+<span class="c">#---------------------------------------------------------------------</span>
+<span class="c"># Example configuration for a possible web application.  See the</span>
+<span class="c"># full configuration options online.</span>
+<span class="c">#</span>
+<span class="c">#</span>
+<span class="c">#---------------------------------------------------------------------</span>
+
+<span class="c">#---------------------------------------------------------------------</span>
+<span class="c"># Global settings</span>
+<span class="c">#---------------------------------------------------------------------</span>
+<span class="n">global</span>
+  <span class="n">maxconn</span>  <span class="n">2000</span>
+  <span class="n">ulimit-n</span>  <span class="n">16384</span>
+  <span class="n">log</span>  <span class="n">127</span><span class="p">.</span><span class="n">0</span><span class="p">.</span><span class="n">0</span><span class="p">.</span><span class="n">1</span> <span class="n">local0</span> <span class="n">err</span>
+  <span class="n">stats</span> <span class="n">timeout</span> <span class="n">30s</span>
+
+<span class="n">defaults</span>
+  <span class="n">log</span> <span class="n">global</span>
+  <span class="n">mode</span>  <span class="n">http</span>
+  <span class="n">option</span>  <span class="n">httplog</span>
+  <span class="n">timeout</span> <span class="n">connect</span> <span class="n">5000</span>
+  <span class="n">timeout</span> <span class="n">client</span>  <span class="n">50000</span>
+  <span class="n">timeout</span> <span class="n">server</span>  <span class="n">50000</span>
+  <span class="n">timeout</span> <span class="n">http-request</span> <span class="n">15s</span>
+  <span class="n">timeout</span> <span class="n">http-keep-alive</span> <span class="n">15s</span>
+
+<span class="n">frontend</span> <span class="n">monitor-in</span>
+  <span class="n">bind</span> <span class="p">*:</span><span class="n">33305</span>
+  <span class="n">mode</span> <span class="n">http</span>
+  <span class="n">option</span> <span class="n">httplog</span>
+  <span class="n">monitor-uri</span> <span class="p">/</span><span class="n">monitor</span>
+
+<span class="n">frontend</span> <span class="n">k8s-master</span>
+  <span class="n">bind</span> <span class="n">0</span><span class="p">.</span><span class="n">0</span><span class="p">.</span><span class="n">0</span><span class="p">.</span><span class="n">0</span><span class="p">:</span><span class="n">16443</span>
+  <span class="n">bind</span> <span class="n">127</span><span class="p">.</span><span class="n">0</span><span class="p">.</span><span class="n">0</span><span class="p">.</span><span class="n">1</span><span class="p">:</span><span class="n">16443</span>
+  <span class="n">mode</span> <span class="n">tcp</span>
+  <span class="n">option</span> <span class="n">tcplog</span>
+  <span class="n">tcp-request</span> <span class="n">inspect-delay</span> <span class="n">5s</span>
+  <span class="n">default_backend</span> <span class="n">k8s-master</span>
+
+<span class="n">backend</span> <span class="n">k8s-master</span>
+  <span class="n">mode</span> <span class="n">tcp</span>
+  <span class="n">option</span> <span class="n">tcplog</span>
+  <span class="n">option</span> <span class="n">tcp-check</span>
+  <span class="n">balance</span> <span class="n">roundrobin</span>
+  <span class="k">default</span><span class="n">-server</span> <span class="n">inter</span> <span class="n">10s</span> <span class="n">downinter</span> <span class="n">5s</span> <span class="n">rise</span> <span class="n">2</span> <span class="n">fall</span> <span class="n">2</span> <span class="n">slowstart</span> <span class="n">60s</span> <span class="n">maxconn</span> <span class="n">250</span> <span class="n">maxqueue</span> <span class="n">256</span> <span class="n">weight</span> <span class="n">100</span>
+  <span class="n">server</span> <span class="n">master01</span>   <span class="n">192</span><span class="p">.</span><span class="n">168</span><span class="p">.</span><span class="n">10</span><span class="p">.</span><span class="n">11</span><span class="p">:</span><span class="n">6443</span>  <span class="n">check</span>
+  <span class="n">server</span> <span class="n">master02</span>   <span class="n">192</span><span class="p">.</span><span class="n">168</span><span class="p">.</span><span class="n">10</span><span class="p">.</span><span class="n">12</span><span class="p">:</span><span class="n">6443</span>  <span class="n">check</span>
+  <span class="n">server</span> <span class="n">master03</span>   <span class="n">192</span><span class="p">.</span><span class="n">168</span><span class="p">.</span><span class="n">10</span><span class="p">.</span><span class="n">13</span><span class="p">:</span><span class="n">6443</span>  <span class="n">check</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="p">[</span><span class="n">root</span><span class="nv">@master01</span> <span class="p">~]</span><span class="c"># systemctl enable haproxy;systemctl start haproxy</span>
+
+<span class="p">[</span><span class="n">root</span><span class="nv">@master01</span> <span class="p">~]</span><span class="c"># systemctl status haproxy</span>
+</code></pre></div>
+<p><img alt="image-20220119174750138" src="../../../img/kubernetes/kubernetes_hight/image-20220119174750138.png" /></p>
+<div class="highlight"><pre><span></span><code><span class="p">[</span><span class="n">root</span><span class="nv">@master01</span> <span class="p">~]</span><span class="c"># scp /etc/haproxy/haproxy.cfg master02:/etc/haproxy/haproxy.cfg</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="p">[</span><span class="n">root</span><span class="nv">@master02</span> <span class="p">~]</span><span class="c"># systemctl enable haproxy;systemctl start haproxy</span>
+
+<span class="p">[</span><span class="n">root</span><span class="nv">@master02</span> <span class="p">~]</span><span class="c"># systemctl status haproxy</span>
+</code></pre></div>
+<p><img alt="image-20220119175023889" src="../../../img/kubernetes/kubernetes_hight/image-20220119175023889.png" /></p>
+<h2 id="43_keepalived">4.3 Keepalived配置及启动<a class="headerlink" href="#43_keepalived" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><span class="p">[</span><span class="n">root</span><span class="nv">@master01</span> <span class="p">~]</span><span class="c"># vim /etc/keepalived/keepalived.conf</span>
+<span class="p">[</span><span class="n">root</span><span class="nv">@master01</span> <span class="p">~]</span><span class="c"># cat /etc/keepalived/keepalived.conf</span>
+<span class="p">!</span> <span class="n">Configuration</span> <span class="n">File</span> <span class="k">for</span> <span class="n">keepalived</span>
+<span class="n">global_defs</span> <span class="p">{</span>
+    <span class="n">router_id</span> <span class="n">LVS_DEVEL</span>
+<span class="n">script_user</span> <span class="n">root</span>
+    <span class="n">enable_script_security</span>
+<span class="p">}</span>
+<span class="n">vrrp_script</span> <span class="n">chk_apiserver</span> <span class="p">{</span>
+    <span class="n">script</span> <span class="s2">&quot;/etc/keepalived/check_apiserver.sh&quot;</span> <span class="c">#此脚本需要多独定义，并要调用。</span>
+    <span class="n">interval</span> <span class="n">5</span>
+    <span class="n">weight</span> <span class="p">-</span><span class="n">5</span>
+    <span class="n">fall</span> <span class="n">2</span>
+<span class="n">rise</span> <span class="n">1</span>
+<span class="p">}</span>
+<span class="n">vrrp_instance</span> <span class="n">VI_1</span> <span class="p">{</span>
+    <span class="n">state</span> <span class="n">MASTER</span>
+    <span class="n">interface</span> <span class="n">ens33</span> <span class="c"># 修改为正在使用的网卡</span>
+    <span class="n">mcast_src_ip</span> <span class="n">192</span><span class="p">.</span><span class="n">168</span><span class="p">.</span><span class="n">10</span><span class="p">.</span><span class="n">11</span> <span class="c">#为本master主机对应的IP地址</span>
+    <span class="n">virtual_router_id</span> <span class="n">51</span>
+    <span class="n">priority</span> <span class="n">101</span>
+    <span class="n">advert_int</span> <span class="n">2</span>
+    <span class="n">authentication</span> <span class="p">{</span>
+        <span class="n">auth_type</span> <span class="n">PASS</span>
+        <span class="n">auth_pass</span> <span class="n">abc123</span>
+    <span class="p">}</span>
+    <span class="n">virtual_ipaddress</span> <span class="p">{</span>
+        <span class="n">192</span><span class="p">.</span><span class="n">168</span><span class="p">.</span><span class="n">10</span><span class="p">.</span><span class="n">100</span> <span class="c">#为VIP地址</span>
+    <span class="p">}</span>
+    <span class="n">track_script</span> <span class="p">{</span>
+       <span class="n">chk_apiserver</span> <span class="c"># 执行上面检查apiserver脚本</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="p">[</span><span class="n">root</span><span class="nv">@master01</span> <span class="p">~]</span><span class="c"># vim /etc/keepalived/check_apiserver.sh</span>
+<span class="p">[</span><span class="n">root</span><span class="nv">@master01</span> <span class="p">~]</span><span class="c"># cat /etc/keepalived/check_apiserver.sh</span>
+<span class="c">#!/bin/bash</span>
+
+<span class="n">err</span><span class="p">=</span><span class="n">0</span>
+<span class="k">for</span> <span class="n">k</span> <span class="k">in</span> <span class="p">$(</span><span class="n">seq</span> <span class="n">1</span> <span class="n">3</span><span class="p">)</span>
+<span class="k">do</span>
+    <span class="n">check_code</span><span class="p">=$(</span><span class="n">pgrep</span> <span class="n">haproxy</span><span class="p">)</span>
+    <span class="k">if</span> <span class="p">[[</span> <span class="nv">$check_code</span> <span class="p">==</span> <span class="s2">&quot;&quot;</span> <span class="p">]];</span> <span class="n">then</span>
+        <span class="n">err</span><span class="p">=$(</span><span class="n">expr</span> <span class="nv">$err</span> <span class="p">+</span> <span class="n">1</span><span class="p">)</span>
+        <span class="nb">sleep </span><span class="n">1</span>
+        <span class="k">continue</span>
+    <span class="k">else</span>
+        <span class="n">err</span><span class="p">=</span><span class="n">0</span>
+        <span class="k">break</span>
+    <span class="n">fi</span>
+<span class="n">done</span>
+
+<span class="k">if</span> <span class="p">[[</span> <span class="nv">$err</span> <span class="p">!=</span> <span class="s2">&quot;0&quot;</span> <span class="p">]];</span> <span class="n">then</span>
+    <span class="nb">echo </span><span class="s2">&quot;systemctl stop keepalived&quot;</span>
+    <span class="p">/</span><span class="n">usr</span><span class="p">/</span><span class="n">bin</span><span class="p">/</span><span class="n">systemctl</span> <span class="n">stop</span> <span class="n">keepalived</span>
+    <span class="n">exit</span> <span class="n">1</span>
+<span class="k">else</span>
+    <span class="n">exit</span> <span class="n">0</span>
+<span class="n">fi</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="p">[</span><span class="n">root</span><span class="nv">@master01</span> <span class="p">~]</span><span class="c"># chmod +x /etc/keepalived/check_apiserver.sh</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="p">[</span><span class="n">root</span><span class="nv">@master01</span> <span class="p">~]</span><span class="c"># scp /etc/keepalived/keepalived.conf master02:/etc/keepalived/</span>
+
+<span class="p">[</span><span class="n">root</span><span class="nv">@master01</span> <span class="p">~]</span><span class="c"># scp /etc/keepalived/check_apiserver.sh master02:/etc/keepalived/</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="p">[</span><span class="n">root</span><span class="nv">@master02</span> <span class="p">~]</span><span class="c"># vim /etc/keepalived/keepalived.conf</span>
+<span class="p">[</span><span class="n">root</span><span class="nv">@master02</span> <span class="p">~]</span><span class="c"># cat /etc/keepalived/keepalived.conf</span>
+<span class="p">!</span> <span class="n">Configuration</span> <span class="n">File</span> <span class="k">for</span> <span class="n">keepalived</span>
+<span class="n">global_defs</span> <span class="p">{</span>
+    <span class="n">router_id</span> <span class="n">LVS_DEVEL</span>
+<span class="n">script_user</span> <span class="n">root</span>
+    <span class="n">enable_script_security</span>
+<span class="p">}</span>
+<span class="n">vrrp_script</span> <span class="n">chk_apiserver</span> <span class="p">{</span>
+    <span class="n">script</span> <span class="s2">&quot;/etc/keepalived/check_apiserver.sh&quot;</span> <span class="c">#此脚本需要多独定义，并要调用。</span>
+    <span class="n">interval</span> <span class="n">5</span>
+    <span class="n">weight</span> <span class="p">-</span><span class="n">5</span>
+    <span class="n">fall</span> <span class="n">2</span>
+<span class="n">rise</span> <span class="n">1</span>
+<span class="p">}</span>
+<span class="n">vrrp_instance</span> <span class="n">VI_1</span> <span class="p">{</span>
+    <span class="n">state</span> <span class="n">BACKUP</span>
+    <span class="n">interface</span> <span class="n">ens33</span> <span class="c"># 修改为正在使用的网卡</span>
+    <span class="n">mcast_src_ip</span> <span class="n">192</span><span class="p">.</span><span class="n">168</span><span class="p">.</span><span class="n">10</span><span class="p">.</span><span class="n">12</span> <span class="c">#为本master主机对应的IP地址</span>
+    <span class="n">virtual_router_id</span> <span class="n">51</span>
+    <span class="n">priority</span> <span class="n">99</span> <span class="c"># 修改为99</span>
+    <span class="n">advert_int</span> <span class="n">2</span>
+    <span class="n">authentication</span> <span class="p">{</span>
+        <span class="n">auth_type</span> <span class="n">PASS</span>
+        <span class="n">auth_pass</span> <span class="n">abc123</span>
+    <span class="p">}</span>
+    <span class="n">virtual_ipaddress</span> <span class="p">{</span>
+        <span class="n">192</span><span class="p">.</span><span class="n">168</span><span class="p">.</span><span class="n">10</span><span class="p">.</span><span class="n">100</span> <span class="c">#为VIP地址</span>
+    <span class="p">}</span>
+    <span class="n">track_script</span> <span class="p">{</span>
+       <span class="n">chk_apiserver</span> <span class="c"># 执行上面检查apiserver脚本</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="p">[</span><span class="n">root</span><span class="nv">@master01</span> <span class="p">~]</span><span class="c"># systemctl enable keepalived;systemctl start keepalived</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="p">[</span><span class="n">root</span><span class="nv">@master02</span> <span class="p">~]</span><span class="c"># systemctl enable keepalived;systemctl start keepalived</span>
+</code></pre></div>
+<h2 id="44">4.4 验证高可用集群可用性<a class="headerlink" href="#44" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><span class="p">[</span><span class="n">root</span><span class="nv">@master01</span> <span class="p">~]</span><span class="c"># ip a s ens33</span>
+<span class="n">2</span><span class="p">:</span> <span class="n">ens33</span><span class="p">:</span> <span class="p">&lt;</span><span class="n">BROADCAST</span><span class="p">,</span><span class="n">MULTICAST</span><span class="p">,</span><span class="n">UP</span><span class="p">,</span><span class="n">LOWER_UP</span><span class="p">&gt;</span> <span class="n">mtu</span> <span class="n">1500</span> <span class="n">qdisc</span> <span class="n">pfifo_fast</span> <span class="n">state</span> <span class="n">UP</span> <span class="nb">group </span><span class="k">default</span> <span class="n">qlen</span> <span class="n">1000</span>
+    <span class="n">link</span><span class="p">/</span><span class="n">ether</span> <span class="n">00</span><span class="p">:</span><span class="n">0c</span><span class="p">:</span><span class="n">29</span><span class="p">:</span><span class="n">50</span><span class="p">:</span><span class="n">f9</span><span class="p">:</span><span class="n">5f</span> <span class="n">brd</span> <span class="n">ff</span><span class="p">:</span><span class="n">ff</span><span class="p">:</span><span class="n">ff</span><span class="p">:</span><span class="n">ff</span><span class="p">:</span><span class="n">ff</span><span class="p">:</span><span class="n">ff</span>
+    <span class="n">inet</span> <span class="n">192</span><span class="p">.</span><span class="n">168</span><span class="p">.</span><span class="n">10</span><span class="p">.</span><span class="n">11</span><span class="p">/</span><span class="n">24</span> <span class="n">brd</span> <span class="n">192</span><span class="p">.</span><span class="n">168</span><span class="p">.</span><span class="n">10</span><span class="p">.</span><span class="n">255</span> <span class="n">scope</span> <span class="n">global</span> <span class="n">noprefixroute</span> <span class="n">ens33</span>
+       <span class="n">valid_lft</span> <span class="n">forever</span> <span class="n">preferred_lft</span> <span class="n">forever</span>
+    <span class="n">inet</span> <span class="n">192</span><span class="p">.</span><span class="n">168</span><span class="p">.</span><span class="n">10</span><span class="p">.</span><span class="n">100</span><span class="p">/</span><span class="n">32</span> <span class="n">scope</span> <span class="n">global</span> <span class="n">ens33</span>
+       <span class="n">valid_lft</span> <span class="n">forever</span> <span class="n">preferred_lft</span> <span class="n">forever</span>
+    <span class="n">inet6</span> <span class="n">fe80</span><span class="p">::</span><span class="n">adf4</span><span class="p">:</span><span class="n">a8bc</span><span class="p">:</span><span class="n">a1c</span><span class="p">:</span><span class="n">a9f7</span><span class="p">/</span><span class="n">64</span> <span class="n">scope</span> <span class="n">link</span> <span class="n">tentative</span> <span class="n">noprefixroute</span> <span class="n">dadfailed</span>
+       <span class="n">valid_lft</span> <span class="n">forever</span> <span class="n">preferred_lft</span> <span class="n">forever</span>
+    <span class="n">inet6</span> <span class="n">fe80</span><span class="p">::</span><span class="n">2b33</span><span class="p">:</span><span class="n">40ed</span><span class="p">:</span><span class="n">9311</span><span class="p">:</span><span class="n">8812</span><span class="p">/</span><span class="n">64</span> <span class="n">scope</span> <span class="n">link</span> <span class="n">tentative</span> <span class="n">noprefixroute</span> <span class="n">dadfailed</span>
+       <span class="n">valid_lft</span> <span class="n">forever</span> <span class="n">preferred_lft</span> <span class="n">forever</span>
+    <span class="n">inet6</span> <span class="n">fe80</span><span class="p">::</span><span class="n">8508</span><span class="p">:</span><span class="n">20d8</span><span class="p">:</span><span class="n">7240</span><span class="p">:</span><span class="n">32b2</span><span class="p">/</span><span class="n">64</span> <span class="n">scope</span> <span class="n">link</span> <span class="n">tentative</span> <span class="n">noprefixroute</span> <span class="n">dadfailed</span>
+       <span class="n">valid_lft</span> <span class="n">forever</span> <span class="n">preferred_lft</span> <span class="n">forever</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="p">[</span><span class="n">root</span><span class="nv">@master01</span> <span class="p">~]</span><span class="c"># ss -anput | grep &quot;:16443&quot;</span>
+<span class="n">tcp</span>    <span class="n">LISTEN</span>     <span class="n">0</span>      <span class="n">2000</span>   <span class="n">127</span><span class="p">.</span><span class="n">0</span><span class="p">.</span><span class="n">0</span><span class="p">.</span><span class="n">1</span><span class="p">:</span><span class="n">16443</span>                 <span class="p">*:*</span>                   <span class="n">users</span><span class="p">:((</span><span class="s2">&quot;haproxy&quot;</span><span class="p">,</span><span class="n">pid</span><span class="p">=</span><span class="n">2983</span><span class="p">,</span><span class="n">fd</span><span class="p">=</span><span class="n">6</span><span class="p">))</span>
+<span class="n">tcp</span>    <span class="n">LISTEN</span>     <span class="n">0</span>      <span class="n">2000</span>      <span class="p">*:</span><span class="n">16443</span>                 <span class="p">*:*</span>                   <span class="n">users</span><span class="p">:((</span><span class="s2">&quot;haproxy&quot;</span><span class="p">,</span><span class="n">pid</span><span class="p">=</span><span class="n">2983</span><span class="p">,</span><span class="n">fd</span><span class="p">=</span><span class="n">5</span><span class="p">))</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="p">[</span><span class="n">root</span><span class="nv">@master02</span> <span class="p">~]</span><span class="c"># ss -anput | grep &quot;:16443&quot;</span>
+<span class="n">tcp</span>    <span class="n">LISTEN</span>     <span class="n">0</span>      <span class="n">2000</span>   <span class="n">127</span><span class="p">.</span><span class="n">0</span><span class="p">.</span><span class="n">0</span><span class="p">.</span><span class="n">1</span><span class="p">:</span><span class="n">16443</span>                 <span class="p">*:*</span>                   <span class="n">users</span><span class="p">:((</span><span class="s2">&quot;haproxy&quot;</span><span class="p">,</span><span class="n">pid</span><span class="p">=</span><span class="n">2974</span><span class="p">,</span><span class="n">fd</span><span class="p">=</span><span class="n">6</span><span class="p">))</span>
+<span class="n">tcp</span>    <span class="n">LISTEN</span>     <span class="n">0</span>      <span class="n">2000</span>      <span class="p">*:</span><span class="n">16443</span>                 <span class="p">*:*</span>                   <span class="n">users</span><span class="p">:((</span><span class="s2">&quot;haproxy&quot;</span><span class="p">,</span><span class="n">pid</span><span class="p">=</span><span class="n">2974</span><span class="p">,</span><span class="n">fd</span><span class="p">=</span><span class="n">5</span><span class="p">))</span>
+</code></pre></div>
+<h1 id="kubernetes_1212">五、kubernetes 1.21.0  集群部署<a class="headerlink" href="#kubernetes_1212" title="Permanent link">&para;</a></h1>
+<h2 id="51">5.1 集群软件版本说明<a class="headerlink" href="#51" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>kubeadm</th>
+<th>kubelet</th>
+<th>kubectl</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>版本</td>
+<td>1.21.0</td>
+<td>1.21.0</td>
+<td>1.21.0</td>
+</tr>
+<tr>
+<td>安装位置</td>
+<td>集群所有主机</td>
+<td>集群所有主机</td>
+<td>集群所有主机</td>
+</tr>
+<tr>
+<td>作用</td>
+<td>初始化集群、管理集群等</td>
+<td>用于接收api-server指令，对pod生命周期进行管理</td>
+<td>集群应用命令行管理工具</td>
+</tr>
+</tbody>
+</table>
+<h2 id="52_kubernetes_yum">5.2 kubernetes YUM源准备<a class="headerlink" href="#52_kubernetes_yum" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p>在/etc/yum.repos.d/目录中创建k8s.repo文件，把下面内容复制进去即可。</p>
+</blockquote>
+<h3 id="521_yum">5.2.1 谷歌YUM源<a class="headerlink" href="#521_yum" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="no">[kubernetes]</span>
+<span class="n">name</span><span class="p">=</span><span class="n">Kubernetes</span>
+<span class="n">baseurl</span><span class="p">=</span><span class="n">https</span><span class="p">://</span><span class="n">packages</span><span class="p">.</span><span class="n">cloud</span><span class="p">.</span><span class="n">google</span><span class="p">.</span><span class="n">com</span><span class="p">/</span><span class="n">yum</span><span class="p">/</span><span class="n">repos</span><span class="p">/</span><span class="n">kubernetes-el7-x86_64</span>
+<span class="n">enabled</span><span class="p">=</span><span class="n">1</span>
+<span class="n">gpgcheck</span><span class="p">=</span><span class="n">1</span>
+<span class="n">repo_gpgcheck</span><span class="p">=</span><span class="n">1</span>
+<span class="n">gpgkey</span><span class="p">=</span><span class="n">https</span><span class="p">://</span><span class="n">packages</span><span class="p">.</span><span class="n">cloud</span><span class="p">.</span><span class="n">google</span><span class="p">.</span><span class="n">com</span><span class="p">/</span><span class="n">yum</span><span class="p">/</span><span class="n">doc</span><span class="p">/</span><span class="n">yum-key</span><span class="p">.</span><span class="n">gpg</span>
+        <span class="n">https</span><span class="p">://</span><span class="n">packages</span><span class="p">.</span><span class="n">cloud</span><span class="p">.</span><span class="n">google</span><span class="p">.</span><span class="n">com</span><span class="p">/</span><span class="n">yum</span><span class="p">/</span><span class="n">doc</span><span class="p">/</span><span class="n">rpm-package-key</span><span class="p">.</span><span class="n">gpg</span>
+</code></pre></div>
+<h3 id="522_yum">5.2.2 阿里云YUM源<a class="headerlink" href="#522_yum" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="no">[kubernetes]</span>
+<span class="n">name</span><span class="p">=</span><span class="n">Kubernetes</span>
+<span class="n">baseurl</span><span class="p">=</span><span class="n">https</span><span class="p">://</span><span class="n">mirrors</span><span class="p">.</span><span class="n">aliyun</span><span class="p">.</span><span class="n">com</span><span class="p">/</span><span class="n">kubernetes</span><span class="p">/</span><span class="n">yum</span><span class="p">/</span><span class="n">repos</span><span class="p">/</span><span class="n">kubernetes-el7-x86_64</span><span class="p">/</span>
+<span class="n">enabled</span><span class="p">=</span><span class="n">1</span>
+<span class="n">gpgcheck</span><span class="p">=</span><span class="n">1</span>
+<span class="n">repo_gpgcheck</span><span class="p">=</span><span class="n">1</span>
+<span class="n">gpgkey</span><span class="p">=</span><span class="n">https</span><span class="p">://</span><span class="n">mirrors</span><span class="p">.</span><span class="n">aliyun</span><span class="p">.</span><span class="n">com</span><span class="p">/</span><span class="n">kubernetes</span><span class="p">/</span><span class="n">yum</span><span class="p">/</span><span class="n">doc</span><span class="p">/</span><span class="n">yum-key</span><span class="p">.</span><span class="n">gpg</span> <span class="n">https</span><span class="p">://</span><span class="n">mirrors</span><span class="p">.</span><span class="n">aliyun</span><span class="p">.</span><span class="n">com</span><span class="p">/</span><span class="n">kubernetes</span><span class="p">/</span><span class="n">yum</span><span class="p">/</span><span class="n">doc</span><span class="p">/</span><span class="n">rpm-package-key</span><span class="p">.</span><span class="n">gpg</span>
+</code></pre></div>
+<h2 id="53">5.3 集群软件安装<a class="headerlink" href="#53" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><span class="n">查看指定版本</span>
+<span class="c"># yum list kubeadm.x86_64 --showduplicates | sort -r</span>
+<span class="c"># yum list kubelet.x86_64 --showduplicates | sort -r</span>
+<span class="c"># yum list kubectl.x86_64 --showduplicates | sort -r</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">安装指定版本</span>
+<span class="c"># yum -y install --setopt=obsoletes=0 kubeadm-1.21.0-0  kubelet-1.21.0-0 kubectl-1.21.0-0</span>
+</code></pre></div>
+<h2 id="54_kubelet">5.4 配置kubelet<a class="headerlink" href="#54_kubelet" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p>为了实现docker使用的cgroupdriver与kubelet使用的cgroup的一致性，建议修改如下文件内容。</p>
+</blockquote>
+<div class="highlight"><pre><span></span><code><span class="c"># vim /etc/sysconfig/kubelet</span>
+<span class="n">KUBELET_EXTRA_ARGS</span><span class="p">=</span><span class="s2">&quot;--cgroup-driver=systemd&quot;</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">设置kubelet为开机自启动即可</span><span class="err">，</span><span class="n">由于没有生成配置文件</span><span class="err">，</span><span class="n">集群初始化后自动启动</span>
+<span class="c"># systemctl enable kubelet</span>
+</code></pre></div>
+<h2 id="55">5.5 集群镜像准备<a class="headerlink" href="#55" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p>可使用VPN实现下载。</p>
+</blockquote>
+<div class="highlight"><pre><span></span><code><span class="c"># kubeadm config images list --kubernetes-version=v1.21.0</span>
+<span class="n">k8s</span><span class="p">.</span><span class="n">gcr</span><span class="p">.</span><span class="n">io</span><span class="p">/</span><span class="n">kube-apiserver</span><span class="p">:</span><span class="n">v1</span><span class="p">.</span><span class="n">21</span><span class="p">.</span><span class="n">0</span>
+<span class="n">k8s</span><span class="p">.</span><span class="n">gcr</span><span class="p">.</span><span class="n">io</span><span class="p">/</span><span class="n">kube-controller-manager</span><span class="p">:</span><span class="n">v1</span><span class="p">.</span><span class="n">21</span><span class="p">.</span><span class="n">0</span>
+<span class="n">k8s</span><span class="p">.</span><span class="n">gcr</span><span class="p">.</span><span class="n">io</span><span class="p">/</span><span class="n">kube-scheduler</span><span class="p">:</span><span class="n">v1</span><span class="p">.</span><span class="n">21</span><span class="p">.</span><span class="n">0</span>
+<span class="n">k8s</span><span class="p">.</span><span class="n">gcr</span><span class="p">.</span><span class="n">io</span><span class="p">/</span><span class="n">kube-proxy</span><span class="p">:</span><span class="n">v1</span><span class="p">.</span><span class="n">21</span><span class="p">.</span><span class="n">0</span>
+<span class="n">k8s</span><span class="p">.</span><span class="n">gcr</span><span class="p">.</span><span class="n">io</span><span class="p">/</span><span class="n">pause</span><span class="p">:</span><span class="n">3</span><span class="p">.</span><span class="n">4</span><span class="p">.</span><span class="n">1</span>
+<span class="n">k8s</span><span class="p">.</span><span class="n">gcr</span><span class="p">.</span><span class="n">io</span><span class="p">/</span><span class="n">etcd</span><span class="p">:</span><span class="n">3</span><span class="p">.</span><span class="n">4</span><span class="p">.</span><span class="n">13</span><span class="p">-</span><span class="n">0</span>
+<span class="n">k8s</span><span class="p">.</span><span class="n">gcr</span><span class="p">.</span><span class="n">io</span><span class="p">/</span><span class="n">coredns</span><span class="p">/</span><span class="n">coredns</span><span class="p">:</span><span class="n">v1</span><span class="p">.</span><span class="n">8</span><span class="p">.</span><span class="n">0</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c"># cat image_download.sh</span>
+<span class="c">#!/bin/bash</span>
+<span class="n">images_list</span><span class="p">=</span><span class="s1">&#39;</span>
+<span class="s1">k8s.gcr.io/kube-apiserver:v1.21.0</span>
+<span class="s1">k8s.gcr.io/kube-controller-manager:v1.21.0</span>
+<span class="s1">k8s.gcr.io/kube-scheduler:v1.21.0</span>
+<span class="s1">k8s.gcr.io/kube-proxy:v1.21.0</span>
+<span class="s1">k8s.gcr.io/pause:3.4.1</span>
+<span class="s1">k8s.gcr.io/etcd:3.4.13-0</span>
+<span class="s1">k8s.gcr.io/coredns/coredns:v1.8.0&#39;</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="k">in</span> <span class="nv">$images_list</span>
+<span class="k">do</span>
+        <span class="n">docker</span> <span class="n">pull</span> <span class="nv">$i</span>
+<span class="n">done</span>
+
+<span class="n">docker</span> <span class="n">save</span> <span class="n">-o</span> <span class="n">k8s</span><span class="p">-</span><span class="n">1</span><span class="p">-</span><span class="n">21</span><span class="p">-</span><span class="n">0</span><span class="p">.</span><span class="n">tar</span> <span class="nv">$images_list</span>
+</code></pre></div>
+<h2 id="56">5.6 集群初始化<a class="headerlink" href="#56" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p>阿里云镜像仓库中的CoreDNS镜像下载有错误。</p>
+</blockquote>
+<div class="highlight"><pre><span></span><code><span class="p">[</span><span class="n">root</span><span class="nv">@master01</span> <span class="p">~]</span><span class="c"># vim kubeadm-config.yaml</span>
+<span class="p">[</span><span class="n">root</span><span class="nv">@master01</span> <span class="p">~]</span><span class="c"># cat kubeadm-config.yaml</span>
+<span class="n">apiVersion</span><span class="p">:</span> <span class="n">kubeadm</span><span class="p">.</span><span class="n">k8s</span><span class="p">.</span><span class="n">io</span><span class="p">/</span><span class="n">v1beta2</span>
+<span class="n">bootstrapTokens</span><span class="p">:</span>
+<span class="p">-</span> <span class="n">groups</span><span class="p">:</span>
+  <span class="p">-</span> <span class="n">system</span><span class="p">:</span><span class="n">bootstrappers</span><span class="p">:</span><span class="n">kubeadm</span><span class="p">:</span><span class="k">default</span><span class="n">-node-token</span>
+  <span class="n">token</span><span class="p">:</span> <span class="n">7t2weq</span><span class="p">.</span><span class="n">bjbawausm0jaxury</span>
+  <span class="n">ttl</span><span class="p">:</span> <span class="n">24h0m0s</span>
+  <span class="n">usages</span><span class="p">:</span>
+  <span class="p">-</span> <span class="n">signing</span>
+  <span class="p">-</span> <span class="n">authentication</span>
+<span class="n">kind</span><span class="p">:</span> <span class="n">InitConfiguration</span>
+<span class="n">localAPIEndpoint</span><span class="p">:</span>
+  <span class="n">advertiseAddress</span><span class="p">:</span> <span class="n">192</span><span class="p">.</span><span class="n">168</span><span class="p">.</span><span class="n">10</span><span class="p">.</span><span class="n">11</span>
+  <span class="n">bindPort</span><span class="p">:</span> <span class="n">6443</span>
+<span class="n">nodeRegistration</span><span class="p">:</span>
+  <span class="n">criSocket</span><span class="p">:</span> <span class="p">/</span><span class="n">var</span><span class="p">/</span><span class="n">run</span><span class="p">/</span><span class="n">dockershim</span><span class="p">.</span><span class="n">sock</span>
+  <span class="n">name</span><span class="p">:</span> <span class="n">master01</span>
+  <span class="n">taints</span><span class="p">:</span>
+  <span class="p">-</span> <span class="n">effect</span><span class="p">:</span> <span class="n">NoSchedule</span>
+    <span class="n">key</span><span class="p">:</span> <span class="n">node-role</span><span class="p">.</span><span class="n">kubernetes</span><span class="p">.</span><span class="n">io</span><span class="p">/</span><span class="n">master</span>
+<span class="p">---</span>
+<span class="n">apiServer</span><span class="p">:</span>
+  <span class="n">certSANs</span><span class="p">:</span>
+  <span class="p">-</span> <span class="n">192</span><span class="p">.</span><span class="n">168</span><span class="p">.</span><span class="n">10</span><span class="p">.</span><span class="n">100</span>
+  <span class="n">timeoutForControlPlane</span><span class="p">:</span> <span class="n">4m0s</span>
+<span class="n">apiVersion</span><span class="p">:</span> <span class="n">kubeadm</span><span class="p">.</span><span class="n">k8s</span><span class="p">.</span><span class="n">io</span><span class="p">/</span><span class="n">v1beta2</span>
+<span class="n">certificatesDir</span><span class="p">:</span> <span class="p">/</span><span class="n">etc</span><span class="p">/</span><span class="n">kubernetes</span><span class="p">/</span><span class="n">pki</span>
+<span class="n">clusterName</span><span class="p">:</span> <span class="n">kubernetes</span>
+<span class="n">controlPlaneEndpoint</span><span class="p">:</span> <span class="n">192</span><span class="p">.</span><span class="n">168</span><span class="p">.</span><span class="n">10</span><span class="p">.</span><span class="n">100</span><span class="p">:</span><span class="n">16443</span>
+<span class="n">controllerManager</span><span class="p">:</span> <span class="p">{}</span>
+<span class="n">dns</span><span class="p">:</span>
+  <span class="n">type</span><span class="p">:</span> <span class="n">CoreDNS</span>
+<span class="n">etcd</span><span class="p">:</span>
+  <span class="n">local</span><span class="p">:</span>
+    <span class="n">dataDir</span><span class="p">:</span> <span class="p">/</span><span class="n">var</span><span class="p">/</span><span class="n">lib</span><span class="p">/</span><span class="n">etcd</span>
+<span class="n">imageRepository</span><span class="p">:</span> <span class="n">registry</span><span class="p">.</span><span class="n">cn-hangzhou</span><span class="p">.</span><span class="n">aliyuncs</span><span class="p">.</span><span class="n">com</span><span class="p">/</span><span class="n">google_containers</span>
+<span class="n">kind</span><span class="p">:</span> <span class="n">ClusterConfiguration</span>
+<span class="n">kubernetesVersion</span><span class="p">:</span> <span class="n">v1</span><span class="p">.</span><span class="n">21</span><span class="p">.</span><span class="n">0</span>
+<span class="n">networking</span><span class="p">:</span>
+  <span class="n">dnsDomain</span><span class="p">:</span> <span class="n">cluster</span><span class="p">.</span><span class="n">local</span>
+  <span class="n">podSubnet</span><span class="p">:</span> <span class="n">10</span><span class="p">.</span><span class="n">244</span><span class="p">.</span><span class="n">0</span><span class="p">.</span><span class="n">0</span><span class="p">/</span><span class="n">16</span>
+  <span class="n">serviceSubnet</span><span class="p">:</span> <span class="n">10</span><span class="p">.</span><span class="n">96</span><span class="p">.</span><span class="n">0</span><span class="p">.</span><span class="n">0</span><span class="p">/</span><span class="n">12</span>
+<span class="n">scheduler</span><span class="p">:</span> <span class="p">{}</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="p">[</span><span class="n">root</span><span class="nv">@master01</span> <span class="p">~]</span><span class="c"># vim kubeadm-config.yaml</span>
+<span class="p">[</span><span class="n">root</span><span class="nv">@master01</span> <span class="p">~]</span><span class="c"># cat kubeadm-config.yaml</span>
+<span class="n">apiVersion</span><span class="p">:</span> <span class="n">kubeadm</span><span class="p">.</span><span class="n">k8s</span><span class="p">.</span><span class="n">io</span><span class="p">/</span><span class="n">v1beta2</span>
+<span class="n">bootstrapTokens</span><span class="p">:</span>
+<span class="p">-</span> <span class="n">groups</span><span class="p">:</span>
+  <span class="p">-</span> <span class="n">system</span><span class="p">:</span><span class="n">bootstrappers</span><span class="p">:</span><span class="n">kubeadm</span><span class="p">:</span><span class="k">default</span><span class="n">-node-token</span>
+  <span class="n">token</span><span class="p">:</span> <span class="n">7t2weq</span><span class="p">.</span><span class="n">bjbawausm0jaxury</span>
+  <span class="n">ttl</span><span class="p">:</span> <span class="n">24h0m0s</span>
+  <span class="n">usages</span><span class="p">:</span>
+  <span class="p">-</span> <span class="n">signing</span>
+  <span class="p">-</span> <span class="n">authentication</span>
+<span class="n">kind</span><span class="p">:</span> <span class="n">InitConfiguration</span>
+<span class="n">localAPIEndpoint</span><span class="p">:</span>
+  <span class="n">advertiseAddress</span><span class="p">:</span> <span class="n">192</span><span class="p">.</span><span class="n">168</span><span class="p">.</span><span class="n">10</span><span class="p">.</span><span class="n">11</span>
+  <span class="n">bindPort</span><span class="p">:</span> <span class="n">6443</span>
+<span class="n">nodeRegistration</span><span class="p">:</span>
+  <span class="n">criSocket</span><span class="p">:</span> <span class="p">/</span><span class="n">var</span><span class="p">/</span><span class="n">run</span><span class="p">/</span><span class="n">dockershim</span><span class="p">.</span><span class="n">sock</span>
+  <span class="n">name</span><span class="p">:</span> <span class="n">master01</span>
+  <span class="n">taints</span><span class="p">:</span>
+  <span class="p">-</span> <span class="n">effect</span><span class="p">:</span> <span class="n">NoSchedule</span>
+    <span class="n">key</span><span class="p">:</span> <span class="n">node-role</span><span class="p">.</span><span class="n">kubernetes</span><span class="p">.</span><span class="n">io</span><span class="p">/</span><span class="n">master</span>
+<span class="p">---</span>
+<span class="n">apiServer</span><span class="p">:</span>
+  <span class="n">certSANs</span><span class="p">:</span>
+  <span class="p">-</span> <span class="n">192</span><span class="p">.</span><span class="n">168</span><span class="p">.</span><span class="n">10</span><span class="p">.</span><span class="n">100</span>
+  <span class="n">timeoutForControlPlane</span><span class="p">:</span> <span class="n">4m0s</span>
+<span class="n">apiVersion</span><span class="p">:</span> <span class="n">kubeadm</span><span class="p">.</span><span class="n">k8s</span><span class="p">.</span><span class="n">io</span><span class="p">/</span><span class="n">v1beta2</span>
+<span class="n">certificatesDir</span><span class="p">:</span> <span class="p">/</span><span class="n">etc</span><span class="p">/</span><span class="n">kubernetes</span><span class="p">/</span><span class="n">pki</span>
+<span class="n">clusterName</span><span class="p">:</span> <span class="n">kubernetes</span>
+<span class="n">controlPlaneEndpoint</span><span class="p">:</span> <span class="n">192</span><span class="p">.</span><span class="n">168</span><span class="p">.</span><span class="n">10</span><span class="p">.</span><span class="n">100</span><span class="p">:</span><span class="n">16443</span>
+<span class="n">controllerManager</span><span class="p">:</span> <span class="p">{}</span>
+<span class="n">dns</span><span class="p">:</span>
+  <span class="n">type</span><span class="p">:</span> <span class="n">CoreDNS</span>
+<span class="n">etcd</span><span class="p">:</span>
+  <span class="n">local</span><span class="p">:</span>
+    <span class="n">dataDir</span><span class="p">:</span> <span class="p">/</span><span class="n">var</span><span class="p">/</span><span class="n">lib</span><span class="p">/</span><span class="n">etcd</span>
+<span class="n">imageRepository</span><span class="p">:</span> 
+<span class="n">kind</span><span class="p">:</span> <span class="n">ClusterConfiguration</span>
+<span class="n">kubernetesVersion</span><span class="p">:</span> <span class="n">v1</span><span class="p">.</span><span class="n">21</span><span class="p">.</span><span class="n">0</span>
+<span class="n">networking</span><span class="p">:</span>
+  <span class="n">dnsDomain</span><span class="p">:</span> <span class="n">cluster</span><span class="p">.</span><span class="n">local</span>
+  <span class="n">podSubnet</span><span class="p">:</span> <span class="n">10</span><span class="p">.</span><span class="n">244</span><span class="p">.</span><span class="n">0</span><span class="p">.</span><span class="n">0</span><span class="p">/</span><span class="n">16</span>
+  <span class="n">serviceSubnet</span><span class="p">:</span> <span class="n">10</span><span class="p">.</span><span class="n">96</span><span class="p">.</span><span class="n">0</span><span class="p">.</span><span class="n">0</span><span class="p">/</span><span class="n">12</span>
+<span class="n">scheduler</span><span class="p">:</span> <span class="p">{}</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="p">[</span><span class="n">root</span><span class="nv">@master01</span> <span class="p">~]</span><span class="c"># kubeadm init --config /root/kubeadm-config.yaml --upload-certs</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">输出内容</span><span class="err">，</span><span class="n">一定保留</span><span class="err">，</span><span class="n">便于后继操作使用</span><span class="err">。</span>
+<span class="n">Your</span> <span class="n">Kubernetes</span> <span class="n">control-plane</span> <span class="n">has</span> <span class="n">initialized</span> <span class="n">successfully</span><span class="p">!</span>
+
+<span class="n">To</span> <span class="nb">start </span><span class="n">using</span> <span class="n">your</span> <span class="n">cluster</span><span class="p">,</span> <span class="n">you</span> <span class="n">need</span> <span class="n">to</span> <span class="n">run</span> <span class="n">the</span> <span class="n">following</span> <span class="n">as</span> <span class="n">a</span> <span class="n">regular</span> <span class="n">user</span><span class="p">:</span>
+
+  <span class="n">mkdir</span> <span class="n">-p</span> <span class="nv">$HOME</span><span class="p">/.</span><span class="n">kube</span>
+  <span class="n">sudo</span> <span class="nb">cp </span><span class="n">-i</span> <span class="p">/</span><span class="n">etc</span><span class="p">/</span><span class="n">kubernetes</span><span class="p">/</span><span class="n">admin</span><span class="p">.</span><span class="n">conf</span> <span class="nv">$HOME</span><span class="p">/.</span><span class="n">kube</span><span class="p">/</span><span class="n">config</span>
+  <span class="n">sudo</span> <span class="n">chown</span> <span class="p">$(</span><span class="n">id</span> <span class="n">-u</span><span class="p">):$(</span><span class="n">id</span> <span class="n">-g</span><span class="p">)</span> <span class="nv">$HOME</span><span class="p">/.</span><span class="n">kube</span><span class="p">/</span><span class="n">config</span>
+
+<span class="n">Alternatively</span><span class="p">,</span> <span class="k">if</span> <span class="n">you</span> <span class="n">are</span> <span class="n">the</span> <span class="n">root</span> <span class="n">user</span><span class="p">,</span> <span class="n">you</span> <span class="n">can</span> <span class="n">run</span><span class="p">:</span>
+
+  <span class="n">export</span> <span class="n">KUBECONFIG</span><span class="p">=/</span><span class="n">etc</span><span class="p">/</span><span class="n">kubernetes</span><span class="p">/</span><span class="n">admin</span><span class="p">.</span><span class="n">conf</span>
+
+<span class="n">You</span> <span class="n">should</span> <span class="n">now</span> <span class="n">deploy</span> <span class="n">a</span> <span class="n">pod</span> <span class="n">network</span> <span class="n">to</span> <span class="n">the</span> <span class="n">cluster</span><span class="p">.</span>
+<span class="n">Run</span> <span class="s2">&quot;kubectl apply -f [podnetwork].yaml&quot;</span> <span class="n">with</span> <span class="n">one</span> <span class="n">of</span> <span class="n">the</span> <span class="n">options</span> <span class="n">listed</span> <span class="n">at</span><span class="p">:</span>
+  <span class="n">https</span><span class="p">://</span><span class="n">kubernetes</span><span class="p">.</span><span class="n">io</span><span class="p">/</span><span class="n">docs</span><span class="p">/</span><span class="n">concepts</span><span class="p">/</span><span class="n">cluster-administration</span><span class="p">/</span><span class="n">addons</span><span class="p">/</span>
+
+<span class="n">You</span> <span class="n">can</span> <span class="n">now</span> <span class="n">join</span> <span class="n">any</span> <span class="n">number</span> <span class="n">of</span> <span class="n">the</span> <span class="n">control-plane</span> <span class="n">node</span> <span class="n">running</span> <span class="n">the</span> <span class="n">following</span> <span class="n">command</span> <span class="n">on</span> <span class="n">each</span> <span class="n">as</span> <span class="n">root</span><span class="p">:</span>
+
+  <span class="n">kubeadm</span> <span class="n">join</span> <span class="n">192</span><span class="p">.</span><span class="n">168</span><span class="p">.</span><span class="n">10</span><span class="p">.</span><span class="n">100</span><span class="p">:</span><span class="n">16443</span> <span class="p">-</span><span class="n">-token</span> <span class="n">7t2weq</span><span class="p">.</span><span class="n">bjbawausm0jaxury</span> <span class="p">\</span>
+        <span class="p">-</span><span class="n">-discovery-token-ca-cert-hash</span> <span class="n">sha256</span><span class="p">:</span><span class="n">085fc221ad8b5baffdaa567768a10d21eca2fc1f939fe73578ff725feea70ba4</span> <span class="p">\</span>
+        <span class="p">-</span><span class="n">-control-plane</span> <span class="p">-</span><span class="n">-certificate-key</span> <span class="n">9f74fd2c73a16a79fb9f458cd5874a860564070fd93c3912d910ba2b9c11a2b1</span>
+
+<span class="n">Please</span> <span class="n">note</span> <span class="n">that</span> <span class="n">the</span> <span class="n">certificate-key</span> <span class="n">gives</span> <span class="n">access</span> <span class="n">to</span> <span class="n">cluster</span> <span class="n">sensitive</span> <span class="n">data</span><span class="p">,</span> <span class="n">keep</span> <span class="n">it</span> <span class="n">secret</span><span class="p">!</span>
+<span class="n">As</span> <span class="n">a</span> <span class="n">safeguard</span><span class="p">,</span> <span class="n">uploaded-certs</span> <span class="n">will</span> <span class="n">be</span> <span class="n">deleted</span> <span class="k">in</span> <span class="n">two</span> <span class="n">hours</span><span class="p">;</span> <span class="k">If</span> <span class="n">necessary</span><span class="p">,</span> <span class="n">you</span> <span class="n">can</span> <span class="n">use</span>
+<span class="s2">&quot;kubeadm init phase upload-certs --upload-certs&quot;</span> <span class="n">to</span> <span class="n">reload</span> <span class="n">certs</span> <span class="n">afterward</span><span class="p">.</span>
+
+<span class="n">Then</span> <span class="n">you</span> <span class="n">can</span> <span class="n">join</span> <span class="n">any</span> <span class="n">number</span> <span class="n">of</span> <span class="n">worker</span> <span class="n">nodes</span> <span class="n">by</span> <span class="n">running</span> <span class="n">the</span> <span class="n">following</span> <span class="n">on</span> <span class="n">each</span> <span class="n">as</span> <span class="n">root</span><span class="p">:</span>
+
+<span class="n">kubeadm</span> <span class="n">join</span> <span class="n">192</span><span class="p">.</span><span class="n">168</span><span class="p">.</span><span class="n">10</span><span class="p">.</span><span class="n">100</span><span class="p">:</span><span class="n">16443</span> <span class="p">-</span><span class="n">-token</span> <span class="n">7t2weq</span><span class="p">.</span><span class="n">bjbawausm0jaxury</span> <span class="p">\</span>
+        <span class="p">-</span><span class="n">-discovery-token-ca-cert-hash</span> <span class="n">sha256</span><span class="p">:</span><span class="n">085fc221ad8b5baffdaa567768a10d21eca2fc1f939fe73578ff725feea70ba4</span>
+</code></pre></div>
+<h2 id="57">5.7 集群应用客户端管理集群文件准备<a class="headerlink" href="#57" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><span class="p">[</span><span class="n">root</span><span class="nv">@master01</span> <span class="p">~]</span><span class="c"># mkdir -p $HOME/.kube</span>
+<span class="p">[</span><span class="n">root</span><span class="nv">@master01</span> <span class="p">~]</span><span class="c"># cp -i /etc/kubernetes/admin.conf $HOME/.kube/config</span>
+<span class="p">[</span><span class="n">root</span><span class="nv">@master01</span> <span class="p">~]</span><span class="c"># chown $(id -u):$(id -g) $HOME/.kube/config</span>
+<span class="p">[</span><span class="n">root</span><span class="nv">@master01</span> <span class="p">~]</span><span class="c"># ls /root/.kube/</span>
+<span class="n">config</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="p">[</span><span class="n">root</span><span class="nv">@master01</span> <span class="p">~]</span><span class="c"># export KUBECONFIG=/etc/kubernetes/admin.conf</span>
+</code></pre></div>
+<h2 id="58">5.8 集群网络准备<a class="headerlink" href="#58" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p>使用calico部署集群网络</p>
+<p>安装参考网址：<a href="https://projectcalico.docs.tigera.io/about/about-calico">https://projectcalico.docs.tigera.io/about/about-calico</a></p>
+</blockquote>
+<h3 id="581_calico">5.8.1 calico安装<a class="headerlink" href="#581_calico" title="Permanent link">&para;</a></h3>
+<p><img alt="image-20220119141547207" src="../../../img/kubernetes/kubernetes_hight/image-20220119141547207.png" /></p>
+<p><img alt="image-20220119141645676" src="../../../img/kubernetes/kubernetes_hight/image-20220119141645676.png" /></p>
+<p><img alt="image-20220119141734347" src="../../../img/kubernetes/kubernetes_hight/image-20220119141734347.png" /></p>
+<p><img alt="image-20220119141830625" src="../../../img/kubernetes/kubernetes_hight/image-20220119141830625.png" /></p>
+<div class="highlight"><pre><span></span><code><span class="n">下载operator资源清多文件</span>
+<span class="c"># wget https://docs.projectcalico.org/manifests/tigera-operator.yaml</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">应用资源清多文件</span><span class="err">，</span><span class="n">创建operator</span>
+<span class="c"># kubectl apply -f tigera-operator.yaml</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">通过自定义资源方式安装</span>
+<span class="c"># wget https://docs.projectcalico.org/manifests/custom-resources.yaml</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">修改文件第13行</span><span class="err">，</span><span class="n">修改为使用kubeadm</span> <span class="n">init</span> <span class="p">---</span><span class="n">-pod-network-cidr对应的IP地址段</span>
+<span class="c"># vim custom-resources.yaml</span>
+<span class="p">......</span>
+ <span class="n">11</span>     <span class="n">ipPools</span><span class="p">:</span>
+ <span class="n">12</span>     <span class="p">-</span> <span class="n">blockSize</span><span class="p">:</span> <span class="n">26</span>
+ <span class="n">13</span>       <span class="n">cidr</span><span class="p">:</span> <span class="n">10</span><span class="p">.</span><span class="n">244</span><span class="p">.</span><span class="n">0</span><span class="p">.</span><span class="n">0</span><span class="p">/</span><span class="n">16</span> 
+ <span class="n">14</span>       <span class="n">encapsulation</span><span class="p">:</span> <span class="n">VXLANCrossSubnet</span>
+<span class="p">......</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">应用资源清多文件</span>
+<span class="c"># kubectl apply -f custom-resources.yaml</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">监视calico-sysem命名空间中pod运行情况</span>
+<span class="c"># watch kubectl get pods -n calico-system</span>
+</code></pre></div>
+<blockquote>
+<p>Wait until each pod has the <code>STATUS</code> of <code>Running</code>.</p>
+</blockquote>
+<div class="highlight"><pre><span></span><code><span class="n">删除</span> <span class="n">master</span> <span class="n">上的</span> <span class="n">taint</span>
+<span class="c"># kubectl taint nodes --all node-role.kubernetes.io/master-</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">已经全部运行</span>
+<span class="c"># kubectl get pods -n calico-system</span>
+<span class="n">NAME</span>                                      <span class="n">READY</span>   <span class="n">STATUS</span>    <span class="n">RESTARTS</span>   <span class="n">AGE</span>
+<span class="n">calico-kube-controllers</span><span class="p">-</span><span class="n">666bb9949-dzp68</span>   <span class="n">1</span><span class="p">/</span><span class="n">1</span>     <span class="n">Running</span>   <span class="n">0</span>          <span class="n">11m</span>
+<span class="n">calico-node-jhcf4</span>                         <span class="n">1</span><span class="p">/</span><span class="n">1</span>     <span class="n">Running</span>   <span class="n">4</span>          <span class="n">11m</span>
+<span class="n">calico-typha</span><span class="p">-</span><span class="n">68b96d8d9c</span><span class="p">-</span><span class="n">7qfq7</span>             <span class="n">1</span><span class="p">/</span><span class="n">1</span>     <span class="n">Running</span>   <span class="n">2</span>          <span class="n">11m</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">查看kube-system命名空间中coredns状态</span><span class="err">，</span><span class="n">处于Running状态表明联网成功</span><span class="err">。</span>
+<span class="c"># kubectl get pods -n kube-system</span>
+<span class="n">NAME</span>                               <span class="n">READY</span>   <span class="n">STATUS</span>    <span class="n">RESTARTS</span>   <span class="n">AGE</span>
+<span class="n">coredns</span><span class="p">-</span><span class="n">558bd4d5db</span><span class="p">-</span><span class="n">4jbdv</span>           <span class="n">1</span><span class="p">/</span><span class="n">1</span>     <span class="n">Running</span>   <span class="n">0</span>          <span class="n">113m</span>
+<span class="n">coredns</span><span class="p">-</span><span class="n">558bd4d5db-pw5x5</span>           <span class="n">1</span><span class="p">/</span><span class="n">1</span>     <span class="n">Running</span>   <span class="n">0</span>          <span class="n">113m</span>
+<span class="n">etcd-master01</span>                      <span class="n">1</span><span class="p">/</span><span class="n">1</span>     <span class="n">Running</span>   <span class="n">0</span>          <span class="n">113m</span>
+<span class="n">kube-apiserver-master01</span>            <span class="n">1</span><span class="p">/</span><span class="n">1</span>     <span class="n">Running</span>   <span class="n">0</span>          <span class="n">113m</span>
+<span class="n">kube-controller-manager-master01</span>   <span class="n">1</span><span class="p">/</span><span class="n">1</span>     <span class="n">Running</span>   <span class="n">4</span>          <span class="n">113m</span>
+<span class="n">kube-proxy-kbx4z</span>                   <span class="n">1</span><span class="p">/</span><span class="n">1</span>     <span class="n">Running</span>   <span class="n">0</span>          <span class="n">113m</span>
+<span class="n">kube-scheduler-master01</span>            <span class="n">1</span><span class="p">/</span><span class="n">1</span>     <span class="n">Running</span>   <span class="n">3</span>          <span class="n">113m</span>
+</code></pre></div>
+<h3 id="582_calico">5.8.2 calico客户端安装<a class="headerlink" href="#582_calico" title="Permanent link">&para;</a></h3>
+<p><img alt="image-20220119144207789" src="../../../img/kubernetes/kubernetes_hight/image-20220119144207789.png" /></p>
+<p><img alt="image-20220119144446449" src="../../../img/kubernetes/kubernetes_hight/image-20220119144446449.png" /></p>
+<div class="highlight"><pre><span></span><code><span class="n">下载二进制文件</span>
+<span class="c"># curl -L https://github.com/projectcalico/calico/releases/download/v3.21.4/calicoctl-linux-amd64 -o calicoctl</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">安装calicoctl</span>
+<span class="c"># mv calicoctl /usr/bin/</span>
+
+<span class="n">为calicoctl添加可执行权限</span>
+<span class="c"># chmod +x /usr/bin/calicoctl</span>
+
+<span class="n">查看添加权限后文件</span>
+<span class="c"># ls /usr/bin/calicoctl</span>
+<span class="p">/</span><span class="n">usr</span><span class="p">/</span><span class="n">bin</span><span class="p">/</span><span class="n">calicoctl</span>
+
+<span class="n">查看calicoctl版本</span>
+<span class="c"># calicoctl  version</span>
+<span class="n">Client</span> <span class="n">Version</span><span class="p">:</span>    <span class="n">v3</span><span class="p">.</span><span class="n">21</span><span class="p">.</span><span class="n">4</span>
+<span class="n">Git</span> <span class="n">commit</span><span class="p">:</span>        <span class="n">220d04c94</span>
+<span class="n">Cluster</span> <span class="n">Version</span><span class="p">:</span>   <span class="n">v3</span><span class="p">.</span><span class="n">21</span><span class="p">.</span><span class="n">4</span>
+<span class="n">Cluster</span> <span class="n">Type</span><span class="p">:</span>      <span class="n">typha</span><span class="p">,</span><span class="n">kdd</span><span class="p">,</span><span class="n">k8s</span><span class="p">,</span><span class="n">operator</span><span class="p">,</span><span class="n">bgp</span><span class="p">,</span><span class="n">kubeadm</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">通过</span><span class="p">~/.</span><span class="n">kube</span><span class="p">/</span><span class="n">config连接kubernetes集群</span><span class="err">，</span><span class="n">查看已运行节点</span>
+<span class="c"># DATASTORE_TYPE=kubernetes KUBECONFIG=~/.kube/config calicoctl get nodes</span>
+<span class="n">NAME</span>
+<span class="n">master01</span>
+</code></pre></div>
+<h2 id="59_master">5.9 集群其它Master节点加入集群<a class="headerlink" href="#59_master" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><span class="p">[</span><span class="n">root</span><span class="nv">@master02</span> <span class="p">~]</span><span class="c"># kubeadm join 192.168.10.100:16443 --token 7t2weq.bjbawausm0jaxury \</span>
+<span class="p">&gt;</span>         <span class="p">-</span><span class="n">-discovery-token-ca-cert-hash</span> <span class="n">sha256</span><span class="p">:</span><span class="n">085fc221ad8b5baffdaa567768a10d21eca2fc1f939fe73578ff725feea70ba4</span> <span class="p">\</span>
+<span class="p">&gt;</span>         <span class="p">-</span><span class="n">-control-plane</span> <span class="p">-</span><span class="n">-certificate-key</span> <span class="n">9f74fd2c73a16a79fb9f458cd5874a860564070fd93c3912d910ba2b9c11a2b1</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="p">[</span><span class="n">root</span><span class="nv">@master03</span> <span class="p">~]</span><span class="c"># kubeadm join 192.168.10.100:16443 --token 7t2weq.bjbawausm0jaxury \</span>
+<span class="p">&gt;</span>         <span class="p">-</span><span class="n">-discovery-token-ca-cert-hash</span> <span class="n">sha256</span><span class="p">:</span><span class="n">085fc221ad8b5baffdaa567768a10d21eca2fc1f939fe73578ff725feea70ba4</span> <span class="p">\</span>
+<span class="p">&gt;</span>         <span class="p">-</span><span class="n">-control-plane</span> <span class="p">-</span><span class="n">-certificate-key</span> <span class="n">9f74fd2c73a16a79fb9f458cd5874a860564070fd93c3912d910ba2b9c11a2b1</span>
+</code></pre></div>
+<h2 id="510">5.10 集群工作节点加入集群<a class="headerlink" href="#510" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p>因容器镜像下载较慢，可能会导致报错，主要错误为没有准备好cni（集群网络插件），如有网络，请耐心等待即可。</p>
+</blockquote>
+<div class="highlight"><pre><span></span><code><span class="p">[</span><span class="n">root</span><span class="nv">@worker01</span> <span class="p">~]</span><span class="c"># kubeadm join 192.168.10.100:16443 --token 7t2weq.bjbawausm0jaxury \</span>
+<span class="p">&gt;</span>         <span class="p">-</span><span class="n">-discovery-token-ca-cert-hash</span> <span class="n">sha256</span><span class="p">:</span><span class="n">085fc221ad8b5baffdaa567768a10d21eca2fc1f939fe73578ff725feea70ba4</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="p">[</span><span class="n">root</span><span class="nv">@worker02</span> <span class="p">~]</span><span class="c"># kubeadm join 192.168.10.100:16443 --token 7t2weq.bjbawausm0jaxury \</span>
+<span class="p">&gt;</span>         <span class="p">-</span><span class="n">-discovery-token-ca-cert-hash</span> <span class="n">sha256</span><span class="p">:</span><span class="n">085fc221ad8b5baffdaa567768a10d21eca2fc1f939fe73578ff725feea70ba4</span>
+</code></pre></div>
+<h2 id="511">5.11 验证集群可用性<a class="headerlink" href="#511" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><span class="n">查看所有的节点</span>
+<span class="p">[</span><span class="n">root</span><span class="nv">@master01</span> <span class="p">~]</span><span class="c"># kubectl get nodes</span>
+<span class="n">NAME</span>       <span class="n">STATUS</span>   <span class="n">ROLES</span>                  <span class="n">AGE</span>     <span class="n">VERSION</span>
+<span class="n">master01</span>   <span class="n">Ready</span>    <span class="n">control-plane</span><span class="p">,</span><span class="n">master</span>   <span class="n">13m</span>     <span class="n">v1</span><span class="p">.</span><span class="n">21</span><span class="p">.</span><span class="n">0</span>
+<span class="n">master02</span>   <span class="n">Ready</span>    <span class="n">control-plane</span><span class="p">,</span><span class="n">master</span>   <span class="n">2m25s</span>   <span class="n">v1</span><span class="p">.</span><span class="n">21</span><span class="p">.</span><span class="n">0</span>
+<span class="n">master03</span>   <span class="n">Ready</span>    <span class="n">control-plane</span><span class="p">,</span><span class="n">master</span>   <span class="n">87s</span>     <span class="n">v1</span><span class="p">.</span><span class="n">21</span><span class="p">.</span><span class="n">0</span>
+<span class="n">worker01</span>   <span class="n">Ready</span>    <span class="p">&lt;</span><span class="n">none</span><span class="p">&gt;</span>                 <span class="n">3m13s</span>   <span class="n">v1</span><span class="p">.</span><span class="n">21</span><span class="p">.</span><span class="n">0</span>
+<span class="n">worker02</span>   <span class="n">Ready</span>    <span class="p">&lt;</span><span class="n">none</span><span class="p">&gt;</span>                 <span class="n">2m50s</span>   <span class="n">v1</span><span class="p">.</span><span class="n">21</span><span class="p">.</span><span class="n">0</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">查看集群健康情况</span><span class="p">,</span><span class="n">理想状态</span>
+<span class="p">[</span><span class="n">root</span><span class="nv">@master01</span> <span class="p">~]</span><span class="c"># kubectl get cs</span>
+<span class="n">NAME</span>                 <span class="n">STATUS</span>    <span class="n">MESSAGE</span>             <span class="n">ERROR</span>
+<span class="n">controller-manager</span>   <span class="n">Healthy</span>   <span class="n">ok</span>
+<span class="n">scheduler</span>            <span class="n">Healthy</span>   <span class="n">ok</span>
+<span class="n">etcd</span><span class="p">-</span><span class="n">0</span>               <span class="n">Healthy</span>   <span class="p">{</span><span class="s2">&quot;health&quot;</span><span class="p">:</span><span class="s2">&quot;true&quot;</span><span class="p">}</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">真实情况</span>
+<span class="c"># kubectl get cs</span>
+<span class="n">Warning</span><span class="p">:</span> <span class="n">v1</span> <span class="n">ComponentStatus</span> <span class="n">is</span> <span class="n">deprecated</span> <span class="k">in</span> <span class="n">v1</span><span class="p">.</span><span class="n">19</span><span class="p">+</span>
+<span class="n">NAME</span>                 <span class="n">STATUS</span>      <span class="n">MESSAGE</span>                                                                                       <span class="n">ERROR</span>
+<span class="n">scheduler</span>            <span class="n">Unhealthy</span>   <span class="n">Get</span> <span class="s2">&quot;http://127.0.0.1:10251/healthz&quot;</span><span class="p">:</span> <span class="n">dial</span> <span class="n">tcp</span> <span class="n">127</span><span class="p">.</span><span class="n">0</span><span class="p">.</span><span class="n">0</span><span class="p">.</span><span class="n">1</span><span class="p">:</span><span class="n">10251</span><span class="p">:</span> <span class="n">connect</span><span class="p">:</span> <span class="n">connection</span> <span class="n">refused</span>
+<span class="n">controller-manager</span>   <span class="n">Unhealthy</span>   <span class="n">Get</span> <span class="s2">&quot;http://127.0.0.1:10252/healthz&quot;</span><span class="p">:</span> <span class="n">dial</span> <span class="n">tcp</span> <span class="n">127</span><span class="p">.</span><span class="n">0</span><span class="p">.</span><span class="n">0</span><span class="p">.</span><span class="n">1</span><span class="p">:</span><span class="n">10252</span><span class="p">:</span> <span class="n">connect</span><span class="p">:</span> <span class="n">connection</span> <span class="n">refused</span>
+<span class="n">etcd</span><span class="p">-</span><span class="n">0</span>               <span class="n">Healthy</span>     <span class="p">{</span><span class="s2">&quot;health&quot;</span><span class="p">:</span><span class="s2">&quot;true&quot;</span><span class="p">}</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">查看kubernetes集群pod运行情况</span>
+<span class="p">[</span><span class="n">root</span><span class="nv">@master01</span> <span class="p">~]</span><span class="c"># kubectl get pods -n kube-system</span>
+<span class="n">NAME</span>                               <span class="n">READY</span>   <span class="n">STATUS</span>    <span class="n">RESTARTS</span>   <span class="n">AGE</span>
+<span class="n">coredns</span><span class="p">-</span><span class="n">558bd4d5db-smp62</span>           <span class="n">1</span><span class="p">/</span><span class="n">1</span>     <span class="n">Running</span>   <span class="n">0</span>          <span class="n">13m</span>
+<span class="n">coredns</span><span class="p">-</span><span class="n">558bd4d5db-zcmp5</span>           <span class="n">1</span><span class="p">/</span><span class="n">1</span>     <span class="n">Running</span>   <span class="n">0</span>          <span class="n">13m</span>
+<span class="n">etcd-master01</span>                      <span class="n">1</span><span class="p">/</span><span class="n">1</span>     <span class="n">Running</span>   <span class="n">0</span>          <span class="n">14m</span>
+<span class="n">etcd-master02</span>                      <span class="n">1</span><span class="p">/</span><span class="n">1</span>     <span class="n">Running</span>   <span class="n">0</span>          <span class="n">3m10s</span>
+<span class="n">etcd-master03</span>                      <span class="n">1</span><span class="p">/</span><span class="n">1</span>     <span class="n">Running</span>   <span class="n">0</span>          <span class="n">115s</span>
+<span class="n">kube-apiserver-master01</span>            <span class="n">1</span><span class="p">/</span><span class="n">1</span>     <span class="n">Running</span>   <span class="n">0</span>          <span class="n">14m</span>
+<span class="n">kube-apiserver-master02</span>            <span class="n">1</span><span class="p">/</span><span class="n">1</span>     <span class="n">Running</span>   <span class="n">0</span>          <span class="n">3m13s</span>
+<span class="n">kube-apiserver-master03</span>            <span class="n">1</span><span class="p">/</span><span class="n">1</span>     <span class="n">Running</span>   <span class="n">0</span>          <span class="n">116s</span>
+<span class="n">kube-controller-manager-master01</span>   <span class="n">1</span><span class="p">/</span><span class="n">1</span>     <span class="n">Running</span>   <span class="n">1</span>          <span class="n">13m</span>
+<span class="n">kube-controller-manager-master02</span>   <span class="n">1</span><span class="p">/</span><span class="n">1</span>     <span class="n">Running</span>   <span class="n">0</span>          <span class="n">3m13s</span>
+<span class="n">kube-controller-manager-master03</span>   <span class="n">1</span><span class="p">/</span><span class="n">1</span>     <span class="n">Running</span>   <span class="n">0</span>          <span class="n">116s</span>
+<span class="n">kube-proxy</span><span class="p">-</span><span class="n">629zl</span>                   <span class="n">1</span><span class="p">/</span><span class="n">1</span>     <span class="n">Running</span>   <span class="n">0</span>          <span class="n">2m17s</span>
+<span class="n">kube-proxy</span><span class="p">-</span><span class="n">85qn8</span>                   <span class="n">1</span><span class="p">/</span><span class="n">1</span>     <span class="n">Running</span>   <span class="n">0</span>          <span class="n">3m15s</span>
+<span class="n">kube-proxy-fhqzt</span>                   <span class="n">1</span><span class="p">/</span><span class="n">1</span>     <span class="n">Running</span>   <span class="n">0</span>          <span class="n">13m</span>
+<span class="n">kube-proxy-jdxbd</span>                   <span class="n">1</span><span class="p">/</span><span class="n">1</span>     <span class="n">Running</span>   <span class="n">0</span>          <span class="n">3m40s</span>
+<span class="n">kube-proxy-ks97x</span>                   <span class="n">1</span><span class="p">/</span><span class="n">1</span>     <span class="n">Running</span>   <span class="n">0</span>          <span class="n">4m3s</span>
+<span class="n">kube-scheduler-master01</span>            <span class="n">1</span><span class="p">/</span><span class="n">1</span>     <span class="n">Running</span>   <span class="n">1</span>          <span class="n">13m</span>
+<span class="n">kube-scheduler-master02</span>            <span class="n">1</span><span class="p">/</span><span class="n">1</span>     <span class="n">Running</span>   <span class="n">0</span>          <span class="n">3m13s</span>
+<span class="n">kube-scheduler-master03</span>            <span class="n">1</span><span class="p">/</span><span class="n">1</span>     <span class="n">Running</span>   <span class="n">0</span>          <span class="n">115s</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">再次查看calico-system命名空间中pod运行情况</span><span class="err">。</span>
+<span class="p">[</span><span class="n">root</span><span class="nv">@master01</span> <span class="p">~]</span><span class="c"># kubectl get pod -n calico-system</span>
+<span class="n">NAME</span>                                      <span class="n">READY</span>   <span class="n">STATUS</span>    <span class="n">RESTARTS</span>   <span class="n">AGE</span>
+<span class="n">calico-kube-controllers</span><span class="p">-</span><span class="n">666bb9949</span><span class="p">-</span><span class="n">4z77k</span>   <span class="n">1</span><span class="p">/</span><span class="n">1</span>     <span class="n">Running</span>   <span class="n">0</span>          <span class="n">10m</span>
+<span class="n">calico-node-b5wjv</span>                         <span class="n">1</span><span class="p">/</span><span class="n">1</span>     <span class="n">Running</span>   <span class="n">0</span>          <span class="n">10m</span>
+<span class="n">calico-node-d427l</span>                         <span class="n">1</span><span class="p">/</span><span class="n">1</span>     <span class="n">Running</span>   <span class="n">0</span>          <span class="n">4m45s</span>
+<span class="n">calico-node-jkq7f</span>                         <span class="n">1</span><span class="p">/</span><span class="n">1</span>     <span class="n">Running</span>   <span class="n">0</span>          <span class="n">2m59s</span>
+<span class="n">calico-node-wtjnm</span>                         <span class="n">1</span><span class="p">/</span><span class="n">1</span>     <span class="n">Running</span>   <span class="n">0</span>          <span class="n">4m22s</span>
+<span class="n">calico-node-xxh2p</span>                         <span class="n">1</span><span class="p">/</span><span class="n">1</span>     <span class="n">Running</span>   <span class="n">0</span>          <span class="n">3m57s</span>
+<span class="n">calico-typha</span><span class="p">-</span><span class="n">7cd9d6445b</span><span class="p">-</span><span class="n">5zcg5</span>             <span class="n">1</span><span class="p">/</span><span class="n">1</span>     <span class="n">Running</span>   <span class="n">0</span>          <span class="n">2m54s</span>
+<span class="n">calico-typha</span><span class="p">-</span><span class="n">7cd9d6445b-b5d4j</span>             <span class="n">1</span><span class="p">/</span><span class="n">1</span>     <span class="n">Running</span>   <span class="n">0</span>          <span class="n">10m</span>
+<span class="n">calico-typha</span><span class="p">-</span><span class="n">7cd9d6445b-z44kp</span>             <span class="n">1</span><span class="p">/</span><span class="n">1</span>     <span class="n">Running</span>   <span class="n">1</span>          <span class="n">4m17s</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">在master节点上操作</span><span class="err">，</span><span class="n">查看网络节点是否添加</span>
+<span class="p">[</span><span class="n">root</span><span class="nv">@master01</span> <span class="p">~]</span><span class="c"># DATASTORE_TYPE=kubernetes KUBECONFIG=~/.kube/config calicoctl get nodes</span>
+<span class="n">NAME</span>
+<span class="n">master01</span>
+<span class="n">master02</span>
+<span class="n">master03</span>
+<span class="n">worker01</span>
+<span class="n">worker02</span>
+</code></pre></div>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      BurningMyself<a href='https://beian.miit.gov.cn/' target='_blank'>  蜀ICP备15033200号-1</a>
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        <div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/burningmyself" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://gitee.com/burningmyself" target="_blank" rel="noopener" title="gitee.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 488 512"><!--! Font Awesome Free 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M488 261.8C488 403.3 391.1 504 248 504 110.8 504 0 393.2 0 256S110.8 8 248 8c66.8 0 123 24.5 166.3 64.9l-67.5 64.9C258.5 52.6 94.3 116.6 94.3 256c0 86.5 69.1 156.6 153.7 156.6 98.2 0 135-70.4 140.8-106.9H248v-85.3h236.1c2.3 12.7 3.9 24.9 3.9 41.4z"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "../../..", "features": [], "search": "../../../assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.2a6f1dda.min.js"></script>
+      
+        <script src="../../../js/extra.js"></script>
+      
+        <script src="../../../js/baidu-tongji.js"></script>
+      
+        <script src="https://www.googletagmanager.com/gtag/js?id=UA-155084439-1"></script>
+      
+        <script src="https://www.googletagmanager.com/gtag/js?id=UA-155132293-1"></script>
+      
+        <script src="../../../js/google.js"></script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+      
+    
+  </body>
+</html>
