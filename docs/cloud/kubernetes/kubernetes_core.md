@@ -235,7 +235,7 @@ workloads分为pod与controllers
 
 
 
-![1564844640416](../../img/kubernetes/kubernetes_core/work load.png)
+![1564844640416](../../img/kubernetes/kubernetes_core/work_load.png)
 
 在pod的YAML里指定pod标签
 
