@@ -96,6 +96,16 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://burningmyself.gitee.io/cloud/kubernetes/kubernetes_cluster/</loc>
+         <lastmod>2023-03-08</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://burningmyself.gitee.io/cloud/kubernetes/kubernetes_core/</loc>
+         <lastmod>2023-03-08</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://burningmyself.gitee.io/cloud/kubernetes/kubernetes_hight/</loc>
          <lastmod>2023-03-08</lastmod>
          <changefreq>daily</changefreq>
