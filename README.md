@@ -10,11 +10,11 @@
 [Gitee](https://gitee.com/yangfubing)
 
 
-![GitHub issues](https://img.shields.io/github/issues/burningmyself/micro)
-![GitHub forks](https://img.shields.io/github/forks/burningmyself/micro)
-![GitHub stars](https://img.shields.io/github/stars/burningmyself/micro)
-![GitHub license](https://img.shields.io/github/license/burningmyself/micro)
-![Twitter](https://img.shields.io/twitter/url?url=https%3A%2F%2Fgithub.com%2Fburningmyself%2Fmicro)
+![GitHub issues](https://img.shields.io/github/issues/burningmyself/burningmyself.github.io)
+![GitHub forks](https://img.shields.io/github/forks/burningmyself/burningmyself.github.io)
+![GitHub stars](https://img.shields.io/github/stars/burningmyself/burningmyself.github.io)
+![GitHub license](https://img.shields.io/github/license/burningmyself/burningmyself.github.io)
+![Twitter](https://img.shields.io/twitter/url?url=https%3A%2F%2Fgithub.com%2Fburningmyself%2Fburningmyself.github.io)
 
 
 ## 捐赠
