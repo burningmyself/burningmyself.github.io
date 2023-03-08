@@ -101,6 +101,16 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://burningmyself.gitee.io/cloud/kubernetes/kubernetes_hight_bin1/</loc>
+         <lastmod>2023-03-08</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://burningmyself.gitee.io/cloud/kubernetes/kubernetes_hight_bin2/</loc>
+         <lastmod>2023-03-08</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://burningmyself.gitee.io/cloud/kubernetes/kubernetes_introduce/</loc>
          <lastmod>2023-03-08</lastmod>
          <changefreq>daily</changefreq>
@@ -112,6 +122,16 @@
     </url>
     <url>
          <loc>https://burningmyself.gitee.io/cloud/kubernetes/kubernetes_rke/</loc>
+         <lastmod>2023-03-08</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://burningmyself.gitee.io/cloud/kubernetes/kubernetes_sealos/</loc>
+         <lastmod>2023-03-08</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://burningmyself.gitee.io/cloud/kubernetes/kubernetes_ui/</loc>
          <lastmod>2023-03-08</lastmod>
          <changefreq>daily</changefreq>
     </url>
