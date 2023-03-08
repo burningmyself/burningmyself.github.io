@@ -119,11 +119,11 @@ nav:
       - kubeadm极速部署Kubernetes: cloud/kubernetes.md
       - kubernetes介绍与集群架构: cloud/kubernetes/kubernetes_introduce.md
       - Kubernetes集群部署方式说明: cloud/kubernetes/kubernetes_way.md
-      - 云计算: cloud/compute.md
-      - 云计算: cloud/compute.md        
-      - 云计算: cloud/compute.md
-      - 云计算: cloud/compute.md
-      - 云计算: cloud/compute.md                  
+      - kubeadm部署单Master节点kubernetes集群: cloud/kubernetes/kubernetes_master.md
+      - kubeadm部署高可用kubernetes集群: cloud/kubernetes/kubernetes_hight.md        
+      - 使用RKE构建企业生产级Kubernetes集群: cloud/kubernetes/kubernetes_rke.md
+      - 云计算: cloud/kubernetes/kubernetes_way.md
+      - 云计算: cloud/kubernetes/kubernetes_way.md            
   - 微服务:  
       - 分布式锁: micro/fbs-lock.md
       - 微服务设计: micro/design.md

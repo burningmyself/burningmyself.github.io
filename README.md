@@ -147,9 +147,9 @@
 * * [kubeadm极速部署Kubernetes](docs/cloud/kubernetes.md)
 * * [kubernetes介绍与集群架构](docs/cloud/kubernetes/kubernetes_introduce.md)
 * * [Kubernetes集群部署方式说明](docs/cloud/kubernetes/kubernetes_way.md)
-* * [云计算](docs/cloud/compute.md)
-* * [云计算](docs/cloud/compute.md)
-* * [云计算](docs/cloud/compute.md)
+* * [kubeadm部署单Master节点kubernetes集群](docs/cloud/kubernetes/kubernetes_master.md)
+* * [kubeadm部署高可用kubernetes集群](docs/cloud/kubernetes/kubernetes_hight.md)
+* * [使用RKE构建企业生产级Kubernetes集群](docs/cloud/kubernetes/kubernetes_rke.md
 * * [云计算](docs/cloud/compute.md)
 * * [云计算](docs/cloud/compute.md)
 * [情感]
