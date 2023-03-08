@@ -150,8 +150,10 @@
 * * [kubeadm部署单Master节点kubernetes集群](docs/cloud/kubernetes/kubernetes_master.md)
 * * [kubeadm部署高可用kubernetes集群](docs/cloud/kubernetes/kubernetes_hight.md)
 * * [使用RKE构建企业生产级Kubernetes集群](docs/cloud/kubernetes/kubernetes_rke.md
-* * [云计算](docs/cloud/compute.md)
-* * [云计算](docs/cloud/compute.md)
+* * [Kubernetes高可用集群二进制部署（Runtime Docker）一](docs/cloud/kubernetes/kubernetes_hight_bin1.md)
+* * [Kubernetes高可用集群二进制部署（Runtime Docker）二](docs/cloud/kubernetes/kubernetes_hight_bin2.md)
+* * [Kubernetes集群UI及主机资源监控](cloud/kubernetes/kubernetes_ui.md)
+* * [使用sealos部署kubernetes集群并实现集群管理](cloud/kubernetes/kubernetes_sealos.md)
 * [情感]
 * * [情商](docs/emotion/eq.md)
 * * [工作心得](docs/emotion/workheard.md)
