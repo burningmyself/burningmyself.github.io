@@ -536,18 +536,6 @@ go version go1.16.10 linux/amd64
 cri-dockerd 
 ~~~
 
-
-
-~~~powershell
-查看目录中内容
-# ls cri-dockerd/
-LICENSE  Makefile  packaging  README.md  src  VERSION
-~~~
-
-
-
-
-
 ~~~powershell
 # cd cri-dockerd
 ~~~
@@ -556,8 +544,7 @@ LICENSE  Makefile  packaging  README.md  src  VERSION
 
 ~~~powershell
 创建bin目录并构建cri-dockerd二进制文件
-# mkdir bin
-# cd src && go get && go build -o ../bin/cri-dockerd
+# go build -o ./cri-dockerd
 ~~~
 
 
@@ -661,51 +648,17 @@ KUBELET_EXTRA_ARGS="--cgroup-driver=systemd"
 
 
 
-### 2.3.5  集群镜像准备
-
-> 可使用VPN实现下载。
+### 2.3.5  使用阿里云拉取所需镜像
 
 ~~~powershell
-# kubeadm config images list --kubernetes-version=v1.24.0
-k8s.gcr.io/kube-apiserver:v1.24.0
-k8s.gcr.io/kube-controller-manager:v1.24.0
-k8s.gcr.io/kube-scheduler:v1.24.0
-k8s.gcr.io/kube-proxy:v1.24.0
-k8s.gcr.io/pause:3.7
-k8s.gcr.io/etcd:3.5.3-0
-k8s.gcr.io/coredns/coredns:v1.8.6
+kubeadm config images pull --image-repository=registry.aliyuncs.com/google_containers --cri-socket unix:///run/cri-dockerd.sock
 ~~~
-
-
-
-~~~powershell
-# cat image_download.sh
-#!/bin/bash
-images_list='
-k8s.gcr.io/kube-apiserver:v1.24.0
-k8s.gcr.io/kube-controller-manager:v1.24.0
-k8s.gcr.io/kube-scheduler:v1.24.0
-k8s.gcr.io/kube-proxy:v1.24.0
-k8s.gcr.io/pause:3.7
-k8s.gcr.io/etcd:3.5.3-0
-k8s.gcr.io/coredns/coredns:v1.8.6'
-
-for i in $images_list
-do
-        docker pull $i
-done
-
-docker save -o k8s-1-24-0.tar $images_list
-~~~
-
-
-
-
 
 ### 2.3.6 集群初始化
 
 ~~~powershell
-[root@k8s-master01 ~]# kubeadm init --kubernetes-version=v1.24.0 --pod-network-cidr=10.224.0.0/16 --apiserver-advertise-address=192.168.10.200  --cri-socket unix:///var/run/cri-dockerd.sock
+[root@k8s-master01 ~] 
+ kubeadm init --kubernetes-version=v1.26.2 --pod-network-cidr=10.224.0.0/16 --apiserver-advertise-address=192.168.10.200  --cri-socket unix:///run/cri-dockerd.sock --image-repository registry.aliyuncs.com/google_containers
 ~~~
 
 
@@ -1026,6 +979,8 @@ k8s-worker02
 查看所有的节点
 [root@k8s-master01 ~]# kubectl get nodes
 NAME           STATUS   ROLES           AGE   VERSION# kubeadm极速部署Kubernetes 1.24版本集群
+~~~
+
 
 # 一、Kubernetes 1.24版本发布及重磅改动
 
