@@ -588,6 +588,8 @@ cri-dockerd
 
 ~~~powershell
 [kubernetes]
+vi /etc/yum.repos.d/kubernetes.repo
+
 name=Kubernetes
 baseurl=https://packages.cloud.google.com/yum/repos/kubernetes-el7-x86_64
 enabled=1
@@ -605,6 +607,8 @@ gpgkey=https://packages.cloud.google.com/yum/doc/yum-key.gpg
 
 ~~~powershell
 [kubernetes]
+vi /etc/yum.repos.d/kubernetes.repo
+
 name=Kubernetes
 baseurl=https://mirrors.aliyun.com/kubernetes/yum/repos/kubernetes-el7-x86_64/
 enabled=1
