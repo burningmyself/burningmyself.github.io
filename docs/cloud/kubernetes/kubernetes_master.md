@@ -566,6 +566,28 @@ gpgkey=https://mirrors.aliyun.com/kubernetes/yum/doc/yum-key.gpg https://mirrors
 # yum -y install --setopt=obsoletes=0 kubeadm-1.21.0-0  kubelet-1.21.0-0 kubectl-1.21.0-0
 ~~~
 
+## 指定阿里云yum源并安装
+```shell
+cat <<EOF > /etc/yum.repos.d/kubernetes.repo
+[kubernetes]
+name=Kubernetes
+baseurl=https://mirrors.aliyun.com/kubernetes/yum/repos/kubernetes-el7-x86_64/
+enabled=1
+gpgcheck=1
+repo_gpgcheck=0
+gpgkey=https://mirrors.aliyun.com/kubernetes/yum/doc/yum-key.gpg https://mirrors.aliyun.com/kubernetes/yum/doc/rpm-package-key.gpg
+EOF
+
+setenforce 0
+sudo sed -i 's/^SELINUX=enforcing$/SELINUX=permissive/' /etc/selinux/config
+
+sudo yum install -y kubelet kubeadm kubectl --disableexcludes=kubernetes
+systemctl enable kubelet && systemctl start kubelet
+
+## 另外，你也可以指定版本安装
+## yum install -y kubelet-1.25.6 kubectl-kubelet-1.25.6 kubeadm-kubelet-1.25.6
+
+```
 
 
 
@@ -634,7 +656,7 @@ docker save -o k8s-1-21-0.tar $images_list
 ## 4.6 集群初始化
 
 ~~~powershell
-[root@master01 ~]# kubeadm init --kubernetes-version=v1.21.0 --pod-network-cidr=10.244.0.0/16 --apiserver-advertise-address=192.168.10.11
+[root@master01 ~]# kubeadm init --kubernetes-version=v1.21.0 --pod-network-cidr=10.244.0.0/16 --apiserver-advertise-address=192.168.10.11  --image-repository registry.aliyuncs.com/google_containers
 ~~~
 
 

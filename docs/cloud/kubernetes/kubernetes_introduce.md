@@ -55,9 +55,7 @@
 希腊语：舵手、飞行员
 
 
-
-<img src="../../img/kubernetes/kubernetes_introduce/1557045795562.png" alt="1557045795562" style="zoom:50%;" />
-
+![1557045795562](../../img/kubernetes/kubernetes_introduce/1557045795562.png)
 
 
 

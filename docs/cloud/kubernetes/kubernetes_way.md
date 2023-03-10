@@ -50,9 +50,7 @@
 
 - kubekey
 
-
-
-<img src="../../img/kubernetes/kubernetes_way/image-20220324205307087.png" alt="image-20220324205307087" style="zoom:50%;" />
+![image-20220324205307087](../../img/kubernetes/kubernetes_way/image-20220324205307087.png)
 
 
 
