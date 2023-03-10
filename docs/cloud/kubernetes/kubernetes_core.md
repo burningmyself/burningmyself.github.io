@@ -4583,7 +4583,7 @@ I0517 00:55:11.027858       1 shared_informer.go:230] Caches are synced for endp
 
 
 
-## 6.5 重新启动kube-proxy
+## 6.5 
 
 > 删除kube-proxy-xxx的所有pod，让它重新拉取新的kube-proxy-xxx的pod
 
