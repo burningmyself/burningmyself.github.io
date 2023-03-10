@@ -3314,6 +3314,26 @@
 <div class="highlight"><pre><span></span><code><span class="n">安装指定版本</span>
 <span class="c"># yum -y install --setopt=obsoletes=0 kubeadm-1.21.0-0  kubelet-1.21.0-0 kubectl-1.21.0-0</span>
 </code></pre></div>
+<h2 id="yum">指定阿里云yum源并安装<a class="headerlink" href="#yum" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code>cat<span class="w"> </span><span class="s">&lt;&lt;EOF &gt; /etc/yum.repos.d/kubernetes.repo</span>
+<span class="s">[kubernetes]</span>
+<span class="s">name=Kubernetes</span>
+<span class="s">baseurl=https://mirrors.aliyun.com/kubernetes/yum/repos/kubernetes-el7-x86_64/</span>
+<span class="s">enabled=1</span>
+<span class="s">gpgcheck=1</span>
+<span class="s">repo_gpgcheck=0</span>
+<span class="s">gpgkey=https://mirrors.aliyun.com/kubernetes/yum/doc/yum-key.gpg https://mirrors.aliyun.com/kubernetes/yum/doc/rpm-package-key.gpg</span>
+<span class="s">EOF</span>
+
+setenforce<span class="w"> </span><span class="m">0</span>
+sudo<span class="w"> </span>sed<span class="w"> </span>-i<span class="w"> </span><span class="s1">&#39;s/^SELINUX=enforcing$/SELINUX=permissive/&#39;</span><span class="w"> </span>/etc/selinux/config
+
+sudo<span class="w"> </span>yum<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>kubelet<span class="w"> </span>kubeadm<span class="w"> </span>kubectl<span class="w"> </span>--disableexcludes<span class="o">=</span>kubernetes
+systemctl<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>kubelet<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>systemctl<span class="w"> </span>start<span class="w"> </span>kubelet
+
+<span class="c1">## 另外，你也可以指定版本安装</span>
+<span class="c1">## yum install -y kubelet-1.25.6 kubectl-kubelet-1.25.6 kubeadm-kubelet-1.25.6</span>
+</code></pre></div>
 <h2 id="44_kubelet">4.4 配置kubelet<a class="headerlink" href="#44_kubelet" title="Permanent link">&para;</a></h2>
 <blockquote>
 <p>为了实现docker使用的cgroupdriver与kubelet使用的cgroup的一致性，建议修改如下文件内容。</p>
@@ -3356,7 +3376,7 @@
 <span class="n">docker</span> <span class="n">save</span> <span class="n">-o</span> <span class="n">k8s</span><span class="p">-</span><span class="n">1</span><span class="p">-</span><span class="n">21</span><span class="p">-</span><span class="n">0</span><span class="p">.</span><span class="n">tar</span> <span class="nv">$images_list</span>
 </code></pre></div>
 <h2 id="46">4.6 集群初始化<a class="headerlink" href="#46" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code><span class="p">[</span><span class="n">root</span><span class="nv">@master01</span> <span class="p">~]</span><span class="c"># kubeadm init --kubernetes-version=v1.21.0 --pod-network-cidr=10.244.0.0/16 --apiserver-advertise-address=192.168.10.11</span>
+<div class="highlight"><pre><span></span><code><span class="p">[</span><span class="n">root</span><span class="nv">@master01</span> <span class="p">~]</span><span class="c"># kubeadm init --kubernetes-version=v1.21.0 --pod-network-cidr=10.244.0.0/16 --apiserver-advertise-address=192.168.10.11  --image-repository registry.aliyuncs.com/google_containers</span>
 </code></pre></div>
 <div class="highlight"><pre><span></span><code><span class="n">输出内容</span><span class="err">，</span><span class="n">一定保留</span><span class="err">，</span><span class="n">便于后继操作使用</span><span class="err">。</span>
 <span class="no">[init]</span> <span class="n">Using</span> <span class="n">Kubernetes</span> <span class="n">version</span><span class="p">:</span> <span class="n">v1</span><span class="p">.</span><span class="n">21</span><span class="p">.</span><span class="n">0</span>

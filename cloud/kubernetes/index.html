@@ -3301,6 +3301,8 @@
 <h3 id="232_kubernetes_yum">2.3.2  kubernetes YUM源准备<a class="headerlink" href="#232_kubernetes_yum" title="Permanent link">&para;</a></h3>
 <h4 id="2321_yum">2.3.2.1 谷歌YUM源<a class="headerlink" href="#2321_yum" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="no">[kubernetes]</span>
+<span class="n">vi</span> <span class="p">/</span><span class="n">etc</span><span class="p">/</span><span class="n">yum</span><span class="p">.</span><span class="n">repos</span><span class="p">.</span><span class="n">d</span><span class="p">/</span><span class="n">kubernetes</span><span class="p">.</span><span class="n">repo</span>
+
 <span class="n">name</span><span class="p">=</span><span class="n">Kubernetes</span>
 <span class="n">baseurl</span><span class="p">=</span><span class="n">https</span><span class="p">://</span><span class="n">packages</span><span class="p">.</span><span class="n">cloud</span><span class="p">.</span><span class="n">google</span><span class="p">.</span><span class="n">com</span><span class="p">/</span><span class="n">yum</span><span class="p">/</span><span class="n">repos</span><span class="p">/</span><span class="n">kubernetes-el7-x86_64</span>
 <span class="n">enabled</span><span class="p">=</span><span class="n">1</span>
@@ -3311,6 +3313,8 @@
 </code></pre></div>
 <h4 id="2322_yum">2.3.2.2 阿里云YUM源<a class="headerlink" href="#2322_yum" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="no">[kubernetes]</span>
+<span class="n">vi</span> <span class="p">/</span><span class="n">etc</span><span class="p">/</span><span class="n">yum</span><span class="p">.</span><span class="n">repos</span><span class="p">.</span><span class="n">d</span><span class="p">/</span><span class="n">kubernetes</span><span class="p">.</span><span class="n">repo</span>
+
 <span class="n">name</span><span class="p">=</span><span class="n">Kubernetes</span>
 <span class="n">baseurl</span><span class="p">=</span><span class="n">https</span><span class="p">://</span><span class="n">mirrors</span><span class="p">.</span><span class="n">aliyun</span><span class="p">.</span><span class="n">com</span><span class="p">/</span><span class="n">kubernetes</span><span class="p">/</span><span class="n">yum</span><span class="p">/</span><span class="n">repos</span><span class="p">/</span><span class="n">kubernetes-el7-x86_64</span><span class="p">/</span>
 <span class="n">enabled</span><span class="p">=</span><span class="n">1</span>
