@@ -128,11 +128,11 @@ nav:
       - 使用sealos部署kubernetes集群并实现集群管理: cloud/kubernetes/kubernetes_sealos.md 
       - kubernetes集群命令语法: cloud/kubernetes/kubernetes_cluster.md
       - Kubernetes核心概念: cloud/kubernetes/kubernetes_core.md
-      - 源监控: cloud/kubernetes/kubernetes_ui.md
-      - 源监控: cloud/kubernetes/kubernetes_ui.md   
-      - 源监控: cloud/kubernetes/kubernetes_ui.md
-      - 源监控: cloud/kubernetes/kubernetes_ui.md
-      - 源监控: cloud/kubernetes/kubernetes_ui.md
+      - Kubernetes集群 服务暴露 Nginx Ingress Controller: cloud/kubernetes/kubernetes_nginx_ingress_controller.md
+      - Kubernetes集群 服务暴露 Traefik: cloud/kubernetes/kubernetes_traefik.md   
+      - Kubernetes配置与密钥管理 ConfigMap&Secret: cloud/kubernetes/kubernetes_configMap_secret.md
+      - Kubernetes集群使用容器镜像仓库Harbor: cloud/kubernetes/kubernetes_harbor.md
+      - Kubernetes集群安全管理: cloud/kubernetes/kubernetes_safety.md
       - 源监控: cloud/kubernetes/kubernetes_ui.md 
       - 源监控: cloud/kubernetes/kubernetes_ui.md
       - 源监控: cloud/kubernetes/kubernetes_ui.md
