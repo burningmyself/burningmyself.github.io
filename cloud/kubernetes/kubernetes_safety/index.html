@@ -1,0 +1,3814 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content=".net,java,php,python,docker,web">
+      
+      
+        <meta name="author" content="BurningMyself">
+      
+      
+        <link rel="canonical" href="https://burningmyself.gitee.io/cloud/kubernetes/kubernetes_safety/">
+      
+      
+      
+      <link rel="icon" href="../../../favicon.ico">
+      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.0.15">
+    
+    
+      
+        <title>1 安全管理 - BurningMyself</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.113286f1.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.a0c5b2b5.min.css">
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="" data-md-color-accent="">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#1" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../../.." title="BurningMyself" class="md-header__button md-logo" aria-label="BurningMyself" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            BurningMyself
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              1 安全管理
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/burningmyself/burningmyself.github.io" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    burningmyself.github.io
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="BurningMyself" class="md-nav__button md-logo" aria-label="BurningMyself" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    BurningMyself
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/burningmyself/burningmyself.github.io" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    burningmyself.github.io
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        介绍
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+          技术博文
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          技术博文
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="0">
+          .NET
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_1_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2_1">
+          <span class="md-nav__icon md-icon"></span>
+          .NET
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../net/c_sharp/" class="md-nav__link">
+        C#新特性语法
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../net/c_docker/" class="md-nav__link">
+        .Net Core Docker 部署
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../net/c_sqlserver_nginx/" class="md-nav__link">
+        Docker 容器化部署 ASP.NET Core
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../net/c_core_safety/" class="md-nav__link">
+        让你的ASP.NET Core应用程序更安全
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../net/c_core_study_route/" class="md-nav__link">
+        ASP.NET Core开发者指南
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+          Java
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2_2">
+          <span class="md-nav__icon md-icon"></span>
+          Java
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../java/feature/" class="md-nav__link">
+        Java特性
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../java/load-class/" class="md-nav__link">
+        Java类加载
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../java/orm/" class="md-nav__link">
+        Orm的优缺点
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../java/bio-nio/" class="md-nav__link">
+        BIO与NIO
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../java/rocketmq/rmq-1/" class="md-nav__link">
+        RocketMq下载与安装
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../java/springAnnotation/" class="md-nav__link">
+        Spring常用注解
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../java/javavm/" class="md-nav__link">
+        Java 虚拟机
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../java/springdesign/" class="md-nav__link">
+        Spring 常用设计
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../java/spring-cloud/" class="md-nav__link">
+        Spring Cloud
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../java/java-simple/" class="md-nav__link">
+        Java simple
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../java/java-validator/" class="md-nav__link">
+        Java Validator
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../java/java-string/" class="md-nav__link">
+        Java String
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../java/java-utils/" class="md-nav__link">
+        Java Utils
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+          Python
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2_3">
+          <span class="md-nav__icon md-icon"></span>
+          Python
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../python/feature/" class="md-nav__link">
+        Python特性
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../python/str_joint/" class="md-nav__link">
+        Python字符拼接
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../python/syntax_rule/" class="md-nav__link">
+        Python语法技巧
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../python/fabric/" class="md-nav__link">
+        远程部署神器 Fabric
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_4" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_4" id="__nav_2_4_label" tabindex="0">
+          PHP
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_4_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2_4">
+          <span class="md-nav__icon md-icon"></span>
+          PHP
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../php/kj/" class="md-nav__link">
+        框架
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_5" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_5" id="__nav_2_5_label" tabindex="0">
+          Web
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_5_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2_5">
+          <span class="md-nav__icon md-icon"></span>
+          Web
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../web/es6/" class="md-nav__link">
+        es6语法
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../web/ali_js_style/" class="md-nav__link">
+        阿里js样式规范
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../web/node.js/" class="md-nav__link">
+        node.js文档
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../web/react/" class="md-nav__link">
+        React 开发者指南
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../dart/syntax/" class="md-nav__link">
+        Dart语法学习
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../web/react_interview/" class="md-nav__link">
+        React 面试
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../web/js_tool_method/" class="md-nav__link">
+        js 工具函数
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../web/vue_cp_react/" class="md-nav__link">
+        vue与react比较
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../web/javascript/" class="md-nav__link">
+        JavaScript 基础
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_6" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_6" id="__nav_2_6_label" tabindex="0">
+          SQL
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_6_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2_6">
+          <span class="md-nav__icon md-icon"></span>
+          SQL
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../sql/mysql_yh/" class="md-nav__link">
+        MySQL优化
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../sql/mysql_yh17/" class="md-nav__link">
+        MySQL优化
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../sql/mysql_log/" class="md-nav__link">
+        MySQL日志
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../sql/mysql_index/" class="md-nav__link">
+        MySQL索引
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../sql/mysql_pxc/" class="md-nav__link">
+        MySQL PXC集群
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../sql/mysql_use/" class="md-nav__link">
+        MySQL 数据库应用
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../sql/mysql_backups/" class="md-nav__link">
+        MySql 备份
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../sql/sql_server_master/" class="md-nav__link">
+        Sql Server 主从备份
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../sql/data_split/" class="md-nav__link">
+        数据库之互联网常用分库分表方案
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../sql/mybatis/" class="md-nav__link">
+        Mybatis使用心德
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_7" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_7" id="__nav_2_7_label" tabindex="0">
+          Linux
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_7_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2_7">
+          <span class="md-nav__icon md-icon"></span>
+          Linux
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../linux/often/" class="md-nav__link">
+        常用命令
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../linux/ope/" class="md-nav__link">
+        实用的Linux 命令
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_8" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_8" id="__nav_2_8_label" tabindex="0">
+          Docker
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_8_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2_8">
+          <span class="md-nav__icon md-icon"></span>
+          Docker
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../docker/docker/" class="md-nav__link">
+        Docker全科
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../docker/docker-compose/" class="md-nav__link">
+        docker和docker-compose配置常用环境
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../docker/docker-jenkins/" class="md-nav__link">
+        Docker部署Jenkins
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../docker/docker-phabricator/" class="md-nav__link">
+        Docker部署Phabricator
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_9" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_9" id="__nav_2_9_label" tabindex="0">
+          Tool
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_9_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2_9">
+          <span class="md-nav__icon md-icon"></span>
+          Tool
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tool/git/" class="md-nav__link">
+        Git
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tool/gitusual/" class="md-nav__link">
+        Git动画展示
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tool/gitquestion/" class="md-nav__link">
+        Git问题处理
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tool/gitflow/" class="md-nav__link">
+        GitFlow
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tool/gitbook/" class="md-nav__link">
+        GitBook
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tool/gitcmr/" class="md-nav__link">
+        Git提交日志规范
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tool/markdown/" class="md-nav__link">
+        Markdown
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tool/cicd/" class="md-nav__link">
+        CI/CD
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tool/mkdocs/" class="md-nav__link">
+        mkdocs简单使用
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tool/gitstudy/" class="md-nav__link">
+        Git的黑魔法
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tool/minio/" class="md-nav__link">
+        MinIO 搭建使用
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tool/cat-monitoring/" class="md-nav__link">
+        Cat分布式监控
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+          云架构
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          云架构
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../native/" class="md-nav__link">
+        云原生
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../virtual/" class="md-nav__link">
+        虚拟化技术
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../compute/" class="md-nav__link">
+        云计算
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../apprelease/" class="md-nav__link">
+        应用部署容器化演进
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../containerlinux/" class="md-nav__link">
+        容器技术所涉及Linux内核关键技术
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_6" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3_6" id="__nav_3_6_label" tabindex="0">
+          Docker
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_6_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3_6">
+          <span class="md-nav__icon md-icon"></span>
+          Docker
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docker/docker_native/" class="md-nav__link">
+        容器管理工具Docker生态架构及部署
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docker/docker_nginx/" class="md-nav__link">
+        使用容器运行Nginx应用及Docker命令
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docker/docker_image/" class="md-nav__link">
+        Docker容器镜像
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docker/docker_image_fast/" class="md-nav__link">
+        Docker容器镜像加速器及本地容器镜像仓库
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docker/docker_container_enterprice/" class="md-nav__link">
+        Docker容器化部署企业级应用集群
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docker/docker_file/" class="md-nav__link">
+        Dockerfile精讲及新型容器镜像构建技术
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docker/docker_network/" class="md-nav__link">
+        Docker容器网络与通信原理深度解析
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docker/docker_date/" class="md-nav__link">
+        Docker容器数据持久化存储机制
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docker/docker_compose/" class="md-nav__link">
+        Docker容器服务编排利器Docker Compose应用实战
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docker/docker_swarm/" class="md-nav__link">
+        Docker主机集群化方案 Docker Swarm
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docker/docker_devops/" class="md-nav__link">
+        基于Docker容器DevOps应用方案 企业业务代码发布系统
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docker/docker_container/" class="md-nav__link">
+        轻量级或工业级容器管理工具
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_7" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3_7" id="__nav_3_7_label" tabindex="0">
+          Kubernetes
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_7_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3_7">
+          <span class="md-nav__icon md-icon"></span>
+          Kubernetes
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        kubeadm极速部署Kubernetes
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubernetes_introduce/" class="md-nav__link">
+        kubernetes介绍与集群架构
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubernetes_way/" class="md-nav__link">
+        Kubernetes集群部署方式说明
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubernetes_master/" class="md-nav__link">
+        kubeadm部署单Master节点kubernetes集群
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubernetes_hight/" class="md-nav__link">
+        kubeadm部署高可用kubernetes集群
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubernetes_rke/" class="md-nav__link">
+        使用RKE构建企业生产级Kubernetes集群
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubernetes_hight_bin1/" class="md-nav__link">
+        Kubernetes高可用集群二进制部署（Runtime Docker）一
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubernetes_hight_bin2/" class="md-nav__link">
+        Kubernetes高可用集群二进制部署（Runtime Docker）二
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubernetes_ui/" class="md-nav__link">
+        Kubernetes集群UI及主机资源监控
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubernetes_sealos/" class="md-nav__link">
+        使用sealos部署kubernetes集群并实现集群管理
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubernetes_cluster/" class="md-nav__link">
+        kubernetes集群命令语法
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubernetes_core/" class="md-nav__link">
+        Kubernetes核心概念
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubernetes_nginx_ingress_controller/" class="md-nav__link">
+        Kubernetes集群 服务暴露 Nginx Ingress Controller
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubernetes_traefik/" class="md-nav__link">
+        Kubernetes集群 服务暴露 Traefik
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubernetes_configMap_secret/" class="md-nav__link">
+        Kubernetes配置与密钥管理 ConfigMap&Secret
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubernetes_harbor/" class="md-nav__link">
+        Kubernetes集群使用容器镜像仓库Harbor
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubernetes_ui/" class="md-nav__link">
+        源监控
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubernetes_ui/" class="md-nav__link">
+        源监控
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubernetes_ui/" class="md-nav__link">
+        源监控
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubernetes_ui/" class="md-nav__link">
+        源监控
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubernetes_ui/" class="md-nav__link">
+        源监控
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubernetes_ui/" class="md-nav__link">
+        源监控
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubernetes_ui/" class="md-nav__link">
+        源监控
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubernetes_ui/" class="md-nav__link">
+        源监控
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubernetes_ui/" class="md-nav__link">
+        源监控
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubernetes_ui/" class="md-nav__link">
+        源监控
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubernetes_ui/" class="md-nav__link">
+        源监控
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubernetes_ui/" class="md-nav__link">
+        源监控
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubernetes_ui/" class="md-nav__link">
+        源监控
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubernetes_ui/" class="md-nav__link">
+        源监控
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubernetes_ui/" class="md-nav__link">
+        源监控
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubernetes_ui/" class="md-nav__link">
+        源监控
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubernetes_ui/" class="md-nav__link">
+        源监控
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubernetes_ui/" class="md-nav__link">
+        源监控
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+          微服务
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          微服务
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../micro/fbs-lock/" class="md-nav__link">
+        分布式锁
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../micro/design/" class="md-nav__link">
+        微服务设计
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../micro/distrimsg/" class="md-nav__link">
+        分布式系统与消息的投递
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../micro/ddd/" class="md-nav__link">
+        基于DDD的微服务设计和开发实战
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../micro/kafka/" class="md-nav__link">
+        Kafka架构原理
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../micro/redis_cluster/" class="md-nav__link">
+        Redis Cluster原理
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../micro/spring-cloud-micro/" class="md-nav__link">
+        分布式架构
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+          经验分析
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          经验分析
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../exp/devops/" class="md-nav__link">
+        DevOps
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../exp/micro-service/" class="md-nav__link">
+        Micro-Service
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../exp/raft-gossip/" class="md-nav__link">
+        Raft算法和Gossip协议
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../exp/cl/" class="md-nav__link">
+        集群和负载均衡
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../exp/ai/" class="md-nav__link">
+        人工智能
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../exp/code-principle/" class="md-nav__link">
+        代码原则
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../exp/techbig/" class="md-nav__link">
+        如何成为技术大牛
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../exp/learnweetout/" class="md-nav__link">
+        程序员如何技术成长
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../exp/pt/" class="md-nav__link">
+        产品与技术
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../exp/four_deep_learning/" class="md-nav__link">
+        深度学习框架
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../exp/tl/" class="md-nav__link">
+        在阿里做了5年技术Leader，我总结出这些套路！
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../exp/cto/" class="md-nav__link">
+        CTO 技能图谱
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+          构架
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_6">
+          <span class="md-nav__icon md-icon"></span>
+          构架
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../framework/split/" class="md-nav__link">
+        构架拆分
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../framework/fgb/" class="md-nav__link">
+        分布式、高并发、多线程
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../framework/agility/" class="md-nav__link">
+        如何理解敏捷开发
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../framework/fwork/" class="md-nav__link">
+        走向架构师必备的技能
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../framework/data_middle/" class="md-nav__link">
+        数据中台的思考与总结
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../framework/algorithm-ten/" class="md-nav__link">
+        必学的 10 大算法
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+          情感
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_7">
+          <span class="md-nav__icon md-icon"></span>
+          情感
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../emotion/eq/" class="md-nav__link">
+        情商
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../emotion/workheard/" class="md-nav__link">
+        工作心得
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../emotion/lookbook/" class="md-nav__link">
+        看书
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../emotion/selfdiscipline/" class="md-nav__link">
+        自律
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../emotion/livefail/" class="md-nav__link">
+        为什么活着失败
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../emotion/emotion/" class="md-nav__link">
+        情绪管理
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../emotion/losecome/" class="md-nav__link">
+        所有的失去，都会以另一种方式归来
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../emotion/threeheart/" class="md-nav__link">
+        人生有这三种好心态
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../emotion/onepath/" class="md-nav__link">
+        余生，学会一个人走，不管有没有人陪
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../emotion/twopath/" class="md-nav__link">
+        往后余生还很精彩，别被熬夜拖垮了
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../emotion/lifetime/" class="md-nav__link">
+        心态好的人，一辈子都好
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#11" class="md-nav__link">
+    1.1 安全框架
+  </a>
+  
+    <nav class="md-nav" aria-label="1.1 安全框架">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#111" class="md-nav__link">
+    1.1.1 认证框架
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#112" class="md-nav__link">
+    1.1.2 框架解读
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12" class="md-nav__link">
+    1.2 认证实践
+  </a>
+  
+    <nav class="md-nav" aria-label="1.2 认证实践">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#121" class="md-nav__link">
+    1.2.1 用户实践
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#122" class="md-nav__link">
+    1.2.2 集群用户
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#123" class="md-nav__link">
+    1.2.3 授权基础
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#124" class="md-nav__link">
+    1.2.4 授权案例
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+  
+
+
+<h1 id="1">1 安全管理<a class="headerlink" href="#1" title="Permanent link">&para;</a></h1>
+<h2 id="11">1.1 安全框架<a class="headerlink" href="#11" title="Permanent link">&para;</a></h2>
+<h3 id="111">1.1.1 认证框架<a class="headerlink" href="#111" title="Permanent link">&para;</a></h3>
+<p>学习目标</p>
+<p>这一节，我们从 基础知识、认证流程、小结 三个方面来学习。</p>
+<p><strong>基础知识</strong></p>
+<p>资源操作</p>
+<p><img alt="image-20220722144813760" src="../../../img/kubernetes/kubernetes_safety/image-20220722144813760.png" /></p>
+<div class="highlight"><pre><span></span><code><span class="n">用户访问k8s业务应用的流程</span><span class="err">：</span>
+    <span class="n">方法一</span><span class="err">：</span><span class="n">无需api_server认证</span>
+        <span class="n">用户</span> <span class="p">--</span> <span class="n">ingress</span><span class="p">|</span><span class="n">service</span> <span class="p">--</span> <span class="n">pod</span>
+    <span class="n">方法二</span><span class="err">：</span><span class="n">基于api_server认证</span>
+        <span class="n">管理k8s平台上各种应用对象</span>
+</code></pre></div>
+<p><strong>认证流程</strong></p>
+<p>简介</p>
+<div class="highlight"><pre><span></span><code><span class="n">对APIServer的访问一般都要经过的三个步骤</span><span class="err">，</span><span class="n">认证</span><span class="p">(</span><span class="n">Authn</span><span class="p">)+</span><span class="n">授权</span><span class="p">(</span><span class="n">Authz</span><span class="p">)</span><span class="err">、</span><span class="n">准入控制</span><span class="p">(</span><span class="n">Admission</span><span class="p">)</span><span class="err">，</span><span class="n">它也能在一定程度上提高安全性</span><span class="err">，</span><span class="n">不过更多是资源管理方面的作用</span><span class="err">。</span>
+<span class="n">注意</span><span class="err">：</span><span class="n">认证和授权功能都是以插件化的方式来实现的</span><span class="err">，</span><span class="n">这样可以最大化的用户自定义效果</span><span class="err">。</span>
+</code></pre></div>
+<p><img alt="1633439274496" src="../../../img/kubernetes/kubernetes_safety/1633439274496.png" /></p>
+<div class="highlight"><pre><span></span><code><span class="n">认证</span><span class="p">(</span><span class="n">Authn</span><span class="p">)</span>
+    <span class="n">对用户身份进行基本的认证</span><span class="err">，</span><span class="n">只允许被当前系统许可的人进入集群内部</span>
+<span class="n">授权</span><span class="p">(</span><span class="n">Authz</span><span class="p">)</span>
+    <span class="n">不同的用户可以获取不同的资源操作权限</span><span class="err">，</span><span class="n">比如普通用户</span><span class="err">、</span><span class="n">超级用户</span><span class="err">、</span><span class="n">等</span>
+<span class="n">准入控制</span><span class="p">(</span><span class="n">Admission</span><span class="p">)</span>
+    <span class="n">类似于审计</span><span class="err">，</span><span class="n">主要侧重于</span> <span class="n">操作动作的校验</span><span class="err">、</span><span class="n">语法规范的矫正等写操作场景</span><span class="err">。</span>
+</code></pre></div>
+<p>解析</p>
+<div class="highlight"><pre><span></span><code><span class="n">左侧</span><span class="err">：</span>
+    <span class="n">对于k8s来说</span><span class="err">，</span><span class="n">它主要面对两种用户</span><span class="err">：</span>
+        <span class="n">普通人类用户</span><span class="p">(</span><span class="n">交互模式</span><span class="p">)</span> <span class="p">-</span> <span class="n">User</span> <span class="n">Account</span>
+        <span class="n">集群内部的pod用户</span><span class="p">(</span><span class="n">服务进程</span><span class="p">)</span> <span class="p">-</span> <span class="n">Service</span> <span class="n">Account</span>
+<span class="n">中间</span><span class="err">：</span>
+    <span class="n">每个部分都是以插件的方式来整合到</span> <span class="n">k8s</span> <span class="n">集群环境中</span><span class="err">：</span>
+    <span class="p">-</span> <span class="n">认证和授权是按照</span> <span class="n">插件的顺序进行依次性的检测</span><span class="err">，</span><span class="n">并且遵循</span> <span class="s2">&quot;短路模型&quot;</span> <span class="n">的认证方式</span>
+        <span class="n">所谓的</span><span class="s2">&quot;短路&quot;</span><span class="n">即</span><span class="err">，</span><span class="n">失败的时候</span><span class="err">，</span><span class="n">到此结束</span><span class="p">,</span><span class="n">后续的规则不会进行</span><span class="err">。</span>
+    <span class="p">-</span> <span class="n">准入控制</span> <span class="n">由于仅用户写操作场景</span><span class="err">，</span><span class="n">所以它不遵循</span> <span class="s2">&quot;短路模型&quot;</span><span class="err">，</span><span class="n">而是会全部检测</span>
+        <span class="n">原因在于</span><span class="err">，</span><span class="n">它要记录为什么不执行</span><span class="err">，</span><span class="n">原因是什么</span><span class="err">，</span><span class="n">方便后续审计等动作</span><span class="err">。</span>
+</code></pre></div>
+<p><strong>小结</strong></p>
+<div class="highlight"><pre><span></span><code>
+</code></pre></div>
+<h3 id="112">1.1.2 框架解读<a class="headerlink" href="#112" title="Permanent link">&para;</a></h3>
+<p>学习目标</p>
+<p>这一节，我们从 流程解读、对象梳理、小结 三个方面来学习。</p>
+<p><strong>流程解读</strong></p>
+<p>认证</p>
+<div class="highlight"><pre><span></span><code><span class="n">认证用户</span>
+    <span class="n">在我们的认证范围中</span><span class="err">，</span><span class="n">有一个术语叫Subject</span><span class="err">，</span><span class="n">它表示我们在集群中基于某些规则和动作尝试操作的对象</span><span class="err">，</span><span class="n">在k8s集群中定义了两种类型的subject资源</span><span class="err">：</span>
+    <span class="n">User</span> <span class="n">Account</span><span class="err">：</span>
+        <span class="n">有外部独立服务进行管理的</span><span class="err">，</span><span class="n">对于用户的管理集群内部没有一个关联的资源对象</span>
+        <span class="n">如果需要操作k8s资源</span><span class="err">，</span><span class="n">需要集群内部证书的认证签名</span><span class="err">。</span>
+    <span class="n">Service</span> <span class="n">Account</span>
+        <span class="n">通过Kubernetes</span> <span class="n">API</span> <span class="n">来管理的一些用户帐号</span><span class="err">，</span><span class="n">和</span> <span class="n">namespace</span> <span class="n">进行关联的</span>
+        <span class="n">一般是内部资源对象操作资源的一种方式</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">用户组</span>
+    <span class="n">单个控制用户的权限台繁琐</span><span class="err">，</span><span class="n">可以借助于用户组的机制实现批量用户的自动化管理</span><span class="err">，</span><span class="n">主要有以下几种</span>
+    <span class="n">system</span><span class="p">:</span><span class="n">unauthenticated</span>
+        <span class="n">未能通过任何一个授权插件检验的账号的所有未通过认证测试的用户统一隶属的用户组</span><span class="err">；</span> 
+    <span class="n">system</span><span class="p">:</span><span class="n">authenticated</span>
+        <span class="n">认证成功后的用户自动加入的一个专用组</span><span class="err">，</span><span class="n">用于快捷引用所有正常通过认证的用户账号</span><span class="err">；</span>
+    <span class="n">system</span><span class="p">:</span><span class="n">serviceaccounts</span>
+        <span class="n">所有名称空间中的所有ServiceAccount对象</span>
+    <span class="n">system</span><span class="p">:</span><span class="n">serviceaccounts</span><span class="p">:&lt;</span><span class="n">namespace</span><span class="p">&gt;</span>
+        <span class="n">特定名称空间内所有的ServiceAccount对象</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">认证方式</span>
+    <span class="n">kubernetes的认证方式主要有两种</span><span class="err">：</span>
+        <span class="n">证书认证</span> <span class="p">-</span> <span class="n">本质上就是TLS双向认证</span>
+        <span class="n">令牌认证</span> <span class="p">-</span> <span class="n">大量手动配置TLS认证比较麻烦</span><span class="err">，</span><span class="n">可以将证书生成token进行间接使用</span><span class="err">。</span>
+</code></pre></div>
+<p>授权</p>
+<div class="highlight"><pre><span></span><code>    <span class="n">授权主要是在认证的基础上</span><span class="err">，</span><span class="n">用于对集群资源的访问控制权限设置</span><span class="err">，</span><span class="n">通过检查请求包含的相关属性值</span><span class="err">，</span><span class="n">与相对应的访问策略相比较</span><span class="err">，</span><span class="n">API请求必须满足某些策略才能被处理</span><span class="err">。</span><span class="n">常见授权机制有</span><span class="err">：</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">Node</span>
+    <span class="n">主要针对节点的基本通信授权认证</span><span class="err">，</span><span class="n">比如kubelet的正常通信</span><span class="err">。</span>
+<span class="n">ABAC</span><span class="p">(</span><span class="n">Attribute</span> <span class="n">Based</span> <span class="n">Access</span> <span class="n">Control</span><span class="p">)</span><span class="err">：</span>
+    <span class="n">基于属性的访问控制</span><span class="err">，</span><span class="n">与apiserver服务的本地策略规则紧密相关</span><span class="err">，</span><span class="n">一旦变动需要重启</span><span class="err">。</span>
+<span class="n">RBAC</span><span class="p">(</span><span class="n">Role</span> <span class="n">Based</span> <span class="n">Access</span> <span class="n">Control</span><span class="p">)</span><span class="err">：</span>
+    <span class="n">基于角色的访问控制</span><span class="err">，</span><span class="n">这是1</span><span class="p">.</span><span class="n">6</span><span class="p">+</span><span class="n">版本主推的授权策略</span><span class="err">，</span><span class="n">可以使用API自定义角色和集群角色</span><span class="err">，</span><span class="n">并将角色和特定的用户</span><span class="err">，</span><span class="n">用户组</span><span class="err">，</span><span class="n">Service</span> <span class="n">Account关联起来</span><span class="err">，</span><span class="n">可以用来实现多租户隔离功能</span><span class="err">（</span><span class="n">基于namespace资源</span><span class="err">）</span>
+</code></pre></div>
+<p>准入控制</p>
+<div class="highlight"><pre><span></span><code>    <span class="n">准入控制</span><span class="p">(</span><span class="n">Admission</span> <span class="n">Control</span><span class="p">)</span><span class="err">，</span><span class="n">实际上是一个准入控制器插件列表</span><span class="err">，</span><span class="n">发送到APIServer的请求都需要经过这个列表中的每个准入控制器插件的检查</span><span class="err">，</span><span class="n">如果某一个控制器插件准入失败</span><span class="err">，</span><span class="n">就准入失败</span><span class="err">。</span><span class="n">它主要涉及到pod和容器对特定用户和特定权限之间的关联关系</span><span class="err">。</span>
+    <span class="n">比如操作的对象是否存在依赖关系</span><span class="err">、</span><span class="n">被操作的对象是否能够增删改查等限制</span><span class="err">。</span>
+</code></pre></div>
+<p><strong>对象梳理</strong></p>
+<p>资源对象</p>
+<p><img alt="image-20220715012035435" src="../../../img/kubernetes/kubernetes_safety/image-20220715012035435.png" /></p>
+<p>对象简介</p>
+<div class="highlight"><pre><span></span><code><span class="n">认证对象</span><span class="err">：</span><span class="n">SA</span><span class="err">、</span><span class="n">token</span>
+<span class="n">授权对象</span><span class="err">：</span><span class="n">Role</span><span class="err">、</span><span class="n">ClusterRole</span><span class="err">、</span><span class="n">RoleBinding</span><span class="err">、</span><span class="n">ClusterRoleBinding</span>
+<span class="n">准入对象</span><span class="err">：</span><span class="n">LimitRanger</span><span class="err">、</span><span class="n">ResourceQuota</span><span class="err">、</span><span class="n">PodSecurityPolicy等</span>
+</code></pre></div>
+<p><strong>小结</strong></p>
+<div class="highlight"><pre><span></span><code>
+</code></pre></div>
+<h2 id="12">1.2 认证实践<a class="headerlink" href="#12" title="Permanent link">&para;</a></h2>
+<h3 id="121">1.2.1 用户实践<a class="headerlink" href="#121" title="Permanent link">&para;</a></h3>
+<p>学习目标</p>
+<p>这一节，我们从 SA实践、UA实践、小结 三个方面来学习。</p>
+<p><strong>SA实践</strong></p>
+<p>资源属性</p>
+<div class="highlight"><pre><span></span><code><span class="n">apiVersion</span><span class="p">:</span> <span class="n">v1</span>                          <span class="c"># ServiceAccount所属的API群组及版本</span>
+<span class="n">kind</span><span class="p">:</span> <span class="n">ServiceAccount</span>                    <span class="c"># 资源类型标识</span>
+<span class="n">metadata</span><span class="p">:</span>
+  <span class="n">name</span> <span class="p">&lt;</span><span class="n">string</span><span class="p">&gt;</span>                         <span class="c"># 资源名称</span>
+  <span class="n">namespace</span> <span class="p">&lt;</span><span class="n">string</span><span class="p">&gt;</span>                    <span class="c"># ServiceAccount是名称空间级别的资源</span>
+<span class="n">automountServiceAccountToken</span> <span class="p">&lt;</span><span class="n">boolean</span><span class="p">&gt;</span>  <span class="c"># 是否让Pod自动挂载API令牌</span>
+<span class="n">secrets</span> <span class="p">&lt;[]</span><span class="n">Object</span><span class="p">&gt;</span>                      <span class="c"># 以该SA运行的Pod所要使用的Secret对象组成的列表</span>
+  <span class="n">apiVersion</span> <span class="p">&lt;</span><span class="n">string</span><span class="p">&gt;</span>                   <span class="c"># 引用的Secret对象所属的API群组及版本，可省略</span>
+  <span class="n">kind</span> <span class="p">&lt;</span><span class="n">string</span><span class="p">&gt;</span>                         <span class="c"># 引用的资源的类型，这里是指Secret，可省略</span>
+  <span class="n">name</span> <span class="p">&lt;</span><span class="n">string</span><span class="p">&gt;</span>                         <span class="c"># 引用的Secret对象的名称，通常仅给出该字段即可</span>
+  <span class="n">namespace</span> <span class="p">&lt;</span><span class="n">string</span><span class="p">&gt;</span>                    <span class="c"># 引用的Secret对象所属的名称空间</span>
+  <span class="n">uid</span>  <span class="p">&lt;</span><span class="n">string</span><span class="p">&gt;</span>                         <span class="c"># 引用的Secret对象的标识符；</span>
+<span class="n">imagePullSecrets</span> <span class="p">&lt;[]</span><span class="n">Object</span><span class="p">&gt;</span>             <span class="c"># 引用的用于下载Pod中容器镜像的Secret对象列表</span>
+  <span class="n">name</span> <span class="p">&lt;</span><span class="n">string</span><span class="p">&gt;</span>                         <span class="c"># docker-registry类型的Secret资源的名称</span>
+</code></pre></div>
+<p>命令解析</p>
+<div class="highlight"><pre><span></span><code><span class="n">命令格式</span><span class="err">：</span><span class="n">kubectl</span> <span class="n">create</span> <span class="n">serviceaccount</span> <span class="n">NAME</span> <span class="p">[-</span><span class="n">-dry-run</span><span class="p">]</span> <span class="no">[options]</span>
+<span class="n">作用</span><span class="err">：</span><span class="n">创建一个</span><span class="s2">&quot;服务账号&quot;</span>
+<span class="n">参数详解</span>
+    <span class="p">-</span><span class="n">-dry-run</span><span class="p">=</span><span class="n">false</span>                     <span class="n">模拟创建模式</span>
+    <span class="p">-</span><span class="n">-generator</span><span class="p">=</span><span class="s1">&#39;serviceaccount/v1&#39;</span>     <span class="n">设定api版本信息</span>
+    <span class="n">-o</span><span class="p">,</span> <span class="p">-</span><span class="n">-output</span><span class="p">=</span><span class="s1">&#39;&#39;</span>                     <span class="n">设定输出信息格式</span><span class="err">，</span><span class="n">常见的有</span><span class="err">：</span>
+                                            <span class="n">json</span><span class="p">|</span><span class="n">yaml</span><span class="p">|</span><span class="n">name</span><span class="p">|</span><span class="n">template</span><span class="p">|...</span>
+    <span class="p">-</span><span class="n">-save-config</span><span class="p">=</span><span class="n">false</span>                 <span class="n">保存配置信息</span>
+    <span class="p">-</span><span class="n">-template</span><span class="p">=</span><span class="s1">&#39;&#39;</span>                       <span class="n">设定配置模板文件</span>
+</code></pre></div>
+<p>简单实践</p>
+<div class="highlight"><pre><span></span><code><span class="n">创建专属目录</span>
+<span class="p">[</span><span class="n">root</span><span class="nv">@kubernetes</span><span class="n">-master1</span> <span class="p">~]</span><span class="c"># mkdir /data/kubernetes/secure -p; cd /data/kubernetes/secure</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">手工创建SA账号</span>
+<span class="p">[</span><span class="n">root</span><span class="nv">@kubernetes</span><span class="n">-master1</span> <span class="p">/</span><span class="n">data</span><span class="p">/</span><span class="n">kubernetes</span><span class="p">/</span><span class="n">secure</span><span class="p">]</span><span class="c"># kubectl create serviceaccount mysa</span>
+<span class="n">serviceaccount</span><span class="p">/</span><span class="n">mysa</span> <span class="n">created</span>
+
+<span class="n">检查效果</span>
+<span class="p">[</span><span class="n">root</span><span class="nv">@kubernetes</span><span class="n">-master1</span> <span class="p">/</span><span class="n">data</span><span class="p">/</span><span class="n">kubernetes</span><span class="p">/</span><span class="n">secure</span><span class="p">]</span><span class="c"># kubectl  get sa mysa</span>
+<span class="n">NAME</span>   <span class="n">SECRETS</span>   <span class="n">AGE</span>
+<span class="n">mysa</span>   <span class="n">1</span>         <span class="n">9s</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">资源清单创建SA</span>
+<span class="p">[</span><span class="n">root</span><span class="nv">@kubernetes</span><span class="n">-master1</span> <span class="p">/</span><span class="n">data</span><span class="p">/</span><span class="n">kubernetes</span><span class="p">/</span><span class="n">secure</span><span class="p">]</span><span class="c"># 01_kubernetes_secure_sa.yaml</span>
+<span class="n">apiVersion</span><span class="p">:</span> <span class="n">v1</span>
+<span class="n">kind</span><span class="p">:</span> <span class="n">ServiceAccount</span>
+<span class="n">metadata</span><span class="p">:</span>
+  <span class="n">name</span><span class="p">:</span> <span class="n">superopsmsb</span>
+<span class="p">---</span>
+<span class="n">apiVersion</span><span class="p">:</span> <span class="n">v1</span>
+<span class="n">kind</span><span class="p">:</span> <span class="n">Pod</span>
+<span class="n">metadata</span><span class="p">:</span>
+  <span class="n">name</span><span class="p">:</span> <span class="n">nginx-web</span>
+<span class="n">spec</span><span class="p">:</span>
+  <span class="n">containers</span><span class="p">:</span>
+  <span class="p">-</span> <span class="n">name</span><span class="p">:</span> <span class="n">nginx-web</span>
+    <span class="n">image</span><span class="p">:</span> <span class="n">kubernetes-register</span><span class="p">.</span><span class="n">superopsmsb</span><span class="p">.</span><span class="n">com</span><span class="p">/</span><span class="n">superopsmsb</span><span class="p">/</span><span class="n">nginx_web</span><span class="p">:</span><span class="n">v0</span><span class="p">.</span><span class="n">1</span>
+  <span class="n">serviceAccountName</span><span class="p">:</span> <span class="n">superopsmsb</span>
+
+<span class="n">应用资源清单</span>
+<span class="p">[</span><span class="n">root</span><span class="nv">@kubernetes</span><span class="n">-master1</span> <span class="p">/</span><span class="n">data</span><span class="p">/</span><span class="n">kubernetes</span><span class="p">/</span><span class="n">secure</span><span class="p">]</span><span class="c"># kubectl  apply -f 01_kubernetes_secure_sa.yaml</span>
+<span class="n">serviceaccount</span><span class="p">/</span><span class="n">superopsmsb</span> <span class="n">created</span>
+<span class="n">pod</span><span class="p">/</span><span class="n">nginx-web</span> <span class="n">created</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">查看资源属性</span>
+<span class="p">[</span><span class="n">root</span><span class="nv">@kubernetes</span><span class="n">-master1</span> <span class="p">/</span><span class="n">data</span><span class="p">/</span><span class="n">kubernetes</span><span class="p">/</span><span class="n">secure</span><span class="p">]</span><span class="c"># kubectl describe pod nginx-web</span>
+<span class="n">Name</span><span class="p">:</span>               <span class="n">nginx-web</span>
+<span class="p">...</span> 
+<span class="n">Containers</span><span class="p">:</span>
+  <span class="n">nginx-web</span><span class="p">:</span>
+    <span class="p">...</span>
+    <span class="n">Mounts</span><span class="p">:</span>
+      <span class="p">/</span><span class="n">var</span><span class="p">/</span><span class="n">run</span><span class="p">/</span><span class="n">secrets</span><span class="p">/</span><span class="n">kubernetes</span><span class="p">.</span><span class="n">io</span><span class="p">/</span><span class="n">serviceaccount</span> <span class="n">from</span> <span class="n">kube-api-access-wqb6w</span> <span class="p">(</span><span class="n">ro</span><span class="p">)</span>
+<span class="p">...</span>
+<span class="n">结果显示</span><span class="err">：</span>
+    <span class="n">用户信息挂载到容器的</span> <span class="p">/</span><span class="n">var</span><span class="p">/</span><span class="n">run</span><span class="p">/</span><span class="n">secrets</span><span class="p">/</span><span class="n">kubernetes</span><span class="p">.</span><span class="n">io</span><span class="p">/</span><span class="n">serviceaccount</span> <span class="n">目录下了</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">容器内部的账号身份信息</span>
+<span class="p">[</span><span class="n">root</span><span class="nv">@kubernetes</span><span class="n">-master1</span> <span class="p">/</span><span class="n">data</span><span class="p">/</span><span class="n">kubernetes</span><span class="p">/</span><span class="n">secure</span><span class="p">]</span><span class="c"># kubectl exec -it nginx-web -- /bin/sh</span>
+<span class="c"># ls /var/run/secrets/kubernetes.io/serviceaccount/</span>
+<span class="n">ca</span><span class="p">.</span><span class="n">crt</span>  <span class="n">namespace</span>  <span class="n">token</span>
+</code></pre></div>
+<p><strong>UA实践</strong></p>
+<p>简介</p>
+<div class="highlight"><pre><span></span><code>    <span class="n">所谓的UA其实就是我们平常做CA时候的基本步骤</span><span class="err">，</span><span class="n">主要包括如下几步</span>
+    <span class="n">1</span> <span class="n">创建私钥文件</span>
+    <span class="n">2</span> <span class="n">基于私钥文件创建证书签名请求</span>
+    <span class="n">3</span> <span class="n">基于私钥和签名请求生成证书文件</span>
+</code></pre></div>
+<p>1 创建私钥文件</p>
+<div class="highlight"><pre><span></span><code><span class="n">给用户</span> <span class="n">superopsmsb</span> <span class="n">创建一个私钥</span><span class="err">，</span><span class="n">命名成</span><span class="err">：</span><span class="n">superopsmsb</span><span class="p">.</span><span class="n">key</span><span class="p">(</span><span class="n">无加密</span><span class="p">)</span>
+<span class="p">[</span><span class="n">root</span><span class="nv">@kubernetes</span><span class="n">-master1</span> <span class="p">~]</span><span class="c"># cd /etc/kubernetes/pki/</span>
+<span class="p">[</span><span class="n">root</span><span class="nv">@kubernetes</span><span class="n">-master1</span> <span class="p">/</span><span class="n">etc</span><span class="p">/</span><span class="n">kubernetes</span><span class="p">/</span><span class="n">pki</span><span class="p">]</span><span class="c"># (umask 077; openssl genrsa -out superopsmsb.key 2048)</span>
+<span class="n">G</span>
+<span class="n">命令解析</span><span class="err">：</span>
+    <span class="n">genrsa</span>          <span class="n">该子命令用于生成RSA私钥</span><span class="err">，</span><span class="n">不会生成公钥</span><span class="err">，</span><span class="n">因为公钥提取自私钥</span>
+    <span class="n">-out</span> <span class="n">filename</span>   <span class="n">生成的私钥保存至filename文件</span><span class="err">，</span><span class="n">若未指定输出文件</span><span class="err">，</span><span class="n">则为标准输出</span>
+    <span class="n">-numbits</span>        <span class="n">指定私钥的长度</span><span class="err">，</span><span class="n">默认1024</span><span class="err">，</span><span class="n">该项必须为命令行的最后一项参数</span>
+</code></pre></div>
+<p>2 签名请求</p>
+<div class="highlight"><pre><span></span><code><span class="n">用刚创建的私钥创建一个证书签名请求文件</span><span class="err">：</span><span class="n">superopsmsb</span><span class="p">.</span><span class="n">csr</span>
+<span class="p">[</span><span class="n">root</span><span class="nv">@kubernetes</span><span class="n">-master1</span> <span class="p">/</span><span class="n">etc</span><span class="p">/</span><span class="n">kubernetes</span><span class="p">/</span><span class="n">pki</span><span class="p">]</span><span class="c"># openssl req -new -key  superopsmsb.key -out superopsmsb.csr -subj &quot;/CN=superopsmsb/O=superopsmsb&quot;</span>
+<span class="n">参数说明</span><span class="err">：</span>
+    <span class="n">-new</span>    <span class="n">生成证书请求文件</span>
+    <span class="n">-key</span>    <span class="n">指定已有的秘钥文件生成签名请求</span><span class="err">，</span><span class="n">必须与-new配合使用</span>
+    <span class="n">-out</span>    <span class="n">输出证书文件名称</span>
+    <span class="n">-subj</span>   <span class="n">输入证书拥有者信息</span><span class="err">，</span><span class="n">这里指定</span> <span class="n">CN</span> <span class="n">以及</span> <span class="n">O</span> <span class="n">的值</span><span class="err">，</span><span class="p">/</span><span class="n">表示内容分隔</span>
+        <span class="n">CN以及O的值对于kubernetes很重要</span><span class="err">，</span><span class="n">因为kubernetes会从证书这两个值对应获取相关信息</span><span class="err">：</span>
+            <span class="s2">&quot;CN&quot;</span><span class="err">：</span><span class="n">Common</span> <span class="n">Name</span><span class="err">，</span><span class="n">用于从证书中提取该字段作为请求的用户名</span> <span class="p">(</span><span class="n">User</span> <span class="n">Name</span><span class="p">)</span><span class="err">；</span>
+                <span class="n">浏览器使用该字段验证网站是否合法</span><span class="err">；</span>
+            <span class="s2">&quot;O&quot;</span><span class="err">：</span><span class="n">Organization</span><span class="err">，</span><span class="n">用于分组认证</span>
+
+<span class="n">检查效果</span><span class="err">：</span>
+<span class="p">[</span><span class="n">root</span><span class="nv">@kubernetes</span><span class="n">-master1</span> <span class="p">/</span><span class="n">etc</span><span class="p">/</span><span class="n">kubernetes</span><span class="p">/</span><span class="n">pki</span><span class="p">]</span><span class="c"># ls superopsmsb.*</span>
+<span class="n">superopsmsb</span><span class="p">.</span><span class="n">csr</span>  <span class="n">superopsmsb</span><span class="p">.</span><span class="n">key</span>
+<span class="n">结果显示</span><span class="err">：</span>
+    <span class="p">*.</span><span class="n">key</span> <span class="n">是我们的私钥</span><span class="err">，</span><span class="p">*.</span><span class="n">csr是我们的签名请求文件</span>
+</code></pre></div>
+<p>3 生成证书</p>
+<div class="highlight"><pre><span></span><code><span class="n">利用Kubernetes集群的CA相关证书对UA文件进行认证</span>
+<span class="p">[</span><span class="n">root</span><span class="nv">@kubernetes</span><span class="n">-master1</span> <span class="p">/</span><span class="n">etc</span><span class="p">/</span><span class="n">kubernetes</span><span class="p">/</span><span class="n">pki</span><span class="p">]</span><span class="c"># openssl x509 -req -in superopsmsb.csr -CA ./ca.crt  -CAkey ./ca.key  -CAcreateserial -out superopsmsb.crt -days 365</span>
+<span class="n">Signature</span> <span class="n">ok</span>
+<span class="n">subject</span><span class="p">=/</span><span class="n">CN</span><span class="p">=</span><span class="n">superopsmsb</span><span class="p">/</span><span class="n">O</span><span class="p">=</span><span class="n">superopsmsb</span>
+<span class="n">Getting</span> <span class="n">CA</span> <span class="n">Private</span> <span class="n">Key</span>
+<span class="n">参数说明</span><span class="err">：</span>
+    <span class="n">-req</span>                <span class="n">产生证书签发申请命令</span>
+    <span class="n">-in</span>                 <span class="n">指定需要签名的请求文件</span>
+    <span class="n">-CA</span>                 <span class="n">指定CA证书文件</span>
+    <span class="n">-CAkey</span>          <span class="n">指定CA证书的秘钥文件</span>
+    <span class="n">-CAcreateserial</span> <span class="n">生成唯一的证书序列号</span>
+    <span class="n">-x509</span>               <span class="n">表示输出一个X509格式的证书</span>
+    <span class="n">-days</span>               <span class="n">指定证书过期时间为365天</span>
+    <span class="n">-out</span>                <span class="n">输出证书文件</span>
+<span class="n">检查文件效果</span>
+<span class="p">[</span><span class="n">root</span><span class="nv">@kubernetes</span><span class="n">-master1</span> <span class="p">/</span><span class="n">etc</span><span class="p">/</span><span class="n">kubernetes</span><span class="p">/</span><span class="n">pki</span><span class="p">]</span><span class="c"># ls superopsmsb.*</span>
+<span class="n">superopsmsb</span><span class="p">.</span><span class="n">crt</span>  <span class="n">superopsmsb</span><span class="p">.</span><span class="n">csr</span>  <span class="n">superopsmsb</span><span class="p">.</span><span class="n">key</span>
+<span class="n">结果显示</span><span class="err">：</span>
+    <span class="p">*.</span><span class="n">crt就是我们最终生成的签证证书</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">提取信息效果</span>
+<span class="p">]</span><span class="c"># openssl x509 -in superopsmsb.crt -text -noout</span>
+<span class="n">Certificate</span><span class="p">:</span>
+   <span class="p">...</span>
+    <span class="n">Signature</span> <span class="n">Algorithm</span><span class="p">:</span> <span class="n">sha256WithRSAEncryption</span>
+        <span class="n">Issuer</span><span class="p">:</span> <span class="n">CN</span><span class="p">=</span><span class="n">kubernetes</span>
+        <span class="p">...</span>
+        <span class="n">Subject</span><span class="p">:</span> <span class="n">CN</span><span class="p">=</span><span class="n">superopsmsb</span><span class="p">,</span> <span class="n">O</span><span class="p">=</span><span class="n">superopsmsb</span>
+<span class="n">结果显示</span><span class="err">：</span>
+    <span class="n">Issuer</span><span class="p">:</span> <span class="n">表示是哪个CA机构帮我们认证的</span>
+    <span class="n">我们关注的重点在于Subject内容中的请求用户所属的组信息</span>
+</code></pre></div>
+<p><strong>小结</strong></p>
+<div class="highlight"><pre><span></span><code>
+</code></pre></div>
+<h3 id="122">1.2.2 集群用户<a class="headerlink" href="#122" title="Permanent link">&para;</a></h3>
+<p>学习目标</p>
+<p>这一节，我们从 config基础、简单实践、小结 三个方面来学习。</p>
+<p><strong>config基础</strong></p>
+<p>简介</p>
+<div class="highlight"><pre><span></span><code>    <span class="n">根据我们之前对kubernetes集群的了解</span><span class="err">，</span><span class="n">我们主要是通过config文件来进入到kubernetes集群内部的</span><span class="err">，</span><span class="n">然后具有操作相关资源的权限</span><span class="err">。</span>
+</code></pre></div>
+<p><img alt="image-20220722152956452" src="../../../img/kubernetes/kubernetes_safety/image-20220722152956452.png" /></p>
+<div class="highlight"><pre><span></span><code><span class="n">在config文件内部主要做了四件事情</span><span class="err">：</span>
+    <span class="n">1</span> <span class="n">创建登录k8s集群的用户</span>
+        <span class="n">基于证书和秘钥信息创建用户</span>
+    <span class="n">2</span> <span class="n">创建登录k8s集群的地址</span>
+    <span class="n">3</span> <span class="n">将登录用户和目标k8s集群关联在一起</span><span class="err">，</span><span class="n">形成k8s集群入口</span>
+    <span class="n">4</span> <span class="n">设定默认的k8s集群入口</span>
+
+<span class="n">注意</span><span class="err">：</span>
+    <span class="n">这里的k8s集群入口其实就类似于我们</span> <span class="n">通过ssh登录远程主机的一个入口</span><span class="err">，</span><span class="n">示例如下</span><span class="err">：</span>
+        <span class="n">ssh</span> <span class="n">root</span><span class="nv">@10</span><span class="p">.</span><span class="n">0</span><span class="p">.</span><span class="n">0</span><span class="p">.</span><span class="n">12</span>
+</code></pre></div>
+<p>命令解读</p>
+<div class="highlight"><pre><span></span><code><span class="n">集群操作</span>
+    <span class="nb">get-clusters</span>    <span class="n">显示</span> <span class="n">kubeconfig</span> <span class="n">文件中定义的集群</span>
+    <span class="n">delete-cluster</span>  <span class="n">删除</span> <span class="n">kubeconfig</span> <span class="n">文件中指定的集群</span>
+    <span class="nb">set-cluster</span>     <span class="nb">Set </span><span class="n">a</span> <span class="n">cluster</span> <span class="n">entry</span> <span class="k">in</span> <span class="n">kubeconfig</span>
+
+<span class="n">用户操作</span> 
+    <span class="n">delete-user</span>     <span class="n">Delete</span> <span class="n">the</span> <span class="n">specified</span> <span class="n">user</span> <span class="n">from</span> <span class="n">the</span> <span class="n">kubeconfig</span>
+    <span class="nb">get-users</span>       <span class="n">Display</span> <span class="n">users</span> <span class="n">defined</span> <span class="k">in</span> <span class="n">the</span> <span class="n">kubeconfig</span>
+    <span class="nb">set-credentials</span> <span class="nb">Set </span><span class="n">a</span> <span class="n">user</span> <span class="n">entry</span> <span class="k">in</span> <span class="n">kubeconfig</span>
+
+<span class="n">上下文操作</span> 
+    <span class="n">current-context</span> <span class="n">Display</span> <span class="n">the</span> <span class="n">current-context</span>
+    <span class="n">delete-context</span>  <span class="n">删除</span> <span class="n">kubeconfig</span> <span class="n">文件中指定的</span> <span class="n">context</span>
+    <span class="nb">get-contexts</span>    <span class="n">描述一个或多个</span> <span class="n">contexts</span>
+    <span class="nb">rename-context</span>  <span class="n">Rename</span> <span class="n">a</span> <span class="n">context</span> <span class="n">from</span> <span class="n">the</span> <span class="n">kubeconfig</span> <span class="n">file</span>
+    <span class="nb">set-context</span>     <span class="nb">Set </span><span class="n">a</span> <span class="n">context</span> <span class="n">entry</span> <span class="k">in</span> <span class="n">kubeconfig</span>
+    <span class="nb">use-context</span>     <span class="nb">Set </span><span class="n">the</span> <span class="n">current-context</span> <span class="k">in</span> <span class="n">a</span> <span class="n">kubeconfig</span> <span class="n">file</span>
+
+<span class="n">其他操作</span> 
+    <span class="nb">set </span>            <span class="nb">Set </span><span class="n">an</span> <span class="n">individual</span> <span class="n">value</span> <span class="k">in</span> <span class="n">a</span> <span class="n">kubeconfig</span> <span class="n">file</span>
+    <span class="n">unset</span>           <span class="n">Unset</span> <span class="n">an</span> <span class="n">individual</span> <span class="n">value</span> <span class="k">in</span> <span class="n">a</span> <span class="n">kubeconfig</span> <span class="n">file</span>    
+    <span class="n">view</span>            <span class="n">显示合并的</span> <span class="n">kubeconfig</span> <span class="n">配置或一个指定的</span> <span class="n">kubeconfig</span> <span class="n">文件</span>
+</code></pre></div>
+<p><strong>简单实践</strong></p>
+<p>创建用户</p>
+<div class="highlight"><pre><span></span><code><span class="n">创建用户</span>
+<span class="p">[</span><span class="n">root</span><span class="nv">@kubernetes</span><span class="n">-master1</span> <span class="p">/</span><span class="n">etc</span><span class="p">/</span><span class="n">kubernetes</span><span class="p">/</span><span class="n">pki</span><span class="p">]</span><span class="c"># kubectl config set-credentials superopsmsb --client-certificate=./superopsmsb.crt --client-key=./superopsmsb.key  --embed-certs=true --kubeconfig=/tmp/superopsmsb.conf</span>
+<span class="n">参数详解</span><span class="err">：</span>
+    <span class="nb">set-credentials</span>     <span class="n">子命令的作用就是给kubeconfig认证文件创建一个用户条目</span>
+    <span class="p">-</span><span class="n">-client-certificate</span><span class="p">=</span><span class="n">path</span><span class="p">/</span><span class="n">to</span><span class="p">/</span><span class="n">certfile</span>   <span class="n">指定用户的签证证书文件</span>
+    <span class="p">-</span><span class="n">-client-key</span><span class="p">=</span><span class="n">path</span><span class="p">/</span><span class="n">to</span><span class="p">/</span><span class="n">keyfile</span>                <span class="n">指定用户的私钥文件</span>
+    <span class="p">-</span><span class="n">-embed-certs</span><span class="p">=</span><span class="n">true</span><span class="err">，</span><span class="n">在kubeconfig中为用户条目嵌入客户端证书</span><span class="p">/</span><span class="n">密钥</span><span class="err">，</span><span class="n">默认值是false</span><span class="err">，</span>
+    <span class="p">-</span><span class="n">-kubeconfig</span><span class="p">=/</span><span class="n">path</span><span class="p">/</span><span class="n">to</span><span class="p">/</span><span class="n">other_config</span><span class="p">.</span><span class="n">file</span> <span class="n">表示将属性信息单独输出到一个文件</span><span class="err">，</span><span class="n">不指定的话</span><span class="err">，</span><span class="n">表示存到默认的</span> <span class="p">~/.</span><span class="n">kube</span><span class="p">/</span><span class="n">config文件中</span>
+</code></pre></div>
+<p>创建集群</p>
+<div class="highlight"><pre><span></span><code><span class="n">创建集群</span>
+<span class="p">[</span><span class="n">root</span><span class="nv">@kubernetes</span><span class="n">-master1</span> <span class="p">/</span><span class="n">etc</span><span class="p">/</span><span class="n">kubernetes</span><span class="p">/</span><span class="n">pki</span><span class="p">]</span><span class="c"># kubectl config set-cluster mycluster  --server=&quot;https://10.0.0.200:6443&quot; --certificate-authority=/etc/kubernetes/pki/ca.crt --embed-certs=true --kubeconfig=/tmp/superopsmsb.conf</span>
+<span class="n">参数详解</span><span class="err">：</span>
+    <span class="p">-</span><span class="n">-server</span><span class="p">=</span><span class="n">cluster_api_server</span>
+    <span class="p">-</span><span class="n">-certificate-authority</span><span class="p">=</span><span class="n">path</span><span class="p">/</span><span class="n">to</span><span class="p">/</span><span class="n">certificate</span><span class="p">/</span><span class="n">authority</span>
+</code></pre></div>
+<p>关联用户和集群</p>
+<div class="highlight"><pre><span></span><code><span class="n">配置上下文信息</span>
+<span class="p">[</span><span class="n">root</span><span class="nv">@kubernetes</span><span class="n">-master1</span> <span class="p">/</span><span class="n">etc</span><span class="p">/</span><span class="n">kubernetes</span><span class="p">/</span><span class="n">pki</span><span class="p">]</span><span class="c"># kubectl  config set-context superopsmsb@mycluster --cluster=mycluster --user=superopsmsb  --kubeconfig=/tmp/superopsmsb.conf</span>
+<span class="n">属性详解</span>
+    <span class="p">-</span><span class="n">-cluster</span><span class="p">=</span><span class="n">cluster_nickname</span>      <span class="n">关联的集群名称</span>
+    <span class="p">-</span><span class="n">-user</span><span class="p">=</span><span class="n">user_nickname</span>            <span class="n">关联的用户名称</span>
+    <span class="p">-</span><span class="n">-namespace</span><span class="p">=</span><span class="n">namespace</span>           <span class="n">可以设置该生效的命名空间</span>
+</code></pre></div>
+<p>设定默认的入口</p>
+<div class="highlight"><pre><span></span><code><span class="n">更改默认登录kubernetes的用户</span>
+<span class="p">[</span><span class="n">root</span><span class="nv">@kubernetes</span><span class="n">-master1</span> <span class="p">/</span><span class="n">etc</span><span class="p">/</span><span class="n">kubernetes</span><span class="p">/</span><span class="n">pki</span><span class="p">]</span><span class="c"># kubectl config use-context superopsmsb@mycluster --kubeconfig=/tmp/superopsmsb.conf</span>
+</code></pre></div>
+<p>测试效果</p>
+<div class="highlight"><pre><span></span><code><span class="n">查看配置文件内容</span>
+<span class="p">[</span><span class="n">root</span><span class="nv">@kubernetes</span><span class="n">-master1</span> <span class="p">/</span><span class="n">etc</span><span class="p">/</span><span class="n">kubernetes</span><span class="p">/</span><span class="n">pki</span><span class="p">]</span><span class="c"># kubectl config view --kubeconfig=/tmp/superopsmsb.conf</span>
+<span class="n">apiVersion</span><span class="p">:</span> <span class="n">v1</span>
+<span class="n">clusters</span><span class="p">:</span>
+<span class="p">-</span> <span class="n">cluster</span><span class="p">:</span>
+    <span class="n">certificate-authority-data</span><span class="p">:</span> <span class="n">DATA</span><span class="p">+</span><span class="n">OMITTED</span>
+    <span class="n">server</span><span class="p">:</span> <span class="n">https</span><span class="p">://</span><span class="n">10</span><span class="p">.</span><span class="n">0</span><span class="p">.</span><span class="n">0</span><span class="p">.</span><span class="n">200</span><span class="p">:</span><span class="n">6443</span>
+  <span class="n">name</span><span class="p">:</span> <span class="n">mycluster</span>
+<span class="n">contexts</span><span class="p">:</span>
+<span class="p">-</span> <span class="n">context</span><span class="p">:</span>
+    <span class="n">cluster</span><span class="p">:</span> <span class="n">mycluster</span>
+    <span class="n">user</span><span class="p">:</span> <span class="n">superopsmsb</span>
+  <span class="n">name</span><span class="p">:</span> <span class="n">superopsmsb</span><span class="nv">@mycluster</span>
+<span class="n">current-context</span><span class="p">:</span> <span class="n">superopsmsb</span><span class="nv">@mycluster</span>
+<span class="n">kind</span><span class="p">:</span> <span class="n">Config</span>
+<span class="n">preferences</span><span class="p">:</span> <span class="p">{}</span>
+<span class="n">users</span><span class="p">:</span>
+<span class="p">-</span> <span class="n">name</span><span class="p">:</span> <span class="n">superopsmsb</span>
+  <span class="n">user</span><span class="p">:</span>
+    <span class="n">client-certificate-data</span><span class="p">:</span> <span class="n">REDACTED</span>
+    <span class="n">client-key-data</span><span class="p">:</span> <span class="n">REDACTED</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">查看资源测试</span>
+<span class="p">[</span><span class="n">root</span><span class="nv">@kubernetes</span><span class="n">-master1</span> <span class="p">/</span><span class="n">etc</span><span class="p">/</span><span class="n">kubernetes</span><span class="p">/</span><span class="n">pki</span><span class="p">]</span><span class="c"># kubectl get pod --kubeconfig=/tmp/superopsmsb.conf</span>
+<span class="n">Error</span> <span class="n">from</span> <span class="n">server</span> <span class="p">(</span><span class="n">Forbidden</span><span class="p">):</span> <span class="n">pods</span> <span class="n">is</span> <span class="n">forbidden</span><span class="p">:</span> <span class="n">User</span> <span class="s2">&quot;superopsmsb&quot;</span> <span class="n">cannot</span> <span class="n">list</span> <span class="n">resource</span> <span class="s2">&quot;pods&quot;</span> <span class="k">in</span> <span class="n">API</span> <span class="nb">group </span><span class="s2">&quot;&quot;</span> <span class="k">in</span> <span class="n">the</span> <span class="n">namespace</span> <span class="s2">&quot;default&quot;</span>
+<span class="n">结果显示</span><span class="err">：</span>
+    <span class="n">虽然提示报错</span><span class="err">，</span><span class="n">但是这也证明了用户已经被kubernetes承认了</span>
+</code></pre></div>
+<p><strong>小结</strong></p>
+<div class="highlight"><pre><span></span><code>
+</code></pre></div>
+<h3 id="123">1.2.3 授权基础<a class="headerlink" href="#123" title="Permanent link">&para;</a></h3>
+<p>学习目标</p>
+<p>这一节，我们从 基础知识、Role实践、clusterRole实践、小结 四个方面来学习。</p>
+<p><strong>基础知识</strong></p>
+<p>授权场景</p>
+<p><img alt="image-20220722152956452" src="../../../img/kubernetes/kubernetes_safety/image-20220722152956452.png" /></p>
+<p>授权机制</p>
+<div class="highlight"><pre><span></span><code>    <span class="n">RBAC使用rbac</span><span class="p">.</span><span class="n">authorization</span><span class="p">.</span><span class="n">k8s</span><span class="p">.</span><span class="n">io</span> <span class="n">API</span> <span class="nb">Group </span><span class="n">来实现授权决策</span><span class="err">，</span><span class="n">允许管理员通过</span> <span class="n">Kubernetes</span> <span class="n">API</span> <span class="n">动态配置策略</span><span class="err">，</span><span class="n">要启用RBAC</span><span class="err">，</span><span class="n">需要在</span> <span class="n">apiserver</span> <span class="n">中添加参数</span><span class="p">-</span><span class="n">-authorization-mode</span><span class="p">=</span><span class="n">RBAC</span><span class="err">，</span><span class="n">kubeadm安装的集群默认开启了RBAC</span><span class="err">，</span><span class="n">我们可以通过查看</span> <span class="n">Master</span> <span class="n">节点上</span> <span class="n">apiserver</span> <span class="n">的静态Pod定义文件</span><span class="err">：</span>
+<span class="p">[</span><span class="n">root</span><span class="nv">@kubernetes</span><span class="n">-master1</span> <span class="p">~]</span><span class="c"># grep authorization-mode /etc/kubernetes/manifests/kube-apiserver.yaml</span>
+    <span class="p">-</span> <span class="p">-</span><span class="n">-authorization-mode</span><span class="p">=</span><span class="n">Node</span><span class="p">,</span><span class="n">RBAC</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>    <span class="n">Kubernetes的基本特性就是它的所有资源对象都是模型化的</span> <span class="n">API</span> <span class="n">对象</span><span class="err">，</span><span class="n">我们可以基于api-server对各种资源进行增</span><span class="err">、</span><span class="n">删</span><span class="err">、</span><span class="n">改</span><span class="err">、</span><span class="n">查等操作</span><span class="err">，</span><span class="n">但是这些操作涉及到的不仅仅是资源本身和动作</span><span class="err">，</span><span class="n">而且还涉及到资源和动作之间的内容</span><span class="err">，</span><span class="n">比如api的分组版本和资源和api的关联即权限授权等</span><span class="err">。</span>
+</code></pre></div>
+<p>授权</p>
+<p><img alt="1633487979722" src="../../../img/kubernetes/kubernetes_safety/1633487979722.png" /></p>
+<div class="highlight"><pre><span></span><code>    <span class="n">所谓的授权</span><span class="err">，</span><span class="n">其实指的是</span><span class="err">，</span><span class="n">将某些subject对象赋予执行某些资源动作的权限</span><span class="err">。</span><span class="n">我们有时候会将其称为Group</span><span class="p">(</span><span class="n">权限组</span><span class="p">)</span><span class="err">，</span><span class="n">而这个组其实是有两部分组成</span><span class="err">：</span><span class="n">组名和组关联</span><span class="p">(</span><span class="n">也称绑定</span><span class="p">)</span><span class="err">。</span>
+<span class="n">简单来说</span><span class="err">：</span><span class="n">所谓的授权</span><span class="err">，</span><span class="n">其实是为用户授予xx角色</span>
+    <span class="n">关于kubernetes的授权属性</span><span class="err">，</span><span class="n">主要包括如下三个层次</span><span class="err">：</span><span class="n">namespace级别</span><span class="err">、</span><span class="n">cluster级别</span><span class="err">、</span><span class="n">混合级别</span>
+</code></pre></div>
+<p>授权级别</p>
+<p><img alt="image-20220722160151434" src="../../../img/kubernetes/kubernetes_safety/image-20220722160151434.png" /></p>
+<div class="highlight"><pre><span></span><code><span class="n">namespace级别</span>
+    <span class="n">rules</span> 
+        <span class="p">-</span> <span class="n">规则</span><span class="err">，</span><span class="n">是一组属于不同</span> <span class="n">API</span> <span class="nb">Group </span><span class="n">资源上的权限操作的集合</span>
+    <span class="n">role</span> 
+        <span class="p">-</span> <span class="n">表示在一个namespace中基于rules使用资源的权限</span><span class="err">，</span><span class="n">主要涉及到操作和对象</span>
+    <span class="n">RoleBingding</span> 
+        <span class="p">-</span> <span class="n">将Subject和Role绑定在一起</span><span class="err">，</span><span class="n">表示Subject具有指定资源的role操作权限</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">cluster级别</span>
+    <span class="n">ClusterRole</span> 
+        <span class="p">-</span> <span class="n">表示在一个Cluster中基于rules使用资源的权限</span>
+    <span class="n">ClusterRoleBingding</span> 
+        <span class="p">-</span> <span class="n">将Subject和ClusterRole绑定在一起</span><span class="err">，</span><span class="n">表示Subject指定资源的ClusterRole操作权限</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">混合级别</span>
+    <span class="n">RoleBingding</span> 
+        <span class="p">-</span> <span class="n">将Subject基于RoleBingding与ClusterRole绑定在一起</span>
+        <span class="p">-</span> <span class="n">表示Subject可以使用所有ClusterRole中指定资源的role角色</span>
+        <span class="p">-</span> <span class="n">但是限制在了只能操作某个命名空间的资源</span><span class="err">。</span>
+        <span class="p">-</span> <span class="n">也就是所谓的</span><span class="s2">&quot;权限降级&quot;</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>场景1：
+    多个namespace中的role角色都一致，如果都使用内部的RoleBingding的话，每个namespace都必须单独创建role，而使用ClusterRole的话，只需要一个就可以了，大大的减轻批量使用namespace中的RoleBingding 操作。
+场景2：
+    我们对A用户要提升权限，但是，由于A处于考察期，那么我们暂时给他分配一个区域，测试一下它的运行效果。生活中的场景，提升张三为公司副总裁，但是由于是新手，所以加了一个限制 -- 主管销售范围的副总裁。
+</code></pre></div>
+<p><strong>简单实践</strong></p>
+<p>属性解析</p>
+<div class="highlight"><pre><span></span><code><span class="n">我们可以使用</span> <span class="n">kubectl</span> <span class="n">explain</span> <span class="n">role</span> <span class="n">的方式来查看一下Role的属性信息</span><span class="err">：</span>
+
+    <span class="n">apiVersion</span> <span class="p">&lt;</span><span class="n">string</span><span class="p">&gt;</span>
+    <span class="n">kind</span> <span class="p">&lt;</span><span class="n">string</span><span class="p">&gt;</span>
+    <span class="n">metadata</span>     <span class="p">&lt;</span><span class="n">Object</span><span class="p">&gt;</span>
+    <span class="n">rules</span>        <span class="p">&lt;[]</span><span class="n">Object</span><span class="p">&gt;</span>
+      <span class="n">apiGroups</span>             <span class="p">&lt;[]</span><span class="n">string</span><span class="p">&gt;</span>
+      <span class="n">nonResourceURLs</span>       <span class="p">&lt;[]</span><span class="n">string</span><span class="p">&gt;</span>
+      <span class="n">resourceNames</span>         <span class="p">&lt;[]</span><span class="n">string</span><span class="p">&gt;</span>
+      <span class="n">resources</span>             <span class="p">&lt;[]</span><span class="n">string</span><span class="p">&gt;</span>
+      <span class="n">verbs</span>                 <span class="p">&lt;[]</span><span class="n">string</span><span class="p">&gt;</span> <span class="n">-required</span><span class="p">-</span>
+    <span class="n">结果显示</span><span class="err">：</span>
+        <span class="n">对于role来说</span><span class="err">，</span><span class="n">其核心的内容主要是rules的权限规则</span>
+        <span class="n">在这么多rules属性中</span><span class="err">，</span><span class="n">最重要的是verbs权限条目</span><span class="err">，</span><span class="n">而且所有的属性都是可以以列表的形式累加存在</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">命令行创建role</span><span class="err">，</span><span class="n">查看具有pod资源的get</span><span class="err">、</span><span class="n">list权限的属性信息</span>
+<span class="p">[</span><span class="n">root</span><span class="nv">@kubernetes</span><span class="n">-master1</span> <span class="p">~]</span><span class="c"># kubectl create role pods-reader --verb=get,list --resource=pods --dry-run -o yaml</span>
+<span class="n">apiVersion</span><span class="p">:</span> <span class="n">rbac</span><span class="p">.</span><span class="n">authorization</span><span class="p">.</span><span class="n">k8s</span><span class="p">.</span><span class="n">io</span><span class="p">/</span><span class="n">v1</span>
+<span class="n">kind</span><span class="p">:</span> <span class="n">Role</span>
+<span class="n">metadata</span><span class="p">:</span>
+  <span class="n">creationTimestamp</span><span class="p">:</span> <span class="n">null</span>       <span class="n">时间信息</span>
+  <span class="n">name</span><span class="p">:</span> <span class="n">pods-reader</span>             <span class="n">role的名称</span>
+<span class="n">rules</span><span class="p">:</span>                          <span class="n">授权规则</span>
+<span class="p">-</span> <span class="n">apiGroups</span><span class="p">:</span>                    <span class="n">操作的对象</span>
+  <span class="p">-</span> <span class="s2">&quot;&quot;</span>                              <span class="n">所有权限</span>
+  <span class="n">resources</span><span class="p">:</span>                    <span class="n">资源对象</span>
+  <span class="p">-</span> <span class="n">pods</span>                            <span class="n">pod的对象</span>
+  <span class="n">verbs</span><span class="p">:</span>                            <span class="n">对pod允许的权限</span>
+  <span class="p">-</span> <span class="n">get</span>                             <span class="n">获取</span>
+  <span class="p">-</span> <span class="n">list</span>                                <span class="n">查看</span>
+<span class="n">结果显示</span><span class="err">：</span>
+    <span class="n">对于一个role必备的rules来说</span><span class="err">，</span><span class="n">他主要有三部分组成</span><span class="err">：</span><span class="n">apiGroup</span><span class="err">、</span><span class="n">resources</span><span class="err">、</span><span class="n">verbs</span>
+    <span class="n">apiGroups</span>   <span class="n">设定包含资源的api组</span><span class="err">，</span><span class="n">如果是多个</span><span class="err">，</span><span class="n">表示只要属于api组范围中的任意资源都可以操作</span>
+    <span class="n">resources</span>   <span class="n">位于apiGroup范围中的某些具体的资源对象</span>
+    <span class="n">verbs</span>       <span class="n">针对具体资源对象的一些具体操作</span>
+<span class="n">注意</span><span class="err">：</span>
+    <span class="n">关于api组的信息获取</span><span class="err">，</span><span class="n">可以参照https</span><span class="p">://</span><span class="n">kubernetes</span><span class="p">.</span><span class="n">io</span><span class="p">/</span><span class="n">docs</span><span class="p">/</span><span class="n">reference</span><span class="p">/</span><span class="c">#api-reference</span>
+</code></pre></div>
+<p>简单实践</p>
+<div class="highlight"><pre><span></span><code><span class="n">按照上面的role格式</span><span class="err">，</span><span class="n">我们写一个role资源文件</span><span class="p">,</span><span class="n">允许用户操作</span> <span class="n">Deployment</span><span class="err">、</span><span class="n">Pod</span><span class="err">、</span><span class="n">RS</span> <span class="n">的所有权限</span>
+<span class="p">[</span><span class="n">root</span><span class="nv">@kubernetes</span><span class="n">-master1</span> <span class="p">/</span><span class="n">data</span><span class="p">/</span><span class="n">kubernetes</span><span class="p">/</span><span class="n">secure</span><span class="p">]</span><span class="c"># 02_kubernetes_secure_role.yaml</span>
+<span class="n">apiVersion</span><span class="p">:</span> <span class="n">rbac</span><span class="p">.</span><span class="n">authorization</span><span class="p">.</span><span class="n">k8s</span><span class="p">.</span><span class="n">io</span><span class="p">/</span><span class="n">v1</span>
+<span class="n">kind</span><span class="p">:</span> <span class="n">Role</span>
+<span class="n">metadata</span><span class="p">:</span>
+  <span class="n">name</span><span class="p">:</span> <span class="n">myrole</span>
+<span class="n">rules</span><span class="p">:</span>
+<span class="p">-</span> <span class="n">apiGroups</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;extensions&quot;</span><span class="p">,</span> <span class="s2">&quot;apps&quot;</span><span class="p">]</span>
+  <span class="n">resources</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;pods&quot;</span><span class="p">,</span> <span class="s2">&quot;deployments&quot;</span><span class="p">,</span> <span class="s2">&quot;replicasets&quot;</span><span class="p">]</span>
+  <span class="n">verbs</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;get&quot;</span><span class="p">,</span> <span class="s2">&quot;list&quot;</span><span class="p">,</span> <span class="s2">&quot;watch&quot;</span><span class="p">,</span> <span class="s2">&quot;create&quot;</span><span class="p">,</span> <span class="s2">&quot;update&quot;</span><span class="p">,</span> <span class="s2">&quot;patch&quot;</span><span class="p">,</span> <span class="s2">&quot;delete&quot;</span><span class="p">]</span>
+<span class="n">属性解析</span><span class="err">：</span>
+    <span class="n">Pod属于</span> <span class="n">core</span> <span class="n">的</span> <span class="n">API</span> <span class="n">Group</span><span class="err">，</span><span class="n">在YAML中用空字符就可以</span><span class="err">，</span><span class="n">Deployment</span> <span class="n">属于</span> <span class="n">apps</span> <span class="n">的</span> <span class="n">API</span> <span class="n">Group</span><span class="err">，</span><span class="n">ReplicaSets属于extensions这个</span> <span class="n">API</span> <span class="n">Group</span><span class="err">，</span><span class="n">所以</span> <span class="n">rules</span> <span class="n">下面的</span> <span class="n">apiGroups</span> <span class="n">的内容</span><span class="err">：</span><span class="p">[</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;extensions&quot;</span><span class="p">,</span> <span class="s2">&quot;apps&quot;</span><span class="p">]</span>
+    <span class="n">verbs是可以对这些资源对象执行的操作</span><span class="err">，</span><span class="n">如果是所有动作</span><span class="err">，</span><span class="n">也可以使用</span><span class="p">[</span><span class="s2">&quot;*&quot;</span><span class="p">]</span><span class="n">来代替</span><span class="err">。</span>
+</code></pre></div>
+<p>查看资源对象</p>
+<div class="highlight"><pre><span></span><code><span class="n">初始化实例对象</span>
+<span class="p">[</span><span class="n">root</span><span class="nv">@kubernetes</span><span class="n">-master1</span> <span class="p">/</span><span class="n">data</span><span class="p">/</span><span class="n">kubernetes</span><span class="p">/</span><span class="n">secure</span><span class="p">]</span><span class="c"># kubectl  apply -f 02_kubernetes_secure_role.yaml</span>
+<span class="n">role</span><span class="p">.</span><span class="n">rbac</span><span class="p">.</span><span class="n">authorization</span><span class="p">.</span><span class="n">k8s</span><span class="p">.</span><span class="n">io</span><span class="p">/</span><span class="n">myrole</span> <span class="n">created</span>
+
+<span class="n">查看效果</span>
+<span class="p">[</span><span class="n">root</span><span class="nv">@kubernetes</span><span class="n">-master1</span> <span class="p">/</span><span class="n">data</span><span class="p">/</span><span class="n">kubernetes</span><span class="p">/</span><span class="n">secure</span><span class="p">]</span><span class="c"># kubectl describe role myrole </span>
+</code></pre></div>
+<p><img alt="image-20220722160724920" src="../../../img/kubernetes/kubernetes_safety/image-20220722160724920.png" /></p>
+<p>Role用户授权实践</p>
+<div class="highlight"><pre><span></span><code><span class="n">限定用户只能访问命名空间资源</span>
+<span class="p">[</span><span class="n">root</span><span class="nv">@kubernetes</span><span class="n">-master1</span> <span class="p">/</span><span class="n">data</span><span class="p">/</span><span class="n">kubernetes</span><span class="p">/</span><span class="n">secure</span><span class="p">]</span><span class="c"># kubectl create rolebinding super-rolebind --role=myrole --user=superopsmsb</span>
+<span class="n">rolebinding</span><span class="p">.</span><span class="n">rbac</span><span class="p">.</span><span class="n">authorization</span><span class="p">.</span><span class="n">k8s</span><span class="p">.</span><span class="n">io</span><span class="p">/</span><span class="n">super-rolebind</span> <span class="n">created</span>
+
+<span class="n">查看资源效果</span>
+<span class="p">[</span><span class="n">root</span><span class="nv">@kubernetes</span><span class="n">-master1</span> <span class="p">/</span><span class="n">data</span><span class="p">/</span><span class="n">kubernetes</span><span class="p">/</span><span class="n">secure</span><span class="p">]</span><span class="c"># kubectl  get pod --kubeconfig=/tmp/superopsmsb.conf</span>
+<span class="n">NAME</span>        <span class="n">READY</span>   <span class="n">STATUS</span>    <span class="n">RESTARTS</span>   <span class="n">AGE</span>
+<span class="n">nginx-web</span>   <span class="n">1</span><span class="p">/</span><span class="n">1</span>     <span class="n">Running</span>   <span class="n">0</span>          <span class="n">56m</span>
+<span class="p">[</span><span class="n">root</span><span class="nv">@kubernetes</span><span class="n">-master1</span> <span class="p">/</span><span class="n">data</span><span class="p">/</span><span class="n">kubernetes</span><span class="p">/</span><span class="n">secure</span><span class="p">]</span><span class="c"># kubectl  get svc --kubeconfig=/tmp/superopsmsb.conf</span>
+<span class="n">Error</span> <span class="n">from</span> <span class="n">server</span> <span class="p">(</span><span class="n">Forbidden</span><span class="p">):</span> <span class="n">services</span> <span class="n">is</span> <span class="n">forbidden</span><span class="p">:</span> <span class="n">User</span> <span class="s2">&quot;superopsmsb&quot;</span> <span class="n">cannot</span> <span class="n">list</span> <span class="n">resource</span> <span class="s2">&quot;services&quot;</span> <span class="k">in</span> <span class="n">API</span> <span class="nb">group </span><span class="s2">&quot;&quot;</span> <span class="k">in</span> <span class="n">the</span> <span class="n">namespace</span> <span class="s2">&quot;default&quot;</span>
+<span class="p">[</span><span class="n">root</span><span class="nv">@kubernetes</span><span class="n">-master1</span> <span class="p">/</span><span class="n">data</span><span class="p">/</span><span class="n">kubernetes</span><span class="p">/</span><span class="n">secure</span><span class="p">]</span><span class="c"># kubectl  get svc --kubeconfig=/tmp/superopsmsb.conf -n kube-system</span>
+<span class="n">Error</span> <span class="n">from</span> <span class="n">server</span> <span class="p">(</span><span class="n">Forbidden</span><span class="p">):</span> <span class="n">services</span> <span class="n">is</span> <span class="n">forbidden</span><span class="p">:</span> <span class="n">User</span> <span class="s2">&quot;superopsmsb&quot;</span> <span class="n">cannot</span> <span class="n">list</span> <span class="n">resource</span> <span class="s2">&quot;services&quot;</span> <span class="k">in</span> <span class="n">API</span> <span class="nb">group </span><span class="s2">&quot;&quot;</span> <span class="k">in</span> <span class="n">the</span> <span class="n">namespace</span> <span class="s2">&quot;kube-system&quot;</span>
+
+<span class="n">清理授权</span>
+<span class="p">[</span><span class="n">root</span><span class="nv">@kubernetes</span><span class="n">-master1</span> <span class="p">/</span><span class="n">data</span><span class="p">/</span><span class="n">kubernetes</span><span class="p">/</span><span class="n">secure</span><span class="p">]</span><span class="c"># kubectl delete rolebindings super-rolebind</span>
+<span class="n">rolebinding</span><span class="p">.</span><span class="n">rbac</span><span class="p">.</span><span class="n">authorization</span><span class="p">.</span><span class="n">k8s</span><span class="p">.</span><span class="n">io</span> <span class="s2">&quot;super-rolebind&quot;</span> <span class="n">deleted</span>
+</code></pre></div>
+<p><strong>ClusterRole实践</strong></p>
+<p>属性解析</p>
+<div class="highlight"><pre><span></span><code><span class="p">[</span><span class="n">root</span><span class="nv">@kubernetes</span><span class="n">-master1</span> <span class="p">/</span><span class="n">data</span><span class="p">/</span><span class="n">kubernetes</span><span class="p">/</span><span class="n">secure</span><span class="p">]</span><span class="c"># kubectl explain clusterrole</span>
+<span class="n">aggregationRule</span>      <span class="p">&lt;</span><span class="n">Object</span><span class="p">&gt;</span>
+<span class="n">apiVersion</span> <span class="p">&lt;</span><span class="n">string</span><span class="p">&gt;</span>
+<span class="n">kind</span> <span class="p">&lt;</span><span class="n">string</span><span class="p">&gt;</span>
+<span class="n">metadata</span>     <span class="p">&lt;</span><span class="n">Object</span><span class="p">&gt;</span>
+<span class="n">rules</span>        <span class="p">&lt;[]</span><span class="n">Object</span><span class="p">&gt;</span>
+    <span class="n">apiGroups</span>               <span class="p">&lt;[]</span><span class="n">string</span><span class="p">&gt;</span>
+    <span class="n">nonResourceURLs</span>         <span class="p">&lt;[]</span><span class="n">string</span><span class="p">&gt;</span>
+    <span class="n">resourceNames</span>           <span class="p">&lt;[]</span><span class="n">string</span><span class="p">&gt;</span>
+    <span class="n">resources</span>               <span class="p">&lt;[]</span><span class="n">string</span><span class="p">&gt;</span>
+    <span class="n">verbs</span>                   <span class="p">&lt;[]</span><span class="n">string</span><span class="p">&gt;</span> <span class="n">-required</span><span class="p">-</span>
+<span class="n">结果显示</span><span class="err">：</span>
+    <span class="n">clusterrole相对于role的属性多了一个集中控制器的属性aggregationRule</span><span class="err">，</span><span class="n">而这是一个可选的属性</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">命令行创建clusterrole</span><span class="err">，</span><span class="n">查看具有pod资源的get</span><span class="err">、</span><span class="n">list权限的属性信息</span>
+<span class="p">[</span><span class="n">root</span><span class="nv">@kubernetes</span><span class="n">-master1</span> <span class="p">~]</span><span class="c"># kubectl create clusterrole myclusterrole --verb=get,list --resource=pods --dry-run -o yaml</span>
+<span class="n">apiVersion</span><span class="p">:</span> <span class="n">rbac</span><span class="p">.</span><span class="n">authorization</span><span class="p">.</span><span class="n">k8s</span><span class="p">.</span><span class="n">io</span><span class="p">/</span><span class="n">v1</span>
+<span class="n">kind</span><span class="p">:</span> <span class="n">ClusterRole</span>
+<span class="n">metadata</span><span class="p">:</span>
+  <span class="n">creationTimestamp</span><span class="p">:</span> <span class="n">null</span>       <span class="n">时间信息</span>
+  <span class="n">name</span><span class="p">:</span> <span class="n">myclusterrole</span>           <span class="n">role的名称</span>
+<span class="n">rules</span><span class="p">:</span>                          <span class="n">授权规则</span>
+<span class="p">-</span> <span class="n">apiGroups</span><span class="p">:</span>                    <span class="n">操作的对象</span>
+  <span class="p">-</span> <span class="s2">&quot;&quot;</span>                              <span class="n">所有权限</span>
+  <span class="n">resources</span><span class="p">:</span>                    <span class="n">资源对象</span>
+  <span class="p">-</span> <span class="n">pods</span>                            <span class="n">pod的对象</span>
+  <span class="n">verbs</span><span class="p">:</span>                            <span class="n">对pod允许的权限</span>
+  <span class="p">-</span> <span class="n">get</span>                             <span class="n">获取</span>
+  <span class="p">-</span> <span class="n">list</span>                                <span class="n">查看</span>
+<span class="n">结果显示</span><span class="err">：</span>
+    <span class="n">ClusterRole与role的配置一样</span><span class="err">，</span><span class="n">也由三部分组成</span><span class="err">：</span><span class="n">apiGroup</span><span class="err">、</span><span class="n">resources</span><span class="err">、</span><span class="n">verbs</span>
+</code></pre></div>
+<p>简单实践</p>
+<div class="highlight"><pre><span></span><code><span class="n">按照上面的clusterrole格式</span><span class="err">，</span><span class="n">我们写一个clusterrole资源文件</span><span class="p">,</span><span class="n">允许用户操作</span> <span class="n">Deployment</span><span class="err">、</span><span class="n">Pod</span><span class="err">、</span><span class="n">RS</span> <span class="n">的所有权限</span>
+<span class="p">[</span><span class="n">root</span><span class="nv">@kubernetes</span><span class="n">-master1</span> <span class="p">/</span><span class="n">data</span><span class="p">/</span><span class="n">kubernetes</span><span class="p">/</span><span class="n">secure</span><span class="p">]</span><span class="c"># 03_kubernetes_secure_clusterrole.yaml</span>
+<span class="n">apiVersion</span><span class="p">:</span> <span class="n">rbac</span><span class="p">.</span><span class="n">authorization</span><span class="p">.</span><span class="n">k8s</span><span class="p">.</span><span class="n">io</span><span class="p">/</span><span class="n">v1</span>
+<span class="n">kind</span><span class="p">:</span> <span class="n">ClusterRole</span>
+<span class="n">metadata</span><span class="p">:</span>
+  <span class="n">name</span><span class="p">:</span> <span class="n">myclusterrole</span>
+<span class="n">rules</span><span class="p">:</span>
+<span class="p">-</span> <span class="n">apiGroups</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;&quot;</span><span class="p">]</span>
+  <span class="n">resources</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;pods&quot;</span><span class="p">]</span>
+  <span class="n">verbs</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;get&quot;</span><span class="p">,</span> <span class="s2">&quot;list&quot;</span><span class="p">,</span> <span class="s2">&quot;watch&quot;</span><span class="p">]</span>
+
+<span class="n">创建资源对象</span>
+<span class="p">[</span><span class="n">root</span><span class="nv">@kubernetes</span><span class="n">-master1</span> <span class="p">/</span><span class="n">data</span><span class="p">/</span><span class="n">kubernetes</span><span class="p">/</span><span class="n">secure</span><span class="p">]</span><span class="c"># kubectl  apply -f 03_kubernetes_secure_clusterrole.yaml</span>
+<span class="n">clusterrole</span><span class="p">.</span><span class="n">rbac</span><span class="p">.</span><span class="n">authorization</span><span class="p">.</span><span class="n">k8s</span><span class="p">.</span><span class="n">io</span><span class="p">/</span><span class="n">myclusterrole</span> <span class="n">created</span>
+
+<span class="n">查看效果</span>
+<span class="p">[</span><span class="n">root</span><span class="nv">@kubernetes</span><span class="n">-master1</span> <span class="p">/</span><span class="n">data</span><span class="p">/</span><span class="n">kubernetes</span><span class="p">/</span><span class="n">secure</span><span class="p">]</span><span class="c"># kubectl describe clusterrole myclusterrole</span>
+<span class="n">Name</span><span class="p">:</span>         <span class="n">myclusterrole</span>
+<span class="n">Labels</span><span class="p">:</span>       <span class="p">&lt;</span><span class="n">none</span><span class="p">&gt;</span>
+<span class="n">Annotations</span><span class="p">:</span>  <span class="p">&lt;</span><span class="n">none</span><span class="p">&gt;</span>
+<span class="n">PolicyRule</span><span class="p">:</span>
+  <span class="n">Resources</span>  <span class="n">Non-Resource</span> <span class="n">URLs</span>  <span class="n">Resource</span> <span class="n">Names</span>  <span class="n">Verbs</span>
+  <span class="p">---------</span>  <span class="p">-----------------</span>  <span class="p">--------------</span>  <span class="p">-----</span>
+  <span class="n">pods</span>       <span class="p">[]</span>                 <span class="p">[]</span>              <span class="no">[get list watch]</span>
+</code></pre></div>
+<p>ClusterRole用户授权实践</p>
+<div class="highlight"><pre><span></span><code><span class="n">限定用户只能访问命名空间资源</span>
+<span class="p">[</span><span class="n">root</span><span class="nv">@kubernetes</span><span class="n">-master1</span> <span class="p">/</span><span class="n">data</span><span class="p">/</span><span class="n">kubernetes</span><span class="p">/</span><span class="n">secure</span><span class="p">]</span><span class="c"># kubectl create clusterrolebinding super-clusterrolebind --clusterrole=myclusterrole --user=superopsmsb</span>
+
+<span class="n">查看资源效果</span>
+<span class="p">[</span><span class="n">root</span><span class="nv">@kubernetes</span><span class="n">-master1</span> <span class="p">/</span><span class="n">data</span><span class="p">/</span><span class="n">kubernetes</span><span class="p">/</span><span class="n">secure</span><span class="p">]</span><span class="c"># kubectl  get pod --kubeconfig=/tmp/superopsmsb.conf</span>
+<span class="n">NAME</span>        <span class="n">READY</span>   <span class="n">STATUS</span>    <span class="n">RESTARTS</span>   <span class="n">AGE</span>
+<span class="n">nginx-web</span>   <span class="n">1</span><span class="p">/</span><span class="n">1</span>     <span class="n">Running</span>   <span class="n">0</span>          <span class="n">68m</span>
+<span class="p">[</span><span class="n">root</span><span class="nv">@kubernetes</span><span class="n">-master1</span> <span class="p">/</span><span class="n">data</span><span class="p">/</span><span class="n">kubernetes</span><span class="p">/</span><span class="n">secure</span><span class="p">]</span><span class="c"># kubectl  get svc --kubeconfig=/tmp/superopsmsb.conf</span>
+<span class="n">Error</span> <span class="n">from</span> <span class="n">server</span> <span class="p">(</span><span class="n">Forbidden</span><span class="p">):</span> <span class="n">services</span> <span class="n">is</span> <span class="n">forbidden</span><span class="p">:</span> <span class="n">User</span> <span class="s2">&quot;superopsmsb&quot;</span> <span class="n">cannot</span> <span class="n">list</span> <span class="n">resource</span> <span class="s2">&quot;services&quot;</span> <span class="k">in</span> <span class="n">API</span> <span class="nb">group </span><span class="s2">&quot;&quot;</span> <span class="k">in</span> <span class="n">the</span> <span class="n">namespace</span> <span class="s2">&quot;default&quot;</span>
+<span class="p">[</span><span class="n">root</span><span class="nv">@kubernetes</span><span class="n">-master1</span> <span class="p">/</span><span class="n">data</span><span class="p">/</span><span class="n">kubernetes</span><span class="p">/</span><span class="n">secure</span><span class="p">]</span><span class="c"># kubectl  get pod --kubeconfig=/tmp/superopsmsb.conf -n kube-system</span>
+<span class="n">NAME</span>                                         <span class="n">READY</span>   <span class="n">STATUS</span>    <span class="n">RESTARTS</span>         <span class="n">AGE</span>
+<span class="n">coredns</span><span class="p">-</span><span class="n">5d555c984-hzq8q</span>                      <span class="n">1</span><span class="p">/</span><span class="n">1</span>     <span class="n">Running</span>   <span class="n">0</span>                <span class="n">9h</span>
+
+<span class="n">清理授权</span>
+<span class="p">[</span><span class="n">root</span><span class="nv">@kubernetes</span><span class="n">-master1</span> <span class="p">/</span><span class="n">data</span><span class="p">/</span><span class="n">kubernetes</span><span class="p">/</span><span class="n">secure</span><span class="p">]</span><span class="c"># kubectl delete clusterrolebinding super-clusterrolebind</span>
+<span class="n">rolebinding</span><span class="p">.</span><span class="n">rbac</span><span class="p">.</span><span class="n">authorization</span><span class="p">.</span><span class="n">k8s</span><span class="p">.</span><span class="n">io</span> <span class="s2">&quot;super-clusterrolebind&quot;</span> <span class="n">deleted</span>
+</code></pre></div>
+<p><strong>小结</strong></p>
+<div class="highlight"><pre><span></span><code>
+</code></pre></div>
+<h3 id="124">1.2.4 授权案例<a class="headerlink" href="#124" title="Permanent link">&para;</a></h3>
+<p>学习目标</p>
+<p>这一节，我们从 案例解读、文件实践、小结 三个方面来学习。</p>
+<p><strong>案例解读</strong></p>
+<p>简介</p>
+<div class="highlight"><pre><span></span><code>    <span class="n">接下来我们在kubernetes的默认dashboard上面</span><span class="err">，</span><span class="n">来综合演示一下用户的安全管理操作</span><span class="err">。</span>
+</code></pre></div>
+<p><img alt="image-20220716105844575" src="../../../img/kubernetes/kubernetes_safety/image-20220716105844575.png" /></p>
+<div class="highlight"><pre><span></span><code><span class="n">对于dashboard来说</span><span class="err">，</span><span class="n">他的认证方法主要有两种</span><span class="err">：</span><span class="n">令牌认证和文件认证</span><span class="err">。</span><span class="n">由于涉及面比较多</span><span class="err">，</span><span class="n">我们通过两节的内容来进行讲解</span><span class="err">，</span><span class="n">在这里我们用令牌的方式来学习完整的服务认证流程</span><span class="err">。</span>
+
+<span class="n">令牌认证</span>    
+    <span class="p">-</span> <span class="n">基于认证用户的唯一令牌来进行认证</span><span class="err">，</span><span class="n">有默认的超时机制</span><span class="err">，</span><span class="n">一会儿就失效了</span>
+<span class="n">文件认证</span>
+    <span class="p">-</span> <span class="n">基于账号的token信息</span><span class="err">，</span><span class="n">创建kubeconfig文件</span><span class="err">，</span><span class="n">实现长久的认证方式</span><span class="err">。</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">根据我们之前对serviceaccount的工作流程的学习</span><span class="err">，</span><span class="n">对于dashboard的配置也应该遵循相应的操作流程</span><span class="err">：</span>
+    <span class="n">1</span><span class="err">、</span><span class="n">创建专用的serviceaccount</span>
+    <span class="n">2</span><span class="err">、</span><span class="n">创建对应的权限角色</span>
+    <span class="n">3</span><span class="err">、</span><span class="n">将serviceaccount和权限角色进行关联绑定</span>
+</code></pre></div>
+<p><strong>令牌认证</strong></p>
+<p>集群级别</p>
+<div class="highlight"><pre><span></span><code><span class="n">资源定义文件方式</span> 
+<span class="p">[</span><span class="n">root</span><span class="nv">@kubernetes</span><span class="n">-master1</span> <span class="p">/</span><span class="n">data</span><span class="p">/</span><span class="n">kubernetes</span><span class="p">/</span><span class="n">secure</span><span class="p">]</span><span class="c"># 04_kubernetes_secure_dashboard_cluster.yaml</span>
+<span class="n">kind</span><span class="p">:</span> <span class="n">ClusterRoleBinding</span>
+<span class="n">apiVersion</span><span class="p">:</span> <span class="n">rbac</span><span class="p">.</span><span class="n">authorization</span><span class="p">.</span><span class="n">k8s</span><span class="p">.</span><span class="n">io</span><span class="p">/</span><span class="n">v1</span>
+<span class="n">metadata</span><span class="p">:</span>
+  <span class="n">name</span><span class="p">:</span> <span class="n">dashboard-admin</span>
+  <span class="n">annotations</span><span class="p">:</span>
+    <span class="n">rbac</span><span class="p">.</span><span class="n">authorization</span><span class="p">.</span><span class="n">kubernetes</span><span class="p">.</span><span class="n">io</span><span class="p">/</span><span class="n">autoupdate</span><span class="p">:</span> <span class="s2">&quot;true&quot;</span>
+<span class="n">roleRef</span><span class="p">:</span>
+  <span class="n">kind</span><span class="p">:</span> <span class="n">ClusterRole</span>
+  <span class="n">name</span><span class="p">:</span> <span class="n">cluster-admin</span>
+  <span class="n">apiGroup</span><span class="p">:</span> <span class="n">rbac</span><span class="p">.</span><span class="n">authorization</span><span class="p">.</span><span class="n">k8s</span><span class="p">.</span><span class="n">io</span>
+<span class="n">subjects</span><span class="p">:</span>
+<span class="p">-</span> <span class="n">kind</span><span class="p">:</span> <span class="n">ServiceAccount</span>
+  <span class="n">name</span><span class="p">:</span> <span class="n">dashboard-admin</span>
+  <span class="n">namespace</span><span class="p">:</span> <span class="n">kube-system</span>
+
+<span class="p">---</span>
+<span class="n">apiVersion</span><span class="p">:</span> <span class="n">v1</span>
+<span class="n">kind</span><span class="p">:</span> <span class="n">ServiceAccount</span>
+<span class="n">metadata</span><span class="p">:</span>
+  <span class="n">name</span><span class="p">:</span> <span class="n">dashboard-admin</span>
+  <span class="n">namespace</span><span class="p">:</span> <span class="n">kube-system</span>
+  <span class="n">labels</span><span class="p">:</span>
+    <span class="n">kubernetes</span><span class="p">.</span><span class="n">io</span><span class="p">/</span><span class="n">cluster-service</span><span class="p">:</span> <span class="s2">&quot;true&quot;</span>
+    <span class="n">addonmanager</span><span class="p">.</span><span class="n">kubernetes</span><span class="p">.</span><span class="n">io</span><span class="p">/</span><span class="n">mode</span><span class="p">:</span> <span class="n">Reconcile</span>
+
+<span class="n">创建资源对象</span>
+<span class="p">[</span><span class="n">root</span><span class="nv">@kubernetes</span><span class="n">-master1</span> <span class="p">/</span><span class="n">data</span><span class="p">/</span><span class="n">kubernetes</span><span class="p">/</span><span class="n">secure</span><span class="p">]</span><span class="c"># kubectl  apply -f 04_kubernetes_secure_dashboard_cluster.yaml</span>
+<span class="n">clusterrolebinding</span><span class="p">.</span><span class="n">rbac</span><span class="p">.</span><span class="n">authorization</span><span class="p">.</span><span class="n">k8s</span><span class="p">.</span><span class="n">io</span><span class="p">/</span><span class="n">dashboard-admin</span> <span class="n">created</span>
+<span class="n">serviceaccount</span><span class="p">/</span><span class="n">dashboard-admin</span> <span class="n">created</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">获取token信息</span>
+<span class="p">[</span><span class="n">root</span><span class="nv">@kubernetes</span><span class="n">-master1</span> <span class="p">/</span><span class="n">data</span><span class="p">/</span><span class="n">kubernetes</span><span class="p">/</span><span class="n">secure</span><span class="p">]</span><span class="c"># kubectl describe secrets -n kube-system $(kubectl -n kube-system get secret | awk &#39;/dashboard-admin/{print $1}&#39;)</span>
+<span class="n">Name</span><span class="p">:</span>         <span class="n">dashboard-admin-token</span><span class="p">-</span><span class="n">4cdrd</span>
+<span class="p">...</span>
+<span class="n">token</span><span class="p">:</span>      <span class="n">eyJhbG</span><span class="p">...</span><span class="n">qU3__b9ITbLHEytrA</span>
+
+<span class="n">复制token到浏览器查看效果</span>
+</code></pre></div>
+<p><img alt="image-20220722165215675" src="../../../img/kubernetes/kubernetes_safety/image-20220722165215675.png" /></p>
+<p>用户级别</p>
+<div class="highlight"><pre><span></span><code><span class="n">资源定义文件方式</span> 
+<span class="p">[</span><span class="n">root</span><span class="nv">@kubernetes</span><span class="n">-master1</span> <span class="p">/</span><span class="n">data</span><span class="p">/</span><span class="n">kubernetes</span><span class="p">/</span><span class="n">secure</span><span class="p">]</span><span class="c"># 05_kubernetes_secure_dashboard_namespace.yaml</span>
+<span class="n">apiVersion</span><span class="p">:</span> <span class="n">v1</span>
+<span class="n">kind</span><span class="p">:</span> <span class="n">ServiceAccount</span>
+<span class="n">metadata</span><span class="p">:</span>
+  <span class="n">name</span><span class="p">:</span> <span class="n">dashboard-ns</span>
+  <span class="n">namespace</span><span class="p">:</span> <span class="k">default</span>
+<span class="p">---</span>
+<span class="n">apiVersion</span><span class="p">:</span> <span class="n">rbac</span><span class="p">.</span><span class="n">authorization</span><span class="p">.</span><span class="n">k8s</span><span class="p">.</span><span class="n">io</span><span class="p">/</span><span class="n">v1</span>
+<span class="n">kind</span><span class="p">:</span> <span class="n">RoleBinding</span>
+<span class="n">metadata</span><span class="p">:</span>
+  <span class="n">name</span><span class="p">:</span> <span class="n">dashboard-ns</span>
+  <span class="n">namespace</span><span class="p">:</span> <span class="k">default</span>
+<span class="n">roleRef</span><span class="p">:</span>
+  <span class="n">apiGroup</span><span class="p">:</span> <span class="n">rbac</span><span class="p">.</span><span class="n">authorization</span><span class="p">.</span><span class="n">k8s</span><span class="p">.</span><span class="n">io</span>
+  <span class="n">kind</span><span class="p">:</span> <span class="n">ClusterRole</span>
+  <span class="n">name</span><span class="p">:</span> <span class="n">admin</span>
+<span class="n">subjects</span><span class="p">:</span>
+<span class="p">-</span> <span class="n">kind</span><span class="p">:</span> <span class="n">ServiceAccount</span>
+  <span class="n">name</span><span class="p">:</span> <span class="n">dashboard-ns</span>
+  <span class="n">namespace</span><span class="p">:</span> <span class="k">default</span>
+
+<span class="n">创建资源对象</span>
+<span class="p">[</span><span class="n">root</span><span class="nv">@kubernetes</span><span class="n">-master1</span> <span class="p">/</span><span class="n">data</span><span class="p">/</span><span class="n">kubernetes</span><span class="p">/</span><span class="n">secure</span><span class="p">]</span><span class="c"># kubectl  apply -f 05_kubernetes_secure_dashboard_namespace.yaml serviceaccount/dashboard-ns created</span>
+<span class="n">rolebinding</span><span class="p">.</span><span class="n">rbac</span><span class="p">.</span><span class="n">authorization</span><span class="p">.</span><span class="n">k8s</span><span class="p">.</span><span class="n">io</span><span class="p">/</span><span class="n">dashboard-ns</span> <span class="n">created</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">获取token信息</span>
+<span class="p">[</span><span class="n">root</span><span class="nv">@kubernetes</span><span class="n">-master1</span> <span class="p">/</span><span class="n">data</span><span class="p">/</span><span class="n">kubernetes</span><span class="p">/</span><span class="n">secure</span><span class="p">]</span><span class="c"># kubectl describe secrets $(kubectl get secret | awk &#39;/dashboard-ns/{print $1}&#39;)</span>
+<span class="n">Name</span><span class="p">:</span>         <span class="n">dashboard-ns-token-btq6w</span>
+<span class="p">...</span>
+<span class="n">token</span><span class="p">:</span>       <span class="n">eyJhbG</span><span class="p">...</span><span class="n">qU3__8Kqc0Q</span>
+
+<span class="n">复制token到浏览器查看效果</span>
+</code></pre></div>
+<p><img alt="image-20220722170114980" src="../../../img/kubernetes/kubernetes_safety/image-20220722170114980.png" /><strong>文件实践</strong></p>
+<p>namespace文件实践</p>
+<div class="highlight"><pre><span></span><code><span class="n">设置集群信息</span>
+<span class="n">kubectl</span> <span class="n">config</span> <span class="nb">set-cluster</span> <span class="n">kubernetes</span> <span class="p">-</span><span class="n">-certificate-authority</span><span class="p">=/</span><span class="n">etc</span><span class="p">/</span><span class="n">kubernetes</span><span class="p">/</span><span class="n">pki</span><span class="p">/</span><span class="n">ca</span><span class="p">.</span><span class="n">crt</span>  <span class="p">-</span><span class="n">-server</span><span class="p">=</span><span class="s2">&quot;https://10.0.0.200:6443&quot;</span> <span class="p">-</span><span class="n">-embed-certs</span><span class="p">=</span><span class="n">true</span> <span class="p">-</span><span class="n">-kubeconfig</span><span class="p">=/</span><span class="n">root</span><span class="p">/</span><span class="n">dashboard-ns</span><span class="p">.</span><span class="n">conf</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">获取秘钥信息</span>
+<span class="p">[</span><span class="n">root</span><span class="nv">@kubernetes</span><span class="n">-master1</span> <span class="p">/</span><span class="n">data</span><span class="p">/</span><span class="n">kubernetes</span><span class="p">/</span><span class="n">secure</span><span class="p">]</span><span class="c"># NAMESPACE_TOKEN=$(kubectl get secret  $(kubectl get secret | awk &#39;/dashboard-ns/{print $1}&#39;)  -o jsonpath={.data.token} |base64 -d)</span>
+
+<span class="n">设置用户信息</span>
+<span class="n">kubectl</span> <span class="n">config</span> <span class="nb">set-credentials</span> <span class="n">dashboard-ns</span> <span class="p">-</span><span class="n">-token</span><span class="p">=</span><span class="nv">$NAMESPACE_TOKEN</span> <span class="p">-</span><span class="n">-kubeconfig</span><span class="p">=/</span><span class="n">root</span><span class="p">/</span><span class="n">dashboard-ns</span><span class="p">.</span><span class="n">conf</span> 
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">配置上下文信息</span>
+<span class="n">kubectl</span> <span class="n">config</span> <span class="nb">set-context</span> <span class="n">dashboard-ns</span><span class="nv">@kubernetes</span> <span class="p">-</span><span class="n">-cluster</span><span class="p">=</span><span class="n">kubernetes</span> <span class="p">-</span><span class="n">-user</span><span class="p">=</span><span class="n">def-ns-admin</span> <span class="p">-</span><span class="n">-kubeconfig</span><span class="p">=/</span><span class="n">root</span><span class="p">/</span><span class="n">dashboard-ns</span><span class="p">.</span><span class="n">conf</span>
+<span class="n">切换用户</span>
+<span class="n">kubectl</span> <span class="n">config</span> <span class="nb">use-context</span> <span class="n">dashboard-ns</span><span class="nv">@kubernetes</span> <span class="p">-</span><span class="n">-kubeconfig</span><span class="p">=/</span><span class="n">root</span><span class="p">/</span><span class="n">dashboard-ns</span><span class="p">.</span><span class="n">conf</span> 
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">查看效果</span>
+<span class="p">[</span><span class="n">root</span><span class="nv">@kubernetes</span><span class="n">-master1</span> <span class="p">/</span><span class="n">data</span><span class="p">/</span><span class="n">kubernetes</span><span class="p">/</span><span class="n">secure</span><span class="p">]</span><span class="c"># kubectl  config view --kubeconfig=/root/dashboard-ns.conf</span>
+<span class="n">apiVersion</span><span class="p">:</span> <span class="n">v1</span>
+<span class="n">clusters</span><span class="p">:</span>
+<span class="p">-</span> <span class="n">cluster</span><span class="p">:</span>
+    <span class="n">certificate-authority-data</span><span class="p">:</span> <span class="n">DATA</span><span class="p">+</span><span class="n">OMITTED</span>
+    <span class="n">server</span><span class="p">:</span> <span class="n">https</span><span class="p">://</span><span class="n">10</span><span class="p">.</span><span class="n">0</span><span class="p">.</span><span class="n">0</span><span class="p">.</span><span class="n">200</span><span class="p">:</span><span class="n">6443</span>
+  <span class="n">name</span><span class="p">:</span> <span class="n">kubernetes</span>
+<span class="n">contexts</span><span class="p">:</span>
+<span class="p">-</span> <span class="n">context</span><span class="p">:</span>
+    <span class="n">cluster</span><span class="p">:</span> <span class="n">kubernetes</span>
+    <span class="n">user</span><span class="p">:</span> <span class="n">def-ns-admin</span>
+  <span class="n">name</span><span class="p">:</span> <span class="n">dashboard-ns</span><span class="nv">@kubernetes</span>
+<span class="n">current-context</span><span class="p">:</span> <span class="n">dashboard-ns</span><span class="nv">@kubernetes</span>
+<span class="n">kind</span><span class="p">:</span> <span class="n">Config</span>
+<span class="n">preferences</span><span class="p">:</span> <span class="p">{}</span>
+<span class="n">users</span><span class="p">:</span>
+<span class="p">-</span> <span class="n">name</span><span class="p">:</span> <span class="n">dashboard-ns</span>
+  <span class="n">user</span><span class="p">:</span>
+    <span class="n">token</span><span class="p">:</span> <span class="n">REDACTED</span>
+<span class="p">-</span> <span class="n">name</span><span class="p">:</span> <span class="n">def-ns-admin</span>
+  <span class="n">user</span><span class="p">:</span>
+    <span class="n">token</span><span class="p">:</span> <span class="n">REDACTED</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">下载dashboard-ns</span><span class="p">.</span><span class="n">conf到windows主机</span><span class="err">，</span><span class="n">然后在浏览器上</span><span class="err">，</span><span class="n">以kubeconfig文件方式登录dashboard</span>
+</code></pre></div>
+<p><img alt="image-20220722170114980" src="../../../img/kubernetes/kubernetes_safety/image-20220722170114980.png" /></p>
+<p>cluster文件实践</p>
+<div class="highlight"><pre><span></span><code><span class="n">设置集群信息</span>
+<span class="n">kubectl</span> <span class="n">config</span> <span class="nb">set-cluster</span> <span class="n">kubernetes</span> <span class="p">-</span><span class="n">-certificate-authority</span><span class="p">=/</span><span class="n">etc</span><span class="p">/</span><span class="n">kubernetes</span><span class="p">/</span><span class="n">pki</span><span class="p">/</span><span class="n">ca</span><span class="p">.</span><span class="n">crt</span>  <span class="p">-</span><span class="n">-server</span><span class="p">=</span><span class="s2">&quot;https://10.0.0.200:6443&quot;</span> <span class="p">-</span><span class="n">-embed-certs</span><span class="p">=</span><span class="n">true</span> <span class="p">-</span><span class="n">-kubeconfig</span><span class="p">=/</span><span class="n">root</span><span class="p">/</span><span class="n">dashboard-cluster</span><span class="p">.</span><span class="n">conf</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">获取秘钥信息</span>
+<span class="p">[</span><span class="n">root</span><span class="nv">@kubernetes</span><span class="n">-master1</span> <span class="p">/</span><span class="n">data</span><span class="p">/</span><span class="n">kubernetes</span><span class="p">/</span><span class="n">secure</span><span class="p">]</span><span class="c"># CLUSTER_TOKEN=$(kubectl get secret -n kube-system $(kubectl get secret -n kube-system | awk &#39;/dashboard-admin/{print $1}&#39;)  -o jsonpath={.data.token} |base64 -d)</span>
+
+<span class="n">设置用户信息</span>
+<span class="n">kubectl</span> <span class="n">config</span> <span class="nb">set-credentials</span> <span class="n">dashboard-cluster</span> <span class="p">-</span><span class="n">-token</span><span class="p">=</span><span class="nv">$CLUSTER_TOKEN</span> <span class="p">-</span><span class="n">-kubeconfig</span><span class="p">=/</span><span class="n">root</span><span class="p">/</span><span class="n">dashboard-cluster</span><span class="p">.</span><span class="n">conf</span> 
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">配置上下文信息</span>
+<span class="n">kubectl</span> <span class="n">config</span> <span class="nb">set-context</span> <span class="n">dashboard-cluster</span><span class="nv">@kubernetes</span> <span class="p">-</span><span class="n">-cluster</span><span class="p">=</span><span class="n">kubernetes</span> <span class="p">-</span><span class="n">-user</span><span class="p">=</span><span class="n">dashboard-cluster</span> <span class="p">-</span><span class="n">-kubeconfig</span><span class="p">=/</span><span class="n">root</span><span class="p">/</span><span class="n">dashboard-cluster</span><span class="p">.</span><span class="n">conf</span>
+<span class="n">切换用户</span>
+<span class="n">kubectl</span> <span class="n">config</span> <span class="nb">use-context</span> <span class="n">dashboard-cluster</span><span class="nv">@kubernetes</span> <span class="p">-</span><span class="n">-kubeconfig</span><span class="p">=/</span><span class="n">root</span><span class="p">/</span><span class="n">dashboard-cluster</span><span class="p">.</span><span class="n">conf</span> 
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">查看效果</span>
+<span class="p">[</span><span class="n">root</span><span class="nv">@kubernetes</span><span class="n">-master1</span> <span class="p">/</span><span class="n">data</span><span class="p">/</span><span class="n">kubernetes</span><span class="p">/</span><span class="n">secure</span><span class="p">]</span><span class="c"># kubectl config view --kubeconfig=/root/dashboard-cluster.conf</span>
+<span class="n">apiVersion</span><span class="p">:</span> <span class="n">v1</span>
+<span class="n">clusters</span><span class="p">:</span>
+<span class="p">-</span> <span class="n">cluster</span><span class="p">:</span>
+    <span class="n">certificate-authority-data</span><span class="p">:</span> <span class="n">DATA</span><span class="p">+</span><span class="n">OMITTED</span>
+    <span class="n">server</span><span class="p">:</span> <span class="n">https</span><span class="p">://</span><span class="n">10</span><span class="p">.</span><span class="n">0</span><span class="p">.</span><span class="n">0</span><span class="p">.</span><span class="n">200</span><span class="p">:</span><span class="n">6443</span>
+  <span class="n">name</span><span class="p">:</span> <span class="n">kubernetes</span>
+<span class="n">contexts</span><span class="p">:</span>
+<span class="p">-</span> <span class="n">context</span><span class="p">:</span>
+    <span class="n">cluster</span><span class="p">:</span> <span class="n">kubernetes</span>
+    <span class="n">user</span><span class="p">:</span> <span class="n">dashboard-cluster</span>
+  <span class="n">name</span><span class="p">:</span> <span class="n">dashboard-cluster</span><span class="nv">@kubernetes</span>
+<span class="n">current-context</span><span class="p">:</span> <span class="n">dashboard-cluster</span><span class="nv">@kubernetes</span>
+<span class="n">kind</span><span class="p">:</span> <span class="n">Config</span>
+<span class="n">preferences</span><span class="p">:</span> <span class="p">{}</span>
+<span class="n">users</span><span class="p">:</span>
+<span class="p">-</span> <span class="n">name</span><span class="p">:</span> <span class="n">dashboard-cluster</span>
+  <span class="n">user</span><span class="p">:</span>
+    <span class="n">token</span><span class="p">:</span> <span class="n">REDACTED</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">下载dashboard-cluster</span><span class="p">.</span><span class="n">conf到windows主机</span><span class="err">，</span><span class="n">然后在浏览器上</span><span class="err">，</span><span class="n">以kubeconfig文件方式登录dashboard</span>
+</code></pre></div>
+<p><img alt="image-20220722172012447" src="../../../img/kubernetes/kubernetes_safety/image-20220722172012447.png" /></p>
+<p><strong>小结</strong></p>
+<div class="highlight"><pre><span></span><code>
+</code></pre></div>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      BurningMyself<a href='https://beian.miit.gov.cn/' target='_blank'>  蜀ICP备15033200号-1</a>
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        <div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/burningmyself" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://gitee.com/burningmyself" target="_blank" rel="noopener" title="gitee.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 488 512"><!--! Font Awesome Free 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M488 261.8C488 403.3 391.1 504 248 504 110.8 504 0 393.2 0 256S110.8 8 248 8c66.8 0 123 24.5 166.3 64.9l-67.5 64.9C258.5 52.6 94.3 116.6 94.3 256c0 86.5 69.1 156.6 153.7 156.6 98.2 0 135-70.4 140.8-106.9H248v-85.3h236.1c2.3 12.7 3.9 24.9 3.9 41.4z"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "../../..", "features": [], "search": "../../../assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.2a6f1dda.min.js"></script>
+      
+        <script src="../../../js/extra.js"></script>
+      
+        <script src="../../../js/baidu-tongji.js"></script>
+      
+        <script src="https://www.googletagmanager.com/gtag/js?id=UA-155084439-1"></script>
+      
+        <script src="https://www.googletagmanager.com/gtag/js?id=UA-155132293-1"></script>
+      
+        <script src="../../../js/google.js"></script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+      
+    
+  </body>
+</html>

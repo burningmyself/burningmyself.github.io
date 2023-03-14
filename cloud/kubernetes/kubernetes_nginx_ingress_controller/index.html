@@ -1,0 +1,3921 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content=".net,java,php,python,docker,web">
+      
+      
+        <meta name="author" content="BurningMyself">
+      
+      
+        <link rel="canonical" href="https://burningmyself.gitee.io/cloud/kubernetes/kubernetes_nginx_ingress_controller/">
+      
+      
+        <link rel="prev" href="../kubernetes_core/">
+      
+      
+        <link rel="next" href="../kubernetes_traefik/">
+      
+      <link rel="icon" href="../../../favicon.ico">
+      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.0.15">
+    
+    
+      
+        <title>Kubernetes集群 服务暴露 Nginx Ingress Controller - BurningMyself</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.113286f1.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.a0c5b2b5.min.css">
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="" data-md-color-accent="">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#kubernetes_nginx_ingress_controller" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../../.." title="BurningMyself" class="md-header__button md-logo" aria-label="BurningMyself" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            BurningMyself
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Kubernetes集群 服务暴露 Nginx Ingress Controller
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/burningmyself/burningmyself.github.io" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    burningmyself.github.io
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="BurningMyself" class="md-nav__button md-logo" aria-label="BurningMyself" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    BurningMyself
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/burningmyself/burningmyself.github.io" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    burningmyself.github.io
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        介绍
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+          技术博文
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          技术博文
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="0">
+          .NET
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_1_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2_1">
+          <span class="md-nav__icon md-icon"></span>
+          .NET
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../net/c_sharp/" class="md-nav__link">
+        C#新特性语法
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../net/c_docker/" class="md-nav__link">
+        .Net Core Docker 部署
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../net/c_sqlserver_nginx/" class="md-nav__link">
+        Docker 容器化部署 ASP.NET Core
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../net/c_core_safety/" class="md-nav__link">
+        让你的ASP.NET Core应用程序更安全
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../net/c_core_study_route/" class="md-nav__link">
+        ASP.NET Core开发者指南
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+          Java
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2_2">
+          <span class="md-nav__icon md-icon"></span>
+          Java
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../java/feature/" class="md-nav__link">
+        Java特性
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../java/load-class/" class="md-nav__link">
+        Java类加载
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../java/orm/" class="md-nav__link">
+        Orm的优缺点
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../java/bio-nio/" class="md-nav__link">
+        BIO与NIO
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../java/rocketmq/rmq-1/" class="md-nav__link">
+        RocketMq下载与安装
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../java/springAnnotation/" class="md-nav__link">
+        Spring常用注解
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../java/javavm/" class="md-nav__link">
+        Java 虚拟机
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../java/springdesign/" class="md-nav__link">
+        Spring 常用设计
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../java/spring-cloud/" class="md-nav__link">
+        Spring Cloud
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../java/java-simple/" class="md-nav__link">
+        Java simple
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../java/java-validator/" class="md-nav__link">
+        Java Validator
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../java/java-string/" class="md-nav__link">
+        Java String
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../java/java-utils/" class="md-nav__link">
+        Java Utils
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+          Python
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2_3">
+          <span class="md-nav__icon md-icon"></span>
+          Python
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../python/feature/" class="md-nav__link">
+        Python特性
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../python/str_joint/" class="md-nav__link">
+        Python字符拼接
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../python/syntax_rule/" class="md-nav__link">
+        Python语法技巧
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../python/fabric/" class="md-nav__link">
+        远程部署神器 Fabric
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_4" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_4" id="__nav_2_4_label" tabindex="0">
+          PHP
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_4_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2_4">
+          <span class="md-nav__icon md-icon"></span>
+          PHP
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../php/kj/" class="md-nav__link">
+        框架
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_5" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_5" id="__nav_2_5_label" tabindex="0">
+          Web
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_5_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2_5">
+          <span class="md-nav__icon md-icon"></span>
+          Web
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../web/es6/" class="md-nav__link">
+        es6语法
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../web/ali_js_style/" class="md-nav__link">
+        阿里js样式规范
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../web/node.js/" class="md-nav__link">
+        node.js文档
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../web/react/" class="md-nav__link">
+        React 开发者指南
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../dart/syntax/" class="md-nav__link">
+        Dart语法学习
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../web/react_interview/" class="md-nav__link">
+        React 面试
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../web/js_tool_method/" class="md-nav__link">
+        js 工具函数
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../web/vue_cp_react/" class="md-nav__link">
+        vue与react比较
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../web/javascript/" class="md-nav__link">
+        JavaScript 基础
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_6" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_6" id="__nav_2_6_label" tabindex="0">
+          SQL
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_6_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2_6">
+          <span class="md-nav__icon md-icon"></span>
+          SQL
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../sql/mysql_yh/" class="md-nav__link">
+        MySQL优化
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../sql/mysql_yh17/" class="md-nav__link">
+        MySQL优化
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../sql/mysql_log/" class="md-nav__link">
+        MySQL日志
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../sql/mysql_index/" class="md-nav__link">
+        MySQL索引
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../sql/mysql_pxc/" class="md-nav__link">
+        MySQL PXC集群
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../sql/mysql_use/" class="md-nav__link">
+        MySQL 数据库应用
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../sql/mysql_backups/" class="md-nav__link">
+        MySql 备份
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../sql/sql_server_master/" class="md-nav__link">
+        Sql Server 主从备份
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../sql/data_split/" class="md-nav__link">
+        数据库之互联网常用分库分表方案
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../sql/mybatis/" class="md-nav__link">
+        Mybatis使用心德
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_7" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_7" id="__nav_2_7_label" tabindex="0">
+          Linux
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_7_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2_7">
+          <span class="md-nav__icon md-icon"></span>
+          Linux
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../linux/often/" class="md-nav__link">
+        常用命令
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../linux/ope/" class="md-nav__link">
+        实用的Linux 命令
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_8" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_8" id="__nav_2_8_label" tabindex="0">
+          Docker
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_8_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2_8">
+          <span class="md-nav__icon md-icon"></span>
+          Docker
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../docker/docker/" class="md-nav__link">
+        Docker全科
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../docker/docker-compose/" class="md-nav__link">
+        docker和docker-compose配置常用环境
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../docker/docker-jenkins/" class="md-nav__link">
+        Docker部署Jenkins
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../docker/docker-phabricator/" class="md-nav__link">
+        Docker部署Phabricator
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_9" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_9" id="__nav_2_9_label" tabindex="0">
+          Tool
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_9_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2_9">
+          <span class="md-nav__icon md-icon"></span>
+          Tool
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tool/git/" class="md-nav__link">
+        Git
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tool/gitusual/" class="md-nav__link">
+        Git动画展示
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tool/gitquestion/" class="md-nav__link">
+        Git问题处理
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tool/gitflow/" class="md-nav__link">
+        GitFlow
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tool/gitbook/" class="md-nav__link">
+        GitBook
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tool/gitcmr/" class="md-nav__link">
+        Git提交日志规范
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tool/markdown/" class="md-nav__link">
+        Markdown
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tool/cicd/" class="md-nav__link">
+        CI/CD
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tool/mkdocs/" class="md-nav__link">
+        mkdocs简单使用
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tool/gitstudy/" class="md-nav__link">
+        Git的黑魔法
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tool/minio/" class="md-nav__link">
+        MinIO 搭建使用
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tool/cat-monitoring/" class="md-nav__link">
+        Cat分布式监控
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+          云架构
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          云架构
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../native/" class="md-nav__link">
+        云原生
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../virtual/" class="md-nav__link">
+        虚拟化技术
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../compute/" class="md-nav__link">
+        云计算
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../apprelease/" class="md-nav__link">
+        应用部署容器化演进
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../containerlinux/" class="md-nav__link">
+        容器技术所涉及Linux内核关键技术
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_6" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3_6" id="__nav_3_6_label" tabindex="0">
+          Docker
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_6_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3_6">
+          <span class="md-nav__icon md-icon"></span>
+          Docker
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docker/docker_native/" class="md-nav__link">
+        容器管理工具Docker生态架构及部署
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docker/docker_nginx/" class="md-nav__link">
+        使用容器运行Nginx应用及Docker命令
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docker/docker_image/" class="md-nav__link">
+        Docker容器镜像
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docker/docker_image_fast/" class="md-nav__link">
+        Docker容器镜像加速器及本地容器镜像仓库
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docker/docker_container_enterprice/" class="md-nav__link">
+        Docker容器化部署企业级应用集群
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docker/docker_file/" class="md-nav__link">
+        Dockerfile精讲及新型容器镜像构建技术
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docker/docker_network/" class="md-nav__link">
+        Docker容器网络与通信原理深度解析
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docker/docker_date/" class="md-nav__link">
+        Docker容器数据持久化存储机制
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docker/docker_compose/" class="md-nav__link">
+        Docker容器服务编排利器Docker Compose应用实战
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docker/docker_swarm/" class="md-nav__link">
+        Docker主机集群化方案 Docker Swarm
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docker/docker_devops/" class="md-nav__link">
+        基于Docker容器DevOps应用方案 企业业务代码发布系统
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docker/docker_container/" class="md-nav__link">
+        轻量级或工业级容器管理工具
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_7" checked>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3_7" id="__nav_3_7_label" tabindex="0">
+          Kubernetes
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_7_label" aria-expanded="true">
+        <label class="md-nav__title" for="__nav_3_7">
+          <span class="md-nav__icon md-icon"></span>
+          Kubernetes
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        kubeadm极速部署Kubernetes
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubernetes_introduce/" class="md-nav__link">
+        kubernetes介绍与集群架构
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubernetes_way/" class="md-nav__link">
+        Kubernetes集群部署方式说明
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubernetes_master/" class="md-nav__link">
+        kubeadm部署单Master节点kubernetes集群
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubernetes_hight/" class="md-nav__link">
+        kubeadm部署高可用kubernetes集群
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubernetes_rke/" class="md-nav__link">
+        使用RKE构建企业生产级Kubernetes集群
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubernetes_hight_bin1/" class="md-nav__link">
+        Kubernetes高可用集群二进制部署（Runtime Docker）一
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubernetes_hight_bin2/" class="md-nav__link">
+        Kubernetes高可用集群二进制部署（Runtime Docker）二
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubernetes_ui/" class="md-nav__link">
+        Kubernetes集群UI及主机资源监控
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubernetes_sealos/" class="md-nav__link">
+        使用sealos部署kubernetes集群并实现集群管理
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubernetes_cluster/" class="md-nav__link">
+        kubernetes集群命令语法
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubernetes_core/" class="md-nav__link">
+        Kubernetes核心概念
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Kubernetes集群 服务暴露 Nginx Ingress Controller
+      </a>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubernetes_traefik/" class="md-nav__link">
+        Kubernetes集群 服务暴露 Traefik
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubernetes_configMap_secret/" class="md-nav__link">
+        Kubernetes配置与密钥管理 ConfigMap&Secret
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubernetes_harbor/" class="md-nav__link">
+        Kubernetes集群使用容器镜像仓库Harbor
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubernetes_ui/" class="md-nav__link">
+        源监控
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubernetes_ui/" class="md-nav__link">
+        源监控
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubernetes_ui/" class="md-nav__link">
+        源监控
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubernetes_ui/" class="md-nav__link">
+        源监控
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubernetes_ui/" class="md-nav__link">
+        源监控
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubernetes_ui/" class="md-nav__link">
+        源监控
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubernetes_ui/" class="md-nav__link">
+        源监控
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubernetes_ui/" class="md-nav__link">
+        源监控
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubernetes_ui/" class="md-nav__link">
+        源监控
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubernetes_ui/" class="md-nav__link">
+        源监控
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubernetes_ui/" class="md-nav__link">
+        源监控
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubernetes_ui/" class="md-nav__link">
+        源监控
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubernetes_ui/" class="md-nav__link">
+        源监控
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubernetes_ui/" class="md-nav__link">
+        源监控
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubernetes_ui/" class="md-nav__link">
+        源监控
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubernetes_ui/" class="md-nav__link">
+        源监控
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubernetes_ui/" class="md-nav__link">
+        源监控
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubernetes_ui/" class="md-nav__link">
+        源监控
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+          微服务
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          微服务
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../micro/fbs-lock/" class="md-nav__link">
+        分布式锁
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../micro/design/" class="md-nav__link">
+        微服务设计
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../micro/distrimsg/" class="md-nav__link">
+        分布式系统与消息的投递
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../micro/ddd/" class="md-nav__link">
+        基于DDD的微服务设计和开发实战
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../micro/kafka/" class="md-nav__link">
+        Kafka架构原理
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../micro/redis_cluster/" class="md-nav__link">
+        Redis Cluster原理
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../micro/spring-cloud-micro/" class="md-nav__link">
+        分布式架构
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+          经验分析
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          经验分析
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../exp/devops/" class="md-nav__link">
+        DevOps
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../exp/micro-service/" class="md-nav__link">
+        Micro-Service
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../exp/raft-gossip/" class="md-nav__link">
+        Raft算法和Gossip协议
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../exp/cl/" class="md-nav__link">
+        集群和负载均衡
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../exp/ai/" class="md-nav__link">
+        人工智能
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../exp/code-principle/" class="md-nav__link">
+        代码原则
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../exp/techbig/" class="md-nav__link">
+        如何成为技术大牛
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../exp/learnweetout/" class="md-nav__link">
+        程序员如何技术成长
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../exp/pt/" class="md-nav__link">
+        产品与技术
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../exp/four_deep_learning/" class="md-nav__link">
+        深度学习框架
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../exp/tl/" class="md-nav__link">
+        在阿里做了5年技术Leader，我总结出这些套路！
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../exp/cto/" class="md-nav__link">
+        CTO 技能图谱
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+          构架
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_6">
+          <span class="md-nav__icon md-icon"></span>
+          构架
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../framework/split/" class="md-nav__link">
+        构架拆分
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../framework/fgb/" class="md-nav__link">
+        分布式、高并发、多线程
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../framework/agility/" class="md-nav__link">
+        如何理解敏捷开发
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../framework/fwork/" class="md-nav__link">
+        走向架构师必备的技能
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../framework/data_middle/" class="md-nav__link">
+        数据中台的思考与总结
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../framework/algorithm-ten/" class="md-nav__link">
+        必学的 10 大算法
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+          情感
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_7">
+          <span class="md-nav__icon md-icon"></span>
+          情感
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../emotion/eq/" class="md-nav__link">
+        情商
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../emotion/workheard/" class="md-nav__link">
+        工作心得
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../emotion/lookbook/" class="md-nav__link">
+        看书
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../emotion/selfdiscipline/" class="md-nav__link">
+        自律
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../emotion/livefail/" class="md-nav__link">
+        为什么活着失败
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../emotion/emotion/" class="md-nav__link">
+        情绪管理
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../emotion/losecome/" class="md-nav__link">
+        所有的失去，都会以另一种方式归来
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../emotion/threeheart/" class="md-nav__link">
+        人生有这三种好心态
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../emotion/onepath/" class="md-nav__link">
+        余生，学会一个人走，不管有没有人陪
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../emotion/twopath/" class="md-nav__link">
+        往后余生还很精彩，别被熬夜拖垮了
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../emotion/lifetime/" class="md-nav__link">
+        心态好的人，一辈子都好
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+  
+
+
+<h1 id="kubernetes_nginx_ingress_controller">Kubernetes集群 服务暴露 Nginx Ingress Controller<a class="headerlink" href="#kubernetes_nginx_ingress_controller" title="Permanent link">&para;</a></h1>
+<h1 id="ingress">一、ingress控制器<a class="headerlink" href="#ingress" title="Permanent link">&para;</a></h1>
+<h2 id="11_ingress">1.1 ingress控制器作用<a class="headerlink" href="#11_ingress" title="Permanent link">&para;</a></h2>
+<p>ingress controller可以为kubernetes 集群外用户访问Kubernetes集群内部pod提供代理服务。</p>
+<ul>
+<li>提供全局访问代理</li>
+<li>访问流程</li>
+<li>用户&rarr;ingress controller&rarr;service&rarr;pod</li>
+</ul>
+<p><img alt="image-20220412223010688" src="../../../img/kubernetes/kubernetes_nginx_ingress_controller/image-20220412223010688.png" /></p>
+<p><img alt="image-20220412222951979" src="../../../img/kubernetes/kubernetes_nginx_ingress_controller/image-20220412222951979.png" /></p>
+<h2 id="12_ingress">1.2 ingress控制器种类<a class="headerlink" href="#12_ingress" title="Permanent link">&para;</a></h2>
+<h3 id="121_kubernetes_ingress_controller">1.2.1 Kubernetes Ingress Controller<a class="headerlink" href="#121_kubernetes_ingress_controller" title="Permanent link">&para;</a></h3>
+<ul>
+<li>
+<p>参考链接：<a href="http://github.com/nginxinc/kubernetes-ingress">http://github.com/nginxinc/kubernetes-ingress</a></p>
+</li>
+<li>
+<p>实现：Go/Lua（nginx 是用 C 写的）</p>
+</li>
+<li>
+<p>许可证：Apache 2.0</p>
+</li>
+<li>
+<p>Kubernetes 的“官方”控制器（之所以称为官方，是想把它区别于 NGINX 公司的控制器）。这是社区开发的控制器，它基于 nginx Web 服务器，并补充了一组用于实现额外功能的 Lua 插件。</p>
+</li>
+<li>
+<p>由于 NGINX 十分流行，再加上把它用作控制器时所需的修改较少，<strong>它对于 K8s 普通工程师来说，可能是最简单和最直接的选择</strong>。</p>
+</li>
+</ul>
+<h3 id="122_nginx_ingress_controller">1.2.2 NGINX Ingress Controller<a class="headerlink" href="#122_nginx_ingress_controller" title="Permanent link">&para;</a></h3>
+<ul>
+<li>
+<p>参考链接：<a href="http://github.com/kubernetes/ingress-nginx">http://github.com/kubernetes/ingress-nginx</a></p>
+</li>
+<li>
+<p>实现：Go</p>
+</li>
+<li>
+<p>许可证：Apache 2.0</p>
+</li>
+<li>
+<p>这是 NGINX 公司开发的官方产品，它也有一个基于 NGINX Plus 的商业版。NGINX 的控制器具有很高的稳定性、持续的向后兼容性，且没有任何第三方模块。</p>
+</li>
+<li>
+<p>由于消除了 Lua 代码，和官方控制器相比，它保证了较高的速度，但也因此受到较大限制。相较之下，它的付费版本有更广泛的附加功能，如实时指标、JWT 验证、主动健康检查等。</p>
+</li>
+<li>
+<p>NGINX Ingress 重要的优势是对 TCP/UDP 流量的全面支持，最主要缺点是缺乏流量分配功能。</p>
+</li>
+</ul>
+<h3 id="123_kong_ingress">1.2.3 Kong Ingress<a class="headerlink" href="#123_kong_ingress" title="Permanent link">&para;</a></h3>
+<ul>
+<li>
+<p>参考链接：<a href="http://github.com/Kong/kubernetes-ingress-controller">http://github.com/Kong/kubernetes-ingress-controller</a></p>
+</li>
+<li>
+<p>实现：Go</p>
+</li>
+<li>
+<p>许可证：Apache 2.0</p>
+</li>
+<li>
+<p>Kong Ingress 由 Kong Inc 开发，有两个版本：商业版和免费版。它基于 NGINX 构建，并增加了扩展其功能的 Lua 模块。</p>
+</li>
+<li>
+<p>最初，Kong Ingress 主要用作 API 网关，用于 API 请求的处理和路由。现在，它已经成为成熟的 Ingress 控制器，<strong>主要优点是拥有大量易于安装和配置的附加模块、插件（包括第三方插件）</strong>。它开启了控制器具备大量附加功能的先河，其内置函数也提供了许多可能性。Kong Ingress 配置是用 CRD 执行的。</p>
+</li>
+<li>
+<p>Kong Ingress 的一个重要特性是它只能在一个环境中运行（而不支持跨命名空间）。这是一个颇有争议的话题：有些人认为这是一个缺点，因为必须为每个环境生成实例；而另一些人认为这是一个特殊特性，因为它是更高级别的隔离，控制器故障的影响仅限于其所在的环境。</p>
+</li>
+</ul>
+<h3 id="124_traefik">1.2.4 Traefik<a class="headerlink" href="#124_traefik" title="Permanent link">&para;</a></h3>
+<ul>
+<li>
+<p>参考链接：<a href="http://github.com/containous/traefik">http://github.com/containous/traefik</a></p>
+</li>
+<li>
+<p>实现：Go</p>
+</li>
+<li>
+<p>许可证：MIT</p>
+</li>
+<li>
+<p>最初，这个代理是为微服务请求及其动态环境的路由而创建的，因此具有许多有用的功能：**连续更新配置（不重新启动）、支持多种负载均衡算法、Web UI、指标导出、对各种服务的支持协议、REST API、Canary 版本**等。</p>
+</li>
+<li>
+<p>支持开箱即用的 Let’s Encrypt 是它的另一个不错的功能，但它的主要缺点也很明显，就是为了控制器的高可用性，你必须安装并连接其 Key-value store。</p>
+</li>
+<li>
+<p>在 2019 年 9 月发布的 Traefik v2.0 中，虽然它增加许多不错的新功能，如带有 SNI 的 TCP/SSL、金丝雀部署、流量镜像/shadowing 和经过改进的 Web UI，但一些功能（如 WAF 支持）还在策划讨论中。</p>
+</li>
+<li>
+<p>与新版本同期推出的还有一个名叫 Mesh 的服务网格，它建在 Traefik 之上，对kubernetes内部服务访问做到受控及被监控。</p>
+</li>
+</ul>
+<h3 id="125_haproxy_ingress">1.2.5 HAProxy Ingress<a class="headerlink" href="#125_haproxy_ingress" title="Permanent link">&para;</a></h3>
+<ul>
+<li>
+<p>参考链接：<a href="http://github.com/jcmoraisjr/haproxy-ingress">http://github.com/jcmoraisjr/haproxy-ingress</a></p>
+</li>
+<li>
+<p>实现：Go（HAProxy 是用 C 写的）</p>
+</li>
+<li>
+<p>许可证：Apache 2.0</p>
+</li>
+<li>
+<p>HAProxy 是众所周知的代理服务器和负载均衡器。作为 Kubernetes 集群的一部分，它提供了“软”配置更新（无流量损失）、基于 DNS 的服务发现和通过 API 进行动态配置。 HAProxy 还支持完全自定义配置文件模板（通过替换 ConfigMap）以及在其中使用 Spring Boot 函数。</p>
+</li>
+<li>
+<p>通常，工程师会把重点放在已消耗资源的高速、优化和效率上。而 HAProxy 的优点之一正是支持大量负载均衡算法。值得一提的是，在2020年 6 月发布的 v2.0 中，HAProxy 增加了许多新功能，其即将推出的 v2.1 有望带来更多新功能（包括 OpenTracing 支持）。</p>
+</li>
+</ul>
+<h3 id="126_voyager">1.2.6 Voyager<a class="headerlink" href="#126_voyager" title="Permanent link">&para;</a></h3>
+<ul>
+<li>
+<p>参考链接：<a href="http://github.com/appscode/voyager">http://github.com/appscode/voyager</a></p>
+</li>
+<li>
+<p>实现：Go</p>
+</li>
+<li>
+<p>许可证：Apache 2.0</p>
+</li>
+<li>
+<p>Voyager 基于 HAProxy，并作为一个通用的解决方案提供给大量供应商。它最具代表性的功能包括 L7 和 L4 上的流量负载均衡，其中，<strong>TCP L4 流量负载均衡称得上是该解决方案最关键的功能之一</strong>。</p>
+</li>
+<li>
+<p>在2020年早些时候，尽管 Voyager 在 v9.0.0 中推出了对 HTTP/2 和 gRPC 协议的全面支持，但总的来看，对证书管理（Let’s Encrypt 证书）的支持仍是 Voyager 集成的最突出的新功能。</p>
+</li>
+</ul>
+<h3 id="127_contour">1.2.7 Contour<a class="headerlink" href="#127_contour" title="Permanent link">&para;</a></h3>
+<ul>
+<li>
+<p>参考链接：<a href="http://github.com/heptio/contour">http://github.com/heptio/contour</a></p>
+</li>
+<li>
+<p>实现：Go</p>
+</li>
+<li>
+<p>许可证：Apache 2.0</p>
+</li>
+<li>
+<p>Contour 和 Envoy 由同一个作者开发，它基于 Envoy。<strong>它最特别的功能是可以通过 CRD（IngressRoute）管理 Ingress 资源</strong>，对于多团队需要同时使用一个集群的组织来说，这有助于保护相邻环境中的流量，使它们免受 Ingress 资源更改的影响。</p>
+</li>
+<li>
+<p>它还提供了一组扩展的负载均衡算法（镜像、自动重复、限制请求率等），以及详细的流量和故障监控。对某些工程师而言，它不支持粘滞会话可能是一个严重缺陷。</p>
+</li>
+</ul>
+<h3 id="128_istio_ingress">1.2.8 Istio Ingress<a class="headerlink" href="#128_istio_ingress" title="Permanent link">&para;</a></h3>
+<ul>
+<li>
+<p>参考链接：<a href="http://istio.io/docs/tasks/traffic-management/ingress">http://istio.io/docs/tasks/traffic-management/ingress</a></p>
+</li>
+<li>
+<p>实现：Go</p>
+</li>
+<li>
+<p>许可证：Apache 2.0</p>
+</li>
+<li>
+<p>Istio 是 IBM、Google 和 Lyft 的联合开发项目，它是一个全面的服务网格解决方案——<strong>不仅可以管理所有传入的外部流量（作为 Ingress 控制器），还可以控制集群内部的所有流量</strong>。</p>
+</li>
+<li>
+<p>Istio 将 Envoy 用作每种服务的辅助代理。从本质上讲，它是一个可以执行几乎所有操作的大型处理器，其中心思想是最大程度的控制、可扩展性、安全性和透明性。</p>
+</li>
+<li>
+<p>通过 Istio Ingress，你可以对流量路由、服务之间的访问授权、均衡、监控、金丝雀发布等进行优化。</p>
+</li>
+</ul>
+<h3 id="129_ambassador">1.2.9 Ambassador<a class="headerlink" href="#129_ambassador" title="Permanent link">&para;</a></h3>
+<ul>
+<li>
+<p>参考链接：<a href="http://github.com/datawire/ambassador">http://github.com/datawire/ambassador</a></p>
+</li>
+<li>
+<p>实现：Python</p>
+</li>
+<li>
+<p>许可证：Apache 2.0</p>
+</li>
+<li>
+<p>Ambassador 也是一个基于 Envoy 的解决方案，它有免费版和商业版两个版本。</p>
+</li>
+<li>
+<p>Ambassador 被称为“Kubernetes 原生 API 微服务网关”，它与 K8s 原语紧密集成，拥有你所期望的从 Ingress controller 获得的功能包，它还可以与各种服务网格解决方案，如 Linkerd、Istio 等一起使用。</p>
+</li>
+<li>
+<p>顺便提一下，Ambassador 博客日前发布了一份基准测试结果，比较了 Envoy、HAProxy 和 NGINX 的基础性能。</p>
+</li>
+</ul>
+<h3 id="1210_gloo">1.2.10 Gloo<a class="headerlink" href="#1210_gloo" title="Permanent link">&para;</a></h3>
+<ul>
+<li>
+<p>参考链接：<a href="http://github.com/solo-io/gloo">http://github.com/solo-io/gloo</a></p>
+</li>
+<li>
+<p>实现：Go</p>
+</li>
+<li>
+<p>许可证：Apache 2.0</p>
+</li>
+<li>
+<p>Gloo 是在 Envoy 之上构建的新软件（于 2018 年 3 月发布），由于它的作者坚持认为“网关应该从功能而不是服务中构建 API”，它也被称为“功能网关”。其“功能级路由”的意思是它可以为后端实现是微服务、无服务器功能和遗留应用的混合应用路由流量。</p>
+</li>
+<li>
+<p>由于拥有可插拔的体系结构，Gloo 提供了工程师期望的大部分功能，但是其中一些功能仅在其商业版本（Gloo Enterprise）中可用。</p>
+</li>
+</ul>
+<h3 id="1211_skipper">1.2.11 Skipper<a class="headerlink" href="#1211_skipper" title="Permanent link">&para;</a></h3>
+<ul>
+<li>
+<p>参考链接：<a href="http://github.com/zalando/skipper">http://github.com/zalando/skipper</a></p>
+</li>
+<li>
+<p>实现：Go</p>
+</li>
+<li>
+<p>许可证：Apache 2.0</p>
+</li>
+<li>
+<p>Skipper 是 HTTP 路由器和反向代理，因此不支持各种协议。从技术上讲，它使用 Endpoints API（而不是 Kubernetes Services）将流量路由到 Pod。它的优点在于其丰富的过滤器集所提供的高级 HTTP 路由功能，工程师可以借此创建、更新和删除所有 HTTP 数据。</p>
+</li>
+<li>
+<p>Skipper 的路由规则可以在不停机的情况下更新。正如它的作者所述，Skipper 可以很好地与其他解决方案一起使用，比如 AWS ELB。</p>
+</li>
+</ul>
+<h1 id="nginx_ingress_controller">二、nginx ingress controller<a class="headerlink" href="#nginx_ingress_controller" title="Permanent link">&para;</a></h1>
+<h2 id="21_nginx_ingress_controller">2.1 nginx ingress controller位置<a class="headerlink" href="#21_nginx_ingress_controller" title="Permanent link">&para;</a></h2>
+<p><img alt="image-20220412213345991" src="../../../img/kubernetes/kubernetes_nginx_ingress_controller/image-20220412213345991.png" /></p>
+<ul>
+<li>参考链接：<a href="https://www.nginx.com/products/nginx/kubernetes-ingress-controller">https://www.nginx.com/products/nginx/kubernetes-ingress-controller</a></li>
+</ul>
+<h2 id="22_nginx_ingress_controller">2.2  nginx ingress controller部署<a class="headerlink" href="#22_nginx_ingress_controller" title="Permanent link">&para;</a></h2>
+<ul>
+<li>项目地址：<a href="https://github.com/kubernetes/ingress-nginx">https://github.com/kubernetes/ingress-nginx</a></li>
+</ul>
+<h3 id="221">2.2.1 下载并修改配置文件<a class="headerlink" href="#221" title="Permanent link">&para;</a></h3>
+<p><img alt="image-20220412223933840" src="../../../img/kubernetes/kubernetes_nginx_ingress_controller/image-20220412223933840.png" /></p>
+<p><img alt="image-20220412224751513" src="../../../img/kubernetes/kubernetes_nginx_ingress_controller/image-20220412224751513.png" /></p>
+<p><img alt="image-20220412224823931" src="../../../img/kubernetes/kubernetes_nginx_ingress_controller/image-20220412224823931.png" /></p>
+<div class="highlight"><pre><span></span><code><span class="p">[</span><span class="n">root</span><span class="nv">@k8s</span><span class="n">-master1</span> <span class="p">~]</span><span class="c">#  curl -k https://raw.githubusercontent.com/kubernetes/ingress-nginx/main/deploy/static/provider/baremetal/deploy.yaml  -o deploy.yaml</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="p">[</span><span class="n">root</span><span class="nv">@k8s</span><span class="n">-master1</span> <span class="p">~]</span><span class="c"># ls</span>
+<span class="n">deploy</span><span class="p">.</span><span class="n">yaml</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="p">[</span><span class="n">root</span><span class="nv">@k8s</span><span class="n">-master1</span> <span class="p">~]</span><span class="c"># vim deploy.yaml</span>
+<span class="p">......</span>
+<span class="n">323</span> <span class="n">spec</span><span class="p">:</span>
+<span class="n">324</span>   <span class="n">ports</span><span class="p">:</span>
+<span class="n">325</span>   <span class="p">-</span> <span class="n">appProtocol</span><span class="p">:</span> <span class="n">http</span>
+<span class="n">326</span>     <span class="n">name</span><span class="p">:</span> <span class="n">http</span>
+<span class="n">327</span>     <span class="n">port</span><span class="p">:</span> <span class="n">80</span>
+<span class="n">328</span>     <span class="n">protocol</span><span class="p">:</span> <span class="n">TCP</span>
+<span class="n">329</span>     <span class="n">targetPort</span><span class="p">:</span> <span class="n">http</span>
+<span class="n">330</span>   <span class="p">-</span> <span class="n">appProtocol</span><span class="p">:</span> <span class="n">https</span>
+<span class="n">331</span>     <span class="n">name</span><span class="p">:</span> <span class="n">https</span>
+<span class="n">332</span>     <span class="n">port</span><span class="p">:</span> <span class="n">443</span>
+<span class="n">333</span>     <span class="n">protocol</span><span class="p">:</span> <span class="n">TCP</span>
+<span class="n">334</span>     <span class="n">targetPort</span><span class="p">:</span> <span class="n">https</span>
+<span class="n">335</span>   <span class="n">selector</span><span class="p">:</span>
+<span class="n">336</span>     <span class="n">app</span><span class="p">.</span><span class="n">kubernetes</span><span class="p">.</span><span class="n">io</span><span class="p">/</span><span class="n">component</span><span class="p">:</span> <span class="n">controller</span>
+<span class="n">337</span>     <span class="n">app</span><span class="p">.</span><span class="n">kubernetes</span><span class="p">.</span><span class="n">io</span><span class="p">/</span><span class="n">instance</span><span class="p">:</span> <span class="n">ingress-nginx</span>
+<span class="n">338</span>     <span class="n">app</span><span class="p">.</span><span class="n">kubernetes</span><span class="p">.</span><span class="n">io</span><span class="p">/</span><span class="n">name</span><span class="p">:</span> <span class="n">ingress-nginx</span>
+<span class="n">339</span>   <span class="n">type</span><span class="p">:</span> <span class="n">NodePort</span>
+
+<span class="n">把339行修改为LoadBalancer</span>
+<span class="n">323</span> <span class="n">spec</span><span class="p">:</span>
+<span class="n">324</span>   <span class="n">ports</span><span class="p">:</span>
+<span class="n">325</span>   <span class="p">-</span> <span class="n">appProtocol</span><span class="p">:</span> <span class="n">http</span>
+<span class="n">326</span>     <span class="n">name</span><span class="p">:</span> <span class="n">http</span>
+<span class="n">327</span>     <span class="n">port</span><span class="p">:</span> <span class="n">80</span>
+<span class="n">328</span>     <span class="n">protocol</span><span class="p">:</span> <span class="n">TCP</span>
+<span class="n">329</span>     <span class="n">targetPort</span><span class="p">:</span> <span class="n">http</span>
+<span class="n">330</span>   <span class="p">-</span> <span class="n">appProtocol</span><span class="p">:</span> <span class="n">https</span>
+<span class="n">331</span>     <span class="n">name</span><span class="p">:</span> <span class="n">https</span>
+<span class="n">332</span>     <span class="n">port</span><span class="p">:</span> <span class="n">443</span>
+<span class="n">333</span>     <span class="n">protocol</span><span class="p">:</span> <span class="n">TCP</span>
+<span class="n">334</span>     <span class="n">targetPort</span><span class="p">:</span> <span class="n">https</span>
+<span class="n">335</span>   <span class="n">selector</span><span class="p">:</span>
+<span class="n">336</span>     <span class="n">app</span><span class="p">.</span><span class="n">kubernetes</span><span class="p">.</span><span class="n">io</span><span class="p">/</span><span class="n">component</span><span class="p">:</span> <span class="n">controller</span>
+<span class="n">337</span>     <span class="n">app</span><span class="p">.</span><span class="n">kubernetes</span><span class="p">.</span><span class="n">io</span><span class="p">/</span><span class="n">instance</span><span class="p">:</span> <span class="n">ingress-nginx</span>
+<span class="n">338</span>     <span class="n">app</span><span class="p">.</span><span class="n">kubernetes</span><span class="p">.</span><span class="n">io</span><span class="p">/</span><span class="n">name</span><span class="p">:</span> <span class="n">ingress-nginx</span>
+<span class="n">339</span>   <span class="n">type</span><span class="p">:</span> <span class="n">LoadBalancer</span>
+</code></pre></div>
+<h3 id="222">2.2.2 应用资源清单文件<a class="headerlink" href="#222" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="p">[</span><span class="n">root</span><span class="nv">@k8s</span><span class="n">-master1</span> <span class="p">~]</span><span class="c"># kubectl apply -f deploy.yaml</span>
+<span class="n">namespace</span><span class="p">/</span><span class="n">ingress-nginx</span> <span class="n">created</span>
+<span class="n">serviceaccount</span><span class="p">/</span><span class="n">ingress-nginx</span> <span class="n">created</span>
+<span class="n">serviceaccount</span><span class="p">/</span><span class="n">ingress-nginx-admission</span> <span class="n">created</span>
+<span class="n">role</span><span class="p">.</span><span class="n">rbac</span><span class="p">.</span><span class="n">authorization</span><span class="p">.</span><span class="n">k8s</span><span class="p">.</span><span class="n">io</span><span class="p">/</span><span class="n">ingress-nginx</span> <span class="n">created</span>
+<span class="n">role</span><span class="p">.</span><span class="n">rbac</span><span class="p">.</span><span class="n">authorization</span><span class="p">.</span><span class="n">k8s</span><span class="p">.</span><span class="n">io</span><span class="p">/</span><span class="n">ingress-nginx-admission</span> <span class="n">created</span>
+<span class="n">clusterrole</span><span class="p">.</span><span class="n">rbac</span><span class="p">.</span><span class="n">authorization</span><span class="p">.</span><span class="n">k8s</span><span class="p">.</span><span class="n">io</span><span class="p">/</span><span class="n">ingress-nginx</span> <span class="n">created</span>
+<span class="n">clusterrole</span><span class="p">.</span><span class="n">rbac</span><span class="p">.</span><span class="n">authorization</span><span class="p">.</span><span class="n">k8s</span><span class="p">.</span><span class="n">io</span><span class="p">/</span><span class="n">ingress-nginx-admission</span> <span class="n">created</span>
+<span class="n">rolebinding</span><span class="p">.</span><span class="n">rbac</span><span class="p">.</span><span class="n">authorization</span><span class="p">.</span><span class="n">k8s</span><span class="p">.</span><span class="n">io</span><span class="p">/</span><span class="n">ingress-nginx</span> <span class="n">created</span>
+<span class="n">rolebinding</span><span class="p">.</span><span class="n">rbac</span><span class="p">.</span><span class="n">authorization</span><span class="p">.</span><span class="n">k8s</span><span class="p">.</span><span class="n">io</span><span class="p">/</span><span class="n">ingress-nginx-admission</span> <span class="n">created</span>
+<span class="n">clusterrolebinding</span><span class="p">.</span><span class="n">rbac</span><span class="p">.</span><span class="n">authorization</span><span class="p">.</span><span class="n">k8s</span><span class="p">.</span><span class="n">io</span><span class="p">/</span><span class="n">ingress-nginx</span> <span class="n">created</span>
+<span class="n">clusterrolebinding</span><span class="p">.</span><span class="n">rbac</span><span class="p">.</span><span class="n">authorization</span><span class="p">.</span><span class="n">k8s</span><span class="p">.</span><span class="n">io</span><span class="p">/</span><span class="n">ingress-nginx-admission</span> <span class="n">created</span>
+<span class="n">configmap</span><span class="p">/</span><span class="n">ingress-nginx-controller</span> <span class="n">created</span>
+<span class="n">service</span><span class="p">/</span><span class="n">ingress-nginx-controller</span> <span class="n">created</span>
+<span class="n">service</span><span class="p">/</span><span class="n">ingress-nginx-controller-admission</span> <span class="n">created</span>
+<span class="n">deployment</span><span class="p">.</span><span class="n">apps</span><span class="p">/</span><span class="n">ingress-nginx-controller</span> <span class="n">created</span>
+<span class="n">job</span><span class="p">.</span><span class="n">batch</span><span class="p">/</span><span class="n">ingress-nginx-admission-create</span> <span class="n">created</span>
+<span class="n">job</span><span class="p">.</span><span class="n">batch</span><span class="p">/</span><span class="n">ingress-nginx-admission-patch</span> <span class="n">created</span>
+<span class="n">ingressclass</span><span class="p">.</span><span class="n">networking</span><span class="p">.</span><span class="n">k8s</span><span class="p">.</span><span class="n">io</span><span class="p">/</span><span class="n">nginx</span> <span class="n">created</span>
+<span class="n">validatingwebhookconfiguration</span><span class="p">.</span><span class="n">admissionregistration</span><span class="p">.</span><span class="n">k8s</span><span class="p">.</span><span class="n">io</span><span class="p">/</span><span class="n">ingress-nginx-admission</span> <span class="n">created</span>
+</code></pre></div>
+<h3 id="223">2.2.3 验证部署结果<a class="headerlink" href="#223" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>注意镜像较大，可提前下载至集群node节点</p>
+</blockquote>
+<div class="highlight"><pre><span></span><code><span class="p">[</span><span class="n">root</span><span class="nv">@k8s</span><span class="n">-master1</span> <span class="p">~]</span><span class="c"># kubectl get pods -n ingress-nginx</span>
+<span class="n">NAME</span>                                      <span class="n">READY</span>   <span class="n">STATUS</span>      <span class="n">RESTARTS</span>   <span class="n">AGE</span>
+<span class="n">ingress-nginx-admission-create-xdpgp</span>      <span class="n">0</span><span class="p">/</span><span class="n">1</span>     <span class="n">Completed</span>   <span class="n">0</span>          <span class="n">91s</span>
+<span class="n">ingress-nginx-admission-patch-lgnxs</span>       <span class="n">0</span><span class="p">/</span><span class="n">1</span>     <span class="n">Completed</span>   <span class="n">1</span>          <span class="n">91s</span>
+<span class="n">ingress-nginx-controller</span><span class="p">-</span><span class="n">9596689c-j9p9l</span>   <span class="n">1</span><span class="p">/</span><span class="n">1</span>     <span class="n">Running</span>     <span class="n">0</span>          <span class="n">91s</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="p">[</span><span class="n">root</span><span class="nv">@k8s</span><span class="n">-master1</span> <span class="n">ng</span><span class="p">]</span><span class="c"># kubectl get all -n ingress-nginx</span>
+<span class="n">NAME</span>                                          <span class="n">READY</span>   <span class="n">STATUS</span>      <span class="n">RESTARTS</span>   <span class="n">AGE</span>
+<span class="n">pod</span><span class="p">/</span><span class="n">ingress-nginx-admission-create-xdpgp</span>      <span class="n">0</span><span class="p">/</span><span class="n">1</span>     <span class="n">Completed</span>   <span class="n">0</span>          <span class="n">3m24s</span>
+<span class="n">pod</span><span class="p">/</span><span class="n">ingress-nginx-admission-patch-lgnxs</span>       <span class="n">0</span><span class="p">/</span><span class="n">1</span>     <span class="n">Completed</span>   <span class="n">1</span>          <span class="n">3m24s</span>
+<span class="n">pod</span><span class="p">/</span><span class="n">ingress-nginx-controller</span><span class="p">-</span><span class="n">9596689c-j9p9l</span>   <span class="n">1</span><span class="p">/</span><span class="n">1</span>     <span class="n">Running</span>     <span class="n">0</span>          <span class="n">3m24s</span>
+
+<span class="n">NAME</span>                                         <span class="nb">TYPE </span>          <span class="n">CLUSTER-IP</span>      <span class="n">EXTERNAL-IP</span>     <span class="n">PORT</span><span class="p">(</span><span class="n">S</span><span class="p">)</span>                      <span class="n">AGE</span>
+<span class="n">service</span><span class="p">/</span><span class="n">ingress-nginx-controller</span>             <span class="n">LoadBalancer</span>   <span class="n">10</span><span class="p">.</span><span class="n">96</span><span class="p">.</span><span class="n">183</span><span class="p">.</span><span class="n">188</span>   <span class="n">192</span><span class="p">.</span><span class="n">168</span><span class="p">.</span><span class="n">10</span><span class="p">.</span><span class="n">91</span>   <span class="n">80</span><span class="p">:</span><span class="n">32369</span><span class="p">/</span><span class="n">TCP</span><span class="p">,</span><span class="n">443</span><span class="p">:</span><span class="n">31775</span><span class="p">/</span><span class="n">TCP</span>   <span class="n">3m25s</span>
+<span class="n">service</span><span class="p">/</span><span class="n">ingress-nginx-controller-admission</span>   <span class="n">ClusterIP</span>      <span class="n">10</span><span class="p">.</span><span class="n">96</span><span class="p">.</span><span class="n">212</span><span class="p">.</span><span class="n">14</span>    <span class="p">&lt;</span><span class="n">none</span><span class="p">&gt;</span>          <span class="n">443</span><span class="p">/</span><span class="n">TCP</span>                      <span class="n">3m25s</span>
+
+<span class="n">NAME</span>                                       <span class="n">READY</span>   <span class="n">UP-TO-DATE</span>   <span class="n">AVAILABLE</span>   <span class="n">AGE</span>
+<span class="n">deployment</span><span class="p">.</span><span class="n">apps</span><span class="p">/</span><span class="n">ingress-nginx-controller</span>   <span class="n">1</span><span class="p">/</span><span class="n">1</span>     <span class="n">1</span>            <span class="n">1</span>           <span class="n">3m24s</span>
+
+<span class="n">NAME</span>                                                <span class="n">DESIRED</span>   <span class="n">CURRENT</span>   <span class="n">READY</span>   <span class="n">AGE</span>
+<span class="n">replicaset</span><span class="p">.</span><span class="n">apps</span><span class="p">/</span><span class="n">ingress-nginx-controller</span><span class="p">-</span><span class="n">9596689c</span>   <span class="n">1</span>         <span class="n">1</span>         <span class="n">1</span>       <span class="n">3m24s</span>
+
+<span class="n">NAME</span>                                       <span class="n">COMPLETIONS</span>   <span class="n">DURATION</span>   <span class="n">AGE</span>
+<span class="n">job</span><span class="p">.</span><span class="n">batch</span><span class="p">/</span><span class="n">ingress-nginx-admission-create</span>   <span class="n">1</span><span class="p">/</span><span class="n">1</span>           <span class="n">2s</span>         <span class="n">3m24s</span>
+<span class="n">job</span><span class="p">.</span><span class="n">batch</span><span class="p">/</span><span class="n">ingress-nginx-admission-patch</span>    <span class="n">1</span><span class="p">/</span><span class="n">1</span>           <span class="n">3s</span>         <span class="n">3m24s</span>
+</code></pre></div>
+<h2 id="23_ingress">2.3 ingress对象应用案例<a class="headerlink" href="#23_ingress" title="Permanent link">&para;</a></h2>
+<h3 id="23_1_ingress-http">2.3 1 ingress-http案例<a class="headerlink" href="#23_1_ingress-http" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>基于名称的负载均衡</p>
+</blockquote>
+<h4 id="2311_deployment">2.3.1.1 创建deployment控制器类型应用<a class="headerlink" href="#2311_deployment" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="p">[</span><span class="n">root</span><span class="nv">@k8s</span><span class="n">-master1</span> <span class="p">~]</span><span class="c"># vim nginx.yml</span>
+<span class="n">apiVersion</span><span class="p">:</span> <span class="n">apps</span><span class="p">/</span><span class="n">v1</span>
+<span class="n">kind</span><span class="p">:</span> <span class="n">Deployment</span>
+<span class="n">metadata</span><span class="p">:</span>
+  <span class="n">name</span><span class="p">:</span> <span class="n">nginx</span>
+  <span class="n">namespace</span><span class="p">:</span> <span class="n">ingress-nginx</span>
+<span class="n">spec</span><span class="p">:</span>
+  <span class="n">replicas</span><span class="p">:</span> <span class="n">2</span>
+  <span class="n">selector</span><span class="p">:</span>
+    <span class="n">matchLabels</span><span class="p">:</span>
+      <span class="n">app</span><span class="p">:</span> <span class="n">nginx</span>
+  <span class="n">template</span><span class="p">:</span>
+    <span class="n">metadata</span><span class="p">:</span>
+      <span class="n">labels</span><span class="p">:</span>
+        <span class="n">app</span><span class="p">:</span> <span class="n">nginx</span>
+    <span class="n">spec</span><span class="p">:</span>
+      <span class="n">containers</span><span class="p">:</span>
+      <span class="p">-</span> <span class="n">name</span><span class="p">:</span> <span class="n">c1</span>
+        <span class="n">image</span><span class="p">:</span> <span class="n">nginx</span><span class="p">:</span><span class="n">1</span><span class="p">.</span><span class="n">15-alpine</span>
+        <span class="n">imagePullPolicy</span><span class="p">:</span> <span class="n">IfNotPresent</span>
+</code></pre></div>
+<p>应用YAML</p>
+<div class="highlight"><pre><span></span><code><span class="p">[</span><span class="n">root</span><span class="nv">@k8s</span><span class="n">-master1</span> <span class="p">~]</span><span class="c"># kubectl apply -f nginx.yml</span>
+<span class="n">deployment</span><span class="p">.</span><span class="n">extensions</span><span class="p">/</span><span class="n">nginx</span> <span class="n">created</span>
+</code></pre></div>
+<p>验证pod</p>
+<div class="highlight"><pre><span></span><code><span class="p">[</span><span class="n">root</span><span class="nv">@k8s</span><span class="n">-master1</span> <span class="p">~]</span><span class="c"># kubectl get pods -n ingress-nginx</span>
+<span class="n">NAME</span>                                        <span class="n">READY</span>   <span class="n">STATUS</span>    <span class="n">RESTARTS</span>   <span class="n">AGE</span>
+<span class="n">nginx</span><span class="p">-</span><span class="n">79654d7b8-nhxpm</span>                       <span class="n">1</span><span class="p">/</span><span class="n">1</span>     <span class="n">Running</span>   <span class="n">0</span>          <span class="n">12s</span>
+<span class="n">nginx</span><span class="p">-</span><span class="n">79654d7b8-tp8wg</span>                       <span class="n">1</span><span class="p">/</span><span class="n">1</span>     <span class="n">Running</span>   <span class="n">0</span>          <span class="n">13s</span>
+<span class="n">nginx-ingress-controller</span><span class="p">-</span><span class="n">77db54fc46-kwwkt</span>   <span class="n">1</span><span class="p">/</span><span class="n">1</span>     <span class="n">Running</span>   <span class="n">0</span>          <span class="n">11m</span>
+</code></pre></div>
+<h4 id="2312_service">2.3.1.2 创建service<a class="headerlink" href="#2312_service" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="p">[</span><span class="n">root</span><span class="nv">@k8s</span><span class="n">-master1</span> <span class="p">~]</span><span class="c"># vim nginx-service.yml</span>
+<span class="n">apiVersion</span><span class="p">:</span> <span class="n">v1</span>
+<span class="n">kind</span><span class="p">:</span> <span class="n">Service</span>
+<span class="n">metadata</span><span class="p">:</span>
+  <span class="n">name</span><span class="p">:</span> <span class="n">nginx-service</span>
+  <span class="n">namespace</span><span class="p">:</span> <span class="n">ingress-nginx</span>
+  <span class="n">labels</span><span class="p">:</span>
+    <span class="n">app</span><span class="p">:</span> <span class="n">nginx</span>
+<span class="n">spec</span><span class="p">:</span>
+  <span class="n">ports</span><span class="p">:</span>
+  <span class="p">-</span> <span class="n">port</span><span class="p">:</span> <span class="n">80</span>
+    <span class="n">targetPort</span><span class="p">:</span> <span class="n">80</span>
+  <span class="n">selector</span><span class="p">:</span>
+    <span class="n">app</span><span class="p">:</span> <span class="n">nginx</span>
+</code></pre></div>
+<p>应用YAML</p>
+<div class="highlight"><pre><span></span><code><span class="p">[</span><span class="n">root</span><span class="nv">@k8s</span><span class="n">-master1</span> <span class="p">~]</span><span class="c"># kubectl apply -f nginx-service.yml</span>
+<span class="n">service</span><span class="p">/</span><span class="n">nginx-service</span> <span class="n">created</span>
+</code></pre></div>
+<p>验证service</p>
+<div class="highlight"><pre><span></span><code><span class="p">[</span><span class="n">root</span><span class="nv">@k8s</span><span class="n">-master1</span> <span class="p">~]</span><span class="c"># kubectl get svc -n ingress-nginx</span>
+<span class="n">NAME</span>            <span class="nb">TYPE </span>       <span class="n">CLUSTER-IP</span>     <span class="n">EXTERNAL-IP</span>   <span class="n">PORT</span><span class="p">(</span><span class="n">S</span><span class="p">)</span>   <span class="n">AGE</span>
+<span class="n">nginx-service</span>   <span class="n">ClusterIP</span>   <span class="n">10</span><span class="p">.</span><span class="n">2</span><span class="p">.</span><span class="n">115</span><span class="p">.</span><span class="n">144</span>   <span class="p">&lt;</span><span class="n">none</span><span class="p">&gt;</span>        <span class="n">80</span><span class="p">/</span><span class="n">TCP</span>    <span class="n">5s</span>
+</code></pre></div>
+<h4 id="2313_ingress">2.3.1.3 创建ingress对象<a class="headerlink" href="#2313_ingress" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="p">[</span><span class="n">root</span><span class="nv">@k8s</span><span class="n">-master1</span> <span class="p">~]</span><span class="c"># vim ingress-nginx.yaml</span>
+<span class="n">apiVersion</span><span class="p">:</span> <span class="n">networking</span><span class="p">.</span><span class="n">k8s</span><span class="p">.</span><span class="n">io</span><span class="p">/</span><span class="n">v1</span>
+<span class="n">kind</span><span class="p">:</span> <span class="n">Ingress</span>
+<span class="n">metadata</span><span class="p">:</span>
+  <span class="n">name</span><span class="p">:</span> <span class="n">ingress-nginx</span>                    <span class="c">#自定义ingress名称</span>
+  <span class="n">namespace</span><span class="p">:</span> <span class="n">ingress-nginx</span>
+  <span class="n">annotations</span><span class="p">:</span>
+    <span class="n">ingressclass</span><span class="p">.</span><span class="n">kubernetes</span><span class="p">.</span><span class="n">io</span><span class="p">/</span><span class="n">is-default-class</span><span class="p">:</span> <span class="s2">&quot;true&quot;</span>
+    <span class="n">kubernetes</span><span class="p">.</span><span class="n">io</span><span class="p">/</span><span class="n">ingress</span><span class="p">.</span><span class="n">class</span><span class="p">:</span> <span class="n">nginx</span>
+<span class="n">spec</span><span class="p">:</span>
+  <span class="n">rules</span><span class="p">:</span>
+  <span class="p">-</span> <span class="n">host</span><span class="p">:</span> <span class="n">www</span><span class="p">.</span><span class="n">kubemsb</span><span class="p">.</span><span class="n">com</span>                   <span class="c"># 自定义域名</span>
+    <span class="n">http</span><span class="p">:</span>
+      <span class="n">paths</span><span class="p">:</span>
+      <span class="p">-</span> <span class="n">pathType</span><span class="p">:</span> <span class="n">Prefix</span>
+        <span class="n">path</span><span class="p">:</span> <span class="s2">&quot;/&quot;</span>
+        <span class="n">backend</span><span class="p">:</span>
+          <span class="n">service</span><span class="p">:</span>
+            <span class="n">name</span><span class="p">:</span> <span class="n">nginx-service</span>     <span class="c"># 对应上面创建的service名称</span>
+            <span class="n">port</span><span class="p">:</span>
+              <span class="n">number</span><span class="p">:</span> <span class="n">80</span>
+</code></pre></div>
+<p>应用YAML</p>
+<div class="highlight"><pre><span></span><code><span class="p">[</span><span class="n">root</span><span class="nv">@k8s</span><span class="n">-master1</span> <span class="p">~]</span><span class="c"># kubectl apply -f ingress-nginx.yaml</span>
+<span class="n">ingress</span><span class="p">.</span><span class="n">extensions</span><span class="p">/</span><span class="n">ingress-nginx</span> <span class="n">created</span>
+</code></pre></div>
+<p>验证ingress</p>
+<div class="highlight"><pre><span></span><code><span class="p">[</span><span class="n">root</span><span class="nv">@k8s</span><span class="n">-master1</span> <span class="p">~]</span><span class="c"># kubectl get ingress -n ingress-nginx</span>
+<span class="n">NAME</span>            <span class="n">CLASS</span>    <span class="n">HOSTS</span>             <span class="n">ADDRESS</span>         <span class="n">PORTS</span>   <span class="n">AGE</span>
+<span class="n">ingress-nginx</span>   <span class="p">&lt;</span><span class="n">none</span><span class="p">&gt;</span>   <span class="n">www</span><span class="p">.</span><span class="n">kubemsb</span><span class="p">.</span><span class="n">com</span>   <span class="n">192</span><span class="p">.</span><span class="n">168</span><span class="p">.</span><span class="n">10</span><span class="p">.</span><span class="n">12</span>   <span class="n">80</span>      <span class="n">113s</span>
+</code></pre></div>
+<p>描述查看ingress信息</p>
+<div class="highlight"><pre><span></span><code><span class="p">[</span><span class="n">root</span><span class="nv">@k8s</span><span class="n">-master1</span> <span class="p">~]</span><span class="c"># kubectl describe ingress ingress-nginx -n ingress-nginx</span>
+<span class="n">Name</span><span class="p">:</span>             <span class="n">ingress-nginx</span>
+<span class="n">Namespace</span><span class="p">:</span>        <span class="n">ingress-nginx</span>
+<span class="n">Address</span><span class="p">:</span>          <span class="n">192</span><span class="p">.</span><span class="n">168</span><span class="p">.</span><span class="n">10</span><span class="p">.</span><span class="n">12</span>
+<span class="k">Default</span> <span class="n">backend</span><span class="p">:</span>  <span class="k">default</span><span class="n">-http-backend</span><span class="p">:</span><span class="n">80</span> <span class="p">(&lt;</span><span class="n">error</span><span class="p">:</span> <span class="n">endpoints</span> <span class="s2">&quot;default-http-backend&quot;</span> <span class="n">not</span> <span class="n">found</span><span class="p">&gt;)</span>
+<span class="n">Rules</span><span class="p">:</span>
+  <span class="n">Host</span>             <span class="n">Path</span>  <span class="n">Backends</span>
+  <span class="p">----</span>             <span class="p">----</span>  <span class="p">--------</span>
+  <span class="n">www</span><span class="p">.</span><span class="n">kubemsb</span><span class="p">.</span><span class="n">com</span>
+                   <span class="p">/</span>   <span class="n">nginx-service</span><span class="p">:</span><span class="n">80</span> <span class="p">(</span><span class="n">10</span><span class="p">.</span><span class="n">244</span><span class="p">.</span><span class="n">159</span><span class="p">.</span><span class="n">160</span><span class="p">:</span><span class="n">80</span><span class="p">,</span><span class="n">10</span><span class="p">.</span><span class="n">244</span><span class="p">.</span><span class="n">194</span><span class="p">.</span><span class="n">110</span><span class="p">:</span><span class="n">80</span><span class="p">)</span>
+<span class="n">Annotations</span><span class="p">:</span>       <span class="n">kubernetes</span><span class="p">.</span><span class="n">io</span><span class="p">/</span><span class="n">ingress</span><span class="p">.</span><span class="n">class</span><span class="p">:</span> <span class="n">nginx</span>
+<span class="n">Events</span><span class="p">:</span>
+  <span class="nb">Type </span>   <span class="n">Reason</span>  <span class="n">Age</span>                 <span class="n">From</span>                      <span class="n">Message</span>
+  <span class="p">----</span>    <span class="p">------</span>  <span class="p">----</span>                <span class="p">----</span>                      <span class="p">-------</span>
+  <span class="n">Normal</span>  <span class="n">Sync</span>    <span class="n">2m</span> <span class="p">(</span><span class="n">x2</span> <span class="n">over</span> <span class="n">2m56s</span><span class="p">)</span>  <span class="n">nginx-ingress-controller</span>  <span class="n">Scheduled</span> <span class="k">for</span> <span class="n">sync</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="p">[</span><span class="n">root</span><span class="nv">@k8s</span><span class="n">-master1</span> <span class="p">~]</span><span class="c"># kubectl get pods -o wide -n ingress-nginx</span>
+<span class="n">NAME</span>                                      <span class="n">READY</span>   <span class="n">STATUS</span>      <span class="n">RESTARTS</span>   <span class="n">AGE</span>     <span class="n">IP</span>               <span class="n">NODE</span>          <span class="n">NOMINATED</span> <span class="n">NODE</span>   <span class="n">READINESS</span> <span class="n">GATES</span>
+
+<span class="n">nginx</span><span class="p">-</span><span class="n">646d5c7b67-mpw9r</span>                    <span class="n">1</span><span class="p">/</span><span class="n">1</span>     <span class="n">Running</span>     <span class="n">0</span>          <span class="n">4m15s</span>   <span class="n">10</span><span class="p">.</span><span class="n">244</span><span class="p">.</span><span class="n">194</span><span class="p">.</span><span class="n">110</span>   <span class="n">k8s-worker1</span>   <span class="p">&lt;</span><span class="n">none</span><span class="p">&gt;</span>           <span class="p">&lt;</span><span class="n">none</span><span class="p">&gt;</span>
+<span class="n">nginx</span><span class="p">-</span><span class="n">646d5c7b67-v99gz</span>                    <span class="n">1</span><span class="p">/</span><span class="n">1</span>     <span class="n">Running</span>     <span class="n">0</span>          <span class="n">4m15s</span>   <span class="n">10</span><span class="p">.</span><span class="n">244</span><span class="p">.</span><span class="n">159</span><span class="p">.</span><span class="n">160</span>   <span class="n">k8s-master1</span>   <span class="p">&lt;</span><span class="n">none</span><span class="p">&gt;</span>           <span class="p">&lt;</span><span class="n">none</span><span class="p">&gt;</span>
+<span class="n">可以看到两个pod的IP正好对应ingress域名对应的IP</span>
+</code></pre></div>
+<p>确认<code>nginx-ingress-controller</code>的podIP为<code>192.168.10.91</code></p>
+<h4 id="2314">2.3.1.4 模拟客户端访问<a class="headerlink" href="#2314" title="Permanent link">&para;</a></h4>
+<p>1, 确认<code>nginx-ingress-controller</code>的podIP, 下面命令查询的结果为<code>192.168.10.91</code></p>
+<div class="highlight"><pre><span></span><code><span class="p">[</span><span class="n">root</span><span class="nv">@k8s</span><span class="n">-master1</span> <span class="p">~]</span><span class="c"># kubectl get svc -n ingress-nginx  |grep ingress</span>
+<span class="n">ingress-nginx-controller</span>             <span class="n">LoadBalancer</span>   <span class="n">10</span><span class="p">.</span><span class="n">96</span><span class="p">.</span><span class="n">183</span><span class="p">.</span><span class="n">188</span>   <span class="n">192</span><span class="p">.</span><span class="n">168</span><span class="p">.</span><span class="n">10</span><span class="p">.</span><span class="n">91</span>   <span class="n">80</span><span class="p">:</span><span class="n">32369</span><span class="p">/</span><span class="n">TCP</span><span class="p">,</span><span class="n">443</span><span class="p">:</span><span class="n">31775</span><span class="p">/</span><span class="n">TCP</span>   <span class="n">11m</span>
+<span class="n">ingress-nginx-controller-admission</span>   <span class="n">ClusterIP</span>      <span class="n">10</span><span class="p">.</span><span class="n">96</span><span class="p">.</span><span class="n">212</span><span class="p">.</span><span class="n">14</span>    <span class="p">&lt;</span><span class="n">none</span><span class="p">&gt;</span>          <span class="n">443</span><span class="p">/</span><span class="n">TCP</span>                      <span class="n">11m</span>
+</code></pre></div>
+<p>2, 在集群之外任一主机中添加上述域名与IP地址解析(模拟公网DNS)</p>
+<div class="highlight"><pre><span></span><code><span class="p">[</span><span class="n">root</span><span class="nv">@otherhost</span> <span class="p">~]</span><span class="c"># vim /etc/hosts</span>
+
+<span class="n">192</span><span class="p">.</span><span class="n">168</span><span class="p">.</span><span class="n">10</span><span class="p">.</span><span class="n">91</span> <span class="n">www</span><span class="p">.</span><span class="n">kubemsb</span><span class="p">.</span><span class="n">com</span>
+</code></pre></div>
+<p>3, 准备pod内容器运行的web主页</p>
+<div class="highlight"><pre><span></span><code><span class="p">[</span><span class="n">root</span><span class="nv">@k8s</span><span class="n">-master1</span> <span class="p">~]</span><span class="c"># kubectl get pods  -n ingress-nginx </span>
+<span class="n">nginx</span><span class="p">-</span><span class="n">646d5c7b67-mpw9r</span>                    <span class="n">1</span><span class="p">/</span><span class="n">1</span>     <span class="n">Running</span>     <span class="n">0</span>          <span class="n">8m34s</span>
+<span class="n">nginx</span><span class="p">-</span><span class="n">646d5c7b67-v99gz</span>                    <span class="n">1</span><span class="p">/</span><span class="n">1</span>     <span class="n">Running</span>     <span class="n">0</span>          <span class="n">8m34s</span>
+
+
+<span class="p">[</span><span class="n">root</span><span class="nv">@k8s</span><span class="n">-master1</span> <span class="p">~]</span><span class="c"># kubectl exec -it nginx-646d5c7b67-mpw9r -n ingress-nginx  -- /bin/sh</span>
+<span class="p">/</span> <span class="c"># echo &quot;ingress web1&quot; &gt; /usr/share/nginx/html/index.html</span>
+<span class="p">/</span> <span class="c"># exit</span>
+
+<span class="p">[</span><span class="n">root</span><span class="nv">@k8s</span><span class="n">-master1</span> <span class="p">~]</span><span class="c"># kubectl exec -it nginx-646d5c7b67-v99gz -n ingress-nginx -- /bin/sh</span>
+<span class="p">/</span> <span class="c"># echo &quot;ingress web2&quot; &gt; /usr/share/nginx/html/index.html</span>
+<span class="p">/</span> <span class="c"># exit</span>
+</code></pre></div>
+<p>4, 访问及结果展示</p>
+<div class="highlight"><pre><span></span><code><span class="p">[</span><span class="n">root</span><span class="nv">@otherhost</span> <span class="p">~]</span><span class="c"># curl www.kubemsb.com</span>
+<span class="n">ingress</span> <span class="n">web1</span>
+<span class="p">[</span><span class="n">root</span><span class="nv">@otherhost</span> <span class="p">~]</span><span class="c"># curl www.kubemsb.com</span>
+<span class="n">ingress</span> <span class="n">web2</span>
+</code></pre></div>
+<h3 id="232_ingress-http">2.3.2 ingress-http案例扩展<a class="headerlink" href="#232_ingress-http" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>基于URI的负载均衡</p>
+</blockquote>
+<h4 id="2321">2.3.2.1 创建第一个应用<a class="headerlink" href="#2321" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="p">[</span><span class="n">root</span><span class="nv">@k8s</span><span class="n">-master1</span> <span class="p">~]</span><span class="c"># vim nginx-uri-1.yml</span>
+<span class="n">apiVersion</span><span class="p">:</span> <span class="n">apps</span><span class="p">/</span><span class="n">v1</span>
+<span class="n">kind</span><span class="p">:</span> <span class="n">Deployment</span>
+<span class="n">metadata</span><span class="p">:</span>
+  <span class="n">name</span><span class="p">:</span> <span class="n">nginx-uri</span><span class="p">-</span><span class="n">1</span>
+  <span class="n">namespace</span><span class="p">:</span> <span class="n">ingress-nginx</span>
+<span class="n">spec</span><span class="p">:</span>
+  <span class="n">replicas</span><span class="p">:</span> <span class="n">2</span>
+  <span class="n">selector</span><span class="p">:</span>
+    <span class="n">matchLabels</span><span class="p">:</span>
+      <span class="n">app</span><span class="p">:</span> <span class="n">nginx-uri</span><span class="p">-</span><span class="n">1</span>
+  <span class="n">template</span><span class="p">:</span>
+    <span class="n">metadata</span><span class="p">:</span>
+      <span class="n">labels</span><span class="p">:</span>
+        <span class="n">app</span><span class="p">:</span> <span class="n">nginx-uri</span><span class="p">-</span><span class="n">1</span>
+    <span class="n">spec</span><span class="p">:</span>
+      <span class="n">containers</span><span class="p">:</span>
+      <span class="p">-</span> <span class="n">name</span><span class="p">:</span> <span class="n">c1</span>
+        <span class="n">image</span><span class="p">:</span> <span class="n">nginx</span><span class="p">:</span><span class="n">1</span><span class="p">.</span><span class="n">15-alpine</span>
+        <span class="n">imagePullPolicy</span><span class="p">:</span> <span class="n">IfNotPresent</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="p">[</span><span class="n">root</span><span class="nv">@k8s</span><span class="n">-master1</span> <span class="p">~]</span><span class="c"># vim nginx-service-uri-1.yml</span>
+<span class="n">apiVersion</span><span class="p">:</span> <span class="n">v1</span>
+<span class="n">kind</span><span class="p">:</span> <span class="n">Service</span>
+<span class="n">metadata</span><span class="p">:</span>
+  <span class="n">name</span><span class="p">:</span> <span class="n">nginx-service-uri</span><span class="p">-</span><span class="n">1</span>
+  <span class="n">namespace</span><span class="p">:</span> <span class="n">ingress-nginx</span>
+  <span class="n">labels</span><span class="p">:</span>
+    <span class="n">app</span><span class="p">:</span> <span class="n">nginx-uri</span><span class="p">-</span><span class="n">1</span>
+<span class="n">spec</span><span class="p">:</span>
+  <span class="n">ports</span><span class="p">:</span>
+  <span class="p">-</span> <span class="n">port</span><span class="p">:</span> <span class="n">80</span>
+    <span class="n">targetPort</span><span class="p">:</span> <span class="n">80</span>
+  <span class="n">selector</span><span class="p">:</span>
+    <span class="n">app</span><span class="p">:</span> <span class="n">nginx-uri</span><span class="p">-</span><span class="n">1</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c"># kubectl apply -f nginx-uri-1.yaml</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c"># kubectl apply -f nginx-service-uri-1.yaml</span>
+</code></pre></div>
+<h4 id="2322">2.3.2.2 创建第二个应用<a class="headerlink" href="#2322" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="p">[</span><span class="n">root</span><span class="nv">@k8s</span><span class="n">-master1</span> <span class="p">~]</span><span class="c"># vim nginx-uri-2.yml</span>
+<span class="n">apiVersion</span><span class="p">:</span> <span class="n">apps</span><span class="p">/</span><span class="n">v1</span>
+<span class="n">kind</span><span class="p">:</span> <span class="n">Deployment</span>
+<span class="n">metadata</span><span class="p">:</span>
+  <span class="n">name</span><span class="p">:</span> <span class="n">nginx-uri</span><span class="p">-</span><span class="n">2</span>
+  <span class="n">namespace</span><span class="p">:</span> <span class="n">ingress-nginx</span>
+<span class="n">spec</span><span class="p">:</span>
+  <span class="n">replicas</span><span class="p">:</span> <span class="n">2</span>
+  <span class="n">selector</span><span class="p">:</span>
+    <span class="n">matchLabels</span><span class="p">:</span>
+      <span class="n">app</span><span class="p">:</span> <span class="n">nginx-uri</span><span class="p">-</span><span class="n">2</span>
+  <span class="n">template</span><span class="p">:</span>
+    <span class="n">metadata</span><span class="p">:</span>
+      <span class="n">labels</span><span class="p">:</span>
+        <span class="n">app</span><span class="p">:</span> <span class="n">nginx-uri</span><span class="p">-</span><span class="n">2</span>
+    <span class="n">spec</span><span class="p">:</span>
+      <span class="n">containers</span><span class="p">:</span>
+      <span class="p">-</span> <span class="n">name</span><span class="p">:</span> <span class="n">c1</span>
+        <span class="n">image</span><span class="p">:</span> <span class="n">nginx</span><span class="p">:</span><span class="n">1</span><span class="p">.</span><span class="n">15-alpine</span>
+        <span class="n">imagePullPolicy</span><span class="p">:</span> <span class="n">IfNotPresent</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="p">[</span><span class="n">root</span><span class="nv">@k8s</span><span class="n">-master1</span> <span class="p">~]</span><span class="c"># vim nginx-service-uri-2.yml</span>
+<span class="n">apiVersion</span><span class="p">:</span> <span class="n">v1</span>
+<span class="n">kind</span><span class="p">:</span> <span class="n">Service</span>
+<span class="n">metadata</span><span class="p">:</span>
+  <span class="n">name</span><span class="p">:</span> <span class="n">nginx-service-uri</span><span class="p">-</span><span class="n">2</span>
+  <span class="n">namespace</span><span class="p">:</span> <span class="n">ingress-nginx</span>
+  <span class="n">labels</span><span class="p">:</span>
+    <span class="n">app</span><span class="p">:</span> <span class="n">nginx-uri</span><span class="p">-</span><span class="n">2</span>
+<span class="n">spec</span><span class="p">:</span>
+  <span class="n">ports</span><span class="p">:</span>
+  <span class="p">-</span> <span class="n">port</span><span class="p">:</span> <span class="n">80</span>
+    <span class="n">targetPort</span><span class="p">:</span> <span class="n">80</span>
+  <span class="n">selector</span><span class="p">:</span>
+    <span class="n">app</span><span class="p">:</span> <span class="n">nginx-uri</span><span class="p">-</span><span class="n">2</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c"># kubectl apply -f nginx-uri-2.yaml</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c"># kubectl apply -f nginx-service-uri-2.yaml</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c"># kubectl get svc -n ingress-nginx</span>
+<span class="n">NAME</span>                                 <span class="nb">TYPE </span>          <span class="n">CLUSTER-IP</span>      <span class="n">EXTERNAL-IP</span>     <span class="n">PORT</span><span class="p">(</span><span class="n">S</span><span class="p">)</span>                      <span class="n">AGE</span>
+
+<span class="n">nginx-service-uri</span><span class="p">-</span><span class="n">1</span>                  <span class="n">ClusterIP</span>      <span class="n">10</span><span class="p">.</span><span class="n">96</span><span class="p">.</span><span class="n">171</span><span class="p">.</span><span class="n">135</span>   <span class="p">&lt;</span><span class="n">none</span><span class="p">&gt;</span>          <span class="n">80</span><span class="p">/</span><span class="n">TCP</span>                       <span class="n">7m24s</span>
+<span class="n">nginx-service-uri</span><span class="p">-</span><span class="n">2</span>                  <span class="n">ClusterIP</span>      <span class="n">10</span><span class="p">.</span><span class="n">96</span><span class="p">.</span><span class="n">234</span><span class="p">.</span><span class="n">164</span>   <span class="p">&lt;</span><span class="n">none</span><span class="p">&gt;</span>          <span class="n">80</span><span class="p">/</span><span class="n">TCP</span>                       <span class="n">4m11s</span>
+</code></pre></div>
+<h4 id="2323_ingress">2.3.2.3 创建ingress对象<a class="headerlink" href="#2323_ingress" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="p">[</span><span class="n">root</span><span class="nv">@k8s</span><span class="n">-master1</span> <span class="p">~]</span><span class="c"># vim ingress-nginx.yaml</span>
+<span class="n">apiVersion</span><span class="p">:</span> <span class="n">networking</span><span class="p">.</span><span class="n">k8s</span><span class="p">.</span><span class="n">io</span><span class="p">/</span><span class="n">v1</span>
+<span class="n">kind</span><span class="p">:</span> <span class="n">Ingress</span>
+<span class="n">metadata</span><span class="p">:</span>
+  <span class="n">name</span><span class="p">:</span> <span class="n">ingress-uri</span>
+  <span class="n">namespace</span><span class="p">:</span> <span class="n">ingress-nginx</span>
+  <span class="n">annotations</span><span class="p">:</span>
+    <span class="n">ingressclass</span><span class="p">.</span><span class="n">kubernetes</span><span class="p">.</span><span class="n">io</span><span class="p">/</span><span class="n">is-default-class</span><span class="p">:</span> <span class="s2">&quot;true&quot;</span>
+    <span class="n">kubernetes</span><span class="p">.</span><span class="n">io</span><span class="p">/</span><span class="n">ingress</span><span class="p">.</span><span class="n">class</span><span class="p">:</span> <span class="n">nginx</span>
+<span class="n">spec</span><span class="p">:</span>
+  <span class="n">rules</span><span class="p">:</span>
+  <span class="p">-</span> <span class="n">host</span><span class="p">:</span> <span class="n">www</span><span class="p">.</span><span class="n">kubemsburi</span><span class="p">.</span><span class="n">com</span>
+    <span class="n">http</span><span class="p">:</span>
+      <span class="n">paths</span><span class="p">:</span>
+      <span class="p">-</span> <span class="n">path</span><span class="p">:</span> <span class="p">/</span><span class="n">svc1</span>
+        <span class="n">pathType</span><span class="p">:</span> <span class="n">Prefix</span>
+        <span class="n">backend</span><span class="p">:</span>
+          <span class="n">service</span><span class="p">:</span>
+            <span class="n">name</span><span class="p">:</span> <span class="n">nginx-service-uri</span><span class="p">-</span><span class="n">1</span>
+            <span class="n">port</span><span class="p">:</span>
+              <span class="n">number</span><span class="p">:</span> <span class="n">80</span>
+      <span class="p">-</span> <span class="n">path</span><span class="p">:</span> <span class="p">/</span><span class="n">svc2</span>
+        <span class="n">pathType</span><span class="p">:</span> <span class="n">Prefix</span>
+        <span class="n">backend</span><span class="p">:</span>
+          <span class="n">service</span><span class="p">:</span>
+            <span class="n">name</span><span class="p">:</span> <span class="n">nginx-service-uri</span><span class="p">-</span><span class="n">2</span>
+            <span class="n">port</span><span class="p">:</span>
+              <span class="n">number</span><span class="p">:</span> <span class="n">80</span>
+</code></pre></div>
+<p>应用YAML</p>
+<div class="highlight"><pre><span></span><code><span class="p">[</span><span class="n">root</span><span class="nv">@master1</span> <span class="p">~]</span><span class="c"># kubectl apply -f ingress-nginx-uri.yaml</span>
+<span class="n">ingress</span><span class="p">.</span><span class="n">networking</span><span class="p">.</span><span class="n">k8s</span><span class="p">.</span><span class="n">io</span><span class="p">/</span><span class="n">ingress-uri</span> <span class="n">created</span>
+</code></pre></div>
+<p>验证ingress</p>
+<div class="highlight"><pre><span></span><code><span class="p">[</span><span class="n">root</span><span class="nv">@master1</span> <span class="p">~]</span><span class="c"># kubectl get ingress -n ingress-nginx</span>
+<span class="n">NAME</span>            <span class="n">CLASS</span>    <span class="n">HOSTS</span>             <span class="n">ADDRESS</span>         <span class="n">PORTS</span>   <span class="n">AGE</span>
+<span class="n">ingress-uri</span>     <span class="p">&lt;</span><span class="n">none</span><span class="p">&gt;</span>   <span class="n">www</span><span class="p">.</span><span class="n">kubemsburi</span><span class="p">.</span><span class="n">com</span>                   <span class="n">80</span>      <span class="n">13s</span>
+</code></pre></div>
+<p>描述查看ingress信息</p>
+<div class="highlight"><pre><span></span><code><span class="p">[</span><span class="n">root</span><span class="nv">@master1</span> <span class="p">~]</span><span class="c"># kubectl describe ingress ingress-uri -n ingress-nginx</span>
+<span class="n">Name</span><span class="p">:</span>             <span class="n">ingress-uri</span>
+<span class="n">Namespace</span><span class="p">:</span>        <span class="n">ingress-nginx</span>
+<span class="n">Address</span><span class="p">:</span>          <span class="n">192</span><span class="p">.</span><span class="n">168</span><span class="p">.</span><span class="n">10</span><span class="p">.</span><span class="n">12</span>
+<span class="k">Default</span> <span class="n">backend</span><span class="p">:</span>  <span class="k">default</span><span class="n">-http-backend</span><span class="p">:</span><span class="n">80</span> <span class="p">(&lt;</span><span class="n">error</span><span class="p">:</span> <span class="n">endpoints</span> <span class="s2">&quot;default-http-backend&quot;</span> <span class="n">not</span> <span class="n">found</span><span class="p">&gt;)</span>
+<span class="n">Rules</span><span class="p">:</span>
+  <span class="n">Host</span>                <span class="n">Path</span>  <span class="n">Backends</span>
+  <span class="p">----</span>                <span class="p">----</span>  <span class="p">--------</span>
+  <span class="n">www</span><span class="p">.</span><span class="n">kubemsburi</span><span class="p">.</span><span class="n">com</span>
+                      <span class="p">/</span><span class="n">svc1</span>   <span class="n">nginx-service-uri</span><span class="p">-</span><span class="n">1</span><span class="p">:</span><span class="n">80</span> <span class="p">(</span><span class="n">10</span><span class="p">.</span><span class="n">244</span><span class="p">.</span><span class="n">159</span><span class="p">.</span><span class="n">158</span><span class="p">:</span><span class="n">80</span><span class="p">,</span><span class="n">10</span><span class="p">.</span><span class="n">244</span><span class="p">.</span><span class="n">194</span><span class="p">.</span><span class="n">111</span><span class="p">:</span><span class="n">80</span><span class="p">)</span>
+                      <span class="p">/</span><span class="n">svc2</span>   <span class="n">nginx-service-uri</span><span class="p">-</span><span class="n">2</span><span class="p">:</span><span class="n">80</span> <span class="p">(</span><span class="n">10</span><span class="p">.</span><span class="n">244</span><span class="p">.</span><span class="n">159</span><span class="p">.</span><span class="n">159</span><span class="p">:</span><span class="n">80</span><span class="p">,</span><span class="n">10</span><span class="p">.</span><span class="n">244</span><span class="p">.</span><span class="n">194</span><span class="p">.</span><span class="n">112</span><span class="p">:</span><span class="n">80</span><span class="p">)</span>
+<span class="n">Annotations</span><span class="p">:</span>          <span class="n">kubernetes</span><span class="p">.</span><span class="n">io</span><span class="p">/</span><span class="n">ingress</span><span class="p">.</span><span class="n">class</span><span class="p">:</span> <span class="n">nginx</span>
+<span class="n">Events</span><span class="p">:</span>
+  <span class="nb">Type </span>   <span class="n">Reason</span>  <span class="n">Age</span>               <span class="n">From</span>                      <span class="n">Message</span>
+  <span class="p">----</span>    <span class="p">------</span>  <span class="p">----</span>              <span class="p">----</span>                      <span class="p">-------</span>
+  <span class="n">Normal</span>  <span class="n">Sync</span>    <span class="n">4s</span> <span class="p">(</span><span class="n">x2</span> <span class="n">over</span> <span class="n">32s</span><span class="p">)</span>  <span class="n">nginx-ingress-controller</span>  <span class="n">Scheduled</span> <span class="k">for</span> <span class="n">sync</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="p">[</span><span class="n">root</span><span class="nv">@k8s</span><span class="n">-master1</span> <span class="p">~]</span><span class="c"># kubectl get pods -o wide -n ingress-nginx</span>
+<span class="n">NAME</span>                                      <span class="n">READY</span>   <span class="n">STATUS</span>      <span class="n">RESTARTS</span>   <span class="n">AGE</span>   <span class="n">IP</span>               <span class="n">NODE</span>          <span class="n">NOMINATED</span> <span class="n">NODE</span>   <span class="n">READINESS</span> <span class="n">GATES</span>
+
+<span class="n">nginx-uri</span><span class="p">-</span><span class="n">1</span><span class="p">-</span><span class="n">7d7d75f86-dws96</span>               <span class="n">1</span><span class="p">/</span><span class="n">1</span>     <span class="n">Running</span>     <span class="n">0</span>          <span class="n">14m</span>   <span class="n">10</span><span class="p">.</span><span class="n">244</span><span class="p">.</span><span class="n">159</span><span class="p">.</span><span class="n">158</span>   <span class="n">k8s-master1</span>   <span class="p">&lt;</span><span class="n">none</span><span class="p">&gt;</span>           <span class="p">&lt;</span><span class="n">none</span><span class="p">&gt;</span>
+<span class="n">nginx-uri</span><span class="p">-</span><span class="n">1</span><span class="p">-</span><span class="n">7d7d75f86-s8js4</span>               <span class="n">1</span><span class="p">/</span><span class="n">1</span>     <span class="n">Running</span>     <span class="n">0</span>          <span class="n">14m</span>   <span class="n">10</span><span class="p">.</span><span class="n">244</span><span class="p">.</span><span class="n">194</span><span class="p">.</span><span class="n">111</span>   <span class="n">k8s-worker1</span>   <span class="p">&lt;</span><span class="n">none</span><span class="p">&gt;</span>           <span class="p">&lt;</span><span class="n">none</span><span class="p">&gt;</span>
+<span class="n">nginx-uri</span><span class="p">-</span><span class="n">2</span><span class="p">-</span><span class="n">7cdf7f89b7</span><span class="p">-</span><span class="n">8s4mg</span>              <span class="n">1</span><span class="p">/</span><span class="n">1</span>     <span class="n">Running</span>     <span class="n">0</span>          <span class="n">10m</span>   <span class="n">10</span><span class="p">.</span><span class="n">244</span><span class="p">.</span><span class="n">194</span><span class="p">.</span><span class="n">112</span>   <span class="n">k8s-worker1</span>   <span class="p">&lt;</span><span class="n">none</span><span class="p">&gt;</span>           <span class="p">&lt;</span><span class="n">none</span><span class="p">&gt;</span>
+<span class="n">nginx-uri</span><span class="p">-</span><span class="n">2</span><span class="p">-</span><span class="n">7cdf7f89b7-gj8x6</span>              <span class="n">1</span><span class="p">/</span><span class="n">1</span>     <span class="n">Running</span>     <span class="n">0</span>          <span class="n">10m</span>   <span class="n">10</span><span class="p">.</span><span class="n">244</span><span class="p">.</span><span class="n">159</span><span class="p">.</span><span class="n">159</span>   <span class="n">k8s-master1</span>   <span class="p">&lt;</span><span class="n">none</span><span class="p">&gt;</span>           <span class="p">&lt;</span><span class="n">none</span><span class="p">&gt;</span>
+</code></pre></div>
+<p>确认<code>nginx-ingress-controller</code>的podIP为<code>192.168.10.91</code></p>
+<h4 id="2314_1">2.3.1.4 模拟客户端访问<a class="headerlink" href="#2314_1" title="Permanent link">&para;</a></h4>
+<p>1, 确认<code>nginx-ingress-controller</code>的podIP, 下面命令查询的结果为<code>192.168.10.91</code></p>
+<div class="highlight"><pre><span></span><code><span class="p">[</span><span class="n">root</span><span class="nv">@k8s</span><span class="n">-master1</span> <span class="p">~]</span><span class="c"># kubectl get svc -n ingress-nginx  |grep ingress</span>
+<span class="n">ingress-nginx-controller</span>             <span class="n">LoadBalancer</span>   <span class="n">10</span><span class="p">.</span><span class="n">96</span><span class="p">.</span><span class="n">183</span><span class="p">.</span><span class="n">188</span>   <span class="n">192</span><span class="p">.</span><span class="n">168</span><span class="p">.</span><span class="n">10</span><span class="p">.</span><span class="n">91</span>   <span class="n">80</span><span class="p">:</span><span class="n">32369</span><span class="p">/</span><span class="n">TCP</span><span class="p">,</span><span class="n">443</span><span class="p">:</span><span class="n">31775</span><span class="p">/</span><span class="n">TCP</span>   <span class="n">11m</span>
+<span class="n">ingress-nginx-controller-admission</span>   <span class="n">ClusterIP</span>      <span class="n">10</span><span class="p">.</span><span class="n">96</span><span class="p">.</span><span class="n">212</span><span class="p">.</span><span class="n">14</span>    <span class="p">&lt;</span><span class="n">none</span><span class="p">&gt;</span>          <span class="n">443</span><span class="p">/</span><span class="n">TCP</span>                      <span class="n">11m</span>
+</code></pre></div>
+<p>2, 在集群之外任一主机中添加上述域名与IP地址解析(模拟公网DNS)</p>
+<div class="highlight"><pre><span></span><code><span class="p">[</span><span class="n">root</span><span class="nv">@otherhost</span> <span class="p">~]</span><span class="c"># vim /etc/hosts</span>
+
+<span class="n">192</span><span class="p">.</span><span class="n">168</span><span class="p">.</span><span class="n">10</span><span class="p">.</span><span class="n">91</span> <span class="n">www</span><span class="p">.</span><span class="n">kubemsburi</span><span class="p">.</span><span class="n">com</span>
+</code></pre></div>
+<p>3, 准备pod内容器运行的web主页</p>
+<div class="highlight"><pre><span></span><code><span class="p">[</span><span class="n">root</span><span class="nv">@k8s</span><span class="n">-master1</span> <span class="p">~]</span><span class="c"># kubectl exec -it nginx-uri-1-7d7d75f86-dws96 -n ingress-nginx -- /bin/sh</span>
+<span class="p">/</span> <span class="c"># mkdir /usr/share/nginx/html/svc1</span>
+<span class="p">/</span> <span class="c"># echo &quot;sssvc1&quot; &gt; /usr/share/nginx/html/svc1/index.html</span>
+<span class="p">/</span> <span class="c"># exit</span>
+<span class="p">[</span><span class="n">root</span><span class="nv">@k8s</span><span class="n">-master1</span> <span class="p">~]</span><span class="c"># kubectl exec -it nginx-uri-1-7d7d75f86-s8js4 -n ingress-nginx -- /bin/sh</span>
+<span class="p">/</span> <span class="c"># mkdir /usr/share/nginx/html/svc1</span>
+<span class="p">/</span> <span class="c"># echo &quot;sssvc1&quot; &gt; /usr/share/nginx/html/svc1/index.html</span>
+<span class="p">/</span> <span class="c"># exit</span>
+<span class="p">[</span><span class="n">root</span><span class="nv">@k8s</span><span class="n">-master1</span> <span class="p">~]</span><span class="c"># kubectl exec -it nginx-uri-2-7cdf7f89b7-8s4mg -n ingress-nginx -- /bin/sh</span>
+<span class="p">/</span> <span class="c"># mkdir /usr/share/nginx/html/svc2</span>
+<span class="p">/</span> <span class="c"># echo &quot;sssvc2&quot; &gt; /usr/share/nginx/html/svc1/index.html</span>
+<span class="p">/</span> <span class="c"># exit</span>
+<span class="p">[</span><span class="n">root</span><span class="nv">@k8s</span><span class="n">-master1</span> <span class="p">~]</span><span class="c"># kubectl exec -it nginx-uri-2-7cdf7f89b7-gj8x6 -n ingress-nginx -- /bin/sh</span>
+<span class="p">/</span> <span class="c"># mkdir /usr/share/nginx/html/svc2</span>
+<span class="p">/</span> <span class="c"># echo &quot;sssvc2&quot; &gt; /usr/share/nginx/html/svc1/index.html</span>
+<span class="p">/</span> <span class="c"># exit</span>
+</code></pre></div>
+<p>4, 访问及结果展示</p>
+<div class="highlight"><pre><span></span><code><span class="p">[</span><span class="n">root</span><span class="nv">@otherhost</span> <span class="p">~]</span><span class="c"># curl www.kubemsburi.com/svc1/index.html</span>
+<span class="n">sssvc1</span>
+<span class="p">[</span><span class="n">root</span><span class="nv">@otherhost</span> <span class="p">~]</span><span class="c"># curl www.kubemsburi.com/svc2/index.html</span>
+<span class="n">sssvc2</span>
+</code></pre></div>
+<h3 id="233_ingress-https">2.3.3 ingress-https案例<a class="headerlink" href="#233_ingress-https" title="Permanent link">&para;</a></h3>
+<h4 id="2331">2.3.3.1 创建自签证书<a class="headerlink" href="#2331" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="p">[</span><span class="n">root</span><span class="nv">@k8s</span><span class="n">-master1</span> <span class="p">~]</span><span class="c"># mkdir ingress-https</span>
+<span class="p">[</span><span class="n">root</span><span class="nv">@k8s</span><span class="n">-master1</span> <span class="p">~]</span><span class="c"># cd ingress-https/</span>
+<span class="p">[</span><span class="n">root</span><span class="nv">@k8s</span><span class="n">-master1</span> <span class="n">ingress-https</span><span class="p">]</span><span class="c"># openssl genrsa -out nginx.key 2048</span>
+<span class="p">[</span><span class="n">root</span><span class="nv">@k8s</span><span class="n">-master1</span> <span class="n">ingress-https</span><span class="p">]</span><span class="c"># openssl req -new -x509 -key nginx.key -out nginx.pem -days 365</span>
+<span class="p">......</span>
+<span class="p">......</span>
+<span class="n">Country</span> <span class="n">Name</span> <span class="p">(</span><span class="n">2</span> <span class="n">letter</span> <span class="n">code</span><span class="p">)</span> <span class="no">[XX]</span><span class="p">:</span><span class="n">CN</span>
+<span class="n">State</span> <span class="n">or</span> <span class="n">Province</span> <span class="n">Name</span> <span class="p">(</span><span class="n">full</span> <span class="n">name</span><span class="p">)</span> <span class="p">[]:</span><span class="n">GD</span>
+<span class="n">Locality</span> <span class="n">Name</span> <span class="p">(</span><span class="n">eg</span><span class="p">,</span> <span class="n">city</span><span class="p">)</span> <span class="no">[Default City]</span><span class="p">:</span><span class="n">SZ</span>
+<span class="n">Organization</span> <span class="n">Name</span> <span class="p">(</span><span class="n">eg</span><span class="p">,</span> <span class="n">company</span><span class="p">)</span> <span class="no">[Default Company Ltd]</span><span class="p">:</span><span class="n">IT</span>
+<span class="n">Organizational</span> <span class="n">Unit</span> <span class="n">Name</span> <span class="p">(</span><span class="n">eg</span><span class="p">,</span> <span class="n">section</span><span class="p">)</span> <span class="p">[]:</span><span class="n">it</span>
+<span class="n">Common</span> <span class="n">Name</span> <span class="p">(</span><span class="n">eg</span><span class="p">,</span> <span class="n">your</span> <span class="n">name</span> <span class="n">or</span> <span class="n">your</span> <span class="n">server</span><span class="err">&#39;</span><span class="n">s</span> <span class="n">hostname</span><span class="p">)</span> <span class="p">[]:</span><span class="n">kubemsbhost</span>
+<span class="n">Email</span> <span class="n">Address</span> <span class="p">[]:</span><span class="n">admin</span><span class="nv">@kubemsbhost</span><span class="p">.</span><span class="n">com</span>
+
+<span class="p">[</span><span class="n">root</span><span class="nv">@k8s</span><span class="n">-master1</span> <span class="n">ingress-https</span><span class="p">]</span><span class="c"># ls</span>
+<span class="n">nginx</span><span class="p">.</span><span class="n">key</span>  <span class="n">nginx</span><span class="p">.</span><span class="n">pem</span>
+</code></pre></div>
+<h4 id="2332_secret">2.3.3.2 将证书创建成secret<a class="headerlink" href="#2332_secret" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="p">[</span><span class="n">root</span><span class="nv">@k8s</span><span class="n">-master1</span> <span class="n">ingress-https</span><span class="p">]</span><span class="c"># kubectl create secret tls nginx-tls-secret --cert=nginx.pem --key=nginx.key -n ingress-nginx</span>
+<span class="n">secret</span><span class="p">/</span><span class="n">nginx-tls-secret</span> <span class="n">created</span>
+
+<span class="p">[</span><span class="n">root</span><span class="nv">@k8s</span><span class="n">-master1</span> <span class="n">ingress-https</span><span class="p">]</span><span class="c"># kubectl get secrets -n ingress-nginx |grep nginx-tls-secret</span>
+<span class="n">nginx-tls-secret</span>                           <span class="n">kubernetes</span><span class="p">.</span><span class="n">io</span><span class="p">/</span><span class="n">tls</span>                     <span class="n">2</span>      <span class="n">38s</span>
+</code></pre></div>
+<h4 id="2333_yaml">2.3.3.3 编排YAML并创建<a class="headerlink" href="#2333_yaml" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="p">[</span><span class="n">root</span><span class="nv">@k8s</span><span class="n">-master1</span> <span class="n">ingress-https</span><span class="p">]</span><span class="c"># vim ingress-https.yml</span>
+<span class="n">apiVersion</span><span class="p">:</span> <span class="n">apps</span><span class="p">/</span><span class="n">v1</span>
+<span class="n">kind</span><span class="p">:</span> <span class="n">Deployment</span>
+<span class="n">metadata</span><span class="p">:</span>
+  <span class="n">name</span><span class="p">:</span> <span class="n">nginx2</span>
+  <span class="n">namespace</span><span class="p">:</span> <span class="n">ingress-nginx</span>
+<span class="n">spec</span><span class="p">:</span>
+  <span class="n">replicas</span><span class="p">:</span> <span class="n">2</span>
+  <span class="n">selector</span><span class="p">:</span>
+    <span class="n">matchLabels</span><span class="p">:</span>
+      <span class="n">app</span><span class="p">:</span> <span class="n">nginx2</span>
+  <span class="n">template</span><span class="p">:</span>
+    <span class="n">metadata</span><span class="p">:</span>
+      <span class="n">labels</span><span class="p">:</span>
+        <span class="n">app</span><span class="p">:</span> <span class="n">nginx2</span>
+    <span class="n">spec</span><span class="p">:</span>
+      <span class="n">containers</span><span class="p">:</span>
+      <span class="p">-</span> <span class="n">name</span><span class="p">:</span> <span class="n">c1</span>
+        <span class="n">image</span><span class="p">:</span> <span class="n">nginx</span><span class="p">:</span><span class="n">1</span><span class="p">.</span><span class="n">15-alpine</span>
+        <span class="n">imagePullPolicy</span><span class="p">:</span> <span class="n">IfNotPresent</span>
+        <span class="n">ports</span><span class="p">:</span>
+        <span class="p">-</span> <span class="n">name</span><span class="p">:</span> <span class="n">http</span>
+          <span class="n">containerPort</span><span class="p">:</span> <span class="n">80</span>
+        <span class="p">-</span> <span class="n">name</span><span class="p">:</span> <span class="n">https</span>
+          <span class="n">containerPort</span><span class="p">:</span> <span class="n">443</span>
+<span class="p">---</span>
+<span class="n">apiVersion</span><span class="p">:</span> <span class="n">v1</span>
+<span class="n">kind</span><span class="p">:</span> <span class="n">Service</span>
+<span class="n">metadata</span><span class="p">:</span>
+  <span class="n">name</span><span class="p">:</span> <span class="n">nginx-service2</span>
+  <span class="n">namespace</span><span class="p">:</span> <span class="n">ingress-nginx</span>
+  <span class="n">labels</span><span class="p">:</span>
+    <span class="n">app</span><span class="p">:</span> <span class="n">nginx2</span>
+<span class="n">spec</span><span class="p">:</span>
+  <span class="n">ports</span><span class="p">:</span>
+  <span class="p">-</span> <span class="n">name</span><span class="p">:</span> <span class="n">http</span>
+    <span class="n">port</span><span class="p">:</span> <span class="n">80</span>
+    <span class="n">targetPort</span><span class="p">:</span> <span class="n">80</span>
+  <span class="p">-</span> <span class="n">name</span><span class="p">:</span> <span class="n">https</span>
+    <span class="n">port</span><span class="p">:</span> <span class="n">443</span>
+    <span class="n">targetPort</span><span class="p">:</span> <span class="n">443</span>
+  <span class="n">selector</span><span class="p">:</span>
+    <span class="n">app</span><span class="p">:</span> <span class="n">nginx2</span>
+<span class="p">---</span>
+<span class="n">apiVersion</span><span class="p">:</span> <span class="n">networking</span><span class="p">.</span><span class="n">k8s</span><span class="p">.</span><span class="n">io</span><span class="p">/</span><span class="n">v1</span>
+<span class="n">kind</span><span class="p">:</span> <span class="n">Ingress</span>
+<span class="n">metadata</span><span class="p">:</span>
+  <span class="n">name</span><span class="p">:</span> <span class="n">ingress-nginx2</span>
+  <span class="n">namespace</span><span class="p">:</span> <span class="n">ingress-nginx</span>
+  <span class="n">annotations</span><span class="p">:</span>
+    <span class="n">ingressclass</span><span class="p">.</span><span class="n">kubernetes</span><span class="p">.</span><span class="n">io</span><span class="p">/</span><span class="n">is-default-class</span><span class="p">:</span> <span class="s2">&quot;true&quot;</span>
+    <span class="n">kubernetes</span><span class="p">.</span><span class="n">io</span><span class="p">/</span><span class="n">ingress</span><span class="p">.</span><span class="n">class</span><span class="p">:</span> <span class="n">nginx</span>
+<span class="n">spec</span><span class="p">:</span>
+  <span class="n">tls</span><span class="p">:</span>
+  <span class="p">-</span> <span class="n">hosts</span><span class="p">:</span>
+    <span class="p">-</span> <span class="n">www</span><span class="p">.</span><span class="n">kubemsbhost</span><span class="p">.</span><span class="n">com</span>                                                     <span class="c"># 域名</span>
+    <span class="n">secretName</span><span class="p">:</span> <span class="n">nginx-tls-secret</span>                                  <span class="c"># 调用前面创建的secret</span>
+  <span class="n">rules</span><span class="p">:</span>
+  <span class="p">-</span> <span class="n">host</span><span class="p">:</span> <span class="n">www</span><span class="p">.</span><span class="n">kubemsbhost</span><span class="p">.</span><span class="n">com</span>                                                 <span class="c"># 域名</span>
+    <span class="n">http</span><span class="p">:</span>
+      <span class="n">paths</span><span class="p">:</span>
+      <span class="p">-</span> <span class="n">pathType</span><span class="p">:</span> <span class="n">Prefix</span>
+        <span class="n">path</span><span class="p">:</span> <span class="s2">&quot;/&quot;</span>
+        <span class="n">backend</span><span class="p">:</span>
+          <span class="n">service</span><span class="p">:</span>
+            <span class="n">name</span><span class="p">:</span> <span class="n">nginx-service2</span>                     <span class="c"># 对应服务名</span>
+            <span class="n">port</span><span class="p">:</span>
+              <span class="n">number</span><span class="p">:</span> <span class="n">80</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="p">[</span><span class="n">root</span><span class="nv">@k8s</span><span class="n">-master1</span> <span class="n">ingress-https</span><span class="p">]</span><span class="c"># kubectl apply -f ingress-https.yml</span>
+<span class="n">deployment</span><span class="p">.</span><span class="n">apps</span><span class="p">/</span><span class="n">nginx2</span> <span class="n">created</span>
+<span class="n">service</span><span class="p">/</span><span class="n">nginx-service2</span> <span class="n">created</span>
+<span class="n">ingress</span><span class="p">.</span><span class="n">extensions</span><span class="p">/</span><span class="n">ingress-nginx2</span> <span class="n">created</span>
+</code></pre></div>
+<p>验证</p>
+<div class="highlight"><pre><span></span><code><span class="p">[</span><span class="n">root</span><span class="nv">@k8s</span><span class="n">-master1</span> <span class="p">~]</span><span class="c"># kubectl get ingress -n ingress-nginx</span>
+<span class="n">NAME</span>             <span class="n">CLASS</span>    <span class="n">HOSTS</span>                 <span class="n">ADDRESS</span>         <span class="n">PORTS</span>     <span class="n">AGE</span>
+<span class="n">ingress-nginx2</span>   <span class="p">&lt;</span><span class="n">none</span><span class="p">&gt;</span>   <span class="n">www</span><span class="p">.</span><span class="n">kubemsbhost</span><span class="p">.</span><span class="n">com</span>   <span class="n">192</span><span class="p">.</span><span class="n">168</span><span class="p">.</span><span class="n">10</span><span class="p">.</span><span class="n">12</span>   <span class="n">80</span><span class="p">,</span> <span class="n">443</span>   <span class="n">2m14s</span>
+</code></pre></div>
+<h4 id="2334">2.3.3.4 模拟客户端访问<a class="headerlink" href="#2334" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="p">[</span><span class="n">root</span><span class="nv">@otherhost</span> <span class="p">~]</span><span class="c"># vim /etc/hosts</span>
+
+<span class="n">192</span><span class="p">.</span><span class="n">168</span><span class="p">.</span><span class="n">10</span><span class="p">.</span><span class="n">91</span> <span class="n">www</span><span class="p">.</span><span class="n">kubemsbhost</span><span class="p">.</span><span class="n">com</span>                   <span class="n">添加这行模拟DNS</span>
+
+<span class="p">[</span><span class="n">root</span><span class="nv">@otherhost</span> <span class="p">~]</span><span class="c"># firefox https://www.kubemsbhost.com &amp;</span>
+<span class="p">[</span><span class="n">1</span><span class="p">]</span> <span class="n">10892</span>
+</code></pre></div>
+<p><img alt="image-20220413013418685" src="../../../img/kubernetes/kubernetes_nginx_ingress_controller/image-20220413013418685.png" /></p>
+<p><img alt="image-20220413013457091" src="../../../img/kubernetes/kubernetes_nginx_ingress_controller/image-20220413013457091.png" /></p>
+<div class="highlight"><pre><span></span><code><span class="n">关于可信任证书的说明</span><span class="err">：</span>
+<span class="n">如果需要在互联网中访问kubernetes集群中的服务是可信的</span><span class="err">，</span><span class="n">建议使用互联网中申请的SSL证书</span><span class="err">。</span>
+</code></pre></div>
+<h3 id="234_ingressnodeport">2.3.4 ingress+nodeport服务<a class="headerlink" href="#234_ingressnodeport" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="p">[</span><span class="n">root</span><span class="nv">@k8s</span><span class="n">-master1</span> <span class="p">~]</span><span class="c"># vim ingress-nodeport.yml</span>
+<span class="n">apiVersion</span><span class="p">:</span> <span class="n">apps</span><span class="p">/</span><span class="n">v1</span>
+<span class="n">kind</span><span class="p">:</span> <span class="n">Deployment</span>
+<span class="n">metadata</span><span class="p">:</span>
+  <span class="n">name</span><span class="p">:</span> <span class="n">nginx3</span>
+  <span class="n">namespace</span><span class="p">:</span> <span class="n">ingress-nginx</span>
+<span class="n">spec</span><span class="p">:</span>
+  <span class="n">replicas</span><span class="p">:</span> <span class="n">2</span>
+  <span class="n">selector</span><span class="p">:</span>
+    <span class="n">matchLabels</span><span class="p">:</span>
+      <span class="n">app</span><span class="p">:</span> <span class="n">nginx3</span>
+  <span class="n">template</span><span class="p">:</span>
+    <span class="n">metadata</span><span class="p">:</span>
+      <span class="n">labels</span><span class="p">:</span>
+        <span class="n">app</span><span class="p">:</span> <span class="n">nginx3</span>
+    <span class="n">spec</span><span class="p">:</span>
+      <span class="n">containers</span><span class="p">:</span>
+      <span class="p">-</span> <span class="n">name</span><span class="p">:</span> <span class="n">c1</span>
+        <span class="n">image</span><span class="p">:</span> <span class="n">nginx</span><span class="p">:</span><span class="n">1</span><span class="p">.</span><span class="n">15-alpine</span>
+        <span class="n">imagePullPolicy</span><span class="p">:</span> <span class="n">IfNotPresent</span>
+<span class="p">---</span>
+<span class="n">apiVersion</span><span class="p">:</span> <span class="n">v1</span>
+<span class="n">kind</span><span class="p">:</span> <span class="n">Service</span>
+<span class="n">metadata</span><span class="p">:</span>
+  <span class="n">name</span><span class="p">:</span> <span class="n">nginx-service3</span>
+  <span class="n">namespace</span><span class="p">:</span> <span class="n">ingress-nginx</span>
+  <span class="n">labels</span><span class="p">:</span>
+    <span class="n">app</span><span class="p">:</span> <span class="n">nginx3</span>
+<span class="n">spec</span><span class="p">:</span>
+  <span class="n">type</span><span class="p">:</span> <span class="n">NodePort</span>                        <span class="c"># NodePort类型服务</span>
+  <span class="n">ports</span><span class="p">:</span>
+  <span class="p">-</span> <span class="n">port</span><span class="p">:</span> <span class="n">80</span>
+    <span class="n">targetPort</span><span class="p">:</span> <span class="n">80</span>
+  <span class="n">selector</span><span class="p">:</span>
+    <span class="n">app</span><span class="p">:</span> <span class="n">nginx3</span>
+<span class="p">---</span>
+<span class="n">apiVersion</span><span class="p">:</span> <span class="n">networking</span><span class="p">.</span><span class="n">k8s</span><span class="p">.</span><span class="n">io</span><span class="p">/</span><span class="n">v1</span>
+<span class="n">kind</span><span class="p">:</span> <span class="n">Ingress</span>
+<span class="n">metadata</span><span class="p">:</span>
+  <span class="n">name</span><span class="p">:</span> <span class="n">ingress-nginx3</span>
+  <span class="n">namespace</span><span class="p">:</span> <span class="n">ingress-nginx</span>
+  <span class="n">annotations</span><span class="p">:</span>
+    <span class="n">ingressclass</span><span class="p">.</span><span class="n">kubernetes</span><span class="p">.</span><span class="n">io</span><span class="p">/</span><span class="n">is-default-class</span><span class="p">:</span> <span class="s2">&quot;true&quot;</span>
+    <span class="n">kubernetes</span><span class="p">.</span><span class="n">io</span><span class="p">/</span><span class="n">ingress</span><span class="p">.</span><span class="n">class</span><span class="p">:</span> <span class="n">nginx</span>
+<span class="n">spec</span><span class="p">:</span>
+  <span class="n">rules</span><span class="p">:</span>
+  <span class="p">-</span> <span class="n">host</span><span class="p">:</span> <span class="n">www</span><span class="p">.</span><span class="n">kubemsb3</span><span class="p">.</span><span class="n">com</span>                                                 <span class="c"># 域名</span>
+    <span class="n">http</span><span class="p">:</span>
+      <span class="n">paths</span><span class="p">:</span>
+      <span class="p">-</span> <span class="n">pathType</span><span class="p">:</span> <span class="n">Prefix</span>
+        <span class="n">path</span><span class="p">:</span> <span class="s2">&quot;/&quot;</span>
+        <span class="n">backend</span><span class="p">:</span>
+          <span class="n">service</span><span class="p">:</span>
+            <span class="n">name</span><span class="p">:</span> <span class="n">nginx-service3</span>                    <span class="c"># 对应服务名</span>
+            <span class="n">port</span><span class="p">:</span>
+              <span class="n">number</span><span class="p">:</span> <span class="n">80</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="p">[</span><span class="n">root</span><span class="nv">@k8s</span><span class="n">-master1</span> <span class="p">~]</span><span class="c"># kubectl apply -f ingress-nodeport.yml</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">root</span><span class="nv">@k8s</span><span class="n">-master1</span> <span class="p">~]</span><span class="c"># kubectl get svc -n ingress-nginx</span>
+<span class="n">NAME</span>             <span class="nb">TYPE </span>       <span class="n">CLUSTER-IP</span>     <span class="n">EXTERNAL-IP</span>   <span class="n">PORT</span><span class="p">(</span><span class="n">S</span><span class="p">)</span>          <span class="n">AGE</span>
+<span class="n">nginx-service</span>    <span class="n">ClusterIP</span>   <span class="n">10</span><span class="p">.</span><span class="n">2</span><span class="p">.</span><span class="n">115</span><span class="p">.</span><span class="n">144</span>   <span class="p">&lt;</span><span class="n">none</span><span class="p">&gt;</span>        <span class="n">80</span><span class="p">/</span><span class="n">TCP</span>           <span class="n">22h</span>
+<span class="n">nginx-service2</span>   <span class="n">ClusterIP</span>   <span class="n">10</span><span class="p">.</span><span class="n">2</span><span class="p">.</span><span class="n">237</span><span class="p">.</span><span class="n">70</span>    <span class="p">&lt;</span><span class="n">none</span><span class="p">&gt;</span>        <span class="n">80</span><span class="p">/</span><span class="n">TCP</span><span class="p">,</span><span class="n">443</span><span class="p">/</span><span class="n">TCP</span>   <span class="n">22h</span>
+<span class="n">nginx-service3</span>   <span class="n">NodePort</span>    <span class="n">10</span><span class="p">.</span><span class="n">2</span><span class="p">.</span><span class="n">75</span><span class="p">.</span><span class="n">250</span>    <span class="p">&lt;</span><span class="n">none</span><span class="p">&gt;</span>        <span class="n">80</span><span class="p">:</span><span class="n">26765</span><span class="p">/</span><span class="n">TCP</span>     <span class="n">3m51s</span>
+<span class="n">nginx-service3是nodeport类型</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="p">[</span><span class="n">root</span><span class="nv">@otherhost</span> <span class="p">~]</span><span class="c"># vim /etc/hosts</span>
+
+<span class="n">192</span><span class="p">.</span><span class="n">168</span><span class="p">.</span><span class="n">10</span><span class="p">.</span><span class="n">91</span> <span class="n">www</span><span class="p">.</span><span class="n">kubemsb3</span><span class="p">.</span><span class="n">com</span>                  <span class="n">添加这行模拟DNS</span>
+
+<span class="p">[</span><span class="n">root</span><span class="nv">@otherhost</span> <span class="p">~]</span><span class="c"># curl www.kubemsb3.com</span>
+</code></pre></div>
+<h1 id="ingress_nginx_controller_140">ingress nginx controller 1.4.0 最新版本部署方法<a class="headerlink" href="#ingress_nginx_controller_140" title="Permanent link">&para;</a></h1>
+<h1 id="ingress_nginx_controller">一、获取ingress nginx controller<a class="headerlink" href="#ingress_nginx_controller" title="Permanent link">&para;</a></h1>
+<p><img alt="image-20220918114949361" src="../../../img/kubernetes/kubernetes_nginx_ingress_controller/image-20220918114949361.png" /></p>
+<p><img alt="image-20220918115048813" src="../../../img/kubernetes/kubernetes_nginx_ingress_controller/image-20220918115048813.png" /></p>
+<p><img alt="image-20220918115146998" src="../../../img/kubernetes/kubernetes_nginx_ingress_controller/image-20220918115146998.png" /></p>
+<p><img alt="image-20220918115213271" src="../../../img/kubernetes/kubernetes_nginx_ingress_controller/image-20220918115213271.png" /></p>
+<p><img alt="image-20220918115253857" src="../../../img/kubernetes/kubernetes_nginx_ingress_controller/image-20220918115253857.png" /></p>
+<div class="highlight"><pre><span></span><code><span class="c"># wget https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.4.0/deploy/static/provider/cloud/deploy.yaml</span>
+</code></pre></div>
+<h1 id="ingress_nginx_controller_1">二、部署ingress nginx controller<a class="headerlink" href="#ingress_nginx_controller_1" title="Permanent link">&para;</a></h1>
+<div class="highlight"><pre><span></span><code><span class="c"># vim deploy.yaml</span>
+<span class="p">......</span>
+
+<span class="n">361</span> <span class="n">spec</span><span class="p">:</span>
+<span class="n">362</span>   <span class="n">externalTrafficPolicy</span><span class="p">:</span> <span class="n">Cluster</span>  <span class="n">默认为local</span><span class="err">，</span><span class="n">修改为Cluster</span>
+<span class="n">363</span>   <span class="n">ipFamilies</span><span class="p">:</span>
+<span class="n">364</span>   <span class="p">-</span> <span class="n">IPv4</span>
+<span class="n">365</span>   <span class="n">ipFamilyPolicy</span><span class="p">:</span> <span class="n">SingleStack</span>
+<span class="n">366</span>   <span class="n">ports</span><span class="p">:</span>
+<span class="n">367</span>   <span class="p">-</span> <span class="n">appProtocol</span><span class="p">:</span> <span class="n">http</span>
+<span class="n">368</span>     <span class="n">name</span><span class="p">:</span> <span class="n">http</span>
+<span class="n">369</span>     <span class="n">port</span><span class="p">:</span> <span class="n">80</span>
+<span class="n">370</span>     <span class="n">protocol</span><span class="p">:</span> <span class="n">TCP</span>
+<span class="n">371</span>     <span class="n">targetPort</span><span class="p">:</span> <span class="n">http</span>
+<span class="n">372</span>   <span class="p">-</span> <span class="n">appProtocol</span><span class="p">:</span> <span class="n">https</span>
+<span class="n">373</span>     <span class="n">name</span><span class="p">:</span> <span class="n">https</span>
+<span class="n">374</span>     <span class="n">port</span><span class="p">:</span> <span class="n">443</span>
+<span class="n">375</span>     <span class="n">protocol</span><span class="p">:</span> <span class="n">TCP</span>
+<span class="n">376</span>     <span class="n">targetPort</span><span class="p">:</span> <span class="n">https</span>
+<span class="n">377</span>   <span class="n">selector</span><span class="p">:</span>
+<span class="n">378</span>     <span class="n">app</span><span class="p">.</span><span class="n">kubernetes</span><span class="p">.</span><span class="n">io</span><span class="p">/</span><span class="n">component</span><span class="p">:</span> <span class="n">controller</span>
+<span class="n">379</span>     <span class="n">app</span><span class="p">.</span><span class="n">kubernetes</span><span class="p">.</span><span class="n">io</span><span class="p">/</span><span class="n">instance</span><span class="p">:</span> <span class="n">ingress-nginx</span>
+<span class="n">380</span>     <span class="n">app</span><span class="p">.</span><span class="n">kubernetes</span><span class="p">.</span><span class="n">io</span><span class="p">/</span><span class="n">name</span><span class="p">:</span> <span class="n">ingress-nginx</span>
+<span class="n">381</span>   <span class="n">type</span><span class="p">:</span> <span class="n">LoadBalancer</span>  <span class="n">此处默认即为LoadBalancer</span><span class="p">,</span><span class="n">此版本不用修改</span><span class="err">。</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c"># kubectl apply -f deploy.yaml</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c"># kubectl get pods -n ingress-nginx</span>
+<span class="n">NAME</span>                                       <span class="n">READY</span>   <span class="n">STATUS</span>      <span class="n">RESTARTS</span>   <span class="n">AGE</span>
+<span class="n">ingress-nginx-admission-create-szjlp</span>       <span class="n">0</span><span class="p">/</span><span class="n">1</span>     <span class="n">Completed</span>   <span class="n">0</span>          <span class="n">13m</span>
+<span class="n">ingress-nginx-admission-patch-b8vnr</span>        <span class="n">0</span><span class="p">/</span><span class="n">1</span>     <span class="n">Completed</span>   <span class="n">0</span>          <span class="n">13m</span>
+<span class="n">ingress-nginx-controller-b4fcbcc8f-mg9vm</span>   <span class="n">1</span><span class="p">/</span><span class="n">1</span>     <span class="n">Running</span>     <span class="n">0</span>          <span class="n">13m</span>
+</code></pre></div>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      BurningMyself<a href='https://beian.miit.gov.cn/' target='_blank'>  蜀ICP备15033200号-1</a>
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        <div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/burningmyself" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://gitee.com/burningmyself" target="_blank" rel="noopener" title="gitee.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 488 512"><!--! Font Awesome Free 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M488 261.8C488 403.3 391.1 504 248 504 110.8 504 0 393.2 0 256S110.8 8 248 8c66.8 0 123 24.5 166.3 64.9l-67.5 64.9C258.5 52.6 94.3 116.6 94.3 256c0 86.5 69.1 156.6 153.7 156.6 98.2 0 135-70.4 140.8-106.9H248v-85.3h236.1c2.3 12.7 3.9 24.9 3.9 41.4z"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "../../..", "features": [], "search": "../../../assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.2a6f1dda.min.js"></script>
+      
+        <script src="../../../js/extra.js"></script>
+      
+        <script src="../../../js/baidu-tongji.js"></script>
+      
+        <script src="https://www.googletagmanager.com/gtag/js?id=UA-155084439-1"></script>
+      
+        <script src="https://www.googletagmanager.com/gtag/js?id=UA-155132293-1"></script>
+      
+        <script src="../../../js/google.js"></script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+      
+    
+  </body>
+</html>
