@@ -133,7 +133,7 @@ nav:
       - Kubernetes配置与密钥管理 ConfigMap&Secret: cloud/kubernetes/kubernetes_configMap_secret.md
       - Kubernetes集群使用容器镜像仓库Harbor: cloud/kubernetes/kubernetes_harbor.md
       - Kubernetes集群安全管理: cloud/kubernetes/kubernetes_safety.md
-      - 源监控: cloud/kubernetes/kubernetes_ui.md 
+      - kubernetes持久化存储卷: cloud/kubernetes/kubernetes_storage_volume.md 
       - 源监控: cloud/kubernetes/kubernetes_ui.md
       - 源监控: cloud/kubernetes/kubernetes_ui.md
       - 源监控: cloud/kubernetes/kubernetes_ui.md
