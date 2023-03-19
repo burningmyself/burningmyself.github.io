@@ -78,7 +78,7 @@ nav:
         - 数据库之互联网常用分库分表方案: sql/data_split.md
         - Mybatis使用心德: sql/mybatis.md
     - Linux: 
-        - Linux 学习笔记：linux/linux.md
+        - Linux: 学习笔记：linux/linux.md
         - 常用命令: linux/often.md
         - 实用的Linux 命令: linux/ope.md        
     - Docker: 
