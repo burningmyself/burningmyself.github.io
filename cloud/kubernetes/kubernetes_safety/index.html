@@ -15,13 +15,17 @@
         <link rel="canonical" href="https://burningmyself.gitee.io/cloud/kubernetes/kubernetes_safety/">
       
       
+        <link rel="prev" href="../kubernetes_harbor/">
+      
+      
+        <link rel="next" href="../kubernetes_storage_volume/">
       
       <link rel="icon" href="../../../favicon.ico">
       <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.0.15">
     
     
       
-        <title>1 安全管理 - BurningMyself</title>
+        <title>Kubernetes集群安全管理 - BurningMyself</title>
       
     
     
@@ -102,7 +106,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              1 安全管理
+              Kubernetes集群安全管理
             
           </span>
         </div>
@@ -1406,14 +1410,16 @@
 
   
   
+    
+  
   
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
       
       
       
-      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
       
       
       
@@ -1422,7 +1428,7 @@
           <span class="md-nav__icon md-icon"></span>
         </label>
       
-      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
         <label class="md-nav__title" for="__nav_3">
           <span class="md-nav__icon md-icon"></span>
           云架构
@@ -1705,14 +1711,16 @@
               
   
   
+    
+  
   
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
       
       
       
-      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_7" >
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_7" checked>
       
       
       
@@ -1721,7 +1729,7 @@
           <span class="md-nav__icon md-icon"></span>
         </label>
       
-      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_7_label" aria-expanded="false">
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_7_label" aria-expanded="true">
         <label class="md-nav__title" for="__nav_3_7">
           <span class="md-nav__icon md-icon"></span>
           Kubernetes
@@ -1956,10 +1964,126 @@
               
   
   
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Kubernetes集群安全管理
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Kubernetes集群安全管理
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#11" class="md-nav__link">
+    1.1 安全框架
+  </a>
+  
+    <nav class="md-nav" aria-label="1.1 安全框架">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#111" class="md-nav__link">
+    1.1.1 认证框架
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#112" class="md-nav__link">
+    1.1.2 框架解读
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12" class="md-nav__link">
+    1.2 认证实践
+  </a>
+  
+    <nav class="md-nav" aria-label="1.2 认证实践">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#121" class="md-nav__link">
+    1.2.1 用户实践
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#122" class="md-nav__link">
+    1.2.2 集群用户
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#123" class="md-nav__link">
+    1.2.3 授权基础
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#124" class="md-nav__link">
+    1.2.4 授权案例
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
   
     <li class="md-nav__item">
-      <a href="../kubernetes_ui/" class="md-nav__link">
-        源监控
+      <a href="../kubernetes_storage_volume/" class="md-nav__link">
+        kubernetes持久化存储卷
       </a>
     </li>
   
@@ -1972,22 +2096,8 @@
   
   
     <li class="md-nav__item">
-      <a href="../kubernetes_ui/" class="md-nav__link">
-        源监控
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../kubernetes_ui/" class="md-nav__link">
-        源监控
+      <a href="../kubernetes_storage_ceph/" class="md-nav__link">
+        存储解决方案 Ceph
       </a>
     </li>
   
@@ -2976,8 +3086,6 @@
 <h1 id="1">1 安全管理<a class="headerlink" href="#1" title="Permanent link">&para;</a></h1>
 <h2 id="11">1.1 安全框架<a class="headerlink" href="#11" title="Permanent link">&para;</a></h2>
 <h3 id="111">1.1.1 认证框架<a class="headerlink" href="#111" title="Permanent link">&para;</a></h3>
-<p>学习目标</p>
-<p>这一节，我们从 基础知识、认证流程、小结 三个方面来学习。</p>
 <p><strong>基础知识</strong></p>
 <p>资源操作</p>
 <p><img alt="image-20220722144813760" src="../../../img/kubernetes/kubernetes_safety/image-20220722144813760.png" /></p>
