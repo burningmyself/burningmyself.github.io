@@ -47,9 +47,7 @@
 
 ## 1.3 traefik与nginx ingress对比
 
-<img src="../../img/kubernetes/kubernetes_traefik/image-20220419021708805.png" alt="image-20220419021708805" style="zoom: 200%;" />
-
-
+![20220419021708805](../../img/kubernetes/kubernetes_traefik/image-20220419021708805.png)
 
 
 
