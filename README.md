@@ -7,7 +7,7 @@
 
 [Github](https://github.com/burningmyself)
 
-[Gitee](https://gitee.com/yangfubing)
+[Gitee](https://gitee.com/https://gitee.com/burningmyself)
 
 ![GitHub issues](https://img.shields.io/github/issues/burningmyself/burningmyself.github.io)
 ![GitHub forks](https://img.shields.io/github/forks/burningmyself/burningmyself.github.io)
