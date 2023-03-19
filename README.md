@@ -162,7 +162,7 @@
 * * [Kubernetes集群使用容器镜像仓库Harbor](cloud/kubernetes/kubernetes_harbor.md)
 * * [Kubernetes集群安全管理](cloud/kubernetes/kubernetes_safety.md)
 * * [kubernetes持久化存储卷](cloud/kubernetes/kubernetes_storage_volume.md)
-* * [源监控](cloud/kubernetes/kubernetes_ui.md)
+* * [存储解决方案 Ceph](cloud/kubernetes/kubernetes_storage_ceph.md)
 * * [源监控](cloud/kubernetes/kubernetes_ui.md)
 * * [源监控](cloud/kubernetes/kubernetes_ui.md)
 * * [源监控](cloud/kubernetes/kubernetes_ui.md)
