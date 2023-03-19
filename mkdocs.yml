@@ -113,7 +113,7 @@ nav:
       - Docker容器数据持久化存储机制: cloud/docker/docker_date.md
       - Docker容器服务编排利器Docker Compose应用实战: cloud/docker/docker_compose.md 
       - Docker主机集群化方案 Docker Swarm: cloud/docker/docker_swarm.md
-      - 基于Docker容器DevOps应用方案 企业业务代码发布系统: cloud/docker/docker_devops.md
+      - 基于Docker容器DevOps应用方案 企业业务代码发布系统: cloud/docker/docker_devops.m
       - 轻量级或工业级容器管理工具: cloud/docker/docker_container.md     
     - Kubernetes:
       - kubeadm极速部署Kubernetes: cloud/kubernetes.md
@@ -134,7 +134,7 @@ nav:
       - Kubernetes集群使用容器镜像仓库Harbor: cloud/kubernetes/kubernetes_harbor.md
       - Kubernetes集群安全管理: cloud/kubernetes/kubernetes_safety.md
       - kubernetes持久化存储卷: cloud/kubernetes/kubernetes_storage_volume.md 
-      - 存储解决方案 Ceph: cloud/kubernetes/kubernetes_storage_ceph.md
+      - kubernetes存储解决方案Ceph: cloud/kubernetes/kubernetes_storage_ceph.md
       - 源监控: cloud/kubernetes/kubernetes_ui.md
       - 源监控: cloud/kubernetes/kubernetes_ui.md
       - 源监控: cloud/kubernetes/kubernetes_ui.md
