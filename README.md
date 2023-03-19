@@ -60,6 +60,7 @@
   * [Java String](docs/java/java-string.md)
   * [Java Utils](docs/java/java-utils.md)
 * [Linux]
+  * [Linux 学习笔记](docs/linux/linux.md)
   * [Linux常用命令](docs/linux/often.md)
   * [实用的Linux 命令](docs/linux/ope.md)
 * [微服务]
@@ -83,6 +84,8 @@
   * [Python的字符操作](docs/python/str_joint.md)
   * [Python语法技巧](docs/python/syntax_rule.md)
   * [远程部署神器 Fabric](docs/python/fabric.md)
+* [Go]  
+  * [Go基础语法](docs/go/go_base.md)
 * [SQL]
   * [MySQL 优化指南](docs/sql/mysql_yh.md)
   * [MySQL优化](docs/sql/mysql_yh17.md)
