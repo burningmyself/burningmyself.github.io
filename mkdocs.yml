@@ -138,11 +138,11 @@ nav:
       - Kubernetes集群安全管理: cloud/kubernetes/kubernetes_safety.md
       - kubernetes持久化存储卷: cloud/kubernetes/kubernetes_storage_volume.md 
       - kubernetes存储解决方案Ceph: cloud/kubernetes/kubernetes_storage_ceph.md
-      - 源监控: cloud/kubernetes/kubernetes_ui.md
-      - 源监控: cloud/kubernetes/kubernetes_ui.md
-      - 源监控: cloud/kubernetes/kubernetes_ui.md
-      - 源监控: cloud/kubernetes/kubernetes_ui.md
-      - 源监控: cloud/kubernetes/kubernetes_ui.md
+      - Kubernetes集群公共服务: cloud/kubernetes/kubernetes_cluster_serve.md
+      - kubernetes集群java项目上云部署: cloud/kubernetes/kubernetes_deploy_java.md
+      - kubernetes集群Python项目上云部署: cloud/kubernetes/kubernetes_deploy_python.md
+      - Kubernetes集群golang项目上云部署: cloud/kubernetes/kubernetes_deploy_golang.md
+      - kubernetes日志收集方案: cloud/kubernetes/kubernetes_logs_collect.md
       - 源监控: cloud/kubernetes/kubernetes_ui.md
       - 源监控: cloud/kubernetes/kubernetes_ui.md   
       - 源监控: cloud/kubernetes/kubernetes_ui.md
