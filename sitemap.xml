@@ -2,667 +2,702 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://burningmyself.gitee.io/</loc>
-         <lastmod>2023-03-19</lastmod>
+         <lastmod>2023-03-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://burningmyself.gitee.io/cloud/apprelease/</loc>
-         <lastmod>2023-03-19</lastmod>
+         <lastmod>2023-03-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://burningmyself.gitee.io/cloud/compute/</loc>
-         <lastmod>2023-03-19</lastmod>
+         <lastmod>2023-03-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://burningmyself.gitee.io/cloud/containerlinux/</loc>
-         <lastmod>2023-03-19</lastmod>
+         <lastmod>2023-03-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://burningmyself.gitee.io/cloud/kubernetes/</loc>
-         <lastmod>2023-03-19</lastmod>
+         <lastmod>2023-03-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://burningmyself.gitee.io/cloud/native/</loc>
-         <lastmod>2023-03-19</lastmod>
+         <lastmod>2023-03-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://burningmyself.gitee.io/cloud/virtual/</loc>
-         <lastmod>2023-03-19</lastmod>
+         <lastmod>2023-03-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://burningmyself.gitee.io/cloud/docker/docker_compose/</loc>
-         <lastmod>2023-03-19</lastmod>
+         <lastmod>2023-03-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://burningmyself.gitee.io/cloud/docker/docker_container/</loc>
-         <lastmod>2023-03-19</lastmod>
+         <lastmod>2023-03-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://burningmyself.gitee.io/cloud/docker/docker_container_enterprice/</loc>
-         <lastmod>2023-03-19</lastmod>
+         <lastmod>2023-03-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://burningmyself.gitee.io/cloud/docker/docker_date/</loc>
-         <lastmod>2023-03-19</lastmod>
+         <lastmod>2023-03-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://burningmyself.gitee.io/cloud/docker/docker_devops/</loc>
-         <lastmod>2023-03-19</lastmod>
+         <lastmod>2023-03-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://burningmyself.gitee.io/cloud/docker/docker_file/</loc>
-         <lastmod>2023-03-19</lastmod>
+         <lastmod>2023-03-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://burningmyself.gitee.io/cloud/docker/docker_image/</loc>
-         <lastmod>2023-03-19</lastmod>
+         <lastmod>2023-03-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://burningmyself.gitee.io/cloud/docker/docker_image_fast/</loc>
-         <lastmod>2023-03-19</lastmod>
+         <lastmod>2023-03-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://burningmyself.gitee.io/cloud/docker/docker_native/</loc>
-         <lastmod>2023-03-19</lastmod>
+         <lastmod>2023-03-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://burningmyself.gitee.io/cloud/docker/docker_network/</loc>
-         <lastmod>2023-03-19</lastmod>
+         <lastmod>2023-03-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://burningmyself.gitee.io/cloud/docker/docker_nginx/</loc>
-         <lastmod>2023-03-19</lastmod>
+         <lastmod>2023-03-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://burningmyself.gitee.io/cloud/docker/docker_swarm/</loc>
-         <lastmod>2023-03-19</lastmod>
+         <lastmod>2023-03-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://burningmyself.gitee.io/cloud/kubernetes/kubernetes_cluster/</loc>
-         <lastmod>2023-03-19</lastmod>
+         <lastmod>2023-03-20</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://burningmyself.gitee.io/cloud/kubernetes/kubernetes_cluster_serve/</loc>
+         <lastmod>2023-03-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://burningmyself.gitee.io/cloud/kubernetes/kubernetes_configMap_secret/</loc>
-         <lastmod>2023-03-19</lastmod>
+         <lastmod>2023-03-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://burningmyself.gitee.io/cloud/kubernetes/kubernetes_core/</loc>
-         <lastmod>2023-03-19</lastmod>
+         <lastmod>2023-03-20</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://burningmyself.gitee.io/cloud/kubernetes/kubernetes_deploy_golang/</loc>
+         <lastmod>2023-03-20</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://burningmyself.gitee.io/cloud/kubernetes/kubernetes_deploy_java/</loc>
+         <lastmod>2023-03-20</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://burningmyself.gitee.io/cloud/kubernetes/kubernetes_deploy_python/</loc>
+         <lastmod>2023-03-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://burningmyself.gitee.io/cloud/kubernetes/kubernetes_harbor/</loc>
-         <lastmod>2023-03-19</lastmod>
+         <lastmod>2023-03-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://burningmyself.gitee.io/cloud/kubernetes/kubernetes_hight/</loc>
-         <lastmod>2023-03-19</lastmod>
+         <lastmod>2023-03-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://burningmyself.gitee.io/cloud/kubernetes/kubernetes_hight_bin1/</loc>
-         <lastmod>2023-03-19</lastmod>
+         <lastmod>2023-03-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://burningmyself.gitee.io/cloud/kubernetes/kubernetes_hight_bin2/</loc>
-         <lastmod>2023-03-19</lastmod>
+         <lastmod>2023-03-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://burningmyself.gitee.io/cloud/kubernetes/kubernetes_introduce/</loc>
-         <lastmod>2023-03-19</lastmod>
+         <lastmod>2023-03-20</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://burningmyself.gitee.io/cloud/kubernetes/kubernetes_logs_collect/</loc>
+         <lastmod>2023-03-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://burningmyself.gitee.io/cloud/kubernetes/kubernetes_master/</loc>
-         <lastmod>2023-03-19</lastmod>
+         <lastmod>2023-03-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://burningmyself.gitee.io/cloud/kubernetes/kubernetes_nginx_ingress_controller/</loc>
-         <lastmod>2023-03-19</lastmod>
+         <lastmod>2023-03-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://burningmyself.gitee.io/cloud/kubernetes/kubernetes_rke/</loc>
-         <lastmod>2023-03-19</lastmod>
+         <lastmod>2023-03-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://burningmyself.gitee.io/cloud/kubernetes/kubernetes_safety/</loc>
-         <lastmod>2023-03-19</lastmod>
+         <lastmod>2023-03-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://burningmyself.gitee.io/cloud/kubernetes/kubernetes_sealos/</loc>
-         <lastmod>2023-03-19</lastmod>
+         <lastmod>2023-03-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://burningmyself.gitee.io/cloud/kubernetes/kubernetes_storage_ceph/</loc>
-         <lastmod>2023-03-19</lastmod>
+         <lastmod>2023-03-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://burningmyself.gitee.io/cloud/kubernetes/kubernetes_storage_volume/</loc>
-         <lastmod>2023-03-19</lastmod>
+         <lastmod>2023-03-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://burningmyself.gitee.io/cloud/kubernetes/kubernetes_traefik/</loc>
-         <lastmod>2023-03-19</lastmod>
+         <lastmod>2023-03-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://burningmyself.gitee.io/cloud/kubernetes/kubernetes_ui/</loc>
-         <lastmod>2023-03-19</lastmod>
+         <lastmod>2023-03-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://burningmyself.gitee.io/cloud/kubernetes/kubernetes_way/</loc>
-         <lastmod>2023-03-19</lastmod>
+         <lastmod>2023-03-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://burningmyself.gitee.io/dart/syntax/</loc>
-         <lastmod>2023-03-19</lastmod>
+         <lastmod>2023-03-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://burningmyself.gitee.io/docker/docker-compose/</loc>
-         <lastmod>2023-03-19</lastmod>
+         <lastmod>2023-03-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://burningmyself.gitee.io/docker/docker-jenkins/</loc>
-         <lastmod>2023-03-19</lastmod>
+         <lastmod>2023-03-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://burningmyself.gitee.io/docker/docker-phabricator/</loc>
-         <lastmod>2023-03-19</lastmod>
+         <lastmod>2023-03-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://burningmyself.gitee.io/docker/docker/</loc>
-         <lastmod>2023-03-19</lastmod>
+         <lastmod>2023-03-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://burningmyself.gitee.io/emotion/emotion/</loc>
-         <lastmod>2023-03-19</lastmod>
+         <lastmod>2023-03-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://burningmyself.gitee.io/emotion/eq/</loc>
-         <lastmod>2023-03-19</lastmod>
+         <lastmod>2023-03-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://burningmyself.gitee.io/emotion/lifetime/</loc>
-         <lastmod>2023-03-19</lastmod>
+         <lastmod>2023-03-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://burningmyself.gitee.io/emotion/livefail/</loc>
-         <lastmod>2023-03-19</lastmod>
+         <lastmod>2023-03-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://burningmyself.gitee.io/emotion/lookbook/</loc>
-         <lastmod>2023-03-19</lastmod>
+         <lastmod>2023-03-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://burningmyself.gitee.io/emotion/losecome/</loc>
-         <lastmod>2023-03-19</lastmod>
+         <lastmod>2023-03-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://burningmyself.gitee.io/emotion/onepath/</loc>
-         <lastmod>2023-03-19</lastmod>
+         <lastmod>2023-03-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://burningmyself.gitee.io/emotion/selfdiscipline/</loc>
-         <lastmod>2023-03-19</lastmod>
+         <lastmod>2023-03-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://burningmyself.gitee.io/emotion/threeheart/</loc>
-         <lastmod>2023-03-19</lastmod>
+         <lastmod>2023-03-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://burningmyself.gitee.io/emotion/twopath/</loc>
-         <lastmod>2023-03-19</lastmod>
+         <lastmod>2023-03-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://burningmyself.gitee.io/emotion/workheard/</loc>
-         <lastmod>2023-03-19</lastmod>
+         <lastmod>2023-03-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://burningmyself.gitee.io/exp/ai/</loc>
-         <lastmod>2023-03-19</lastmod>
+         <lastmod>2023-03-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://burningmyself.gitee.io/exp/cl/</loc>
-         <lastmod>2023-03-19</lastmod>
+         <lastmod>2023-03-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://burningmyself.gitee.io/exp/code-principle/</loc>
-         <lastmod>2023-03-19</lastmod>
+         <lastmod>2023-03-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://burningmyself.gitee.io/exp/cto/</loc>
-         <lastmod>2023-03-19</lastmod>
+         <lastmod>2023-03-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://burningmyself.gitee.io/exp/devops/</loc>
-         <lastmod>2023-03-19</lastmod>
+         <lastmod>2023-03-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://burningmyself.gitee.io/exp/four_deep_learning/</loc>
-         <lastmod>2023-03-19</lastmod>
+         <lastmod>2023-03-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://burningmyself.gitee.io/exp/learnweetout/</loc>
-         <lastmod>2023-03-19</lastmod>
+         <lastmod>2023-03-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://burningmyself.gitee.io/exp/micro-service/</loc>
-         <lastmod>2023-03-19</lastmod>
+         <lastmod>2023-03-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://burningmyself.gitee.io/exp/pt/</loc>
-         <lastmod>2023-03-19</lastmod>
+         <lastmod>2023-03-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://burningmyself.gitee.io/exp/raft-gossip/</loc>
-         <lastmod>2023-03-19</lastmod>
+         <lastmod>2023-03-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://burningmyself.gitee.io/exp/techbig/</loc>
-         <lastmod>2023-03-19</lastmod>
+         <lastmod>2023-03-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://burningmyself.gitee.io/exp/tl/</loc>
-         <lastmod>2023-03-19</lastmod>
+         <lastmod>2023-03-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://burningmyself.gitee.io/framework/agility/</loc>
-         <lastmod>2023-03-19</lastmod>
+         <lastmod>2023-03-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://burningmyself.gitee.io/framework/algorithm-ten/</loc>
-         <lastmod>2023-03-19</lastmod>
+         <lastmod>2023-03-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://burningmyself.gitee.io/framework/data_middle/</loc>
-         <lastmod>2023-03-19</lastmod>
+         <lastmod>2023-03-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://burningmyself.gitee.io/framework/fgb/</loc>
-         <lastmod>2023-03-19</lastmod>
+         <lastmod>2023-03-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://burningmyself.gitee.io/framework/fwork/</loc>
-         <lastmod>2023-03-19</lastmod>
+         <lastmod>2023-03-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://burningmyself.gitee.io/framework/split/</loc>
-         <lastmod>2023-03-19</lastmod>
+         <lastmod>2023-03-20</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://burningmyself.gitee.io/go/go_base/</loc>
+         <lastmod>2023-03-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://burningmyself.gitee.io/java/bio-nio/</loc>
-         <lastmod>2023-03-19</lastmod>
+         <lastmod>2023-03-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://burningmyself.gitee.io/java/feature/</loc>
-         <lastmod>2023-03-19</lastmod>
+         <lastmod>2023-03-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://burningmyself.gitee.io/java/java-simple/</loc>
-         <lastmod>2023-03-19</lastmod>
+         <lastmod>2023-03-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://burningmyself.gitee.io/java/java-string/</loc>
-         <lastmod>2023-03-19</lastmod>
+         <lastmod>2023-03-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://burningmyself.gitee.io/java/java-utils/</loc>
-         <lastmod>2023-03-19</lastmod>
+         <lastmod>2023-03-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://burningmyself.gitee.io/java/java-validator/</loc>
-         <lastmod>2023-03-19</lastmod>
+         <lastmod>2023-03-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://burningmyself.gitee.io/java/javavm/</loc>
-         <lastmod>2023-03-19</lastmod>
+         <lastmod>2023-03-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://burningmyself.gitee.io/java/load-class/</loc>
-         <lastmod>2023-03-19</lastmod>
+         <lastmod>2023-03-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://burningmyself.gitee.io/java/orm/</loc>
-         <lastmod>2023-03-19</lastmod>
+         <lastmod>2023-03-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://burningmyself.gitee.io/java/spring-cloud/</loc>
-         <lastmod>2023-03-19</lastmod>
+         <lastmod>2023-03-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://burningmyself.gitee.io/java/springAnnotation/</loc>
-         <lastmod>2023-03-19</lastmod>
+         <lastmod>2023-03-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://burningmyself.gitee.io/java/springdesign/</loc>
-         <lastmod>2023-03-19</lastmod>
+         <lastmod>2023-03-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://burningmyself.gitee.io/java/rocketmq/rmq-1/</loc>
-         <lastmod>2023-03-19</lastmod>
+         <lastmod>2023-03-20</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://burningmyself.gitee.io/linux/linux/</loc>
+         <lastmod>2023-03-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://burningmyself.gitee.io/linux/often/</loc>
-         <lastmod>2023-03-19</lastmod>
+         <lastmod>2023-03-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://burningmyself.gitee.io/linux/ope/</loc>
-         <lastmod>2023-03-19</lastmod>
+         <lastmod>2023-03-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://burningmyself.gitee.io/micro/ddd/</loc>
-         <lastmod>2023-03-19</lastmod>
+         <lastmod>2023-03-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://burningmyself.gitee.io/micro/design/</loc>
-         <lastmod>2023-03-19</lastmod>
+         <lastmod>2023-03-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://burningmyself.gitee.io/micro/distrimsg/</loc>
-         <lastmod>2023-03-19</lastmod>
+         <lastmod>2023-03-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://burningmyself.gitee.io/micro/fbs-lock/</loc>
-         <lastmod>2023-03-19</lastmod>
+         <lastmod>2023-03-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://burningmyself.gitee.io/micro/kafka/</loc>
-         <lastmod>2023-03-19</lastmod>
+         <lastmod>2023-03-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://burningmyself.gitee.io/micro/redis_cluster/</loc>
-         <lastmod>2023-03-19</lastmod>
+         <lastmod>2023-03-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://burningmyself.gitee.io/micro/spring-cloud-micro/</loc>
-         <lastmod>2023-03-19</lastmod>
+         <lastmod>2023-03-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://burningmyself.gitee.io/net/c_core_safety/</loc>
-         <lastmod>2023-03-19</lastmod>
+         <lastmod>2023-03-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://burningmyself.gitee.io/net/c_core_study_route/</loc>
-         <lastmod>2023-03-19</lastmod>
+         <lastmod>2023-03-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://burningmyself.gitee.io/net/c_docker/</loc>
-         <lastmod>2023-03-19</lastmod>
+         <lastmod>2023-03-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://burningmyself.gitee.io/net/c_sharp/</loc>
-         <lastmod>2023-03-19</lastmod>
+         <lastmod>2023-03-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://burningmyself.gitee.io/net/c_sqlserver_nginx/</loc>
-         <lastmod>2023-03-19</lastmod>
+         <lastmod>2023-03-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://burningmyself.gitee.io/php/kj/</loc>
-         <lastmod>2023-03-19</lastmod>
+         <lastmod>2023-03-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://burningmyself.gitee.io/python/fabric/</loc>
-         <lastmod>2023-03-19</lastmod>
+         <lastmod>2023-03-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://burningmyself.gitee.io/python/feature/</loc>
-         <lastmod>2023-03-19</lastmod>
+         <lastmod>2023-03-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://burningmyself.gitee.io/python/str_joint/</loc>
-         <lastmod>2023-03-19</lastmod>
+         <lastmod>2023-03-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://burningmyself.gitee.io/python/syntax_rule/</loc>
-         <lastmod>2023-03-19</lastmod>
+         <lastmod>2023-03-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://burningmyself.gitee.io/sql/data_split/</loc>
-         <lastmod>2023-03-19</lastmod>
+         <lastmod>2023-03-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://burningmyself.gitee.io/sql/mybatis/</loc>
-         <lastmod>2023-03-19</lastmod>
+         <lastmod>2023-03-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://burningmyself.gitee.io/sql/mysql_backups/</loc>
-         <lastmod>2023-03-19</lastmod>
+         <lastmod>2023-03-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://burningmyself.gitee.io/sql/mysql_index/</loc>
-         <lastmod>2023-03-19</lastmod>
+         <lastmod>2023-03-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://burningmyself.gitee.io/sql/mysql_log/</loc>
-         <lastmod>2023-03-19</lastmod>
+         <lastmod>2023-03-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://burningmyself.gitee.io/sql/mysql_pxc/</loc>
-         <lastmod>2023-03-19</lastmod>
+         <lastmod>2023-03-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://burningmyself.gitee.io/sql/mysql_use/</loc>
-         <lastmod>2023-03-19</lastmod>
+         <lastmod>2023-03-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://burningmyself.gitee.io/sql/mysql_yh/</loc>
-         <lastmod>2023-03-19</lastmod>
+         <lastmod>2023-03-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://burningmyself.gitee.io/sql/mysql_yh17/</loc>
-         <lastmod>2023-03-19</lastmod>
+         <lastmod>2023-03-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://burningmyself.gitee.io/sql/sql_server_master/</loc>
-         <lastmod>2023-03-19</lastmod>
+         <lastmod>2023-03-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://burningmyself.gitee.io/tool/cat-monitoring/</loc>
-         <lastmod>2023-03-19</lastmod>
+         <lastmod>2023-03-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://burningmyself.gitee.io/tool/cicd/</loc>
-         <lastmod>2023-03-19</lastmod>
+         <lastmod>2023-03-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://burningmyself.gitee.io/tool/git/</loc>
-         <lastmod>2023-03-19</lastmod>
+         <lastmod>2023-03-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://burningmyself.gitee.io/tool/gitbook/</loc>
-         <lastmod>2023-03-19</lastmod>
+         <lastmod>2023-03-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://burningmyself.gitee.io/tool/gitcmr/</loc>
-         <lastmod>2023-03-19</lastmod>
+         <lastmod>2023-03-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://burningmyself.gitee.io/tool/gitflow/</loc>
-         <lastmod>2023-03-19</lastmod>
+         <lastmod>2023-03-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://burningmyself.gitee.io/tool/gitquestion/</loc>
-         <lastmod>2023-03-19</lastmod>
+         <lastmod>2023-03-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://burningmyself.gitee.io/tool/gitstudy/</loc>
-         <lastmod>2023-03-19</lastmod>
+         <lastmod>2023-03-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://burningmyself.gitee.io/tool/gitusual/</loc>
-         <lastmod>2023-03-19</lastmod>
+         <lastmod>2023-03-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://burningmyself.gitee.io/tool/markdown/</loc>
-         <lastmod>2023-03-19</lastmod>
+         <lastmod>2023-03-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://burningmyself.gitee.io/tool/minio/</loc>
-         <lastmod>2023-03-19</lastmod>
+         <lastmod>2023-03-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://burningmyself.gitee.io/tool/mkdocs/</loc>
-         <lastmod>2023-03-19</lastmod>
+         <lastmod>2023-03-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://burningmyself.gitee.io/web/ali_js_style/</loc>
-         <lastmod>2023-03-19</lastmod>
+         <lastmod>2023-03-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://burningmyself.gitee.io/web/es6/</loc>
-         <lastmod>2023-03-19</lastmod>
+         <lastmod>2023-03-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://burningmyself.gitee.io/web/javascript/</loc>
-         <lastmod>2023-03-19</lastmod>
+         <lastmod>2023-03-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://burningmyself.gitee.io/web/js_tool_method/</loc>
-         <lastmod>2023-03-19</lastmod>
+         <lastmod>2023-03-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://burningmyself.gitee.io/web/node.js/</loc>
-         <lastmod>2023-03-19</lastmod>
+         <lastmod>2023-03-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://burningmyself.gitee.io/web/react/</loc>
-         <lastmod>2023-03-19</lastmod>
+         <lastmod>2023-03-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://burningmyself.gitee.io/web/react_interview/</loc>
-         <lastmod>2023-03-19</lastmod>
+         <lastmod>2023-03-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://burningmyself.gitee.io/web/vue_cp_react/</loc>
-         <lastmod>2023-03-19</lastmod>
+         <lastmod>2023-03-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
 </urlset>
