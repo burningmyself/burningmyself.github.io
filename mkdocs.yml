@@ -145,7 +145,7 @@ nav:
       - kubernetes日志收集方案: cloud/kubernetes/kubernetes_logs_collect.md
       - 企业级中间件上云部署 zookeeper: cloud/kubernetes/kubernetes_zookeeper.md
       - kubernetes云原生中间件上云部署 kafka: cloud/kubernetes/kubernetes_kafka.md   
-      - rocketmq部署: cloud/kubernetes/kubernetes_rocketmq.md
+      - rocketmq部署: cloud/kubernetes/kubernetes_rokectmq.md
       - 源监控: cloud/kubernetes/kubernetes_ui.md
       - 源监控: cloud/kubernetes/kubernetes_ui.md
       - 源监控: cloud/kubernetes/kubernetes_ui.md 

@@ -171,7 +171,7 @@
   * [kubernetes日志收集方案](docs/cloud/kubernetes/kubernetes_logs_collect.md)
   * [企业级中间件上云部署 zookeeper](docs/cloud/kubernetes/kubernetes_zookeeper.md)
   * [kubernetes云原生中间件上云部署 kafka](docs/cloud/kubernetes/kubernetes_kafka.md)
-  * [源监rocketmq部署控](docs/cloud/kubernetes/kubernetes_rocketmq.md)
+  * [源监rocketmq部署控](docs/cloud/kubernetes/kubernetes_rokectmq.md)
   * [源监控](docs/cloud/kubernetes/kubernetes_ui.md)
   * [源监控](docs/cloud/kubernetes/kubernetes_ui.md)
   * [源监控](docs/cloud/kubernetes/kubernetes_ui.md)
