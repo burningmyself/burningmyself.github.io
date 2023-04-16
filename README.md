@@ -181,7 +181,7 @@
   * [源Rancher容器云管理平台监控](docs/cloud/kubernetes/kubernetes_rancher.md)
   * [源监使用kubeconfig管理多集群方法控](docs/cloud/kubernetes/kubernetes_kubeconfig.md)
   * [karmada实现k8s集群联邦](docs/cloud/kubernetes/kubernetes_karamada.md)
-  * [《将博客搬至CSDN》](docs/cloud/kubernetes/kubernetes_csnd.md)
+  * [《将博客搬至CSDN》](docs/cloud/kubernetes/kubernetes_csdn.md)
   * [源监控](docs/cloud/kubernetes/kubernetes_ui.md)
 * [情感]
   * [情商](docs/emotion/eq.md)

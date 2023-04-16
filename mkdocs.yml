@@ -155,7 +155,7 @@ nav:
       - Rancher容器云管理平台: cloud/kubernetes/kubernetes_rancher.md
       - 使用kubeconfig管理多集群方法: cloud/kubernetes/kubernetes_kubeconfig.md
       - karmada实现k8s集群联邦: cloud/kubernetes/kubernetes_karmada.md
-      - 《将博客搬至CSDN》: cloud/kubernetes/kubernetes_csnd.md
+      - 《将博客搬至CSDN》: cloud/kubernetes/kubernetes_csdn.md
       - 源监控: cloud/kubernetes/kubernetes_ui.md
       - 源监控: cloud/kubernetes/kubernetes_ui.md                                
   - 微服务:  
