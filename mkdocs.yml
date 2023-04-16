@@ -146,8 +146,8 @@ nav:
       - 企业级中间件上云部署 zookeeper: cloud/kubernetes/kubernetes_zookeeper.md
       - kubernetes云原生中间件上云部署 kafka: cloud/kubernetes/kubernetes_kafka.md   
       - rocketmq部署: cloud/kubernetes/kubernetes_rokectmq.md
-      - 源监控: cloud/kubernetes/kubernetes_ui.md
-      - 源监控: cloud/kubernetes/kubernetes_ui.md
+      - Kubernetes集群包管理解决方案 Helm: cloud/kubernetes/kubernetes_helm.md
+      - Kubernetes原生配置管理利器 kustomize: cloud/kubernetes/kubernetes_kustomize.md
       - 源监控: cloud/kubernetes/kubernetes_ui.md 
       - 源监控: cloud/kubernetes/kubernetes_ui.md
       - 源监控: cloud/kubernetes/kubernetes_ui.md
