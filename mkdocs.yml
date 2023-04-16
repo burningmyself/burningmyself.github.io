@@ -148,9 +148,11 @@ nav:
       - rocketmq部署: cloud/kubernetes/kubernetes_rokectmq.md
       - Kubernetes集群包管理解决方案 Helm: cloud/kubernetes/kubernetes_helm.md
       - Kubernetes原生配置管理利器 kustomize: cloud/kubernetes/kubernetes_kustomize.md
-      - 源监控: cloud/kubernetes/kubernetes_ui.md 
-      - 源监控: cloud/kubernetes/kubernetes_ui.md
-      - 源监控: cloud/kubernetes/kubernetes_ui.md
+      - kubernetes集群网络解决方案 flannel: cloud/kubernetes/kubernetes_flannel.md 
+      - kubernetes集群网络解决方案 calico: cloud/kubernetes/kubernetes_calico.md
+      - kubernetes集群 underlay 网络方案 hybridnet: cloud/kubernetes/kubernetes_hybridnet.md
+      - kubernetes版本双栈协议（IPv4&IPv6）集群部署: cloud/kubernetes/kubernetes_ipv4_and_ipv6.md
+      - Rancher容器云管理平台: cloud/kubernetes/kubernetes_rancher.md
       - 源监控: cloud/kubernetes/kubernetes_ui.md
       - 源监控: cloud/kubernetes/kubernetes_ui.md                                 
   - 微服务:  
