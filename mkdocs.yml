@@ -153,8 +153,11 @@ nav:
       - kubernetes集群 underlay 网络方案 hybridnet: cloud/kubernetes/kubernetes_hybridnet.md
       - kubernetes版本双栈协议（IPv4&IPv6）集群部署: cloud/kubernetes/kubernetes_ipv4_and_ipv6.md
       - Rancher容器云管理平台: cloud/kubernetes/kubernetes_rancher.md
+      - 使用kubeconfig管理多集群方法: cloud/kubernetes/kubernetes_kubeconfig.md
+      - karmada实现k8s集群联邦: cloud/kubernetes/kubernetes_karmada.md
+      - 《将博客搬至CSDN》: cloud/kubernetes/kubernetes_csnd.md
       - 源监控: cloud/kubernetes/kubernetes_ui.md
-      - 源监控: cloud/kubernetes/kubernetes_ui.md                                 
+      - 源监控: cloud/kubernetes/kubernetes_ui.md                                
   - 微服务:  
       - 分布式锁: micro/fbs-lock.md
       - 微服务设计: micro/design.md
