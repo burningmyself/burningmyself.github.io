@@ -96,6 +96,11 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://burningmyself.gitee.io/cloud/kubernetes/kubernetes_calico/</loc>
+         <lastmod>2023-04-16</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://burningmyself.gitee.io/cloud/kubernetes/kubernetes_cluster/</loc>
          <lastmod>2023-04-16</lastmod>
          <changefreq>daily</changefreq>
@@ -131,6 +136,11 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://burningmyself.gitee.io/cloud/kubernetes/kubernetes_flannel/</loc>
+         <lastmod>2023-04-16</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://burningmyself.gitee.io/cloud/kubernetes/kubernetes_harbor/</loc>
          <lastmod>2023-04-16</lastmod>
          <changefreq>daily</changefreq>
@@ -156,7 +166,17 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://burningmyself.gitee.io/cloud/kubernetes/kubernetes_hybridnet/</loc>
+         <lastmod>2023-04-16</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://burningmyself.gitee.io/cloud/kubernetes/kubernetes_introduce/</loc>
+         <lastmod>2023-04-16</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://burningmyself.gitee.io/cloud/kubernetes/kubernetes_ipv4_and_ipv6/</loc>
          <lastmod>2023-04-16</lastmod>
          <changefreq>daily</changefreq>
     </url>
@@ -182,6 +202,11 @@
     </url>
     <url>
          <loc>https://burningmyself.gitee.io/cloud/kubernetes/kubernetes_nginx_ingress_controller/</loc>
+         <lastmod>2023-04-16</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://burningmyself.gitee.io/cloud/kubernetes/kubernetes_rancher/</loc>
          <lastmod>2023-04-16</lastmod>
          <changefreq>daily</changefreq>
     </url>
