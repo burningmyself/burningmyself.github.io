@@ -121,6 +121,11 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://burningmyself.gitee.io/cloud/kubernetes/kubernetes_csdn/</loc>
+         <lastmod>2023-04-16</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://burningmyself.gitee.io/cloud/kubernetes/kubernetes_deploy_golang/</loc>
          <lastmod>2023-04-16</lastmod>
          <changefreq>daily</changefreq>
@@ -182,6 +187,16 @@
     </url>
     <url>
          <loc>https://burningmyself.gitee.io/cloud/kubernetes/kubernetes_kafka/</loc>
+         <lastmod>2023-04-16</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://burningmyself.gitee.io/cloud/kubernetes/kubernetes_karmada/</loc>
+         <lastmod>2023-04-16</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://burningmyself.gitee.io/cloud/kubernetes/kubernetes_kubeconfig/</loc>
          <lastmod>2023-04-16</lastmod>
          <changefreq>daily</changefreq>
     </url>

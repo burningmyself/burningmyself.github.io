@@ -1,0 +1,3435 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content=".net,java,php,python,docker,web">
+      
+      
+        <meta name="author" content="BurningMyself">
+      
+      
+        <link rel="canonical" href="https://burningmyself.gitee.io/cloud/kubernetes/kubernetes_kubeconfig/">
+      
+      
+        <link rel="prev" href="../kubernetes_rancher/">
+      
+      
+        <link rel="next" href="../kubernetes_karmada/">
+      
+      <link rel="icon" href="../../../favicon.ico">
+      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.0.15">
+    
+    
+      
+        <title>使用kubeconfig管理多集群方法 - BurningMyself</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.113286f1.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.a0c5b2b5.min.css">
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="" data-md-color-accent="">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#kubeconfig" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../../.." title="BurningMyself" class="md-header__button md-logo" aria-label="BurningMyself" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            BurningMyself
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              使用kubeconfig管理多集群方法
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/burningmyself/burningmyself.github.io" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    burningmyself.github.io
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="BurningMyself" class="md-nav__button md-logo" aria-label="BurningMyself" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    BurningMyself
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/burningmyself/burningmyself.github.io" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    burningmyself.github.io
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        介绍
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+          技术博文
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          技术博文
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="0">
+          .NET
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_1_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2_1">
+          <span class="md-nav__icon md-icon"></span>
+          .NET
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../net/c_sharp/" class="md-nav__link">
+        C#新特性语法
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../net/c_docker/" class="md-nav__link">
+        .Net Core Docker 部署
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../net/c_sqlserver_nginx/" class="md-nav__link">
+        Docker 容器化部署 ASP.NET Core
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../net/c_core_safety/" class="md-nav__link">
+        让你的ASP.NET Core应用程序更安全
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../net/c_core_study_route/" class="md-nav__link">
+        ASP.NET Core开发者指南
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+          Java
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2_2">
+          <span class="md-nav__icon md-icon"></span>
+          Java
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../java/feature/" class="md-nav__link">
+        Java特性
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../java/load-class/" class="md-nav__link">
+        Java类加载
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../java/orm/" class="md-nav__link">
+        Orm的优缺点
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../java/bio-nio/" class="md-nav__link">
+        BIO与NIO
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../java/rocketmq/rmq-1/" class="md-nav__link">
+        RocketMq下载与安装
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../java/springAnnotation/" class="md-nav__link">
+        Spring常用注解
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../java/javavm/" class="md-nav__link">
+        Java 虚拟机
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../java/springdesign/" class="md-nav__link">
+        Spring 常用设计
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../java/spring-cloud/" class="md-nav__link">
+        Spring Cloud
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../java/java-simple/" class="md-nav__link">
+        Java simple
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../java/java-validator/" class="md-nav__link">
+        Java Validator
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../java/java-string/" class="md-nav__link">
+        Java String
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../java/java-utils/" class="md-nav__link">
+        Java Utils
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+          Python
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2_3">
+          <span class="md-nav__icon md-icon"></span>
+          Python
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../python/feature/" class="md-nav__link">
+        Python特性
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../python/str_joint/" class="md-nav__link">
+        Python字符拼接
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../python/syntax_rule/" class="md-nav__link">
+        Python语法技巧
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../python/fabric/" class="md-nav__link">
+        远程部署神器 Fabric
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_4" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_4" id="__nav_2_4_label" tabindex="0">
+          Go
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_4_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2_4">
+          <span class="md-nav__icon md-icon"></span>
+          Go
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../go/go_base/" class="md-nav__link">
+        Go基础语法
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_5" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_5" id="__nav_2_5_label" tabindex="0">
+          PHP
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_5_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2_5">
+          <span class="md-nav__icon md-icon"></span>
+          PHP
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../php/kj/" class="md-nav__link">
+        框架
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_6" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_6" id="__nav_2_6_label" tabindex="0">
+          Web
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_6_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2_6">
+          <span class="md-nav__icon md-icon"></span>
+          Web
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../web/es6/" class="md-nav__link">
+        es6语法
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../web/ali_js_style/" class="md-nav__link">
+        阿里js样式规范
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../web/node.js/" class="md-nav__link">
+        node.js文档
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../web/react/" class="md-nav__link">
+        React 开发者指南
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../dart/syntax/" class="md-nav__link">
+        Dart语法学习
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../web/react_interview/" class="md-nav__link">
+        React 面试
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../web/js_tool_method/" class="md-nav__link">
+        js 工具函数
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../web/vue_cp_react/" class="md-nav__link">
+        vue与react比较
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../web/javascript/" class="md-nav__link">
+        JavaScript 基础
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_7" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_7" id="__nav_2_7_label" tabindex="0">
+          SQL
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_7_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2_7">
+          <span class="md-nav__icon md-icon"></span>
+          SQL
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../sql/mysql_yh/" class="md-nav__link">
+        MySQL优化
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../sql/mysql_yh17/" class="md-nav__link">
+        MySQL优化
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../sql/mysql_log/" class="md-nav__link">
+        MySQL日志
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../sql/mysql_index/" class="md-nav__link">
+        MySQL索引
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../sql/mysql_pxc/" class="md-nav__link">
+        MySQL PXC集群
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../sql/mysql_use/" class="md-nav__link">
+        MySQL 数据库应用
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../sql/mysql_backups/" class="md-nav__link">
+        MySql 备份
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../sql/sql_server_master/" class="md-nav__link">
+        Sql Server 主从备份
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../sql/data_split/" class="md-nav__link">
+        数据库之互联网常用分库分表方案
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../sql/mybatis/" class="md-nav__link">
+        Mybatis使用心德
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_8" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_8" id="__nav_2_8_label" tabindex="0">
+          Linux
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_8_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2_8">
+          <span class="md-nav__icon md-icon"></span>
+          Linux
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../linux/linux/" class="md-nav__link">
+        Linux学习笔记
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../linux/often/" class="md-nav__link">
+        常用命令
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../linux/ope/" class="md-nav__link">
+        实用的Linux 命令
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_9" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_9" id="__nav_2_9_label" tabindex="0">
+          Docker
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_9_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2_9">
+          <span class="md-nav__icon md-icon"></span>
+          Docker
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../docker/docker/" class="md-nav__link">
+        Docker全科
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../docker/docker-compose/" class="md-nav__link">
+        docker和docker-compose配置常用环境
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../docker/docker-jenkins/" class="md-nav__link">
+        Docker部署Jenkins
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../docker/docker-phabricator/" class="md-nav__link">
+        Docker部署Phabricator
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_10" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_10" id="__nav_2_10_label" tabindex="0">
+          Tool
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_10_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2_10">
+          <span class="md-nav__icon md-icon"></span>
+          Tool
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tool/git/" class="md-nav__link">
+        Git
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tool/gitusual/" class="md-nav__link">
+        Git动画展示
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tool/gitquestion/" class="md-nav__link">
+        Git问题处理
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tool/gitflow/" class="md-nav__link">
+        GitFlow
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tool/gitbook/" class="md-nav__link">
+        GitBook
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tool/gitcmr/" class="md-nav__link">
+        Git提交日志规范
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tool/markdown/" class="md-nav__link">
+        Markdown
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tool/cicd/" class="md-nav__link">
+        CI/CD
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tool/mkdocs/" class="md-nav__link">
+        mkdocs简单使用
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tool/gitstudy/" class="md-nav__link">
+        Git的黑魔法
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tool/minio/" class="md-nav__link">
+        MinIO 搭建使用
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tool/cat-monitoring/" class="md-nav__link">
+        Cat分布式监控
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+          云架构
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          云架构
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../native/" class="md-nav__link">
+        云原生
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../virtual/" class="md-nav__link">
+        虚拟化技术
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../compute/" class="md-nav__link">
+        云计算
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../apprelease/" class="md-nav__link">
+        应用部署容器化演进
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../containerlinux/" class="md-nav__link">
+        容器技术所涉及Linux内核关键技术
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_6" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3_6" id="__nav_3_6_label" tabindex="0">
+          Docker
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_6_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3_6">
+          <span class="md-nav__icon md-icon"></span>
+          Docker
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docker/docker_native/" class="md-nav__link">
+        容器管理工具Docker生态架构及部署
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docker/docker_nginx/" class="md-nav__link">
+        使用容器运行Nginx应用及Docker命令
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docker/docker_image/" class="md-nav__link">
+        Docker容器镜像
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docker/docker_image_fast/" class="md-nav__link">
+        Docker容器镜像加速器及本地容器镜像仓库
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docker/docker_container_enterprice/" class="md-nav__link">
+        Docker容器化部署企业级应用集群
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docker/docker_file/" class="md-nav__link">
+        Dockerfile精讲及新型容器镜像构建技术
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docker/docker_network/" class="md-nav__link">
+        Docker容器网络与通信原理深度解析
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docker/docker_date/" class="md-nav__link">
+        Docker容器数据持久化存储机制
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docker/docker_compose/" class="md-nav__link">
+        Docker容器服务编排利器Docker Compose应用实战
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docker/docker_swarm/" class="md-nav__link">
+        Docker主机集群化方案 Docker Swarm
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docker/docker_devops/" class="md-nav__link">
+        基于Docker容器DevOps应用方案 企业业务代码发布系统
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docker/docker_container/" class="md-nav__link">
+        轻量级或工业级容器管理工具
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_7" checked>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3_7" id="__nav_3_7_label" tabindex="0">
+          Kubernetes
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_7_label" aria-expanded="true">
+        <label class="md-nav__title" for="__nav_3_7">
+          <span class="md-nav__icon md-icon"></span>
+          Kubernetes
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        kubeadm极速部署Kubernetes
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubernetes_introduce/" class="md-nav__link">
+        kubernetes介绍与集群架构
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubernetes_way/" class="md-nav__link">
+        Kubernetes集群部署方式说明
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubernetes_master/" class="md-nav__link">
+        kubeadm部署单Master节点kubernetes集群
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubernetes_hight/" class="md-nav__link">
+        kubeadm部署高可用kubernetes集群
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubernetes_rke/" class="md-nav__link">
+        使用RKE构建企业生产级Kubernetes集群
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubernetes_hight_bin1/" class="md-nav__link">
+        Kubernetes高可用集群二进制部署（Runtime Docker）一
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubernetes_hight_bin2/" class="md-nav__link">
+        Kubernetes高可用集群二进制部署（Runtime Docker）二
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubernetes_ui/" class="md-nav__link">
+        Kubernetes集群UI及主机资源监控
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubernetes_sealos/" class="md-nav__link">
+        使用sealos部署kubernetes集群并实现集群管理
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubernetes_cluster/" class="md-nav__link">
+        kubernetes集群命令语法
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubernetes_core/" class="md-nav__link">
+        Kubernetes核心概念
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubernetes_nginx_ingress_controller/" class="md-nav__link">
+        Kubernetes集群 服务暴露 Nginx Ingress Controller
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubernetes_traefik/" class="md-nav__link">
+        Kubernetes集群 服务暴露 Traefik
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubernetes_configMap_secret/" class="md-nav__link">
+        Kubernetes配置与密钥管理 ConfigMap&Secret
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubernetes_harbor/" class="md-nav__link">
+        Kubernetes集群使用容器镜像仓库Harbor
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubernetes_safety/" class="md-nav__link">
+        Kubernetes集群安全管理
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubernetes_storage_volume/" class="md-nav__link">
+        kubernetes持久化存储卷
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubernetes_storage_ceph/" class="md-nav__link">
+        kubernetes存储解决方案Ceph
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubernetes_cluster_serve/" class="md-nav__link">
+        Kubernetes集群公共服务
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubernetes_deploy_java/" class="md-nav__link">
+        kubernetes集群java项目上云部署
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubernetes_deploy_python/" class="md-nav__link">
+        kubernetes集群Python项目上云部署
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubernetes_deploy_golang/" class="md-nav__link">
+        Kubernetes集群golang项目上云部署
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubernetes_logs_collect/" class="md-nav__link">
+        kubernetes日志收集方案
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubernetes_zookeeper/" class="md-nav__link">
+        企业级中间件上云部署 zookeeper
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubernetes_kafka/" class="md-nav__link">
+        kubernetes云原生中间件上云部署 kafka
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubernetes_rokectmq/" class="md-nav__link">
+        rocketmq部署
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubernetes_helm/" class="md-nav__link">
+        Kubernetes集群包管理解决方案 Helm
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubernetes_kustomize/" class="md-nav__link">
+        Kubernetes原生配置管理利器 kustomize
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubernetes_flannel/" class="md-nav__link">
+        kubernetes集群网络解决方案 flannel
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubernetes_calico/" class="md-nav__link">
+        kubernetes集群网络解决方案 calico
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubernetes_hybridnet/" class="md-nav__link">
+        kubernetes集群 underlay 网络方案 hybridnet
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubernetes_ipv4_and_ipv6/" class="md-nav__link">
+        kubernetes版本双栈协议（IPv4&IPv6）集群部署
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubernetes_rancher/" class="md-nav__link">
+        Rancher容器云管理平台
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        使用kubeconfig管理多集群方法
+      </a>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubernetes_karmada/" class="md-nav__link">
+        karmada实现k8s集群联邦
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubernetes_csdn/" class="md-nav__link">
+        《将博客搬至CSDN》
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubernetes_ui/" class="md-nav__link">
+        源监控
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubernetes_ui/" class="md-nav__link">
+        源监控
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+          微服务
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          微服务
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../micro/fbs-lock/" class="md-nav__link">
+        分布式锁
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../micro/design/" class="md-nav__link">
+        微服务设计
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../micro/distrimsg/" class="md-nav__link">
+        分布式系统与消息的投递
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../micro/ddd/" class="md-nav__link">
+        基于DDD的微服务设计和开发实战
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../micro/kafka/" class="md-nav__link">
+        Kafka架构原理
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../micro/redis_cluster/" class="md-nav__link">
+        Redis Cluster原理
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../micro/spring-cloud-micro/" class="md-nav__link">
+        分布式架构
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+          经验分析
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          经验分析
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../exp/devops/" class="md-nav__link">
+        DevOps
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../exp/micro-service/" class="md-nav__link">
+        Micro-Service
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../exp/raft-gossip/" class="md-nav__link">
+        Raft算法和Gossip协议
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../exp/cl/" class="md-nav__link">
+        集群和负载均衡
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../exp/ai/" class="md-nav__link">
+        人工智能
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../exp/code-principle/" class="md-nav__link">
+        代码原则
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../exp/techbig/" class="md-nav__link">
+        如何成为技术大牛
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../exp/learnweetout/" class="md-nav__link">
+        程序员如何技术成长
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../exp/pt/" class="md-nav__link">
+        产品与技术
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../exp/four_deep_learning/" class="md-nav__link">
+        深度学习框架
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../exp/tl/" class="md-nav__link">
+        在阿里做了5年技术Leader，我总结出这些套路！
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../exp/cto/" class="md-nav__link">
+        CTO 技能图谱
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+          构架
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_6">
+          <span class="md-nav__icon md-icon"></span>
+          构架
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../framework/split/" class="md-nav__link">
+        构架拆分
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../framework/fgb/" class="md-nav__link">
+        分布式、高并发、多线程
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../framework/agility/" class="md-nav__link">
+        如何理解敏捷开发
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../framework/fwork/" class="md-nav__link">
+        走向架构师必备的技能
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../framework/data_middle/" class="md-nav__link">
+        数据中台的思考与总结
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../framework/algorithm-ten/" class="md-nav__link">
+        必学的 10 大算法
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+          情感
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_7">
+          <span class="md-nav__icon md-icon"></span>
+          情感
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../emotion/eq/" class="md-nav__link">
+        情商
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../emotion/workheard/" class="md-nav__link">
+        工作心得
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../emotion/lookbook/" class="md-nav__link">
+        看书
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../emotion/selfdiscipline/" class="md-nav__link">
+        自律
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../emotion/livefail/" class="md-nav__link">
+        为什么活着失败
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../emotion/emotion/" class="md-nav__link">
+        情绪管理
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../emotion/losecome/" class="md-nav__link">
+        所有的失去，都会以另一种方式归来
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../emotion/threeheart/" class="md-nav__link">
+        人生有这三种好心态
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../emotion/onepath/" class="md-nav__link">
+        余生，学会一个人走，不管有没有人陪
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../emotion/twopath/" class="md-nav__link">
+        往后余生还很精彩，别被熬夜拖垮了
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../emotion/lifetime/" class="md-nav__link">
+        心态好的人，一辈子都好
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+  
+
+
+<h1 id="kubeconfig">使用kubeconfig管理多集群方法<a class="headerlink" href="#kubeconfig" title="Permanent link">&para;</a></h1>
+<h1 id="k8s">一、 k8s集群部署<a class="headerlink" href="#k8s" title="Permanent link">&para;</a></h1>
+<blockquote>
+<p>准备多套k8s集群，可以使用kubeadm部署多套k8s集群。</p>
+</blockquote>
+<div class="highlight"><pre><span></span><code><span class="c"># wget  https://github.com/labring/sealos/releases/download/v4.1.7/sealos_4.1.7_linux_amd64.tar.gz  &amp;&amp; \</span>
+    <span class="n">tar</span> <span class="n">-zxvf</span> <span class="n">sealos_4</span><span class="p">.</span><span class="n">1</span><span class="p">.</span><span class="n">7_linux_amd64</span><span class="p">.</span><span class="n">tar</span><span class="p">.</span><span class="n">gz</span> <span class="n">sealos</span> <span class="p">&amp;&amp;</span>  <span class="n">chmod</span> <span class="p">+</span><span class="n">x</span> <span class="n">sealos</span> <span class="p">&amp;&amp;</span> <span class="nb">mv </span><span class="n">sealos</span> <span class="p">/</span><span class="n">usr</span><span class="p">/</span><span class="n">bin</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="p">[</span><span class="n">root</span><span class="nv">@k8s</span><span class="n">-master01</span> <span class="p">~]</span><span class="c"># cat sealos-install.sh</span>
+<span class="n">sealos</span> <span class="n">run</span> <span class="n">labring</span><span class="p">/</span><span class="n">kubernetes</span><span class="p">:</span><span class="n">v1</span><span class="p">.</span><span class="n">25</span><span class="p">.</span><span class="n">0</span> <span class="n">labring</span><span class="p">/</span><span class="n">helm</span><span class="p">:</span><span class="n">v3</span><span class="p">.</span><span class="n">8</span><span class="p">.</span><span class="n">2</span> <span class="n">labring</span><span class="p">/</span><span class="n">calico</span><span class="p">:</span><span class="n">v3</span><span class="p">.</span><span class="n">24</span><span class="p">.</span><span class="n">1</span> <span class="p">\</span>
+     <span class="p">-</span><span class="n">-masters</span> <span class="n">192</span><span class="p">.</span><span class="n">168</span><span class="p">.</span><span class="n">10</span><span class="p">.</span><span class="n">140</span> <span class="p">\</span>
+     <span class="p">-</span><span class="n">-nodes</span> <span class="n">192</span><span class="p">.</span><span class="n">168</span><span class="p">.</span><span class="n">10</span><span class="p">.</span><span class="n">141</span><span class="p">,</span><span class="n">192</span><span class="p">.</span><span class="n">168</span><span class="p">.</span><span class="n">10</span><span class="p">.</span><span class="n">142</span> <span class="n">-p</span> <span class="n">centos</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="p">[</span><span class="n">root</span><span class="nv">@k8s</span><span class="n">-master01</span> <span class="p">~]</span><span class="c"># cat sealos-install.sh</span>
+<span class="n">sealos</span> <span class="n">run</span> <span class="n">labring</span><span class="p">/</span><span class="n">kubernetes</span><span class="p">:</span><span class="n">v1</span><span class="p">.</span><span class="n">25</span><span class="p">.</span><span class="n">0</span> <span class="n">labring</span><span class="p">/</span><span class="n">helm</span><span class="p">:</span><span class="n">v3</span><span class="p">.</span><span class="n">8</span><span class="p">.</span><span class="n">2</span> <span class="n">labring</span><span class="p">/</span><span class="n">calico</span><span class="p">:</span><span class="n">v3</span><span class="p">.</span><span class="n">24</span><span class="p">.</span><span class="n">1</span> <span class="p">\</span>
+     <span class="p">-</span><span class="n">-masters</span> <span class="n">192</span><span class="p">.</span><span class="n">168</span><span class="p">.</span><span class="n">10</span><span class="p">.</span><span class="n">160</span> <span class="p">\</span>
+     <span class="p">-</span><span class="n">-nodes</span> <span class="n">192</span><span class="p">.</span><span class="n">168</span><span class="p">.</span><span class="n">10</span><span class="p">.</span><span class="n">161</span><span class="p">,</span><span class="n">192</span><span class="p">.</span><span class="n">168</span><span class="p">.</span><span class="n">10</span><span class="p">.</span><span class="n">162</span> <span class="n">-p</span> <span class="n">centos</span>
+</code></pre></div>
+<h1 id="k8s_1">二、K8S多集群管理<a class="headerlink" href="#k8s_1" title="Permanent link">&para;</a></h1>
+<h2 id="21_kubeconfig">2.1 获取多集群kubeconfig文件<a class="headerlink" href="#21_kubeconfig" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><span class="n">创建文件存储目录</span>
+<span class="p">[</span><span class="n">root</span><span class="nv">@k8s</span><span class="n">-master01</span> <span class="p">~]</span><span class="c"># mkdir kubeconfigdir</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">获取第一个集群kubeconfig文件</span>
+<span class="p">[</span><span class="n">root</span><span class="nv">@k8s</span><span class="n">-master01</span> <span class="p">~]</span><span class="c"># cp /root/.kube/config kubeconfigdir/config1</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">获取第二个集群kubeconfig文件</span>
+<span class="p">[</span><span class="n">root</span><span class="nv">@k8s</span><span class="n">-master01</span> <span class="p">~]</span><span class="c"># scp 192.168.10.160:/root/.kube/config kubeconfigdir/config2</span>
+</code></pre></div>
+<h2 id="22_kubeconfig">2.2 合并多集群kubeconfig文件<a class="headerlink" href="#22_kubeconfig" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p>可以选择手动合并，也可以选择自动全并。本案例为手动合并。</p>
+<p>自动合并命令：# KUBECONFIG=./config1:./config2 kubectl config view --flatten &gt; ./configX，前提需要修改config文件。</p>
+</blockquote>
+<div class="highlight"><pre><span></span><code><span class="n">合并后kubeconfig文件如下</span><span class="err">：</span>
+
+<span class="p">[</span><span class="n">root</span><span class="nv">@k8s</span><span class="n">-master01</span> <span class="n">kubeconfigdir</span><span class="p">]</span><span class="c"># cat config12</span>
+<span class="n">apiVersion</span><span class="p">:</span> <span class="n">v1</span>
+<span class="n">clusters</span><span class="p">:</span>
+<span class="p">-</span> <span class="n">cluster</span><span class="p">:</span>
+    <span class="n">certificate-authority-data</span><span class="p">:</span> <span class="n">LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUMvakNDQWVhZ0F3SUJBZ0lCQURBTkJna3Foa2lHOXcwQkFRc0ZBREFWTVJNd0VRWURWUVFERXdwcmRXSmwKY201bGRHVnpNQjRYRFRJek1ERXdOVEExTWpJek1sb1hEVE16TURFd01qQTFNakl6TWxvd0ZURVRNQkVHQTFVRQpBeE1LYTNWaVpYSnVaWFJsY3pDQ0FTSXdEUVlKS29aSWh2Y05BUUVCQlFBRGdnRVBBRENDQVFvQ2dnRUJBTmJjClFkK0ttSkd2NDNJRG9yWXY1UmRSNkNVTkpvUE1CY3kveDd2U3FIM1dEbWJsWnM3NDMvbVJRUDE1NDNRSmlsbDYKNmV1WjQrSDBsZXVsRWNjQU9mN2dPOG5EaDJSTEQ0ZHc4bk51L2JWMnRnRjc5b1FSTUtDczN2TWwzcEwzZmZiVQpweHdQVXAzTktwb1pZZndNVTJvazVIZGxwbkdqQzVLRnkvb2FNcmNrUWFNQjhjaFhhckxoSDBCVHZXS29sWnUxCjJPa2VvRDJKRTl1czVDRkt4MDMxWmtjQVArbVpjM2JYejI0amZYOUI1L05BR3c2Vmx3bjNCR1dHR1pJczd4Q3cKbjdpS1dNMTJGZCsyM1Z0dUtMWDBzdnJsUkQxcHdFdUxvRVVGdHN0dEJqZmN6bHJtQkhTWEE4SHFRazE1bVRCWAo5U0ZSc2NpOEVHaTR1MS9UN0JFQ0F3RUFBYU5aTUZjd0RnWURWUjBQQVFIL0JBUURBZ0trTUE4R0ExVWRFd0VCCi93UUZNQU1CQWY4d0hRWURWUjBPQkJZRUZKRFVvYStGQklSeXduaHFPUDViWk1ZSmdWZEJNQlVHQTFVZEVRUU8KTUF5Q0NtdDFZbVZ5Ym1WMFpYTXdEUVlKS29aSWh2Y05BUUVMQlFBRGdnRUJBRWc3WmFMLzJNWE9BNi9qem5wTApqVTA4Z2lBV01Jc2pzWk10V3R2WFNEQ3g0UE10LzAzVENXb0hlYi9BTSszMHpkMXNqOWE5V281akNkdFB0WGtQClFIa3gyNWZheVpwVndiN0d1Qk8xNSsxdUFjRWtJWmhKNnhuT25sZlIyUkF2TTVodXV6RUtTeHRoZ3Nlay9wYlAKeFBYWkdzQS90T3dEbm55L1ZpMzNFVjlLampybVY4d0xLR0htRHVhM05hWjh2aUtBeHVscmNITUZ1ZXloSFdaUQpiSlNyS1FZSDJUaGt3ekw4SHd6cEZ3SEQvVDRTTHpQRkF2VVc5ZkxTVm16V0N2Mkd6RzhvQWR0WHYrQ2YyOXZECmEyMFJvWnE1UDcwdnVZdGF5UXpmM0o2aHBMRGRvUFBYUVRmUVo0NlRJZmlKdjM3RTgycXVYQ0JSNUlvOEI5Z0wKWXE4PQotLS0tLUVORCBDRVJUSUZJQ0FURS0tLS0tCg</span><span class="p">==</span>
+    <span class="n">server</span><span class="p">:</span> <span class="n">https</span><span class="p">://</span><span class="n">192</span><span class="p">.</span><span class="n">168</span><span class="p">.</span><span class="n">10</span><span class="p">.</span><span class="n">140</span><span class="p">:</span><span class="n">6443</span>
+  <span class="n">name</span><span class="p">:</span> <span class="n">member1</span>
+<span class="p">-</span> <span class="n">cluster</span><span class="p">:</span>
+    <span class="n">certificate-authority-data</span><span class="p">:</span> <span class="n">LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUMvakNDQWVhZ0F3SUJBZ0lCQURBTkJna3Foa2lHOXcwQkFRc0ZBREFWTVJNd0VRWURWUVFERXdwcmRXSmwKY201bGRHVnpNQjRYRFRJek1ERXdOVEExTWpNeE5Gb1hEVE16TURFd01qQTFNak14TkZvd0ZURVRNQkVHQTFVRQpBeE1LYTNWaVpYSnVaWFJsY3pDQ0FTSXdEUVlKS29aSWh2Y05BUUVCQlFBRGdnRVBBRENDQVFvQ2dnRUJBT0JlCjFRUGhjY3ZPVGRUa1gySE1VOE53WXNiM01CWWNmbG5ERW1ENE9PRE1sNi8xdTRmYVhvc2RFMFNxUTlDYU5pamUKR09OU0lXc01zTlpmWVJ6Tk9mMlBlRXJyeGEwcE12RG5oNnEwSGtqVmQxdVZTNWhrbkNxY00rU0pnYUlhSXl5Zwp0RW00NFFWdFo2MGZhU1cxMFFWQXp5ZWJEYjJ3Wm1zSnhzRE5rbHprYzY4alVIK3N1dmxzMitjb1hnRWo1ditnCnlydjh2SjlPVklIdDlhd2VMU1h1YnhtZVpUOUZ6UDNRandkdTY3NjV3bFVFQ2E5YnZVWEY4MlVuYURnTWhVR1kKR2dqSVQrd09sN0ZGQVVrOFZXMm0xRnNaWlR6bmQwaDloRTI2MkZ1V2YzL29nZlcvbUIyMEo5ZzQ5Q0NoaVFGYQpCY0xUclJuZHhaWU5uZkdIalowQ0F3RUFBYU5aTUZjd0RnWURWUjBQQVFIL0JBUURBZ0trTUE4R0ExVWRFd0VCCi93UUZNQU1CQWY4d0hRWURWUjBPQkJZRUZIblhUUk52VkVxU1dEWUpROTFROGt3Y0I4ZnFNQlVHQTFVZEVRUU8KTUF5Q0NtdDFZbVZ5Ym1WMFpYTXdEUVlKS29aSWh2Y05BUUVMQlFBRGdnRUJBS3lYMmJ4d2cySVYxUEE0OThaNApaU290VFljNFZMc3hvdUNwNUY0U2dGSVIrc0pEWVc5R1RTRFpXbW9aczlQaE4vOFpEdDFQVjJMdU1waG00YStkCm83OW9PME10OHhvMGNsdGQzaUZXWkNRK0lzcHJoNUVTd0VuSmdCYmpDWGxObCs4T256VUJaQVRtZWw4dnY4LysKektITDdTNE03K1NOclN4ZGE1VHkwU2M4Mi8wS0RoUmZDMWtOZkhFMStuNWw4d2JVa1BmNDJkanY1eEFac2pQUwo1d1VTOCs4QXBQM0ZWNkNhRmJBdUlRbXFUL1pDdG9GYUZVVGxwUEFnRjBPa1AzelVXaTBrQzR3eG5vUVRXaW4yCnhEYWkvdmRPU1Qyd2FnU3dKOXRZd3ZsQmg4ZmQwdmM3bDlvMGREeklBYlh4OTBvdkZ0bzVCZ0VsT0FrQ3hTTisKc0E0PQotLS0tLUVORCBDRVJUSUZJQ0FURS0tLS0tCg</span><span class="p">==</span>
+    <span class="n">server</span><span class="p">:</span> <span class="n">https</span><span class="p">://</span><span class="n">192</span><span class="p">.</span><span class="n">168</span><span class="p">.</span><span class="n">10</span><span class="p">.</span><span class="n">160</span><span class="p">:</span><span class="n">6443</span>
+  <span class="n">name</span><span class="p">:</span> <span class="n">member2</span>
+<span class="n">contexts</span><span class="p">:</span>
+<span class="p">-</span> <span class="n">context</span><span class="p">:</span>
+    <span class="n">cluster</span><span class="p">:</span> <span class="n">member1</span>
+    <span class="n">user</span><span class="p">:</span> <span class="n">member1-admin</span>
+  <span class="n">name</span><span class="p">:</span> <span class="n">member1</span>
+<span class="p">-</span> <span class="n">context</span><span class="p">:</span>
+    <span class="n">cluster</span><span class="p">:</span> <span class="n">member2</span>
+    <span class="n">user</span><span class="p">:</span> <span class="n">member2-admin</span>
+  <span class="n">name</span><span class="p">:</span> <span class="n">member2</span>
+<span class="n">current-context</span><span class="p">:</span> <span class="n">member1</span>
+<span class="n">kind</span><span class="p">:</span> <span class="n">Config</span>
+<span class="n">preferences</span><span class="p">:</span> <span class="p">{}</span>
+<span class="n">users</span><span class="p">:</span>
+<span class="p">-</span> <span class="n">name</span><span class="p">:</span> <span class="n">member1-admin</span>
+  <span class="n">user</span><span class="p">:</span>
+    <span class="n">client-certificate-data</span><span class="p">:</span> <span class="n">LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURJVENDQWdtZ0F3SUJBZ0lJR3ljSnc3LytXNGt3RFFZSktvWklodmNOQVFFTEJRQXdGVEVUTUJFR0ExVUUKQXhNS2EzVmlaWEp1WlhSbGN6QWVGdzB5TXpBeE1EVXdOVEl5TXpKYUZ3MHlOREF4TURVd05USXlNelJhTURReApGekFWQmdOVkJBb1REbk41YzNSbGJUcHRZWE4wWlhKek1Sa3dGd1lEVlFRREV4QnJkV0psY201bGRHVnpMV0ZrCmJXbHVNSUlCSWpBTkJna3Foa2lHOXcwQkFRRUZBQU9DQVE4QU1JSUJDZ0tDQVFFQXl3NEFmd1RYQllzSUZkZkIKcU9tWWZMbEpzS2VLZDdOS1pSZEZ4TmU5ejB6dTVnc1Zudm9HWXlmdkJXdWxTMDZjcDFuTGdOR1ZWUVN4SndKUQo5blo4cEQyV3h2QkVBRkdBdWoxUWtLaXZnMDkwSG1zbFZHbVE2blhDNkxzTm1QdFRSOVdpWnpmWjQyK2t3SGRJCjM1SGlNeEk2aXIva1BoZHBPc3ZaRWZzUGl1cDZpVDF2d1VKbFR4V00zZVF3d2ZRYW1MSHdGYUhpNFZvOTl4TUkKQllsUktpa2FYMFluQkFGZ2RVcEZ6Rk53TnpTWnFoQy9KaE1qQyt1OTVnakx5SENZVXhWU2xBRDc0TDErb1l2WQppNmZkM0RhQWx5VjRZYXRabytxSFhlbW5RdGMveEhwR3gwNVIxdnBZQmVnNGVXL0lhUER0a29UNEtzR0kyNm9DCithczZaUUlEQVFBQm8xWXdWREFPQmdOVkhROEJBZjhFQkFNQ0JhQXdFd1lEVlIwbEJBd3dDZ1lJS3dZQkJRVUgKQXdJd0RBWURWUjBUQVFIL0JBSXdBREFmQmdOVkhTTUVHREFXZ0JTUTFLR3ZoUVNFY3NKNGFqaitXMlRHQ1lGWApRVEFOQmdrcWhraUc5dzBCQVFzRkFBT0NBUUVBVGxwRlBzVW5qTGl4L0dINjMrZUY0ZEFYTmZvdW84bWl2cm1pCmVtSTUySzJZMHYzdlhBRkhHWi9GSDdML1VBMTMycmVGSlFHRmhBMHp1NnF5cUMzaHRWTnFsalQwQ3JkdjFVNnYKbE5KT2lVZnVRTXJkV3lDQ3BsdWxMREtQNnpXY0hpRXFacWx0UGVpVHZpdE5LcURvSXBwYXU3NUxCR2JGYVdxNgpESkRZZlBUL2JqM1RHV0V3VzEzWnczdjlnc3NzOVRSbHd6YzJTTmpOOHdSbktnaEh4N3dBSVlPTE51bzRXcUxwCldXdW5jYjJCRFZKQStUc0t1UTVxTUEvVHpLakVZdHR3S0VrTkdTTCt4eS9jRUIvanV4TnR0SXBkbnBhdWxJU3kKMlpuU2pxSkgrbzBxYjdzekJINlVLWVdscFYvZzVnSDlOb1RwVUxHSkdkSWZnaXRwdUE9PQotLS0tLUVORCBDRVJUSUZJQ0FURS0tLS0tCg</span><span class="p">==</span>
+    <span class="n">client-key-data</span><span class="p">:</span> <span class="n">LS0tLS1CRUdJTiBSU0EgUFJJVkFURSBLRVktLS0tLQpNSUlFcFFJQkFBS0NBUUVBeXc0QWZ3VFhCWXNJRmRmQnFPbVlmTGxKc0tlS2Q3TktaUmRGeE5lOXowenU1Z3NWCm52b0dZeWZ2Qld1bFMwNmNwMW5MZ05HVlZRU3hKd0pROW5aOHBEMld4dkJFQUZHQXVqMVFrS2l2ZzA5MEhtc2wKVkdtUTZuWEM2THNObVB0VFI5V2laemZaNDIra3dIZEkzNUhpTXhJNmlyL2tQaGRwT3N2WkVmc1BpdXA2aVQxdgp3VUpsVHhXTTNlUXd3ZlFhbUxId0ZhSGk0Vm85OXhNSUJZbFJLaWthWDBZbkJBRmdkVXBGekZOd056U1pxaEMvCkpoTWpDK3U5NWdqTHlIQ1lVeFZTbEFENzRMMStvWXZZaTZmZDNEYUFseVY0WWF0Wm8rcUhYZW1uUXRjL3hIcEcKeDA1UjF2cFlCZWc0ZVcvSWFQRHRrb1Q0S3NHSTI2b0MrYXM2WlFJREFRQUJBb0lCQVFDN3R3UUthTVVISU5LbQpyc0Vma0dRaDJZRWdTS0tmcWlYNmNwdFRNRWNPMzRaek1JZ2FZZldKc1I4c21hbERoemNYRnRJbEVwdkU3d04rCmxvdVdiVThvM3E4RzFwTm0zL0hyT2tmQ2s4ODl5elFEOHZXZHBjSU1ualZEeGJqNlZrMVZPVkJicjZ4RXI2OVYKSm5FK0RiVlpsVjU5YW94c1FtUkxzS3ZLRFpqK3g4SnFhWnhMZkp2eEJPbnBvZ3JpSHhHRjA4Sm5BMTBqZFNlMApnY1Q3dFA4Wk1IeVhiWDVsYkFYQWp3VXJnNTJ2YUFBVEZkOTNUYTkrdDRwcWt5OU93RmZHR0p2bm9VLzRIZ1hqCjVvN0lIdWcxbVNhbXYvSlVvcXRKZW54MzAxVGNNSkxqS1Zlck4wbm85MGExYnpNQThiVzBEaWpiYjl3R043bFkKM0xDdTFMdEJBb0dCQU04NE0rdUJ2c05KbE5pZU9Zd1I1UUh4TjJPV3hnQTBjYSt5S09DYjBsMUpCOE9EK0lhUQpmbVdKTUlLeEpjQUZva0EwT3E3MmFEUlhTeWorcS9hQ2VUUkxPOHFlVjJLSFo5TGRYOW9BNGhqUVFqVm5pbGZSCkJ1dlhKd040bHdLcWR4aVZqN3R2cU0yYmVnZTdRejN2STViQTdIcGNZSnJOZWpmdUdSMDJZcVBaQW9HQkFQcmEKejNjUGFyanN1dGQxK3VQUWdwN0Y1V3Fud05uSUhtWTQ2SVp0YnQ5VnNaN2tRSlJZaHNjdkhMaVhVMmhWQ244agpSOU5WNHNOejQ4azdDU0RpQXdaNFZBYUFOM1N1OFBaNHZ5RFZJZVllK0tVUnJkM1RuRk10NFptc0UvWGlyV29GCmtNSndiK2lLMVJGc1VCU0NTSVBnQjZQOXZ6R3NaV0NnaVczT1I4OXRBb0dBRyt6M0VrWHA3MmQ3SjdZckN6VmUKSjJUYWtoRS9uY2R6aXJuM3lFMDNqRnJMTVE0WDhBcUkvaVgrNDUzNytHVEorTjBSQzRNcGgrUTd2TXFWWWlNegpNbGp4TmQwZzZhWlYxNVQ5MWVOSWxROTczTGFYYmo0OU1JdE9OcW1Kc0ZKSXVvZHRWMVUwNm9DSmNZRkxEbzJyCnZpVkJ1VHU1eVNMbjFhSEF3SzhUbkFFQ2dZRUF2amR6ZitXWjJIWHh5L1d6ZEZJazZmNUgwMU0zSWl6a0dFRm8KMko1Y3AwOVVxNWFLL2JJUEtUU3BRN1BEMUdZLzJsNUhWWkpYckR2UmEwS3Z6bFp6VXRHbGJYU0dHSjJiTEZvdApHOWxocGh5d0VJTlNZdFhXUVNDV1pDK2V4eUhHdTVGU3pvM3gzZFNBY29DK1RIN3FPODJDSGJFSTdNSzc4TVJxCjBXL005aFVDZ1lFQXBWTWxQL24xQ2VKWW12RDZwanNCMy9VaE9UUDlUN0wrWk9LNnlMZEwyNzlqeVRBUm1URGcKOHhWSitZNjZLSXluS3ZFaDlmaGZRZDdtbHJyYmNSK0RwSVdFRXkxN3JQQWpjbkNhVWNZVDJXVGlYcjROWVlmUgpIakdMQ2tLb3hWci9aV2lXUUJ2UVRoemZUd0RRaWVCS2xpT0hoY3h3bnl6Q2dWdm5Wc3hWbDF3PQotLS0tLUVORCBSU0EgUFJJVkFURSBLRVktLS0tLQo</span><span class="p">=</span>
+<span class="p">-</span> <span class="n">name</span><span class="p">:</span> <span class="n">member2-admin</span>
+  <span class="n">user</span><span class="p">:</span>
+    <span class="n">client-certificate-data</span><span class="p">:</span> <span class="n">LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURJVENDQWdtZ0F3SUJBZ0lJTytGWlFKV2RpYUF3RFFZSktvWklodmNOQVFFTEJRQXdGVEVUTUJFR0ExVUUKQXhNS2EzVmlaWEp1WlhSbGN6QWVGdzB5TXpBeE1EVXdOVEl6TVRSYUZ3MHlOREF4TURVd05USXpNVFphTURReApGekFWQmdOVkJBb1REbk41YzNSbGJUcHRZWE4wWlhKek1Sa3dGd1lEVlFRREV4QnJkV0psY201bGRHVnpMV0ZrCmJXbHVNSUlCSWpBTkJna3Foa2lHOXcwQkFRRUZBQU9DQVE4QU1JSUJDZ0tDQVFFQTV3OVB5R3EvMloxRnVtMkkKSkU0TmlONStwUnQyY01vV1RXdi9neTB0NmdMRE5yVTFnRFB1aWZ5SmhLM05veHdwWGJXTXY1dUQ5QzlwS3N2UwpjbW1IdUZQVFF6ZWpleGZuYkEwckhZSk9FK1krSWZhM1FZMTgzL0lJUXZGUGozMkJEdVVNZkNtcHFSbitZejVpCk1TVW1pWCtDelkxRC93REVJZ0FtOUZXTEV5cnkxZi8xMjhkVGRGU3JITFpab2xCbG00aWhIUUMxV0JBVFFsVlMKN2pMMmFNTGNPTDl5OXJGMkNVY3pUTTA1K2R2Z2ZFUGw4aVlVRVNieFRtVUFETmRBS2lGSitvZmFrc0RFaGxpMwpNVXNHNitLdFZVR2E0aTJJc3pYMTlNOHFZYWFNdHZyaDFlTHBaTld5NGwwSUVhd3NlaS9ZVm5OUE5hb0Jld3FnCnJ0bHFwd0lEQVFBQm8xWXdWREFPQmdOVkhROEJBZjhFQkFNQ0JhQXdFd1lEVlIwbEJBd3dDZ1lJS3dZQkJRVUgKQXdJd0RBWURWUjBUQVFIL0JBSXdBREFmQmdOVkhTTUVHREFXZ0JSNTEwMFRiMVJLa2xnMkNVUGRVUEpNSEFmSAo2akFOQmdrcWhraUc5dzBCQVFzRkFBT0NBUUVBcHJGdkNIS0k2WHlKbzZ2cTRSUmRqdUFjbHhBeTBQV2Fud2VZCnRKR2lKUlFncXJqaUNNQkZDSEdDcjZnTHY3RzUwSFNSL0UwbnpZWGdzQ2FKUFN4U2ZkSFJiRVRRMldWT2ExSVEKN1hUMnUzT1l4bDhSWXkwR2lNMWRyakxYOHQ4K0xXSVhYdFEzVGVkaFJwNEtvR2J5Z3BuVlJlKzNCOXhsbDFZQQoxRWxJL1QxV0t5Qk0waEdhdHB1Z2l2aXFaNFY2RVJkMzBtUmhmT1dqem5rNi9GTmFIRTRtL1J6cFVtNWZPbURBClVSWElBa05JZlZudENRRkVuejhDWmlaMkVyNG5HV0pwOWV1UU9Scyt5eUlGdkFWZjd5REYrUGV6SDVIUCtBL3YKbktGd0JxTUdyaHN0bEEyUHdvSE9wMnVQa01MKzdSSENQYWRMYVltejNRQWFCdGNyRWc9PQotLS0tLUVORCBDRVJUSUZJQ0FURS0tLS0tCg</span><span class="p">==</span>
+    <span class="n">client-key-data</span><span class="p">:</span> <span class="n">LS0tLS1CRUdJTiBSU0EgUFJJVkFURSBLRVktLS0tLQpNSUlFb3dJQkFBS0NBUUVBNXc5UHlHcS8yWjFGdW0ySUpFNE5pTjUrcFJ0MmNNb1dUV3YvZ3kwdDZnTEROclUxCmdEUHVpZnlKaEszTm94d3BYYldNdjV1RDlDOXBLc3ZTY21tSHVGUFRRemVqZXhmbmJBMHJIWUpPRStZK0lmYTMKUVkxODMvSUlRdkZQajMyQkR1VU1mQ21wcVJuK1l6NWlNU1VtaVgrQ3pZMUQvd0RFSWdBbTlGV0xFeXJ5MWYvMQoyOGRUZEZTckhMWlpvbEJsbTRpaEhRQzFXQkFUUWxWUzdqTDJhTUxjT0w5eTlyRjJDVWN6VE0wNStkdmdmRVBsCjhpWVVFU2J4VG1VQUROZEFLaUZKK29mYWtzREVobGkzTVVzRzYrS3RWVUdhNGkySXN6WDE5TThxWWFhTXR2cmgKMWVMcFpOV3k0bDBJRWF3c2VpL1lWbk5QTmFvQmV3cWdydGxxcHdJREFRQUJBb0lCQUFNRHNSL0ZQTUdEQ3NEVwo0dnJPUmVEdVBpcTdRLzFPdGFIRzhldHRNSGNvR0JIanBWSUoyMmZUY3B2WGhLSkhJTWNITWxIaG5vUVdCa0kzCnJJUXZta1N1VzBnNk5wakpoQXhsMDVVcitRYkxieTRVUU9uTEJjRUtNRTluUklsenNyWldDS2FxQ0h1YlNqVlQKUUFheUhHR1kxMFVGUGNqYTRyUXEybGMvc25QS2lrMFpkcEZMZlduWUljTTdKSU5TTHZTRkJVWGxHV0hnZi9UbgpBSWNQMFpuWkZ0cHZhdS9MMXk4UUNzY2ZPVWo3YjJFbG5FU2xHRFdnUVcyZDBrdXppQ2dxRmtVZm5HdWVDNExuCnlySUVRSzBSM081TUt4ODM2TWN3TytTcDgrUmtMeitKYlUzTXprelhLVGZBSU5haVFuZ2Q5Zy9JaVpnbUtjUjQKMkFKSFBKa0NnWUVBNjVWTkdORURKaDlsWWlwQWZ6NHVRa1AydmN1VExaajNuVjU0OXlucERZQnFrWnFxSFhXYwpERm1OTWhpdm5VNnprSE02KzY1RWZGOTdQZTkvUmM2QnJrcUhlYWsvcjY2ajdVSVlPVklvR1FvMVZRQ2MyR0NhCnZIVVluL01rOHBRUDdwNHpyUmFxVWFoZm1Jc1JhTlVlZytWMnZsa1krQkNNblRQSTRvRllGSnNDZ1lFQSt4V24KU1RRUmczYWE5N0pwOUFDRTNNVGRHbStPcnExM0lDTU12Q2pKM0c2VFhaOS8wSC96NG1FMlQwMUVIVnIvZStBRQptVmk3VDU1ZWIzRVdRbElsdExKUTdQK1R3YnBheUFMamZqcDVRTGtZUEcvY1UwNnAycFhXOHU0L3dsUk5YbWVmCklkRGFpOTJPNzltOG4rZ1d3b1JzL3g1b21XamE4azkxR1NuV3RPVUNnWUVBa3dIWDJtU1RVbmJGRFR6UWdwYUsKeDA4aDZjM2ZTZFRxcjRrRWN6Zno5ampzUjIvOE4rWHNPc2luRTF2VU9wV2g5OEh3VEoyeW51bjJQZS8xdTluaAprcUZ2YUx2MHdleDQzdFVmeUtVNzRHUStZNHkrVTBmMVJ5VEsrUVVCU1Y2YmtvdW1NNXl4SzhPbDQ4cmtVa2FyCmhDTHN0bHRpK1dsYVZiNjYzSjFhR1lFQ2dZQjU4MWR2OTZrMTkrcG11akk1Ly9LSUk5bmNHQ2p0OEhTMm1DOTgKU0RkYktCM05VRVhOS0FoMWdJL1hUb2p4MVJ2WHQ4T2tFM1BPeFBYTEhOc1oxVHBaSEc2djNhYVBab3JuTUhmNwovRHllVWdoU2VtWkIxQ2d0Y2ErWUNGM1JiZzZ4OXBSVTRWTDBzZVRWM0NTQWFrSjdzY1FhMlZNbWg4WW9BSzI0ClRoanBmUUtCZ0FSUWRsTTZWbVVDTE9iZTgvTFNCckxjbEg1enFwdkx2M2VEeDhuN1BKdTl5aC9jbnAvaFd0ZU0Kd1cyaTUzUTVNUnFManJ5Zk4ra0E0c3BTVk45cTVHVnRYSWE5M1JkOENsc045UEMyMG1OK0pYOUhaUThLb015MQpVNmMybVlyVFhpYm9yNVBPNlB0aUdRaTNkREZWVDhzTnhZd0FzenliankxYjZUQmVDc3lMCi0tLS0tRU5EIFJTQSBQUklWQVRFIEtFWS0tLS0tCg</span><span class="p">==</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">注</span><span class="err">：</span><span class="n">上述kubeconfig文件中clustername</span><span class="err">、</span><span class="n">username</span><span class="err">、</span><span class="n">contextname都可以根据企业实际情况进行替换</span><span class="err">。</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">查看可管理的集群</span>
+<span class="p">[</span><span class="n">root</span><span class="nv">@k8s</span><span class="n">-master01</span> <span class="n">kubeconfigdir</span><span class="p">]</span><span class="c"># kubectl --kubeconfig=config12 config get-clusters</span>
+<span class="n">NAME</span>
+<span class="n">member2</span>
+<span class="n">member1</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">查看可管理的集群上下文</span>
+<span class="p">[</span><span class="n">root</span><span class="nv">@k8s</span><span class="n">-master01</span> <span class="n">kubeconfigdir</span><span class="p">]</span><span class="c"># kubectl --kubeconfig=config12 config get-contexts</span>
+<span class="n">CURRENT</span>   <span class="n">NAME</span>      <span class="n">CLUSTER</span>   <span class="n">AUTHINFO</span>        <span class="n">NAMESPACE</span>
+          <span class="n">member1</span>   <span class="n">member1</span>   <span class="n">member1-admin</span>
+<span class="p">*</span>         <span class="n">member2</span>   <span class="n">member2</span>   <span class="n">member2-admin</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">查看当前上下文</span>
+<span class="p">[</span><span class="n">root</span><span class="nv">@k8s</span><span class="n">-master01</span> <span class="n">kubeconfigdir</span><span class="p">]</span><span class="c"># kubectl --kubeconfig=config12 config current-context</span>
+<span class="n">member2</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">切换上下文</span>
+<span class="p">[</span><span class="n">root</span><span class="nv">@k8s</span><span class="n">-master01</span> <span class="n">kubeconfigdir</span><span class="p">]</span><span class="c"># kubectl --kubeconfig=config12 config use-context member1</span>
+<span class="n">Switched</span> <span class="n">to</span> <span class="n">context</span> <span class="s2">&quot;member1&quot;</span><span class="p">.</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">查看切换后当前上下文</span>
+<span class="p">[</span><span class="n">root</span><span class="nv">@k8s</span><span class="n">-master01</span> <span class="n">kubeconfigdir</span><span class="p">]</span><span class="c"># kubectl --kubeconfig=config12 config current-context</span>
+<span class="n">member1</span>
+</code></pre></div>
+<h2 id="23_kubeconfig">2.3 使用合并后kubeconfig管理多集群<a class="headerlink" href="#23_kubeconfig" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><span class="n">查看member1集群kube-system命名空间中pod信息</span>
+
+<span class="p">[</span><span class="n">root</span><span class="nv">@k8s</span><span class="n">-master01</span> <span class="p">~]</span><span class="c"># kubectl --kubeconfig /root/kubeconfigdir/config12 config use-context member1</span>
+<span class="n">Switched</span> <span class="n">to</span> <span class="n">context</span> <span class="s2">&quot;member1&quot;</span><span class="p">.</span>
+
+<span class="p">[</span><span class="n">root</span><span class="nv">@k8s</span><span class="n">-master01</span> <span class="p">~]</span><span class="c"># kubectl --kubeconfig /root/kubeconfigdir/config12 config current-context</span>
+<span class="n">member1</span>
+
+<span class="p">[</span><span class="n">root</span><span class="nv">@k8s</span><span class="n">-master01</span> <span class="p">~]</span><span class="c"># kubectl --kubeconfig /root/kubeconfigdir/config12 get pods -n kube-system</span>
+<span class="n">NAME</span>                                   <span class="n">READY</span>   <span class="n">STATUS</span>    <span class="n">RESTARTS</span>      <span class="n">AGE</span>
+<span class="n">coredns</span><span class="p">-</span><span class="n">57575c5f89</span><span class="p">-</span><span class="n">4nl9k</span>               <span class="n">1</span><span class="p">/</span><span class="n">1</span>     <span class="n">Running</span>   <span class="n">3</span> <span class="p">(</span><span class="n">39h</span> <span class="n">ago</span><span class="p">)</span>   <span class="n">45h</span>
+<span class="n">coredns</span><span class="p">-</span><span class="n">57575c5f89</span><span class="p">-</span><span class="n">9hjsn</span>               <span class="n">1</span><span class="p">/</span><span class="n">1</span>     <span class="n">Running</span>   <span class="n">3</span> <span class="p">(</span><span class="n">39h</span> <span class="n">ago</span><span class="p">)</span>   <span class="n">45h</span>
+<span class="n">etcd-k8s-master01</span>                      <span class="n">1</span><span class="p">/</span><span class="n">1</span>     <span class="n">Running</span>   <span class="n">3</span> <span class="p">(</span><span class="n">39h</span> <span class="n">ago</span><span class="p">)</span>   <span class="n">45h</span>
+<span class="n">kube-apiserver-k8s-master01</span>            <span class="n">1</span><span class="p">/</span><span class="n">1</span>     <span class="n">Running</span>   <span class="n">5</span> <span class="p">(</span><span class="n">39h</span> <span class="n">ago</span><span class="p">)</span>   <span class="n">45h</span>
+<span class="n">kube-controller-manager-k8s-master01</span>   <span class="n">1</span><span class="p">/</span><span class="n">1</span>     <span class="n">Running</span>   <span class="n">3</span> <span class="p">(</span><span class="n">39h</span> <span class="n">ago</span><span class="p">)</span>   <span class="n">45h</span>
+<span class="n">kube-proxy</span><span class="p">-</span><span class="n">4wp45</span>                       <span class="n">1</span><span class="p">/</span><span class="n">1</span>     <span class="n">Running</span>   <span class="n">3</span> <span class="p">(</span><span class="n">39h</span> <span class="n">ago</span><span class="p">)</span>   <span class="n">45h</span>
+<span class="n">kube-proxy-pxz6p</span>                       <span class="n">1</span><span class="p">/</span><span class="n">1</span>     <span class="n">Running</span>   <span class="n">3</span> <span class="p">(</span><span class="n">39h</span> <span class="n">ago</span><span class="p">)</span>   <span class="n">45h</span>
+<span class="n">kube-proxy-wvx9g</span>                       <span class="n">1</span><span class="p">/</span><span class="n">1</span>     <span class="n">Running</span>   <span class="n">3</span> <span class="p">(</span><span class="n">39h</span> <span class="n">ago</span><span class="p">)</span>   <span class="n">45h</span>
+<span class="n">kube-scheduler-k8s-master01</span>            <span class="n">1</span><span class="p">/</span><span class="n">1</span>     <span class="n">Running</span>   <span class="n">3</span> <span class="p">(</span><span class="n">39h</span> <span class="n">ago</span><span class="p">)</span>   <span class="n">45h</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">查看member2集群kube-system命名空间中pod信息</span>
+
+<span class="p">[</span><span class="n">root</span><span class="nv">@k8s</span><span class="n">-master01</span> <span class="p">~]</span><span class="c"># kubectl --kubeconfig /root/kubeconfigdir/config12 config use-context member2</span>
+<span class="n">Switched</span> <span class="n">to</span> <span class="n">context</span> <span class="s2">&quot;member2&quot;</span><span class="p">.</span>
+
+<span class="p">[</span><span class="n">root</span><span class="nv">@k8s</span><span class="n">-master01</span> <span class="p">~]</span><span class="c"># kubectl --kubeconfig /root/kubeconfigdir/config12 config current-context</span>
+<span class="n">member2</span>
+
+<span class="p">[</span><span class="n">root</span><span class="nv">@k8s</span><span class="n">-master01</span> <span class="p">~]</span><span class="c"># kubectl --kubeconfig /root/kubeconfigdir/config12 get pods -n kube-system</span>
+<span class="n">NAME</span>                                   <span class="n">READY</span>   <span class="n">STATUS</span>    <span class="n">RESTARTS</span>      <span class="n">AGE</span>
+<span class="n">coredns</span><span class="p">-</span><span class="n">57575c5f89</span><span class="p">-</span><span class="n">782l5</span>               <span class="n">1</span><span class="p">/</span><span class="n">1</span>     <span class="n">Running</span>   <span class="n">3</span> <span class="p">(</span><span class="n">14h</span> <span class="n">ago</span><span class="p">)</span>   <span class="n">45h</span>
+<span class="n">coredns</span><span class="p">-</span><span class="n">57575c5f89</span><span class="p">-</span><span class="n">9tjcn</span>               <span class="n">1</span><span class="p">/</span><span class="n">1</span>     <span class="n">Running</span>   <span class="n">3</span> <span class="p">(</span><span class="n">14h</span> <span class="n">ago</span><span class="p">)</span>   <span class="n">45h</span>
+<span class="n">etcd-k8s-master01</span>                      <span class="n">1</span><span class="p">/</span><span class="n">1</span>     <span class="n">Running</span>   <span class="n">3</span> <span class="p">(</span><span class="n">14h</span> <span class="n">ago</span><span class="p">)</span>   <span class="n">45h</span>
+<span class="n">kube-apiserver-k8s-master01</span>            <span class="n">1</span><span class="p">/</span><span class="n">1</span>     <span class="n">Running</span>   <span class="n">4</span> <span class="p">(</span><span class="n">12m</span> <span class="n">ago</span><span class="p">)</span>   <span class="n">45h</span>
+<span class="n">kube-controller-manager-k8s-master01</span>   <span class="n">1</span><span class="p">/</span><span class="n">1</span>     <span class="n">Running</span>   <span class="n">3</span> <span class="p">(</span><span class="n">14h</span> <span class="n">ago</span><span class="p">)</span>   <span class="n">45h</span>
+<span class="n">kube-proxy</span><span class="p">-</span><span class="n">5nglp</span>                       <span class="n">1</span><span class="p">/</span><span class="n">1</span>     <span class="n">Running</span>   <span class="n">3</span> <span class="p">(</span><span class="n">14h</span> <span class="n">ago</span><span class="p">)</span>   <span class="n">45h</span>
+<span class="n">kube-proxy-d7q6c</span>                       <span class="n">1</span><span class="p">/</span><span class="n">1</span>     <span class="n">Running</span>   <span class="n">3</span> <span class="p">(</span><span class="n">14h</span> <span class="n">ago</span><span class="p">)</span>   <span class="n">45h</span>
+<span class="n">kube-proxy-dhr9d</span>                       <span class="n">1</span><span class="p">/</span><span class="n">1</span>     <span class="n">Running</span>   <span class="n">3</span> <span class="p">(</span><span class="n">14h</span> <span class="n">ago</span><span class="p">)</span>   <span class="n">45h</span>
+<span class="n">kube-scheduler-k8s-master01</span>            <span class="n">1</span><span class="p">/</span><span class="n">1</span>     <span class="n">Running</span>   <span class="n">3</span> <span class="p">(</span><span class="n">14h</span> <span class="n">ago</span><span class="p">)</span>   <span class="n">45h</span>
+</code></pre></div>
+<h2 id="24_kubectx">2.4 kubectx<a class="headerlink" href="#24_kubectx" title="Permanent link">&para;</a></h2>
+<h3 id="241">2.4.1 下载<a class="headerlink" href="#241" title="Permanent link">&para;</a></h3>
+<p><img alt="image-20230413124940258" src="../../../img/kubernetes/kubernetes_kubeconfig/image-20230413124940258.png" /></p>
+<p><img alt="image-20230413124955713" src="../../../img/kubernetes/kubernetes_kubeconfig/image-20230413124955713.png" /></p>
+<p><img alt="image-20230413125024563" src="../../../img/kubernetes/kubernetes_kubeconfig/image-20230413125024563.png" /></p>
+<p><img alt="image-20230413125115514" src="../../../img/kubernetes/kubernetes_kubeconfig/image-20230413125115514.png" /></p>
+<div class="highlight"><pre><span></span><code><span class="c"># wget https://github.com/ahmetb/kubectx/releases/download/v0.9.4/kubectx</span>
+</code></pre></div>
+<h3 id="242">2.4.2 安装及使用<a class="headerlink" href="#242" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c"># ls</span>
+<span class="n">kubectx</span>
+
+<span class="c"># chmod +x kubectx</span>
+
+<span class="c"># mv kubectx /usr/local/bin/</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c"># cp configX /root/.kube/config</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c"># kubectx</span>
+<span class="n">member1</span>
+<span class="n">member2</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">如果默认在member1集群</span><span class="err">，</span><span class="n">使用下面命令则会自动切换到member2</span>
+<span class="c"># kubectx -</span>
+
+<span class="n">Switched</span> <span class="n">to</span> <span class="n">context</span> <span class="s2">&quot;member2&quot;</span><span class="p">.</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">再次使用kubectx将切换到member1</span>
+<span class="c"># kubectx -</span>
+
+<span class="n">Switched</span> <span class="n">to</span> <span class="n">context</span> <span class="s2">&quot;member1&quot;</span><span class="p">.</span>
+</code></pre></div>
+<h1 id="kubeconfigk8s">三、使用kubeconfig实现在不同k8s集群中部署应用<a class="headerlink" href="#kubeconfigk8s" title="Permanent link">&para;</a></h1>
+<h2 id="31_member1">3.1 在member1集群中部署应用<a class="headerlink" href="#31_member1" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><span class="n">查看部署描述文件</span>
+<span class="p">[</span><span class="n">root</span><span class="nv">@k8s</span><span class="n">-master01</span> <span class="n">nginxdir</span><span class="p">]</span><span class="c"># cat n1.yaml</span>
+<span class="n">apiVersion</span><span class="p">:</span> <span class="n">apps</span><span class="p">/</span><span class="n">v1</span>
+<span class="n">kind</span><span class="p">:</span> <span class="n">Deployment</span>
+<span class="n">metadata</span><span class="p">:</span>
+  <span class="n">name</span><span class="p">:</span> <span class="n">nginx1</span>                    <span class="c"># deployment名</span>
+<span class="n">spec</span><span class="p">:</span>
+  <span class="n">replicas</span><span class="p">:</span> <span class="n">2</span>                                   <span class="c"># 副本集,deployment里使用了replicaset</span>
+  <span class="n">selector</span><span class="p">:</span>
+    <span class="n">matchLabels</span><span class="p">:</span>
+      <span class="n">app</span><span class="p">:</span> <span class="n">nginx1</span>                                <span class="c"># 匹配的pod标签,表示deployment和rs控制器控制带有此标签的pod</span>
+  <span class="n">template</span><span class="p">:</span>                                         <span class="c"># 代表pod的配置模板</span>
+    <span class="n">metadata</span><span class="p">:</span>
+      <span class="n">labels</span><span class="p">:</span>
+        <span class="n">app</span><span class="p">:</span> <span class="n">nginx1</span>                              <span class="c"># pod的标签</span>
+    <span class="n">spec</span><span class="p">:</span>
+      <span class="n">containers</span><span class="p">:</span>                               <span class="c"># 以下为pod里的容器定义</span>
+      <span class="p">-</span> <span class="n">name</span><span class="p">:</span> <span class="n">nginx1</span>
+        <span class="n">image</span><span class="p">:</span> <span class="n">nginx</span><span class="p">:</span><span class="n">latest</span>
+        <span class="n">imagePullPolicy</span><span class="p">:</span> <span class="n">IfNotPresent</span>
+        <span class="n">ports</span><span class="p">:</span>
+        <span class="p">-</span> <span class="n">containerPort</span><span class="p">:</span> <span class="n">80</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">确认所在目录</span>
+<span class="p">[</span><span class="n">root</span><span class="nv">@k8s</span><span class="n">-master01</span> <span class="n">nginxdir</span><span class="p">]</span><span class="c"># pwd</span>
+<span class="p">/</span><span class="n">root</span><span class="p">/</span><span class="n">nginxdir</span>
+
+<span class="n">确认文件是否存在</span>
+<span class="p">[</span><span class="n">root</span><span class="nv">@k8s</span><span class="n">-master01</span> <span class="n">nginxdir</span><span class="p">]</span><span class="c"># ls</span>
+<span class="n">n1</span><span class="p">.</span><span class="n">yaml</span>
+
+<span class="n">查看当前上下文</span>
+<span class="p">[</span><span class="n">root</span><span class="nv">@k8s</span><span class="n">-master01</span> <span class="n">nginxdir</span><span class="p">]</span><span class="c"># kubectl --kubeconfig /root/kubeconfigdir/config12 config current-context</span>
+<span class="n">member2</span>
+
+<span class="n">切换当前上下文</span>
+<span class="p">[</span><span class="n">root</span><span class="nv">@k8s</span><span class="n">-master01</span> <span class="n">nginxdir</span><span class="p">]</span><span class="c"># kubectl --kubeconfig /root/kubeconfigdir/config12 config use-context member1</span>
+<span class="n">Switched</span> <span class="n">to</span> <span class="n">context</span> <span class="s2">&quot;member1&quot;</span><span class="p">.</span>
+
+<span class="n">部署nginx应用</span>
+<span class="p">[</span><span class="n">root</span><span class="nv">@k8s</span><span class="n">-master01</span> <span class="n">nginxdir</span><span class="p">]</span><span class="c"># kubectl --kubeconfig /root/kubeconfigdir/config12 apply -f n1.yaml</span>
+<span class="n">deployment</span><span class="p">.</span><span class="n">apps</span><span class="p">/</span><span class="n">nginx1</span> <span class="n">created</span>
+
+<span class="n">查看部署的nginx对应的pod</span>
+<span class="p">[</span><span class="n">root</span><span class="nv">@k8s</span><span class="n">-master01</span> <span class="n">nginxdir</span><span class="p">]</span><span class="c"># kubectl --kubeconfig /root/kubeconfigdir/config12 get pods</span>
+<span class="n">NAME</span>                                     <span class="n">READY</span>   <span class="n">STATUS</span>              <span class="n">RESTARTS</span>      <span class="n">AGE</span>
+<span class="n">nginx1</span><span class="p">-</span><span class="n">7bff55d4bd-nwztt</span>                  <span class="n">1</span><span class="p">/</span><span class="n">1</span>     <span class="n">Running</span>             <span class="n">0</span>             <span class="n">13s</span>
+<span class="n">nginx1</span><span class="p">-</span><span class="n">7bff55d4bd-rvhwp</span>                  <span class="n">0</span><span class="p">/</span><span class="n">1</span>     <span class="n">ContainerCreating</span>   <span class="n">0</span>             <span class="n">13s</span>
+
+<span class="n">切换上下文</span>
+<span class="p">[</span><span class="n">root</span><span class="nv">@k8s</span><span class="n">-master01</span> <span class="n">nginxdir</span><span class="p">]</span><span class="c"># kubectl --kubeconfig /root/kubeconfigdir/config12 config use-context member2</span>
+<span class="n">Switched</span> <span class="n">to</span> <span class="n">context</span> <span class="s2">&quot;member2&quot;</span><span class="p">.</span>
+
+<span class="n">确认member2集群中是否有部署nginx应用</span><span class="err">，</span><span class="n">结果</span><span class="err">：</span><span class="n">没有</span>
+<span class="p">[</span><span class="n">root</span><span class="nv">@k8s</span><span class="n">-master01</span> <span class="n">nginxdir</span><span class="p">]</span><span class="c"># kubectl --kubeconfig /root/kubeconfigdir/config12 get pods</span>
+</code></pre></div>
+<h2 id="32_member2">3.2 在member2集群中部署应用<a class="headerlink" href="#32_member2" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><span class="n">查看部署描述文件</span>
+<span class="p">[</span><span class="n">root</span><span class="nv">@k8s</span><span class="n">-master01</span> <span class="n">nginxdir</span><span class="p">]</span><span class="c"># cat n1.yaml</span>
+<span class="n">apiVersion</span><span class="p">:</span> <span class="n">apps</span><span class="p">/</span><span class="n">v1</span>
+<span class="n">kind</span><span class="p">:</span> <span class="n">Deployment</span>
+<span class="n">metadata</span><span class="p">:</span>
+  <span class="n">name</span><span class="p">:</span> <span class="n">nginx1</span>                    <span class="c"># deployment名</span>
+<span class="n">spec</span><span class="p">:</span>
+  <span class="n">replicas</span><span class="p">:</span> <span class="n">2</span>                                   <span class="c"># 副本集,deployment里使用了replicaset</span>
+  <span class="n">selector</span><span class="p">:</span>
+    <span class="n">matchLabels</span><span class="p">:</span>
+      <span class="n">app</span><span class="p">:</span> <span class="n">nginx1</span>                                <span class="c"># 匹配的pod标签,表示deployment和rs控制器控制带有此标签的pod</span>
+  <span class="n">template</span><span class="p">:</span>                                         <span class="c"># 代表pod的配置模板</span>
+    <span class="n">metadata</span><span class="p">:</span>
+      <span class="n">labels</span><span class="p">:</span>
+        <span class="n">app</span><span class="p">:</span> <span class="n">nginx1</span>                              <span class="c"># pod的标签</span>
+    <span class="n">spec</span><span class="p">:</span>
+      <span class="n">containers</span><span class="p">:</span>                               <span class="c"># 以下为pod里的容器定义</span>
+      <span class="p">-</span> <span class="n">name</span><span class="p">:</span> <span class="n">nginx1</span>
+        <span class="n">image</span><span class="p">:</span> <span class="n">nginx</span><span class="p">:</span><span class="n">latest</span>
+        <span class="n">imagePullPolicy</span><span class="p">:</span> <span class="n">IfNotPresent</span>
+        <span class="n">ports</span><span class="p">:</span>
+        <span class="p">-</span> <span class="n">containerPort</span><span class="p">:</span> <span class="n">80</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">切换上下文</span>
+<span class="p">[</span><span class="n">root</span><span class="nv">@k8s</span><span class="n">-master01</span> <span class="n">nginxdir</span><span class="p">]</span><span class="c"># kubectl --kubeconfig /root/kubeconfigdir/config12 config use-context member2</span>
+<span class="n">Switched</span> <span class="n">to</span> <span class="n">context</span> <span class="s2">&quot;member2&quot;</span><span class="p">.</span>
+
+<span class="n">确认当前上下文</span>
+<span class="p">[</span><span class="n">root</span><span class="nv">@k8s</span><span class="n">-master01</span> <span class="n">nginxdir</span><span class="p">]</span><span class="c"># kubectl --kubeconfig /root/kubeconfigdir/config12 config current-context</span>
+<span class="n">member2</span>
+
+<span class="n">执行nginx应用部署</span>
+<span class="p">[</span><span class="n">root</span><span class="nv">@k8s</span><span class="n">-master01</span> <span class="n">nginxdir</span><span class="p">]</span><span class="c"># kubectl --kubeconfig /root/kubeconfigdir/config12 apply -f n1.yaml</span>
+<span class="n">deployment</span><span class="p">.</span><span class="n">apps</span><span class="p">/</span><span class="n">nginx1</span> <span class="n">created</span>
+
+<span class="n">确认nginx应用部署对应的pod是否运行</span><span class="err">，</span><span class="n">结果</span><span class="err">：</span><span class="n">运行</span><span class="err">。</span>
+<span class="p">[</span><span class="n">root</span><span class="nv">@k8s</span><span class="n">-master01</span> <span class="n">nginxdir</span><span class="p">]</span><span class="c"># kubectl --kubeconfig /root/kubeconfigdir/config12 get pods</span>
+<span class="n">NAME</span>                                     <span class="n">READY</span>   <span class="n">STATUS</span>    <span class="n">RESTARTS</span>      <span class="n">AGE</span>
+<span class="n">nfs-client-provisioner-dfd8488d7-rtmdj</span>   <span class="n">1</span><span class="p">/</span><span class="n">1</span>     <span class="n">Running</span>   <span class="n">3</span> <span class="p">(</span><span class="n">14h</span> <span class="n">ago</span><span class="p">)</span>   <span class="n">45h</span>
+<span class="n">nginx1</span><span class="p">-</span><span class="n">7bff55d4bd</span><span class="p">-</span><span class="n">25vkz</span>                  <span class="n">1</span><span class="p">/</span><span class="n">1</span>     <span class="n">Running</span>   <span class="n">0</span>             <span class="n">8s</span>
+<span class="n">nginx1</span><span class="p">-</span><span class="n">7bff55d4bd-lfprt</span>                  <span class="n">1</span><span class="p">/</span><span class="n">1</span>     <span class="n">Running</span>   <span class="n">0</span>             <span class="n">8s</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">删除不同集群中已部署的应用</span>
+
+<span class="n">删除member2集群中的应用</span>
+<span class="p">[</span><span class="n">root</span><span class="nv">@k8s</span><span class="n">-master01</span> <span class="n">nginxdir</span><span class="p">]</span><span class="c"># kubectl --kubeconfig /root/kubeconfigdir/config12 config use-context member2</span>
+<span class="n">Switched</span> <span class="n">to</span> <span class="n">context</span> <span class="s2">&quot;member2&quot;</span><span class="p">.</span>
+
+<span class="p">[</span><span class="n">root</span><span class="nv">@k8s</span><span class="n">-master01</span> <span class="n">nginxdir</span><span class="p">]</span><span class="c"># kubectl --kubeconfig /root/kubeconfigdir/config12 delete -f n1.yaml</span>
+<span class="n">deployment</span><span class="p">.</span><span class="n">apps</span> <span class="s2">&quot;nginx1&quot;</span> <span class="n">deleted</span>
+
+
+<span class="n">删除member1集群中的应用</span>
+<span class="p">[</span><span class="n">root</span><span class="nv">@k8s</span><span class="n">-master01</span> <span class="n">nginxdir</span><span class="p">]</span><span class="c"># kubectl --kubeconfig /root/kubeconfigdir/config12 config use-context member1</span>
+<span class="n">Switched</span> <span class="n">to</span> <span class="n">context</span> <span class="s2">&quot;member1&quot;</span><span class="p">.</span>
+
+<span class="p">[</span><span class="n">root</span><span class="nv">@k8s</span><span class="n">-master01</span> <span class="n">nginxdir</span><span class="p">]</span><span class="c"># kubectl --kubeconfig /root/kubeconfigdir/config12 delete -f n1.yaml</span>
+<span class="n">deployment</span><span class="p">.</span><span class="n">apps</span> <span class="s2">&quot;nginx1&quot;</span> <span class="n">deleted</span>
+</code></pre></div>
+<h1 id="_1">四、 持久化存储准备<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
+<blockquote>
+<p>提前准备好NFS服务，主要为后续k8s联邦做准备。</p>
+</blockquote>
+<div class="highlight"><pre><span></span><code><span class="n">下载NFS做为后端持久化存储部署文件</span>
+<span class="c"># for file in class.yaml deployment.yaml rbac.yaml  ; do wget https://raw.githubusercontent.com/kubernetes-incubator/external-storage/master/nfs-client/deploy/$file ; done</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">替换的镜像</span><span class="err">：</span><span class="n">registry</span><span class="p">.</span><span class="n">cn-beijing</span><span class="p">.</span><span class="n">aliyuncs</span><span class="p">.</span><span class="n">com</span><span class="p">/</span><span class="n">pylixm</span><span class="p">/</span><span class="n">nfs-subdir-external-provisioner</span><span class="p">:</span><span class="n">v4</span><span class="p">.</span><span class="n">0</span><span class="p">.</span><span class="n">0</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">本次NFS服务器IP地址及共享目录</span><span class="err">：</span>
+<span class="n">192</span><span class="p">.</span><span class="n">168</span><span class="p">.</span><span class="n">10</span><span class="p">.</span><span class="n">166</span>
+<span class="p">/</span><span class="n">netshare</span>
+</code></pre></div>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      BurningMyself<a href='https://beian.miit.gov.cn/' target='_blank'>  蜀ICP备15033200号-1</a>
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        <div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/burningmyself" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://gitee.com/burningmyself" target="_blank" rel="noopener" title="gitee.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 488 512"><!--! Font Awesome Free 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M488 261.8C488 403.3 391.1 504 248 504 110.8 504 0 393.2 0 256S110.8 8 248 8c66.8 0 123 24.5 166.3 64.9l-67.5 64.9C258.5 52.6 94.3 116.6 94.3 256c0 86.5 69.1 156.6 153.7 156.6 98.2 0 135-70.4 140.8-106.9H248v-85.3h236.1c2.3 12.7 3.9 24.9 3.9 41.4z"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "../../..", "features": [], "search": "../../../assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.2a6f1dda.min.js"></script>
+      
+        <script src="../../../js/extra.js"></script>
+      
+        <script src="../../../js/baidu-tongji.js"></script>
+      
+        <script src="https://www.googletagmanager.com/gtag/js?id=UA-155084439-1"></script>
+      
+        <script src="https://www.googletagmanager.com/gtag/js?id=UA-155132293-1"></script>
+      
+        <script src="../../../js/google.js"></script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+      
+    
+  </body>
+</html>
