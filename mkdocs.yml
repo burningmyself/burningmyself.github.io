@@ -83,6 +83,7 @@ nav:
         - 实用的Linux 命令: linux/ope.md        
     - Docker: 
         - Docker全科: docker/docker.md
+        - Docker 核心技术: docker/docker_core.md
         - docker和docker-compose配置常用环境: docker/docker-compose.md   
         - Docker部署Jenkins: docker/docker-jenkins.md 
         - Docker部署Phabricator: docker/docker-phabricator.md
