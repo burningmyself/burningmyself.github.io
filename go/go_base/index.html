@@ -3698,17 +3698,6 @@ ServiceTypeLoadBalancer ServiceType = &quot;LoadBalancer&quot;
 ServiceTypeExternalName ServiceType = &quot;ExternalName&quot;
 )
 </code></pre></div>
-<h5 id="11">课后练习1.1<a class="headerlink" href="#11" title="Permanent link">&para;</a></h5>
-<ul>
-<li>安装 Go</li>
-<li>安装 IDE 并安装 Go 语言插件</li>
-<li>编写一个小程序</li>
-</ul>
-<div class="highlight"><pre><span></span><code>给定一个字符串数组
-[&quot;I&quot;,&quot;am&quot;,&quot;stupid&quot;,&quot;and&quot;,&quot;weak&quot;]
-用 for 循环遍历该数组并修改为
-[&quot;I&quot;,&quot;am&quot;,&quot;smart&quot;,&quot;and&quot;,&quot;strong&quot;]
-</code></pre></div>
 <h4 id="5">5. 函数<a class="headerlink" href="#5" title="Permanent link">&para;</a></h4>
 <h5 id="main">Main 函数<a class="headerlink" href="#main" title="Permanent link">&para;</a></h5>
 <ul>
@@ -4280,16 +4269,6 @@ close(done)</p>
 <p>go process(ctx, 100 *time.Millisecond)</p>
 <p>&lt;-ctx.Done()</p>
 <p>fmt.Println("main:", ctx.Err())</p>
-<h5 id="12">课后练习1.2<a class="headerlink" href="#12" title="Permanent link">&para;</a></h5>
-<ul>
-<li>基于 Channel 编写一个简单的单线程生产者消费者模型</li>
-<li>队列：
-队列长度 10 ，队列元素类型为 int</li>
-<li>生产者：
-每 1 秒往队列中放入一个类型为 int 的元素，队列满时生产者可以阻塞</li>
-<li>消费者：
-每一秒从队列中获取一个元素并打印，队列为空时消费者阻塞</li>
-</ul>
 <h2 id="go_8">模块二：Go 语言进阶<a class="headerlink" href="#go_8" title="Permanent link">&para;</a></h2>
 <h1 id="_34">目录 •• 线程加锁线程调度<a class="headerlink" href="#_34" title="Permanent link">&para;</a></h1>
 <ul>
@@ -4577,10 +4556,6 @@ P Psyscall
 <li>通过 runtime.runqsteal 尝试从其他随机的处理器中窃取待运行的 Goroutine</li>
 </ul>
 </li>
-</ul>
-<h4 id="21">课后练习 2.1<a class="headerlink" href="#21" title="Permanent link">&para;</a></h4>
-<ul>
-<li>将练习1.2中的生产者消费者模型修改成为多个生产者和多个消费者模式</li>
 </ul>
 <h3 id="3_1">3. 内存管理<a class="headerlink" href="#3_1" title="Permanent link">&para;</a></h3>
 <h4 id="_40">关于内存管理的争论<a class="headerlink" href="#_40" title="Permanent link">&para;</a></h4>
@@ -5338,11 +5313,7 @@ curl 127.0.0.1:10249/debug/pprof/heap?debug=2
 <li>解决方法：
 修改代码加入客户端超时控制。</li>
 </ul>
-<h4 id="22">课后练习 2.2<a class="headerlink" href="#22" title="Permanent link">&para;</a></h4>
-<ul>
-<li>编写一个 HTTP 服务器
-    接收客户端请求并将请求的 Header 打印出来返回给客户端</li>
-</ul>
+<p><a href="https://draveness.me/golang/">Go 语言设计与实现</a></p>
 
 
 
