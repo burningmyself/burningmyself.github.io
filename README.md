@@ -32,6 +32,8 @@
   * [docker和docker-compose配置常用环境](docs/docker/docker-compose.md)
   * [Docker部署Jenkins](docs/docker/docker-jenkins.md)
   * [Docker部署Phabricator](docs/docker/docker-phabricator.md)
+* [K8s]  
+  * [Kubernetes架构原则和对象设计](docs/kubernetes/k8s_fw_rule_and_object_design.md)
 * [经验]
   * [集群和负载均衡](docs/exp/cl.md)
   * [DevOps是什么](docs/exp/devops.md)  
@@ -45,7 +47,6 @@
   * [深度学习框架](docs/exp/four_deep_learning.md)
   * [在阿里做了5年技术Leader，我总结出这些套路！](docs/exp/tl.md)
   * [CTO 技能图谱](docs/exp/cto.md)
-* [Img]
 * [Java]
   * [Java 新特性](docs/java/feature.md)
   * [Java 类加载机制](docs/java/load-class.md)

@@ -87,6 +87,8 @@ nav:
         - docker和docker-compose配置常用环境: docker/docker-compose.md   
         - Docker部署Jenkins: docker/docker-jenkins.md 
         - Docker部署Phabricator: docker/docker-phabricator.md
+    - Kubernetes:
+        - Kubernetes架构原则和对象设计: kubernetes/k8s_fw_rule_and_object_design.md    
     - Tool: 
         - Git: tool/git.md
         - Git动画展示: tool/gitusual.md
