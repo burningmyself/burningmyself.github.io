@@ -520,24 +520,6 @@ cgroupfs:
 因此kubelet会默认--cgroup-driver=systemd，若运行时cgroup不一致时，kubelet会报错。
 
 
-#### 课后练习3.1
-
-- Memory子系统练习
-- 在cgroupmemory子系统目录中创建目录结构
-cd /sys/fs/cgroup/memory
-mkdirmemorydemo
-cd memorydemo
-- 运行malloc（在linux机器makebuild）
-- 查看内存使用情况
-watch 'ps-aux|grepmalloc|grep-v grep‘
-- 通过cgroup限制memory
-    - 把进程添加到cgroup进程配置组
-echo ps-ef|grepmalloc |grep -v grep|awk'{print $2}' > cgroup.procs
-    - 设置memory.limit_in_bytes
-echo 104960000 > memory.limit_in_bytes
-- 等待进程被oomkill
-
-
 ### 文件系统
 
 Union FS
@@ -1052,23 +1034,3 @@ Docker hub
 
 - Docker命令简单、易用，社区十分活跃，且周边组件丰富。
 
-#### 容器的劣势？
-
-课后作业：思考并讨论容器的劣势。
-
-
-#### 课后练习 3.2
-
-- 构建本地镜像
-- 编写Dockerfile将练习2.2编写的httpserver容器化
-    - 请思考有哪些最佳实践可以引入到Dockerfile中来
-- 将镜像推送至Docker官方镜像仓库
-- 通过Docker命令本地启动httpserver
-- 通过nsenter进入容器查看IP配置
-
-
-#### 参考资料
-
-[https://www.cnblogs.com/XiaoliBoy/p/10410686.html](https://www.cnblogs.com/XiaoliBoy/p/10410686.html)
-
-[http://www.wowotech.net/process_management/451.html](http://www.wowotech.net/process_management/451.html)
