@@ -1502,13 +1502,6 @@
   
 </li>
         
-          <li class="md-nav__item">
-  <a href="#31" class="md-nav__link">
-    课后练习3.1
-  </a>
-  
-</li>
-        
       </ul>
     </nav>
   
@@ -1799,27 +1792,6 @@
         
       </ul>
     </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#_17" class="md-nav__link">
-    容器的劣势？
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#32" class="md-nav__link">
-    课后练习 3.2
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#_18" class="md-nav__link">
-    参考资料
-  </a>
   
 </li>
         
@@ -3954,13 +3926,6 @@
   
 </li>
         
-          <li class="md-nav__item">
-  <a href="#31" class="md-nav__link">
-    课后练习3.1
-  </a>
-  
-</li>
-        
       </ul>
     </nav>
   
@@ -4251,27 +4216,6 @@
         
       </ul>
     </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#_17" class="md-nav__link">
-    容器的劣势？
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#32" class="md-nav__link">
-    课后练习 3.2
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#_18" class="md-nav__link">
-    参考资料
-  </a>
   
 </li>
         
@@ -4726,25 +4670,6 @@ cgroupfs:</li>
     systemd驱动管，让cgroup管理混乱且容易在资源紧张时引发问题。
 因此kubelet会默认--cgroup-driver=systemd，若运行时cgroup不一致时，kubelet会报错。</li>
 </ul>
-<h4 id="31">课后练习3.1<a class="headerlink" href="#31" title="Permanent link">&para;</a></h4>
-<ul>
-<li>Memory子系统练习</li>
-<li>在cgroupmemory子系统目录中创建目录结构
-cd /sys/fs/cgroup/memory
-mkdirmemorydemo
-cd memorydemo</li>
-<li>运行malloc（在linux机器makebuild）</li>
-<li>查看内存使用情况
-watch 'ps-aux|grepmalloc|grep-v grep‘</li>
-<li>通过cgroup限制memory<ul>
-<li>把进程添加到cgroup进程配置组
-echo ps-ef|grepmalloc |grep -v grep|awk'{print $2}' &gt; cgroup.procs</li>
-<li>设置memory.limit_in_bytes
-echo 104960000 &gt; memory.limit_in_bytes</li>
-</ul>
-</li>
-<li>等待进程被oomkill</li>
-</ul>
 <h3 id="_9">文件系统<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h3>
 <p>Union FS</p>
 <ul>
@@ -5194,22 +5119,6 @@ ENTRYPOINT command param1 param2 // docker run参数替换模式
 <ul>
 <li>Docker命令简单、易用，社区十分活跃，且周边组件丰富。</li>
 </ul>
-<h4 id="_17">容器的劣势？<a class="headerlink" href="#_17" title="Permanent link">&para;</a></h4>
-<p>课后作业：思考并讨论容器的劣势。</p>
-<h4 id="32">课后练习 3.2<a class="headerlink" href="#32" title="Permanent link">&para;</a></h4>
-<ul>
-<li>构建本地镜像</li>
-<li>编写Dockerfile将练习2.2编写的httpserver容器化<ul>
-<li>请思考有哪些最佳实践可以引入到Dockerfile中来</li>
-</ul>
-</li>
-<li>将镜像推送至Docker官方镜像仓库</li>
-<li>通过Docker命令本地启动httpserver</li>
-<li>通过nsenter进入容器查看IP配置</li>
-</ul>
-<h4 id="_18">参考资料<a class="headerlink" href="#_18" title="Permanent link">&para;</a></h4>
-<p><a href="https://www.cnblogs.com/XiaoliBoy/p/10410686.html">https://www.cnblogs.com/XiaoliBoy/p/10410686.html</a></p>
-<p><a href="http://www.wowotech.net/process_management/451.html">http://www.wowotech.net/process_management/451.html</a></p>
 
 
 
