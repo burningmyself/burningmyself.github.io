@@ -636,19 +636,10 @@ Kubernetes对象的最基本定义，它通过引入GKV（Group，Kind，Version
 Metadata中有两个最重要的属性：Namespace和Name，分别定义了对象的
 Namespace归属及名字，这两个属性唯一定义了某个对象实例。
 
-1. Label：
-
-- 顾名思义就是给对象打标签，一个对象可以有任意对标签，其存在形式是键值对。
+Label：
+顾名思义就是给对象打标签，一个对象可以有任意对标签，其存在形式是键值对。
 Label定义了对象的可识别属性，Kubernetes API支持以Label作为过滤条件
 查询对象。
-
-2. Annotation：
-
-- Annotation与Label一样用键值对来定义，但Annotation是作为属性扩展，
-更多面向于系统管理员和开发人员，因此需要像其他属性一样做合理归类。
-
-
-##### Label
 
 - Label是识别Kubernetes对象的标签，以key/value的方式附加到对象上。
 - key最长不能超过 63 字节，value可以为空，也可以是不超过 253 字节的字符串。
@@ -660,22 +651,26 @@ Label定义了对象的可识别属性，Kubernetes API支持以Label作为过�
     - 集合，如env in (production, qa)；
     - 多个label（它们之间是AND关系），如app=nginx,env=test。
 
-##### Annotations
+Annotation：
+
+Annotation与Label一样用键值对来定义，但Annotation是作为属性扩展，
+更多面向于系统管理员和开发人员，因此需要像其他属性一样做合理归类。
+
 
 - Annotations是key/value形式附加于对象的注解。
 - 不同于 Labels 用于标志和选择对象，Annotations 则是用来记录一些附加信息，用来辅助应用部署、安
     全策略以及调度策略等。
 - 比如deployment使用annotations来记录rollingupdate的状态。
 
-3. Finalizer
+Finalizer：
 
-Finalizer本质上是一个资源锁，Kubernetes在接收某对象的删除请求时，会检
+- Finalizer本质上是一个资源锁，Kubernetes在接收某对象的删除请求时，会检
 查Finalizer是否为空，如果不为空则只对其做逻辑删除，即只会更新对象中的
 metadata.deletionTimestamp字段。
 
-4. ResourceVersion
+ResourceVersion：
 
-ResourceVersion可以被看作一种乐观锁，每个对象在任意时刻都有其
+- ResourceVersion可以被看作一种乐观锁，每个对象在任意时刻都有其
 ResourceVersion，当Kubernetes对象被客户端读取以后，ResourceVersion
 信息也被一并读取。此机制确保了分布式系统中任意多线程能够无锁并发访问对
 象，极大提升了系统的整体效率。
@@ -783,6 +778,7 @@ containers:
 #### 健康检查
 
 Kubernetes作为一个面向应用的集群管理工具，需要确保容器在部署后确实处在正常的运行状态。
+
 1.探针类型：
 
 - LivenessProbe
@@ -791,7 +787,9 @@ Kubernetes作为一个面向应用的集群管理工具，需要确保容器在�
     - 探测应用是否就绪并且处于正常服务状态，如果不正常则不会接收来自Kubernetes Service 的流量。
 - StartupProbe
     - 探测应用是否启动完成，如果在failureThreshold*periodSeconds周期内未就绪，则会应用进程会被重启。
+
 2.探活方式：
+
 - Exec
 - TCP socket
 - HTTP
