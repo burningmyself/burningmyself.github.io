@@ -531,6 +531,11 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://burningmyself.gitee.io/kubernetes/k8s_kube_APIServer/</loc>
+         <lastmod>2023-05-19</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://burningmyself.gitee.io/linux/linux/</loc>
          <lastmod>2023-05-19</lastmod>
          <changefreq>daily</changefreq>

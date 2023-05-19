@@ -15,13 +15,17 @@
         <link rel="canonical" href="https://burningmyself.gitee.io/kubernetes/k8s_etcd/">
       
       
+        <link rel="prev" href="../k8s_fw_rule_and_object_design/">
+      
+      
+        <link rel="next" href="../k8s_kube_APIServer/">
       
       <link rel="icon" href="../../favicon.ico">
       <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.0.15">
     
     
       
-        <title>Kubernetes 控制平面组件：etcd - BurningMyself</title>
+        <title>Kubernetes控制平面组件etcd - BurningMyself</title>
       
     
     
@@ -102,7 +106,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Kubernetes 控制平面组件：etcd
+              Kubernetes控制平面组件etcd
             
           </span>
         </div>
@@ -225,14 +229,16 @@
 
   
   
+    
+  
   
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
       
       
       
-      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
       
       
       
@@ -241,7 +247,7 @@
           <span class="md-nav__icon md-icon"></span>
         </label>
       
-      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
         <label class="md-nav__title" for="__nav_2">
           <span class="md-nav__icon md-icon"></span>
           技术博文
@@ -1272,14 +1278,16 @@
               
   
   
+    
+  
   
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
       
       
       
-      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_10" >
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_10" checked>
       
       
       
@@ -1288,7 +1296,7 @@
           <span class="md-nav__icon md-icon"></span>
         </label>
       
-      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_10_label" aria-expanded="false">
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_10_label" aria-expanded="true">
         <label class="md-nav__title" for="__nav_2_10">
           <span class="md-nav__icon md-icon"></span>
           Kubernetes
@@ -1303,6 +1311,559 @@
     <li class="md-nav__item">
       <a href="../k8s_fw_rule_and_object_design/" class="md-nav__link">
         Kubernetes架构原则和对象设计
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Kubernetes控制平面组件etcd
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Kubernetes控制平面组件etcd
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#etcd" class="md-nav__link">
+    etcd
+  </a>
+  
+    <nav class="md-nav" aria-label="etcd">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    主要功能
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    使用场景
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    键值对存储
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    服务注册与发现
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    消息发布与订阅
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#etcd_1" class="md-nav__link">
+    Etcd的安装
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    第三方库和客户端工具
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#etcd_2" class="md-nav__link">
+    etcd 命令
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ttl_cas" class="md-nav__link">
+    核心：TTL &amp; CAS
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#raft" class="md-nav__link">
+    Raft协议
+  </a>
+  
+    <nav class="md-nav" aria-label="Raft协议">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#raft_1" class="md-nav__link">
+    Raft协议概览
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#raft_2" class="md-nav__link">
+    理解Raft协议
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#learner" class="md-nav__link">
+    learner
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#etcdraft" class="md-nav__link">
+    etcd基于Raft的一致性
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    日志复制
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    安全性
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    失效处理
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wal" class="md-nav__link">
+    wal日志
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#etcd_v3_watch" class="md-nav__link">
+    etcd v3 存储，Watch以及过期机制
+  </a>
+  
+    <nav class="md-nav" aria-label="etcd v3 存储，Watch以及过期机制">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    存储机制
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#watch" class="md-nav__link">
+    Watch机制
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#etcd_3" class="md-nav__link">
+    etcd 命令
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#etcd_4" class="md-nav__link">
+    etcd 成员重要参数
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    灾备
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    容量管理
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#alarm_disarm_alarm" class="md-nav__link">
+    Alarm &amp; Disarm Alarm
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#etcd_5" class="md-nav__link">
+    高可用etcd解决方案
+  </a>
+  
+    <nav class="md-nav" aria-label="高可用etcd解决方案">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#etcd_operator" class="md-nav__link">
+    Etcd Operator
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bitnami_etcd" class="md-nav__link">
+    基于 Bitnami 安装etcd高可用集群
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#kubernetesetcd" class="md-nav__link">
+    Kubernetes如何使用etcd
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#kubernetsetcd" class="md-nav__link">
+    Kubernets对象在etcd中的存储路径
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#etcd_6" class="md-nav__link">
+    etcd在集群中所处的位置
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#kubernetesetcd_1" class="md-nav__link">
+    Kubernetes如何使用etcd
+  </a>
+  
+    <nav class="md-nav" aria-label="Kubernetes如何使用etcd">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#etcd_7" class="md-nav__link">
+    堆叠式etcd集群的高可用拓扑
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#etcd_8" class="md-nav__link">
+    外部etcd集群的高可用拓扑
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#-_etcd" class="md-nav__link">
+    实践 - etcd集群高可用
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#etcd_9" class="md-nav__link">
+    实践 – etcd存储规划
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#etcd_10" class="md-nav__link">
+    etcd 安全性
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    减少网络延迟
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#io" class="md-nav__link">
+    减少磁盘I/O延迟
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_14" class="md-nav__link">
+    保持合理的日志文件大小
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_15" class="md-nav__link">
+    设置合理的存储配额
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_16" class="md-nav__link">
+    自动压缩历史版本
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_17" class="md-nav__link">
+    定期消除碎片化
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_18" class="md-nav__link">
+    数据备份
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_19" class="md-nav__link">
+    优化运行参数
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#etcd_11" class="md-nav__link">
+    etcd备份存储
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_20" class="md-nav__link">
+    备份方案实践
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#etcd_12" class="md-nav__link">
+    etcd 常见问题
+  </a>
+  
+    <nav class="md-nav" aria-label="etcd 常见问题">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#peer" class="md-nav__link">
+    多少个peer最适合？
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#apiserveretcd" class="md-nav__link">
+    保证apiserver和etcd之间的高效性通讯
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#backup" class="md-nav__link">
+    增强版backup方案
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#etcd_13" class="md-nav__link">
+    etcd数据加密
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#kubernetes" class="md-nav__link">
+    Kubernetes中数据分离
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#apiserver" class="md-nav__link">
+    查询APIServer
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12345" class="md-nav__link">
+    从 12345 版本开始，监听所有对象变化
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#get_apiv1namespacestestpodswatch1resourceversion10245" class="md-nav__link">
+    GET /api/v1/namespaces/test/pods?watch=1&amp;resourceVersion=10245
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_21" class="md-nav__link">
+    分页查询
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#get_apiv1podslimit500" class="md-nav__link">
+    GET /api/v1/pods?limit=500
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resourceversion" class="md-nav__link">
+    ResourceVersion
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_22" class="md-nav__link">
+    遭遇到的陷阱
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#etcd_down" class="md-nav__link">
+    少数etcd 成员Down
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#master" class="md-nav__link">
+    Master节点出现网络分区
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_23" class="md-nav__link">
+    参考资料
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../k8s_kube_APIServer/" class="md-nav__link">
+        深入理解Kube-APIServer
       </a>
     </li>
   
