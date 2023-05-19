@@ -1734,26 +1734,6 @@
     Metadata
   </a>
   
-    <nav class="md-nav" aria-label="Metadata">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#label" class="md-nav__link">
-    Label
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#annotations" class="md-nav__link">
-    Annotations
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
 </li>
         
           <li class="md-nav__item">
@@ -4113,26 +4093,6 @@
     Metadata
   </a>
   
-    <nav class="md-nav" aria-label="Metadata">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#label" class="md-nav__link">
-    Label
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#annotations" class="md-nav__link">
-    Annotations
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
 </li>
         
           <li class="md-nav__item">
@@ -4923,24 +4883,10 @@ Mon<span class="w"> </span>Mar<span class="w"> </span><span class="m">25</span><
 <h4 id="metadata">Metadata<a class="headerlink" href="#metadata" title="Permanent link">&para;</a></h4>
 <p>Metadata中有两个最重要的属性：Namespace和Name，分别定义了对象的
 Namespace归属及名字，这两个属性唯一定义了某个对象实例。</p>
-<ol>
-<li>
-<p>Label：</p>
-</li>
-<li>
-<p>顾名思义就是给对象打标签，一个对象可以有任意对标签，其存在形式是键值对。
+<p>Label：
+顾名思义就是给对象打标签，一个对象可以有任意对标签，其存在形式是键值对。
 Label定义了对象的可识别属性，Kubernetes API支持以Label作为过滤条件
 查询对象。</p>
-</li>
-<li>
-<p>Annotation：</p>
-</li>
-<li>
-<p>Annotation与Label一样用键值对来定义，但Annotation是作为属性扩展，
-更多面向于系统管理员和开发人员，因此需要像其他属性一样做合理归类。</p>
-</li>
-</ol>
-<h5 id="label">Label<a class="headerlink" href="#label" title="Permanent link">&para;</a></h5>
 <ul>
 <li>Label是识别Kubernetes对象的标签，以key/value的方式附加到对象上。</li>
 <li>key最长不能超过 63 字节，value可以为空，也可以是不超过 253 字节的字符串。</li>
@@ -4954,28 +4900,28 @@ Label定义了对象的可识别属性，Kubernetes API支持以Label作为过�
 </ul>
 </li>
 </ul>
-<h5 id="annotations">Annotations<a class="headerlink" href="#annotations" title="Permanent link">&para;</a></h5>
+<p>Annotation：</p>
+<p>Annotation与Label一样用键值对来定义，但Annotation是作为属性扩展，
+更多面向于系统管理员和开发人员，因此需要像其他属性一样做合理归类。</p>
 <ul>
 <li>Annotations是key/value形式附加于对象的注解。</li>
 <li>不同于 Labels 用于标志和选择对象，Annotations 则是用来记录一些附加信息，用来辅助应用部署、安
     全策略以及调度策略等。</li>
-<li>
-<p>比如deployment使用annotations来记录rollingupdate的状态。</p>
-</li>
-<li>
-<p>Finalizer</p>
-</li>
+<li>比如deployment使用annotations来记录rollingupdate的状态。</li>
 </ul>
-<p>Finalizer本质上是一个资源锁，Kubernetes在接收某对象的删除请求时，会检
+<p>Finalizer：</p>
+<ul>
+<li>Finalizer本质上是一个资源锁，Kubernetes在接收某对象的删除请求时，会检
 查Finalizer是否为空，如果不为空则只对其做逻辑删除，即只会更新对象中的
-metadata.deletionTimestamp字段。</p>
-<ol>
-<li>ResourceVersion</li>
-</ol>
-<p>ResourceVersion可以被看作一种乐观锁，每个对象在任意时刻都有其
+metadata.deletionTimestamp字段。</li>
+</ul>
+<p>ResourceVersion：</p>
+<ul>
+<li>ResourceVersion可以被看作一种乐观锁，每个对象在任意时刻都有其
 ResourceVersion，当Kubernetes对象被客户端读取以后，ResourceVersion
 信息也被一并读取。此机制确保了分布式系统中任意多线程能够无锁并发访问对
-象，极大提升了系统的整体效率。</p>
+象，极大提升了系统的整体效率。</li>
+</ul>
 <h4 id="spec_status">Spec 和 Status<a class="headerlink" href="#spec_status" title="Permanent link">&para;</a></h4>
 <ul>
 <li>Spec和Status才是对象的核心。</li>
@@ -5066,8 +5012,8 @@ deployment<span class="w"> </span><span class="s2">&quot;nginx&quot;</span><span
 <span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">memory:&quot; 128 Mi&quot;</span>
 </code></pre></div>
 <h4 id="_16">健康检查<a class="headerlink" href="#_16" title="Permanent link">&para;</a></h4>
-<p>Kubernetes作为一个面向应用的集群管理工具，需要确保容器在部署后确实处在正常的运行状态。
-1.探针类型：</p>
+<p>Kubernetes作为一个面向应用的集群管理工具，需要确保容器在部署后确实处在正常的运行状态。</p>
+<p>1.探针类型：</p>
 <ul>
 <li>LivenessProbe<ul>
 <li>探测应用是否处于健康状态，如果不健康则删除并重新创建容器。</li>
@@ -5078,10 +5024,12 @@ deployment<span class="w"> </span><span class="s2">&quot;nginx&quot;</span><span
 </ul>
 </li>
 <li>StartupProbe<ul>
-<li>探测应用是否启动完成，如果在failureThreshold*periodSeconds周期内未就绪，则会应用进程会被重启。
-2.探活方式：</li>
+<li>探测应用是否启动完成，如果在failureThreshold*periodSeconds周期内未就绪，则会应用进程会被重启。</li>
 </ul>
 </li>
+</ul>
+<p>2.探活方式：</p>
+<ul>
 <li>Exec</li>
 <li>TCP socket</li>
 <li>HTTP</li>
