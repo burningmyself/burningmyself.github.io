@@ -88,7 +88,9 @@ nav:
         - Docker部署Jenkins: docker/docker-jenkins.md 
         - Docker部署Phabricator: docker/docker-phabricator.md
     - Kubernetes:
-        - Kubernetes架构原则和对象设计: kubernetes/k8s_fw_rule_and_object_design.md    
+        - Kubernetes架构原则和对象设计: kubernetes/k8s_fw_rule_and_object_design.md
+        - Kubernetes控制平面组件etcd: kubernetes/k8s_etcd.md
+        - 深入理解Kube-APIServer: kubernetes/k8s_kube_APIServer.md    
     - Tool: 
         - Git: tool/git.md
         - Git动画展示: tool/gitusual.md

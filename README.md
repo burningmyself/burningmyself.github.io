@@ -34,6 +34,8 @@
   * [Docker部署Phabricator](docs/docker/docker-phabricator.md)
 * [K8s]  
   * [Kubernetes架构原则和对象设计](docs/kubernetes/k8s_fw_rule_and_object_design.md)
+  * [Kubernetes控制平面组件etcd](docs/kubernetes/k8s_etcd.md)
+  * [深入理解Kube-APIServer](docs/kubernetes/k8s_kube_APIServer.md)
 * [经验]
   * [集群和负载均衡](docs/exp/cl.md)
   * [DevOps是什么](docs/exp/devops.md)  
