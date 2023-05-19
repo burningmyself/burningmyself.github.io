@@ -1,0 +1,4446 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content=".net,java,php,python,docker,web">
+      
+      
+        <meta name="author" content="BurningMyself">
+      
+      
+        <link rel="canonical" href="https://burningmyself.gitee.io/kubernetes/k8s_etcd/">
+      
+      
+      
+      <link rel="icon" href="../../favicon.ico">
+      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.0.15">
+    
+    
+      
+        <title>Kubernetes 控制平面组件：etcd - BurningMyself</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.113286f1.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.a0c5b2b5.min.css">
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="" data-md-color-accent="">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#kubernetes_etcd" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../.." title="BurningMyself" class="md-header__button md-logo" aria-label="BurningMyself" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            BurningMyself
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Kubernetes 控制平面组件：etcd
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/burningmyself/burningmyself.github.io" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    burningmyself.github.io
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="BurningMyself" class="md-nav__button md-logo" aria-label="BurningMyself" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    BurningMyself
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/burningmyself/burningmyself.github.io" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    burningmyself.github.io
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        介绍
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+          技术博文
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          技术博文
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="0">
+          .NET
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_1_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2_1">
+          <span class="md-nav__icon md-icon"></span>
+          .NET
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../net/c_sharp/" class="md-nav__link">
+        C#新特性语法
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../net/c_docker/" class="md-nav__link">
+        .Net Core Docker 部署
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../net/c_sqlserver_nginx/" class="md-nav__link">
+        Docker 容器化部署 ASP.NET Core
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../net/c_core_safety/" class="md-nav__link">
+        让你的ASP.NET Core应用程序更安全
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../net/c_core_study_route/" class="md-nav__link">
+        ASP.NET Core开发者指南
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+          Java
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2_2">
+          <span class="md-nav__icon md-icon"></span>
+          Java
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../java/feature/" class="md-nav__link">
+        Java特性
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../java/load-class/" class="md-nav__link">
+        Java类加载
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../java/orm/" class="md-nav__link">
+        Orm的优缺点
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../java/bio-nio/" class="md-nav__link">
+        BIO与NIO
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../java/rocketmq/rmq-1/" class="md-nav__link">
+        RocketMq下载与安装
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../java/springAnnotation/" class="md-nav__link">
+        Spring常用注解
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../java/javavm/" class="md-nav__link">
+        Java 虚拟机
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../java/springdesign/" class="md-nav__link">
+        Spring 常用设计
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../java/spring-cloud/" class="md-nav__link">
+        Spring Cloud
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../java/java-simple/" class="md-nav__link">
+        Java simple
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../java/java-validator/" class="md-nav__link">
+        Java Validator
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../java/java-string/" class="md-nav__link">
+        Java String
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../java/java-utils/" class="md-nav__link">
+        Java Utils
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+          Python
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2_3">
+          <span class="md-nav__icon md-icon"></span>
+          Python
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../python/feature/" class="md-nav__link">
+        Python特性
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../python/str_joint/" class="md-nav__link">
+        Python字符拼接
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../python/syntax_rule/" class="md-nav__link">
+        Python语法技巧
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../python/fabric/" class="md-nav__link">
+        远程部署神器 Fabric
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_4" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_4" id="__nav_2_4_label" tabindex="0">
+          Go
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_4_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2_4">
+          <span class="md-nav__icon md-icon"></span>
+          Go
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../go/go_base/" class="md-nav__link">
+        Go基础语法
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_5" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_5" id="__nav_2_5_label" tabindex="0">
+          PHP
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_5_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2_5">
+          <span class="md-nav__icon md-icon"></span>
+          PHP
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../php/kj/" class="md-nav__link">
+        框架
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_6" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_6" id="__nav_2_6_label" tabindex="0">
+          Web
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_6_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2_6">
+          <span class="md-nav__icon md-icon"></span>
+          Web
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../web/es6/" class="md-nav__link">
+        es6语法
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../web/ali_js_style/" class="md-nav__link">
+        阿里js样式规范
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../web/node.js/" class="md-nav__link">
+        node.js文档
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../web/react/" class="md-nav__link">
+        React 开发者指南
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../dart/syntax/" class="md-nav__link">
+        Dart语法学习
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../web/react_interview/" class="md-nav__link">
+        React 面试
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../web/js_tool_method/" class="md-nav__link">
+        js 工具函数
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../web/vue_cp_react/" class="md-nav__link">
+        vue与react比较
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../web/javascript/" class="md-nav__link">
+        JavaScript 基础
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_7" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_7" id="__nav_2_7_label" tabindex="0">
+          SQL
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_7_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2_7">
+          <span class="md-nav__icon md-icon"></span>
+          SQL
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sql/mysql_yh/" class="md-nav__link">
+        MySQL优化
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sql/mysql_yh17/" class="md-nav__link">
+        MySQL优化
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sql/mysql_log/" class="md-nav__link">
+        MySQL日志
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sql/mysql_index/" class="md-nav__link">
+        MySQL索引
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sql/mysql_pxc/" class="md-nav__link">
+        MySQL PXC集群
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sql/mysql_use/" class="md-nav__link">
+        MySQL 数据库应用
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sql/mysql_backups/" class="md-nav__link">
+        MySql 备份
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sql/sql_server_master/" class="md-nav__link">
+        Sql Server 主从备份
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sql/data_split/" class="md-nav__link">
+        数据库之互联网常用分库分表方案
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sql/mybatis/" class="md-nav__link">
+        Mybatis使用心德
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_8" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_8" id="__nav_2_8_label" tabindex="0">
+          Linux
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_8_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2_8">
+          <span class="md-nav__icon md-icon"></span>
+          Linux
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linux/linux/" class="md-nav__link">
+        Linux学习笔记
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linux/often/" class="md-nav__link">
+        常用命令
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linux/ope/" class="md-nav__link">
+        实用的Linux 命令
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_9" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_9" id="__nav_2_9_label" tabindex="0">
+          Docker
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_9_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2_9">
+          <span class="md-nav__icon md-icon"></span>
+          Docker
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docker/docker/" class="md-nav__link">
+        Docker全科
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docker/docker_core/" class="md-nav__link">
+        Docker 核心技术
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docker/docker-compose/" class="md-nav__link">
+        docker和docker-compose配置常用环境
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docker/docker-jenkins/" class="md-nav__link">
+        Docker部署Jenkins
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docker/docker-phabricator/" class="md-nav__link">
+        Docker部署Phabricator
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_10" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_10" id="__nav_2_10_label" tabindex="0">
+          Kubernetes
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_10_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2_10">
+          <span class="md-nav__icon md-icon"></span>
+          Kubernetes
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../k8s_fw_rule_and_object_design/" class="md-nav__link">
+        Kubernetes架构原则和对象设计
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_11" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_11" id="__nav_2_11_label" tabindex="0">
+          Tool
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_11_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2_11">
+          <span class="md-nav__icon md-icon"></span>
+          Tool
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tool/git/" class="md-nav__link">
+        Git
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tool/gitusual/" class="md-nav__link">
+        Git动画展示
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tool/gitquestion/" class="md-nav__link">
+        Git问题处理
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tool/gitflow/" class="md-nav__link">
+        GitFlow
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tool/gitbook/" class="md-nav__link">
+        GitBook
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tool/gitcmr/" class="md-nav__link">
+        Git提交日志规范
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tool/markdown/" class="md-nav__link">
+        Markdown
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tool/cicd/" class="md-nav__link">
+        CI/CD
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tool/mkdocs/" class="md-nav__link">
+        mkdocs简单使用
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tool/gitstudy/" class="md-nav__link">
+        Git的黑魔法
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tool/minio/" class="md-nav__link">
+        MinIO 搭建使用
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tool/cat-monitoring/" class="md-nav__link">
+        Cat分布式监控
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+          云架构
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          云架构
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cloud/native/" class="md-nav__link">
+        云原生
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cloud/virtual/" class="md-nav__link">
+        虚拟化技术
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cloud/compute/" class="md-nav__link">
+        云计算
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cloud/apprelease/" class="md-nav__link">
+        应用部署容器化演进
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cloud/containerlinux/" class="md-nav__link">
+        容器技术所涉及Linux内核关键技术
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_6" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3_6" id="__nav_3_6_label" tabindex="0">
+          Docker
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_6_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3_6">
+          <span class="md-nav__icon md-icon"></span>
+          Docker
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cloud/docker/docker_native/" class="md-nav__link">
+        容器管理工具Docker生态架构及部署
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cloud/docker/docker_nginx/" class="md-nav__link">
+        使用容器运行Nginx应用及Docker命令
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cloud/docker/docker_image/" class="md-nav__link">
+        Docker容器镜像
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cloud/docker/docker_image_fast/" class="md-nav__link">
+        Docker容器镜像加速器及本地容器镜像仓库
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cloud/docker/docker_container_enterprice/" class="md-nav__link">
+        Docker容器化部署企业级应用集群
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cloud/docker/docker_file/" class="md-nav__link">
+        Dockerfile精讲及新型容器镜像构建技术
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cloud/docker/docker_network/" class="md-nav__link">
+        Docker容器网络与通信原理深度解析
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cloud/docker/docker_date/" class="md-nav__link">
+        Docker容器数据持久化存储机制
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cloud/docker/docker_compose/" class="md-nav__link">
+        Docker容器服务编排利器Docker Compose应用实战
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cloud/docker/docker_swarm/" class="md-nav__link">
+        Docker主机集群化方案 Docker Swarm
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cloud/docker/docker_devops/" class="md-nav__link">
+        基于Docker容器DevOps应用方案 企业业务代码发布系统
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cloud/docker/docker_container/" class="md-nav__link">
+        轻量级或工业级容器管理工具
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_7" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3_7" id="__nav_3_7_label" tabindex="0">
+          Kubernetes
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_7_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3_7">
+          <span class="md-nav__icon md-icon"></span>
+          Kubernetes
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cloud/kubernetes/" class="md-nav__link">
+        kubeadm极速部署Kubernetes
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cloud/kubernetes/kubernetes_introduce/" class="md-nav__link">
+        kubernetes介绍与集群架构
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cloud/kubernetes/kubernetes_way/" class="md-nav__link">
+        Kubernetes集群部署方式说明
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cloud/kubernetes/kubernetes_master/" class="md-nav__link">
+        kubeadm部署单Master节点kubernetes集群
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cloud/kubernetes/kubernetes_hight/" class="md-nav__link">
+        kubeadm部署高可用kubernetes集群
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cloud/kubernetes/kubernetes_rke/" class="md-nav__link">
+        使用RKE构建企业生产级Kubernetes集群
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cloud/kubernetes/kubernetes_hight_bin1/" class="md-nav__link">
+        Kubernetes高可用集群二进制部署（Runtime Docker）一
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cloud/kubernetes/kubernetes_hight_bin2/" class="md-nav__link">
+        Kubernetes高可用集群二进制部署（Runtime Docker）二
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cloud/kubernetes/kubernetes_ui/" class="md-nav__link">
+        Kubernetes集群UI及主机资源监控
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cloud/kubernetes/kubernetes_sealos/" class="md-nav__link">
+        使用sealos部署kubernetes集群并实现集群管理
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cloud/kubernetes/kubernetes_cluster/" class="md-nav__link">
+        kubernetes集群命令语法
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cloud/kubernetes/kubernetes_core/" class="md-nav__link">
+        Kubernetes核心概念
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cloud/kubernetes/kubernetes_nginx_ingress_controller/" class="md-nav__link">
+        Kubernetes集群 服务暴露 Nginx Ingress Controller
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cloud/kubernetes/kubernetes_traefik/" class="md-nav__link">
+        Kubernetes集群 服务暴露 Traefik
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cloud/kubernetes/kubernetes_configMap_secret/" class="md-nav__link">
+        Kubernetes配置与密钥管理 ConfigMap&Secret
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cloud/kubernetes/kubernetes_harbor/" class="md-nav__link">
+        Kubernetes集群使用容器镜像仓库Harbor
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cloud/kubernetes/kubernetes_safety/" class="md-nav__link">
+        Kubernetes集群安全管理
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cloud/kubernetes/kubernetes_storage_volume/" class="md-nav__link">
+        kubernetes持久化存储卷
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cloud/kubernetes/kubernetes_storage_ceph/" class="md-nav__link">
+        kubernetes存储解决方案Ceph
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cloud/kubernetes/kubernetes_cluster_serve/" class="md-nav__link">
+        Kubernetes集群公共服务
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cloud/kubernetes/kubernetes_deploy_java/" class="md-nav__link">
+        kubernetes集群java项目上云部署
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cloud/kubernetes/kubernetes_deploy_python/" class="md-nav__link">
+        kubernetes集群Python项目上云部署
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cloud/kubernetes/kubernetes_deploy_golang/" class="md-nav__link">
+        Kubernetes集群golang项目上云部署
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cloud/kubernetes/kubernetes_logs_collect/" class="md-nav__link">
+        kubernetes日志收集方案
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cloud/kubernetes/kubernetes_zookeeper/" class="md-nav__link">
+        企业级中间件上云部署 zookeeper
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cloud/kubernetes/kubernetes_kafka/" class="md-nav__link">
+        kubernetes云原生中间件上云部署 kafka
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cloud/kubernetes/kubernetes_rokectmq/" class="md-nav__link">
+        rocketmq部署
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cloud/kubernetes/kubernetes_helm/" class="md-nav__link">
+        Kubernetes集群包管理解决方案 Helm
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cloud/kubernetes/kubernetes_kustomize/" class="md-nav__link">
+        Kubernetes原生配置管理利器 kustomize
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cloud/kubernetes/kubernetes_flannel/" class="md-nav__link">
+        kubernetes集群网络解决方案 flannel
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cloud/kubernetes/kubernetes_calico/" class="md-nav__link">
+        kubernetes集群网络解决方案 calico
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cloud/kubernetes/kubernetes_hybridnet/" class="md-nav__link">
+        kubernetes集群 underlay 网络方案 hybridnet
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cloud/kubernetes/kubernetes_ipv4_and_ipv6/" class="md-nav__link">
+        kubernetes版本双栈协议（IPv4&IPv6）集群部署
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cloud/kubernetes/kubernetes_rancher/" class="md-nav__link">
+        Rancher容器云管理平台
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cloud/kubernetes/kubernetes_kubeconfig/" class="md-nav__link">
+        使用kubeconfig管理多集群方法
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cloud/kubernetes/kubernetes_karmada/" class="md-nav__link">
+        karmada实现k8s集群联邦
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cloud/kubernetes/kubernetes_csdn/" class="md-nav__link">
+        《将博客搬至CSDN》
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cloud/kubernetes/kubernetes_ui/" class="md-nav__link">
+        源监控
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cloud/kubernetes/kubernetes_ui/" class="md-nav__link">
+        源监控
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+          微服务
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          微服务
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../micro/fbs-lock/" class="md-nav__link">
+        分布式锁
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../micro/design/" class="md-nav__link">
+        微服务设计
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../micro/distrimsg/" class="md-nav__link">
+        分布式系统与消息的投递
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../micro/ddd/" class="md-nav__link">
+        基于DDD的微服务设计和开发实战
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../micro/kafka/" class="md-nav__link">
+        Kafka架构原理
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../micro/redis_cluster/" class="md-nav__link">
+        Redis Cluster原理
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../micro/spring-cloud-micro/" class="md-nav__link">
+        分布式架构
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+          经验分析
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          经验分析
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../exp/devops/" class="md-nav__link">
+        DevOps
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../exp/micro-service/" class="md-nav__link">
+        Micro-Service
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../exp/raft-gossip/" class="md-nav__link">
+        Raft算法和Gossip协议
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../exp/cl/" class="md-nav__link">
+        集群和负载均衡
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../exp/ai/" class="md-nav__link">
+        人工智能
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../exp/code-principle/" class="md-nav__link">
+        代码原则
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../exp/techbig/" class="md-nav__link">
+        如何成为技术大牛
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../exp/learnweetout/" class="md-nav__link">
+        程序员如何技术成长
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../exp/pt/" class="md-nav__link">
+        产品与技术
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../exp/four_deep_learning/" class="md-nav__link">
+        深度学习框架
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../exp/tl/" class="md-nav__link">
+        在阿里做了5年技术Leader，我总结出这些套路！
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../exp/cto/" class="md-nav__link">
+        CTO 技能图谱
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+          构架
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_6">
+          <span class="md-nav__icon md-icon"></span>
+          构架
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../framework/split/" class="md-nav__link">
+        构架拆分
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../framework/fgb/" class="md-nav__link">
+        分布式、高并发、多线程
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../framework/agility/" class="md-nav__link">
+        如何理解敏捷开发
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../framework/fwork/" class="md-nav__link">
+        走向架构师必备的技能
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../framework/data_middle/" class="md-nav__link">
+        数据中台的思考与总结
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../framework/algorithm-ten/" class="md-nav__link">
+        必学的 10 大算法
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+          情感
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_7">
+          <span class="md-nav__icon md-icon"></span>
+          情感
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../emotion/eq/" class="md-nav__link">
+        情商
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../emotion/workheard/" class="md-nav__link">
+        工作心得
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../emotion/lookbook/" class="md-nav__link">
+        看书
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../emotion/selfdiscipline/" class="md-nav__link">
+        自律
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../emotion/livefail/" class="md-nav__link">
+        为什么活着失败
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../emotion/emotion/" class="md-nav__link">
+        情绪管理
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../emotion/losecome/" class="md-nav__link">
+        所有的失去，都会以另一种方式归来
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../emotion/threeheart/" class="md-nav__link">
+        人生有这三种好心态
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../emotion/onepath/" class="md-nav__link">
+        余生，学会一个人走，不管有没有人陪
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../emotion/twopath/" class="md-nav__link">
+        往后余生还很精彩，别被熬夜拖垮了
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../emotion/lifetime/" class="md-nav__link">
+        心态好的人，一辈子都好
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#etcd" class="md-nav__link">
+    etcd
+  </a>
+  
+    <nav class="md-nav" aria-label="etcd">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    主要功能
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    使用场景
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    键值对存储
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    服务注册与发现
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    消息发布与订阅
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#etcd_1" class="md-nav__link">
+    Etcd的安装
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    第三方库和客户端工具
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#etcd_2" class="md-nav__link">
+    etcd 命令
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ttl_cas" class="md-nav__link">
+    核心：TTL &amp; CAS
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#raft" class="md-nav__link">
+    Raft协议
+  </a>
+  
+    <nav class="md-nav" aria-label="Raft协议">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#raft_1" class="md-nav__link">
+    Raft协议概览
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#raft_2" class="md-nav__link">
+    理解Raft协议
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#learner" class="md-nav__link">
+    learner
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#etcdraft" class="md-nav__link">
+    etcd基于Raft的一致性
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    日志复制
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    安全性
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    失效处理
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wal" class="md-nav__link">
+    wal日志
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#etcd_v3_watch" class="md-nav__link">
+    etcd v3 存储，Watch以及过期机制
+  </a>
+  
+    <nav class="md-nav" aria-label="etcd v3 存储，Watch以及过期机制">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    存储机制
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#watch" class="md-nav__link">
+    Watch机制
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#etcd_3" class="md-nav__link">
+    etcd 命令
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#etcd_4" class="md-nav__link">
+    etcd 成员重要参数
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    灾备
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    容量管理
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#alarm_disarm_alarm" class="md-nav__link">
+    Alarm &amp; Disarm Alarm
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#etcd_5" class="md-nav__link">
+    高可用etcd解决方案
+  </a>
+  
+    <nav class="md-nav" aria-label="高可用etcd解决方案">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#etcd_operator" class="md-nav__link">
+    Etcd Operator
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bitnami_etcd" class="md-nav__link">
+    基于 Bitnami 安装etcd高可用集群
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#kubernetesetcd" class="md-nav__link">
+    Kubernetes如何使用etcd
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#kubernetsetcd" class="md-nav__link">
+    Kubernets对象在etcd中的存储路径
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#etcd_6" class="md-nav__link">
+    etcd在集群中所处的位置
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#kubernetesetcd_1" class="md-nav__link">
+    Kubernetes如何使用etcd
+  </a>
+  
+    <nav class="md-nav" aria-label="Kubernetes如何使用etcd">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#etcd_7" class="md-nav__link">
+    堆叠式etcd集群的高可用拓扑
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#etcd_8" class="md-nav__link">
+    外部etcd集群的高可用拓扑
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#-_etcd" class="md-nav__link">
+    实践 - etcd集群高可用
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#etcd_9" class="md-nav__link">
+    实践 – etcd存储规划
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#etcd_10" class="md-nav__link">
+    etcd 安全性
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    减少网络延迟
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#io" class="md-nav__link">
+    减少磁盘I/O延迟
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_14" class="md-nav__link">
+    保持合理的日志文件大小
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_15" class="md-nav__link">
+    设置合理的存储配额
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_16" class="md-nav__link">
+    自动压缩历史版本
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_17" class="md-nav__link">
+    定期消除碎片化
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_18" class="md-nav__link">
+    数据备份
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_19" class="md-nav__link">
+    优化运行参数
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#etcd_11" class="md-nav__link">
+    etcd备份存储
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_20" class="md-nav__link">
+    备份方案实践
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#etcd_12" class="md-nav__link">
+    etcd 常见问题
+  </a>
+  
+    <nav class="md-nav" aria-label="etcd 常见问题">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#peer" class="md-nav__link">
+    多少个peer最适合？
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#apiserveretcd" class="md-nav__link">
+    保证apiserver和etcd之间的高效性通讯
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#backup" class="md-nav__link">
+    增强版backup方案
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#etcd_13" class="md-nav__link">
+    etcd数据加密
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#kubernetes" class="md-nav__link">
+    Kubernetes中数据分离
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#apiserver" class="md-nav__link">
+    查询APIServer
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12345" class="md-nav__link">
+    从 12345 版本开始，监听所有对象变化
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#get_apiv1namespacestestpodswatch1resourceversion10245" class="md-nav__link">
+    GET /api/v1/namespaces/test/pods?watch=1&amp;resourceVersion=10245
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_21" class="md-nav__link">
+    分页查询
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#get_apiv1podslimit500" class="md-nav__link">
+    GET /api/v1/pods?limit=500
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resourceversion" class="md-nav__link">
+    ResourceVersion
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_22" class="md-nav__link">
+    遭遇到的陷阱
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#etcd_down" class="md-nav__link">
+    少数etcd 成员Down
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#master" class="md-nav__link">
+    Master节点出现网络分区
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_23" class="md-nav__link">
+    参考资料
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+  
+
+
+<h1 id="kubernetes_etcd">Kubernetes 控制平面组件：etcd<a class="headerlink" href="#kubernetes_etcd" title="Permanent link">&para;</a></h1>
+<h2 id="etcd">etcd<a class="headerlink" href="#etcd" title="Permanent link">&para;</a></h2>
+<p>Etcd是CoreOS基于Raft开发的分布式key-value存储，可用于服务发现、共享配置以及一致性
+保障（如数据库选主、分布式锁等）。</p>
+<p>在分布式系统中，如何管理节点间的状态一直是一个难题，etcd像是专门为集群环境的服务发现
+和注册而设计，它提供了数据TTL失效、数据改变监视、多值、目录监听、分布式锁原子操作等
+功能，可以方便的跟踪并管理集群节点的状态。</p>
+<ul>
+<li>键值对存储：将数据存储在分层组织的目录中，如同在标准文件系统中</li>
+<li>监测变更：监测特定的键或目录以进行更改，并对值的更改做出反应</li>
+<li>简单:curl可访问的用户的API（HTTP+JSON）</li>
+<li>安全: 可选的SSL客户端证书认证</li>
+<li>快速: 单实例每秒 1000 次写操作，2000+次读操作</li>
+<li>可靠: 使用Raft算法保证一致性</li>
+</ul>
+<h3 id="_1">主要功能<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h3>
+<ul>
+<li>基本的key-value存储</li>
+<li>监听机制</li>
+<li>key的过期及续约机制，用于监控和服务发现</li>
+<li>原子Compare And Swap和Compare And Delete，用于分布式锁和leader选举</li>
+</ul>
+<h3 id="_2">使用场景<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
+<ul>
+<li>也可以用于键值对存储，应用程序可以读取和写入etcd中的数据</li>
+<li>etcd比较多的应用场景是用于服务注册与发现</li>
+<li>基于监听机制的分布式异步系统</li>
+</ul>
+<h3 id="_3">键值对存储<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
+<p>etcd是一个 <strong>键值存储</strong> 的组件，其他的应用都是基于其键值存储的功能展开。</p>
+<ul>
+<li>采用kv型数据存储，一般情况下比关系型数据库快。</li>
+<li>支持动态存储(内存)以及静态存储(磁盘)。</li>
+<li>分布式存储，可集成为多节点集群。</li>
+<li>存储方式，采用类似目录结构。（B+tree）<ul>
+<li>只有叶子节点才能真正存储数据，相当于文件。</li>
+<li>叶子节点的父节点一定是目录，目录不能存储数据。</li>
+</ul>
+</li>
+</ul>
+<h3 id="_4">服务注册与发现<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
+<ul>
+<li>强一致性、高可用的服务存储目录。<ul>
+<li>基于Raft 算法的etcd 天生就是这样一个强一致性、高可用的服务存储目录。</li>
+</ul>
+</li>
+<li>一种注册服务和服务健康状况的机制。<ul>
+<li>用户可以在etcd中注册服务，并且对注册的服务配置 key TTL，定时保持服务的心跳以达
+   到监控健康状态的效果。</li>
+</ul>
+</li>
+</ul>
+<h3 id="_5">消息发布与订阅<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
+<ul>
+<li>在分布式系统中，最适用的一种组件间通信方式就是消息发布与订阅。</li>
+<li>即构建一个配置共享中心，数据提供者在这个配置中心发布消息，而消息使用者则订阅他们
+    关心的主题，一旦主题有消息发布，就会实时通知订阅者。</li>
+<li>通过这种方式可以做到分布式系统配置的集中式管理与动态更新。</li>
+<li>应用中用到的一些配置信息放到etcd上进行集中管理。</li>
+<li>应用在启动的时候主动从etcd获取一次配置信息，同时，在etcd节点上注册一个Watcher并
+    等待，以后每次配置有更新的时候，etcd都会实时通知订阅者，以此达到获取最新配置信息
+    的目的。</li>
+</ul>
+<h3 id="etcd_1">Etcd的安装<a class="headerlink" href="#etcd_1" title="Permanent link">&para;</a></h3>
+<p>下载安装包，参考https://github.com/etcd-io/etcd/releases</p>
+<ul>
+<li>ETCD_VER=v3.4.</li>
+<li>DOWNLOAD_URL=<a href="https://github.com/etcd-io/etcd/releases/download">https://github.com/etcd-io/etcd/releases/download</a></li>
+<li>rm -f /tmp/etcd-${ETCD_VER}-linux-amd64.tar.gz</li>
+<li>rm -rf /tmp/etcd-download-test &amp;&amp; mkdir-p /tmp/etcd-download-test</li>
+<li>curl -L <span class="arithmatex"><span class="MathJax_Preview">{DOWNLOAD_URL}/</span><script type="math/tex">{DOWNLOAD_URL}/</script></span>{ETCD_VER}/etcd-<span class="arithmatex"><span class="MathJax_Preview">{ETCD_VER}-linux-amd64.tar.gz -o /tmp/etcd-</span><script type="math/tex">{ETCD_VER}-linux-amd64.tar.gz -o /tmp/etcd-</script></span>{ETCD_VER}-
+    linux-amd64.tar.gz</li>
+<li>tar xzvf/tmp/etcd-${ETCD_VER}-linux-amd64.tar.gz -C /tmp/etcd-download-test --strip-components=</li>
+<li>rm -f /tmp/etcd-${ETCD_VER}-linux-amd64.tar.gz</li>
+</ul>
+<p>更多信息</p>
+<p><a href="https://github.com/cncamp/101/blob/master/module5/1.etcd-member-list.MD">https://github.com/cncamp/101/blob/master/module5/1.etcd-member-list.MD</a></p>
+<h3 id="_6">第三方库和客户端工具<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
+<p>目前有很多支持etcd的库和客户端工具</p>
+<ul>
+<li>命令行客户端工具etcdctl</li>
+<li>Go客户端go-etcd</li>
+<li>Java客户端jetcd</li>
+<li>Python客户端python-etcd</li>
+</ul>
+<h3 id="etcd_2">etcd 命令<a class="headerlink" href="#etcd_2" title="Permanent link">&para;</a></h3>
+<p>查看集群成员状态</p>
+<p>etcdctlmember list --write-out=table</p>
+<p>+------------------+---------+---------+-----------------------+-----------------------+------------+</p>
+<p>| ID | STATUS | NAME | PEER ADDRS | CLIENT ADDRS | IS LEARNER |</p>
+<p>+------------------+---------+---------+-----------------------+-----------------------+------------+</p>
+<p>| 8e9e05c52164694d | started | default | <a href="http://localhost:2380">http://localhost:2380</a> | <a href="http://localhost:2379">http://localhost:2379</a> | false |</p>
+<p>+------------------+---------+---------+-----------------------+-----------------------+------------+</p>
+<p>基本的数据读写操作</p>
+<ul>
+<li>写入数据</li>
+</ul>
+<p>etcdctl--endpoints=localhost:12379 put /a b</p>
+<p>OK</p>
+<ul>
+<li>读取数据</li>
+</ul>
+<p>etcdctl--endpoints=localhost:12379 get /a</p>
+<p>/a</p>
+<p>b</p>
+<ul>
+<li>按key的前缀查询数据</li>
+</ul>
+<p>etcdctl--endpoints=localhost:12379 get --prefix /</p>
+<ul>
+<li>只显示键值</li>
+</ul>
+<p>etcdctl--endpoints=localhost:12379 get --prefix / --keys-only--debug</p>
+<h3 id="ttl_cas">核心：TTL &amp; CAS<a class="headerlink" href="#ttl_cas" title="Permanent link">&para;</a></h3>
+<p>TTL（timeto live）指的是给一个key设置一个有效期，到期后这个key就会被自动删掉，这在
+很多分布式锁的实现上都会用到，可以保证锁的实时有效性。</p>
+<p>Atomic Compare-and-Swap（CAS）指的是在对key进行赋值的时候，客户端需要提供一些条
+件，当这些条件满足后，才能赋值成功。这些条件包括：</p>
+<ul>
+<li>prevExist：key当前赋值前是否存在</li>
+<li>prevValue：key当前赋值前的值</li>
+<li>prevIndex：key当前赋值前的Index</li>
+</ul>
+<p>这样的话，key的设置是有前提的，需要知道这个key当前的具体情况才可以对其设置。</p>
+<h2 id="raft">Raft协议<a class="headerlink" href="#raft" title="Permanent link">&para;</a></h2>
+<h3 id="raft_1">Raft协议概览<a class="headerlink" href="#raft_1" title="Permanent link">&para;</a></h3>
+<p>Raft协议基于quorum机制，即大多数同意原则，任何的变更都需超过半数的成员确认</p>
+<h3 id="raft_2">理解Raft协议<a class="headerlink" href="#raft_2" title="Permanent link">&para;</a></h3>
+<p><a href="http://thesecretlivesofdata.com/raft/">http://thesecretlivesofdata.com/raft/</a></p>
+<h3 id="learner">learner<a class="headerlink" href="#learner" title="Permanent link">&para;</a></h3>
+<p>Raft 4.2.1引入的新角色</p>
+<p>当出现一个etcd集群需要增加节点时，新节点与
+Leader的数据差异较大，需要较多数据同步才能跟
+上leader的最新的数据。</p>
+<p>此时Leader的网络带宽很可能被用尽，进而使得
+leader无法正常保持心跳。</p>
+<p>进而导致follower重新发起投票。</p>
+<p>进而可能引发etcd集群不可用。</p>
+<p>Learner角色只接收数据而不参与投票，因此增加
+learner节点时，集群的quorum不变。</p>
+<p><img alt="k8s_etcd_1" src="../../img/k8s/k8s_etcd/k8s_etcd_1.jpg" /></p>
+<h3 id="etcdraft">etcd基于Raft的一致性<a class="headerlink" href="#etcdraft" title="Permanent link">&para;</a></h3>
+<p>选举方法</p>
+<ul>
+<li>初始启动时，节点处于follower状态并被设定一个election timeout，如果在这一时间周期内没有收到
+    来自leader 的heartbeat，节点将发起选举：将自己切换为candidate 之后，向集群中其它follower
+    节点发送请求，询问其是否选举自己成为 leader。</li>
+<li>当收到来自集群中过半数节点的接受投票后，节点即成为 leader，开始接收保存client 的数据并向其它
+    的follower 节点同步日志。如果没有达成一致，则candidate随机选择一个等待间隔（150ms ~
+    300ms）再次发起投票，得到集群中半数以上follower接受的candidate将成为leader</li>
+<li>leader节点依靠定时向 follower 发送heartbeat来保持其地位。</li>
+<li>任何时候如果其它follower 在election timeout 期间都没有收到来自leader 的heartbeat，同样会将
+    自己的状态切换为candidate 并发起选举。每成功选举一次，新 leader 的任期（Term）都会比之前
+    leader 的任期大 1 。</li>
+</ul>
+<h3 id="_7">日志复制<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
+<p>当接Leader收到客户端的日志（事务请求）后先把该日志追加到本地的Log中，然后通过
+heartbeat把该Entry同步给其他Follower，Follower接收到日志后记录日志然后向Leader发送
+ACK，当Leader收到大多数（n/2+1）Follower的ACK信息后将该日志设置为已提交并追加到
+本地磁盘中，通知客户端并在下个heartbeat中Leader将通知所有的Follower将该日志存储在自
+己的本地磁盘中。</p>
+<h3 id="_8">安全性<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
+<p>安全性是用于保证每个节点都执行相同序列的安全机制，如当某个Follower在当前Leader
+commit Log时变得不可用了，稍后可能该Follower又会被选举为Leader，这时新Leader可能
+会用新的Log覆盖先前已committed的Log，这就是导致节点执行不同序列；Safety就是用于保
+证选举出来的Leader一定包含先前committed Log的机制；</p>
+<p>选举安全性（Election Safety）：每个任期（Term）只能选举出一个Leader</p>
+<p>Leader完整性（Leader Completeness）：指Leader日志的完整性，当Log在任期Term1被
+Commit后，那么以后任期Term2、Term3...等的Leader必须包含该Log；Raft在选举阶段就使
+用Term的判断用于保证完整性：当请求投票的该Candidate的Term较大或Term相同Index更大
+则投票，否则拒绝该请求。</p>
+<h3 id="_9">失效处理<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h3>
+<p>1) Leader失效：其他没有收到heartbeat的节点会发起新的选举，而当Leader恢复后由于步进
+数小会自动成为follower（日志也会被新leader的日志覆盖）</p>
+<p>2 ）follower节点不可用：follower 节点不可用的情况相对容易解决。因为集群中的日志内容始
+终是从leader 节点同步的，只要这一节点再次加入集群时重新从 leader 节点处复制日志即可。</p>
+<p>3 ）多个candidate：冲突后candidate将随机选择一个等待间隔（150ms ~ 300ms）再次发起
+投票，得到集群中半数以上follower接受的candidate将成为leader</p>
+<h3 id="wal">wal日志<a class="headerlink" href="#wal" title="Permanent link">&para;</a></h3>
+<p>wal日志是二进制的，解析出来后是以上数据结构LogEntry。其中第一个字段type，只有两种，
+一种是 0 表示Normal， 1 表示ConfChange（ConfChange表示 Etcd本身的配置变更同步，比
+如有新的节点加入等）。第二个字段是term，每个term代表一个主节点的任期，每次主节点变
+更term就会变化。第三个字段是index，这个序号是严格有序递增的，代表变更序号。第四个字
+段是二进制的data，将raft request对象的pb结构整个保存下。etcd 源码下有个tools/etcd-
+dump-logs，可以将wal日志dump成文本查看，可以协助分析Raft协议。</p>
+<p>Raft协议本身不关心应用数据，也就是data中的部分，一致性都通过同步wal日志来实现，每个
+节点将从主节点收到的data apply到本地的存储，Raft只关心日志的同步状态，如果本地存储实
+现的有bug，比如没有正确的将data apply到本地，也可能会导致数据不一致。</p>
+<h2 id="etcd_v3_watch">etcd v3 存储，Watch以及过期机制<a class="headerlink" href="#etcd_v3_watch" title="Permanent link">&para;</a></h2>
+<p><img alt="k8s_etcd_2" src="../../img/k8s/k8s_etcd/k8s_etcd_2.jpg" /></p>
+<h3 id="_10">存储机制<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h3>
+<p>etcdv3 store 分为两部分，一部分是内存中的索引，kvindex，是基于Google开源的一个
+Golang的btree实现的，另外一部分是后端存储。按照它的设计，backend可以对接多种存储，
+当前使用的boltdb。boltdb是一个单机的支持事务的kv存储，etcd 的事务是基于boltdb的事务
+实现的。etcd 在boltdb中存储的key是reversion，value是 etcd 自己的key-value组合，也就
+是说etcd 会在boltdb中把每个版本都保存下，从而实现了多版本机制。</p>
+<p>reversion主要由两部分组成，第一部分main rev，每次事务进行加一，第二部分sub rev，同一
+个事务中的每次操作加一。</p>
+<p>etcd 提供了命令和设置选项来控制compact，同时支持put操作的参数来精确控制某个key的历
+史版本数。</p>
+<p>内存kvindex保存的就是key和reversion之前的映射关系，用来加速查询。</p>
+<p><img alt="k8s_etcd_3" src="../../img/k8s/k8s_etcd/k8s_etcd_3.jpg" /></p>
+<h3 id="watch">Watch机制<a class="headerlink" href="#watch" title="Permanent link">&para;</a></h3>
+<p>etcdv3 的watch机制支持watch某个固定的key，也支持watch一个范围（可以用于模拟目录的
+结构的watch），所以 watchGroup包含两种watcher，一种是 key watchers，数据结构是每
+个key对应一组watcher，另外一种是 range watchers, 数据结构是一个IntervalTree，方便通
+过区间查找到对应的watcher。</p>
+<p>同时，每个WatchableStore 包含两种 watcherGroup，一种是synced，一种是unsynced，
+前者表示该group的watcher数据都已经同步完毕，在等待新的变更，后者表示该group的
+watcher数据同步落后于当前最新变更，还在追赶。</p>
+<p>当etcd 收到客户端的watch请求，如果请求携带了revision参数，则比较请求的revision和
+store当前的revision，如果大于当前revision，则放入synced组中，否则放入unsynced组。同
+时etcd会启动一个后台的goroutine持续同步unsynced的watcher，然后将其迁移到synced组。
+也就是这种机制下，etcd v3 支持从任意版本开始watch，没有v2的 1000 条历史event表限制的
+问题（当然这是指没有compact的情况下）</p>
+<h2 id="etcd_3">etcd 命令<a class="headerlink" href="#etcd_3" title="Permanent link">&para;</a></h2>
+<p>查看集群成员状态</p>
+<p>etcdctlmember list --write-out=table</p>
+<p>+------------------+---------+---------+-----------------------+-----------------------+-----
+-------+</p>
+<p>| ID | STATUS | NAME | PEER ADDRS | CLIENT ADDRS | IS
+LEARNER |</p>
+<p>+------------------+---------+---------+-----------------------+-----------------------+-----
+-------+</p>
+<p>| 8e9e05c52164694d | started | default | <a href="http://localhost:2380">http://localhost:2380</a> | <a href="http://localhost:2379">http://localhost:2379</a> |
+false |</p>
+<p>+------------------+---------+---------+-----------------------+-----------------------+-----
+-------+</p>
+<ul>
+<li>启动新etcd集群</li>
+</ul>
+<p>docker run -d registry.aliyuncs.com/google_containers/etcd:3.5.0-0 /usr/local/bin/etcd</p>
+<ul>
+<li>进入etcd容器</li>
+</ul>
+<p>dockerps|grepetcd</p>
+<p>docker exec –it <containerid> sh</p>
+<ul>
+<li>存入数据</li>
+</ul>
+<p>etcdctlput x 0</p>
+<ul>
+<li>读取数据</li>
+</ul>
+<p>etcdctlget x -w=json</p>
+<p>{"header":{"cluster_id":14841639068965178418,"member_id":10276657743932975437,"r
+evision":2,"raft_term":2},"kvs":[{"key":"eA==","create_revision":2,"mod_revision":2,"versi
+on":1,"value":"MA=="}],"count":1}</p>
+<ul>
+<li>修改值</li>
+</ul>
+<p>etcdctlput x 1</p>
+<ul>
+<li>查询最新值</li>
+</ul>
+<p>etcdctlget x</p>
+<p>x</p>
+<p>1</p>
+<ul>
+<li>查询历史版本值</li>
+</ul>
+<p>etcdctlget x --rev=2</p>
+<p>x</p>
+<p>0</p>
+<h2 id="etcd_4">etcd 成员重要参数<a class="headerlink" href="#etcd_4" title="Permanent link">&para;</a></h2>
+<p>成员相关参数</p>
+<div class="highlight"><pre><span></span><code>--name &#39;default&#39;
+Human-readable name for this member.
+--data-dir&#39;${name}.etcd&#39;
+Path to the data directory.
+--listen-peer-urls &#39;http://localhost:2380&#39;
+List of URLs to listen on for peer traffic.
+--listen-client-urls &#39;http://localhost:2379&#39;
+List of URLs to listen on for client traffic.
+</code></pre></div>
+<p>集群相关参数</p>
+<div class="highlight"><pre><span></span><code>--initial-advertise-peer-urls &#39;http://localhost:2380&#39;
+List of this member&#39;s peer URLs to advertise to the rest of the cluster.
+--initial-cluster &#39;default=http://localhost:2380&#39;
+Initial cluster configuration for bootstrapping.
+--initial-cluster-state &#39;new&#39;
+Initial cluster state (&#39;new&#39; or &#39;existing&#39;).
+--initial-cluster-token &#39;etcd-cluster&#39;
+Initial cluster token for the etcd cluster during bootstrap.
+--advertise-client-urls &#39;http://localhost:2379&#39;
+List of this member&#39;s client URLs to advertise to the public.
+</code></pre></div>
+<p>etcd安全相关参数</p>
+<div class="highlight"><pre><span></span><code>--cert-file &#39;&#39;
+Path to the client server TLS cert file.
+--key-file &#39;&#39;
+Path to the client server TLS key file.
+--client-crl-file &#39;&#39;
+Path to the client certificate revocation list file.
+--trusted-ca-file &#39;&#39;
+Path to the client server TLS trusted CA cert file.
+--peer-cert-file &#39;&#39;
+Path to the peer server TLS cert file.
+--peer-key-file &#39;&#39;
+Path to the peer server TLS key file.
+--peer-trusted-ca-file &#39;&#39;
+Path to the peer server TLS trusted CA file.
+</code></pre></div>
+<h2 id="_11">灾备<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h2>
+<ul>
+<li>创建Snapshot</li>
+</ul>
+<div class="highlight"><pre><span></span><code>etcdctl--endpoints https://127.0.0.1:3379 --cert /tmp/etcd-certs/certs/127.0.0.1.pem --
+key /tmp/etcd-certs/certs/127.0.0.1-key.pem --cacert/tmp/etcd-certs/certs/ca.pem
+snapshot save snapshot.db
+</code></pre></div>
+<ul>
+<li>恢复数据</li>
+</ul>
+<div class="highlight"><pre><span></span><code>etcdctlsnapshot restore snapshot.db\
+--name infra2 \
+--data-dir=/tmp/etcd/infra2 \
+--initial-cluster
+infra0=http://127.0.0.1:3380,infra1=http://127.0.0.1:4380,infra2=http://127.0.0.1:5380 \
+--initial-cluster-token etcd-cluster- 1 \
+--initial-advertise-peer-urls http://127.0.0.1:5380
+</code></pre></div>
+<h2 id="_12">容量管理<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h2>
+<p>单个对象不建议超过1.5M</p>
+<p>默认容量2G</p>
+<p>不建议超过8G</p>
+<h2 id="alarm_disarm_alarm">Alarm &amp; Disarm Alarm<a class="headerlink" href="#alarm_disarm_alarm" title="Permanent link">&para;</a></h2>
+<ul>
+<li>设置etcd存储大小</li>
+</ul>
+<p>$ etcd--quota-backend-bytes =$((16 * 1024 * 1024))</p>
+<ul>
+<li>写爆磁盘</li>
+</ul>
+<p>$ while [ 1 ]; do dd if=/dev/urandombs=1024 count=1024 | ETCDCTL_API=3 etcdctlput key || break; done</p>
+<ul>
+<li>查看endpoint状态</li>
+</ul>
+<p>$ ETCDCTL_API <strong>=3</strong> etcdctl--write-out <strong>=</strong> table endpoint status</p>
+<ul>
+<li>查看alarm</li>
+</ul>
+<p>$ ETCDCTL_API <strong>=3</strong> etcdctlalarm list</p>
+<ul>
+<li>清理碎片</li>
+</ul>
+<p>$ ETCDCTL_API <strong>=3</strong> etcdctldefrag</p>
+<ul>
+<li>清理alarm</li>
+</ul>
+<p>$ ETCDCTL_API <strong>=3</strong> etcdctlalarm disarm</p>
+<ul>
+<li>碎片整理</li>
+</ul>
+<p>//keep one hour of history</p>
+<p>$ etcd --auto-compaction-retention=1</p>
+<p>//compact up to revision 3</p>
+<p>$ etcdctlcompact 3</p>
+<p>$ etcdctl defrag</p>
+<p>Finished defragmenting etcd member [127.0.0.1:2379]</p>
+<h2 id="etcd_5">高可用etcd解决方案<a class="headerlink" href="#etcd_5" title="Permanent link">&para;</a></h2>
+<p>etcd-operator: coreos开源的，基于kubernetes CRD完成etcd集群配置。Archived</p>
+<p><a href="https://github.com/coreos/etcd-operator">https://github.com/coreos/etcd-operator</a></p>
+<p>Etcdstatefulset Helm chart: Bitnami(powered by vmware)</p>
+<p><a href="https://bitnami.com/stack/etcd/helm">https://bitnami.com/stack/etcd/helm</a></p>
+<p><a href="https://github.com/bitnami/charts/blob/master/bitnami/etcd">https://github.com/bitnami/charts/blob/master/bitnami/etcd</a></p>
+<h3 id="etcd_operator">Etcd Operator<a class="headerlink" href="#etcd_operator" title="Permanent link">&para;</a></h3>
+<p><img alt="k8s_etcd_4" src="../../img/k8s/k8s_etcd/k8s_etcd_4.jpg" /></p>
+<p><a href="https://github.com/coreos/etcd-operator.git">https://github.com/coreos/etcd-operator.git</a></p>
+<h3 id="bitnami_etcd">基于 Bitnami 安装etcd高可用集群<a class="headerlink" href="#bitnami_etcd" title="Permanent link">&para;</a></h3>
+<ul>
+<li>安装helm</li>
+</ul>
+<p><a href="https://github.com/helm/helm/releases">https://github.com/helm/helm/releases</a></p>
+<ul>
+<li>通过helm安装etcd</li>
+</ul>
+<p>helm repo add bitnamihttps://charts.bitnami.com/bitnami</p>
+<p>helm install my-release bitnami/etcd</p>
+<ul>
+<li>通过客户端与serve交互</li>
+</ul>
+<p>kubectlrun my-release-etcd-client --restart='Never' --image
+docker.io/bitnami/etcd:3.5.0-debian- 10 - r94 --env ROOT_PASSWORD=$(kubectlget
+secret --namespace default my-release-etcd -o jsonpath="{.data.etcd-root-password}" |
+base64 --decode) --env ETCDCTL_ENDPOINTS="my-release-
+etcd.default.svc.cluster.local:2379" --namespace default --command --sleep infinity</p>
+<h2 id="kubernetesetcd">Kubernetes如何使用etcd<a class="headerlink" href="#kubernetesetcd" title="Permanent link">&para;</a></h2>
+<p>etcd是kubernetes的后端存储</p>
+<p>对于每一个kubernetesObject，都有对应的storage.go负责对象的存储操作</p>
+<ul>
+<li>pkg/registry/core/pod/storage/storage.go</li>
+</ul>
+<p>API server 启动脚本中指定etcdservers集群</p>
+<div class="highlight"><pre><span></span><code><span class="nt">spec</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">containers</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">command</span><span class="p">:</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">kube-apiserver</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">--advertise-address=192.168.34.2</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">--enable-bootstrap-token-auth=true</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">--etcd-cafile=/etc/kubernetes/pki/etcd/ca.crt</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">--etcd-certfile=/etc/kubernetes/pki/apiserver-etcd-client.crt</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">--etcd-keyfile=/etc/kubernetes/pki/apiserver-etcd-client.key</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">--etcd-servers=https://127.0.0.1:2379</span>
+</code></pre></div>
+<p>早期APIserver 对etcd做简单的Ping check，现在已经改为真实的etcd api call</p>
+<h2 id="kubernetsetcd">Kubernets对象在etcd中的存储路径<a class="headerlink" href="#kubernetsetcd" title="Permanent link">&para;</a></h2>
+<ul>
+<li>ksexec -it etcd-cadmin sh</li>
+<li>ETCDCTL_API=3</li>
+<li>
+<p>alias ectl='etcdctl --endpoints <a href="https://127.0.0.1:2379">https://127.0.0.1:2379</a> \
+    --cacert/etc/kubernetes/pki/etcd/ca.crt \
+    --cert /etc/kubernetes/pki/etcd/server.crt \
+    --key /etc/kubernetes/pki/etcd/server.key</p>
+</li>
+<li>
+<p>ectlget --prefix --keys-only /
+/registry/namespaces/calico-apiserver
+/registry/networkpolicies/calico-apiserver/allow-apiserver
+/registry/operator.tigera.io/tigerastatuses/apiserver
+/registry/pods/calico-apiserver/calico-apiserver-77dffffcdf-g2tcx
+/registry/pods/default/toolbox-68f79dd5f8-4664n</p>
+</li>
+</ul>
+<h2 id="etcd_6">etcd在集群中所处的位置<a class="headerlink" href="#etcd_6" title="Permanent link">&para;</a></h2>
+<p><img alt="k8s_etcd_5" src="../../img/k8s/k8s_etcd/k8s_etcd_5.jpg" /></p>
+<h2 id="kubernetesetcd_1">Kubernetes如何使用etcd<a class="headerlink" href="#kubernetesetcd_1" title="Permanent link">&para;</a></h2>
+<p>etcd是kubernetes的后端存储</p>
+<p>对于每一个kubernetes Object，都有对应的storage.go 负责对象的存储操作</p>
+<ul>
+<li>pkg/registry/core/pod/storage/storage.go</li>
+</ul>
+<p>API server 启动脚本中指定etcd servers集群</p>
+<ul>
+<li>/usr/local/bin/kube-apiserver --etcd_servers=<a href="https://localhost:4001">https://localhost:4001</a> --etcd-
+    cafile=/etc/ssl/kubernetes/ca.crt--storage-backend=etcd3 --etcd-servers-
+    overrides=/events#https:// localhost:4002</li>
+</ul>
+<h3 id="etcd_7">堆叠式etcd集群的高可用拓扑<a class="headerlink" href="#etcd_7" title="Permanent link">&para;</a></h3>
+<ul>
+<li>这种拓扑将相同节点上的控制平面和etcd成员耦合在一起。优点在于建立起来非常容易，并且
+    对副本的管理也更容易。但是，堆叠式存在耦合失败的风险。如果一个节点发生故障，则etcd
+    成员和控制平面实例都会丢失，并且集群冗余也会受到损害。可以通过添加更多控制平面节点
+    来减轻这种风险。因此为实现集群高可用应该至少运行三个堆叠的Master节点。</li>
+</ul>
+<p><img alt="k8s_etcd_6" src="../../img/k8s/k8s_etcd/k8s_etcd_6.jpg" /></p>
+<h3 id="etcd_8">外部etcd集群的高可用拓扑<a class="headerlink" href="#etcd_8" title="Permanent link">&para;</a></h3>
+<ul>
+<li>该拓扑将控制平面和etcd成员解耦。如果丢失一个Master节点，对etcd成员的影响较小，并
+    且不会像堆叠式拓扑那样对集群冗余产生太大影响。但是，此拓扑所需的主机数量是堆叠式拓
+    扑的两倍。具有此拓扑的群集至少需要三个主机用于控制平面节点，三个主机用于etcd集群。</li>
+</ul>
+<p><img alt="k8s_etcd_7" src="../../img/k8s/k8s_etcd/k8s_etcd_7.jpg" /></p>
+<h3 id="-_etcd">实践 - etcd集群高可用<a class="headerlink" href="#-_etcd" title="Permanent link">&para;</a></h3>
+<p>多少个peer最适合？</p>
+<ul>
+<li>1 个？ 3 个？ 5 个？</li>
+<li>保证高可用是首要目标</li>
+<li>所有写操作都要经过leader</li>
+<li>peer多了是否能提升集群并读操作的并发能力？
+    ➢ apiserver的配置只连本地的etcd peer
+    ➢ apiserver的配置指定所有etcd peers，但只有当前连接的etcd member异常，
+       apiserver才会换目标</li>
+<li>需要动态flexup吗？</li>
+</ul>
+<p>保证apiserver和etcd之间的高效性通讯</p>
+<ul>
+<li>apiserver和etcd部署在同一节点</li>
+<li>apiserver和etcd之间的通讯基于gRPC
+    ➢ 针对每一个object，apiserver和etcd之间的Connection -&gt; stream共享
+    ➢ http2的特性
+       ➢ Streamquota
+       ➢ 带来的问题？对于大规模集群，会造成链路阻塞
+       ➢ 10000 个pod，一次list操作需要返回的数据可能超过100M
+          ➢ k get pod --all-namespaces|wc–l
+          ➢ 8520
+          ➢ k get pod -oyaml--all-namespaces&gt;pods
+          ➢ ls -l pods
+          ➢ -rw-r--r--1 root root 75339736 Apr 5 03:13 pods</li>
+</ul>
+<h3 id="etcd_9">实践 – etcd存储规划<a class="headerlink" href="#etcd_9" title="Permanent link">&para;</a></h3>
+<ul>
+<li>本地vs远程？
+    ➢ RemoteStorage
+       ➢ 优势是假设永远可用，现实真是如此吗？
+       ➢ 劣势是IO效率，可能带来的问题？
+    ➢ 最佳实践：
+       ➢ LocalSSD
+       ➢ 利用localvolume分配空间</li>
+<li>多少空间？
+    ➢ 与集群规模相关，思考：为什么每个member的DB size不一致？</li>
+</ul>
+<h3 id="etcd_10">etcd 安全性<a class="headerlink" href="#etcd_10" title="Permanent link">&para;</a></h3>
+<p>➢ peer和peer之间的通讯加密
+    ➢ 是否有需求
+        ➢ TLS的额外开销
+        ➢ 运营复杂度增加
+    ➢ 数据加密
+        ➢ 是否有需求？
+        ➢ Kubernetes提供了针对secret的加密
+            ➢ <a href="https://kubernetes.io/docs/tasks/administer-cluster/encrypt-data/">https://kubernetes.io/docs/tasks/administer-cluster/encrypt-data/</a></p>
+<p>事件分离</p>
+<ul>
+<li>对于大规模集群，大量的事件会对etcd造成压力</li>
+<li>API server 启动脚本中指定etcdservers集群
+    ➢ /usr/local/bin/kube-apiserver --etcd_servers=<a href="https://localhost:4001">https://localhost:4001</a> --etcd-
+       cafile=/etc/ssl/kubernetes/ca.crt--storage-backend=etcd3 --etcd-servers-
+       overrides=/events#<a href="https://localhost:4002">https://localhost:4002</a></li>
+</ul>
+<p>如何监控?</p>
+<h3 id="_13">减少网络延迟<a class="headerlink" href="#_13" title="Permanent link">&para;</a></h3>
+<p>减少网络延迟</p>
+<ul>
+<li>数据中心内的RTT大概是数毫秒，国内的典型RTT约为50ms，两大洲之间的RTT可能慢至
+    400ms。因此建议etcd集群尽量同地域部署。</li>
+<li>当客户端到Leader的并发连接数量过多，可能会导致其他Follower节点发往Leader的请求因
+    为网络拥塞而被延迟处理。在Follower节点上，可能会看到这样的错误：
+    ➢ dropped MsgPropto 247ae21ff9436b2d since streamMsg'ssending buffer is
+       full</li>
+<li>可以在节点上通过流量控制工具（Traffic Control）提高etcd成员之间发送数据的优先级来避
+    免。</li>
+</ul>
+<h3 id="io">减少磁盘I/O延迟<a class="headerlink" href="#io" title="Permanent link">&para;</a></h3>
+<p>对于磁盘延迟，典型的旋转磁盘写延迟约为 10 毫秒。对于SSD（Solid State Drives，固态硬
+盘），延迟通常低于 1 毫秒。HDD（Hard Disk Drive，硬盘驱动器）或者网盘在大量数据读写
+操作的情况下延时会不稳定。因此强烈建议使用SSD。</p>
+<p>同时为了降低其他应用程序的I/O操作对etcd的干扰，建议将etcd的数据存放在单独的磁盘内。
+也可以将不同类型的对象存储在不同的若干个etcd集群中，比如将频繁变更的event对象从主
+etcd集群中分离出来，以保证主集群的高性能。在APIServer处这是可以通过参数配置的。这些
+etcd集群最好也分别能有一块单独的存储磁盘。</p>
+<p>如果不可避免地，etcd和其他的业务共享存储磁盘，那么就需要通过下面ionice命令对etcd服务
+设置更高的磁盘I/O优先级，尽可能避免其他进程的影响。</p>
+<div class="highlight"><pre><span></span><code>$ ionice -c2 -n0 -p &#39;pgrepetcd&#39;
+</code></pre></div>
+<h3 id="_14">保持合理的日志文件大小<a class="headerlink" href="#_14" title="Permanent link">&para;</a></h3>
+<p>etcd以日志的形式保存数据，无论是数据创建还是修改，它都将操作追加到日志文件，因此日志
+文件大小会随着数据修改次数而线性增长。</p>
+<p>当Kubernetes集群规模较大时，其对etcd集群中的数据更改也会很频繁，集群日记文件会迅速
+增长。</p>
+<p>为了有效降低日志文件大小，etcd会以固定周期创建快照保存系统的当前状态，并移除旧日志文
+件。另外当修改次数累积到一定的数量（默认是 10000 ，通过参数“--snapshot-count”指
+定），etcd也会创建快照文件。</p>
+<p>如果etcd的内存使用和磁盘使用过高，可以先分析是否数据写入频度过大导致快照频度过高，确
+认后可通过调低快照触发的阈值来降低其对内存和磁盘的使用。</p>
+<h3 id="_15">设置合理的存储配额<a class="headerlink" href="#_15" title="Permanent link">&para;</a></h3>
+<p>存储空间的配额用于控制etcd数据空间的大小。合理的存储配额可保证集群操作的可靠性。如果
+没有存储配额，也就是etcd可以利用整个磁盘空间，etcd的性能会因为存储空间的持续增长而
+严重下降，甚至有耗完集群磁盘空间导致不可预测集群行为的风险。如果设置的存储配额太小，
+一旦其中一个节点的后台数据库的存储空间超出了存储配额，etcd就会触发集群范围的告警，并
+将集群置于只接受读和删除请求的维护模式。只有在释放足够的空间、消除后端数据库的碎片和
+清除存储配额告警之后，集群才能恢复正常操作。</p>
+<h3 id="_16">自动压缩历史版本<a class="headerlink" href="#_16" title="Permanent link">&para;</a></h3>
+<p>etcd会为每个键都保存了历史版本。为了避免出现性能问题或存储空间消耗完导致写不进去的问
+题，这些历史版本需要进行周期性地压缩。压缩历史版本就是丢弃该键给定版本之前的所有信息，
+节省出来的空间可以用于后续的写操作。etcd支持自动压缩历史版本。在启动参数中指定参数
+“--auto-compaction”，其值以小时为单位。也就是etcd会自动压缩该值设置的时间窗口之
+前的历史版本。</p>
+<h3 id="_17">定期消除碎片化<a class="headerlink" href="#_17" title="Permanent link">&para;</a></h3>
+<p>压缩历史版本，相当于离散地抹去etcd存储空间某些数据，etcd存储空间中将会出现碎片。这
+些碎片无法被后台存储使用，却仍占据节点的存储空间。因此定期消除存储碎片，将释放碎片化
+的存储空间，重新调整整个存储空间。</p>
+<h3 id="_18">数据备份<a class="headerlink" href="#_18" title="Permanent link">&para;</a></h3>
+<ul>
+<li>备份方案
+    ➢ 基于事件重放
+    ➢ etcd备份：备份完整的集群信息，灾难恢复
+       ➢ etcdctlsnapshot save</li>
+<li>频度？
+    ➢ 时间间隔太长：
+       ➢ 能否接受userdatalost？
+       ➢ 如果有外部资源配置，如负载均衡等，能否接受数据丢失导致的leak？
+    ➢ 时间间隔太短：
+       ➢ 对etcd的影响
+          ➢ 做snapshot的时候，etcd会锁住当前数据
+          ➢ 并发的写操作需要开辟新的空间进行增量写，导致磁盘空间增长</li>
+<li>如何保证备份的时效性，同时防止磁盘爆掉？
+    ➢ Autodefrag？</li>
+</ul>
+<h3 id="_19">优化运行参数<a class="headerlink" href="#_19" title="Permanent link">&para;</a></h3>
+<p>当网络延迟和磁盘延迟固定的情况下，可以优化etcd运行参数来提升集群的工作效率。etcd基于Raft
+协议进行Leader选举，当Leader选定以后才能开始数据读写操作，因此频繁的Leader选举会导致数
+据读写性能显著降低。可以通过调整心跳周期（HeatbeatInterval）和选举超时时间（Election
+Timeout），来降低Leader选举的可能性。</p>
+<p>心跳周期是控制Leader以何种频度向Follower发起心跳通知。心跳通知除表明Leader活跃状态之外，
+还带有待写入数据信息，Follower依据心跳信息进行数据写入，默认心跳周期是100ms。选举超时时
+间定义了当Follower多久没有收到Leader心跳，则重新发起选举，该参数的默认设置是1000ms。</p>
+<p>如果etcd集群的不同实例部署在延迟较低的相同数据中心，通常使用默认配置即可。如果不同实例部
+署在多数据中心或者网络延迟较高的集群环境，则需要对心跳周期和选举超时时间进行调整。建议心
+跳周期参数推荐设置为接近etcd多个成员之间平均数据往返周期的最大值，一般是平均RTT的0.55-
+1.5倍。如果心跳周期设置得过低，etcd会发送很多不必要的心跳信息，从而增加CPU和网络的负担。
+如果设置得过高，则会导致选举频繁超时。选举超时时间也需要根据etcd成员之间的平均RTT时间来
+设置。选举超时时间最少设置为etcd成员之间RTT时间的 10 倍，以便对网络波动。</p>
+<p>心跳间隔和选举超时时间的值必须对同一个etcd集群的所有节点都生效，如果各个节点配置不同，就
+会导致集群成员之间协商结果不可预知而不稳定。</p>
+<h3 id="etcd_11">etcd备份存储<a class="headerlink" href="#etcd_11" title="Permanent link">&para;</a></h3>
+<p>etcd的默认工作目录下会生成两个子目录：wal和snap。wal是用于存放预写式日志，其最大的
+作用是记录整个数据变化的全部历程。所有数据的修改在提交前，都要先写入wal中。</p>
+<p>snap是用于存放快照数据。为防止wal文件过多，etcd会定期（当wal中数据超过 10000 条记录
+时，由参数“--snapshot-count”设置）创建快照。当快照生成后，wal中数据就可以被删除了。</p>
+<p>如果数据遭到破坏或错误修改需要回滚到之前某个状态时，方法就有两个：一是从快照中恢复数
+据主体，但是未被拍入快照的数据会丢失；而是执行所有WAL中记录的修改操作，从最原始的
+数据恢复到数据损坏之前的状态，但恢复的时间较长。</p>
+<h3 id="_20">备份方案实践<a class="headerlink" href="#_20" title="Permanent link">&para;</a></h3>
+<p>官方推荐etcd集群的备份方式是定期创建快照。和etcd内部定期创建快照的目的不同，该备份方式依赖外部
+程序定期创建快照，并将快照上传到网络存储设备以实现etcd数据的冗余备份。上传到网络设备的数据，都
+应进行了加密。即使当所有etcd实例都丢失了数据，也能允许etcd集群从一个已知的良好状态的时间点在任
+一地方进行恢复。根据集群对etcd备份粒度的要求，可适当调节备份的周期。在生产环境中实测，拍摄快照
+通常会影响集群当时的性能，因此不建议频繁创建快照。但是备份周期太长，就可能导致大量数据的丢失。</p>
+<p>这里可以使用增量备份的方式。如图 3 - 8 所示，备份程序每 30 分钟触发一次快照的拍摄。紧接着它从快照结
+束的版本（Revision）开始，监听etcd集群的事件，并每 10 秒钟将事件保存到文件中，并将快照和事件文件
+上传到网络存储设备中。 30 分钟的快照周期对集群性能影响甚微。当大灾难来临时，也至多丢失 10 秒的数据。
+至于数据修复，首先把数据从网络存储设备中下载下来，然后从快照中恢复大块数据，并在此基础上依次应
+用存储的所有事件。这样就可以将集群数据恢复到灾难发生前。</p>
+<p><img alt="k8s_etcd_8" src="../../img/k8s/k8s_etcd/k8s_etcd_8.jpg" /></p>
+<h2 id="etcd_12">etcd 常见问题<a class="headerlink" href="#etcd_12" title="Permanent link">&para;</a></h2>
+<h3 id="peer">多少个peer最适合？<a class="headerlink" href="#peer" title="Permanent link">&para;</a></h3>
+<ul>
+<li>1 个？ 3 个？ 5 个？</li>
+<li>保证高可用是首要目标</li>
+<li>所有写操作都要经过leader</li>
+<li>peer多了是否能提升集群并读操作的并发能力？
+    ➢ apiserver的配置只连本地的etcd peer
+    ➢ apiserver的配置指定所有etcd peers，但只有当前连接的etcd member异常，
+       apiserver才会换目标</li>
+<li>需要动态flexup吗？</li>
+</ul>
+<h3 id="apiserveretcd">保证apiserver和etcd之间的高效性通讯<a class="headerlink" href="#apiserveretcd" title="Permanent link">&para;</a></h3>
+<p>保证apiserver和etcd之间的高效性通讯</p>
+<ul>
+<li>apiserver和etcd部署在同一节点</li>
+<li>apiserver和etcd之间的通讯基于gRPC
+    ➢ 针对每一个object，apiserver和etcd之间的Connection -&gt; stream共享
+    ➢ HTTP/2的特性
+       ➢ Streamquota
+       ➢ 带来的问题？对于大规模集群，会造成链路阻塞
+       ➢ 10000 个pod，一次list操作需要返回的数据可能超过100M
+          ➢ k get pod --all-namespaces|wc–l
+          ➢ 8520
+          ➢ k get pod -oyaml--all-namespaces&gt;pods
+          ➢ ls -l pods
+          ➢ -rw-r--r--1 root root 75339736 Apr 5 03:13 pods</li>
+</ul>
+<h2 id="backup">增强版backup方案<a class="headerlink" href="#backup" title="Permanent link">&para;</a></h2>
+<p><img alt="k8s_etcd_9" src="../../img/k8s/k8s_etcd/k8s_etcd_9.jpg" /></p>
+<h2 id="etcd_13">etcd数据加密<a class="headerlink" href="#etcd_13" title="Permanent link">&para;</a></h2>
+<p>➢ <a href="https://kubernetes.io/docs/tasks/administer-cluster/encrypt-data/">https://kubernetes.io/docs/tasks/administer-cluster/encrypt-data/</a></p>
+<div class="highlight"><pre><span></span><code><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">API Server.config.k 8 s.io/v 1</span>
+<span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">EncryptionConfiguration</span>
+<span class="nt">resources</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">secrets</span>
+<span class="w">    </span><span class="nt">providers</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">identity</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{}</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">aesgcm</span><span class="p">:</span>
+<span class="w">       </span><span class="nt">keys</span><span class="p">:</span>
+<span class="w">       </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">key 1</span>
+<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">secret</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">c 2 VjcmV 0 IGlzIHNlY 3 VyZQ==</span>
+<span class="w">       </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">key 2</span>
+<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">secret</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">dGhpcyBpcyBwYXNzd 29 yZA==</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">aescbc</span><span class="p">:</span>
+<span class="w">       </span><span class="nt">keys</span><span class="p">:</span>
+<span class="w">       </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">key 1</span>
+<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">secret</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">c 2 VjcmV 0 IGlzIHNlY 3 VyZQ==</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">secretbox</span><span class="p">:</span>
+<span class="w">       </span><span class="nt">keys</span><span class="p">:</span>
+<span class="w">       </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">key 1</span>
+<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">secret</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">YWJjZGVmZ 2 hpamtsbW 5 vcHFyc 3 R 1 dnd 4 eXoxMjM 0 NTY=</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">kms</span><span class="p">:</span>
+<span class="w">       </span><span class="nt">name </span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">myKmsPlugin</span>
+<span class="w">       </span><span class="nt">endpoint</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">unix:///tmp/socketfile.sock</span>
+<span class="w">       </span><span class="nt">cachesize</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">100</span>
+</code></pre></div>
+<h2 id="kubernetes">Kubernetes中数据分离<a class="headerlink" href="#kubernetes" title="Permanent link">&para;</a></h2>
+<ul>
+<li>对于大规模集群，大量的事件会对etcd造成压力</li>
+<li>API server 启动脚本中指定etcd servers集群</li>
+</ul>
+<p>/usr/local/bin/kube-apiserver--etcd-servers=<a href="https://localhost:4001">https://localhost:4001</a> --etcd-
+cafile=/etc/ssl/kubernetes/ca.crt--storage-backend=etcd3 --etcd-servers-
+overrides=/events#<a href="https://localhost:4002">https://localhost:4002</a></p>
+<h2 id="apiserver">查询APIServer<a class="headerlink" href="#apiserver" title="Permanent link">&para;</a></h2>
+<p>返回某namespace中的所有Pod</p>
+<p>GET /api/v1/namespaces/test/pods</p>
+<hr />
+<p>200 OK</p>
+<p>Content-Type: application/json</p>
+<p>{
+"kind": "PodList",
+"apiVersion": "v1",
+"metadata": {"resourceVersion":"10245"},
+"items": [...]
+}</p>
+<h2 id="12345">从 12345 版本开始，监听所有对象变化<a class="headerlink" href="#12345" title="Permanent link">&para;</a></h2>
+<h2 id="get_apiv1namespacestestpodswatch1resourceversion10245">GET /api/v1/namespaces/test/pods?watch=1&amp;resourceVersion=10245<a class="headerlink" href="#get_apiv1namespacestestpodswatch1resourceversion10245" title="Permanent link">&para;</a></h2>
+<p>200 OK
+Transfer-Encoding: chunked</p>
+<p>Content-Type: application/json</p>
+<p>{
+"type": "ADDED",
+"object": {"kind": "Pod", "apiVersion": "v1", "metadata": {"resourceVersion": "10596", ...}, ...}</p>
+<p>}
+{
+"type": "MODIFIED",
+"object": {"kind": "Pod", "apiVersion": "v1", "metadata": {"resourceVersion": "11020", ...}, ...}
+}
+...</p>
+<h2 id="_21">分页查询<a class="headerlink" href="#_21" title="Permanent link">&para;</a></h2>
+<h2 id="get_apiv1podslimit500">GET /api/v1/pods?limit=500<a class="headerlink" href="#get_apiv1podslimit500" title="Permanent link">&para;</a></h2>
+<p>200 OK
+Content-Type: application/json</p>
+<p>{</p>
+<p>"kind": "PodList",
+"apiVersion": "v1",
+"metadata": {
+"resourceVersion":"10245",
+"continue": "ENCODED_CONTINUE_TOKEN",
+},
+"items": [...] // returns pods 1- 500
+}</p>
+<p>GET
+/api/v1/pods?limit=500&amp;continue=ENCODED_CONTINUE_TOKEN</p>
+<hr />
+<p>200 OK
+Content-Type: application/json</p>
+<p>{
+"kind": "PodList",
+"apiVersion": "v1",
+"metadata": {
+"resourceVersion":"10245",
+"continue": "ENCODED_CONTINUE_TOKEN_2",
+},
+"items": [...] // returns pods 501- 1000
+}</p>
+<h2 id="resourceversion">ResourceVersion<a class="headerlink" href="#resourceversion" title="Permanent link">&para;</a></h2>
+<ul>
+<li>单个对象的resourceVersion<ul>
+<li>对象的最后修改resourceVersion</li>
+</ul>
+</li>
+<li>List对象的resourceVersion<ul>
+<li>生成listresponse时的resourceVersion</li>
+</ul>
+</li>
+<li>List行为<ul>
+<li>List对象时，如果不加resourceVersion，意味着需要MostRecent数据，请求会击穿
+   APIServer缓存，直接发送至etcd</li>
+<li>APIServer通过Label过滤对象查询时，过滤动作是在APIServer端，APIServer需要向
+   etcd发起全量查询请求</li>
+</ul>
+</li>
+</ul>
+<h2 id="_22">遭遇到的陷阱<a class="headerlink" href="#_22" title="Permanent link">&para;</a></h2>
+<p>频繁的leaderelection</p>
+<p>etcd 分裂</p>
+<p>etcd 不响应</p>
+<p>与apiserver之间的链路阻塞</p>
+<p>磁盘暴涨</p>
+<h2 id="etcd_down">少数etcd 成员Down<a class="headerlink" href="#etcd_down" title="Permanent link">&para;</a></h2>
+<p><img alt="k8s_etcd_10" src="../../img/k8s/k8s_etcd/k8s_etcd_10.jpg" /></p>
+<h2 id="master">Master节点出现网络分区<a class="headerlink" href="#master" title="Permanent link">&para;</a></h2>
+<p><strong>Case: 网络分区出现</strong>
+Group#1: master-1, master- 2
+Group#2: master-3, master-4, master- 5</p>
+<p><img alt="k8s_etcd_11" src="../../img/k8s/k8s_etcd/k8s_etcd_11.jpg" /></p>
+<h2 id="_23">参考资料<a class="headerlink" href="#_23" title="Permanent link">&para;</a></h2>
+<p>B树和B+树</p>
+<p><a href="https://segmentfault.com/a/1190000020416577">https://segmentfault.com/a/1190000020416577</a></p>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      BurningMyself<a href='https://beian.miit.gov.cn/' target='_blank'>  蜀ICP备15033200号-1</a>
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        <div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/burningmyself" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://gitee.com/burningmyself" target="_blank" rel="noopener" title="gitee.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 488 512"><!--! Font Awesome Free 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M488 261.8C488 403.3 391.1 504 248 504 110.8 504 0 393.2 0 256S110.8 8 248 8c66.8 0 123 24.5 166.3 64.9l-67.5 64.9C258.5 52.6 94.3 116.6 94.3 256c0 86.5 69.1 156.6 153.7 156.6 98.2 0 135-70.4 140.8-106.9H248v-85.3h236.1c2.3 12.7 3.9 24.9 3.9 41.4z"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.2a6f1dda.min.js"></script>
+      
+        <script src="../../js/extra.js"></script>
+      
+        <script src="../../js/baidu-tongji.js"></script>
+      
+        <script src="https://www.googletagmanager.com/gtag/js?id=UA-155084439-1"></script>
+      
+        <script src="https://www.googletagmanager.com/gtag/js?id=UA-155132293-1"></script>
+      
+        <script src="../../js/google.js"></script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+      
+    
+  </body>
+</html>

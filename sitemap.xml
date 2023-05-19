@@ -521,6 +521,11 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://burningmyself.gitee.io/kubernetes/k8s_etcd/</loc>
+         <lastmod>2023-05-19</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://burningmyself.gitee.io/kubernetes/k8s_fw_rule_and_object_design/</loc>
          <lastmod>2023-05-19</lastmod>
          <changefreq>daily</changefreq>
