@@ -90,7 +90,8 @@ nav:
     - Kubernetes:
         - Kubernetes架构原则和对象设计: kubernetes/k8s_fw_rule_and_object_design.md
         - Kubernetes控制平面组件etcd: kubernetes/k8s_etcd.md
-        - 深入理解Kube-APIServer: kubernetes/k8s_kube_APIServer.md    
+        - 深入理解Kube-APIServer: kubernetes/k8s_kube_APIServer.md
+        - kubernetes控制平面组件: kubernetes/k8s_controller_manager.md    
     - Tool: 
         - Git: tool/git.md
         - Git动画展示: tool/gitusual.md
@@ -160,7 +161,6 @@ nav:
       - Rancher容器云管理平台: cloud/kubernetes/kubernetes_rancher.md
       - 使用kubeconfig管理多集群方法: cloud/kubernetes/kubernetes_kubeconfig.md
       - karmada实现k8s集群联邦: cloud/kubernetes/kubernetes_karmada.md
-      - 《将博客搬至CSDN》: cloud/kubernetes/kubernetes_csdn.md
       - 源监控: cloud/kubernetes/kubernetes_ui.md
       - 源监控: cloud/kubernetes/kubernetes_ui.md                                
   - 微服务:  

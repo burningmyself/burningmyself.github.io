@@ -36,6 +36,7 @@
   * [Kubernetes架构原则和对象设计](docs/kubernetes/k8s_fw_rule_and_object_design.md)
   * [Kubernetes控制平面组件etcd](docs/kubernetes/k8s_etcd.md)
   * [深入理解Kube-APIServer](docs/kubernetes/k8s_kube_APIServer.md)
+  * [kubernetes控制平面组件](docs/kubernetes/k8s_controller_manager.md)
 * [经验]
   * [集群和负载均衡](docs/exp/cl.md)
   * [DevOps是什么](docs/exp/devops.md)  
@@ -185,7 +186,6 @@
   * [源Rancher容器云管理平台监控](docs/cloud/kubernetes/kubernetes_rancher.md)
   * [源监使用kubeconfig管理多集群方法控](docs/cloud/kubernetes/kubernetes_kubeconfig.md)
   * [karmada实现k8s集群联邦](docs/cloud/kubernetes/kubernetes_karamada.md)
-  * [《将博客搬至CSDN》](docs/cloud/kubernetes/kubernetes_csdn.md)
   * [源监控](docs/cloud/kubernetes/kubernetes_ui.md)
 * [情感]
   * [情商](docs/emotion/eq.md)
