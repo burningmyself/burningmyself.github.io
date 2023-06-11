@@ -1,0 +1,4275 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content=".net,java,php,python,docker,web">
+      
+      
+        <meta name="author" content="BurningMyself">
+      
+      
+        <link rel="canonical" href="https://burningmyself.gitee.io/cloud/kubernetes/kubernetes_kubesphere/">
+      
+      
+        <link rel="prev" href="../kubernetes_karmada/">
+      
+      
+        <link rel="next" href="../kubernetes_ui/">
+      
+      <link rel="icon" href="../../../favicon.ico">
+      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.0.15">
+    
+    
+      
+        <title>安装kubesphere使用 - BurningMyself</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.113286f1.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.a0c5b2b5.min.css">
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="" data-md-color-accent="">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#linuxall_in_onekubernetes_kubesphere" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../../.." title="BurningMyself" class="md-header__button md-logo" aria-label="BurningMyself" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            BurningMyself
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              安装kubesphere使用
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/burningmyself/burningmyself.github.io" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    burningmyself.github.io
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="BurningMyself" class="md-nav__button md-logo" aria-label="BurningMyself" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    BurningMyself
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/burningmyself/burningmyself.github.io" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    burningmyself.github.io
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        介绍
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+          技术博文
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          技术博文
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="0">
+          .NET
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_1_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2_1">
+          <span class="md-nav__icon md-icon"></span>
+          .NET
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../net/c_sharp/" class="md-nav__link">
+        C#新特性语法
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../net/c_docker/" class="md-nav__link">
+        .Net Core Docker 部署
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../net/c_sqlserver_nginx/" class="md-nav__link">
+        Docker 容器化部署 ASP.NET Core
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../net/c_core_safety/" class="md-nav__link">
+        让你的ASP.NET Core应用程序更安全
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../net/c_core_study_route/" class="md-nav__link">
+        ASP.NET Core开发者指南
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+          Java
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2_2">
+          <span class="md-nav__icon md-icon"></span>
+          Java
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../java/feature/" class="md-nav__link">
+        Java特性
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../java/load-class/" class="md-nav__link">
+        Java类加载
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../java/orm/" class="md-nav__link">
+        Orm的优缺点
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../java/bio-nio/" class="md-nav__link">
+        BIO与NIO
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../java/rocketmq/rmq-1/" class="md-nav__link">
+        RocketMq下载与安装
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../java/springAnnotation/" class="md-nav__link">
+        Spring常用注解
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../java/javavm/" class="md-nav__link">
+        Java 虚拟机
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../java/springdesign/" class="md-nav__link">
+        Spring 常用设计
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../java/spring-cloud/" class="md-nav__link">
+        Spring Cloud
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../java/java-simple/" class="md-nav__link">
+        Java simple
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../java/java-validator/" class="md-nav__link">
+        Java Validator
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../java/java-string/" class="md-nav__link">
+        Java String
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../java/java-utils/" class="md-nav__link">
+        Java Utils
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+          Python
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2_3">
+          <span class="md-nav__icon md-icon"></span>
+          Python
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../python/feature/" class="md-nav__link">
+        Python特性
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../python/str_joint/" class="md-nav__link">
+        Python字符拼接
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../python/syntax_rule/" class="md-nav__link">
+        Python语法技巧
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../python/fabric/" class="md-nav__link">
+        远程部署神器 Fabric
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_4" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_4" id="__nav_2_4_label" tabindex="0">
+          Go
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_4_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2_4">
+          <span class="md-nav__icon md-icon"></span>
+          Go
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../go/go_base/" class="md-nav__link">
+        Go基础语法
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_5" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_5" id="__nav_2_5_label" tabindex="0">
+          PHP
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_5_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2_5">
+          <span class="md-nav__icon md-icon"></span>
+          PHP
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../php/kj/" class="md-nav__link">
+        框架
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_6" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_6" id="__nav_2_6_label" tabindex="0">
+          Web
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_6_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2_6">
+          <span class="md-nav__icon md-icon"></span>
+          Web
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../web/es6/" class="md-nav__link">
+        es6语法
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../web/ali_js_style/" class="md-nav__link">
+        阿里js样式规范
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../web/node.js/" class="md-nav__link">
+        node.js文档
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../web/react/" class="md-nav__link">
+        React 开发者指南
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../dart/syntax/" class="md-nav__link">
+        Dart语法学习
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../web/react_interview/" class="md-nav__link">
+        React 面试
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../web/js_tool_method/" class="md-nav__link">
+        js 工具函数
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../web/vue_cp_react/" class="md-nav__link">
+        vue与react比较
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../web/javascript/" class="md-nav__link">
+        JavaScript 基础
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_7" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_7" id="__nav_2_7_label" tabindex="0">
+          SQL
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_7_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2_7">
+          <span class="md-nav__icon md-icon"></span>
+          SQL
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../sql/mysql_yh/" class="md-nav__link">
+        MySQL优化
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../sql/mysql_yh17/" class="md-nav__link">
+        MySQL优化
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../sql/mysql_log/" class="md-nav__link">
+        MySQL日志
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../sql/mysql_index/" class="md-nav__link">
+        MySQL索引
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../sql/mysql_pxc/" class="md-nav__link">
+        MySQL PXC集群
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../sql/mysql_use/" class="md-nav__link">
+        MySQL 数据库应用
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../sql/mysql_backups/" class="md-nav__link">
+        MySql 备份
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../sql/sql_server_master/" class="md-nav__link">
+        Sql Server 主从备份
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../sql/data_split/" class="md-nav__link">
+        数据库之互联网常用分库分表方案
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../sql/mybatis/" class="md-nav__link">
+        Mybatis使用心德
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_8" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_8" id="__nav_2_8_label" tabindex="0">
+          Linux
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_8_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2_8">
+          <span class="md-nav__icon md-icon"></span>
+          Linux
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../linux/linux/" class="md-nav__link">
+        Linux学习笔记
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../linux/often/" class="md-nav__link">
+        常用命令
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../linux/ope/" class="md-nav__link">
+        实用的Linux 命令
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_9" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_9" id="__nav_2_9_label" tabindex="0">
+          Docker
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_9_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2_9">
+          <span class="md-nav__icon md-icon"></span>
+          Docker
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../docker/docker/" class="md-nav__link">
+        Docker全科
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../docker/docker_core/" class="md-nav__link">
+        Docker 核心技术
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../docker/docker-compose/" class="md-nav__link">
+        docker和docker-compose配置常用环境
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../docker/docker-jenkins/" class="md-nav__link">
+        Docker部署Jenkins
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../docker/docker-phabricator/" class="md-nav__link">
+        Docker部署Phabricator
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_10" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_10" id="__nav_2_10_label" tabindex="0">
+          Kubernetes
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_10_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2_10">
+          <span class="md-nav__icon md-icon"></span>
+          Kubernetes
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../kubernetes/k8s_fw_rule_and_object_design/" class="md-nav__link">
+        Kubernetes架构原则和对象设计
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../kubernetes/k8s_etcd/" class="md-nav__link">
+        Kubernetes控制平面组件etcd
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../kubernetes/k8s_kube_APIServer/" class="md-nav__link">
+        深入理解Kube-APIServer
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../kubernetes/k8s_controller_manager/" class="md-nav__link">
+        kubernetes控制平面组件
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_11" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_11" id="__nav_2_11_label" tabindex="0">
+          Tool
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_11_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2_11">
+          <span class="md-nav__icon md-icon"></span>
+          Tool
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tool/git/" class="md-nav__link">
+        Git
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tool/gitusual/" class="md-nav__link">
+        Git动画展示
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tool/gitquestion/" class="md-nav__link">
+        Git问题处理
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tool/gitflow/" class="md-nav__link">
+        GitFlow
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tool/gitbook/" class="md-nav__link">
+        GitBook
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tool/gitcmr/" class="md-nav__link">
+        Git提交日志规范
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tool/markdown/" class="md-nav__link">
+        Markdown
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tool/cicd/" class="md-nav__link">
+        CI/CD
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tool/mkdocs/" class="md-nav__link">
+        mkdocs简单使用
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tool/gitstudy/" class="md-nav__link">
+        Git的黑魔法
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tool/minio/" class="md-nav__link">
+        MinIO 搭建使用
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tool/cat-monitoring/" class="md-nav__link">
+        Cat分布式监控
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+          云架构
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          云架构
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../native/" class="md-nav__link">
+        云原生
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../virtual/" class="md-nav__link">
+        虚拟化技术
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../compute/" class="md-nav__link">
+        云计算
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../apprelease/" class="md-nav__link">
+        应用部署容器化演进
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../containerlinux/" class="md-nav__link">
+        容器技术所涉及Linux内核关键技术
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_6" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3_6" id="__nav_3_6_label" tabindex="0">
+          Docker
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_6_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3_6">
+          <span class="md-nav__icon md-icon"></span>
+          Docker
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docker/docker_native/" class="md-nav__link">
+        容器管理工具Docker生态架构及部署
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docker/docker_nginx/" class="md-nav__link">
+        使用容器运行Nginx应用及Docker命令
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docker/docker_image/" class="md-nav__link">
+        Docker容器镜像
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docker/docker_image_fast/" class="md-nav__link">
+        Docker容器镜像加速器及本地容器镜像仓库
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docker/docker_container_enterprice/" class="md-nav__link">
+        Docker容器化部署企业级应用集群
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docker/docker_file/" class="md-nav__link">
+        Dockerfile精讲及新型容器镜像构建技术
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docker/docker_network/" class="md-nav__link">
+        Docker容器网络与通信原理深度解析
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docker/docker_date/" class="md-nav__link">
+        Docker容器数据持久化存储机制
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docker/docker_compose/" class="md-nav__link">
+        Docker容器服务编排利器Docker Compose应用实战
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docker/docker_swarm/" class="md-nav__link">
+        Docker主机集群化方案 Docker Swarm
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docker/docker_devops/" class="md-nav__link">
+        基于Docker容器DevOps应用方案 企业业务代码发布系统
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docker/docker_container/" class="md-nav__link">
+        轻量级或工业级容器管理工具
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_7" checked>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3_7" id="__nav_3_7_label" tabindex="0">
+          Kubernetes
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_7_label" aria-expanded="true">
+        <label class="md-nav__title" for="__nav_3_7">
+          <span class="md-nav__icon md-icon"></span>
+          Kubernetes
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        kubeadm极速部署Kubernetes
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubernetes_introduce/" class="md-nav__link">
+        kubernetes介绍与集群架构
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubernetes_way/" class="md-nav__link">
+        Kubernetes集群部署方式说明
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubernetes_master/" class="md-nav__link">
+        kubeadm部署单Master节点kubernetes集群
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubernetes_hight/" class="md-nav__link">
+        kubeadm部署高可用kubernetes集群
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubernetes_rke/" class="md-nav__link">
+        使用RKE构建企业生产级Kubernetes集群
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubernetes_hight_bin1/" class="md-nav__link">
+        Kubernetes高可用集群二进制部署（Runtime Docker）一
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubernetes_hight_bin2/" class="md-nav__link">
+        Kubernetes高可用集群二进制部署（Runtime Docker）二
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubernetes_ui/" class="md-nav__link">
+        Kubernetes集群UI及主机资源监控
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubernetes_sealos/" class="md-nav__link">
+        使用sealos部署kubernetes集群并实现集群管理
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubernetes_cluster/" class="md-nav__link">
+        kubernetes集群命令语法
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubernetes_core/" class="md-nav__link">
+        Kubernetes核心概念
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubernetes_nginx_ingress_controller/" class="md-nav__link">
+        Kubernetes集群 服务暴露 Nginx Ingress Controller
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubernetes_traefik/" class="md-nav__link">
+        Kubernetes集群 服务暴露 Traefik
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubernetes_configMap_secret/" class="md-nav__link">
+        Kubernetes配置与密钥管理 ConfigMap&Secret
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubernetes_harbor/" class="md-nav__link">
+        Kubernetes集群使用容器镜像仓库Harbor
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubernetes_safety/" class="md-nav__link">
+        Kubernetes集群安全管理
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubernetes_storage_volume/" class="md-nav__link">
+        kubernetes持久化存储卷
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubernetes_storage_ceph/" class="md-nav__link">
+        kubernetes存储解决方案Ceph
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubernetes_cluster_serve/" class="md-nav__link">
+        Kubernetes集群公共服务
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubernetes_deploy_java/" class="md-nav__link">
+        kubernetes集群java项目上云部署
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubernetes_deploy_python/" class="md-nav__link">
+        kubernetes集群Python项目上云部署
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubernetes_deploy_golang/" class="md-nav__link">
+        Kubernetes集群golang项目上云部署
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubernetes_logs_collect/" class="md-nav__link">
+        kubernetes日志收集方案
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubernetes_zookeeper/" class="md-nav__link">
+        企业级中间件上云部署 zookeeper
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubernetes_kafka/" class="md-nav__link">
+        kubernetes云原生中间件上云部署 kafka
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubernetes_rokectmq/" class="md-nav__link">
+        rocketmq部署
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubernetes_helm/" class="md-nav__link">
+        Kubernetes集群包管理解决方案 Helm
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubernetes_kustomize/" class="md-nav__link">
+        Kubernetes原生配置管理利器 kustomize
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubernetes_flannel/" class="md-nav__link">
+        kubernetes集群网络解决方案 flannel
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubernetes_calico/" class="md-nav__link">
+        kubernetes集群网络解决方案 calico
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubernetes_hybridnet/" class="md-nav__link">
+        kubernetes集群 underlay 网络方案 hybridnet
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubernetes_ipv4_and_ipv6/" class="md-nav__link">
+        kubernetes版本双栈协议（IPv4&IPv6）集群部署
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubernetes_rancher/" class="md-nav__link">
+        Rancher容器云管理平台
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubernetes_kubeconfig/" class="md-nav__link">
+        使用kubeconfig管理多集群方法
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubernetes_karmada/" class="md-nav__link">
+        karmada实现k8s集群联邦
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        安装kubesphere使用
+      </a>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubernetes_ui/" class="md-nav__link">
+        源监控
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+          微服务
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          微服务
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../micro/fbs-lock/" class="md-nav__link">
+        分布式锁
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../micro/design/" class="md-nav__link">
+        微服务设计
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../micro/distrimsg/" class="md-nav__link">
+        分布式系统与消息的投递
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../micro/ddd/" class="md-nav__link">
+        基于DDD的微服务设计和开发实战
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../micro/kafka/" class="md-nav__link">
+        Kafka架构原理
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../micro/redis_cluster/" class="md-nav__link">
+        Redis Cluster原理
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../micro/spring-cloud-micro/" class="md-nav__link">
+        分布式架构
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+          经验分析
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          经验分析
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../exp/devops/" class="md-nav__link">
+        DevOps
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../exp/micro-service/" class="md-nav__link">
+        Micro-Service
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../exp/raft-gossip/" class="md-nav__link">
+        Raft算法和Gossip协议
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../exp/cl/" class="md-nav__link">
+        集群和负载均衡
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../exp/ai/" class="md-nav__link">
+        人工智能
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../exp/code-principle/" class="md-nav__link">
+        代码原则
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../exp/techbig/" class="md-nav__link">
+        如何成为技术大牛
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../exp/learnweetout/" class="md-nav__link">
+        程序员如何技术成长
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../exp/pt/" class="md-nav__link">
+        产品与技术
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../exp/four_deep_learning/" class="md-nav__link">
+        深度学习框架
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../exp/tl/" class="md-nav__link">
+        在阿里做了5年技术Leader，我总结出这些套路！
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../exp/cto/" class="md-nav__link">
+        CTO 技能图谱
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+          构架
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_6">
+          <span class="md-nav__icon md-icon"></span>
+          构架
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../framework/split/" class="md-nav__link">
+        构架拆分
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../framework/fgb/" class="md-nav__link">
+        分布式、高并发、多线程
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../framework/agility/" class="md-nav__link">
+        如何理解敏捷开发
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../framework/fwork/" class="md-nav__link">
+        走向架构师必备的技能
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../framework/data_middle/" class="md-nav__link">
+        数据中台的思考与总结
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../framework/algorithm-ten/" class="md-nav__link">
+        必学的 10 大算法
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+          情感
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_7">
+          <span class="md-nav__icon md-icon"></span>
+          情感
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../emotion/eq/" class="md-nav__link">
+        情商
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../emotion/workheard/" class="md-nav__link">
+        工作心得
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../emotion/lookbook/" class="md-nav__link">
+        看书
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../emotion/selfdiscipline/" class="md-nav__link">
+        自律
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../emotion/livefail/" class="md-nav__link">
+        为什么活着失败
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../emotion/emotion/" class="md-nav__link">
+        情绪管理
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../emotion/losecome/" class="md-nav__link">
+        所有的失去，都会以另一种方式归来
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../emotion/threeheart/" class="md-nav__link">
+        人生有这三种好心态
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../emotion/onepath/" class="md-nav__link">
+        余生，学会一个人走，不管有没有人陪
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../emotion/twopath/" class="md-nav__link">
+        往后余生还很精彩，别被熬夜拖垮了
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../emotion/lifetime/" class="md-nav__link">
+        心态好的人，一辈子都好
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+  
+
+
+<h1 id="linuxall_in_onekubernetes_kubesphere">在Linux上以all in one模式安装kubernetes &amp; kubesphere<a class="headerlink" href="#linuxall_in_onekubernetes_kubesphere" title="Permanent link">&para;</a></h1>
+<p>于刚接触 KubeSphere 并想快速上手该容器平台的用户，All-in-One 安装模式是最佳的选择，它能够帮助您零配置快速部署 KubeSphere 和 Kubernetes。</p>
+<h1 id="linux">一、Linux主机准备<a class="headerlink" href="#linux" title="Permanent link">&para;</a></h1>
+<p>若要以 All-in-One 模式进行安装，您仅需参考以下对机器硬件和操作系统的要求准备一台主机。</p>
+<blockquote>
+<p>如果您的机器至少有 8 核 CPU 和 16 GB 内存，则建议启用所有组件。</p>
+</blockquote>
+<h2 id="11">1.1 硬件推荐配置<a class="headerlink" href="#11" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th align="left">操作系统</th>
+<th align="left">最低配置</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"><strong>Ubuntu</strong> <em>16.04</em>, <em>18.04</em></td>
+<td align="left">2 核 CPU，4 GB 内存，40 GB 磁盘空间</td>
+</tr>
+<tr>
+<td align="left"><strong>Debian</strong> <em>Buster</em>, <em>Stretch</em></td>
+<td align="left">2 核 CPU，4 GB 内存，40 GB 磁盘空间</td>
+</tr>
+<tr>
+<td align="left"><strong>CentOS</strong> <em>7.x</em></td>
+<td align="left">2 核 CPU，4 GB 内存，40 GB 磁盘空间</td>
+</tr>
+<tr>
+<td align="left"><strong>Red Hat Enterprise Linux 7</strong></td>
+<td align="left">2 核 CPU，4 GB 内存，40 GB 磁盘空间</td>
+</tr>
+<tr>
+<td align="left"><strong>SUSE Linux Enterprise Server 15/openSUSE Leap 15.2</strong></td>
+<td align="left">2 核 CPU，4 GB 内存，40 GB 磁盘空间</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>以上的系统要求和以下的教程适用于没有启用任何可选组件的默认最小化安装。</p>
+</blockquote>
+<p><img alt="image-20220517012416510" src="../../../img/kubernetes/kubernetes_kubesphere/image-20220517012416510.png" /></p>
+<p><img alt="image-20220517013504048" src="../../../img/kubernetes/kubernetes_kubesphere/image-20220517013504048.png" /></p>
+<p><img alt="image-20220517013601517" src="../../../img/kubernetes/kubernetes_kubesphere/image-20220517013601517.png" /></p>
+<h2 id="12">1.2 节点要求<a class="headerlink" href="#12" title="Permanent link">&para;</a></h2>
+<ul>
+<li>节点必须能够通过 <code>SSH</code> 连接。</li>
+<li>节点上可以使用 <code>sudo</code>/<code>curl</code>/<code>openssl</code> 命令。</li>
+</ul>
+<h2 id="13">1.3 容器运行时<a class="headerlink" href="#13" title="Permanent link">&para;</a></h2>
+<p>您的集群必须有一个可用的容器运行时。如果您使用 KubeKey 搭建集群，KubeKey 会默认安装最新版本的 Docker。或者，您也可以在创建集群前手动安装 Docker 或其他容器运行时。</p>
+<table>
+<thead>
+<tr>
+<th align="left">支持的容器运行时</th>
+<th align="left">版本</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">Docker</td>
+<td align="left">19.3.8 +</td>
+</tr>
+<tr>
+<td align="left">containerd</td>
+<td align="left">最新版</td>
+</tr>
+<tr>
+<td align="left">CRI-O（试验版，未经充分测试）</td>
+<td align="left">最新版</td>
+</tr>
+<tr>
+<td align="left">iSula（试验版，未经充分测试）</td>
+<td align="left">最新版</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>如果您想在离线环境中部署 KubeSphere，请务必提前安装一个容器运行时。</p>
+</blockquote>
+<div class="highlight"><pre><span></span><code><span class="c"># wget https://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo -O /etc/yum.repos.d/docker-ce.repo</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c"># yum -y install docker-ce</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c"># systemctl enable --now docker</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c"># cat /etc/docker/daemon.json</span>
+<span class="p">{</span>
+        <span class="s2">&quot;exec-opts&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;native.cgroupdriver=systemd&quot;</span><span class="p">]</span>
+<span class="p">}</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c"># systemctl restart docker</span>
+</code></pre></div>
+<h2 id="14">1.4 依赖项要求<a class="headerlink" href="#14" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p>KubeKey 是用 Go 语言开发的一款全新的安装工具，代替了以前基于 ansible 的安装程序。KubeKey 为用户提供了灵活的安装选择，可以分别安装 KubeSphere 和 Kubernetes 或二者同时安装，既方便又高效。</p>
+</blockquote>
+<p>KubeKey 可以将 Kubernetes 和 KubeSphere 一同安装。针对不同的 Kubernetes 版本，需要安装的依赖项可能有所不同。您可以参考以下列表，查看是否需要提前在节点上安装相关的依赖项。</p>
+<table>
+<thead>
+<tr>
+<th align="left">依赖项</th>
+<th align="left">Kubernetes 版本 ≥ 1.18</th>
+<th align="left">Kubernetes 版本 &lt; 1.18</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"><code>socat</code></td>
+<td align="left">必须</td>
+<td align="left">可选但建议</td>
+</tr>
+<tr>
+<td align="left"><code>conntrack</code></td>
+<td align="left">必须</td>
+<td align="left">可选但建议</td>
+</tr>
+<tr>
+<td align="left"><code>ebtables</code></td>
+<td align="left">可选但建议</td>
+<td align="left">可选但建议</td>
+</tr>
+<tr>
+<td align="left"><code>ipset</code></td>
+<td align="left">可选但建议</td>
+<td align="left">可选但建议</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight"><pre><span></span><code><span class="c"># yum -y install socat conntrack ebtables ipset</span>
+</code></pre></div>
+<h2 id="15_dns">1.5 网络和 DNS 要求<a class="headerlink" href="#15_dns" title="Permanent link">&para;</a></h2>
+<ul>
+<li>请确保 <code>/etc/resolv.conf</code> 中的 DNS 地址可用，否则，可能会导致集群中的 DNS 出现问题。</li>
+<li>如果您的网络配置使用防火墙规则或安全组，请务必确保基础设施组件可以通过特定端口相互通信。建议您关闭防火墙。有关更多信息，请参见<a href="https://kubesphere.com.cn/docs/installing-on-linux/introduction/port-firewall/">端口要求</a>。</li>
+<li>支持的 CNI 插件：Calico 和 Flannel。其他插件也适用（例如 Cilium 和 Kube-OVN 等），但请注意它们未经充分测试。</li>
+</ul>
+<blockquote>
+<p>提示：</p>
+<ul>
+<li>建议您的操作系统处于干净状态（不安装任何其他软件），否则可能会发生冲突。</li>
+<li>如果您无法从 dockerhub.io 下载容器镜像，建议提前准备仓库的镜像地址（即加速器）。</li>
+</ul>
+</blockquote>
+<div class="highlight"><pre><span></span><code><span class="c"># cat /etc/resolv.conf </span>
+
+<span class="n">nameserver</span> <span class="n">119</span><span class="p">.</span><span class="n">29</span><span class="p">.</span><span class="n">29</span><span class="p">.</span><span class="n">29</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c"># firewall-cmd --state</span>
+<span class="n">not</span> <span class="n">running</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c"># sestatus </span>
+<span class="n">SELinux</span> <span class="n">status</span><span class="p">:</span>                 <span class="n">disabled</span>
+</code></pre></div>
+<h1 id="kubekey">二、下载 KubeKey<a class="headerlink" href="#kubekey" title="Permanent link">&para;</a></h1>
+<blockquote>
+<p>2.1与2.2看情况使用。</p>
+</blockquote>
+<h2 id="21_githubgoogleapiskk">2.1 通过GitHub/Googleapis获取kk<a class="headerlink" href="#21_githubgoogleapiskk" title="Permanent link">&para;</a></h2>
+<p>从 <a href="https://github.com/kubesphere/kubekey/releases">GitHub Release Page</a> 下载 KubeKey 或直接使用以下命令。</p>
+<div class="highlight"><pre><span></span><code><span class="nb">curl </span><span class="n">-sfL</span> <span class="n">https</span><span class="p">://</span><span class="nb">get-kk</span><span class="p">.</span><span class="n">kubesphere</span><span class="p">.</span><span class="n">io</span> <span class="p">|</span> <span class="n">VERSION</span><span class="p">=</span><span class="n">v2</span><span class="p">.</span><span class="n">0</span><span class="p">.</span><span class="n">0</span> <span class="n">sh</span> <span class="p">-</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">输出</span><span class="err">：</span>
+<span class="n">Downloading</span> <span class="n">kubekey</span> <span class="n">v2</span><span class="p">.</span><span class="n">0</span><span class="p">.</span><span class="n">0</span> <span class="n">from</span> <span class="n">https</span><span class="p">://</span><span class="n">github</span><span class="p">.</span><span class="n">com</span><span class="p">/</span><span class="n">kubesphere</span><span class="p">/</span><span class="n">kubekey</span><span class="p">/</span><span class="n">releases</span><span class="p">/</span><span class="n">download</span><span class="p">/</span><span class="n">v2</span><span class="p">.</span><span class="n">0</span><span class="p">.</span><span class="n">0</span><span class="p">/</span><span class="n">kubekey-v2</span><span class="p">.</span><span class="n">0</span><span class="p">.</span><span class="n">0-linux-amd64</span><span class="p">.</span><span class="n">tar</span><span class="p">.</span><span class="n">gz</span> <span class="p">...</span>
+
+
+<span class="n">Kubekey</span> <span class="n">v2</span><span class="p">.</span><span class="n">0</span><span class="p">.</span><span class="n">0</span> <span class="n">Download</span> <span class="n">Complete</span><span class="p">!</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c"># ls</span>
+<span class="n">kk</span> <span class="n">绿色</span>
+</code></pre></div>
+<blockquote>
+<p>执行以上命令会下载最新版 KubeKey (v2.0.0)，您可以修改命令中的版本号下载指定版本。</p>
+</blockquote>
+<p>为 <code>kk</code> 添加可执行权限：</p>
+<blockquote>
+<p>默认不需要添加，注意观察，如果没有执行权限就添加。</p>
+</blockquote>
+<div class="highlight"><pre><span></span><code><span class="n">chmod</span> <span class="p">+</span><span class="n">x</span> <span class="n">kk</span>
+</code></pre></div>
+<h2 id="22_kubekey">2.2 从正确的区域下载 KubeKey。<a class="headerlink" href="#22_kubekey" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><span class="n">export</span> <span class="n">KKZONE</span><span class="p">=</span><span class="n">cn</span>
+</code></pre></div>
+<p>执行以下命令下载kubekey</p>
+<div class="highlight"><pre><span></span><code><span class="nb">curl </span><span class="n">-sfL</span> <span class="n">https</span><span class="p">://</span><span class="nb">get-kk</span><span class="p">.</span><span class="n">kubesphere</span><span class="p">.</span><span class="n">io</span> <span class="p">|</span> <span class="n">VERSION</span><span class="p">=</span><span class="n">v2</span><span class="p">.</span><span class="n">0</span><span class="p">.</span><span class="n">0</span> <span class="n">sh</span> <span class="p">-</span>
+</code></pre></div>
+<blockquote>
+<p>在您下载 KubeKey 后，如果您将其传至新的机器，且访问 Googleapis 同样受限，在您执行以下步骤之前请务必再次执行 <code>export KKZONE=cn</code> 命令。</p>
+</blockquote>
+<h1 id="_1">三、开始安装<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
+<p>在本快速入门教程中，您只需执行一个命令即可进行安装，其模板如下所示：</p>
+<div class="highlight"><pre><span></span><code><span class="p">./</span><span class="n">kk</span> <span class="n">create</span> <span class="n">cluster</span> <span class="p">[-</span><span class="n">-with-kubernetes</span> <span class="n">version</span><span class="p">]</span> <span class="p">[-</span><span class="n">-with-kubesphere</span> <span class="n">version</span><span class="p">]</span>
+</code></pre></div>
+<p>若要同时安装 Kubernetes 和 KubeSphere，可参考以下示例命令：</p>
+<div class="highlight"><pre><span></span><code><span class="p">./</span><span class="n">kk</span> <span class="n">create</span> <span class="n">cluster</span> <span class="p">-</span><span class="n">-with-kubernetes</span> <span class="n">v1</span><span class="p">.</span><span class="n">21</span><span class="p">.</span><span class="n">5</span> <span class="p">-</span><span class="n">-with-kubesphere</span> <span class="n">v3</span><span class="p">.</span><span class="n">2</span><span class="p">.</span><span class="n">1</span>
+</code></pre></div>
+<blockquote>
+<ul>
+<li>安装 KubeSphere 3.2.1 的建议 Kubernetes 版本：1.19.x、1.20.x、1.21.x 或 1.22.x（实验性支持）。如果不指定 Kubernetes 版本，KubeKey 将默认安装 Kubernetes v1.21.5。有关受支持的 Kubernetes 版本的更多信息，请参见<a href="https://kubesphere.com.cn/docs/installing-on-linux/introduction/kubekey/#支持矩阵">支持矩阵</a>。</li>
+<li>一般来说，对于 All-in-One 安装，您无需更改任何配置。</li>
+<li>如果您在这一步的命令中不添加标志 <code>--with-kubesphere</code>，则不会部署 KubeSphere，KubeKey 将只安装 Kubernetes。如果您添加标志 <code>--with-kubesphere</code> 时不指定 KubeSphere 版本，则会安装最新版本的 KubeSphere。</li>
+<li>KubeKey 会默认安装 <a href="https://openebs.io/">OpenEBS</a> 为开发和测试环境提供 LocalPV 以方便新用户。对于其他存储类型，请参见<a href="https://kubesphere.com.cn/docs/installing-on-linux/persistent-storage-configurations/understand-persistent-storage/">持久化存储配置</a>。</li>
+</ul>
+</blockquote>
+<p>执行该命令后，KubeKey 将检查您的安装环境，结果显示在一张表格中。有关详细信息，请参见节点要求和依赖项要求。</p>
+<p><img alt="image-20220517015613194" src="../../../img/kubernetes/kubernetes_kubesphere/image-20220517015613194.png" /></p>
+<h1 id="_2">四、验证安装结果<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h1>
+<p>当您看到以下输出时，表明安装已经完成。</p>
+<p><img alt="image-20220517012006124" src="../../../img/kubernetes/kubernetes_kubesphere/image-20220517012006124.png" /></p>
+<p>输入以下命令以检查安装结果。</p>
+<div class="highlight"><pre><span></span><code><span class="n">kubectl</span> <span class="n">logs</span> <span class="n">-n</span> <span class="n">kubesphere-system</span> <span class="p">$(</span><span class="n">kubectl</span> <span class="n">get</span> <span class="n">pod</span> <span class="n">-n</span> <span class="n">kubesphere-system</span> <span class="n">-l</span> <span class="n">app</span><span class="p">=</span><span class="n">ks-install</span> <span class="n">-o</span> <span class="n">jsonpath</span><span class="p">=</span><span class="s1">&#39;{.items[0].metadata.name}&#39;</span><span class="p">)</span> <span class="o">-f</span>
+</code></pre></div>
+<p>输出信息会显示 Web 控制台的 IP 地址和端口号，默认的 NodePort 是 <code>30880</code>。现在，您可以使用默认的帐户和密码 (<code>admin/P@88w0rd</code>) 通过 <code>&lt;NodeIP&gt;:30880</code> 访问控制台。</p>
+<div class="highlight"><pre><span></span><code><span class="c">#####################################################</span>
+<span class="c">###              Welcome to KubeSphere!           ###</span>
+<span class="c">#####################################################</span>
+
+<span class="n">Console</span><span class="p">:</span> <span class="n">http</span><span class="p">://</span><span class="n">192</span><span class="p">.</span><span class="n">168</span><span class="p">.</span><span class="n">10</span><span class="p">.</span><span class="n">223</span><span class="p">:</span><span class="n">30880</span>
+<span class="n">Account</span><span class="p">:</span> <span class="n">admin</span>
+<span class="n">Password</span><span class="p">:</span> <span class="n">P</span><span class="nv">@88w0rd</span>
+
+<span class="n">NOTES</span><span class="err">：</span>
+  <span class="n">1</span><span class="p">.</span> <span class="n">After</span> <span class="n">you</span> <span class="n">log</span> <span class="n">into</span> <span class="n">the</span> <span class="n">console</span><span class="p">,</span> <span class="n">please</span> <span class="n">check</span> <span class="n">the</span>
+     <span class="n">monitoring</span> <span class="n">status</span> <span class="n">of</span> <span class="n">service</span> <span class="n">components</span> <span class="k">in</span>
+     <span class="s2">&quot;Cluster Management&quot;</span><span class="p">.</span> <span class="k">If</span> <span class="n">any</span> <span class="n">service</span> <span class="n">is</span> <span class="n">not</span>
+     <span class="n">ready</span><span class="p">,</span> <span class="n">please</span> <span class="n">wait</span> <span class="n">patiently</span> <span class="k">until</span> <span class="n">all</span> <span class="n">components</span> 
+     <span class="n">are</span> <span class="n">up</span> <span class="n">and</span> <span class="n">running</span><span class="p">.</span>
+  <span class="n">2</span><span class="p">.</span> <span class="n">Please</span> <span class="n">change</span> <span class="n">the</span> <span class="k">default</span> <span class="n">password</span> <span class="n">after</span> <span class="n">login</span><span class="p">.</span>
+
+<span class="c">#####################################################</span>
+<span class="n">https</span><span class="p">://</span><span class="n">kubesphere</span><span class="p">.</span><span class="n">io</span>             <span class="n">20xx-xx-xx</span> <span class="n">xx</span><span class="p">:</span><span class="n">xx</span><span class="p">:</span><span class="n">xx</span>
+<span class="c">#####################################################</span>
+</code></pre></div>
+<p>登录至控制台后，您可以在**系统组件**中查看各个组件的状态。如果要使用相关服务，您可能需要等待部分组件启动并运行。您也可以使用 <code>kubectl get pod --all-namespaces</code> 来检查 KubeSphere 相关组件的运行状况。</p>
+<p><img alt="image-20220517020658982" src="../../../img/kubernetes/kubernetes_kubesphere/image-20220517020658982.png" /></p>
+<p><img alt="image-20220517020739940" src="../../../img/kubernetes/kubernetes_kubesphere/image-20220517020739940.png" /></p>
+<p><img alt="image-20220517020807274" src="../../../img/kubernetes/kubernetes_kubesphere/image-20220517020807274.png" /></p>
+<p><img alt="image-20220517020829592" src="../../../img/kubernetes/kubernetes_kubesphere/image-20220517020829592.png" /></p>
+<p><img alt="image-20220517020857139" src="../../../img/kubernetes/kubernetes_kubesphere/image-20220517020857139.png" /></p>
+<h1 id="kuberneteskubesphere">在kubernetes集群上最小化安装kubesphere<a class="headerlink" href="#kuberneteskubesphere" title="Permanent link">&para;</a></h1>
+<p>除了在 Linux 机器上安装 KubeSphere 之外，您还可以将其直接部署在现有的 Kubernetes 集群上。</p>
+<h1 id="_3">一、准备工作<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h1>
+<h2 id="11_kubernetes">1.1 kubernetes集群节点硬件要求<a class="headerlink" href="#11_kubernetes" title="Permanent link">&para;</a></h2>
+<ul>
+<li>确保您的机器满足最低硬件要求：CPU 大于或等于4 核，内存 大于或等于8 GB。</li>
+</ul>
+<h2 id="12_kubernetes">1.2  部署kubernetes集群<a class="headerlink" href="#12_kubernetes" title="Permanent link">&para;</a></h2>
+<blockquote>
+<ul>
+<li>如需在 Kubernetes 上安装 KubeSphere 3.2.1，您的 Kubernetes 版本必须为：1.19.x、1.20.x、1.21.x 或 1.22.x（实验性支持）。</li>
+</ul>
+</blockquote>
+<p>可参考使用kubeadm部署kubernetes集群方法。</p>
+<blockquote>
+<p>本案例采用4个节点，其中3个节点用于部署kubernetes集群，1个节点用于提供存储动态供给。</p>
+</blockquote>
+<h2 id="13_1">1.3 后端存储动态供给准备<a class="headerlink" href="#13_1" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p>在安装之前，需要配置kubernetes个课程上的默认存储类型。</p>
+</blockquote>
+<h3 id="131">1.3.1  准备硬盘<a class="headerlink" href="#131" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="n">查看准备的磁盘</span>
+<span class="p">[</span><span class="n">root</span><span class="nv">@nfsserver</span> <span class="p">~]</span><span class="c"># lsblk</span>
+<span class="n">NAME</span>            <span class="n">MAJ</span><span class="p">:</span><span class="n">MIN</span> <span class="nb">RM </span> <span class="n">SIZE</span> <span class="n">RO</span> <span class="nb">TYPE </span><span class="n">MOUNTPOINT</span>
+<span class="n">sda</span>               <span class="n">8</span><span class="p">:</span><span class="n">0</span>    <span class="n">0</span>  <span class="n">100G</span>  <span class="n">0</span> <span class="n">disk</span>
+<span class="err">├─</span><span class="n">sda1</span>            <span class="n">8</span><span class="p">:</span><span class="n">1</span>    <span class="n">0</span>    <span class="n">1G</span>  <span class="n">0</span> <span class="n">part</span> <span class="p">/</span><span class="n">boot</span>
+<span class="err">└─</span><span class="n">sda2</span>            <span class="n">8</span><span class="p">:</span><span class="n">2</span>    <span class="n">0</span>   <span class="n">99G</span>  <span class="n">0</span> <span class="n">part</span>
+  <span class="err">├─</span><span class="n">centos-root</span> <span class="n">253</span><span class="p">:</span><span class="n">0</span>    <span class="n">0</span>   <span class="n">50G</span>  <span class="n">0</span> <span class="n">lvm</span>  <span class="p">/</span>
+  <span class="err">├─</span><span class="n">centos-swap</span> <span class="n">253</span><span class="p">:</span><span class="n">1</span>    <span class="n">0</span>    <span class="n">2G</span>  <span class="n">0</span> <span class="n">lvm</span>  <span class="no">[SWAP]</span>
+  <span class="err">└─</span><span class="n">centos-home</span> <span class="n">253</span><span class="p">:</span><span class="n">2</span>    <span class="n">0</span>   <span class="n">47G</span>  <span class="n">0</span> <span class="n">lvm</span>  <span class="p">/</span><span class="n">home</span>
+<span class="n">sdb</span>               <span class="n">8</span><span class="p">:</span><span class="n">16</span>   <span class="n">0</span>  <span class="n">100G</span>  <span class="n">0</span> <span class="n">disk</span>
+</code></pre></div>
+<h3 id="132_nfs">1.3.2  安装NFS软件<a class="headerlink" href="#132_nfs" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="n">安装NFS软件</span><span class="err">，</span><span class="n">即是客户端也是服务器端</span>
+<span class="c"># yum -y install nfs-utils</span>
+</code></pre></div>
+<h3 id="133_nfs">1.3.3  NFS配置<a class="headerlink" href="#133_nfs" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="n">创建挂载点</span>
+<span class="c"># mkdir /netshare</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">格式化硬盘</span>
+<span class="c"># mkfs.xfs /dev/sdb</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">编辑文件系统配置文件</span>
+<span class="c"># vim /etc/fstab</span>
+<span class="n">在文件最后添加此行内容</span>
+<span class="p">/</span><span class="n">dev</span><span class="p">/</span><span class="n">sdb</span>                <span class="p">/</span><span class="n">netshare</span>               <span class="n">xfs</span>     <span class="n">defaults</span>        <span class="n">0</span> <span class="n">0</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">手动挂载全部分区</span>
+<span class="c"># mount -a</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">在本地查看文件系统挂载情况</span>
+<span class="c"># df -h</span>
+<span class="n">文件系统</span>                 <span class="n">容量</span>  <span class="n">已用</span>  <span class="n">可用</span> <span class="n">已用</span><span class="p">%</span> <span class="n">挂载点</span>
+
+<span class="p">/</span><span class="n">dev</span><span class="p">/</span><span class="n">sdb</span>                 <span class="n">100G</span>   <span class="n">33M</span>  <span class="n">100G</span>    <span class="n">1</span><span class="p">%</span> <span class="p">/</span><span class="n">netshare</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">添加共享目录到配置文件</span>
+<span class="c"># vim /etc/exports</span>
+<span class="c"># cat /etc/exports</span>
+<span class="p">/</span><span class="n">netshare</span>       <span class="p">*(</span><span class="n">rw</span><span class="p">,</span><span class="n">sync</span><span class="p">,</span><span class="n">no_root_squash</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">启动服务及设置开机自启动</span>
+<span class="c"># systemctl enable nfs-server</span>
+<span class="c"># systemctl start nfs-server</span>
+</code></pre></div>
+<h3 id="134">1.3.4 验证<a class="headerlink" href="#134" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="n">本地验证目录是否共享</span>
+<span class="c"># showmount -e</span>
+<span class="n">Export</span> <span class="n">list</span> <span class="k">for</span> <span class="n">nfsserver</span><span class="p">:</span>
+<span class="p">/</span><span class="n">netshare</span> <span class="p">*</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">在k8s</span> <span class="n">master节点验证目录是否共享</span>
+<span class="c"># showmount -e nfsserver.kubemsb.com</span>
+<span class="n">Export</span> <span class="n">list</span> <span class="k">for</span> <span class="n">nfsserver</span><span class="p">.</span><span class="n">kubemsb</span><span class="p">.</span><span class="n">com</span><span class="p">:</span>
+<span class="p">/</span><span class="n">netshare</span> <span class="p">*</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">在k8s</span> <span class="n">worker01节点验证目录是否共享</span>
+<span class="c"># showmount -e nfsserver.kubemsb.com</span>
+<span class="n">Export</span> <span class="n">list</span> <span class="k">for</span> <span class="n">nfsserver</span><span class="p">.</span><span class="n">kubemsb</span><span class="p">.</span><span class="n">com</span><span class="p">:</span>
+<span class="p">/</span><span class="n">netshare</span> <span class="p">*</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">在k8s</span> <span class="n">worker02节点验证目录是否共享</span>
+<span class="c"># showmount -e nfsserver.kubemsb.com</span>
+<span class="n">Export</span> <span class="n">list</span> <span class="k">for</span> <span class="n">nfsserver</span><span class="p">.</span><span class="n">kubemsb</span><span class="p">.</span><span class="n">com</span><span class="p">:</span>
+<span class="p">/</span><span class="n">netshare</span> <span class="p">*</span>
+</code></pre></div>
+<h3 id="135">1.3.5  部署存储动态供给<a class="headerlink" href="#135" title="Permanent link">&para;</a></h3>
+<h4 id="1351">1.3.5.1  获取资源清单文件<a class="headerlink" href="#1351" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="n">在k8s</span> <span class="n">master节点获取NFS后端存储动态供给配置资源清单文件</span>
+
+<span class="c"># for file in class.yaml deployment.yaml rbac.yaml  ; do wget https://raw.githubusercontent.com/kubernetes-incubator/external-storage/master/nfs-client/deploy/$file ; done</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">查看是否下载</span>
+<span class="c"># ls</span>
+<span class="n">class</span><span class="p">.</span><span class="n">yaml</span>  <span class="n">deployment</span><span class="p">.</span><span class="n">yaml</span>  <span class="n">rbac</span><span class="p">.</span><span class="n">yaml</span>
+</code></pre></div>
+<h4 id="1352">1.3.5.2 应用资源清单文件<a class="headerlink" href="#1352" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="n">应用rbac资源清单文件</span>
+<span class="c"># kubectl apply -f rbac.yaml</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">应用class</span><span class="err">（</span><span class="n">存储类</span><span class="err">）</span><span class="n">资源清单文件</span>
+<span class="c"># kubectl apply -f class.yaml</span>
+<span class="n">storageclass</span><span class="p">.</span><span class="n">storage</span><span class="p">.</span><span class="n">k8s</span><span class="p">.</span><span class="n">io</span><span class="p">/</span><span class="n">managed-nfs-storage</span> <span class="n">created</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">应用deployment资源清单文件之前修改其配置</span><span class="err">，</span><span class="n">主要配置NFS服务器及其共享的目录</span>
+<span class="c"># vim deployment.yaml</span>
+
+<span class="n">注意修改处内容</span>
+
+<span class="n">env</span><span class="p">:</span>
+            <span class="p">-</span> <span class="n">name</span><span class="p">:</span> <span class="n">PROVISIONER_NAME</span>
+              <span class="n">value</span><span class="p">:</span> <span class="n">fuseim</span><span class="p">.</span><span class="n">pri</span><span class="p">/</span><span class="n">ifs</span>
+            <span class="p">-</span> <span class="n">name</span><span class="p">:</span> <span class="n">NFS_SERVER</span>
+              <span class="n">value</span><span class="p">:</span> <span class="n">nfsserver</span><span class="p">.</span><span class="n">kubemsb</span><span class="p">.</span><span class="n">com</span> <span class="n">远程NFS服务器地址</span>
+            <span class="p">-</span> <span class="n">name</span><span class="p">:</span> <span class="n">NFS_PATH</span>
+              <span class="n">value</span><span class="p">:</span> <span class="p">/</span><span class="n">netshare</span> <span class="n">共享出来的目录</span>
+      <span class="n">volumes</span><span class="p">:</span>
+        <span class="p">-</span> <span class="n">name</span><span class="p">:</span> <span class="n">nfs-client-root</span>
+          <span class="n">nfs</span><span class="p">:</span>
+            <span class="n">server</span><span class="p">:</span> <span class="n">nfsserver</span><span class="p">.</span><span class="n">kubemsb</span><span class="p">.</span><span class="n">com</span> <span class="n">远程NFS服务器地址</span>
+            <span class="n">path</span><span class="p">:</span> <span class="p">/</span><span class="n">netshare</span> <span class="n">共享出来的目录</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">应用资源清单文件</span>
+<span class="c"># kubectl apply -f deployment.yaml</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">查看pod运行情况</span>
+
+<span class="c"># kubectl get pods</span>
+<span class="n">出现以下表示成功运行</span>
+<span class="n">NAME</span>                                                     <span class="n">READY</span>   <span class="n">STATUS</span>    <span class="n">RESTARTS</span>   <span class="n">AGE</span>
+
+<span class="n">nfs-client-provisioner-f66d6fbdb-mcrpk</span>                   <span class="n">1</span><span class="p">/</span><span class="n">1</span>     <span class="n">Running</span>   <span class="n">0</span>          <span class="n">73s</span>
+</code></pre></div>
+<blockquote>
+<p>以下为特别注意事项。</p>
+</blockquote>
+<div class="highlight"><pre><span></span><code><span class="n">k8s</span> <span class="n">1</span><span class="p">.</span><span class="n">21版本存在问题</span><span class="err">：</span><span class="n">无法创建PV</span><span class="err">，</span><span class="n">修改api文件</span><span class="err">，</span><span class="n">此文件被自动监视</span><span class="err">，</span><span class="n">修改后会自动关闭原有Pod</span><span class="err">，</span><span class="n">拉起拉的Pod</span>
+<span class="c"># cat /etc/kubernetes/manifests/kube-apiserver.yaml</span>
+<span class="n">apiVersion</span><span class="p">:</span> <span class="n">v1</span>
+<span class="n">kind</span><span class="p">:</span> <span class="n">Pod</span>
+<span class="n">metadata</span><span class="p">:</span>
+  <span class="n">annotations</span><span class="p">:</span>
+    <span class="n">kubeadm</span><span class="p">.</span><span class="n">kubernetes</span><span class="p">.</span><span class="n">io</span><span class="p">/</span><span class="n">kube-apiserver</span><span class="p">.</span><span class="n">advertise-address</span><span class="p">.</span><span class="n">endpoint</span><span class="p">:</span> <span class="n">192</span><span class="p">.</span><span class="n">168</span><span class="p">.</span><span class="n">10</span><span class="p">.</span><span class="n">10</span><span class="p">:</span><span class="n">6443</span>
+  <span class="n">creationTimestamp</span><span class="p">:</span> <span class="n">null</span>
+  <span class="n">labels</span><span class="p">:</span>
+    <span class="n">component</span><span class="p">:</span> <span class="n">kube-apiserver</span>
+    <span class="n">tier</span><span class="p">:</span> <span class="n">control-plane</span>
+  <span class="n">name</span><span class="p">:</span> <span class="n">kube-apiserver</span>
+  <span class="n">namespace</span><span class="p">:</span> <span class="n">kube-system</span>
+<span class="n">spec</span><span class="p">:</span>
+  <span class="n">containers</span><span class="p">:</span>
+  <span class="p">-</span> <span class="n">command</span><span class="p">:</span>
+    <span class="p">-</span> <span class="n">kube-apiserver</span>
+    <span class="p">-</span> <span class="p">-</span><span class="n">-feature-gates</span><span class="p">=</span><span class="n">RemoveSelfLink</span><span class="p">=</span><span class="n">false</span> <span class="n">添加此行内容</span>
+    <span class="p">-</span> <span class="p">-</span><span class="n">-advertise-address</span><span class="p">=</span><span class="n">192</span><span class="p">.</span><span class="n">168</span><span class="p">.</span><span class="n">10</span><span class="p">.</span><span class="n">10</span>
+    <span class="p">-</span> <span class="p">-</span><span class="n">-allow-privileged</span><span class="p">=</span><span class="n">true</span>
+    <span class="p">-</span> <span class="p">-</span><span class="n">-authorization-mode</span><span class="p">=</span><span class="n">Node</span><span class="p">,</span><span class="n">RBAC</span>
+</code></pre></div>
+<blockquote>
+<p>使用新的不基于 SelfLink 功能的 provisioner 镜像，重新创建 provisioner 容器。镜像：registry.cn-beijing.aliyuncs.com/pylixm/nfs-subdir-external-provisioner:v4.0.0</p>
+</blockquote>
+<div class="highlight"><pre><span></span><code><span class="n">设置默认存储类</span>
+<span class="c"># kubectl patch storageclass managed-nfs-storage -p &#39;{&quot;metadata&quot;: {&quot;annotations&quot;:{&quot;storageclass.kubernetes.io/is-default-class&quot;:&quot;true&quot;}}}&#39;</span>
+</code></pre></div>
+<h4 id="1353">1.3.5.3 测试用例验证动态供给是否可用<a class="headerlink" href="#1353" title="Permanent link">&para;</a></h4>
+<blockquote>
+<p>使用测试用例测试NFS后端存储是否可用</p>
+</blockquote>
+<div class="highlight"><pre><span></span><code><span class="n">测试用例</span><span class="err">：</span>
+<span class="c"># cat nginx.yaml</span>
+<span class="p">---</span>
+<span class="n">apiVersion</span><span class="p">:</span> <span class="n">v1</span>
+<span class="n">kind</span><span class="p">:</span> <span class="n">Service</span>
+<span class="n">metadata</span><span class="p">:</span>
+  <span class="n">name</span><span class="p">:</span> <span class="n">nginx</span>
+  <span class="n">labels</span><span class="p">:</span>
+    <span class="n">app</span><span class="p">:</span> <span class="n">nginx</span>
+<span class="n">spec</span><span class="p">:</span>
+  <span class="n">ports</span><span class="p">:</span>
+  <span class="p">-</span> <span class="n">port</span><span class="p">:</span> <span class="n">80</span>
+    <span class="n">name</span><span class="p">:</span> <span class="n">web</span>
+  <span class="n">clusterIP</span><span class="p">:</span> <span class="n">None</span>
+  <span class="n">selector</span><span class="p">:</span>
+    <span class="n">app</span><span class="p">:</span> <span class="n">nginx</span>
+<span class="p">---</span>
+<span class="n">apiVersion</span><span class="p">:</span> <span class="n">apps</span><span class="p">/</span><span class="n">v1</span>
+<span class="n">kind</span><span class="p">:</span> <span class="n">StatefulSet</span>
+<span class="n">metadata</span><span class="p">:</span>
+  <span class="n">name</span><span class="p">:</span> <span class="n">web</span>
+<span class="n">spec</span><span class="p">:</span>
+  <span class="n">selector</span><span class="p">:</span>
+    <span class="n">matchLabels</span><span class="p">:</span>
+      <span class="n">app</span><span class="p">:</span> <span class="n">nginx</span>
+  <span class="n">serviceName</span><span class="p">:</span> <span class="s2">&quot;nginx&quot;</span>
+  <span class="n">replicas</span><span class="p">:</span> <span class="n">2</span>
+  <span class="n">template</span><span class="p">:</span>
+    <span class="n">metadata</span><span class="p">:</span>
+      <span class="n">labels</span><span class="p">:</span>
+        <span class="n">app</span><span class="p">:</span> <span class="n">nginx</span>
+    <span class="n">spec</span><span class="p">:</span>
+      <span class="n">imagePullSecrets</span><span class="p">:</span>
+      <span class="p">-</span> <span class="n">name</span><span class="p">:</span> <span class="n">huoban-harbor</span>
+      <span class="n">terminationGracePeriodSeconds</span><span class="p">:</span> <span class="n">10</span>
+      <span class="n">containers</span><span class="p">:</span>
+      <span class="p">-</span> <span class="n">name</span><span class="p">:</span> <span class="n">nginx</span>
+        <span class="n">image</span><span class="p">:</span> <span class="n">nginx</span><span class="p">:</span><span class="n">latest</span>
+        <span class="n">ports</span><span class="p">:</span>
+        <span class="p">-</span> <span class="n">containerPort</span><span class="p">:</span> <span class="n">80</span>
+          <span class="n">name</span><span class="p">:</span> <span class="n">web</span>
+        <span class="n">volumeMounts</span><span class="p">:</span>
+        <span class="p">-</span> <span class="n">name</span><span class="p">:</span> <span class="n">www</span>
+          <span class="n">mountPath</span><span class="p">:</span> <span class="p">/</span><span class="n">usr</span><span class="p">/</span><span class="n">share</span><span class="p">/</span><span class="n">nginx</span><span class="p">/</span><span class="n">html</span>
+  <span class="n">volumeClaimTemplates</span><span class="p">:</span>
+  <span class="p">-</span> <span class="n">metadata</span><span class="p">:</span>
+      <span class="n">name</span><span class="p">:</span> <span class="n">www</span>
+    <span class="n">spec</span><span class="p">:</span>
+      <span class="n">accessModes</span><span class="p">:</span> <span class="p">[</span> <span class="s2">&quot;ReadWriteOnce&quot;</span> <span class="p">]</span>
+      <span class="n">storageClassName</span><span class="p">:</span> <span class="s2">&quot;managed-nfs-storage&quot;</span>
+      <span class="n">resources</span><span class="p">:</span>
+        <span class="n">requests</span><span class="p">:</span>
+          <span class="n">storage</span><span class="p">:</span> <span class="n">1Gi</span>
+</code></pre></div>
+<h1 id="kubesphere">二、部署Kubesphere<a class="headerlink" href="#kubesphere" title="Permanent link">&para;</a></h1>
+<h2 id="21">2.1 最小化安装<a class="headerlink" href="#21" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><span class="n">kubectl</span> <span class="n">apply</span> <span class="o">-f</span> <span class="n">https</span><span class="p">://</span><span class="n">github</span><span class="p">.</span><span class="n">com</span><span class="p">/</span><span class="n">kubesphere</span><span class="p">/</span><span class="n">ks-installer</span><span class="p">/</span><span class="n">releases</span><span class="p">/</span><span class="n">download</span><span class="p">/</span><span class="n">v3</span><span class="p">.</span><span class="n">2</span><span class="p">.</span><span class="n">1</span><span class="p">/</span><span class="n">kubesphere-installer</span><span class="p">.</span><span class="n">yaml</span>
+
+<span class="n">kubectl</span> <span class="n">apply</span> <span class="o">-f</span> <span class="n">https</span><span class="p">://</span><span class="n">github</span><span class="p">.</span><span class="n">com</span><span class="p">/</span><span class="n">kubesphere</span><span class="p">/</span><span class="n">ks-installer</span><span class="p">/</span><span class="n">releases</span><span class="p">/</span><span class="n">download</span><span class="p">/</span><span class="n">v3</span><span class="p">.</span><span class="n">2</span><span class="p">.</span><span class="n">1</span><span class="p">/</span><span class="n">cluster-configuration</span><span class="p">.</span><span class="n">yaml</span>
+</code></pre></div>
+<blockquote>
+<p>如需求开启更多功能，可在cluster-configuration.yaml文件中配置。</p>
+</blockquote>
+<h2 id="22">2.2 检查安装日志<a class="headerlink" href="#22" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><span class="n">kubectl</span> <span class="n">logs</span> <span class="n">-n</span> <span class="n">kubesphere-system</span> <span class="p">$(</span><span class="n">kubectl</span> <span class="n">get</span> <span class="n">pod</span> <span class="n">-n</span> <span class="n">kubesphere-system</span> <span class="n">-l</span> <span class="n">app</span><span class="p">=</span><span class="n">ks-install</span> <span class="n">-o</span> <span class="n">jsonpath</span><span class="p">=</span><span class="s1">&#39;{.items[0].metadata.name}&#39;</span><span class="p">)</span> <span class="o">-f</span>
+</code></pre></div>
+<h2 id="23_kubesphere">2.3 检查kubesphere安装是否正常<a class="headerlink" href="#23_kubesphere" title="Permanent link">&para;</a></h2>
+<p>使用 <code>kubectl get pod --all-namespaces</code> 查看所有 Pod 是否在 KubeSphere 的相关命名空间中正常运行。如果是，请通过以下命令检查控制台的端口（默认为 <code>30880</code>）：</p>
+<div class="highlight"><pre><span></span><code><span class="n">kubectl</span> <span class="n">get</span> <span class="n">svc</span><span class="p">/</span><span class="n">ks-console</span> <span class="n">-n</span> <span class="n">kubesphere-system</span>
+</code></pre></div>
+<ul>
+<li>通过 NodePort <code>(IP:30880)</code> 使用默认帐户和密码 <code>(admin/P@88w0rd)</code> 访问 Web 控制台。</li>
+</ul>
+<h2 id="24_kubesphere">2.4 访问kubesphere<a class="headerlink" href="#24_kubesphere" title="Permanent link">&para;</a></h2>
+<p><img alt="image-20220517132857802" src="../../../img/kubernetes/kubernetes_kubesphere/image-20220517132857802.png" /></p>
+<p><img alt="image-20220517132926979" src="../../../img/kubernetes/kubernetes_kubesphere/image-20220517132926979.png" /></p>
+<p><img alt="image-20220517133015625" src="../../../img/kubernetes/kubernetes_kubesphere/image-20220517133015625.png" /></p>
+<p><img alt="image-20220517133041644" src="../../../img/kubernetes/kubernetes_kubesphere/image-20220517133041644.png" /></p>
+<p><img alt="image-20220517133221266" src="../../../img/kubernetes/kubernetes_kubesphere/image-20220517133221266.png" /></p>
+<h1 id="kubernetespaas_kubesphere">微服务项目 基于Kubernetes集群PaaS云平台 Kubesphere部署<a class="headerlink" href="#kubernetespaas_kubesphere" title="Permanent link">&para;</a></h1>
+<h1 id="kubernetes_nfs">一、Kubernetes集群持久存储准备 NFS<a class="headerlink" href="#kubernetes_nfs" title="Permanent link">&para;</a></h1>
+<blockquote>
+<p>在安装之前，需要配置kubernetes个课程上的默认存储类型。</p>
+</blockquote>
+<h2 id="11_1">1.1  准备硬盘<a class="headerlink" href="#11_1" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><span class="n">查看准备的磁盘</span>
+<span class="p">[</span><span class="n">root</span><span class="nv">@nfsserver</span> <span class="p">~]</span><span class="c"># lsblk</span>
+<span class="n">NAME</span>            <span class="n">MAJ</span><span class="p">:</span><span class="n">MIN</span> <span class="nb">RM </span> <span class="n">SIZE</span> <span class="n">RO</span> <span class="nb">TYPE </span><span class="n">MOUNTPOINT</span>
+<span class="n">sda</span>               <span class="n">8</span><span class="p">:</span><span class="n">0</span>    <span class="n">0</span>  <span class="n">100G</span>  <span class="n">0</span> <span class="n">disk</span>
+<span class="err">├─</span><span class="n">sda1</span>            <span class="n">8</span><span class="p">:</span><span class="n">1</span>    <span class="n">0</span>    <span class="n">1G</span>  <span class="n">0</span> <span class="n">part</span> <span class="p">/</span><span class="n">boot</span>
+<span class="err">└─</span><span class="n">sda2</span>            <span class="n">8</span><span class="p">:</span><span class="n">2</span>    <span class="n">0</span>   <span class="n">99G</span>  <span class="n">0</span> <span class="n">part</span>
+  <span class="err">├─</span><span class="n">centos-root</span> <span class="n">253</span><span class="p">:</span><span class="n">0</span>    <span class="n">0</span>   <span class="n">50G</span>  <span class="n">0</span> <span class="n">lvm</span>  <span class="p">/</span>
+  <span class="err">├─</span><span class="n">centos-swap</span> <span class="n">253</span><span class="p">:</span><span class="n">1</span>    <span class="n">0</span>    <span class="n">2G</span>  <span class="n">0</span> <span class="n">lvm</span>  <span class="no">[SWAP]</span>
+  <span class="err">└─</span><span class="n">centos-home</span> <span class="n">253</span><span class="p">:</span><span class="n">2</span>    <span class="n">0</span>   <span class="n">47G</span>  <span class="n">0</span> <span class="n">lvm</span>  <span class="p">/</span><span class="n">home</span>
+<span class="n">sdb</span>               <span class="n">8</span><span class="p">:</span><span class="n">16</span>   <span class="n">0</span>  <span class="n">100G</span>  <span class="n">0</span> <span class="n">disk</span>
+</code></pre></div>
+<h2 id="12_nfs">1.2  安装NFS软件<a class="headerlink" href="#12_nfs" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><span class="n">安装NFS软件</span><span class="err">，</span><span class="n">即是客户端也是服务器端</span>
+<span class="c"># yum -y install nfs-utils</span>
+</code></pre></div>
+<h2 id="13_nfs">1.3  NFS配置<a class="headerlink" href="#13_nfs" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><span class="n">创建挂载点</span>
+<span class="c"># mkdir /netshare</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">格式化硬盘</span>
+<span class="c"># mkfs.xfs /dev/sdb</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">编辑文件系统配置文件</span>
+<span class="c"># vim /etc/fstab</span>
+<span class="n">在文件最后添加此行内容</span>
+<span class="p">/</span><span class="n">dev</span><span class="p">/</span><span class="n">sdb</span>                <span class="p">/</span><span class="n">netshare</span>               <span class="n">xfs</span>     <span class="n">defaults</span>        <span class="n">0</span> <span class="n">0</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">手动挂载全部分区</span>
+<span class="c"># mount -a</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">在本地查看文件系统挂载情况</span>
+<span class="c"># df -h</span>
+<span class="n">文件系统</span>                 <span class="n">容量</span>  <span class="n">已用</span>  <span class="n">可用</span> <span class="n">已用</span><span class="p">%</span> <span class="n">挂载点</span>
+
+<span class="p">/</span><span class="n">dev</span><span class="p">/</span><span class="n">sdb</span>                 <span class="n">100G</span>   <span class="n">33M</span>  <span class="n">100G</span>    <span class="n">1</span><span class="p">%</span> <span class="p">/</span><span class="n">netshare</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">添加共享目录到配置文件</span>
+<span class="c"># vim /etc/exports</span>
+<span class="c"># cat /etc/exports</span>
+<span class="p">/</span><span class="n">netshare</span>       <span class="p">*(</span><span class="n">rw</span><span class="p">,</span><span class="n">sync</span><span class="p">,</span><span class="n">no_root_squash</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">启动服务及设置开机自启动</span>
+<span class="c"># systemctl enable nfs-server</span>
+<span class="c"># systemctl start nfs-server</span>
+</code></pre></div>
+<h2 id="14_1">1.4 验证<a class="headerlink" href="#14_1" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><span class="n">本地验证目录是否共享</span>
+<span class="c"># showmount -e</span>
+<span class="n">Export</span> <span class="n">list</span> <span class="k">for</span> <span class="n">nfsserver</span><span class="p">:</span>
+<span class="p">/</span><span class="n">netshare</span> <span class="p">*</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">在k8s</span> <span class="n">master节点验证目录是否共享</span>
+<span class="c"># showmount -e 192.168.10.147</span>
+<span class="n">Export</span> <span class="n">list</span> <span class="k">for</span> <span class="n">192</span><span class="p">.</span><span class="n">168</span><span class="p">.</span><span class="n">10</span><span class="p">.</span><span class="n">147</span><span class="p">:</span>
+<span class="p">/</span><span class="n">netshare</span> <span class="p">*</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">在k8s</span> <span class="n">worker01节点验证目录是否共享</span>
+<span class="c"># showmount -e 192.168.10.147</span>
+<span class="n">Export</span> <span class="n">list</span> <span class="k">for</span> <span class="n">192</span><span class="p">.</span><span class="n">168</span><span class="p">.</span><span class="n">10</span><span class="p">.</span><span class="n">147</span><span class="p">:</span>
+<span class="p">/</span><span class="n">netshare</span> <span class="p">*</span>
+</code></pre></div>
+<h2 id="15">1.5  部署存储动态供给<a class="headerlink" href="#15" title="Permanent link">&para;</a></h2>
+<h3 id="151">1.5.1  获取资源清单文件<a class="headerlink" href="#151" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="n">在k8s</span> <span class="n">master节点获取NFS后端存储动态供给配置资源清单文件</span>
+
+<span class="c"># for file in class.yaml deployment.yaml rbac.yaml  ; do wget https://raw.githubusercontent.com/kubernetes-incubator/external-storage/master/nfs-client/deploy/$file ; done</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">查看是否下载</span>
+<span class="c"># ls</span>
+<span class="n">class</span><span class="p">.</span><span class="n">yaml</span>  <span class="n">deployment</span><span class="p">.</span><span class="n">yaml</span>  <span class="n">rbac</span><span class="p">.</span><span class="n">yaml</span>
+</code></pre></div>
+<h3 id="152">1.5.2 应用资源清单文件<a class="headerlink" href="#152" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="n">应用rbac资源清单文件</span>
+<span class="c"># kubectl apply -f rbac.yaml</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">修改存储类名称</span>
+<span class="c"># vim class.yaml</span>
+<span class="c"># cat class.yaml</span>
+<span class="n">apiVersion</span><span class="p">:</span> <span class="n">storage</span><span class="p">.</span><span class="n">k8s</span><span class="p">.</span><span class="n">io</span><span class="p">/</span><span class="n">v1</span>
+<span class="n">kind</span><span class="p">:</span> <span class="n">StorageClass</span>
+<span class="n">metadata</span><span class="p">:</span>
+  <span class="n">name</span><span class="p">:</span> <span class="n">nfs-client</span>
+<span class="n">provisioner</span><span class="p">:</span> <span class="n">fuseim</span><span class="p">.</span><span class="n">pri</span><span class="p">/</span><span class="n">ifs</span> <span class="c"># or choose another name, must match deployment&#39;s env PROVISIONER_NAME&#39;</span>
+<span class="n">parameters</span><span class="p">:</span>
+  <span class="n">archiveOnDelete</span><span class="p">:</span> <span class="s2">&quot;false&quot;</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">应用class</span><span class="err">（</span><span class="n">存储类</span><span class="err">）</span><span class="n">资源清单文件</span>
+<span class="c"># kubectl apply -f class.yaml</span>
+<span class="n">storageclass</span><span class="p">.</span><span class="n">storage</span><span class="p">.</span><span class="n">k8s</span><span class="p">.</span><span class="n">io</span><span class="p">/</span><span class="n">nfs-client</span> <span class="n">created</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">应用deployment资源清单文件之前修改其配置</span><span class="err">，</span><span class="n">主要配置NFS服务器及其共享的目录</span>
+<span class="c"># vim deployment.yaml</span>
+
+<span class="n">注意修改处内容</span>
+
+<span class="c"># vim deployment.yaml</span>
+<span class="c"># cat deployment.yaml</span>
+<span class="n">apiVersion</span><span class="p">:</span> <span class="n">apps</span><span class="p">/</span><span class="n">v1</span>
+<span class="n">kind</span><span class="p">:</span> <span class="n">Deployment</span>
+<span class="n">metadata</span><span class="p">:</span>
+  <span class="n">name</span><span class="p">:</span> <span class="n">nfs-client-provisioner</span>
+  <span class="n">labels</span><span class="p">:</span>
+    <span class="n">app</span><span class="p">:</span> <span class="n">nfs-client-provisioner</span>
+  <span class="c"># replace with namespace where provisioner is deployed</span>
+  <span class="n">namespace</span><span class="p">:</span> <span class="k">default</span>
+<span class="n">spec</span><span class="p">:</span>
+  <span class="n">replicas</span><span class="p">:</span> <span class="n">1</span>
+  <span class="n">strategy</span><span class="p">:</span>
+    <span class="n">type</span><span class="p">:</span> <span class="n">Recreate</span>
+  <span class="n">selector</span><span class="p">:</span>
+    <span class="n">matchLabels</span><span class="p">:</span>
+      <span class="n">app</span><span class="p">:</span> <span class="n">nfs-client-provisioner</span>
+  <span class="n">template</span><span class="p">:</span>
+    <span class="n">metadata</span><span class="p">:</span>
+      <span class="n">labels</span><span class="p">:</span>
+        <span class="n">app</span><span class="p">:</span> <span class="n">nfs-client-provisioner</span>
+    <span class="n">spec</span><span class="p">:</span>
+      <span class="n">serviceAccountName</span><span class="p">:</span> <span class="n">nfs-client-provisioner</span>
+      <span class="n">containers</span><span class="p">:</span>
+        <span class="p">-</span> <span class="n">name</span><span class="p">:</span> <span class="n">nfs-client-provisioner</span>
+          <span class="n">image</span><span class="p">:</span> <span class="n">registry</span><span class="p">.</span><span class="n">cn-beijing</span><span class="p">.</span><span class="n">aliyuncs</span><span class="p">.</span><span class="n">com</span><span class="p">/</span><span class="n">pylixm</span><span class="p">/</span><span class="n">nfs-subdir-external-provisioner</span><span class="p">:</span><span class="n">v4</span><span class="p">.</span><span class="n">0</span><span class="p">.</span><span class="n">0</span>
+          <span class="n">volumeMounts</span><span class="p">:</span>
+            <span class="p">-</span> <span class="n">name</span><span class="p">:</span> <span class="n">nfs-client-root</span>
+              <span class="n">mountPath</span><span class="p">:</span> <span class="p">/</span><span class="n">persistentvolumes</span>
+          <span class="n">env</span><span class="p">:</span>
+            <span class="p">-</span> <span class="n">name</span><span class="p">:</span> <span class="n">PROVISIONER_NAME</span>
+              <span class="n">value</span><span class="p">:</span> <span class="n">fuseim</span><span class="p">.</span><span class="n">pri</span><span class="p">/</span><span class="n">ifs</span>
+            <span class="p">-</span> <span class="n">name</span><span class="p">:</span> <span class="n">NFS_SERVER</span>
+              <span class="n">value</span><span class="p">:</span> <span class="n">192</span><span class="p">.</span><span class="n">168</span><span class="p">.</span><span class="n">10</span><span class="p">.</span><span class="n">147</span>
+            <span class="p">-</span> <span class="n">name</span><span class="p">:</span> <span class="n">NFS_PATH</span>
+              <span class="n">value</span><span class="p">:</span> <span class="p">/</span><span class="n">netshare</span>
+      <span class="n">volumes</span><span class="p">:</span>
+        <span class="p">-</span> <span class="n">name</span><span class="p">:</span> <span class="n">nfs-client-root</span>
+          <span class="n">nfs</span><span class="p">:</span>
+            <span class="n">server</span><span class="p">:</span> <span class="n">192</span><span class="p">.</span><span class="n">168</span><span class="p">.</span><span class="n">10</span><span class="p">.</span><span class="n">147</span>
+            <span class="n">path</span><span class="p">:</span> <span class="p">/</span><span class="n">netshare</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">应用资源清单文件</span>
+<span class="c"># kubectl apply -f deployment.yaml</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">查看pod运行情况</span>
+
+<span class="c"># kubectl get pods</span>
+<span class="n">出现以下表示成功运行</span>
+<span class="n">NAME</span>                                     <span class="n">READY</span>   <span class="n">STATUS</span>    <span class="n">RESTARTS</span>   <span class="n">AGE</span>
+<span class="n">nfs-client-provisioner</span><span class="p">-</span><span class="n">8bcf6c987</span><span class="p">-</span><span class="n">7cb8p</span>   <span class="n">1</span><span class="p">/</span><span class="n">1</span>     <span class="n">Running</span>   <span class="n">0</span>          <span class="n">74s</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">设置默认存储类</span>
+<span class="c"># kubectl patch storageclass nfs-client -p &#39;{&quot;metadata&quot;: {&quot;annotations&quot;:{&quot;storageclass.kubernetes.io/is-default-class&quot;:&quot;true&quot;}}}&#39;</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c"># kubectl get sc</span>
+<span class="n">NAME</span>                   <span class="n">PROVISIONER</span>      <span class="n">RECLAIMPOLICY</span>   <span class="n">VOLUMEBINDINGMODE</span>   <span class="n">ALLOWVOLUMEEXPANSION</span>   <span class="n">AGE</span>
+<span class="n">nfs-client</span> <span class="p">(</span><span class="k">default</span><span class="p">)</span>   <span class="n">fuseim</span><span class="p">.</span><span class="n">pri</span><span class="p">/</span><span class="n">ifs</span>   <span class="n">Delete</span>          <span class="n">Immediate</span>           <span class="n">false</span>                  <span class="n">18m</span>
+</code></pre></div>
+<h3 id="153">1.5.3 测试用例验证动态供给是否可用<a class="headerlink" href="#153" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>使用测试用例测试NFS后端存储是否可用</p>
+</blockquote>
+<div class="highlight"><pre><span></span><code><span class="n">测试用例</span><span class="err">：</span>
+<span class="c"># vim nginx.yaml</span>
+<span class="c"># cat nginx.yaml</span>
+<span class="p">---</span>
+<span class="n">apiVersion</span><span class="p">:</span> <span class="n">v1</span>
+<span class="n">kind</span><span class="p">:</span> <span class="n">Service</span>
+<span class="n">metadata</span><span class="p">:</span>
+  <span class="n">name</span><span class="p">:</span> <span class="n">nginx</span>
+  <span class="n">labels</span><span class="p">:</span>
+    <span class="n">app</span><span class="p">:</span> <span class="n">nginx</span>
+<span class="n">spec</span><span class="p">:</span>
+  <span class="n">ports</span><span class="p">:</span>
+  <span class="p">-</span> <span class="n">port</span><span class="p">:</span> <span class="n">80</span>
+    <span class="n">name</span><span class="p">:</span> <span class="n">web</span>
+  <span class="n">clusterIP</span><span class="p">:</span> <span class="n">None</span>
+  <span class="n">selector</span><span class="p">:</span>
+    <span class="n">app</span><span class="p">:</span> <span class="n">nginx</span>
+<span class="p">---</span>
+<span class="n">apiVersion</span><span class="p">:</span> <span class="n">apps</span><span class="p">/</span><span class="n">v1</span>
+<span class="n">kind</span><span class="p">:</span> <span class="n">StatefulSet</span>
+<span class="n">metadata</span><span class="p">:</span>
+  <span class="n">name</span><span class="p">:</span> <span class="n">web</span>
+<span class="n">spec</span><span class="p">:</span>
+  <span class="n">selector</span><span class="p">:</span>
+    <span class="n">matchLabels</span><span class="p">:</span>
+      <span class="n">app</span><span class="p">:</span> <span class="n">nginx</span>
+  <span class="n">serviceName</span><span class="p">:</span> <span class="s2">&quot;nginx&quot;</span>
+  <span class="n">replicas</span><span class="p">:</span> <span class="n">2</span>
+  <span class="n">template</span><span class="p">:</span>
+    <span class="n">metadata</span><span class="p">:</span>
+      <span class="n">labels</span><span class="p">:</span>
+        <span class="n">app</span><span class="p">:</span> <span class="n">nginx</span>
+    <span class="n">spec</span><span class="p">:</span>
+      <span class="n">containers</span><span class="p">:</span>
+      <span class="p">-</span> <span class="n">name</span><span class="p">:</span> <span class="n">nginx</span>
+        <span class="n">image</span><span class="p">:</span> <span class="n">nginx</span><span class="p">:</span><span class="n">latest</span>
+        <span class="n">ports</span><span class="p">:</span>
+        <span class="p">-</span> <span class="n">containerPort</span><span class="p">:</span> <span class="n">80</span>
+          <span class="n">name</span><span class="p">:</span> <span class="n">web</span>
+        <span class="n">volumeMounts</span><span class="p">:</span>
+        <span class="p">-</span> <span class="n">name</span><span class="p">:</span> <span class="n">www</span>
+          <span class="n">mountPath</span><span class="p">:</span> <span class="p">/</span><span class="n">usr</span><span class="p">/</span><span class="n">share</span><span class="p">/</span><span class="n">nginx</span><span class="p">/</span><span class="n">html</span>
+  <span class="n">volumeClaimTemplates</span><span class="p">:</span>
+  <span class="p">-</span> <span class="n">metadata</span><span class="p">:</span>
+      <span class="n">name</span><span class="p">:</span> <span class="n">www</span>
+    <span class="n">spec</span><span class="p">:</span>
+      <span class="n">accessModes</span><span class="p">:</span> <span class="p">[</span> <span class="s2">&quot;ReadWriteOnce&quot;</span> <span class="p">]</span>
+      <span class="n">storageClassName</span><span class="p">:</span> <span class="s2">&quot;nfs-client&quot;</span>
+      <span class="n">resources</span><span class="p">:</span>
+        <span class="n">requests</span><span class="p">:</span>
+          <span class="n">storage</span><span class="p">:</span> <span class="n">1Gi</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c"># kubectl apply -f nginx.yaml</span>
+<span class="n">service</span><span class="p">/</span><span class="n">nginx</span> <span class="n">created</span>
+<span class="n">statefulset</span><span class="p">.</span><span class="n">apps</span><span class="p">/</span><span class="n">web</span> <span class="n">created</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c"># kubectl get pvc</span>
+<span class="n">NAME</span>        <span class="n">STATUS</span>   <span class="n">VOLUME</span>                                     <span class="n">CAPACITY</span>   <span class="n">ACCESS</span> <span class="n">MODES</span>   <span class="n">STORAGECLASS</span>   <span class="n">AGE</span>
+<span class="n">www-web</span><span class="p">-</span><span class="n">0</span>   <span class="n">Bound</span>    <span class="n">pvc</span><span class="p">-</span><span class="n">57bee742</span><span class="p">-</span><span class="n">326b</span><span class="p">-</span><span class="n">4d41-b241</span><span class="p">-</span><span class="n">7f2b5dd22596</span>   <span class="n">1Gi</span>        <span class="n">RWO</span>            <span class="n">nfs-client</span>     <span class="n">3m19s</span>
+</code></pre></div>
+<h1 id="kubesphere_1">二、Kubesphere部署<a class="headerlink" href="#kubesphere_1" title="Permanent link">&para;</a></h1>
+<p><img alt="image-20220809220111447" src="../../../img/kubernetes/kubernetes_kubesphere/image-20220809220111447.png" /></p>
+<div class="highlight"><pre><span></span><code><span class="c"># kubectl apply -f https://github.com/kubesphere/ks-installer/releases/download/v3.2.1/kubesphere-installer.yaml</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c"># kubectl apply -f https://github.com/kubesphere/ks-installer/releases/download/v3.2.1/cluster-configuration.yaml</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c"># kubectl logs -n kubesphere-system $(kubectl get pod -n kubesphere-system -l &#39;app in (ks-install, ks-installer)&#39; -o jsonpath=&#39;{.items[0].metadata.name}&#39;) -f</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="p">**************************************************</span>
+<span class="n">Waiting</span> <span class="k">for</span> <span class="n">all</span> <span class="n">tasks</span> <span class="n">to</span> <span class="n">be</span> <span class="n">completed</span> <span class="p">...</span>
+<span class="n">task</span> <span class="n">network</span> <span class="n">status</span> <span class="n">is</span> <span class="n">successful</span>  <span class="p">(</span><span class="n">1</span><span class="p">/</span><span class="n">4</span><span class="p">)</span>
+<span class="n">task</span> <span class="n">openpitrix</span> <span class="n">status</span> <span class="n">is</span> <span class="n">successful</span>  <span class="p">(</span><span class="n">2</span><span class="p">/</span><span class="n">4</span><span class="p">)</span>
+<span class="n">task</span> <span class="n">multicluster</span> <span class="n">status</span> <span class="n">is</span> <span class="n">successful</span>  <span class="p">(</span><span class="n">3</span><span class="p">/</span><span class="n">4</span><span class="p">)</span>
+<span class="n">task</span> <span class="n">monitoring</span> <span class="n">status</span> <span class="n">is</span> <span class="n">successful</span>  <span class="p">(</span><span class="n">4</span><span class="p">/</span><span class="n">4</span><span class="p">)</span>
+<span class="p">**************************************************</span>
+<span class="n">Collecting</span> <span class="n">installation</span> <span class="n">results</span> <span class="p">...</span>
+<span class="c">#####################################################</span>
+<span class="c">###              Welcome to KubeSphere!           ###</span>
+<span class="c">#####################################################</span>
+
+<span class="n">Console</span><span class="p">:</span> <span class="n">http</span><span class="p">://</span><span class="n">192</span><span class="p">.</span><span class="n">168</span><span class="p">.</span><span class="n">10</span><span class="p">.</span><span class="n">141</span><span class="p">:</span><span class="n">30880</span>
+<span class="n">Account</span><span class="p">:</span> <span class="n">admin</span>
+<span class="n">Password</span><span class="p">:</span> <span class="n">P</span><span class="nv">@88w0rd</span>
+
+<span class="n">NOTES</span><span class="err">：</span>
+  <span class="n">1</span><span class="p">.</span> <span class="n">After</span> <span class="n">you</span> <span class="n">log</span> <span class="n">into</span> <span class="n">the</span> <span class="n">console</span><span class="p">,</span> <span class="n">please</span> <span class="n">check</span> <span class="n">the</span>
+     <span class="n">monitoring</span> <span class="n">status</span> <span class="n">of</span> <span class="n">service</span> <span class="n">components</span> <span class="k">in</span>
+     <span class="s2">&quot;Cluster Management&quot;</span><span class="p">.</span> <span class="k">If</span> <span class="n">any</span> <span class="n">service</span> <span class="n">is</span> <span class="n">not</span>
+     <span class="n">ready</span><span class="p">,</span> <span class="n">please</span> <span class="n">wait</span> <span class="n">patiently</span> <span class="k">until</span> <span class="n">all</span> <span class="n">components</span>
+     <span class="n">are</span> <span class="n">up</span> <span class="n">and</span> <span class="n">running</span><span class="p">.</span>
+  <span class="n">2</span><span class="p">.</span> <span class="n">Please</span> <span class="n">change</span> <span class="n">the</span> <span class="k">default</span> <span class="n">password</span> <span class="n">after</span> <span class="n">login</span><span class="p">.</span>
+
+<span class="c">#####################################################</span>
+</code></pre></div>
+<p><img alt="image-20220809230741623" src="../../../img/kubernetes/kubernetes_kubesphere/image-20220809230741623.png" /></p>
+<p><img alt="image-20220809230815158" src="../../../img/kubernetes/kubernetes_kubesphere/image-20220809230815158.png" /></p>
+<p><img alt="image-20220809230848565" src="../../../img/kubernetes/kubernetes_kubesphere/image-20220809230848565.png" /></p>
+<p><img alt="image-20220809230905838" src="../../../img/kubernetes/kubernetes_kubesphere/image-20220809230905838.png" /></p>
+<p><img alt="image-20220809230934784" src="../../../img/kubernetes/kubernetes_kubesphere/image-20220809230934784.png" /></p>
+<h1 id="kubespheredevops">三、Kubesphere开启devops功能<a class="headerlink" href="#kubespheredevops" title="Permanent link">&para;</a></h1>
+<p><img alt="image-20220809231058295" src="../../../img/kubernetes/kubernetes_kubesphere/image-20220809231058295.png" /></p>
+<p><img alt="image-20220809231146157" src="../../../img/kubernetes/kubernetes_kubesphere/image-20220809231146157.png" /></p>
+<p><img alt="image-20220809231209668" src="../../../img/kubernetes/kubernetes_kubesphere/image-20220809231209668.png" /></p>
+<p><img alt="image-20220809231245060" src="../../../img/kubernetes/kubernetes_kubesphere/image-20220809231245060.png" /></p>
+<p><img alt="image-20220809232511974" src="../../../img/kubernetes/kubernetes_kubesphere/image-20220809232511974.png" /></p>
+<h1 id="kubesphere_2">kubesphere多租户管理系统应用<a class="headerlink" href="#kubesphere_2" title="Permanent link">&para;</a></h1>
+<h1 id="kubesphere_3">一、kubesphere平台登录<a class="headerlink" href="#kubesphere_3" title="Permanent link">&para;</a></h1>
+<p><img alt="image-20220922173954226" src="../../../img/kubernetes/kubernetes_kubesphere/image-20220922173954226.png" /></p>
+<p><img alt="image-20220922174311230" src="../../../img/kubernetes/kubernetes_kubesphere/image-20220922174311230.png" /></p>
+<p><img alt="image-20220922174332481" src="../../../img/kubernetes/kubernetes_kubesphere/image-20220922174332481.png" /></p>
+<p><img alt="image-20220922174429882" src="../../../img/kubernetes/kubernetes_kubesphere/image-20220922174429882.png" /></p>
+<p><img alt="image-20220922175512664" src="../../../img/kubernetes/kubernetes_kubesphere/image-20220922175512664.png" /></p>
+<p><img alt="image-20220922175634327" src="../../../img/kubernetes/kubernetes_kubesphere/image-20220922175634327.png" /></p>
+<p><img alt="image-20220922175533321" src="../../../img/kubernetes/kubernetes_kubesphere/image-20220922175533321.png" /></p>
+<p><img alt="image-20220922175658657" src="../../../img/kubernetes/kubernetes_kubesphere/image-20220922175658657.png" /></p>
+<p><img alt="image-20220922175600095" src="../../../img/kubernetes/kubernetes_kubesphere/image-20220922175600095.png" /></p>
+<h1 id="kubesphere_4">二、Kubesphere应用架构<a class="headerlink" href="#kubesphere_4" title="Permanent link">&para;</a></h1>
+<h2 id="21_1">2.1 架构介绍<a class="headerlink" href="#21_1" title="Permanent link">&para;</a></h2>
+<ul>
+<li>KubeSphere 的多租户系统分**三个**层级，即集群、企业空间和项目。</li>
+<li>**集群**即为kubernetes集群</li>
+<li>**企业空间**是用来管理<a href="https://kubesphere.com.cn/docs/v3.3/project-administration/">项目</a>、<a href="https://kubesphere.com.cn/docs/v3.3/devops-user-guide/">DevOps 项目</a>、<a href="https://kubesphere.com.cn/docs/v3.3/workspace-administration/upload-helm-based-application/">应用模板</a>和应用仓库的一种逻辑单元。可以在企业空间中控制资源访问权限，也可以安全地在团队内部分享资源。</li>
+<li>**项目**即为kubernetes的命名空间</li>
+<li>
+<p>您需要创建一个新的企业空间进行操作，而不是使用系统企业空间，系统企业空间中运行着系统资源，绝大部分仅供查看。出于安全考虑，强烈建议给不同的租户授予不同的权限在企业空间中进行协作。</p>
+</li>
+<li>
+<p>可以在一个 KubeSphere 集群中创建多个企业空间，每个企业空间下可以创建多个项目。</p>
+</li>
+</ul>
+<h2 id="22_1">2.2 创建企业空间、项目、用户和平台角色<a class="headerlink" href="#22_1" title="Permanent link">&para;</a></h2>
+<p>KubeSphere 为每个级别默认设有多个内置角色。此外，您还可以创建拥有自定义权限的角色。KubeSphere 多层次结构适用于具有不同团队或组织以及每个团队中需要不同角色的企业用户。</p>
+<h3 id="221">2.2.1 创建用户<a class="headerlink" href="#221" title="Permanent link">&para;</a></h3>
+<p>安装 KubeSphere 之后，您需要向平台添加具有不同角色的用户，以便他们可以针对自己授权的资源在不同的层级进行工作。一开始，系统默认只有一个用户 <code>admin</code>，具有 <code>platform-admin</code> 角色。在本步骤中，您将创建一个示例用户 <code>user-manager</code>，然后使用 <code>user-manager</code> 创建新用户。</p>
+<p>1.以 <code>admin</code> 身份使用默认帐户和密码 (<code>admin/P@88w0rd</code>,本次使用<code>admin/Kubemsb123</code>) 登录 Web 控制台。</p>
+<blockquote>
+<p>出于安全考虑，强烈建议您在首次登录控制台时更改密码。若要更改密码，在右上角的下拉列表中选择**用户设置**，在**密码设置**中设置新密码，您也可以在**用户设置** &gt; **基本信息**中修改控制台语言。</p>
+</blockquote>
+<p>2.点击左上角的**平台管理**，然后选择**访问控制**。在左侧导航栏中，选择**平台角色**。四个内置角色的描述信息如下表所示。</p>
+<p><img alt="image-20220922185507731" src="../../../img/kubernetes/kubernetes_kubesphere/image-20220922185507731.png" /></p>
+<p><img alt="image-20220922185532487" src="../../../img/kubernetes/kubernetes_kubesphere/image-20220922185532487.png" /></p>
+<p><img alt="image-20220922185601902" src="../../../img/kubernetes/kubernetes_kubesphere/image-20220922185601902.png" /></p>
+<table>
+<thead>
+<tr>
+<th align="left">内置角色</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"><code>workspaces-manager</code></td>
+<td align="left">企业空间管理员，管理平台所有企业空间。</td>
+</tr>
+<tr>
+<td align="left"><code>users-manager</code></td>
+<td align="left">用户管理员，管理平台所有用户。</td>
+</tr>
+<tr>
+<td align="left"><code>platform-regular</code></td>
+<td align="left">平台普通用户，在被邀请加入企业空间或集群之前没有任何资源操作权限。</td>
+</tr>
+<tr>
+<td align="left"><code>platform-admin</code></td>
+<td align="left">平台管理员，可以管理平台内的所有资源。</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>内置角色由 KubeSphere 自动创建，无法编辑或删除。</p>
+</blockquote>
+<p>3.在**用户**中，点击**创建**。在弹出的对话框中，提供所有必要信息（带有*标记），然后在**平台角色**一栏选择 <code>users-manager</code></p>
+<p><img alt="image-20220922185654055" src="../../../img/kubernetes/kubernetes_kubesphere/image-20220922185654055.png" /></p>
+<p><img alt="image-20220922185930626" src="../../../img/kubernetes/kubernetes_kubesphere/image-20220922185930626.png" /></p>
+<p><img alt="image-20220922185956364" src="../../../img/kubernetes/kubernetes_kubesphere/image-20220922185956364.png" /></p>
+<p>完成后，点击**确定**。新创建的用户将显示在**用户**页面。</p>
+<p>4.切换用户使用 <code>user-manager</code> 重新登录，创建如下四个新用户，这些用户将在其他的教程中使用。</p>
+<blockquote>
+<ul>
+<li>帐户登出请点击右上角的用户名，然后选择**登出**。</li>
+<li>下面仅为示例用户名，请根据实际情况修改。</li>
+</ul>
+</blockquote>
+<p><img alt="image-20220922190125715" src="../../../img/kubernetes/kubernetes_kubesphere/image-20220922190125715.png" /></p>
+<p><img alt="image-20220922190147221" src="../../../img/kubernetes/kubernetes_kubesphere/image-20220922190147221.png" /></p>
+<p><img alt="image-20220922190235404" src="../../../img/kubernetes/kubernetes_kubesphere/image-20220922190235404.png" /></p>
+<p><img alt="image-20220922190257617" src="../../../img/kubernetes/kubernetes_kubesphere/image-20220922190257617.png" /></p>
+<p><img alt="image-20220922190338870" src="../../../img/kubernetes/kubernetes_kubesphere/image-20220922190338870.png" /></p>
+<table>
+<thead>
+<tr>
+<th align="left">用户</th>
+<th align="left">指定的平台角色</th>
+<th align="left">用户权限</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"><code>ws-manager</code></td>
+<td align="left"><code>workspaces-manager</code></td>
+<td align="left">创建和管理所有企业空间。</td>
+</tr>
+<tr>
+<td align="left"><code>ws-admin</code></td>
+<td align="left"><code>platform-regular</code></td>
+<td align="left">被邀请到企业空间后，管理该企业空间中的所有资源（在此示例中，此用户用于邀请新成员加入该企业空间）。</td>
+</tr>
+<tr>
+<td align="left"><code>project-admin</code></td>
+<td align="left"><code>platform-regular</code></td>
+<td align="left">创建和管理项目以及 DevOps 项目，并邀请新成员加入项目。</td>
+</tr>
+<tr>
+<td align="left"><code>project-regular</code></td>
+<td align="left"><code>platform-regular</code></td>
+<td align="left"><code>project-regular</code> 将由 <code>project-admin</code> 邀请至项目或 DevOps 项目。该用户将用于在指定项目中创建工作负载、流水线和其他资源。</td>
+</tr>
+</tbody>
+</table>
+<p><img alt="image-20220922190428000" src="../../../img/kubernetes/kubernetes_kubesphere/image-20220922190428000.png" /></p>
+<p><img alt="image-20220922190527754" src="../../../img/kubernetes/kubernetes_kubesphere/image-20220922190527754.png" /></p>
+<p><img alt="image-20220922190706339" src="../../../img/kubernetes/kubernetes_kubesphere/image-20220922190706339.png" /></p>
+<p><img alt="image-20220922190804551" src="../../../img/kubernetes/kubernetes_kubesphere/image-20220922190804551.png" /></p>
+<p><img alt="image-20220922190924240" src="../../../img/kubernetes/kubernetes_kubesphere/image-20220922190924240.png" /></p>
+<p>5.在**用户**页面，查看创建的四个用户。</p>
+<p><img alt="image-20220922190952728" src="../../../img/kubernetes/kubernetes_kubesphere/image-20220922190952728.png" /></p>
+<blockquote>
+<p>您可以点击用户名称后的 <img alt="img" src="https://kubesphere.com.cn/images/docs/v3.3/common-icons/three-dots.png" /> 图标选择启用或禁用某个用户。您也可以勾选多个用户进行批量操作。</p>
+</blockquote>
+<h3 id="222">2.2.2 创建企业空间<a class="headerlink" href="#222" title="Permanent link">&para;</a></h3>
+<p>需要使用上一个步骤中创建的用户 <code>ws-manager</code> 创建一个企业空间。作为管理项目、DevOps 项目和组织成员的基本逻辑单元，企业空间是 KubeSphere 多租户系统的基础。</p>
+<p>1.以 <code>ws-manager</code> 身份登录 KubeSphere。点击左上角的**平台管理**，选择**访问控制**。在**企业空间**中，可以看到仅列出了一个默认企业空间 <code>system-workspace</code>，即系统企业空间，其中运行着与系统相关的组件和服务，您无法删除该企业空间。</p>
+<p><img alt="image-20220922191404163" src="../../../img/kubernetes/kubernetes_kubesphere/image-20220922191404163.png" /></p>
+<p><img alt="image-20220922191420465" src="../../../img/kubernetes/kubernetes_kubesphere/image-20220922191420465.png" /></p>
+<p><img alt="image-20220922191436794" src="../../../img/kubernetes/kubernetes_kubesphere/image-20220922191436794.png" /></p>
+<p>2.点击右侧的**创建**，将新企业空间命名为 <code>demo-workspace</code>，并将用户 <code>ws-admin</code> 设置为企业空间管理员。完成后，点击**创建**。</p>
+<p><img alt="image-20220922191618983" src="../../../img/kubernetes/kubernetes_kubesphere/image-20220922191618983.png" /></p>
+<p><img alt="image-20220923113240468" src="../../../img/kubernetes/kubernetes_kubesphere/image-20220923113240468.png" /></p>
+<blockquote>
+<p>如果您已启用<a href="https://kubesphere.com.cn/docs/v3.3/multicluster-management/">多集群功能</a>，您需要为企业空间<a href="https://kubesphere.com.cn/docs/v3.3/cluster-administration/cluster-settings/cluster-visibility-and-authorization/#在创建企业空间时选择可用集群">分配一个或多个可用集群</a>，以便项目可以在集群中创建。</p>
+</blockquote>
+<p>3.登出控制台，然后以 <code>ws-admin</code> 身份重新登录。在**企业空间设置**中，选择**企业空间成员**，然后点击**邀请**。</p>
+<p>4.邀请 <code>project-admin</code> 和 <code>project-regular</code> 进入企业空间，分别授予 <code>demo-workspace-self-provisioner</code> 和 <code>demo-workspace-viewer</code> 角色，点击**确定**。</p>
+<blockquote>
+<p>实际角色名称的格式：<code>&lt;workspace name&gt;-&lt;role name&gt;</code>。例如，在名为 <code>demo-workspace</code> 的企业空间中，角色 <code>viewer</code> 的实际角色名称为 <code>demo-workspace-viewer</code>。</p>
+</blockquote>
+<p>5.将 <code>project-admin</code> 和 <code>project-regular</code> 都添加到企业空间后，点击**确定**。在**企业空间成员**中，您可以看到列出的三名成员。</p>
+<table>
+<thead>
+<tr>
+<th align="left">用户</th>
+<th align="left">分配的企业空间角色</th>
+<th align="left">角色权限</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"><code>ws-admin</code></td>
+<td align="left"><code>demo-workspace-admin</code></td>
+<td align="left">管理指定企业空间中的所有资源（在此示例中，此用户用于邀请新成员加入企业空间）。</td>
+</tr>
+<tr>
+<td align="left"><code>project-admin</code></td>
+<td align="left"><code>demo-workspace-self-provisioner</code></td>
+<td align="left">创建和管理项目以及 DevOps 项目，并邀请新成员加入项目。</td>
+</tr>
+<tr>
+<td align="left"><code>project-regular</code></td>
+<td align="left"><code>demo-workspace-viewer</code></td>
+<td align="left"><code>project-regular</code> 将由 <code>project-admin</code> 邀请至项目或 DevOps 项目。该用户将用于在指定项目中创建工作负载、流水线和其他资源。</td>
+</tr>
+</tbody>
+</table>
+<h3 id="223">2.2.3 创建项目<a class="headerlink" href="#223" title="Permanent link">&para;</a></h3>
+<p>在此步骤中，您需要使用在上一步骤中创建的帐户 <code>project-admin</code> 来创建项目。KubeSphere 中的项目与 Kubernetes 中的命名空间相同，为资源提供了虚拟隔离。有关更多信息，请参见<a href="https://kubernetes.io/zh/docs/concepts/overview/working-with-objects/namespaces/">命名空间</a>。</p>
+<p>1.以 <code>project-admin</code> 身份登录 KubeSphere Web 控制台，在**项目**中，点击**创建**。</p>
+<p>2.输入项目名称（例如 <code>demo-project</code>），点击**确定**。您还可以为项目添加别名和描述。</p>
+<p>3.在**项目**中，点击刚创建的项目查看其详情页面。</p>
+<p>4.在项目的**概览**页面，默认情况下未设置项目配额。您可以点击**编辑配额**并根据需要指定<a href="https://v3-2.docs.kubesphere.io/zh/docs/workspace-administration/project-quotas/">资源请求和限制</a>（例如：CPU 和内存的限制分别设为 1 Core 和 1000 Gi）。</p>
+<p>5.在**项目设置** &gt; **项目成员**中，邀请 <code>project-regular</code> 至该项目，并授予该用户 <code>operator</code> 角色。</p>
+<blockquote>
+<p>具有 <code>operator</code> 角色的用户是项目维护者，可以管理项目中除用户和角色以外的资源。</p>
+</blockquote>
+<p>6.在创建<a href="https://v3-2.docs.kubesphere.io/zh/docs/project-user-guide/application-workloads/routes/">应用路由</a>（即 Kubernetes 中的 <a href="https://kubernetes.io/docs/concepts/services-networking/ingress/">Ingress</a>）之前，需要启用该项目的网关。网关是在项目中运行的 <a href="https://github.com/kubernetes/ingress-nginx">NGINX Ingress 控制器</a>。若要设置网关，请转到**项目设置**中的**网关设置**，然后点击**设置网关**。此步骤中仍使用帐户 <code>project-admin</code>。</p>
+<p>7.选择访问方式 <strong>NodePort</strong>，然后点击**确定**。</p>
+<p>8.在**网关设置**下，可以在页面上看到网关地址以及 http/https 的端口。</p>
+<blockquote>
+<p>如果要使用 <code>LoadBalancer</code> 暴露服务，则需要使用云厂商的 LoadBalancer 插件。如果您的 Kubernetes 集群在裸机环境中运行，建议使用 <a href="https://github.com/kubesphere/openelb">OpenELB</a> 作为 LoadBalancer 插件。</p>
+</blockquote>
+<h3 id="224">2.2.4 创建角色<a class="headerlink" href="#224" title="Permanent link">&para;</a></h3>
+<p>完成上述步骤后，您已了解可以为不同级别的用户授予不同角色。先前步骤中使用的角色都是 KubeSphere 提供的内置角色。在此步骤中，您将学习如何创建自定义角色以满足工作需求。</p>
+<p>1.再次以 <code>admin</code> 身份登录 KubeSphere Web 控制台，转到**访问控制**。</p>
+<p>2.点击左侧导航栏中的**平台角色**，再点击右侧的**创建**。</p>
+<blockquote>
+<p>**平台角色**页面的预设角色无法编辑或删除。</p>
+</blockquote>
+<p>3.在**创建平台角色**对话框中，设置角色标识符（例如，<code>clusters-admin</code>）、角色名称和描述信息，然后点击**编辑权限**。</p>
+<blockquote>
+<p>本示例演示如何创建负责集群管理的角色。</p>
+</blockquote>
+<p>4.在**编辑权限**对话框中，设置角色权限（例如，选择**集群管理**）并点击**确定**。</p>
+<blockquote>
+<ul>
+<li>在本示例中，角色 <code>clusters-admin</code> 包含**集群管理**和**集群查看**权限。</li>
+<li>一些权限依赖于其他权限，依赖项由每项权限下的**依赖于**字段指定。</li>
+<li>选择权限后，将自动选择它所依赖的权限。</li>
+<li>若要取消选择权限，则需要首先取消选择其从属权限。</li>
+</ul>
+</blockquote>
+<p>5.在**平台角色**页面，可以点击所创建角色的名称查看角色详情，点击 <img alt="img" src="https://v3-2.docs.kubesphere.io/images/docs/zh-cn/quickstart/create-workspaces-projects-accounts/%E6%93%8D%E4%BD%9C%E6%8C%89%E9%92%AE.png" /> 以编辑角色、编辑角色权限或删除该角色。</p>
+<p>6.在**用户**页面，可以在创建帐户或编辑现有帐户时为帐户分配该角色。</p>
+<h3 id="225_devops">2.2.5 创建DevOps<a class="headerlink" href="#225_devops" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>若要创建 DevOps 项目，需要预先启用 KubeSphere DevOps 系统，该系统是个可插拔的组件，提供 CI/CD 流水线、Binary-to-Image 和 Source-to-Image 等功能。有关如何启用 DevOps 的更多信息，请参见 <a href="https://v3-2.docs.kubesphere.io/zh/docs/pluggable-components/devops/">KubeSphere DevOps 系统</a>。</p>
+</blockquote>
+<p><img alt="image-20221021235714102" src="../../../img/kubernetes/kubernetes_kubesphere/image-20221021235714102.png" /></p>
+<p><img alt="image-20221021235838690" src="../../../img/kubernetes/kubernetes_kubesphere/image-20221021235838690.png" /></p>
+<p><img alt="image-20221021235910131" src="../../../img/kubernetes/kubernetes_kubesphere/image-20221021235910131.png" /></p>
+<p><img alt="image-20221022000034118" src="../../../img/kubernetes/kubernetes_kubesphere/image-20221022000034118.png" /></p>
+<p><img alt="image-20221022000103051" src="../../../img/kubernetes/kubernetes_kubesphere/image-20221022000103051.png" /></p>
+<p><img alt="image-20221022000159140" src="../../../img/kubernetes/kubernetes_kubesphere/image-20221022000159140.png" /></p>
+<p><img alt="image-20221022000310077" src="../../../img/kubernetes/kubernetes_kubesphere/image-20221022000310077.png" /></p>
+<div class="highlight"><pre><span></span><code><span class="c"># kubectl logs -n kubesphere-system $(kubectl get pod -n kubesphere-system -l app=ks-install -o jsonpath=&#39;{.items[0].metadata.name}&#39;) -f</span>
+</code></pre></div>
+<p>1.以 <code>project-admin</code> 身份登录控制台，在 <strong>DevOps 项目**中，点击**创建</strong>。</p>
+<p>2.输入 DevOps 项目名称（例如 <code>demo-devops</code>），然后点击**确定**，也可以为该项目添加别名和描述。</p>
+<p>3.点击刚创建的项目查看其详细页面。</p>
+<p>4.转到 <strong>DevOps 项目设置</strong>，然后选择 <strong>DevOps 项目成员</strong>。点击**邀请**授予 <code>project-regular</code> 用户 <code>operator</code> 的角色，允许其创建流水线和凭证。</p>
+<p>至此，您已熟悉 KubeSphere 的多租户管理系统。在其他教程中，<code>project-regular</code> 帐户还将用于演示如何在项目或 DevOps 项目中创建应用程序和资源。</p>
+<h1 id="kubesphere_5">KubeSphere应用发布初体验<a class="headerlink" href="#kubesphere_5" title="Permanent link">&para;</a></h1>
+<h1 id="wordpress">一、WordPress 简介<a class="headerlink" href="#wordpress" title="Permanent link">&para;</a></h1>
+<p>WordPress（使用 PHP 语言编写）是免费、开源的内容管理系统，用户可以使用 WordPress 搭建自己的网站。完整的 WordPress 应用程序包括以下 Kubernetes 对象，由 MySQL 作为后端数据库。</p>
+<p><img alt="" src="../../../img/kubernetes/kubernetes_kubesphere/WordPress.png" /></p>
+<h1 id="_4">二、目的<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h1>
+<p>本教程演示了如何在 KubeSphere 中创建应用程序（以 WordPress 为例）并在集群外进行访问。</p>
+<h1 id="_5">三、准备工作<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h1>
+<p>您需要准备一个 <code>project regular</code> 帐户，并在一个项目中赋予该帐户 <code>operator</code> 角色（该用户已被邀请参加该项目）。</p>
+<h1 id="_6">四、部署过程<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h1>
+<h2 id="41">4.1 创建密钥<a class="headerlink" href="#41" title="Permanent link">&para;</a></h2>
+<h3 id="411_mysql">4.1.1 创建MySQL密钥<a class="headerlink" href="#411_mysql" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>环境变量 <code>WORDPRESS_DB_PASSWORD</code> 是连接到 WordPress 数据库的密码。</p>
+</blockquote>
+<p>在此步骤中，您需要创建一个密钥来保存将在 MySQL Pod 模板中使用的环境变量。</p>
+<p>1.使用 <code>project-regular</code> 帐户登录 KubeSphere 控制台，访问 <code>demo-project</code> 的详情页并导航到**配置**。在**保密字典**中，点击右侧的**创建**。</p>
+<p>2.输入基本信息（例如，将其命名为 <code>mysql-secret</code>）并点击**下一步**。在下一页中，选择**类型**为 <strong>Opaque（默认）</strong>，然后点击**添加数据**来添加键值对。输入如下所示的键 (Key) <code>MYSQL_ROOT_PASSWORD</code> 和值 (Value) <code>123456</code>，点击右下角 <strong>√</strong> 进行确认。完成后，点击**创建**按钮以继续。</p>
+<h3 id="412_wordpress">4.1.2 创建WordPress密钥<a class="headerlink" href="#412_wordpress" title="Permanent link">&para;</a></h3>
+<p>按照以上相同的步骤创建一个名为 <code>wordpress-secret</code> 的 WordPress 密钥，输入键 (Key) <code>WORDPRESS_DB_PASSWORD</code> 和值 (Value) <code>123456</code>。创建的密钥显示在列表中。</p>
+<h2 id="42">4.2 创建存储卷<a class="headerlink" href="#42" title="Permanent link">&para;</a></h2>
+<p>1.访问**存储**下的**存储卷**，点击**创建**。</p>
+<p>2.输入卷的基本信息（例如，将其命名为 <code>wordpress-pvc</code>），然后点击**下一步**。</p>
+<p>3.在**存储卷设置**中，需要选择一个可用的**存储类型**，并设置**访问模式**和**存储卷容量**。您可以直接使用默认值，点击**下一步**继续。</p>
+<p>4.在**高级设置**中，您无需添加额外的配置，点击**创建**完成即可。</p>
+<h2 id="43">4.3 创建应用程序<a class="headerlink" href="#43" title="Permanent link">&para;</a></h2>
+<h3 id="431_mysql">4.3.1 添加MySQL后端组件<a class="headerlink" href="#431_mysql" title="Permanent link">&para;</a></h3>
+<p>1.导航到**应用负载**下的**应用**，选择**自制应用** &gt; <strong>创建</strong>。</p>
+<p>2.输入基本信息（例如，在应用名称一栏输入 <code>wordpress</code>），然后点击**下一步**。</p>
+<p>3.在**服务设置**中，点击**创建服务**以在应用中设置组件。</p>
+<p>4.设置组件的服务类型为**有状态服务**。</p>
+<p>5.输入有状态服务的名称（例如 <strong>mysql</strong>）并点击**下一步**。</p>
+<p>6.在**容器组设置**中，点击**添加容器**。</p>
+<p>7.在搜索框中输入 <code>mysql:5.6</code>，按下**回车键**，然后点击**使用默认端口**。由于配置还未设置完成，请不要点击右下角的 <strong>√</strong> 按钮。</p>
+<blockquote>
+<p>在**高级设置**中，请确保内存限制不小于 1000 Mi，否则 MySQL 可能因内存不足而无法启动。</p>
+</blockquote>
+<p>8.向下滚动到**环境变量**，点击**引用配置文件或密钥**。输入名称 <code>MYSQL_ROOT_PASSWORD</code>，然后选择资源 <code>mysql-secret</code> 和前面步骤中创建的密钥 <code>MYSQL_ROOT_PASSWORD</code>，完成后点击 <strong>√</strong> 保存配置，最后点击**下一步**继续。</p>
+<p>9.选择**存储卷设置**中的**添加存储卷模板**，输入**存储卷名称** (<code>mysql</code>) 和**挂载路径**（模式：<code>读写</code>，路径：<code>/var/lib/mysql</code>）的值。</p>
+<p>完成后，点击 <strong>√</strong> 保存设置并点击**下一步**继续。</p>
+<p>10.在**高级设置**中，可以直接点击**添加**，也可以按需选择其他选项。</p>
+<p>11.现在，MySQL 组件已经添加完成。</p>
+<h3 id="432_wordpress">4.3.2 添加WordPress前端组件<a class="headerlink" href="#432_wordpress" title="Permanent link">&para;</a></h3>
+<p>1.再次点击**创建服务**，选择**无状态服务**。输入名称 <code>wordpress</code> 并点击**下一步**。</p>
+<p>2.与上述步骤类似，点击**添加容器**，在搜索栏中输入 <code>wordpress:4.8-apache</code> 并按下**回车键**，然后点击**使用默认端口**。</p>
+<p>3.向下滚动到**环境变量**，点击**引用配置文件或密钥**。这里需要添加两个环境变量，请根据以下截图输入值：</p>
+<ul>
+<li>对于 <code>WORDPRESS_DB_PASSWORD</code>，请选择在步骤 1 中创建的 <code>wordpress-secret</code> 和 <code>WORDPRESS_DB_PASSWORD</code>。</li>
+<li>点击**添加环境变量**，分别输入 <code>WORDPRESS_DB_HOST</code> 和 <code>mysql</code> 作为键 (Key) 和值 (Value)。</li>
+</ul>
+<blockquote>
+<p>对于此处添加的第二个环境变量，该值必须与步骤 5 中创建 MySQL 有状态服务设置的名称完全相同。否则，WordPress 将无法连接到 MySQL 对应的数据库。</p>
+</blockquote>
+<p>点击 <strong>√</strong> 保存配置，再点击**下一步**继续。</p>
+<p>4.在**存储卷设置**中，点击**挂载存储卷**，并**选择存储卷**。</p>
+<p>5.选择上一步创建的 <code>wordpress-pvc</code>，将模式设置为<code>读写</code>，并输入挂载路径 <code>/var/www/html</code>。点击 <strong>√</strong> 保存，再点击**下一步**继续。</p>
+<p>6.在**高级设置**中，可以直接点击**添加**创建服务，也可以按需选择其他选项。</p>
+<p>7.现在，前端组件也已设置完成。点击**下一步**继续。</p>
+<p>8.您可以**路由设置**中设置路由规则（应用路由 Ingress），也可以直接点击**创建**。</p>
+<p>9.创建后，应用将显示在应用列表中。</p>
+<h2 id="44">4.4 验证资源创建情况<a class="headerlink" href="#44" title="Permanent link">&para;</a></h2>
+<p>在**工作负载**中，分别检查**部署**和**有状态副本集**中 <code>wordpress-v1</code> 和 <code>mysql-v1</code> 的状态。如果它们的运行状态为**运行中**，就意味着 WordPress 已经成功创建。</p>
+<h2 id="45_nodeportwordpress">4.5 通过NodePort访问WordPress<a class="headerlink" href="#45_nodeportwordpress" title="Permanent link">&para;</a></h2>
+<p>1.若要在集群外访问服务，请首先导航到**服务**。点击 <code>wordpress</code> 右侧的三个点后，选择**编辑外部访问**。</p>
+<p>2.在**访问方式**中选择 <code>NodePort</code>，然后点击**确定**。</p>
+<p>3.点击服务进入详情页，可以在**端口**处查看暴露的端口。</p>
+<p><img alt="image-20221022131423435" src="../../../img/kubernetes/kubernetes_kubesphere/image-20221022131423435.png" /></p>
+<p>4.通过 <code>{Node IP}:{NodePort}</code> 访问此应用程序，可以看到下图：</p>
+<p><img alt="image-20221022131403934" src="../../../img/kubernetes/kubernetes_kubesphere/image-20221022131403934.png" /></p>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      BurningMyself<a href='https://beian.miit.gov.cn/' target='_blank'>  蜀ICP备15033200号-1</a>
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        <div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/burningmyself" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://gitee.com/burningmyself" target="_blank" rel="noopener" title="gitee.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 488 512"><!--! Font Awesome Free 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M488 261.8C488 403.3 391.1 504 248 504 110.8 504 0 393.2 0 256S110.8 8 248 8c66.8 0 123 24.5 166.3 64.9l-67.5 64.9C258.5 52.6 94.3 116.6 94.3 256c0 86.5 69.1 156.6 153.7 156.6 98.2 0 135-70.4 140.8-106.9H248v-85.3h236.1c2.3 12.7 3.9 24.9 3.9 41.4z"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "../../..", "features": [], "search": "../../../assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.2a6f1dda.min.js"></script>
+      
+        <script src="../../../js/extra.js"></script>
+      
+        <script src="../../../js/baidu-tongji.js"></script>
+      
+        <script src="https://www.googletagmanager.com/gtag/js?id=UA-155084439-1"></script>
+      
+        <script src="https://www.googletagmanager.com/gtag/js?id=UA-155132293-1"></script>
+      
+        <script src="../../../js/google.js"></script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+      
+    
+  </body>
+</html>
