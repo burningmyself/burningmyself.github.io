@@ -2336,8 +2336,8 @@ cat > kubelet.service << "EOF"
 [Unit]
 Description=Kubernetes Kubelet
 Documentation=https://github.com/kubernetes/kubernetes
-After=docker.service
-Requires=docker.service
+After=containerd.service
+Requires=containerd.service
 
 [Service]
 WorkingDirectory=/var/lib/kubelet
@@ -2352,7 +2352,7 @@ ExecStart=/usr/local/bin/kubelet \
   --container-runtime-endpoint=unix:///run/containerd/containerd.sock \
   --network-plugin=cni \
   --rotate-certificates \
-  --pod-infra-container-image=registry.aliyuncs.com/google_containers/pause:3.2 \
+  --pod-infra-container-image=registry.aliyuncs.com/google_containers/pause:3.6 \
   --root-dir=/etc/cni/net.d \
   --alsologtostderr=true \
   --logtostderr=false \

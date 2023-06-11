@@ -161,7 +161,7 @@ nav:
       - Rancher容器云管理平台: cloud/kubernetes/kubernetes_rancher.md
       - 使用kubeconfig管理多集群方法: cloud/kubernetes/kubernetes_kubeconfig.md
       - karmada实现k8s集群联邦: cloud/kubernetes/kubernetes_karmada.md
-      - 源监控: cloud/kubernetes/kubernetes_ui.md
+      - 安装kubesphere使用: cloud/kubernetes/kubernetes_kubesphere.md
       - 源监控: cloud/kubernetes/kubernetes_ui.md                                
   - 微服务:  
       - 分布式锁: micro/fbs-lock.md
