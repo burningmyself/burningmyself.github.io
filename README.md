@@ -174,8 +174,6 @@
   * [kubernetes集群Python项目上云部署](docs/cloud/kubernetes/kubernetes_deploy_python.md)
   * [Kubernetes集群golang项目上云部署](docs/cloud/kubernetes/kubernetes_deploy_golang.md)
   * [helm部署prometheus监控系统及应用](docs/cloud/kubernetes/kubernetes_helm_prometheus.md)
-  * [基于kubernetes集群构建大中型企业CICD应用平台](docs/cloud/kubernetes/kubernetes_devops.md)
-  * [基于KubeSphere实现DevOps](docs/cloud/kubernetes/kubernetes_kubesphere_devops.md.md)
   * [kubernetes日志收集方案ELK](docs/cloud/kubernetes/kubernetes_logs_collect.md)
   * [企业级中间件上云部署zookeeper](docs/cloud/kubernetes/kubernetes_zookeeper.md)
   * [kubernetes云原生中间件上云部署kafka](docs/cloud/kubernetes/kubernetes_kafka.md)
@@ -191,6 +189,9 @@
   * [karmada实现k8s集群联邦](docs/cloud/kubernetes/kubernetes_karamada.md)
   * [安装kubesphere使用](docs/cloud/kubernetes/kubernetes_kubesphere.md)
   * [阿里云容器服务ACK](docs/cloud/kubernetes/kubernetes_ui.md)
+  * [基于kubernetes集群构建大中型企业CICD应用平台](docs/cloud/kubernetes/kubernetes_devops.md)
+  * [基于KubeSphere实现DevOps](docs/cloud/kubernetes/kubernetes_kubesphere_devops.md.md)
+  * [云原生多云持续交付GitOps](docs/cloud/kubernetes/kubernetes_gitops.md)
   * [源监控](docs/cloud/kubernetes/kubernetes_ui.md)
 * [情感]
   * [情商](docs/emotion/eq.md)
