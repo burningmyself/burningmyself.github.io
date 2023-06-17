@@ -13,7 +13,6 @@ Velero 对存储的支持较好，可以支持很多种存储资源，比如 AWS
 ![img](../../img/kubernetes/kubernetes_velero/16200606_61bb2bae6996764949.png)
 
 
-
 # 三、Velero备份过程
 
 - 本地 Velero 客户端发送备份指令。
