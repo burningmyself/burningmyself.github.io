@@ -1,5 +1,3 @@
-# kubernetes日志收集方案
-
 # kubernetes日志收集方案 ELK
 
 
