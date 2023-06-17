@@ -192,6 +192,7 @@
   * [基于kubernetes集群构建大中型企业CICD应用平台](docs/cloud/kubernetes/kubernetes_devops.md)
   * [基于KubeSphere实现DevOps](docs/cloud/kubernetes/kubernetes_kubesphere_devops.md.md)
   * [云原生多云持续交付GitOps](docs/cloud/kubernetes/kubernetes_gitops.md)
+  * [kubernetes集群备份与恢复管理利器Velero](docs/cloud/kubernetes/kubernetes_velero.md)
   * [源监控](docs/cloud/kubernetes/kubernetes_ui.md)
 * [情感]
   * [情商](docs/emotion/eq.md)
