@@ -168,7 +168,12 @@ nav:
       - 基于KubeSphere实现DevOps: cloud/kubernetes/kubernetes_kubesphere_devops.md
       - 云原生多云持续交付GitOps: cloud/kubernetes/kubernetes_gitops.md   
       - kubernetes集群备份与恢复管理利器Velero: cloud/kubernetes/kubernetes_velero.md   
-      - 源监控: cloud/kubernetes/kubernetes_ui.md                               
+      - kubernetes集群舰队管理Kurator: cloud/kubernetes/kubernetes_kurator.md        
+      - Serverless之OpenFaaS函数即服务: cloud/kubernetes/kubernetes_openfass.md    
+      - Flink基于Kubernetes部署: cloud/kubernetes/kubernetes_flink.md  
+      - 大数据HDFS分布式文件系统搭建: cloud/kubernetes/kubernetes_hdfs.md   
+      - Spark与Kubernetes整合: cloud/kubernetes/kubernetes_spark.md   
+      - 源监控: cloud/kubernetes/kubernetes_ui.md                      
   - 微服务:  
       - 分布式锁: micro/fbs-lock.md
       - 微服务设计: micro/design.md
