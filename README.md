@@ -195,7 +195,6 @@
   * [kubernetes集群备份与恢复管理利器Velero](docs/cloud/kubernetes/kubernetes_velero.md)
   * [kubernetes集群舰队管理Kurator](docs/cloud/kubernetes/kubernetes_kurator.md)
   * [Serverless之OpenFaaS函数即服务](docs/cloud/kubernetes/kubernetes_openfass.md)
-  * [大数据HDFS分布式文件系统搭建](docs/cloud/kubernetes/kubernetes_f.md)
   * [Flink基于Kubernetes部署](docs/cloud/kubernetes/kubernetes_flink.md)
   * [大数据HDFS分布式文件系统搭建](docs/cloud/kubernetes/kubernetes_hdfs.md)
   * [Spark与Kubernetes整合](docs/cloud/kubernetes/kubernetes_spark.md)
