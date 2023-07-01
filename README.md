@@ -188,7 +188,7 @@
   * [使用kubeconfig管理多集群方法控](docs/cloud/kubernetes/kubernetes_kubeconfig.md)
   * [karmada实现k8s集群联邦](docs/cloud/kubernetes/kubernetes_karamada.md)
   * [安装kubesphere使用](docs/cloud/kubernetes/kubernetes_kubesphere.md)
-  * [阿里云容器服务ACK](docs/cloud/kubernetes/kubernetes_ui.md)
+  * [阿里云容器服务ACK](docs/cloud/kubernetes/kubernetes_ack.md)
   * [基于kubernetes集群构建大中型企业CICD应用平台](docs/cloud/kubernetes/kubernetes_devops.md)
   * [基于KubeSphere实现DevOps](docs/cloud/kubernetes/kubernetes_kubesphere_devops.md.md)
   * [云原生多云持续交付GitOps](docs/cloud/kubernetes/kubernetes_gitops.md)
