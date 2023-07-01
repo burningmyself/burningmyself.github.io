@@ -1,0 +1,4214 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content=".net,java,php,python,docker,web">
+      
+      
+        <meta name="author" content="BurningMyself">
+      
+      
+        <link rel="canonical" href="https://burningmyself.gitee.io/cloud/kubernetes/kubernetes_kubesphere_devops/">
+      
+      
+        <link rel="prev" href="../kubernetes_devops/">
+      
+      
+        <link rel="next" href="../kubernetes_gitops/">
+      
+      <link rel="icon" href="../../../favicon.ico">
+      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.0.15">
+    
+    
+      
+        <title>基于KubeSphere实现DevOps - BurningMyself</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.113286f1.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.a0c5b2b5.min.css">
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="" data-md-color-accent="">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#kubesphere" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../../.." title="BurningMyself" class="md-header__button md-logo" aria-label="BurningMyself" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            BurningMyself
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              基于KubeSphere实现DevOps
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/burningmyself/burningmyself.github.io" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    burningmyself.github.io
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="BurningMyself" class="md-nav__button md-logo" aria-label="BurningMyself" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    BurningMyself
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/burningmyself/burningmyself.github.io" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    burningmyself.github.io
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        介绍
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+          技术博文
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          技术博文
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="0">
+          .NET
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_1_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2_1">
+          <span class="md-nav__icon md-icon"></span>
+          .NET
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../net/c_sharp/" class="md-nav__link">
+        C#新特性语法
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../net/c_docker/" class="md-nav__link">
+        .Net Core Docker 部署
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../net/c_sqlserver_nginx/" class="md-nav__link">
+        Docker 容器化部署 ASP.NET Core
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../net/c_core_safety/" class="md-nav__link">
+        让你的ASP.NET Core应用程序更安全
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../net/c_core_study_route/" class="md-nav__link">
+        ASP.NET Core开发者指南
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+          Java
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2_2">
+          <span class="md-nav__icon md-icon"></span>
+          Java
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../java/feature/" class="md-nav__link">
+        Java特性
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../java/load-class/" class="md-nav__link">
+        Java类加载
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../java/orm/" class="md-nav__link">
+        Orm的优缺点
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../java/bio-nio/" class="md-nav__link">
+        BIO与NIO
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../java/rocketmq/rmq-1/" class="md-nav__link">
+        RocketMq下载与安装
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../java/springAnnotation/" class="md-nav__link">
+        Spring常用注解
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../java/javavm/" class="md-nav__link">
+        Java 虚拟机
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../java/springdesign/" class="md-nav__link">
+        Spring 常用设计
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../java/spring-cloud/" class="md-nav__link">
+        Spring Cloud
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../java/java-simple/" class="md-nav__link">
+        Java simple
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../java/java-validator/" class="md-nav__link">
+        Java Validator
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../java/java-string/" class="md-nav__link">
+        Java String
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../java/java-utils/" class="md-nav__link">
+        Java Utils
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+          Python
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2_3">
+          <span class="md-nav__icon md-icon"></span>
+          Python
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../python/feature/" class="md-nav__link">
+        Python特性
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../python/str_joint/" class="md-nav__link">
+        Python字符拼接
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../python/syntax_rule/" class="md-nav__link">
+        Python语法技巧
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../python/fabric/" class="md-nav__link">
+        远程部署神器 Fabric
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_4" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_4" id="__nav_2_4_label" tabindex="0">
+          Go
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_4_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2_4">
+          <span class="md-nav__icon md-icon"></span>
+          Go
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../go/go_base/" class="md-nav__link">
+        Go基础语法
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_5" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_5" id="__nav_2_5_label" tabindex="0">
+          PHP
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_5_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2_5">
+          <span class="md-nav__icon md-icon"></span>
+          PHP
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../php/kj/" class="md-nav__link">
+        框架
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_6" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_6" id="__nav_2_6_label" tabindex="0">
+          Web
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_6_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2_6">
+          <span class="md-nav__icon md-icon"></span>
+          Web
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../web/es6/" class="md-nav__link">
+        es6语法
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../web/ali_js_style/" class="md-nav__link">
+        阿里js样式规范
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../web/node.js/" class="md-nav__link">
+        node.js文档
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../web/react/" class="md-nav__link">
+        React 开发者指南
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../dart/syntax/" class="md-nav__link">
+        Dart语法学习
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../web/react_interview/" class="md-nav__link">
+        React 面试
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../web/js_tool_method/" class="md-nav__link">
+        js 工具函数
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../web/vue_cp_react/" class="md-nav__link">
+        vue与react比较
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../web/javascript/" class="md-nav__link">
+        JavaScript 基础
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_7" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_7" id="__nav_2_7_label" tabindex="0">
+          SQL
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_7_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2_7">
+          <span class="md-nav__icon md-icon"></span>
+          SQL
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../sql/mysql_yh/" class="md-nav__link">
+        MySQL优化
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../sql/mysql_yh17/" class="md-nav__link">
+        MySQL优化
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../sql/mysql_log/" class="md-nav__link">
+        MySQL日志
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../sql/mysql_index/" class="md-nav__link">
+        MySQL索引
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../sql/mysql_pxc/" class="md-nav__link">
+        MySQL PXC集群
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../sql/mysql_use/" class="md-nav__link">
+        MySQL 数据库应用
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../sql/mysql_backups/" class="md-nav__link">
+        MySql 备份
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../sql/sql_server_master/" class="md-nav__link">
+        Sql Server 主从备份
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../sql/data_split/" class="md-nav__link">
+        数据库之互联网常用分库分表方案
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../sql/mybatis/" class="md-nav__link">
+        Mybatis使用心德
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_8" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_8" id="__nav_2_8_label" tabindex="0">
+          Linux
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_8_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2_8">
+          <span class="md-nav__icon md-icon"></span>
+          Linux
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../linux/linux/" class="md-nav__link">
+        Linux学习笔记
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../linux/often/" class="md-nav__link">
+        常用命令
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../linux/ope/" class="md-nav__link">
+        实用的Linux 命令
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_9" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_9" id="__nav_2_9_label" tabindex="0">
+          Docker
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_9_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2_9">
+          <span class="md-nav__icon md-icon"></span>
+          Docker
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../docker/docker/" class="md-nav__link">
+        Docker全科
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../docker/docker_core/" class="md-nav__link">
+        Docker 核心技术
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../docker/docker-compose/" class="md-nav__link">
+        docker和docker-compose配置常用环境
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../docker/docker-jenkins/" class="md-nav__link">
+        Docker部署Jenkins
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../docker/docker-phabricator/" class="md-nav__link">
+        Docker部署Phabricator
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_10" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_10" id="__nav_2_10_label" tabindex="0">
+          Kubernetes
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_10_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2_10">
+          <span class="md-nav__icon md-icon"></span>
+          Kubernetes
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../kubernetes/k8s_fw_rule_and_object_design/" class="md-nav__link">
+        Kubernetes架构原则和对象设计
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../kubernetes/k8s_etcd/" class="md-nav__link">
+        Kubernetes控制平面组件etcd
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../kubernetes/k8s_kube_APIServer/" class="md-nav__link">
+        深入理解Kube-APIServer
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../kubernetes/k8s_controller_manager/" class="md-nav__link">
+        kubernetes控制平面组件
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_11" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_11" id="__nav_2_11_label" tabindex="0">
+          Tool
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_11_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2_11">
+          <span class="md-nav__icon md-icon"></span>
+          Tool
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tool/git/" class="md-nav__link">
+        Git
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tool/gitusual/" class="md-nav__link">
+        Git动画展示
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tool/gitquestion/" class="md-nav__link">
+        Git问题处理
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tool/gitflow/" class="md-nav__link">
+        GitFlow
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tool/gitbook/" class="md-nav__link">
+        GitBook
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tool/gitcmr/" class="md-nav__link">
+        Git提交日志规范
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tool/markdown/" class="md-nav__link">
+        Markdown
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tool/cicd/" class="md-nav__link">
+        CI/CD
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tool/mkdocs/" class="md-nav__link">
+        mkdocs简单使用
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tool/gitstudy/" class="md-nav__link">
+        Git的黑魔法
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tool/minio/" class="md-nav__link">
+        MinIO 搭建使用
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tool/cat-monitoring/" class="md-nav__link">
+        Cat分布式监控
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+          云架构
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          云架构
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../native/" class="md-nav__link">
+        云原生
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../virtual/" class="md-nav__link">
+        虚拟化技术
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../compute/" class="md-nav__link">
+        云计算
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../apprelease/" class="md-nav__link">
+        应用部署容器化演进
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../containerlinux/" class="md-nav__link">
+        容器技术所涉及Linux内核关键技术
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_6" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3_6" id="__nav_3_6_label" tabindex="0">
+          Docker
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_6_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3_6">
+          <span class="md-nav__icon md-icon"></span>
+          Docker
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docker/docker_native/" class="md-nav__link">
+        容器管理工具Docker生态架构及部署
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docker/docker_nginx/" class="md-nav__link">
+        使用容器运行Nginx应用及Docker命令
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docker/docker_image/" class="md-nav__link">
+        Docker容器镜像
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docker/docker_image_fast/" class="md-nav__link">
+        Docker容器镜像加速器及本地容器镜像仓库
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docker/docker_container_enterprice/" class="md-nav__link">
+        Docker容器化部署企业级应用集群
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docker/docker_file/" class="md-nav__link">
+        Dockerfile精讲及新型容器镜像构建技术
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docker/docker_network/" class="md-nav__link">
+        Docker容器网络与通信原理深度解析
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docker/docker_date/" class="md-nav__link">
+        Docker容器数据持久化存储机制
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docker/docker_compose/" class="md-nav__link">
+        Docker容器服务编排利器Docker Compose应用实战
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docker/docker_swarm/" class="md-nav__link">
+        Docker主机集群化方案 Docker Swarm
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docker/docker_devops/" class="md-nav__link">
+        基于Docker容器DevOps应用方案 企业业务代码发布系统
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docker/docker_container/" class="md-nav__link">
+        轻量级或工业级容器管理工具
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_7" checked>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3_7" id="__nav_3_7_label" tabindex="0">
+          Kubernetes
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_7_label" aria-expanded="true">
+        <label class="md-nav__title" for="__nav_3_7">
+          <span class="md-nav__icon md-icon"></span>
+          Kubernetes
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        kubeadm极速部署Kubernetes
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubernetes_introduce/" class="md-nav__link">
+        kubernetes介绍与集群架构
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubernetes_way/" class="md-nav__link">
+        Kubernetes集群部署方式说明
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubernetes_master/" class="md-nav__link">
+        kubeadm部署单Master节点kubernetes集群
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubernetes_hight/" class="md-nav__link">
+        kubeadm部署高可用kubernetes集群
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubernetes_rke/" class="md-nav__link">
+        使用RKE构建企业生产级Kubernetes集群
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubernetes_hight_bin1/" class="md-nav__link">
+        Kubernetes高可用集群二进制部署（Runtime Docker）
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubernetes_hight_bin2/" class="md-nav__link">
+        Kubernetes高可用集群二进制部署（Runtime Containerd）
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubernetes_ui/" class="md-nav__link">
+        Kubernetes集群UI及主机资源监控
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubernetes_sealos/" class="md-nav__link">
+        使用sealos部署kubernetes集群并实现集群管理
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubernetes_cluster/" class="md-nav__link">
+        kubernetes集群命令语法
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubernetes_core/" class="md-nav__link">
+        Kubernetes核心概念
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubernetes_nginx_ingress_controller/" class="md-nav__link">
+        Kubernetes集群 服务暴露 Nginx Ingress Controller
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubernetes_traefik/" class="md-nav__link">
+        Kubernetes集群 服务暴露 Traefik
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubernetes_configMap_secret/" class="md-nav__link">
+        Kubernetes配置与密钥管理 ConfigMap&Secret
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubernetes_harbor/" class="md-nav__link">
+        Kubernetes集群使用容器镜像仓库Harbor
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubernetes_safety/" class="md-nav__link">
+        Kubernetes集群安全管理
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubernetes_storage_volume/" class="md-nav__link">
+        kubernetes持久化存储卷
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubernetes_storage_ceph/" class="md-nav__link">
+        kubernetes存储解决方案Ceph
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubernetes_cluster_serve/" class="md-nav__link">
+        Kubernetes集群公共服务
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubernetes_deploy_java/" class="md-nav__link">
+        kubernetes集群java项目上云部署
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubernetes_deploy_python/" class="md-nav__link">
+        kubernetes集群Python项目上云部署
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubernetes_deploy_golang/" class="md-nav__link">
+        Kubernetes集群golang项目上云部署
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubernetes_helm_prometheus/" class="md-nav__link">
+        helm部署prometheus监控系统及应用
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubernetes_logs_collect/" class="md-nav__link">
+        kubernetes日志收集方案ELK
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubernetes_zookeeper/" class="md-nav__link">
+        企业级中间件上云部署zookeeper
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubernetes_kafka/" class="md-nav__link">
+        kubernetes云原生中间件上云部署kafka
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubernetes_rokectmq/" class="md-nav__link">
+        rocketmq部署
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubernetes_helm/" class="md-nav__link">
+        Kubernetes集群包管理解决方案 Helm
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubernetes_kustomize/" class="md-nav__link">
+        Kubernetes原生配置管理利器 kustomize
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubernetes_flannel/" class="md-nav__link">
+        kubernetes集群网络解决方案 flannel
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubernetes_calico/" class="md-nav__link">
+        kubernetes集群网络解决方案 calico
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubernetes_hybridnet/" class="md-nav__link">
+        kubernetes集群 underlay 网络方案 hybridnet
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubernetes_ipv4_and_ipv6/" class="md-nav__link">
+        kubernetes版本双栈协议（IPv4&IPv6）集群部署
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubernetes_rancher/" class="md-nav__link">
+        Rancher容器云管理平台
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubernetes_kubeconfig/" class="md-nav__link">
+        使用kubeconfig管理多集群方法
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubernetes_karmada/" class="md-nav__link">
+        karmada实现k8s集群联邦
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubernetes_kubesphere/" class="md-nav__link">
+        安装kubesphere使用
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubernetes_ui/" class="md-nav__link">
+        阿里云容器服务ACK
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubernetes_devops/" class="md-nav__link">
+        基于kubernetes集群构建大中型企业CICD应用平台
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        基于KubeSphere实现DevOps
+      </a>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubernetes_gitops/" class="md-nav__link">
+        云原生多云持续交付GitOps
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubernetes_velero/" class="md-nav__link">
+        kubernetes集群备份与恢复管理利器Velero
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubernetes_kurator/" class="md-nav__link">
+        kubernetes集群舰队管理Kurator
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubernetes_openfass/" class="md-nav__link">
+        Serverless之OpenFaaS函数即服务
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubernetes_flink/" class="md-nav__link">
+        Flink基于Kubernetes部署
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubernetes_hdfs/" class="md-nav__link">
+        大数据HDFS分布式文件系统搭建
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubernetes_spark/" class="md-nav__link">
+        Spark与Kubernetes整合
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubernetes_ui/" class="md-nav__link">
+        源监控
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+          微服务
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          微服务
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../micro/fbs-lock/" class="md-nav__link">
+        分布式锁
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../micro/design/" class="md-nav__link">
+        微服务设计
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../micro/distrimsg/" class="md-nav__link">
+        分布式系统与消息的投递
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../micro/ddd/" class="md-nav__link">
+        基于DDD的微服务设计和开发实战
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../micro/kafka/" class="md-nav__link">
+        Kafka架构原理
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../micro/redis_cluster/" class="md-nav__link">
+        Redis Cluster原理
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../micro/spring-cloud-micro/" class="md-nav__link">
+        分布式架构
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+          经验分析
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          经验分析
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../exp/devops/" class="md-nav__link">
+        DevOps
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../exp/micro-service/" class="md-nav__link">
+        Micro-Service
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../exp/raft-gossip/" class="md-nav__link">
+        Raft算法和Gossip协议
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../exp/cl/" class="md-nav__link">
+        集群和负载均衡
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../exp/ai/" class="md-nav__link">
+        人工智能
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../exp/code-principle/" class="md-nav__link">
+        代码原则
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../exp/techbig/" class="md-nav__link">
+        如何成为技术大牛
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../exp/learnweetout/" class="md-nav__link">
+        程序员如何技术成长
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../exp/pt/" class="md-nav__link">
+        产品与技术
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../exp/four_deep_learning/" class="md-nav__link">
+        深度学习框架
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../exp/tl/" class="md-nav__link">
+        在阿里做了5年技术Leader，我总结出这些套路！
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../exp/cto/" class="md-nav__link">
+        CTO 技能图谱
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+          构架
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_6">
+          <span class="md-nav__icon md-icon"></span>
+          构架
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../framework/split/" class="md-nav__link">
+        构架拆分
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../framework/fgb/" class="md-nav__link">
+        分布式、高并发、多线程
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../framework/agility/" class="md-nav__link">
+        如何理解敏捷开发
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../framework/fwork/" class="md-nav__link">
+        走向架构师必备的技能
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../framework/data_middle/" class="md-nav__link">
+        数据中台的思考与总结
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../framework/algorithm-ten/" class="md-nav__link">
+        必学的 10 大算法
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+          情感
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_7">
+          <span class="md-nav__icon md-icon"></span>
+          情感
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../emotion/eq/" class="md-nav__link">
+        情商
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../emotion/workheard/" class="md-nav__link">
+        工作心得
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../emotion/lookbook/" class="md-nav__link">
+        看书
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../emotion/selfdiscipline/" class="md-nav__link">
+        自律
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../emotion/livefail/" class="md-nav__link">
+        为什么活着失败
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../emotion/emotion/" class="md-nav__link">
+        情绪管理
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../emotion/losecome/" class="md-nav__link">
+        所有的失去，都会以另一种方式归来
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../emotion/threeheart/" class="md-nav__link">
+        人生有这三种好心态
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../emotion/onepath/" class="md-nav__link">
+        余生，学会一个人走，不管有没有人陪
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../emotion/twopath/" class="md-nav__link">
+        往后余生还很精彩，别被熬夜拖垮了
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../emotion/lifetime/" class="md-nav__link">
+        心态好的人，一辈子都好
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+  
+
+
+<h1 id="kubesphere">Kubesphere应用前 账号准备<a class="headerlink" href="#kubesphere" title="Permanent link">&para;</a></h1>
+<h1 id="docker_hub">一、Docker Hub账号注册<a class="headerlink" href="#docker_hub" title="Permanent link">&para;</a></h1>
+<p><img alt="image-20221026164044647" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221026164044647.png" /></p>
+<p><img alt="image-20221026164119433" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221026164119433.png" /></p>
+<p><img alt="image-20221026164158778" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221026164158778.png" /></p>
+<p><img alt="image-20221026164540247" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221026164540247.png" /></p>
+<p><img alt="image-20221026164602299" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221026164602299.png" /></p>
+<p><img alt="image-20221026164638283" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221026164638283.png" /></p>
+<p><img alt="image-20221026164728173" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221026164728173.png" /></p>
+<h1 id="github">二、GitHub账号注册<a class="headerlink" href="#github" title="Permanent link">&para;</a></h1>
+<p><img alt="image-20221026164905539" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221026164905539.png" /></p>
+<p><img alt="image-20221026165212818" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221026165212818.png" /></p>
+<p><img alt="image-20221026165307549" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221026165307549.png" /></p>
+<p><img alt="image-20221026165328295" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221026165328295.png" /></p>
+<p><img alt="image-20221026165349757" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221026165349757.png" /></p>
+<p><img alt="image-20221026165432544" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221026165432544.png" /></p>
+<p><img alt="image-20221026165842535" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221026165842535.png" /></p>
+<p><img alt="image-20221026165919225" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221026165919225.png" /></p>
+<p><img alt="image-20221026165949811" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221026165949811.png" /></p>
+<p><img alt="image-20221026170055031" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221026170055031.png" /></p>
+<p><img alt="image-20221026170144901" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221026170144901.png" /></p>
+<p><img alt="image-20221026170249245" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221026170249245.png" /></p>
+<h1 id="kubespheredevops">基于Kubesphere实现DevOps<a class="headerlink" href="#kubespheredevops" title="Permanent link">&para;</a></h1>
+<h1 id="devops">一、DevOps介绍<a class="headerlink" href="#devops" title="Permanent link">&para;</a></h1>
+<h2 id="11">1.1 项目开发需要考虑的维度<a class="headerlink" href="#11" title="Permanent link">&para;</a></h2>
+<ul>
+<li>
+<p>dev 怎么开发</p>
+</li>
+<li>
+<p>ops 怎么运维</p>
+</li>
+</ul>
+<blockquote>
+<p>参考项目链接：<a href="https://github.com/kubesphere/devops-maven-sample">https://github.com/kubesphere/devops-maven-sample</a></p>
+</blockquote>
+<h2 id="12_devops">1.2 DevOps是什么<a class="headerlink" href="#12_devops" title="Permanent link">&para;</a></h2>
+<p><img alt="image-20221026122520801" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221026122520801.png" /></p>
+<h1 id="cicd">二、CI/CD介绍<a class="headerlink" href="#cicd" title="Permanent link">&para;</a></h1>
+<p><img alt="image-20221031094406755" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221031094406755.png" /></p>
+<h2 id="21_continuous_integration">2.1 持续集成（Continuous Integration）<a class="headerlink" href="#21_continuous_integration" title="Permanent link">&para;</a></h2>
+<p>持续集成是指软件个人的部分向软件整体部分交付，频繁进行集成以便更快地发现其中错误。</p>
+<p>CI需要具备这些：</p>
+<ul>
+<li>全面的自动化测试 </li>
+</ul>
+<p>这是实践持续集成&amp;持续部署的基础，同时，选择合适的自动化测试工具也很重要</p>
+<ul>
+<li>灵活的基础设施</li>
+</ul>
+<p>容器、虚拟机的存在让开发人员和QA人员不必再大费周张去做IT基础设施环境的准备</p>
+<ul>
+<li>版本控制工具</li>
+</ul>
+<p>如：Git、SNV、Gitlab等</p>
+<ul>
+<li>自动化的构建和软件发布流程工具</li>
+</ul>
+<p>如：Jenkins Gitlab Tekton等</p>
+<ul>
+<li>反馈机制</li>
+</ul>
+<p>如果构建/测试失败，可以快速地反馈到相关负责人，以尽快速度解决问题，实现软件开发稳定版本推出。</p>
+<h2 id="22_continuous_delivery">2.2 持续交付（Continuous Delivery ）<a class="headerlink" href="#22_continuous_delivery" title="Permanent link">&para;</a></h2>
+<p>持续交付在持续集成的基础上，将集成后的代码部署到更贴近真实运行环境的类生产环境中，持续交付优先于整个产品生命周期的软件部署，建立在高水平自动化持续集成之上。</p>
+<ul>
+<li>快速发布</li>
+</ul>
+<p>能够应对业务需求，并更快地实现软件价值，实现编码、测试、上线、交付的频繁迭代周期缩短，同时获得迅速反馈</p>
+<ul>
+<li>高质量软件发布标准 </li>
+</ul>
+<p>整个交付过程标准化、可重复、可靠</p>
+<ul>
+<li>整个交付过程进度可视化</li>
+</ul>
+<p>方便团队成员了解项目成熟度</p>
+<ul>
+<li>更先进的团队协作方式</li>
+</ul>
+<p>从需求分析、产品的用户体验到交互设计、开发、测试、运维等角色密切协作，相比于传统的的开发模式，减少浪费</p>
+<h2 id="23_continuous_deployment">2.3 持续部署（Continuous Deployment）<a class="headerlink" href="#23_continuous_deployment" title="Permanent link">&para;</a></h2>
+<p>持续部署是指当交付的代码通过评审之后，自动部署到生产环境中。</p>
+<p>持续部署是持续交付的最高阶段。这就意味着，所有通过了一系列的自动化测试的发动都将自动部署到生产环境。它也可以被称为Continuous Release</p>
+<p>持续部署主要好处是，可以相对独立地部署新的功能，并能快速地收集真实用户的反馈。</p>
+<p><img alt="image-20221026121709183" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221026121709183.png" /></p>
+<h1 id="kubesphere_devops">三、KubeSphere DevOps凭证管理<a class="headerlink" href="#kubesphere_devops" title="Permanent link">&para;</a></h1>
+<h2 id="31">3.1 凭证介绍<a class="headerlink" href="#31" title="Permanent link">&para;</a></h2>
+<p>凭证是包含敏感信息的对象，例如用户名和密码、SSH 密钥和令牌 (Token)。当 KubeSphere DevOps 流水线运行时，会与外部环境中的对象进行交互，以执行一系列任务，包括拉取代码、推送和拉取镜像以及运行脚本等。此过程中需要提供相应的凭证，而这些凭证不会明文出现在流水线中。</p>
+<p>具有必要权限的 DevOps 项目用户可以为 Jenkins 流水线配置凭证。用户在 DevOps 项目中添加或配置这些凭证后，便可以在 DevOps 项目中使用这些凭证与第三方应用程序进行交互。</p>
+<p>目前，您可以在 DevOps 项目中创建以下 4 种类型的凭证：</p>
+<ul>
+<li><strong>用户名和密码</strong>：用户名和密码，可以作为单独的组件处理，或者作为用冒号分隔的字符串（格式为 <code>username:password</code>）处理，例如 GitHub、GitLab 和 Docker Hub 的帐户。</li>
+<li><strong>SSH 密钥</strong>：带有私钥的用户名，SSH 公钥/私钥对。</li>
+<li><strong>访问令牌</strong>：具有访问权限的令牌。</li>
+<li><strong>kubeconfig</strong>：用于配置跨集群认证。如果选择此类型，将自动获取当前 Kubernetes 集群的 kubeconfig 文件内容，并自动填充在当前页面对话框中。</li>
+</ul>
+<p>本教程演示如何在 DevOps 项目中创建和管理凭证。有关如何使用凭证的更多信息，请参见<a href="https://v3-2.docs.kubesphere.io/zh/docs/devops-user-guide/how-to-use/create-a-pipeline-using-jenkinsfile/">使用 Jenkinsfile 创建流水线</a>和<a href="https://v3-2.docs.kubesphere.io/zh/docs/devops-user-guide/how-to-use/create-a-pipeline-using-graphical-editing-panel/">使用图形编辑面板创建流水线</a>。</p>
+<h2 id="32">3.2 准备工作<a class="headerlink" href="#32" title="Permanent link">&para;</a></h2>
+<ul>
+<li>您已启用 <a href="https://v3-2.docs.kubesphere.io/zh/docs/pluggable-components/devops/">KubeSphere DevOps 系统</a>。</li>
+<li>您需要有一个企业空间、一个 DevOps 项目和一个用户 (<code>project-regular</code>)，并已邀请此帐户至 DevOps 项目中且授予 <code>operator</code> 角色。如果尚未准备好，请参见<a href="https://v3-2.docs.kubesphere.io/zh/docs/quick-start/create-workspace-and-project/">创建企业空间、项目、用户和角色</a>。</li>
+</ul>
+<h2 id="33">3.3 创建凭证<a class="headerlink" href="#33" title="Permanent link">&para;</a></h2>
+<p>以 <code>project-regular</code> 身份登录 KubeSphere 控制台。进入您的 DevOps 项目，选择**凭证**，然后点击**创建**。</p>
+<h3 id="331_docker_hub">3.3.1 创建 Docker Hub 凭证<a class="headerlink" href="#331_docker_hub" title="Permanent link">&para;</a></h3>
+<ol>
+<li>在弹出的对话框中输入以下信息。</li>
+<li><strong>名称</strong>：设置可以在流水线中使用的 ID，例如 <code>dockerhub-id</code>。</li>
+<li><strong>类型</strong>：选择**用户名和密码**。</li>
+<li><strong>用户名</strong>：您的 Docker Hub 帐户（即 Docker ID）。</li>
+<li><strong>密码/令牌</strong>：您的 Docker Hub 密码。</li>
+<li><strong>描述信息</strong>：凭证的简介。</li>
+<li>完成操作后点击**确定**。</li>
+</ol>
+<p><img alt="image-20221027165442735" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221027165442735.png" /></p>
+<p><img alt="image-20221027165531852" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221027165531852.png" /></p>
+<p><img alt="image-20221027165550931" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221027165550931.png" /></p>
+<h3 id="332_github">3.3.2 创建 GitHub 凭证<a class="headerlink" href="#332_github" title="Permanent link">&para;</a></h3>
+<p>同样地，按照上述相同步骤创建 GitHub 凭证。设置不同的**名称**（例如 <code>github-id</code>），<strong>类型**同样选择**用户名和密码</strong>。分别在**用户名**和 **密码/令牌**中输入您的 GitHub 用户名和令牌。</p>
+<blockquote>
+<ul>
+<li>自 2021 年 8 月起，GitHub 要求使用基于令牌的身份验证，此处需要输入令牌，而非 GitHub 密码。关于如如何生成令牌，请参阅<a href="https://docs.github.com/cn/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token">创建个人访问令牌</a>。</li>
+<li>如果您的帐户或密码中包含任何特殊字符，例如 <code>@</code> 和 <code>$</code>，可能会因为无法识别而在流水线运行时导致错误。在这种情况下，您需要先在一些第三方网站（例如 <a href="https://www.urlencoder.org/">urlencoder</a>）上对帐户或密码进行编码，然后将输出结果复制粘贴作为您的凭证信息。</li>
+</ul>
+</blockquote>
+<p><img alt="image-20221027165713572" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221027165713572.png" /></p>
+<p><img alt="image-20221027170151637" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221027170151637.png" /></p>
+<h3 id="333_kubeconfig">3.3.3 创建 kubeconfig 凭证<a class="headerlink" href="#333_kubeconfig" title="Permanent link">&para;</a></h3>
+<p>同样地，按照上述相同步骤创建 kubeconfig 凭证。设置不同的凭证 ID（例如 <code>demo-kubeconfig</code>）并选择 <strong>kubeconfig</strong>。</p>
+<blockquote>
+<p>用于配置集群访问的文件称为 kubeconfig 文件。这是引用配置文件的通用方法。有关更多信息，请参见 <a href="https://kubernetes.io/zh/docs/concepts/configuration/organize-cluster-access-kubeconfig/">Kubernetes 官方文档</a>。您可以创建 kubeconfig 凭证来访问当前 Kubernetes 集群，该凭证将在流水线中使用。您不需要更改该文件，因为 KubeSphere 会自动使用当前 Kubernetes 集群的 kubeconfig 填充该字段。访问其他集群时，您可能需要更改 kubeconfig。</p>
+</blockquote>
+<p><img alt="image-20221027170223311" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221027170223311.png" /></p>
+<p><img alt="image-20221027170323070" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221027170323070.png" /></p>
+<h3 id="334">3.3.4 查看和管理凭证<a class="headerlink" href="#334" title="Permanent link">&para;</a></h3>
+<ol>
+<li>凭证创建后，会在列表中显示。</li>
+<li>点击任意一个凭证，进入其详情页面，您可以查看帐户详情和与此凭证相关的所有事件。</li>
+<li>您也可以在此页面上编辑或删除凭证。请注意，编辑凭证时，KubeSphere 不会显示现有用户名或密码信息。如果输入新的用户名和密码，则前一个将被覆盖。</li>
+</ol>
+<h1 id="sonarqube">四、将SonarQube集成到流水线<a class="headerlink" href="#sonarqube" title="Permanent link">&para;</a></h1>
+<p><a href="https://www.sonarqube.org/">SonarQube</a> 是一种主流的代码质量持续检测工具。您可以将其用于代码库的静态和动态分析。SonarQube 集成到 KubeSphere 流水线后，如果在运行的流水线中检测到问题，您可以直接在仪表板上查看常见代码问题，例如 Bug 和漏洞。</p>
+<h2 id="41">4.1 准备工作<a class="headerlink" href="#41" title="Permanent link">&para;</a></h2>
+<p>您需要<a href="https://v3-2.docs.kubesphere.io/zh/docs/pluggable-components/devops/">启用 KubeSphere DevOps 系统</a>。</p>
+<h2 id="42_sonarqube">4.2 安装 SonarQube 服务器<a class="headerlink" href="#42_sonarqube" title="Permanent link">&para;</a></h2>
+<p>要将 SonarQube 集成到您的流水线，必须先安装 SonarQube 服务器。</p>
+<p>1.请先安装 Helm，以便后续使用该工具安装 SonarQube。例如，运行以下命令安装 Helm 3：</p>
+<div class="highlight"><pre><span></span><code><span class="c"># curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash</span>
+</code></pre></div>
+<p>2.查看helm版本</p>
+<div class="highlight"><pre><span></span><code><span class="c"># helm version</span>
+
+<span class="n">version</span><span class="p">.</span><span class="n">BuildInfo</span><span class="p">{</span><span class="n">Version</span><span class="p">:</span><span class="s2">&quot;v3.10.1&quot;</span><span class="p">,</span> <span class="n">GitCommit</span><span class="p">:</span><span class="s2">&quot;9f88ccb6aee40b9a0535fcc7efea6055e1ef72c9&quot;</span><span class="p">,</span> <span class="n">GitTreeState</span><span class="p">:</span><span class="s2">&quot;clean&quot;</span><span class="p">,</span> <span class="n">GoVersion</span><span class="p">:</span><span class="s2">&quot;go1.18.7&quot;</span><span class="p">}</span>
+</code></pre></div>
+<p>3.执行以下命令安装 SonarQube 服务器</p>
+<div class="highlight"><pre><span></span><code><span class="c"># helm upgrade --install sonarqube sonarqube --repo https://charts.kubesphere.io/main -n kubesphere-devops-system  --create-namespace --set service.type=NodePort</span>
+</code></pre></div>
+<p>4.您会获取以下提示内容</p>
+<div class="highlight"><pre><span></span><code><span class="p">[</span><span class="n">root</span><span class="nv">@k8s</span><span class="n">-master01</span> <span class="p">~]</span><span class="c"># kubectl get svc -n kubesphere-devops-system</span>
+<span class="n">NAME</span>                            <span class="nb">TYPE </span>       <span class="n">CLUSTER-IP</span>    <span class="n">EXTERNAL-IP</span>   <span class="n">PORT</span><span class="p">(</span><span class="n">S</span><span class="p">)</span>          <span class="n">AGE</span>
+<span class="n">devops-apiserver</span>                <span class="n">ClusterIP</span>   <span class="n">10</span><span class="p">.</span><span class="n">96</span><span class="p">.</span><span class="n">2</span><span class="p">.</span><span class="n">56</span>    <span class="p">&lt;</span><span class="n">none</span><span class="p">&gt;</span>        <span class="n">9090</span><span class="p">/</span><span class="n">TCP</span>         <span class="n">5d16h</span>
+<span class="n">devops-jenkins</span>                  <span class="n">NodePort</span>    <span class="n">10</span><span class="p">.</span><span class="n">96</span><span class="p">.</span><span class="n">1</span><span class="p">.</span><span class="n">111</span>   <span class="p">&lt;</span><span class="n">none</span><span class="p">&gt;</span>        <span class="n">80</span><span class="p">:</span><span class="n">30180</span><span class="p">/</span><span class="n">TCP</span>     <span class="n">5d16h</span>
+<span class="n">devops-jenkins-agent</span>            <span class="n">ClusterIP</span>   <span class="n">10</span><span class="p">.</span><span class="n">96</span><span class="p">.</span><span class="n">2</span><span class="p">.</span><span class="n">94</span>    <span class="p">&lt;</span><span class="n">none</span><span class="p">&gt;</span>        <span class="n">50000</span><span class="p">/</span><span class="n">TCP</span>        <span class="n">5d16h</span>
+<span class="n">s2ioperator-metrics-service</span>     <span class="n">ClusterIP</span>   <span class="n">10</span><span class="p">.</span><span class="n">96</span><span class="p">.</span><span class="n">2</span><span class="p">.</span><span class="n">41</span>    <span class="p">&lt;</span><span class="n">none</span><span class="p">&gt;</span>        <span class="n">8080</span><span class="p">/</span><span class="n">TCP</span>         <span class="n">5d16h</span>
+<span class="n">s2ioperator-trigger-service</span>     <span class="n">ClusterIP</span>   <span class="n">10</span><span class="p">.</span><span class="n">96</span><span class="p">.</span><span class="n">2</span><span class="p">.</span><span class="n">217</span>   <span class="p">&lt;</span><span class="n">none</span><span class="p">&gt;</span>        <span class="n">8081</span><span class="p">/</span><span class="n">TCP</span>         <span class="n">5d16h</span>
+<span class="n">sonarqube-postgresql</span>            <span class="n">ClusterIP</span>   <span class="n">10</span><span class="p">.</span><span class="n">96</span><span class="p">.</span><span class="n">2</span><span class="p">.</span><span class="n">172</span>   <span class="p">&lt;</span><span class="n">none</span><span class="p">&gt;</span>        <span class="n">5432</span><span class="p">/</span><span class="n">TCP</span>         <span class="n">3m38s</span>
+<span class="n">sonarqube-postgresql-headless</span>   <span class="n">ClusterIP</span>   <span class="n">None</span>          <span class="p">&lt;</span><span class="n">none</span><span class="p">&gt;</span>        <span class="n">5432</span><span class="p">/</span><span class="n">TCP</span>         <span class="n">3m38s</span>
+<span class="n">sonarqube-sonarqube</span>             <span class="n">NodePort</span>    <span class="n">10</span><span class="p">.</span><span class="n">96</span><span class="p">.</span><span class="n">0</span><span class="p">.</span><span class="n">120</span>   <span class="p">&lt;</span><span class="n">none</span><span class="p">&gt;</span>        <span class="n">9000</span><span class="p">:</span><span class="n">30058</span><span class="p">/</span><span class="n">TCP</span>   <span class="n">3m38s</span>
+<span class="n">webhook-server-service</span>          <span class="n">ClusterIP</span>   <span class="n">10</span><span class="p">.</span><span class="n">96</span><span class="p">.</span><span class="n">3</span><span class="p">.</span><span class="n">74</span>    <span class="p">&lt;</span><span class="n">none</span><span class="p">&gt;</span>        <span class="n">443</span><span class="p">/</span><span class="n">TCP</span>          <span class="n">5d16h</span>
+</code></pre></div>
+<h2 id="43_sonarqube">4.3 获取 SonarQube 控制台地址<a class="headerlink" href="#43_sonarqube" title="Permanent link">&para;</a></h2>
+<p>1.执行以下命令以获取 SonarQube NodePort</p>
+<div class="highlight"><pre><span></span><code><span class="c"># export NODE_PORT=$(kubectl get --namespace kubesphere-devops-system -o jsonpath=&quot;{.spec.ports[0].nodePort}&quot; services sonarqube-sonarqube)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c"># export NODE_IP=$(kubectl get nodes --namespace kubesphere-devops-system -o jsonpath=&quot;{.items[0].status.addresses[0].address}&quot;)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c"># echo http://$NODE_IP:$NODE_PORT</span>
+</code></pre></div>
+<p>2.您可以获得如下输出（本示例中端口号为 <code>30058</code>，可能与您的端口号不同）</p>
+<div class="highlight"><pre><span></span><code><span class="n">http</span><span class="p">://</span><span class="n">192</span><span class="p">.</span><span class="n">168</span><span class="p">.</span><span class="n">10</span><span class="p">.</span><span class="n">141</span><span class="p">:</span><span class="n">30058</span>
+</code></pre></div>
+<h2 id="44_sonarqube">4.4 配置 SonarQube 服务器<a class="headerlink" href="#44_sonarqube" title="Permanent link">&para;</a></h2>
+<h3 id="441_sonarqube">4.4.1 访问 SonarQube 控制台<a class="headerlink" href="#441_sonarqube" title="Permanent link">&para;</a></h3>
+<p>1.执行以下命令查看 SonarQube 的状态。请注意，只有在 SonarQube 启动并运行后才能访问 SonarQube 控制台。</p>
+<div class="highlight"><pre><span></span><code><span class="p">[</span><span class="n">root</span><span class="nv">@k8s</span><span class="n">-master01</span> <span class="p">~]</span><span class="c"># kubectl get pods -n kubesphere-devops-system</span>
+<span class="n">NAME</span>                                  <span class="n">READY</span>   <span class="n">STATUS</span>      <span class="n">RESTARTS</span>         <span class="n">AGE</span>
+<span class="n">sonarqube-postgresql</span><span class="p">-</span><span class="n">0</span>                <span class="n">1</span><span class="p">/</span><span class="n">1</span>     <span class="n">Running</span>     <span class="n">0</span>                <span class="n">37m</span>
+<span class="n">sonarqube-sonarqube-df8d79d5c-hxxbx</span>   <span class="n">1</span><span class="p">/</span><span class="n">1</span>     <span class="n">Running</span>     <span class="n">10</span> <span class="p">(</span><span class="n">2m34s</span> <span class="n">ago</span><span class="p">)</span>   <span class="n">37m</span>
+</code></pre></div>
+<p>2.在浏览器中访问 SonarQube 控制台 <code>http://&lt;Node IP&gt;:&lt;NodePort&gt;</code>。</p>
+<p><img alt="image-20221027180700822" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221027180700822.png" /></p>
+<p>3.点击右上角的 <strong>Log in</strong>，然后使用默认帐户 <code>admin/admin</code> 登录。</p>
+<blockquote>
+<p>取决于您的实例的部署位置，您可能需要设置必要的端口转发规则，并在您的安全组中放行该端口，以便访问 SonarQube。</p>
+</blockquote>
+<p><img alt="image-20221027180719770" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221027180719770.png" /></p>
+<p><img alt="image-20221027180859117" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221027180859117.png" /></p>
+<h3 id="442_sonarqube_token">4.4.2 创建 SonarQube 管理员令牌 (Token)<a class="headerlink" href="#442_sonarqube_token" title="Permanent link">&para;</a></h3>
+<p>1.点击右上角字母 <strong>A</strong>，然后从菜单中选择 <strong>My Account</strong> 以转到 <strong>Profile</strong> 页面。</p>
+<p><img alt="image-20221027181023772" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221027181023772.png" /></p>
+<p><img alt="image-20221027181046300" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221027181046300.png" /></p>
+<p>2.点击 <strong>Security</strong> 并输入令牌名称，例如 <code>kubesphere</code>。</p>
+<p><img alt="image-20221027181424797" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221027181424797.png" /></p>
+<p>3.点击 <strong>Generate</strong> 并复制此令牌。</p>
+<p><img alt="image-20221027181543213" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221027181543213.png" /></p>
+<div class="highlight"><pre><span></span><code><span class="n">c3ee79a4c4b25bd03867db735dc439e3bb726426</span>
+</code></pre></div>
+<blockquote>
+<p>如提示所示，您无法再次查看此令牌，因此请确保复制成功。</p>
+</blockquote>
+<h3 id="443_webhook">4.4.3  创建 Webhook 服务器<a class="headerlink" href="#443_webhook" title="Permanent link">&para;</a></h3>
+<p>1.执行以下命令获取 SonarQube Webhook 的地址</p>
+<div class="highlight"><pre><span></span><code><span class="c"># export NODE_PORT=$(kubectl get --namespace kubesphere-devops-system -o jsonpath=&quot;{.spec.ports[0].nodePort}&quot; services devops-jenkins)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c"># export NODE_IP=$(kubectl get nodes --namespace kubesphere-devops-system -o jsonpath=&quot;{.items[0].status.addresses[0].address}&quot;)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c"># echo http://$NODE_IP:$NODE_PORT/sonarqube-webhook/</span>
+</code></pre></div>
+<p>2.输出结果</p>
+<div class="highlight"><pre><span></span><code><span class="n">http</span><span class="p">://</span><span class="n">192</span><span class="p">.</span><span class="n">168</span><span class="p">.</span><span class="n">10</span><span class="p">.</span><span class="n">141</span><span class="p">:</span><span class="n">30180</span><span class="p">/</span><span class="n">sonarqube-webhook</span><span class="p">/</span>
+</code></pre></div>
+<p>3.依次点击 <strong>Administration</strong>、<strong>Configuration</strong> 和 <strong>Webhooks</strong> 创建一个 Webhook</p>
+<p><img alt="image-20221027182301953" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221027182301953.png" /></p>
+<p>4.点击 <strong>Create</strong></p>
+<p><img alt="image-20221027182342776" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221027182342776.png" /></p>
+<p>5.在弹出的对话框中输入 <strong>Name</strong> 和 <strong>Jenkins Console URL</strong>（即 SonarQube Webhook 地址）。点击 <strong>Create</strong> 完成操作。</p>
+<p><img alt="image-20221027182504582" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221027182504582.png" /></p>
+<p><img alt="image-20221027182526782" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221027182526782.png" /></p>
+<h3 id="444_sonarqube_ks-installer">4.4.4 将 SonarQube 配置添加到 ks-installer<a class="headerlink" href="#444_sonarqube_ks-installer" title="Permanent link">&para;</a></h3>
+<p>1.执行以下命令编辑 <code>ks-installer</code></p>
+<div class="highlight"><pre><span></span><code><span class="c"># kubectl edit cc -n kubesphere-system ks-installer</span>
+</code></pre></div>
+<p>2.搜寻至 <code>devops</code>。添加字段 <code>sonarqube</code> 并在其下方指定 <code>externalSonarUrl</code> 和 <code>externalSonarToken</code>。</p>
+<div class="highlight"><pre><span></span><code><span class="n">devops</span><span class="p">:</span>
+    <span class="n">enabled</span><span class="p">:</span> <span class="n">true</span>
+    <span class="n">jenkinsJavaOpts_MaxRAM</span><span class="p">:</span> <span class="n">2g</span>
+    <span class="n">jenkinsJavaOpts_Xms</span><span class="p">:</span> <span class="n">512m</span>
+    <span class="n">jenkinsJavaOpts_Xmx</span><span class="p">:</span> <span class="n">512m</span>
+    <span class="n">jenkinsMemoryLim</span><span class="p">:</span> <span class="n">2Gi</span>
+    <span class="n">jenkinsMemoryReq</span><span class="p">:</span> <span class="n">1500Mi</span>
+    <span class="n">jenkinsVolumeSize</span><span class="p">:</span> <span class="n">8Gi</span>
+    <span class="n">sonarqube</span><span class="p">:</span>
+      <span class="n">externalSonarUrl</span><span class="p">:</span> <span class="n">http</span><span class="p">://</span><span class="n">192</span><span class="p">.</span><span class="n">168</span><span class="p">.</span><span class="n">10</span><span class="p">.</span><span class="n">141</span><span class="p">:</span><span class="n">30058</span>
+      <span class="n">externalSonarToken</span><span class="p">:</span> <span class="n">c3ee79a4c4b25bd03867db735dc439e3bb726426</span>
+</code></pre></div>
+<p>3.完成操作后保存此文件</p>
+<h3 id="445_sonarqube_jenkins">4.4.5 将 SonarQube 服务器添加至 Jenkins<a class="headerlink" href="#445_sonarqube_jenkins" title="Permanent link">&para;</a></h3>
+<p>1.执行以下命令获取 Jenkins 的地址</p>
+<div class="highlight"><pre><span></span><code><span class="c"># export NODE_PORT=$(kubectl get --namespace kubesphere-devops-system -o jsonpath=&quot;{.spec.ports[0].nodePort}&quot; services devops-jenkins)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c"># export NODE_IP=$(kubectl get nodes --namespace kubesphere-devops-system -o jsonpath=&quot;{.items[0].status.addresses[0].address}&quot;)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c"># echo http://$NODE_IP:$NODE_PORT</span>
+</code></pre></div>
+<p>2.可以获得以下输出，获取 Jenkins 的端口号</p>
+<div class="highlight"><pre><span></span><code><span class="n">http</span><span class="p">://</span><span class="n">192</span><span class="p">.</span><span class="n">168</span><span class="p">.</span><span class="n">10</span><span class="p">.</span><span class="n">141</span><span class="p">:</span><span class="n">30180</span>
+</code></pre></div>
+<p>3.请使用地址 <code>http://&lt;Node IP&gt;:30180</code> 访问 Jenkins。安装 KubeSphere 时，默认情况下也会安装 Jenkins 仪表板。此外，Jenkins 还配置有 KubeSphere LDAP，这意味着您可以直接使用 KubeSphere 帐户（例如 <code>admin/P@88w0rd</code>）登录 Jenkins。有关配置 Jenkins 的更多信息，请参见 <a href="https://v3-2.docs.kubesphere.io/zh/docs/devops-user-guide/how-to-use/jenkins-setting/">Jenkins 系统设置</a>。</p>
+<blockquote>
+<p>取决于您的实例的部署位置，您可能需要设置必要的端口转发规则，并在您的安全组中放行端口 <code>30180</code>，以便访问 Jenkins。</p>
+</blockquote>
+<p><img alt="image-20221027183806808" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221027183806808.png" /></p>
+<p>4.可以前往**系统管理**下的 <strong>Manage Credentials</strong> 并点击 <strong>Stores scoped to Jenkins</strong> 下的 <strong>Jenkins</strong>，再点击**全局凭据 (unrestricted)<strong>，然后点击左侧导航栏的**添加凭据</strong>，参考上方第二张截图用 SonarQube 管理员令牌添加凭证。添加凭证后，从 <strong>Server authentication token</strong> 旁边的下拉列表中选择该凭证。</p>
+<p><img alt="image-20221027185005042" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221027185005042.png" /></p>
+<p><img alt="image-20221027185200948" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221027185200948.png" /></p>
+<p><img alt="image-20221027185246499" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221027185246499.png" /></p>
+<p><img alt="image-20221027185323676" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221027185323676.png" /></p>
+<p><img alt="image-20221027185345516" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221027185345516.png" /></p>
+<p><img alt="image-20221027185807991" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221027185807991.png" /></p>
+<p><img alt="image-20221027185836783" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221027185836783.png" /></p>
+<p>5.点击左侧导航栏中的**系统管理**</p>
+<p><img alt="image-20221027184323977" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221027184323977.png" /></p>
+<p>6.向下翻页找到并点击**系统配置**</p>
+<p><img alt="image-20221027184409988" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221027184409988.png" /></p>
+<p>6.搜寻到**SonarQube Server**,然后点击Add SonarQube</p>
+<p><img alt="image-20221027184516685" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221027184516685.png" /></p>
+<p>7.输入 <strong>Name</strong> 和 <strong>Server URL</strong> (<code>http://&lt;Node IP&gt;:&lt;NodePort&gt;</code>)。点击**添加**，选择 <strong>Jenkins</strong>，然后在弹出的对话框中用 SonarQube 管理员令牌创建凭证（如下方第二张截图所示）。创建凭证后，从 <strong>Server authentication token</strong> 旁边的下拉列表中选择该凭证。点击**应用**完成操作。</p>
+<p><img alt="image-20221027190142850" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221027190142850.png" /></p>
+<h3 id="446_sonarqubeurl_kubesphere">4.4.6 将 sonarqubeURL 添加到 KubeSphere 控制台<a class="headerlink" href="#446_sonarqubeurl_kubesphere" title="Permanent link">&para;</a></h3>
+<p>您需要指定 <code>sonarqubeURL</code>，以便可以直接从 KubeSphere 控制台访问 SonarQube</p>
+<p>1.执行以下命令</p>
+<div class="highlight"><pre><span></span><code><span class="c"># kubectl edit  cm -n kubesphere-system  ks-console-config</span>
+</code></pre></div>
+<p>2.搜寻到 <code>data.client.enableKubeConfig</code>，在下方添加 <code>devops</code> 字段并指定 <code>sonarqubeURL</code></p>
+<div class="highlight"><pre><span></span><code><span class="n">apiVersion</span><span class="p">:</span> <span class="n">v1</span>
+<span class="n">data</span><span class="p">:</span>
+  <span class="n">local_config</span><span class="p">.</span><span class="n">yaml</span><span class="p">:</span> <span class="p">|</span>
+    <span class="n">server</span><span class="p">:</span>
+      <span class="n">http</span><span class="p">:</span>
+        <span class="n">hostname</span><span class="p">:</span> <span class="n">localhost</span>
+        <span class="n">port</span><span class="p">:</span> <span class="n">8000</span>
+        <span class="n">static</span><span class="p">:</span>
+          <span class="n">production</span><span class="p">:</span>
+            <span class="p">/</span><span class="n">public</span><span class="p">:</span> <span class="n">server</span><span class="p">/</span><span class="n">public</span>
+            <span class="p">/</span><span class="n">assets</span><span class="p">:</span> <span class="n">dist</span><span class="p">/</span><span class="n">assets</span>
+            <span class="p">/</span><span class="n">dist</span><span class="p">:</span> <span class="n">dist</span>
+      <span class="n">redis</span><span class="p">:</span>
+        <span class="n">port</span><span class="p">:</span> <span class="n">6379</span>
+        <span class="n">host</span><span class="p">:</span> <span class="n">redis</span><span class="p">.</span><span class="n">kubesphere-system</span><span class="p">.</span><span class="n">svc</span>
+      <span class="n">redisTimeout</span><span class="p">:</span> <span class="n">5000</span>
+      <span class="n">sessionTimeout</span><span class="p">:</span> <span class="n">7200000</span>
+    <span class="n">client</span><span class="p">:</span>
+      <span class="n">version</span><span class="p">:</span>
+        <span class="n">kubesphere</span><span class="p">:</span> <span class="n">v3</span><span class="p">.</span><span class="n">1</span><span class="p">.</span><span class="n">0</span>
+        <span class="n">kubernetes</span><span class="p">:</span> <span class="n">v1</span><span class="p">.</span><span class="n">24</span><span class="p">.</span><span class="n">0</span>
+        <span class="n">openpitrix</span><span class="p">:</span> <span class="n">v3</span><span class="p">.</span><span class="n">1</span><span class="p">.</span><span class="n">0</span>
+      <span class="n">enableKubeConfig</span><span class="p">:</span> <span class="n">true</span>
+      <span class="n">devops</span><span class="p">:</span> <span class="n">手动添加</span>
+        <span class="n">sonarqubeURL</span><span class="p">:</span> <span class="n">http</span><span class="p">://</span><span class="n">192</span><span class="p">.</span><span class="n">168</span><span class="p">.</span><span class="n">10</span><span class="p">.</span><span class="n">141</span><span class="p">:</span><span class="n">30058</span>
+    <span class="n">defaultClusterName</span><span class="p">:</span> <span class="k">default</span>
+</code></pre></div>
+<p>3.保存该文件</p>
+<h3 id="447">4.4.7 重启服务<a class="headerlink" href="#447" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c"># kubectl -n kubesphere-devops-system rollout restart deploy devops-apiserver</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c"># kubectl -n kubesphere-system rollout restart deploy ks-console</span>
+</code></pre></div>
+<h3 id="448_sonarqube_token">4.4.8 为新项目创建 SonarQube Token<a class="headerlink" href="#448_sonarqube_token" title="Permanent link">&para;</a></h3>
+<p>需要一个 SonarQube 令牌，以便您的流水线可以在运行时与 SonarQube 通信。</p>
+<p>1.在 SonarQube 控制台上，点击 <strong>Create new project</strong>。</p>
+<p><img alt="image-20221027225949333" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221027225949333.png" /></p>
+<p><img alt="image-20221027230313253" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221027230313253.png" /></p>
+<p><img alt="image-20221027230416982" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221027230416982.png" /></p>
+<p><img alt="image-20221027230540439" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221027230540439.png" /></p>
+<p><img alt="image-20221027230601587" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221027230601587.png" /></p>
+<div class="highlight"><pre><span></span><code><span class="n">4c5c650e18a80f699d5301773230773ad6e17924</span>
+</code></pre></div>
+<p>2.创建令牌后，点击 <strong>Continue</strong></p>
+<p><img alt="image-20221027230705284" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221027230705284.png" /></p>
+<p>3.分别选择 <strong>Java</strong> 和 <strong>Maven</strong>。</p>
+<blockquote>
+<p>复制下图所示绿色框中的序列号，如果要在流水线中使用，则需要在<a href="https://v3-2.docs.kubesphere.io/zh/docs/devops-user-guide/how-to-use/credential-management/#创建凭证">凭证</a>中添加此序列号。</p>
+</blockquote>
+<p><img alt="image-20221027230847094" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221027230847094.png" /></p>
+<p><img alt="image-20221027230917037" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221027230917037.png" /></p>
+<div class="highlight"><pre><span></span><code><span class="n">mvn</span> <span class="n">sonar</span><span class="p">:</span><span class="n">sonar</span> <span class="p">\</span>
+  <span class="n">-Dsonar</span><span class="p">.</span><span class="n">projectKey</span><span class="p">=</span><span class="n">java-demo</span> <span class="p">\</span>
+  <span class="n">-Dsonar</span><span class="p">.</span><span class="n">host</span><span class="p">.</span><span class="n">url</span><span class="p">=</span><span class="n">http</span><span class="p">://</span><span class="n">192</span><span class="p">.</span><span class="n">168</span><span class="p">.</span><span class="n">10</span><span class="p">.</span><span class="n">141</span><span class="p">:</span><span class="n">30058</span> <span class="p">\</span>
+  <span class="n">-Dsonar</span><span class="p">.</span><span class="n">login</span><span class="p">=</span><span class="n">4c5c650e18a80f699d5301773230773ad6e17924</span>
+</code></pre></div>
+<h1 id="kubesphere_1">五、为 KubeSphere 流水线设置电子邮件服务器<a class="headerlink" href="#kubesphere_1" title="Permanent link">&para;</a></h1>
+<p>内置 Jenkins 无法与平台通知系统共享相同的电子邮件配置。因此，您需要单独为 KubeSphere DevOps 流水线配置电子邮件服务器设置。</p>
+<h2 id="51">5.1 准备工作<a class="headerlink" href="#51" title="Permanent link">&para;</a></h2>
+<ul>
+<li>您需要启用 <a href="https://v3-2.docs.kubesphere.io/zh/docs/pluggable-components/devops/">KubeSphere DevOps 系统</a>。</li>
+<li>您需要一个具有**集群管理**权限的帐户。例如，您可以直接以 <code>admin</code> 身份登录控制台或者创建具有该权限的新角色并将该角色分配给一个用户。</li>
+</ul>
+<h2 id="52">5.2 设置电子邮件服务器<a class="headerlink" href="#52" title="Permanent link">&para;</a></h2>
+<p>1.点击左上角的**平台管理**，然后选择**集群管理**。</p>
+<p>2.如果您已经启用<a href="https://v3-2.docs.kubesphere.io/zh/docs/multicluster-management/">多集群功能</a>并已导入成员集群，那么您可以选择一个特定集群以查看其节点。如果尚未启用该功能，请直接参考下一步。</p>
+<p>3.转到**应用负载**下的**工作负载**，然后从下拉列表中选择 <strong>kubesphere-devops-system</strong> 项目。点击 <code>devops-jenkins</code> 右侧的 <img alt="img" src="https://v3-2.docs.kubesphere.io/images/docs/common-icons/three-dots.png" /> 并选择**编辑 YAML** 以编辑其 YAML 配置文件。</p>
+<p><img alt="image-20221027232346190" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221027232346190.png" /></p>
+<p>4.向下滚动到下图所示的需要指定的字段。完成修改后，点击**确定**以保存。</p>
+<blockquote>
+<p>在 <code>devops-jenkins</code> 部署 (Deployment) 中修改电子邮件服务器后，它会重新启动。因此，DevOps 系统将在几分钟内不可用，请在适当的时候进行此类修改。</p>
+</blockquote>
+<p><img alt="设置电子邮件" src="../../../img/kubernetes/kubernetes_kubesphere_devops/set-jenkins-email.png" /></p>
+<table>
+<thead>
+<tr>
+<th align="left">环境变量名称</th>
+<th align="left">描述信息</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">EMAIL_SMTP_HOST</td>
+<td align="left">SMTP 服务器地址</td>
+</tr>
+<tr>
+<td align="left">EMAIL_SMTP_PORT</td>
+<td align="left">SMTP 服务器端口（如：25）</td>
+</tr>
+<tr>
+<td align="left">EMAIL_FROM_ADDR</td>
+<td align="left">电子邮件发件人地址</td>
+</tr>
+<tr>
+<td align="left">EMAIL_FROM_NAME</td>
+<td align="left">电子邮件发件人姓名</td>
+</tr>
+<tr>
+<td align="left">EMAIL_FROM_PASS</td>
+<td align="left">电子邮件发件人密码</td>
+</tr>
+<tr>
+<td align="left">EMAIL_USE_SSL</td>
+<td align="left">是否启用 SSL 配置</td>
+</tr>
+</tbody>
+</table>
+<p>实际配置：</p>
+<p><img alt="image-20221027232704794" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221027232704794.png" /></p>
+<p><img alt="image-20221027232744625" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221027232744625.png" /></p>
+<h1 id="_1">六、使用图形编辑面板创建流水线<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
+<p>KubeSphere 中的图形编辑面板包含用于 Jenkins <a href="https://www.jenkins.io/zh/doc/book/pipeline/#阶段">阶段 (Stage)</a> 和<a href="https://www.jenkins.io/zh/doc/book/pipeline/#步骤">步骤 (Step)</a> 的所有必要操作。您可以直接在交互式面板上定义这些阶段和步骤，无需创建任何 Jenkinsfile。</p>
+<p>本教程演示如何在 KubeSphere 中使用图形编辑面板创建流水线。KubeSphere 在整个过程中将根据您在编辑面板上的设置自动生成 Jenkinsfile，您无需手动创建 Jenkinsfile。待流水线成功运行，它会相应地在您的开发环境中创建一个部署 (Deployment) 和一个服务 (Service)，并将镜像推送至 Docker Hub。</p>
+<h2 id="61">6.1 准备工作<a class="headerlink" href="#61" title="Permanent link">&para;</a></h2>
+<ul>
+<li>您需要<a href="https://v3-2.docs.kubesphere.io/zh/docs/pluggable-components/devops/">启用 KubeSphere DevOps 系统</a>。</li>
+<li>您需要有一个 <a href="http://www.dockerhub.com/">Docker Hub</a> 帐户。</li>
+<li>您需要创建一个企业空间、一个 DevOps 项目和一个用户 (<code>project-regular</code>)，必须邀请该用户至 DevOps 项目中并赋予 <code>operator</code> 角色。如果尚未创建，请参见<a href="https://v3-2.docs.kubesphere.io/zh/docs/quick-start/create-workspace-and-project/">创建企业空间、项目、用户和角色</a>。</li>
+<li>设置 CI 专用节点来运行流水线（可选）。有关更多信息，请参见<a href="https://v3-2.docs.kubesphere.io/zh/docs/devops-user-guide/how-to-use/set-ci-node/">为缓存依赖项设置 CI 节点</a>。</li>
+<li>配置您的电子邮件服务器用于接收流水线通知（可选）。有关更多信息，请参见<a href="https://v3-2.docs.kubesphere.io/zh/docs/devops-user-guide/how-to-use/jenkins-email/">为 KubeSphere 流水线设置电子邮件服务器</a>。</li>
+<li>配置 SonarQube 将代码分析纳入流水线中（可选）。有关更多信息，请参见<a href="https://v3-2.docs.kubesphere.io/zh/docs/devops-user-guide/how-to-integrate/sonarqube/">将 SonarQube 集成到流水线</a>。</li>
+</ul>
+<h2 id="62">6.2 流水线概述<a class="headerlink" href="#62" title="Permanent link">&para;</a></h2>
+<p>本示例流水线包括以下六个阶段。</p>
+<p><img alt="Pipeline" src="../../../img/kubernetes/kubernetes_kubesphere_devops/20190516091714.png" /></p>
+<ul>
+<li><strong>阶段 1：Checkout SCM</strong>：从 GitHub 仓库拉取源代码。</li>
+<li><strong>阶段 2：单元测试</strong>：待该测试通过后才会进行下一阶段。</li>
+<li><strong>阶段 3：代码分析</strong>：配置 SonarQube 用于静态代码分析。</li>
+<li><strong>阶段 4：构建并推送</strong>：构建镜像并附上标签 <code>snapshot-$BUILD_NUMBER</code> 推送至 Docker Hub，其中 <code>$BUILD_NUMBER</code> 是流水线活动列表中的记录的序列号。</li>
+<li><strong>阶段 5：制品</strong>：生成一个制品（JAR 文件包）并保存。</li>
+<li><strong>阶段 6：部署至开发环境</strong>：在开发环境中创建一个部署和一个服务。该阶段需要进行审核，部署成功运行后，会发送电子邮件通知。</li>
+</ul>
+<h2 id="63">6.3 流水线设置<a class="headerlink" href="#63" title="Permanent link">&para;</a></h2>
+<h3 id="631">6.3.1 创建凭证<a class="headerlink" href="#631" title="Permanent link">&para;</a></h3>
+<p>1.以 <code>project-regular</code> 身份登录 KubeSphere 控制台。转到您的 DevOps 项目，在 **DevOps 项目设置**下的**凭证**页面创建以下凭证。有关如何创建凭证的更多信息，请参见<a href="https://v3-2.docs.kubesphere.io/zh/docs/devops-user-guide/how-to-use/credential-management/">凭证管理</a>。</p>
+<blockquote>
+<p>如果您的帐户或密码中有任何特殊字符，例如 <code>@</code> 和 <code>$</code>，可能会因为无法识别而在流水线运行时导致错误。在这种情况下，您需要先在一些第三方网站（例如 <a href="https://www.urlencoder.org/">urlencoder</a>）上对帐户或密码进行编码，然后将输出结果复制粘贴作为您的凭证信息。</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th align="left">凭证 ID</th>
+<th align="left">类型</th>
+<th align="left">用途</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">dockerhub-id</td>
+<td align="left">用户名和密码</td>
+<td align="left">Docker Hub</td>
+</tr>
+<tr>
+<td align="left">demo-kubeconfig</td>
+<td align="left">kubeconfig</td>
+<td align="left">Kubernetes</td>
+</tr>
+</tbody>
+</table>
+<p>2.您还需要为 SonarQube 创建一个凭证 ID (<code>sonar-token</code>)，用于上述的阶段 3（代码分析）。请参阅<a href="https://v3-2.docs.kubesphere.io/zh/docs/devops-user-guide/how-to-integrate/sonarqube/#create-sonarqube-token-for-new-project">为新项目创建 SonarQube 令牌 (Token)</a>，在**访问令牌**类型的凭证的**令牌**字段中输入 SonarQube 令牌。点击**确定**完成操作。</p>
+<p><img alt="image-20221028102436728" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221028102436728.png" /></p>
+<p><img alt="image-20221028102649494" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221028102649494.png" /></p>
+<p><img alt="image-20221028102709409" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221028102709409.png" /></p>
+<p>3.你在列表中可以看到4个凭证</p>
+<h3 id="632">6.3.2 创建项目<a class="headerlink" href="#632" title="Permanent link">&para;</a></h3>
+<p>在本教程中，示例流水线会将 <a href="https://github.com/kubesphere/devops-maven-sample/tree/sonarqube">sample</a> 应用部署至一个项目。因此，您必须先创建一个项目（例如 <code>kubesphere-sample-dev</code>）。待流水线成功运行，会在该项目中自动创建该应用的部署和服务。</p>
+<p>您可以使用 <code>project-admin</code> 帐户创建项目。此外，该用户也是 CI/CD 流水线的审核员。请确保将 <code>project-regular</code> 帐户邀请至该项目并授予 <code>operator</code> 角色。有关更多信息，请参见<a href="https://v3-2.docs.kubesphere.io/zh/docs/quick-start/create-workspace-and-project/">创建企业空间、项目、用户和角色</a>。</p>
+<p><img alt="image-20221028000558491" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221028000558491.png" /></p>
+<p><img alt="image-20221028000639889" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221028000639889.png" /></p>
+<p><img alt="image-20221028000734548" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221028000734548.png" /></p>
+<p><img alt="image-20221028000754528" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221028000754528.png" /></p>
+<p><img alt="image-20221028000845544" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221028000845544.png" /></p>
+<p><img alt="image-20221028000919311" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221028000919311.png" /></p>
+<p><img alt="image-20221028000959470" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221028000959470.png" /></p>
+<p><img alt="image-20221028001015375" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221028001015375.png" /></p>
+<p><img alt="image-20221028001042749" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221028001042749.png" /></p>
+<h3 id="633">6.3.3 创建流水线<a class="headerlink" href="#633" title="Permanent link">&para;</a></h3>
+<p>1.请确保以 <code>project-regular</code> 身份登录 KubeSphere 控制台，转到您的 DevOps 项目。在**流水线**页面点击**创建**。</p>
+<p><img alt="image-20221028001349754" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221028001349754.png" /></p>
+<p><img alt="image-20221028001415837" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221028001415837.png" /></p>
+<p>2.在弹出的对话框中，将它命名为 <code>graphical-pipeline</code>，点击**下一步**。</p>
+<p><img alt="image-20221028001512033" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221028001512033.png" /></p>
+<p><img alt="image-20221028001554927" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221028001554927.png" /></p>
+<p>3.在**高级设置**页面，点击**添加**，添加以下三个字符串参数。这些参数将用于流水线的 Docker 命令。添加完成后，点击**创建**。</p>
+<p><img alt="image-20221028001822672" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221028001822672.png" /></p>
+<table>
+<thead>
+<tr>
+<th align="left">参数类型</th>
+<th align="left">名称</th>
+<th align="left">值</th>
+<th align="left">描述信息</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">字符串</td>
+<td align="left">REGISTRY</td>
+<td align="left"><code>docker.io</code></td>
+<td align="left">镜像仓库地址。本示例使用 <code>docker.io</code>。</td>
+</tr>
+<tr>
+<td align="left">字符串</td>
+<td align="left">DOCKERHUB_NAMESPACE</td>
+<td align="left">Docker ID</td>
+<td align="left">您的 Docker Hub 帐户或该帐户下的组织名称。</td>
+</tr>
+<tr>
+<td align="left">字符串</td>
+<td align="left">APP_NAME</td>
+<td align="left"><code>devops-sample</code></td>
+<td align="left">应用名称。</td>
+</tr>
+</tbody>
+</table>
+<p><img alt="image-20221028001953606" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221028001953606.png" /></p>
+<p><img alt="image-20221028002324916" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221028002324916.png" /></p>
+<blockquote>
+<p>有关其他字段，请直接使用默认值或者参考<a href="https://v3-2.docs.kubesphere.io/zh/docs/devops-user-guide/how-to-use/pipeline-settings/">流水线设置</a>以自定义配置。</p>
+</blockquote>
+<p>4.创建的流水线会显示在列表中</p>
+<p><img alt="image-20221028002447067" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221028002447067.png" /></p>
+<h3 id="634">6.3.4 编辑流水线<a class="headerlink" href="#634" title="Permanent link">&para;</a></h3>
+<ul>
+<li>点击流水线进入其详情页面。要使用图形编辑面板，请点击**任务状态**选项卡下的**编辑流水线**。在弹出的对话框中，点击**自定义流水线**。该流水线包括六个阶段，请按照以下步骤设置每个阶段。</li>
+<li>您也可以点击**持续集成 (CI)** 和**持续集成&amp;交付 (CI/CD)** 来使用 KubeSphere 提供的<a href="https://v3-2.docs.kubesphere.io/zh/docs/devops-user-guide/how-to-use/use-pipeline-templates/">内置流水线模板</a>。</li>
+</ul>
+<p><img alt="image-20221028003020673" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221028003020673.png" /></p>
+<p><img alt="image-20221028003121067" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221028003121067.png" /></p>
+<blockquote>
+<p>流水线详情页面会显示**同步状态**，它是 KubeSphere 和 Jenkins 之间的同步结果。若同步成功，您会看到**成功**图标。您也可以点击**编辑 Jenkinsfile** 手动为流水线创建一个 Jenkinsfile。</p>
+</blockquote>
+<h4 id="6341_1_checkout_scm">6.3.4.1 阶段 1：拉取源代码 (Checkout SCM)<a class="headerlink" href="#6341_1_checkout_scm" title="Permanent link">&para;</a></h4>
+<p>图形编辑面板包括两个区域：左侧的**画布**和右侧的**内容**。它会根据您对不同阶段和步骤的配置自动生成一个 Jenkinsfile，为开发者提供更加用户友好的操作体验。</p>
+<blockquote>
+<p>流水线包括<a href="https://www.jenkins.io/zh/doc/book/pipeline/syntax/#声明式流水线">声明式流水线</a>和<a href="https://www.jenkins.io/zh/doc/book/pipeline/syntax/#脚本化流水线">脚本化流水线</a>。目前，您可以使用该面板创建声明式流水线。有关流水线语法的更多信息，请参见 <a href="https://www.jenkins.io/zh/doc/book/pipeline/syntax/">Jenkins 文档</a>。</p>
+</blockquote>
+<p>1.在图形编辑面板上，从**类型**下拉列表中选择 <strong>node</strong>，从 <strong>Label</strong> 下拉列表中选择 <strong>maven</strong>。</p>
+<p><img alt="image-20221028003238002" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221028003238002.png" /></p>
+<blockquote>
+<p><code>agent</code> 用于定义执行环境。<code>agent</code> 指令指定 Jenkins 执行流水线的位置和方式。有关更多信息，请参见<a href="https://v3-2.docs.kubesphere.io/zh/docs/devops-user-guide/how-to-use/choose-jenkins-agent/">选择 Jenkins Agent</a>。</p>
+</blockquote>
+<p>2.请点击左侧的加号图标来添加阶段。点击**添加步骤**上方的文本框，然后在右侧的**名称**字段中为该阶段设置名称（例如 <code>Checkout SCM</code>）。</p>
+<p><img alt="image-20221028003607622" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221028003607622.png" /></p>
+<p>3.点击**添加步骤**。在列表中选择 <strong>git</strong>，以从 GitHub 拉取示例代码。在弹出的对话框中，填写必需的字段。点击**确定**完成操作。</p>
+<ul>
+<li><strong>URL</strong>：输入 GitHub 仓库地址 <code>https://github.com/kubesphere/devops-maven-sample.git</code>。请注意，这里是示例地址，您需要使用您自己的仓库地址。</li>
+<li><strong>凭证 ID</strong>：本教程中无需输入凭证 ID。</li>
+<li><strong>分支</strong>：如果您将其留空，则默认为 master 分支。请输入 <code>sonarqube</code>，或者如果您不需要代码分析阶段，请将其留空。</li>
+</ul>
+<p><img alt="image-20221028004820884" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221028004820884.png" /></p>
+<p><img alt="image-20221028004912412" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221028004912412.png" /></p>
+<p><img alt="image-20221028004955059" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221028004955059.png" /></p>
+<p><img alt="image-20221028005248406" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221028005248406.png" /></p>
+<div class="highlight"><pre><span></span><code><span class="n">https</span><span class="p">://</span><span class="n">github</span><span class="p">.</span><span class="n">com</span><span class="p">/</span><span class="n">nextgomsb</span><span class="p">/</span><span class="n">devops-maven-sample</span><span class="p">.</span><span class="n">git</span>
+</code></pre></div>
+<p><strong>后续执行过程中有问题时，可以尝试修改容器基础镜像</strong></p>
+<p><img alt="image-20221031104243656" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221031104243656.png" /></p>
+<p><strong>创建流水线</strong></p>
+<p><img alt="image-20221028005413460" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221028005413460.png" /></p>
+<p><img alt="image-20221028010524003" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221028010524003.png" /></p>
+<p>4.第一阶段设置完成</p>
+<p><img alt="image-20221028005802017" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221028005802017.png" /></p>
+<h4 id="6342_2">6.3.4.2 阶段 2：单元测试<a class="headerlink" href="#6342_2" title="Permanent link">&para;</a></h4>
+<p>1.点击阶段 1 右侧的加号图标添加新的阶段，以在容器中执行单元测试。将它命名为 <code>Unit Test</code>。</p>
+<p><img alt="image-20221028010703560" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221028010703560.png" /></p>
+<p><img alt="image-20221028010805488" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221028010805488.png" /></p>
+<p>2.点击**添加步骤**，在列表中选择**指定容器**。将其命名为 <code>maven</code> 然后点击**确定**。</p>
+<p><img alt="image-20221028010930565" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221028010930565.png" /></p>
+<p><img alt="image-20221028010953830" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221028010953830.png" /></p>
+<p>3.点击**添加嵌套步骤**，在 <code>maven</code> 容器下添加一个嵌套步骤。在列表中选择 <strong>shell</strong> 并在命令行中输入以下命令。点击**确定**保存操作。</p>
+<p><img alt="image-20221028011117734" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221028011117734.png" /></p>
+<p><img alt="image-20221028011154458" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221028011154458.png" /></p>
+<p><img alt="image-20221030205259256" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221030205259256.png" /></p>
+<div class="highlight"><pre><span></span><code><span class="n">mvn</span> <span class="n">clean</span> <span class="n">package</span>
+</code></pre></div>
+<blockquote>
+<p>您可以在图形编辑面板上指定在给定阶段指令中执行的一系列<a href="https://www.jenkins.io/zh/doc/book/pipeline/syntax/#steps">步骤</a>。</p>
+</blockquote>
+<h4 id="6343_3">6.3.4.3 阶段 3：代码分析（可选）<a class="headerlink" href="#6343_3" title="Permanent link">&para;</a></h4>
+<p>本阶段使用 SonarQube 来测试您的代码。如果您不需要代码分析，可以跳过该阶段。</p>
+<p>1.点击 <code>Unit Test</code> 阶段右侧的加号图标添加一个阶段，以在容器中进行 SonarQube 代码分析。将它命名为 <code>Code Analysis</code>。</p>
+<p><img alt="image-20221028101410290" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221028101410290.png" /></p>
+<p>2.在 <strong>Code Analysis</strong> 中，点击**任务**下的**添加步骤**，选择**指定容器**。将其命名为 <code>maven</code> 然后点击**确定**。</p>
+<p><img alt="image-20221028101510119" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221028101510119.png" /></p>
+<p><img alt="image-20221028101631884" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221028101631884.png" /></p>
+<p><img alt="image-20221028101709785" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221028101709785.png" /></p>
+<p>3.点击 <code>maven</code> 容器下的**添加嵌套步骤**，以添加一个嵌套步骤。点击**添加凭证**并从**凭证 ID** 列表中选择 SonarQube 令牌 (<code>sonar-token</code>)。在**文本变量**中输入 <code>SONAR_TOKEN</code>，然后点击**确定**。</p>
+<p><img alt="image-20221028101835008" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221028101835008.png" /></p>
+<p><img alt="image-20221028101905088" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221028101905088.png" /></p>
+<p><img alt="image-20221028102927908" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221028102927908.png" /></p>
+<p>4.在**添加凭证**步骤下，点击**添加嵌套步骤**为其添加一个嵌套步骤。</p>
+<p><img alt="image-20221028103940613" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221028103940613.png" /></p>
+<p>5.点击 <strong>Sonarqube 配置</strong>，在弹出的对话框中保持默认名称 <code>sonar</code> 不变，点击**确定**保存操作</p>
+<p><img alt="image-20221028104138270" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221028104138270.png" /></p>
+<p><img alt="image-20221028104207816" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221028104207816.png" /></p>
+<p>6.在 **Sonarqube 配置**步骤下，点击**添加嵌套步骤**为其添加一个嵌套步骤。</p>
+<p><img alt="image-20221028104342813" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221028104342813.png" /></p>
+<p>7.点击 <strong>shell</strong> 并在命令行中输入以下命令，用于 sonarqube 分支和认证，点击**确定**完成操作。</p>
+<p><img alt="image-20221028104524829" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221028104524829.png" /></p>
+<p><img alt="image-20221028104701245" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221028104701245.png" /></p>
+<div class="highlight"><pre><span></span><code><span class="n">mvn</span> <span class="n">sonar</span><span class="p">:</span><span class="n">sonar</span> <span class="n">-Dsonar</span><span class="p">.</span><span class="n">login</span><span class="p">=</span><span class="nv">$SONAR_TOKEN</span>
+</code></pre></div>
+<p>8.点击**指定容器**步骤下的**添加嵌套步骤**（第三个），选择**超时**。在时间中输入 <code>1</code> 并将单位选择为**小时**，点击**确定**完成操作。</p>
+<p><img alt="image-20221028104841540" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221028104841540.png" /></p>
+<p><img alt="image-20221028104953045" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221028104953045.png" /></p>
+<p><img alt="image-20221028105020275" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221028105020275.png" /></p>
+<p>9.点击**超时**步骤下的**添加嵌套步骤**，选择**代码质量检查 (SonarQube)<strong>。在弹出的对话框中选择**检查通过后开始后续任务</strong>。点击**确定**保存操作。</p>
+<p><img alt="image-20221028105118051" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221028105118051.png" /></p>
+<p><img alt="image-20221028105202924" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221028105202924.png" /></p>
+<p><img alt="image-20221028105244782" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221028105244782.png" /></p>
+<p><img alt="image-20221028105324072" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221028105324072.png" /></p>
+<h4 id="6344_4">6.3.4.4 阶段 4：构建并推送镜像<a class="headerlink" href="#6344_4" title="Permanent link">&para;</a></h4>
+<p>点击前一个阶段右侧的加号图标添加一个新的阶段，以构建并推送镜像至 Docker Hub。将其命名为 <code>Build and Push</code>。</p>
+<p><img alt="image-20221028105532996" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221028105532996.png" /></p>
+<p>2.点击**任务**下的**添加步骤**，选择**指定容器**，将其命名为 <code>maven</code>，然后点击**确定**。</p>
+<p><img alt="image-20221028110037319" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221028110037319.png" /></p>
+<p>3.点击 <code>maven</code> 容器下的**添加嵌套步骤**添加一个嵌套步骤。在列表中选择 <strong>shell</strong> 并在弹出窗口中输入以下命令，点击**确定**完成操作。</p>
+<p><img alt="image-20221028110434696" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221028110434696.png" /></p>
+<p><img alt="image-20221028110514370" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221028110514370.png" /></p>
+<div class="highlight"><pre><span></span><code><span class="n">mvn</span> <span class="n">-Dmaven</span><span class="p">.</span><span class="n">test</span><span class="p">.</span><span class="n">skip</span><span class="p">=</span><span class="n">true</span> <span class="n">clean</span> <span class="n">package</span>
+</code></pre></div>
+<p><img alt="image-20221028110621884" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221028110621884.png" /></p>
+<p>4.再次点击**添加嵌套步骤**，选择 <strong>shell</strong>。在命令行中输入以下命令，以根据 <a href="https://github.com/kubesphere/devops-maven-sample/blob/sonarqube/Dockerfile-online">Dockerfile</a> 构建 Docker 镜像。点击**确定**确认操作。</p>
+<blockquote>
+<p>请勿遗漏命令末尾的点 <code>.</code></p>
+</blockquote>
+<p><img alt="image-20221028110746069" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221028110746069.png" /></p>
+<p><img alt="image-20221028110832612" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221028110832612.png" /></p>
+<div class="highlight"><pre><span></span><code><span class="n">docker</span> <span class="n">build</span> <span class="o">-f</span> <span class="n">Dockerfile-online</span> <span class="n">-t</span> <span class="nv">$REGISTRY</span><span class="p">/</span><span class="nv">$DOCKERHUB_NAMESPACE</span><span class="p">/</span><span class="nv">$APP_NAME</span><span class="p">:</span><span class="n">SNAPSHOT</span><span class="p">-</span><span class="nv">$BUILD_NUMBER</span> <span class="p">.</span>
+</code></pre></div>
+<p><img alt="image-20221028110943337" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221028110943337.png" /></p>
+<p>5.再次点击**添加嵌套步骤**，选择**添加凭证**。在弹出的对话框中填写以下字段，点击**确定**确认操作。</p>
+<ul>
+<li><strong>凭证名称</strong>：选择您创建的 Docker Hub 凭证，例如 <code>dockerhub-id</code>。</li>
+<li><strong>密码变量</strong>：输入 <code>DOCKER_PASSWORD</code>。</li>
+<li><strong>用户名变量</strong>：输入 <code>DOCKER_USERNAME</code>。</li>
+</ul>
+<blockquote>
+<p>出于安全原因，帐户信息在脚本中显示为变量。</p>
+</blockquote>
+<p><img alt="image-20221028111055981" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221028111055981.png" /></p>
+<p><img alt="image-20221028111123696" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221028111123696.png" /></p>
+<p><img alt="image-20221028111252997" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221028111252997.png" /></p>
+<p>6.在**添加凭证**步骤中点击**添加嵌套步骤**（第一个）。选择 <strong>shell</strong> 并在弹出窗口中输入以下命令，用于登录 Docker Hub。点击**确定**确认操作。</p>
+<p><img alt="image-20221028111539496" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221028111539496.png" /></p>
+<p><img alt="image-20221028111622087" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221028111622087.png" /></p>
+<div class="highlight"><pre><span></span><code><span class="nb">echo </span><span class="s2">&quot;$DOCKER_PASSWORD&quot;</span> <span class="p">|</span> <span class="n">docker</span> <span class="n">login</span> <span class="nv">$REGISTRY</span> <span class="n">-u</span> <span class="s2">&quot;$DOCKER_USERNAME&quot;</span> <span class="p">-</span><span class="n">-password-stdin</span>
+</code></pre></div>
+<p><img alt="image-20221028111712445" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221028111712445.png" /></p>
+<p>7.在**添加凭证**步骤中点击**添加嵌套步骤**。选择 <strong>shell</strong> 并输入以下命令，将 SNAPSHOT 镜像推送至 Docker Hub。点击**确定**完成操作。</p>
+<p><img alt="image-20221028112001528" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221028112001528.png" /></p>
+<div class="highlight"><pre><span></span><code><span class="n">docker</span> <span class="n">push</span> <span class="nv">$REGISTRY</span><span class="p">/</span><span class="nv">$DOCKERHUB_NAMESPACE</span><span class="p">/</span><span class="nv">$APP_NAME</span><span class="p">:</span><span class="n">SNAPSHOT</span><span class="p">-</span><span class="nv">$BUILD_NUMBER</span>
+</code></pre></div>
+<p><img alt="image-20221028112053455" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221028112053455.png" /></p>
+<p><img alt="image-20221028112123076" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221028112123076.png" /></p>
+<h4 id="6345_5">6.3.4.5 阶段 5：生成制品<a class="headerlink" href="#6345_5" title="Permanent link">&para;</a></h4>
+<p>1.点击 <strong>Build and Push</strong> 阶段右侧的加号图标添加一个新的阶段，以保存制品，将其命名为 <code>Artifacts</code>。本示例使用 JAR 文件包。</p>
+<p><img alt="image-20221028112332849" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221028112332849.png" /></p>
+<p>2.选中 <strong>Artifacts</strong> 阶段，点击**任务**下的**添加步骤**，选择**保存制品**。在弹出的对话框中输入 <code>target/*.jar</code>，用于设置 Jenkins 中制品的保存路径。点击**确定**完成操作。</p>
+<p><img alt="image-20221028112459764" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221028112459764.png" /></p>
+<p><img alt="image-20221028112521317" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221028112521317.png" /></p>
+<div class="highlight"><pre><span></span><code><span class="n">target</span><span class="p">/*.</span><span class="n">jar</span>
+</code></pre></div>
+<p><img alt="image-20221028112612608" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221028112612608.png" /></p>
+<h4 id="6346_6">6.3.4.6 阶段 6：部署至开发环境<a class="headerlink" href="#6346_6" title="Permanent link">&para;</a></h4>
+<p>1.点击 <strong>Artifacts</strong> 阶段右侧的加号图标添加最后一个阶段，将其命名为 <code>Deploy to Dev</code>。该阶段用于将资源部署至您的开发环境（即 <code>kubesphere-sample-dev</code> 项目）。</p>
+<p><img alt="image-20221028112843130" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221028112843130.png" /></p>
+<p>2.点击 <strong>Deploy to Dev</strong> 阶段下的**添加步骤**，在列表中选择**审核**，然后在**消息**字段中填入 <code>@project-admin</code>，即 <code>project-admin</code> 帐户在流水线运行到该阶段时会进行审核。点击**确定**保存操作。</p>
+<p><img alt="image-20221028112947342" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221028112947342.png" /></p>
+<p><img alt="image-20221028113026666" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221028113026666.png" /></p>
+<blockquote>
+<p>在 KubeSphere 3.2.x 中，能够运行流水线的帐户也能够继续或终止该流水线。此外，流水线创建者、拥有该项目管理员角色的用户或者您指定的帐户也有权限继续或终止流水线。</p>
+</blockquote>
+<p>3.再次点击 <strong>Deploy to Dev</strong> 阶段下的**添加步骤**。在列表中选择**指定容器**，将其命名为 <code>maven</code> 然后点击**确定**。</p>
+<p><img alt="image-20221028113214211" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221028113214211.png" /></p>
+<p>4.点击 <code>maven</code> 容器步骤下的**添加嵌套步骤**。在列表中选择**添加凭证**，在弹出的对话框中填写以下字段，然后点击**确定**。</p>
+<ul>
+<li>凭证名称：选择您创建的 kubeconfig 凭证，例如 <code>demo-kubeconfig</code>。</li>
+<li>kubeconfig 变量：输入 <code>KUBECONFIG_CONTENT</code>。</li>
+</ul>
+<p><img alt="image-20221028113256977" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221028113256977.png" /></p>
+<p><img alt="image-20221028113408653" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221028113408653.png" /></p>
+<p>5.点击**添加凭证**步骤下的**添加嵌套步骤**。在列表中选择 <strong>shell</strong>，在弹出的对话框中输入以下命令，然后点击**确定**。</p>
+<p><img alt="image-20221028113510007" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221028113510007.png" /></p>
+<p><img alt="image-20221028113533301" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221028113533301.png" /></p>
+<div class="highlight"><pre><span></span><code><span class="n">mkdir</span> <span class="p">~/.</span><span class="n">kube</span>
+<span class="nb">echo </span><span class="s2">&quot;$KUBECONFIG_CONTENT&quot;</span> <span class="p">&gt;</span> <span class="p">~/.</span><span class="n">kube</span><span class="p">/</span><span class="n">config</span>
+<span class="n">envsubst</span> <span class="p">&lt;</span> <span class="n">deploy</span><span class="p">/</span><span class="n">dev-ol</span><span class="p">/</span><span class="n">devops-sample-svc</span><span class="p">.</span><span class="n">yaml</span> <span class="p">|</span> <span class="n">kubectl</span> <span class="n">apply</span> <span class="o">-f</span> <span class="p">-</span>
+<span class="n">envsubst</span> <span class="p">&lt;</span> <span class="n">deploy</span><span class="p">/</span><span class="n">dev-ol</span><span class="p">/</span><span class="n">devops-sample</span><span class="p">.</span><span class="n">yaml</span> <span class="p">|</span> <span class="n">kubectl</span> <span class="n">apply</span> <span class="o">-f</span> <span class="p">-</span>
+</code></pre></div>
+<p><img alt="image-20221028113628854" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221028113628854.png" /></p>
+<p>6.如果您想在流水线成功运行时接收电子邮件通知，请点击**添加步骤**，选择**邮件**，以添加电子邮件信息。请注意，配置电子邮件服务器是可选操作，如果您跳过该步骤，依然可以运行流水线。</p>
+<p><img alt="image-20221028113728197" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221028113728197.png" /></p>
+<p><img alt="image-20221028113805090" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221028113805090.png" /></p>
+<p><img alt="image-20221028113952848" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221028113952848.png" /></p>
+<p>7.待您完成上述步骤，请在右下角点击**保存**。随后，您可以看到该流水线有完整的工作流，并且每个阶段也清晰列示。当您用图形编辑面板定义流水线时，KubeSphere 会自动创建相应的 Jenkinsfile。点击**编辑 Jenkinsfile** 查看该 Jenkinsfile。</p>
+<blockquote>
+<p>在**流水线**页面，您可以点击该流水线右侧的 <img alt="img" src="https://v3-2.docs.kubesphere.io/images/docs/common-icons/three-dots.png" />，然后选择**复制**来创建该流水线的副本。如果您需要同时运行多个不包含多分支的流水线，您可以全部选中这些流水线，然后点击**运行**来批量运行它们。</p>
+</blockquote>
+<h2 id="64">6.4 运行流水线<a class="headerlink" href="#64" title="Permanent link">&para;</a></h2>
+<p>1.您需要手动运行使用图形编辑面板创建的流水线。点击**运行**，您可以在弹出的对话框中看到步骤 3 中已定义的三个字符串参数。点击**确定**来运行流水线。</p>
+<p><img alt="image-20221028114448532" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221028114448532.png" /></p>
+<p><img alt="image-20221031102324133" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221031102324133.png" /></p>
+<p>2.要查看流水线的状态，请转到**运行记录**选项卡，点击您想查看的记录。</p>
+<p><img alt="image-20221028114605201" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221028114605201.png" /></p>
+<p>3.稍等片刻，流水线如果成功运行，则会在 <strong>Deploy to Dev</strong> 阶段停止。<code>project-admin</code> 作为流水线的审核员，需要进行审批，然后资源才会部署至开发环境。</p>
+<h2 id="65">6.5 下载制品<a class="headerlink" href="#65" title="Permanent link">&para;</a></h2>
+<p>点击**制品**选项卡，然后点击右侧的图标下载该制品。</p>
+<p><img alt="image-20221030131750542" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221030131750542.png" /></p>
+<h2 id="66">6.6 查看代码分析结果<a class="headerlink" href="#66" title="Permanent link">&para;</a></h2>
+<p>在**代码检查**页面，可以查看由 SonarQube 提供的本示例流水线的代码分析结果。如果您没有事先配置 SonarQube，则该部分不可用。有关更多信息，请参见<a href="https://v3-2.docs.kubesphere.io/zh/docs/devops-user-guide/how-to-integrate/sonarqube/">将 SonarQube 集成到流水线</a>。</p>
+<p><img alt="SonarQube 详细结果" src="../../../img/kubernetes/kubernetes_kubesphere_devops/sonarqube_result_detail.png" /></p>
+<h2 id="67_kubernetes">6.7 验证 Kubernetes 资源<a class="headerlink" href="#67_kubernetes" title="Permanent link">&para;</a></h2>
+<p>1.如果流水线的每个阶段都成功运行，则会自动构建一个 Docker 镜像并推送至您的 Docker Hub 仓库。最终，流水线将在您事先设置的项目中自动创建一个部署和一个服务。</p>
+<p>2.前往该项目（本教程中即 <code>kubesphere-sample-dev</code>），请点击**应用负载**下的**工作负载**，您可以看到列表中显示的部署。</p>
+<p>3.在**服务**页面，您可以看到示例服务通过 NodePort 暴露其端口号。要访问服务，请访问 <code>&lt;Node IP&gt;:&lt;NodePort&gt;</code>。</p>
+<blockquote>
+<p>访问服务前，您可能需要配置端口转发规则并在安全组中放行该端口。</p>
+</blockquote>
+<p>4.现在流水线已成功运行，将会推送一个镜像至 Docker Hub。登录 Docker Hub 查看结果。</p>
+<p><img alt="DockerHub 镜像" src="../../../img/kubernetes/kubernetes_kubesphere_devops/dockerhub_image.png" /></p>
+<p>5.该应用的名称为 <code>devops-sample</code>，即 <code>APP_NAME</code> 的值，标签即 <code>SNAPSHOT-$BUILD_NUMBER</code> 的值。<code>$BUILD_NUMBER</code> 即**运行记录**选项卡列示的记录的序列号。</p>
+<p>6.如果您在最后一个阶段设置了电子邮件服务器并添加了电子邮件通知的步骤，您还会收到电子邮件消息。</p>
+<h1 id="_2">七、配置流水线把项目发布到生产环境<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h1>
+<p><img alt="流水线概览" src="../../../img/kubernetes/kubernetes_kubesphere_devops/pipeline-overview.png" /></p>
+<h2 id="71_github_tekens">7.1 创建GitHub tekens<a class="headerlink" href="#71_github_tekens" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p>如需创建 GitHub 个人访问令牌，请转到您 GitHub 帐户的 <strong>Settings</strong>，点击 <strong>Developer settings</strong>，选择 <strong>Personal access tokens</strong>，然后点击 <strong>Generate new token</strong>。</p>
+</blockquote>
+<p><img alt="image-20221030231946644" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221030231946644.png" /></p>
+<p><img alt="image-20221030232050046" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221030232050046.png" /></p>
+<p><img alt="image-20221030232332862" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221030232332862.png" /></p>
+<p><img alt="image-20221030232439488" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221030232439488.png" /></p>
+<p><img alt="image-20221030232504237" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221030232504237.png" /></p>
+<p><img alt="image-20221030232743591" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221030232743591.png" /></p>
+<p><img alt="image-20221030232825182" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221030232825182.png" /></p>
+<p><img alt="image-20221030232906699" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221030232906699.png" /></p>
+<p><strong>以project-regular用户登录后创建github访问凭证</strong></p>
+<p><img alt="image-20221030233212703" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221030233212703.png" /></p>
+<p><img alt="image-20221030233317075" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221030233317075.png" /></p>
+<p><img alt="image-20221030233338927" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221030233338927.png" /></p>
+<h2 id="72_github">7.2 GitHub创建代码仓库<a class="headerlink" href="#72_github" title="Permanent link">&para;</a></h2>
+<p><img alt="image-20221031001513477" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221031001513477.png" /></p>
+<p><img alt="image-20221031001740425" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221031001740425.png" /></p>
+<h2 id="73">7.3 创建项目<a class="headerlink" href="#73" title="Permanent link">&para;</a></h2>
+<p>使用project-admin用户登录WEB控制器，创建kubesphere-sample-prod项目，并邀请project-regular用户成为项目成员，并为operator角色。</p>
+<p><img alt="image-20221030221900997" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221030221900997.png" /></p>
+<p><img alt="image-20221030222059644" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221030222059644.png" /></p>
+<p><img alt="image-20221030222143880" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221030222143880.png" /></p>
+<p><img alt="image-20221030222226462" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221030222226462.png" /></p>
+<h2 id="74_tag_name">7.4 为发布到生产环境准备TAG_NAME变量<a class="headerlink" href="#74_tag_name" title="Permanent link">&para;</a></h2>
+<p>使用project-regular用户登录，并编辑<code>graphical-pipeline</code>，添加TAG_NAME,值为v0.0.1</p>
+<p><img alt="image-20221030222449504" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221030222449504.png" /></p>
+<p><img alt="image-20221030222635309" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221030222635309.png" /></p>
+<p><img alt="image-20221030222719291" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221030222719291.png" /></p>
+<p><img alt="image-20221030225055086" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221030225055086.png" /></p>
+<h2 id="75_7_push_with_tag">7.5 阶段7: 提交镜像和代码至仓库(push with tag)<a class="headerlink" href="#75_7_push_with_tag" title="Permanent link">&para;</a></h2>
+<h3 id="751">7.5.1 添加条件<a class="headerlink" href="#751" title="Permanent link">&para;</a></h3>
+<p><img alt="image-20221031004855745" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221031004855745.png" /></p>
+<p><img alt="image-20221031004936717" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221031004936717.png" /></p>
+<p><img alt="image-20221031005012420" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221031005012420.png" /></p>
+<div class="highlight"><pre><span></span><code><span class="n">scriptBlock</span>   <span class="k">return</span> <span class="n">params</span><span class="p">.</span><span class="n">TAG_NAME</span> <span class="p">=~</span> <span class="p">/</span><span class="n">v</span><span class="p">.*/</span>
+</code></pre></div>
+<p><img alt="image-20221031005035219" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221031005035219.png" /></p>
+<p><img alt="image-20221031005113742" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221031005113742.png" /></p>
+<h3 id="752">7.5.2 添加步骤<a class="headerlink" href="#752" title="Permanent link">&para;</a></h3>
+<p><img alt="image-20221031005142758" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221031005142758.png" /></p>
+<p><img alt="image-20221031005320532" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221031005320532.png" /></p>
+<p><img alt="image-20221031005342665" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221031005342665.png" /></p>
+<h4 id="7521">7.5.2.1 添加审核<a class="headerlink" href="#7521" title="Permanent link">&para;</a></h4>
+<p><img alt="image-20221031005743582" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221031005743582.png" /></p>
+<p><img alt="image-20221031005819223" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221031005819223.png" /></p>
+<div class="highlight"><pre><span></span><code><span class="n">release</span> <span class="n">image</span> <span class="n">with</span> <span class="n">tag</span><span class="p">?</span>
+<span class="nv">@project</span><span class="n">-admin</span>
+</code></pre></div>
+<p><img alt="image-20221031005844113" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221031005844113.png" /></p>
+<p><img alt="image-20221031010317533" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221031010317533.png" /></p>
+<h4 id="7522">7.5.2.2 添加凭证<a class="headerlink" href="#7522" title="Permanent link">&para;</a></h4>
+<p><img alt="image-20221031010043691" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221031010043691.png" /></p>
+<p><img alt="image-20221030234957787" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221030234957787.png" /></p>
+<h4 id="7523_github">7.5.2.3 添加GitHub配置<a class="headerlink" href="#7523_github" title="Permanent link">&para;</a></h4>
+<p><img alt="image-20221031010619701" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221031010619701.png" /></p>
+<p><img alt="image-20221031010657851" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221031010657851.png" /></p>
+<div class="highlight"><pre><span></span><code><span class="n">git</span> <span class="n">config</span> <span class="p">-</span><span class="n">-global</span> <span class="n">user</span><span class="p">.</span><span class="n">email</span> <span class="s2">&quot;nextgo@126.com&quot;</span> 
+</code></pre></div>
+<p><img alt="image-20221031010717615" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221031010717615.png" /></p>
+<p><img alt="image-20221031010746655" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221031010746655.png" /></p>
+<div class="highlight"><pre><span></span><code><span class="n">git</span> <span class="n">config</span> <span class="p">-</span><span class="n">-global</span> <span class="n">user</span><span class="p">.</span><span class="n">name</span> <span class="s2">&quot;nextgo&quot;</span> 
+</code></pre></div>
+<p><img alt="image-20221031010816798" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221031010816798.png" /></p>
+<p><img alt="image-20221031010852017" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221031010852017.png" /></p>
+<p><img alt="image-20221031010935558" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221031010935558.png" /></p>
+<div class="highlight"><pre><span></span><code><span class="n">git</span> <span class="n">tag</span> <span class="n">-a</span> <span class="nv">$TAG_NAME</span> <span class="n">-m</span> <span class="s2">&quot;$TAG_NAME&quot;</span> 
+</code></pre></div>
+<p><img alt="image-20221031011004651" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221031011004651.png" /></p>
+<p><strong>提前编辑流水线，添加如下变量</strong></p>
+<p><img alt="image-20221030235404156" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221030235404156.png" /></p>
+<p><img alt="image-20221031011135117" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221031011135117.png" /></p>
+<p><img alt="image-20221031011155995" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221031011155995.png" /></p>
+<div class="highlight"><pre><span></span><code><span class="n">git</span> <span class="n">push</span> <span class="n">http</span><span class="p">://</span><span class="nv">$GIT_USERNAME</span><span class="p">:</span><span class="nv">$GITHUB_TOKEN@github</span><span class="p">.</span><span class="n">com</span><span class="p">/</span><span class="nv">$GITHUB_ACCOUNT</span><span class="p">/</span><span class="n">devops-java-sample</span><span class="p">.</span><span class="n">git</span> <span class="p">-</span><span class="n">-tags</span> <span class="p">-</span><span class="n">-ipv4</span>
+</code></pre></div>
+<p><img alt="image-20221031011228502" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221031011228502.png" /></p>
+<h4 id="7524_dockerhub">7.5.2.4 添加DockerHub配置<a class="headerlink" href="#7524_dockerhub" title="Permanent link">&para;</a></h4>
+<p><img alt="image-20221031011355810" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221031011355810.png" /></p>
+<p><img alt="image-20221031011426526" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221031011426526.png" /></p>
+<div class="highlight"><pre><span></span><code><span class="n">docker</span> <span class="n">tag</span>  <span class="nv">$REGISTRY</span><span class="p">/</span><span class="nv">$DOCKERHUB_NAMESPACE</span><span class="p">/</span><span class="nv">$APP_NAME</span><span class="p">:</span><span class="n">v</span><span class="nv">$BUILD_NUMBER</span> <span class="nv">$REGISTRY</span><span class="p">/</span><span class="nv">$DOCKERHUB_NAMESPACE</span><span class="p">/</span><span class="nv">$APP_NAME</span><span class="p">:</span><span class="nv">$TAG_NAME</span> 
+</code></pre></div>
+<p><img alt="image-20221031011454860" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221031011454860.png" /></p>
+<p><img alt="image-20221031011526454" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221031011526454.png" /></p>
+<p><img alt="image-20221031011549068" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221031011549068.png" /></p>
+<div class="highlight"><pre><span></span><code><span class="n">docker</span> <span class="n">push</span>  <span class="nv">$REGISTRY</span><span class="p">/</span><span class="nv">$DOCKERHUB_NAMESPACE</span><span class="p">/</span><span class="nv">$APP_NAME</span><span class="p">:</span><span class="nv">$TAG_NAME</span> 
+</code></pre></div>
+<p><img alt="image-20221031011618546" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221031011618546.png" /></p>
+<p><img alt="image-20221031011650811" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221031011650811.png" /></p>
+<h2 id="76_8_deploy_to_production">7.6 阶段8: 发布到生产环境（deploy to production）<a class="headerlink" href="#76_8_deploy_to_production" title="Permanent link">&para;</a></h2>
+<h3 id="761">7.6.1 添加条件<a class="headerlink" href="#761" title="Permanent link">&para;</a></h3>
+<p><img alt="image-20221031003324495" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221031003324495.png" /></p>
+<p><img alt="image-20221031003349884" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221031003349884.png" /></p>
+<p><img alt="image-20221031003416608" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221031003416608.png" /></p>
+<div class="highlight"><pre><span></span><code><span class="n">scriptBlock</span>   <span class="k">return</span> <span class="n">params</span><span class="p">.</span><span class="n">TAG_NAME</span> <span class="p">=~</span> <span class="p">/</span><span class="n">v</span><span class="p">.*/</span>
+</code></pre></div>
+<p><img alt="image-20221031003516001" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221031003516001.png" /></p>
+<h3 id="762">7.6.2 添加审核<a class="headerlink" href="#762" title="Permanent link">&para;</a></h3>
+<p><img alt="image-20221031003611345" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221031003611345.png" /></p>
+<p><img alt="image-20221031003641520" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221031003641520.png" /></p>
+<div class="highlight"><pre><span></span><code><span class="n">deploy</span> <span class="n">to</span> <span class="n">production</span><span class="p">?</span>
+<span class="nv">@project</span><span class="n">-admin</span> 
+</code></pre></div>
+<p><img alt="image-20221031003712803" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221031003712803.png" /></p>
+<h3 id="763">7.6.3 添加步骤<a class="headerlink" href="#763" title="Permanent link">&para;</a></h3>
+<p><img alt="image-20221031003804371" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221031003804371.png" /></p>
+<p><img alt="image-20221031004025210" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221031004025210.png" /></p>
+<p><img alt="image-20221031004052139" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221031004052139.png" /></p>
+<p><img alt="image-20221031004237267" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221031004237267.png" /></p>
+<h4 id="7631">7.6.3.1 添加凭证<a class="headerlink" href="#7631" title="Permanent link">&para;</a></h4>
+<p><img alt="image-20221031004318639" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221031004318639.png" /></p>
+<p><img alt="image-20221031004202774" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221031004202774.png" /></p>
+<h4 id="7632">7.6.3.2 添加执行步骤<a class="headerlink" href="#7632" title="Permanent link">&para;</a></h4>
+<p><img alt="image-20221031004500945" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221031004500945.png" /></p>
+<p><img alt="image-20221031004533534" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221031004533534.png" /></p>
+<div class="highlight"><pre><span></span><code><span class="n">envsubst</span> <span class="p">&lt;</span> <span class="n">deploy</span><span class="p">/</span><span class="n">prod-all-in-one</span><span class="p">/</span><span class="n">devops-sample</span><span class="p">.</span><span class="n">yaml</span> <span class="p">|</span> <span class="n">kubectl</span> <span class="n">apply</span> <span class="o">-f</span> <span class="p">-</span>
+</code></pre></div>
+<p><img alt="image-20221031004601615" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221031004601615.png" /></p>
+<h2 id="77">7.7 执行流水线<a class="headerlink" href="#77" title="Permanent link">&para;</a></h2>
+<p><img alt="image-20221031103744239" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221031103744239.png" /></p>
+<p><img alt="image-20221031103820943" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221031103820943.png" /></p>
+<p><img alt="image-20221031103906025" src="../../../img/kubernetes/kubernetes_kubesphere_devops/image-20221031103906025.png" /></p>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      BurningMyself<a href='https://beian.miit.gov.cn/' target='_blank'>  蜀ICP备15033200号-1</a>
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        <div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/burningmyself" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://gitee.com/burningmyself" target="_blank" rel="noopener" title="gitee.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 488 512"><!--! Font Awesome Free 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M488 261.8C488 403.3 391.1 504 248 504 110.8 504 0 393.2 0 256S110.8 8 248 8c66.8 0 123 24.5 166.3 64.9l-67.5 64.9C258.5 52.6 94.3 116.6 94.3 256c0 86.5 69.1 156.6 153.7 156.6 98.2 0 135-70.4 140.8-106.9H248v-85.3h236.1c2.3 12.7 3.9 24.9 3.9 41.4z"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "../../..", "features": [], "search": "../../../assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.2a6f1dda.min.js"></script>
+      
+        <script src="../../../js/extra.js"></script>
+      
+        <script src="../../../js/baidu-tongji.js"></script>
+      
+        <script src="https://www.googletagmanager.com/gtag/js?id=UA-155084439-1"></script>
+      
+        <script src="https://www.googletagmanager.com/gtag/js?id=UA-155132293-1"></script>
+      
+        <script src="../../../js/google.js"></script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+      
+    
+  </body>
+</html>
