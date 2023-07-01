@@ -4498,9 +4498,9 @@
 <h2 id="11_kubernetes">1.1 <strong>Kubernetes 介绍</strong><a class="headerlink" href="#11_kubernetes" title="Permanent link">&para;</a></h2>
 <p>Kubernetes是Google公司在2014年6月开源的一个容器集群管理系统，使用Go语言开发，也叫K8S（k8s 这个缩写是因为k和s之间有八个字符的关系）。Kubernetes这个名字源于希腊语，意为“舵手”或“飞行员”。Kubernetes的目标是让部署容器化的应用 简单并且高效,提供应用部署，维护，规划，更新。Kubernetes一个核心的特点就是能够自主的管理容器来保证云平台中的容器按照用户的期望状态运行，让用户能够方便的部署自己的应用。</p>
 <p>Kubernetes官网地址如下:<a href="https://kubernetes.io/">https://kubernetes.io/</a>，中文官网地址如下：<a href="https://kubernetes.io/zh-cn/">https://kubernetes.io/zh-cn/</a></p>
-<p><img alt="image.png" src="https://fynotefile.oss-cn-zhangjiakou.aliyuncs.com/fynote/fyfile/20/1667826904074/1ffd5c05d5804b12a2835ce752678ae6.png" /></p>
+<p><img alt="image.png" src="../../../img/kubernetes/kubernetes_spark/1ffd5c05d5804b12a2835ce752678ae6.png" /></p>
 <p>企业中应用程序的部署经历了传统部署时代、虚拟化部署时代、容器化部署时代，尤其是今天容器化部署应用在企业中应用非常广泛，Kubernetes作为容器编排管理工具也越来越重要。</p>
-<p><img alt="image.png" src="https://fynotefile.oss-cn-zhangjiakou.aliyuncs.com/fynote/fyfile/20/1667826904074/65c590ae4fee44249a01e40aee1ee6aa.png" /></p>
+<p><img alt="image.png" src="../../../img/kubernetes/kubernetes_spark/65c590ae4fee44249a01e40aee1ee6aa.png" /></p>
 <h3 id="111">1.1.1 <strong>传统部署时代</strong><a class="headerlink" href="#111" title="Permanent link">&para;</a></h3>
 <p>早期，各个公司是在物理服务器上运行应用程序。由于无法限制在物理服务器中运行的应用程序资源使用，因此会导致资源分配问题。例如，如果在同一台物理服务器上运行多个应用程序，则可能会出现一个应用程序占用大部分资源的情况，而导致其他应用程序的性能下降。一种解决方案是将每个应用程序都运行在不同的物理服务器上，但是当某个应用资源利用率不高时，服务器上剩余资源无法被分配给其他应用，而且维护许多物理服务器的成本很高。</p>
 <p><strong>物理服务器部署应用痛点如下：</strong></p>
@@ -4574,7 +4574,7 @@
 <p>Kubernetes允许你存储和管理敏感信息，例如密码、OAuth令牌和ssh密钥。 你可以在不重建容器镜像的情况下部署和更新密钥和应用程序配置，也无需在堆栈配置中暴露密钥。</p>
 <h2 id="12_kubernetes">1.2 <strong>Kubernetes集群架构及组件</strong><a class="headerlink" href="#12_kubernetes" title="Permanent link">&para;</a></h2>
 <p>一个Kubernetes集群至少有一个主控制平面节点（Control Plane）和一台或者多台工作节点（Node）组成，控制面板和工作节点实例可以是物理设备或云中的实例。Kubernetes 架构如下：</p>
-<p><img alt="" src="file:///C:\Temp\ksohtml16136\wps9.jpg" /><img alt="image.png" src="https://fynotefile.oss-cn-zhangjiakou.aliyuncs.com/fynote/fyfile/20/1667826904074/a574f87c70034ec1b0abb158368cc765.png" /></p>
+<p><img alt="image.png" src="../../../img/kubernetes/kubernetes_spark/a574f87c70034ec1b0abb158368cc765.png" /></p>
 <h3 id="121_kubernetes_contorl_plane">1.2.1 <strong>Kubernetes 控制平面（Contorl Plane）</strong><a class="headerlink" href="#121_kubernetes_contorl_plane" title="Permanent link">&para;</a></h3>
 <p>Kubernetes控制平面也称为主节点（Master Node），其管理集群中的工作节点（Worker Node）和Pod，在生产环境中,Master节点可以运行在多台节点实例上形成主备，提供Kubernetes集群的容错和高可用性。我们可以通过CLI或者UI页面中向Master节点输入参数控制Kubernetes集群。</p>
 <p>Master节点是Kubernetes集群的管理中心，包含很多组件，这些组件管理Kubernetes集群各个方面，例如集群组件通信、工作负载调度和集群状态持久化。这些组件可以在集群内任意节点运行，但是为了方便会在一台实例上运行Master所有组件，并且不会在此实例上运行用户容器。</p>
@@ -4626,9 +4626,9 @@
 <p>Kubernetes中有非常多的核心概念，下面主要介绍Kubernetes集群中常见的一些概念。</p>
 <h3 id="131_pod">1.3.1 <strong>Pod</strong><a class="headerlink" href="#131_pod" title="Permanent link">&para;</a></h3>
 <p>Pod是可以在 Kubernetes 中创建和管理的、最小的可部署的计算单元，是Kubernetes调度的基本单位，Pod设计的理念是每个Pod都有一个唯一的IP。Pod就像豌豆荚一样，其中包含着一组（一个或多个）容器，这些容器共享存储、网络、文件系统以及怎样运行这些容器的声明。</p>
-<p><img alt="" src="file:///C:\Temp\ksohtml16136\wps10.jpg" /><img alt="image.png" src="https://fynotefile.oss-cn-zhangjiakou.aliyuncs.com/fynote/fyfile/20/1667826904074/a50dae4997a14440ac578cd042c9a4cc.png" /></p>
+<p><img alt="image.png" src="../../../img/kubernetes/kubernetes_spark/a50dae4997a14440ac578cd042c9a4cc.png" /></p>
 <p><strong>Node&amp;Pod&amp;Container&amp;应用程序关系如下图所示：</strong></p>
-<p><img alt="" src="file:///C:\Temp\ksohtml16136\wps11.jpg" /><img alt="image.png" src="https://fynotefile.oss-cn-zhangjiakou.aliyuncs.com/fynote/fyfile/20/1667826904074/56789990f8a04f7a9d0cc2b75d727654.png" /></p>
+<p><img alt="image.png" src="../../../img/kubernetes/kubernetes_spark/56789990f8a04f7a9d0cc2b75d727654.png" /></p>
 <h3 id="132_label">1.3.2 <strong>Label</strong><a class="headerlink" href="#132_label" title="Permanent link">&para;</a></h3>
 <p>Label是附着到object上（例如Pod）的键值对。可以在创建object的时候指定，也可以在object创建后随时指定。Labels的值对系统本身并没有什么含义，只是对用户才有意义。</p>
 <p>一个Label是一个key=value的键值对，其中key与value由用户自己指定。Label可以附加到各种资源对象上，例如Node、Pod、Service、RC等，一个资源对象可以定义任意数量的Label，同一个Label也可以被添加到任意数量的资源对象上去，Label通常在资源对象定义时确定，也可以在对象创建后动态添加或者删除。</p>
@@ -4720,7 +4720,7 @@
 <p>除了以上几种Volume类型，Kubernetes还支持很多类型的Volume，详细可以参考：<a href="https://kubernetes.io/docs/concepts/storage/">https://kubernetes.io/docs/concepts/storage/</a></p>
 <h3 id="137_persistentvolumepv">1.3.7 <strong>PersistentVolume(PV) 持久化存储卷</strong><a class="headerlink" href="#137_persistentvolumepv" title="Permanent link">&para;</a></h3>
 <p>kubernetes存储卷的分类太丰富了，每种类型都要写相应的接口与参数才行，这就让维护与管理难度加大，PersistentVolume(PV)是集群之中的一块网络存储，跟 Node 一样，也是集群的资源。PV是配置好的一段存储(可以是任意类型的存储卷)，将网络存储共享出来,配置定义成PV。PersistentVolume (PV)和PersistentVolumeClaim (PVC)提供了方便的持久化卷， PV提供网络存储资源，而PVC请求存储资源并将其挂载到Pod中，通过PVC用户不需要关心具体的volume实现细节,只需要关心使用需求。</p>
-<p><img alt="image.png" src="https://fynotefile.oss-cn-zhangjiakou.aliyuncs.com/fynote/fyfile/20/1667826904074/fbf2a1687a1e4d3daf73600c19fccaa5.png" /></p>
+<p><img alt="image.png" src="../../../img/kubernetes/kubernetes_spark/fbf2a1687a1e4d3daf73600c19fccaa5.png" /></p>
 <h3 id="138_configmap">1.3.8 <strong>ConfigMap</strong><a class="headerlink" href="#138_configmap" title="Permanent link">&para;</a></h3>
 <p>ConfigMap用于保存配置数据的键值对，可以用来保存单个属性，也可以用来保存配置文件，实现对容器中应用的配置管理，可以把ConfigMap看作是一个挂载到pod中的存储卷。ConfigMap跟secret很类似，但它可以更方便地处理不包含敏感信息的明文字符串。</p>
 <h3 id="139_secret">1.3.9 <strong>Secret</strong><a class="headerlink" href="#139_secret" title="Permanent link">&para;</a></h3>
@@ -5317,14 +5317,14 @@ systemctl start kubelet
 <p>通过Kubernetes dashboard能够直观了解Kubernetes集群中运行的资源对象，通过dashboard可以直接管理（创建、删除、重启等操作）资源对象。</p>
 <h3 id="162_kubernetes_dashboard">1.6.2 <strong>获取Kubernetes dashboard资源清单文件</strong><a class="headerlink" href="#162_kubernetes_dashboard" title="Permanent link">&para;</a></h3>
 <p>这里只需要在Kubernetes Master节点上来下载应用资源清单文件即可。这里去github.com 搜索“kubernetes dashboard”即可，找到匹配Kubernetes 版本的dashboard，下载对应版本的dashboard yaml文件。</p>
-<p><img alt="image.png" src="https://fynotefile.oss-cn-zhangjiakou.aliyuncs.com/fynote/fyfile/20/1667826904074/0cddbf7f85004d91afec4b37a36a382d.png" /></p>
-<p><img alt="image.png" src="https://fynotefile.oss-cn-zhangjiakou.aliyuncs.com/fynote/fyfile/20/1667826904074/8c8cde92fb3c4208a8da4ae772c5944c.png" /></p>
-<p><img alt="image.png" src="https://fynotefile.oss-cn-zhangjiakou.aliyuncs.com/fynote/fyfile/20/1667826904074/d1c47c507a014c2cab5388b06150c29f.png" /></p>
+<p><img alt="image.png" src="../../../img/kubernetes/kubernetes_spark/0cddbf7f85004d91afec4b37a36a382d.png" /></p>
+<p><img alt="image.png" src="../../../img/kubernetes/kubernetes_spark/8c8cde92fb3c4208a8da4ae772c5944c.png" /></p>
+<p><img alt="image.png" src="../../../img/kubernetes/kubernetes_spark/d1c47c507a014c2cab5388b06150c29f.png" /></p>
 <div class="highlight"><pre><span></span><code>[root@node1 ~]# mkdir kube-dashboard
 [root@node1 ~]# cd kube-dashboard/
 [root@node1 kube-dashboard]# wget  https://raw.githubusercontent.com/kubernetes/dashboard/v2.7.0/aio/deploy/recommended.yaml
 </code></pre></div>
-<p><img alt="" src="file:///C:\Temp\ksohtml16136\wps26.jpg" />对应yaml文件下载完成后，为了方便后续在容器主机上访问，在yaml文件中添加对应的NodePort类型、端口以及修改登录kubernetes dashboard的用户。</p>
+<p>对应yaml文件下载完成后，为了方便后续在容器主机上访问，在yaml文件中添加对应的NodePort类型、端口以及修改登录kubernetes dashboard的用户。</p>
 <div class="highlight"><pre><span></span><code>#vi recommended.yaml 【只需要添加或修改以下加粗部分】
 ... ...
 
@@ -5387,7 +5387,7 @@ service/kubernetes-dashboard        NodePort    10.96.4.46       &lt;none&gt;   
 </code></pre></div>
 <h3 id="163_kubernetes_dashboard">1.6.3 <strong>访问Kubernetes dashboard</strong><a class="headerlink" href="#163_kubernetes_dashboard" title="Permanent link">&para;</a></h3>
 <p>WebUI访问Kubernetes dashboard：<a href="http://192.168.179.4:3000">https://192.168.179.4:3000</a>0</p>
-<p><img alt="image.png" src="https://fynotefile.oss-cn-zhangjiakou.aliyuncs.com/fynote/fyfile/20/1667826904074/093e784b4abf42f098dfc184a36789c0.png" /></p>
+<p><img alt="image.png" src="../../../img/kubernetes/kubernetes_spark/093e784b4abf42f098dfc184a36789c0.png" /></p>
 <p>选择“Token”，使用如下命令获取Kubernetes的Token:</p>
 <div class="highlight"><pre><span></span><code>#注意最后的kubernetes-dashboard 为部署dashboard创建的serviceaccounts
 [root@node1 kube-dashboard]# kubectl -n kubernetes-dashboard create token kubernetes-dashboard
@@ -5464,7 +5464,7 @@ replicaset.apps/nginx-test-74845c57fb   2         2         2       45s
 </code></pre></div>
 <p>4) <strong>访问验证</strong></p>
 <p>访问任意kubernetes集群的节点30080端口查看nginx服务是正常，例如：浏览器输入node1:30080</p>
-<p><img alt="" src="file:///C:\Temp\ksohtml10300\wps1.jpg" /><img alt="image.png" src="https://fynotefile.oss-cn-zhangjiakou.aliyuncs.com/fynote/fyfile/20/1667826904074/ce75b5426f07418d8cd0015726d6ac9e.png" /></p>
+<p><img alt="image.png" src="../../../img/kubernetes/kubernetes_spark/ce75b5426f07418d8cd0015726d6ac9e.png" /></p>
 <p>5) <strong>删除nginix服务</strong></p>
 <div class="highlight"><pre><span></span><code>[root@node1 nginx-test]# kubectl delete -f nginx-service.yaml
 [root@node1 nginx-test]# kubectl delete -f nginx.yaml
@@ -5767,8 +5767,8 @@ vim /etc/docker/daemon.json
 <li><strong>访问Harbor UI界面</strong></li>
 </ol>
 <p>然后浏览器访问harbor(只能是ip访问)，用户名为admin，密码为配置的123456。</p>
-<p><img alt="image.png" src="https://fynotefile.oss-cn-zhangjiakou.aliyuncs.com/fynote/fyfile/20/1667826904074/3385b90f53db463ba6c742dc2b08ba29.png" /></p>
-<p><img alt="image.png" src="https://fynotefile.oss-cn-zhangjiakou.aliyuncs.com/fynote/fyfile/20/1667826904074/b73afe0351014104a0bebd6a4ddfd50e.png" /></p>
+<p><img alt="image.png" src="../../../img/kubernetes/kubernetes_spark/3385b90f53db463ba6c742dc2b08ba29.png" /></p>
+<p><img alt="image.png" src="../../../img/kubernetes/kubernetes_spark/b73afe0351014104a0bebd6a4ddfd50e.png" /></p>
 <ol>
 <li><strong>测试Harbor</strong></li>
 </ol>
@@ -5794,7 +5794,7 @@ www.kubemsb.com/library/nginx             v1                        dd025cdfe837
 [root@node1 ~]# docker push www.kubemsb.com/library/nginx:v1
 </code></pre></div>
 <p>将本地镜像推送到harbor镜像仓库后，可以通过WebUI查看对应内容：</p>
-<p><img alt="" src="file:///C:\Temp\ksohtml21784\wps21.jpg" /><img alt="image.png" src="https://fynotefile.oss-cn-zhangjiakou.aliyuncs.com/fynote/fyfile/20/1667826904074/ed61cd24eb7a4b8aa9c55545d6310941.png" /></p>
+<p><img alt="image.png" src="../../../img/kubernetes/kubernetes_spark/ed61cd24eb7a4b8aa9c55545d6310941.png" /></p>
 <p>可以在本地任何一台节点上从Harbor镜像仓库中下载镜像到本地：</p>
 <div class="highlight"><pre><span></span><code>[root@node2 ~]# docker pull 192.168.179.7/library/nginx:v1
 </code></pre></div>
@@ -5810,7 +5810,7 @@ www.kubemsb.com/library/nginx             v1                        dd025cdfe837
 </ul>
 <h2 id="111_spark">1.11 <strong>Spark角色介绍</strong><a class="headerlink" href="#111_spark" title="Permanent link">&para;</a></h2>
 <p>下图是Spark框架中对应的角色，每个角色作用如下:</p>
-<p><img alt="image.png" src="https://fynotefile.oss-cn-zhangjiakou.aliyuncs.com/fynote/fyfile/20/1676618640055/8457fc89c24741a3a22e4f90796bbb50.png" /></p>
+<p><img alt="image.png" src="../../../img/kubernetes/kubernetes_spark/8457fc89c24741a3a22e4f90796bbb50.png" /></p>
 <ul>
 <li>Client ：客户端进程，负责提交作业到Master。</li>
 <li>Master ：Standalone模式中主节点，负责接收Client提交的作业，管理Worker，并命令Worker启动Driver和Executor。</li>
@@ -5922,7 +5922,7 @@ node3
 <li>**访问**webui</li>
 </ol>
 <p>Spark集群启动完成之后，可以在浏览器中输入"<a href="http://node1:8080&quot;来查看Spark">http://node1:8080"来查看Spark</a> WebUI：
-<img alt="image.png" src="https://fynotefile.oss-cn-zhangjiakou.aliyuncs.com/fynote/fyfile/20/1676618640055/7bfb13b30d5e4efbb09487fb1c22dbfc.png" /></p>
+<img alt="image.png" src="../../../img/kubernetes/kubernetes_spark/7bfb13b30d5e4efbb09487fb1c22dbfc.png" /></p>
 <p>在浏览器中输入地址出现以上页面，并且对应的worker状态为Alive，说明Spark Standalone集群搭建成功。</p>
 <ol>
 <li>Spark Pi 任务提交测试</li>
@@ -5941,7 +5941,7 @@ Pi is roughly 3.1410557052785264
 </code></pre></div>
 <h3 id="1122_client">1.12.2 <strong>Client模式</strong><a class="headerlink" href="#1122_client" title="Permanent link">&para;</a></h3>
 <p>Spark基于Standalone模式提交任务流程如下：</p>
-<p><img alt="image.png" src="https://fynotefile.oss-cn-zhangjiakou.aliyuncs.com/fynote/fyfile/20/1676618640055/b0c38807aa9f411098af69ba48b81072.png" /></p>
+<p><img alt="image.png" src="../../../img/kubernetes/kubernetes_spark/b0c38807aa9f411098af69ba48b81072.png" /></p>
 <ol>
 <li>client模式提交任务后，会在客户端启动Driver进程。</li>
 <li>Driver会向Master申请启动Application启动的资源。</li>
@@ -5957,7 +5957,7 @@ spark-submit --master spark://spark_master_ip:7077 --deploy-mode client --class 
 </code></pre></div>
 <h3 id="1123_cluster">1.12.3 <strong>Cluster模式</strong><a class="headerlink" href="#1123_cluster" title="Permanent link">&para;</a></h3>
 <p>Spark基于Standalone cluster模式提交任务流程如下:</p>
-<p><img alt="image.png" src="https://fynotefile.oss-cn-zhangjiakou.aliyuncs.com/fynote/fyfile/20/1676618640055/638b6c046c5b4ae9b782e60cf95e7038.png" /></p>
+<p><img alt="image.png" src="../../../img/kubernetes/kubernetes_spark/638b6c046c5b4ae9b782e60cf95e7038.png" /></p>
 <ol>
 <li>cluster模式提交应用程序后，会向Master请求启动Driver.</li>
 <li>Master接受请求，随机在集群一台节点启动Driver进程。</li>
@@ -6090,7 +6090,7 @@ openjdk                         8u151     a30a1e547e6d ... ...
 [root@node1 spark]# docker push 192.168.179.7/library/spark:v1
 </code></pre></div>
 <p>登录harbor观察对应的镜像是否上传成功，通过webui观察，上传已经成功。</p>
-<p><img alt="image.png" src="https://fynotefile.oss-cn-zhangjiakou.aliyuncs.com/fynote/fyfile/20/1676618640055/ad532b75beec49a283ff6489bc24e83c.png" /></p>
+<p><img alt="image.png" src="../../../img/kubernetes/kubernetes_spark/ad532b75beec49a283ff6489bc24e83c.png" /></p>
 <p>资料中"myspark_v1.tar"为打包好自定义spark镜像，可以通过以下命令加载到docker中：</p>
 <div class="highlight"><pre><span></span><code>[root@node1 ~]# docker load -i myspark_v1.tar 
 [root@node1 ~]# docker images
@@ -6204,7 +6204,7 @@ pod/spark-worker-controller-hhl2c   1/1     Running   0          13s
 pod/spark-worker-controller-lrprt   1/1     Running   0          13s
 </code></pre></div>
 <p>部署完成之后，我们可以登录webui查看对应的Spark Standalone集群启动情况，node1:8080:
-<img alt="image.png" src="https://fynotefile.oss-cn-zhangjiakou.aliyuncs.com/fynote/fyfile/20/1676618640055/d73ae86fdde049f3ab8cfcc81bfe10d7.png" /></p>
+<img alt="image.png" src="../../../img/kubernetes/kubernetes_spark/d73ae86fdde049f3ab8cfcc81bfe10d7.png" /></p>
 <h4 id="11314">1.13.1.4 <strong>任务提交及日志查看</strong><a class="headerlink" href="#11314" title="Permanent link">&para;</a></h4>
 <p>这种Standalone集群部署方式想要提交Spark任务只能进入到pod中进行任务提交。所以这种方式在真实的生产环境中我们也不会使用，官网中也没有给出这种方式的部署方式，这里只用作测试。</p>
 <ol>
@@ -6245,16 +6245,16 @@ root@spark-master-hostname:/# cd /opt/spark/bin/
 root@spark-master-hostname:/opt/spark/bin# ./spark-submit --master spark://spark-master:7077 --deploy-mode cluster --driver-memory 512m --class org.apache.spark.examples.SparkPi ../examples/jars/spark-examples_2.12-3.3.1.jar 
 </code></pre></div>
 <p>以上命令执行完成之后结果如下：</p>
-<p><img alt="image.png" src="https://fynotefile.oss-cn-zhangjiakou.aliyuncs.com/fynote/fyfile/20/1676618640055/eee6425d23a5459ab4631528746f63e3.png" /></p>
+<p><img alt="image.png" src="../../../img/kubernetes/kubernetes_spark/eee6425d23a5459ab4631528746f63e3.png" /></p>
 <p>注意：执行过程中如果delete对应的yaml资源清单后，pod状态一直为Terminating，可以通过强制删除pod命令删除,命令如下：</p>
 <div class="highlight"><pre><span></span><code># --grace-period=0 直接删除 pod
 kubectl delete pod xxx -n xxx --force --grace-period=0
 </code></pre></div>
 <h3 id="1132_spark_native_kubernetes">1.13.2 <strong>Spark Native Kubernetes部署</strong><a class="headerlink" href="#1132_spark_native_kubernetes" title="Permanent link">&para;</a></h3>
 <p>Spark Native Kubernetes 部署类似于Spark 基于Yarn部署，Kubernetes看成是资源调度中心负责资源调度，运行executor。这种方式部署提交Spark任务可以是client模式提交任务也可以cluster模式提交任务，Spark Native Kuberntes提交任务原理图如下：</p>
-<p><img alt="image.png" src="https://fynotefile.oss-cn-zhangjiakou.aliyuncs.com/fynote/fyfile/20/1676618640055/7d3a575ba7d747a194261aa257d7412c.png" /></p>
-<p><img alt="image.png" src="https://fynotefile.oss-cn-zhangjiakou.aliyuncs.com/fynote/fyfile/20/1676618640055/80392b13372c457b861c8bdb39168890.png" /></p>
-<p><img alt="image.png" src="https://fynotefile.oss-cn-zhangjiakou.aliyuncs.com/fynote/fyfile/20/1676618640055/426325be79c845c4858701e337d8454f.png" /></p>
+<p><img alt="image.png" src="../../../img/kubernetes/kubernetes_spark/7d3a575ba7d747a194261aa257d7412c.png" /></p>
+<p><img alt="image.png" src="../../../img/kubernetes/kubernetes_spark/80392b13372c457b861c8bdb39168890.png" /></p>
+<p><img alt="image.png" src="../../../img/kubernetes/kubernetes_spark/426325be79c845c4858701e337d8454f.png" /></p>
 <p>Client提交任务模式中，Driver运行在提交Spark任务的服务器上，也就是客户端，提交任务申请启动的executor以pod方式运行在Kubernetes集群中，当应用程序执行完成后，executor pod被终止被清理，Spark应用程序的日志会在客户端显示。</p>
 <p>Cluster提交任务模式中，Driver会以pod的方式运行在Kubernetes集群中，Driver向Kubernetes申请启动Executor，Executor以pod方式运行在Kubernetes集群中，应用程序的日志不能在客户端显示，需要在Kubernetes集群对应的pod中查看日志，当应用程序完成时，执行程序pod将终止并被清理，但Driver pod会保存日志并在Kubernetes API中保持“已完成”状态。</p>
 <h4 id="11321">1.13.2.1 <strong>构建并上传镜像</strong><a class="headerlink" href="#11321" title="Permanent link">&para;</a></h4>
@@ -6279,7 +6279,7 @@ REPOSITORY                                TAG           IMAGE ID    192.168.179.
 <div class="highlight"><pre><span></span><code>[root@node1 bin]# docker push 192.168.179.7/library/spark:v2
 </code></pre></div>
 <p>检查上传镜像：</p>
-<p><img alt="image.png" src="https://fynotefile.oss-cn-zhangjiakou.aliyuncs.com/fynote/fyfile/20/1676618640055/bf834dfc56d34c55aede4f37ffb29801.png" /></p>
+<p><img alt="image.png" src="../../../img/kubernetes/kubernetes_spark/bf834dfc56d34c55aede4f37ffb29801.png" /></p>
 <h4 id="11322">1.13.2.2 <strong>配置用户权限</strong><a class="headerlink" href="#11322" title="Permanent link">&para;</a></h4>
 <p>后续基于Kubernetes提交Spark任务时需要指定用户，Kubernetes是基于角色进行授权，所以这里创建对应的serviceaccount，然后给serviceaccount进行角色赋权。</p>
 <div class="highlight"><pre><span></span><code>#创建命名空间
@@ -6370,16 +6370,16 @@ NAME                                   READY   STATUS      RESTARTS   AGE
 pod/spark-pi-d3e33d8659fe3a9b-driver   0/1     Completed   0          2m40s
 </code></pre></div>
 <p>Spark Application执行的结果在客户端看不到，需要通过Kubernetes集群pod日志来查看，WebUI访问Kubernetes dashboard：<a href="http://192.168.179.4:3000/">https://192.168.179.4:3000</a>0：</p>
-<p><img alt="image.png" src="https://fynotefile.oss-cn-zhangjiakou.aliyuncs.com/fynote/fyfile/20/1676618640055/29ec6a81c8cf42e58a02c42e75751aca.png" /></p>
+<p><img alt="image.png" src="../../../img/kubernetes/kubernetes_spark/29ec6a81c8cf42e58a02c42e75751aca.png" /></p>
 <p>需要提供token，在Kubernetes集群中任意一台节点执行如下命令查询临时token:</p>
 <div class="highlight"><pre><span></span><code>#注意最后的kubernetes-dashboard 为部署dashboard创建的serviceaccounts
 [root@node1 kube-dashboard]# kubectl -n kubernetes-dashboard create token kubernetes-dashboard
 eyJhbGciOiJSUzI1NiIsImtpZCI6IktKSkJla1plMTJ6VHpNTmgxVG42OC1jaktuR1dOSzNqeHpWajRBQUZLZ1kifQ.eyJhdWQiOlsiaHR0cHM6Ly9rdWJlcm5ldGVzLmRlZmF1bHQuc3ZjLmNsdXN0ZXIubG9jYWwiXSwiZXhwIjoxNjc2NTUxMjUzLCJpYXQiOjE2NzY1NDc2NTMsImlzcyI6Imh0dHBzOi8va3ViZXJuZXRlcy5kZWZhdWx0LnN2Yy5jbHVzdGVyLmxvY2FsIiwia3ViZXJuZXRlcy5pbyI6eyJuYW1lc3BhY2UiOiJrdWJlcm5ldGVzLWRhc2hib2FyZCIsInNlcnZpY2VhY2NvdW50Ijp7Im5hbWUiOiJrdWJlcm5ldGVzLWRhc2hib2FyZCIsInVpZCI6ImM2ZDg0NjJiLWI0YTItNDQyZC04ZDg2LTAyODc5ZDhkZmZiNCJ9fSwibmJmIjoxNjc2NTQ3NjUzLCJzdWIiOiJzeXN0ZW06c2VydmljZWFjY291bnQ6a3ViZXJuZXRlcy1kYXNoYm9hcmQ6a3ViZXJuZXRlcy1kYXNoYm9hcmQifQ.XRLNTx39s1hRcy8hbYFEwFp7JKoDBqd7XzKGieB5SPFeXXDiK6i4DHorg51H0CrxIejGeRJclwiCMk4UPtWM2Yxd07gchCouxsfxMxs4HEK5r1X-eeBv7BlBboZjAjldlhCV6v5cE2yxJkm0BSWOU91zMruRy0q4bzCFxP9mYPPovcaVAWah7EtBytqwuo0aGBM_XeJSmoXKrpApSTaeD5sBzfdsNMu4nhx4Tg8piBlaOALUKgko96ZusyrNokpEwMFyKX5q33vYNFs28tNQR8Nf45xLDTnCdGnOVmBWCSMYD7fxRe56fsPtHkZs7SHOfUWOvRu0QZM2KxntHceThw
 </code></pre></div>
 <p>登录webui后查看对应pod日志：</p>
-<p><img alt="image.png" src="https://fynotefile.oss-cn-zhangjiakou.aliyuncs.com/fynote/fyfile/20/1676618640055/f416db97747047b1b2a715efeeff599a.png" /></p>
-<p><img alt="image.png" src="https://fynotefile.oss-cn-zhangjiakou.aliyuncs.com/fynote/fyfile/20/1676618640055/a37255eda96142ae8c0a7e4220733665.png" /></p>
-<p><img alt="image.png" src="https://fynotefile.oss-cn-zhangjiakou.aliyuncs.com/fynote/fyfile/20/1676618640055/e9a10f64114249c3b2f3561678dfb4fb.png" /></p>
+<p><img alt="image.png" src="../../../img/kubernetes/kubernetes_spark/f416db97747047b1b2a715efeeff599a.png" /></p>
+<p><img alt="image.png" src="../../img/kubernetes/kubernetes_spark/a37255eda96142ae8c0a7e4220733665.png" /></p>
+<p><img alt="image.png" src="../../../img/kubernetes/kubernetes_spark/e9a10f64114249c3b2f3561678dfb4fb.png" /></p>
 <ol>
 <li><strong>使用**pod ****外用户提供的**</strong> jar**包**</li>
 </ol>
@@ -6438,14 +6438,14 @@ pod/spark-pi-eee459865a2a8a5e-driver   1/1     Running            0          13s
 pod/spark-pi-eee459865a2a8a5e-driver   0/1     Completed      0          52s
 </code></pre></div>
 <p>查看对应运行结果，也需要登录Kubernetes webui中找到对应的pod查看日志。登录Kubernetes Webui <a href="https://node1:30000查看日志">https://node1:30000查看日志</a>:</p>
-<p><img alt="image.png" src="https://fynotefile.oss-cn-zhangjiakou.aliyuncs.com/fynote/fyfile/20/1676618640055/ce20c6f171eb4ef58c6f073d6c331b1d.png" /></p>
+<p><img alt="image.png" src="../../../img/kubernetes/kubernetes_spark/ce20c6f171eb4ef58c6f073d6c331b1d.png" /></p>
 <p>执行如下命令获取token:</p>
 <div class="highlight"><pre><span></span><code>#注意最后的kubernetes-dashboard 为部署dashboard创建的serviceaccounts
 [root@node1 kube-dashboard]# kubectl -n kubernetes-dashboard create token kubernetes-dashboard
 eyJhbGciOiJSUzI1NiIsImtpZCI6IktKSkJla1plMTJ6VHpNTmgxVG42OC1jaktuR1dOSzNqeHpWajRBQUZLZ1kifQ.eyJhdWQiOlsiaHR0cHM6Ly9rdWJlcm5ldGVzLmRlZmF1bHQuc3ZjLmNsdXN0ZXIubG9jYWwiXSwiZXhwIjoxNjc2NTUxMjUzLCJpYXQiOjE2NzY1NDc2NTMsImlzcyI6Imh0dHBzOi8va3ViZXJuZXRlcy5kZWZhdWx0LnN2Yy5jbHVzdGVyLmxvY2FsIiwia3ViZXJuZXRlcy5pbyI6eyJuYW1lc3BhY2UiOiJrdWJlcm5ldGVzLWRhc2hib2FyZCIsInNlcnZpY2VhY2NvdW50Ijp7Im5hbWUiOiJrdWJlcm5ldGVzLWRhc2hib2FyZCIsInVpZCI6ImM2ZDg0NjJiLWI0YTItNDQyZC04ZDg2LTAyODc5ZDhkZmZiNCJ9fSwibmJmIjoxNjc2NTQ3NjUzLCJzdWIiOiJzeXN0ZW06c2VydmljZWFjY291bnQ6a3ViZXJuZXRlcy1kYXNoYm9hcmQ6a3ViZXJuZXRlcy1kYXNoYm9hcmQifQ.XRLNTx39s1hRcy8hbYFEwFp7JKoDBqd7XzKGieB5SPFeXXDiK6i4DHorg51H0CrxIejGeRJclwiCMk4UPtWM2Yxd07gchCouxsfxMxs4HEK5r1X-eeBv7BlBboZjAjldlhCV6v5cE2yxJkm0BSWOU91zMruRy0q4bzCFxP9mYPPovcaVAWah7EtBytqwuo0aGBM_XeJSmoXKrpApSTaeD5sBzfdsNMu4nhx4Tg8piBlaOALUKgko96ZusyrNokpEwMFyKX5q33vYNFs28tNQR8Nf45xLDTnCdGnOVmBWCSMYD7fxRe56fsPtHkZs7SHOfUWOvRu0QZM2KxntHceThw
 </code></pre></div>
 <p>登录之后，找打对应spark命名空间，查看对应pod日志如下：</p>
-<p><img alt="image.png" src="https://fynotefile.oss-cn-zhangjiakou.aliyuncs.com/fynote/fyfile/20/1676618640055/0bf82f31aa7643b4941996f47b304b9b.png" /></p>
+<p><img alt="image.png" src="../../../img/kubernetes/kubernetes_spark/0bf82f31aa7643b4941996f47b304b9b.png" /></p>
 
 
 
